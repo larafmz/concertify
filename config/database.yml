@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: localhost
+
+development:
+  <<: *default
+  database: concertify_development
+
+test:
+  <<: *default
+  database: concertify_test
+
+production:
+  <<: *default
+  database: concertify_production

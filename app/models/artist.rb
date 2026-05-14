@@ -12,7 +12,7 @@ class Artist < ApplicationRecord
     
   ## INSTANCE METHODS
 
-    def complete_name #Complete name
+    def complete_name
       name
     end
 

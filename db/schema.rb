@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_14_151857) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_14_180521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,7 +30,26 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_14_151857) do
     t.bigint "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ubication_id"
     t.index ["artist_id"], name: "index_concerts_on_artist_id"
+    t.index ["ubication_id"], name: "index_concerts_on_ubication_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ubications", force: :cascade do |t|
+    t.string "city"
+    t.string "state"
+    t.string "address"
+    t.bigint "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_ubications_on_country_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,4 +65,5 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_14_151857) do
   end
 
   add_foreign_key "concerts", "artists", on_delete: :cascade
+  add_foreign_key "ubications", "countries", on_delete: :cascade
 end

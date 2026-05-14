@@ -3,6 +3,7 @@ class Concert < ApplicationRecord
   ## RELATIONSHIPS
 
     belongs_to :artist
+    belongs_to :ubication
     has_many_attached :photos
 
   ## VALIDATIONS
@@ -12,7 +13,7 @@ class Concert < ApplicationRecord
 
   ## INSTANCE METHODS
 
-    def complete_name #Complete name
+    def complete_name
       tour_name
     end
 

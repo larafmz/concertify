@@ -56,3 +56,5 @@ gem "pg"
 
 # Flexible authentication solution for Rails
 gem 'devise', '~> 5.0', '>= 5.0.4'
+
+gem "importmap-rails", "~> 2.2"

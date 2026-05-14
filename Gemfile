@@ -58,3 +58,5 @@ gem "pg"
 gem 'devise', '~> 5.0', '>= 5.0.4'
 
 gem "importmap-rails", "~> 2.2"
+
+gem 'whenever', require: false

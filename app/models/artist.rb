@@ -1,6 +1,4 @@
 class Artist < ApplicationRecord
-    include AtScopes
-    include SearchCop
 
   ## RELATIONSHIPS
 
@@ -9,28 +7,9 @@ class Artist < ApplicationRecord
 
   ## VALIDATIONS
 
-    #validates :company_name, :short_name, presence: true
-    #validates :company_name, uniqueness: true
-    #validates :cif, format: {with:/\A[A-Z]{1}\d{8}\z/, message: I18n.t("errors.companies.invalid_cif")}
-
-  ## SCOPES
-
-    # search_scope :search do #text search fields
-    #     attributes :company_name, :short_name#, :cif
-    #   end
-
-  ## CLASS METHODS
-
-    # def self.do_search(current_user, params={}, order_by="tin")
-    #     params ||= {}
-    #     companies = Company.order(order_by)
-    #     #Dates search
-    #     companies = apply_at_scopes(companies, params)
-    #     #Text search
-    #     companies = companies.search(params[:text]) if params[:text].present?
-    #     companies
-    # end
-
+    validates :name, :ticketmaster_id, presence: true
+    validates :ticketmaster_id, uniqueness: true
+    
   ## INSTANCE METHODS
 
     def complete_name #Complete name

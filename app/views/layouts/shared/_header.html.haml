@@ -1,0 +1,10 @@
+.header
+  .row.mt-2
+    .col-md-4
+      = link_to root_path, title: t("root_title") do
+        = image_tag("icon_logo.png", alt: t("root_title"))
+        Concertify
+    .col-md-4
+      = form_tag "/searchs", method: "GET" do
+        = text_field_tag :search, params[:text], placeholder: t("search")
+        = submit_tag "Search"

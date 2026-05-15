@@ -1,15 +1,49 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+body {
+  background: #72778C;
+  /* 16192E; */
+}
+
+.widget-content .section-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  background: #fff;
+}
+
+.widget-content .section-box h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+}
+
+.widget-content .items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.widget-content .item-user,
+.widget-content .item-artist,
+.widget-content .item-concert {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  font-size: 14px;
+}
+
+.widget-content .item-user {
+  background: #FFB731;
+}
+
+.widget-content .item-artist {
+  background: #FE962D;
+}
+
+.widget-content .item-concert {
+  background: #FD5A25;
+}
+
+

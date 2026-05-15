@@ -1,0 +1,23 @@
+.widget-content.list
+  .card.card-body
+
+    .section-box
+      %h3 Usuarios
+      .items
+        - @users.each do |user|
+          .item-user
+            = user.email
+
+    .section-box
+      %h3 Artistas
+      .items
+        - @artists.each do |artist|
+          .item-artist
+            = artist.name
+
+    .section-box
+      %h3 Conciertos
+      .items
+        - @concerts.each do |concert|
+          .item-concert
+            = concert.tour_name

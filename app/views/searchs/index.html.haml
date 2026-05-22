@@ -2,22 +2,33 @@
   .card.card-body
 
     .section-box
-      %h3 Usuarios
+      %h2 USUARIOS
       .items
         - @users.each do |user|
-          .item-user
+          .item-box
             = user.email
 
     .section-box
-      %h3 Artistas
+      %h2 ARTISTAS
       .items
         - @artists.each do |artist|
-          .item-artist
-            = artist.name
+          .item 
+            .item-search-avatar.d-flex.align-items-center.gap-2
+              - if !artist.photos.empty?
+                = image_tag artist.photos.first, class: "artist-avatar"
+            .item-box
+              = artist.name
 
     .section-box
-      %h3 Conciertos
-      .items
+      %h2 CONCIERTOS • #{@concerts.size} RESULTADOS
+      .concerts-items
         - @concerts.each do |concert|
           .item-concert
-            = concert.tour_name
+            #{concert.date.strftime("%B")} #{concert.date.day} #{concert.date.year}
+            %br
+            #{concert.date.strftime("%A")} • #{concert.start_time.strftime("%I:%M %p")}
+            %br
+            #{concert.artist.complete_name} - #{concert.tour_name}
+            %br
+            = concert.ubication.complete_name
+            %hr

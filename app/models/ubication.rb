@@ -7,7 +7,7 @@ class Ubication < ApplicationRecord
 
   ## VALIDATIONS
 
-    validates :city, :state, presence: true
+    validates :city, presence: true # there are concerts in ticketmaster without state
     
   ## INSTANCE METHODS
 

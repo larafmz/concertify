@@ -1,11 +1,24 @@
 body {
   background: #72778C;
   /* 16192E; */
+   font-family: system-ui;
+}
+
+.widget-content {
+  padding: 20px;
 }
 
 .widget-content .section-box {
   border: 1px solid #ddd;
-  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  background: #fff;
+}
+
+
+.widget-content .section-box-concerts {
+  border: 1px solid #ddd;
   padding: 12px;
   margin-bottom: 15px;
   margin-top: 15px;
@@ -20,30 +33,52 @@ body {
 }
 
 .widget-content .items {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.widget-content .concerts-items {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.widget-content .item-user,
-.widget-content .item-artist,
-.widget-content .item-concert {
+.widget-content .item-box {
+  width: 230px;
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid #e6e6e6;
   font-size: 14px;
-}
-
-.widget-content .item-user {
-  background: #FFB731;
-}
-
-.widget-content .item-artist {
-  background: #FE962D;
+  text-align: center;
+  color: white;
+  background: #16192E;
 }
 
 .widget-content .item-concert {
-  background: #FD5A25;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
 }
+
+.item-search-avatar {
+  width: 250px;
+  height: 300px;
+  background: black;   /* 👈 relleno */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-search-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 
 

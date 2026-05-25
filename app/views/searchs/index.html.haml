@@ -2,33 +2,46 @@
   .card.card-body
 
     .section-box
-      %h2 USUARIOS
+      %h2 USUARIOS • #{@users.size} RESULTADOS
       .items
         - @users.each do |user|
-          .item-box
+          .item-name
             = user.email
 
     .section-box
-      %h2 ARTISTAS
+      %h2 ARTISTAS • #{@artists.size} RESULTADOS
       .items
-        - @artists.each do |artist|
+        - @artists[0..15].each do |artist|
           .item 
-            .item-search-avatar.d-flex.align-items-center.gap-2
+            .item-search-avatar
               - if !artist.photos.empty?
                 = image_tag artist.photos.first, class: "artist-avatar"
-            .item-box
+            .item-name
               = artist.name
 
     .section-box
       %h2 CONCIERTOS • #{@concerts.size} RESULTADOS
       .concerts-items
-        - @concerts.each do |concert|
+        - @concerts[0..20].each do |concert|
           .item-concert
-            #{concert.date.strftime("%B")} #{concert.date.day} #{concert.date.year}
-            %br
-            #{concert.date.strftime("%A")} • #{concert.start_time.strftime("%I:%M %p")}
-            %br
-            #{concert.artist.complete_name} - #{concert.tour_name}
-            %br
-            = concert.ubication.complete_name
-            %hr
+            .date-concert
+              #{concert.date.strftime("%B")[0,3].upcase} 
+              %br
+              %span{ style: "font-size: 20px;" }= concert.date.day
+              %br
+              - if concert.date.year == Date.today.year
+                #{concert.date.year}
+            .concert-info
+              %span{ style: "color: #696969;" }
+                #{concert.date.strftime("%A")} • #{concert.start_time.strftime("%I:%M %p")}
+              %br
+              #{concert.artist.complete_name} - #{concert.tour_name} 
+              %br
+              %span{ style: "color: #696969;" }
+                #{concert.ubication.complete_name} • #{concert.ubication.address}
+            - if concert.date < Date.today
+              = link_to "He asistido", new_registered_concert_path
+            - if concert.date >= Date.today
+              = link_to "Asistiré", new_future_assistance_path
+          %hr{ style: "border-top: 1px solid #ccc; margin: 0px;" }
+         

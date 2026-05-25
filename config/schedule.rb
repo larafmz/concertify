@@ -19,6 +19,13 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :environment, "development"
+set :output, "/home/larafmz/concertify/log/cron.log" #TO/DO 
+
 every 1.day, at: '00:00 am' do
     rake "concerts:load_from_api"
 end
+
+# every 1.minute do
+#     rake "concerts:load_from_api"
+# end

@@ -4,6 +4,7 @@ class Artist < ApplicationRecord
 
     has_many :concerts
     has_many_attached :photos
+    has_many :interactuables
 
   ## VALIDATIONS
 

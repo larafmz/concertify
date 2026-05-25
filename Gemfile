@@ -62,3 +62,5 @@ gem "importmap-rails", "~> 2.2"
 gem 'whenever', require: false
 
 gem "haml-rails"
+
+gem "kindable"

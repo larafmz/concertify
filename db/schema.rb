@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_22_180116) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_25_181615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,44 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_22_180116) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "future_assistances", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "concert_id", null: false
+    t.boolean "alone"
+    t.string "from"
+    t.integer "concert_seat"
+    t.string "concert_seat_details"
+    t.bigint "interactuable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["concert_id"], name: "index_future_assistances_on_concert_id"
+    t.index ["interactuable_id"], name: "index_future_assistances_on_interactuable_id"
+    t.index ["user_id"], name: "index_future_assistances_on_user_id"
+  end
+
+  create_table "interactuables", force: :cascade do |t|
+    t.string "type"
+    t.bigint "user_id", null: false
+    t.string "text"
+    t.bigint "artist_id"
+    t.bigint "concert_id"
+    t.integer "puntuation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_interactuables_on_artist_id"
+    t.index ["concert_id"], name: "index_interactuables_on_concert_id"
+    t.index ["user_id"], name: "index_interactuables_on_user_id"
+  end
+
+  create_table "tagged_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "interactuable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["interactuable_id"], name: "index_tagged_users_on_interactuable_id"
+    t.index ["user_id"], name: "index_tagged_users_on_user_id"
+  end
+
   create_table "ubications", force: :cascade do |t|
     t.string "city"
     t.string "state"
@@ -95,5 +133,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_22_180116) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "concerts", "artists", on_delete: :cascade
+  add_foreign_key "future_assistances", "concerts"
+  add_foreign_key "future_assistances", "interactuables"
+  add_foreign_key "future_assistances", "users"
+  add_foreign_key "interactuables", "users"
+  add_foreign_key "tagged_users", "interactuables"
+  add_foreign_key "tagged_users", "users"
   add_foreign_key "ubications", "countries", on_delete: :cascade
 end

@@ -1,0 +1,34 @@
+class Interactuable < ApplicationRecord
+
+  ## RELATIONSHIPS
+
+    belongs_to :user
+    belongs_to :artist, optional: true
+    belongs_to :concert, optional: true
+    belongs_to :future_assistance, optional: true
+    has_many :tagged_users
+    #has_many :comments TO/DO
+    #has_many :likes
+    #has_many :reposts
+    has_many_attached :photos
+
+  ## VALIDATIONS
+  
+    validates :puntuation, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
+    validate :photos_limit
+  
+  ## VALIDATION METHODS
+
+    def photos_limit
+        if photos.attached? && photos.count > 4
+            errors.add(:photos, "4 fotos máximo")
+        end
+    end
+
+  ## INSTANCE METHODS
+
+    def complete_name
+      tour_name
+    end
+
+end

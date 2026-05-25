@@ -5,6 +5,7 @@ class Concert < ApplicationRecord
     belongs_to :artist
     belongs_to :ubication
     has_many_attached :photos
+    has_many :interactuables
 
   ## VALIDATIONS
 

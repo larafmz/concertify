@@ -12,11 +12,12 @@
       %h2 ARTISTAS • #{@artists.size} RESULTADOS
       .items
         - @artists[0..9].each do |artist|
-          .item 
-            .item-search-avatar
-              = image_tag artist.dig("images").first.dig("url"), class: "artist-avatar"
-            .item-name
-              = artist.dig("name")
+          = link_to artist_path(artist.dig("id")) do
+            .item 
+              .rectangle_icon
+                = image_tag best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
+              .item-name
+                = artist.dig("name")
 
     .section-box
       %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_25_181615) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_29_185905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_25_181615) do
     t.string "ticketmaster_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "genre_id"
+    t.index ["genre_id"], name: "index_artists_on_genre_id"
   end
 
   create_table "concerts", force: :cascade do |t|
@@ -83,6 +85,12 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_25_181615) do
     t.index ["concert_id"], name: "index_future_assistances_on_concert_id"
     t.index ["interactuable_id"], name: "index_future_assistances_on_interactuable_id"
     t.index ["user_id"], name: "index_future_assistances_on_user_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "interactuables", force: :cascade do |t|

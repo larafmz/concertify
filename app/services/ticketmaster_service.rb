@@ -29,6 +29,14 @@ class TicketmasterService
         end
     end
 
+    def self.genres
+        url= URI("https://app.ticketmaster.com/discovery/v2/classifications.json?apikey=#{API_KEY}")
+        response = Net::HTTP.get(url)
+        data = JSON.parse(response)
+        genres = data.dig("_embedded","classifications").find { |c| c.dig("segment", "name") == "Music" }.dig("segment", "_embedded", "genres")
+        genres
+    end
+
 
 
 end

@@ -9,7 +9,7 @@ class Concert < ApplicationRecord
 
   ## VALIDATIONS
 
-    validates :tour_name, :ticketmaster_id, presence: true
+    validates :tour_name, :ticketmaster_id, :date, presence: true
     validates :ticketmaster_id, uniqueness: true
 
   ## INSTANCE METHODS

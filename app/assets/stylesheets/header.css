@@ -1,0 +1,30 @@
+
+.header {
+  display: grid;
+  grid-template-columns: auto auto 2fr 1fr;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 5px 20px;
+  align-items: center;
+  overflow: visible;
+}
+
+.app_name a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.header .dropdown {
+  width: 100%;
+}
+
+.header form {
+  width: 100%;
+  display: flex;
+}
+
+.header input[type="text"] {
+  width: 100%;
+  flex: 1;
+}

@@ -64,3 +64,5 @@ gem 'whenever', require: false
 gem "haml-rails"
 
 gem "kindable"
+
+gem "bootstrap", "~> 5.3"

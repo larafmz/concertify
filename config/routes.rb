@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   get "/searchs", to: "searchs#index"
 
+  resources :registered_concerts
+  resources :future_assistances
+
 
 
 end

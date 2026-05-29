@@ -1,11 +1,17 @@
+/*
+ *= require header
+ */
+
+ @import "bootstrap";
+
 body {
-  background: #72778C;
-  /* 16192E; */
+  background-color: #0F1419 !important;
    font-family: system-ui;
+   padding: 0 30px;
 }
 
 h2 {
-  font-size: 19px;
+  font-size: 19px !important;
   letter-spacing: 1px;
 }
 
@@ -36,7 +42,7 @@ h2 {
 }
 
 .widget-content .item-name {
-  width: 180px;
+  width: 200px;
   padding: 8px 10px;
   border: 1px solid #e6e6e6;
   font-size: 14px;
@@ -88,3 +94,4 @@ h2 {
   font-size: 17px;
 }
  
+

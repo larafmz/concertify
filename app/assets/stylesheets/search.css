@@ -16,30 +16,3 @@
   background: #16192E;
 }
 
-
-/*CONCIERTOS*/ 
-
-.widget-content .concerts-items {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.widget-content .item-concert {
-  padding: 0px 8px;
-  border-radius: 8px;
-  font-size: 18px;
-  text-align: left;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.date-concert {
-  background: #F2F2F2;
-  padding: 10px 10px;
-  text-align: center;
-  font-size: 17px;
-}
- 
-

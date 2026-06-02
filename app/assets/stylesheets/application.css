@@ -1,6 +1,8 @@
 /*
  *= require header
  *= require search
+ *= require artists
+ *= require concerts
  */
 
  @import "bootstrap";
@@ -71,4 +73,36 @@ h2 {
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+ 
+.separator-horizontal {
+  height: 1px;
+  background: rgb(202, 202, 202);
+}
+
+
+/*
+* BOTÓN
+*/
+
+.btn-custom {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.btn-custom::after {
+  content: "›";
+  font-size: 18px;
+  font-weight: 700;
 }

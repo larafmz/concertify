@@ -18,4 +18,8 @@ class Artist < ApplicationRecord
       name
     end
 
+    def average_puntuation
+      interactuables.publication.average(:puntuation) || 0
+    end
+
 end

@@ -1,0 +1,31 @@
+.concerts-items
+    - if !concerts.nil?
+        - concerts[0..20].each do |concert|
+            .item-concert
+                - concert_date = Date.parse(concert.dig("dates", "start", "localDate"))
+                .date-concert
+                    = concert_date.strftime("%B")[0,3].upcase
+                    %br
+                    %span{ style: "font-size: 20px;" }= concert_date.day
+                    %br
+                    - if concert_date.year != Date.today.year
+                        = concert_date.year
+                .concert-info
+                    %span{ style: "color: #696969;" }
+                        = formatted_concert_date(concert_date, concert.dig("dates", "start", "localTime"))
+                    %br
+                    %span{ style: "font-weight: 600" }
+                        #{concert.dig("name")} 
+                    %br
+                    %span{ style: "color: #696969;" }
+                        - venue = concert.dig("_embedded", "venues")&.first 
+                        - if !venue.nil?
+                            #{venue.dig("city", "name")}, #{venue.dig("state", "name")},  #{venue.dig("country", "name")} • #{venue.dig("address", "line1")}
+                .button-concert
+                    - if concert_date < Date.today
+                        = link_to "He asistido", new_registered_concert_path, class: "btn-custom"
+                    - if concert_date >= Date.today
+                        = link_to "Asistiré", new_future_assistance_path, class: "btn-custom"
+            .separator-horizontal  
+                
+                

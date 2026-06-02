@@ -15,8 +15,14 @@ class Interactuable < ApplicationRecord
   ## VALIDATIONS
   
     validates :puntuation, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
+    validates :type, presence: true
     validate :photos_limit
   
+  ## SCOPES
+
+    scope :register, -> { where(type: "Register") }
+    scope :publication, -> { where(type: "Publication") }
+
   ## VALIDATION METHODS
 
     def photos_limit

@@ -1,7 +1,35 @@
 .widget-content
 
-    .circle_icon
-        = image_tag  @artist.photos.first, class: "artist-avatar"
-        
-    .item-name
-        = @artist.name
+    .artist-box
+        .artist-info
+            .circle_icon
+                = image_tag  @artist.photos.first, class: "artist-avatar"
+                
+            .artist-name
+                = @artist.name
+                - if @artist.genre
+                    %span{ style: "color: #696969; font-size: 15x" }
+                        = @artist.genre.name
+
+        .artist-stats
+            .stat
+                .number
+                    = @artist.interactuables.register.size
+                .name
+                    Registros totales
+            
+            .stat
+                .number
+                    ★ #{@artist.average_puntuation} / 5
+                .name
+                    Media de Registros
+            .stat
+                .number
+                    (TO/DO)
+                .name
+                    Publicaciones
+            
+
+    .section-box
+        %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
+        = render "concerts/index", concerts: @concerts_api       

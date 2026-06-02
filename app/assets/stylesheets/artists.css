@@ -1,0 +1,36 @@
+
+.widget-content .artist-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: white;
+}
+
+.artist-info  {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.artist-name {
+    align-self: end;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.artist-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-self: center;
+    text-align: center;
+}
+
+.stat .number {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.stat .name {
+    color: #696969; 
+    font-size: 15x
+}
+

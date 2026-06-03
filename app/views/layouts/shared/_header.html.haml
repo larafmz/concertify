@@ -9,9 +9,13 @@
   = form_tag "/searchs", method: "GET" do
     = text_field_tag :search, params[:text], placeholder: t("search")
 
-  .dropdown
-    %button.btn.btn-secondary.dropdown-toggle{"data-bs-toggle" => "dropdown"}
-      Opciones
-    %ul.dropdown-menu
-      %li= link_to "Editar"
-      %li= link_to "Eliminar"
+  - if !current_user
+    = link_to "Iniciar sesión", new_user_session_path, class: "btn-custom"
+    = link_to "Crear cuenta", new_user_registration_path, class: "btn-custom"
+  - else 
+    .dropdown
+      %button.btn.btn-secondary.dropdown-toggle{"data-bs-toggle" => "dropdown"}
+        Opciones
+      %ul.dropdown-menu
+        %li= link_to "Editar"
+        %li= link_to "Eliminar"

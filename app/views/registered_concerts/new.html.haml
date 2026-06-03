@@ -1,0 +1,11 @@
+= turbo_frame_tag "modal" do
+  = tag.dialog data: { controller: "dialog" } do
+
+    .modal__header
+      %h2 Registrar asistencia
+
+    .modal__body
+      = render "form"
+
+    .modal__footer
+      = button_tag "Cerrar", class: "btn", data: { action: "dialog#close" }

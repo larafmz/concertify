@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class Artist < ApplicationRecord
 
   ## RELATIONSHIPS
@@ -20,6 +22,19 @@ class Artist < ApplicationRecord
 
     def average_puntuation
       interactuables.publication.average(:puntuation) || 0
+    end
+
+    def self.get_or_create_by_id(id)
+      artist = Artist.find_or_create_by!(ticketmaster_id: id) do |a|
+        artist_api = TicketmasterService.artist_by_id(id)
+        a.name = artist_api.dig("name")
+        if artist_api.dig("images").present?
+          image = best_quality_image(artist_api.dig("images"))
+          a.photos.attach(io: URI.open(image.dig("url")), filename: image.dig("url"), content_type: "image/jpg")
+        end
+        a.genre = Genre.find_by(name: artist_api.dig("classifications", 0, "genre", "name"))
+      end 
+      return artist
     end
 
 end

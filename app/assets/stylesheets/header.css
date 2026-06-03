@@ -1,7 +1,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: auto auto 2fr 1fr;
+  grid-template-columns: auto auto 2fr 1fr 1fr 1fr;
   gap: 12px;
   overflow-x: auto;
   padding: 5px 20px;

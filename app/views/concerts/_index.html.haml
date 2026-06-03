@@ -2,7 +2,7 @@
     - if !concerts.nil?
         - concerts[0..20].each do |concert|
             .item-concert
-                - concert_date = Date.parse(concert.dig("dates", "start", "localDate"))
+                - concert_date = get_concert_date(concert)
                 .date-concert
                     = concert_date.strftime("%B")[0,3].upcase
                     %br
@@ -12,20 +12,21 @@
                         = concert_date.year
                 .concert-info
                     %span{ style: "color: #696969;" }
-                        = formatted_concert_date(concert_date, concert.dig("dates", "start", "localTime"))
+                        = formatted_concert_date(concert_date, get_concert_time(concert))
                     %br
                     %span{ style: "font-weight: 600" }
-                        #{concert.dig("name")} 
+                        = get_concert_name(concert)
                     %br
                     %span{ style: "color: #696969;" }
-                        - venue = concert.dig("_embedded", "venues")&.first 
+                        - venue = get_concert_venue(concert)
                         - if !venue.nil?
-                            #{venue.dig("city", "name")}, #{venue.dig("state", "name")},  #{venue.dig("country", "name")} • #{venue.dig("address", "line1")}
-                .button-concert
-                    - if concert_date < Date.today
-                        = link_to "He asistido", new_registered_concert_path, class: "btn-custom"
-                    - if concert_date >= Date.today
-                        = link_to "Asistiré", new_future_assistance_path, class: "btn-custom"
+                            #{get_venue_city(venue)}, #{get_venue_state(venue)},  #{get_venue_country(venue)} • #{get_venue_address(venue)}
+                - if current_user
+                    .button-concert
+                        - if concert_date < Date.today
+                            = link_to "He asistido", new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+
+                        - if concert_date >= Date.today
+                            = link_to "Asistiré", new_future_assistance_path, class: "btn-custom"
             .separator-horizontal  
-                
-                
+          

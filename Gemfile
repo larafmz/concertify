@@ -66,3 +66,7 @@ gem "haml-rails"
 gem "kindable"
 
 gem "bootstrap", "~> 5.3"
+
+gem "turbo-rails"
+gem 'stimulus-rails'
+

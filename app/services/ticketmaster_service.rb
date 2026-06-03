@@ -11,13 +11,23 @@ class TicketmasterService
         end
     end
   
-    def self.artists_by_id(id)
+    def self.artist_by_id(id)
         url= URI("https://app.ticketmaster.com/discovery/v2/attractions.json?apikey=#{API_KEY}&classificationName=music&id=#{id}")
         puts url
         response = Net::HTTP.get(url)
         data = JSON.parse(response)
         data.dig("_embedded","attractions").first
     end
+
+    
+    def self.concert_by_id(id)
+        url= URI("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&id=#{id}&startDateTime=2010-01-01T00:00:00Z&sort=date,asc&size=200")
+        response = Net::HTTP.get(url)
+        puts url
+        data = JSON.parse(response)
+        data.dig("_embedded","events").first
+    end
+
 
     def self.concerts_by_name(name)
         Rails.cache.fetch("ticketmaster_concerts_#{name}", expires_in: 10.minutes) do

@@ -1,0 +1,11 @@
+.form-register {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+}
+
+.register_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

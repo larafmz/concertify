@@ -14,6 +14,9 @@
                     %span{ style: "color: #696969;" }
                         = formatted_concert_date(concert_date, get_concert_time(concert))
                     %br
+                    = link_to artist_path(get_concert_artist_id(concert)) do 
+                        = get_concert_artist_name(concert)
+                    = " - "                
                     %span{ style: "font-weight: 600" }
                         = get_concert_name(concert)
                     %br

@@ -3,7 +3,7 @@
     .artist-box
         .artist-info
             .circle_icon
-                = image_tag  @artist.photos.first, class: "artist-avatar"
+                = image_tag  @artist.photo, class: "artist-avatar" if @artist.photo.attached?
                 
             .artist-name
                 = @artist.name

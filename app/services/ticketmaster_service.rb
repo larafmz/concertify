@@ -16,7 +16,7 @@ class TicketmasterService
         puts url
         response = Net::HTTP.get(url)
         data = JSON.parse(response)
-        data.dig("_embedded","attractions").first
+        data.dig("_embedded","attractions", 0)
     end
 
     

@@ -3,6 +3,8 @@
  *= require search
  *= require artists
  *= require concerts
+ *= require modal
+ *= require registered_concerts
  */
 
  @import "bootstrap";

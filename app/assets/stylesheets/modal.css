@@ -1,0 +1,23 @@
+
+.custom_modal {
+    background-color: #0F1419;
+    color: white;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal_close {
+  background: none;
+  border: none;
+  padding: 4px;
+  color: #444;
+}
+
+.modal_body {
+  padding: 20px;
+}

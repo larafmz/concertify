@@ -6,7 +6,7 @@ class Concert < ApplicationRecord
 
     belongs_to :artist
     belongs_to :ubication
-    has_many_attached :photos
+    has_one_attached :photo
     has_many :interactuables, dependent: :destroy
 
   ## VALIDATIONS
@@ -28,6 +28,12 @@ class Concert < ApplicationRecord
         c.date = get_concert_date(concert_api)
         c.tour_name = concert_api.dig("name")
         c.start_time = get_concert_time(concert_api)
+
+        if concert_api.dig("images").present?
+          image = best_quality_image(concert_api.dig("images"))
+          c.photo.attach(io: URI.open(image.dig("url")), filename: image.dig("url"), content_type: "image/jpg")
+        end
+
         venue = get_concert_venue(concert_api)
         c.ubication = Ubication.find_or_create_by(city: get_venue_city(venue), state: get_venue_state(venue), country: Country.find_by(code: get_venue_country_code(venue)), address: get_venue_address(venue))
       end

@@ -13,8 +13,7 @@ class SearchsController < ApplicationController
     @concerts_api = TicketmasterService.concerts_by_name(query)
     @concerts_api = [] if @concerts_api.nil?
     @concerts_api = @concerts_api.select do |concert|
-        attractions = concert.dig("_embedded", "attractions")
-        attractions.present? && attractions.first&.dig("name").present?
+        attractions = concert.dig("_embedded", "attractions", 0, "name").present? 
     end
   
     # TO/DO los que se hayan borrado de la api pero sigan en la db

@@ -2,7 +2,7 @@ class FutureAssistance < ApplicationRecord
 
   ##CONFIGURATIONS
 
-  kindable :concert_seat { 0 => "Pista", 1 => "Grada", 2 => "VIP", 3 => "Otro" }
+  kindable :concert_seat, { :pista => 0, :grada => 1, :vip => 2, :otro => 3 }
 
   ## RELATIONSHIPS
 

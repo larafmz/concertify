@@ -31,8 +31,12 @@
                             - if !register
                                 = link_to "He asistido", new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                             - else
-                                = link_to "Editar asistencia", edit_registered_concert_path(id: register.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
                         - if concert_date >= Date.today
-                            = link_to "Asistiré", new_future_assistance_path, class: "btn-custom"
+                            - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+                            - if !future_assistance
+                                = link_to "Asistiré", new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
             .separator-horizontal  
           

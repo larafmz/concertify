@@ -6,22 +6,37 @@ def new
   render layout: false
 end
 
-
 def create
     @registered_concert = RegisteredConcert.new(create_params)
+    @concert = Concert.find(@registered_concert.concert_id)
 
     if @registered_concert.save
-        puts "GUARDADO"
+        redirect_to registered_concert_path(@registered_concert)
     else
-        puts "ERROR"
+       redirect_back fallback_location: root_path
+    end
+end
+
+def edit
+    @registered_concert = RegisteredConcert.find(params[:id])
+    @concert = Concert.find(@registered_concert.concert_id)
+    render layout: false
+end
+
+def update
+    @registered_concert = RegisteredConcert.find(params[:id])
+    @concert = Concert.find(@registered_concert.concert_id)
+
+    if @registered_concert.update(create_params)
+        redirect_to registered_concert_path(@registered_concert)
+    else
+        redirect_back fallback_location: root_path
     end
 end
 
 private
 
 def create_params
-    puts "DEBAJO"
-    puts params
     params.require(:registered_concert).permit(:concert_id, :text, :user_id, :puntuation)
 end 
 

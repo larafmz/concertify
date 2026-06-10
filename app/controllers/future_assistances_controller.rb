@@ -1,14 +1,16 @@
 class FutureAssistancesController < ApplicationController
   
 def new
-  @concert = Concert.get_or_create_by_id(params[:concert_id])
-  @future_assistance = FutureAssistance.new(concert_id: @concert.id)
+  @concert = Concert.find_by(ticketmaster_id: params[:concert_id])
+  @concert_api = TicketmasterService.concert_by_id(params[:concert_id]) if @concert.nil?
+  @future_assistance = FutureAssistance.new()
   render layout: false
 end
 
 def create
+    @concert = Concert.get_or_create_by_id(params[:future_assistance][:concert_id])
     @future_assistance = FutureAssistance.new(create_params)
-    @concert = Concert.find(@future_assistance.concert_id)
+    @future_assistance.concert_id = @concert.id
 
     if @future_assistance.save
         redirect_to future_assistance_path(@future_assistance)

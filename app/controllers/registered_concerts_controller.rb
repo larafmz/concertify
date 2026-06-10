@@ -1,14 +1,20 @@
 class RegisteredConcertsController < ApplicationController
   
+def index
+    @registered_concerts = RegisteredConcert.where(user_id: params[:user_id])
+end
+
 def new
-  @concert = Concert.get_or_create_by_id(params[:concert_id])
-  @registered_concert = RegisteredConcert.new(concert_id: @concert.id)
+  @concert = Concert.find_by(ticketmaster_id: params[:concert_id])
+  @concert_api = TicketmasterService.concert_by_id(params[:concert_id]) if @concert.nil?
+  @registered_concert = RegisteredConcert.new
   render layout: false
 end
 
 def create
+    @concert = Concert.get_or_create_by_id(params[:registered_concert][:concert_id])
     @registered_concert = RegisteredConcert.new(create_params)
-    @concert = Concert.find(@registered_concert.concert_id)
+    @registered_concert.concert_id = @concert.id
 
     if @registered_concert.save
         redirect_to registered_concert_path(@registered_concert)

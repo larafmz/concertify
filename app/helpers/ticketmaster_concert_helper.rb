@@ -24,6 +24,10 @@ module TicketmasterConcertHelper
     def get_concert_venue(concert)
         concert.dig("_embedded", "venues", 0)
     end
+    
+    def get_concert_image_url(concert)
+        best_quality_image(concert.dig("images")).dig("url")
+    end
 
     def get_venue_city(venue)
         venue.dig("city", "name")
@@ -43,6 +47,11 @@ module TicketmasterConcertHelper
 
     def get_venue_address(venue)
         venue.dig("address", "line1")
+    end
+
+    def get_full_ubication(concert) 
+        venue = get_concert_venue(concert)
+        "#{get_venue_city(venue)}, #{get_venue_state(venue)}, #{get_venue_country(venue)}"
     end
 
 end

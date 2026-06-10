@@ -30,8 +30,8 @@ class Concert < ApplicationRecord
         c.start_time = get_concert_time(concert_api)
 
         if concert_api.dig("images").present?
-          image = best_quality_image(concert_api.dig("images"))
-          c.photo.attach(io: URI.open(image.dig("url")), filename: image.dig("url"), content_type: "image/jpg")
+          image = get_concert_image_url(concert_api)
+          c.photo.attach(io: URI.open(image), filename: image, content_type: "image/jpg")
         end
 
         venue = get_concert_venue(concert_api)

@@ -1,2 +1,5 @@
-= render "form"
+- if @concert
+    = render "form_db" 
+- else
+    = render "form_api"
 

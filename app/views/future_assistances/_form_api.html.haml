@@ -8,17 +8,17 @@
     .modal_body
       = form_with model: @future_assistance, data: { turbo: false } do |f|
         
-        = f.hidden_field :concert_id
+        = f.hidden_field :concert_id, value: params[:concert_id]
         = f.hidden_field :user_id, value: current_user&.id
         
         .form-register
 
           .rectangle_icon
-            = image_tag  @concert.photo if @concert.photo.attached?
+            = image_tag get_concert_image_url(@concert_api)
 
           .register_info
-            %span{ style: "font-size: 20px;" }= @concert.tour_name
-            %span{ style: "font-size: 13px;" }= "#{@concert.ubication.complete_name} - #{@concert.date.strftime("%d %B %Y")}"
+            %span{ style: "font-size: 20px;" }= get_concert_name(@concert_api)
+            %span{ style: "font-size: 13px;" }= "#{get_full_ubication(@concert_api)} - #{get_concert_date(@concert_api).strftime("%d %B %Y")}"
             %div
               = f.check_box :alone
               = f.label :alone, "Voy solo"

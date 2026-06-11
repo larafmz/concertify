@@ -12,7 +12,7 @@ def create
     @future_assistance = FutureAssistance.new(create_params)
     @future_assistance.concert_id = @concert.id
 
-    if @future_assistance.save
+    if @future_assistance.save!
         redirect_to future_assistance_path(@future_assistance)
     else
        redirect_back fallback_location: root_path
@@ -29,7 +29,7 @@ def update
     @future_assistance = FutureAssistance.find(params[:id])
     @concert = Concert.find(@future_assistance.concert_id)
 
-    if @future_assistance.update(create_params)
+    if @future_assistance.update!(create_params)
         redirect_to future_assistance_path(@future_assistance)
     else
         redirect_back fallback_location: root_path

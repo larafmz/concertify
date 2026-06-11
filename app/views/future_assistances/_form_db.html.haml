@@ -8,7 +8,7 @@
     .modal_body
       = form_with model: @future_assistance, data: { turbo: false } do |f|
         
-        = f.hidden_field :concert_id, value: params[:concert_id]
+        = f.hidden_field :concert_id, value: params[:concert_id] if @registered_concert.concert_id.nil?
         = f.hidden_field :user_id, value: current_user&.id
         
         .form-register

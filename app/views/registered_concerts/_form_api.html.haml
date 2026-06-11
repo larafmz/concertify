@@ -8,7 +8,7 @@
     .modal_body
       = form_with model: @registered_concert, data: { turbo: false } do |f|
         
-        = f.hidden_field :ticketmaster_id, value: params[:concert_id]
+        = f.hidden_field :concert_id, value: params[:concert_id]
         = f.hidden_field :user_id, value: current_user&.id
         
         .form-register
@@ -20,11 +20,11 @@
             %span{ style: "font-size: 20px;" }= get_concert_name(@concert_api)
             %span{ style: "font-size: 13px;" }= "#{get_full_ubication(@concert_api)} - #{get_concert_date(@concert_api).strftime("%d %B %Y")}"
             = f.text_area :text, placeholder: "Añadir reseña", style: "width: 100%; height: 100px; resize: vertical;"
-            .rating
+            .puntuation
               %div="Rating"
               - (1..5).each do |i|
-                = f.radio_button :rating, i
-                = f.label :"rating_#{i}" do
+                = f.radio_button :puntuation, i
+                = f.label :"puntuation_#{i}" do
                   - (1..i).each do 
                     ★
         %br

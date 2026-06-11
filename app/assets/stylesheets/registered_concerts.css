@@ -1,3 +1,5 @@
+/* form */
+
 .form-register {
     display: grid;
     grid-template-columns: auto auto;
@@ -7,5 +9,49 @@
 .register_info {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+/* index */
+
+.widget-content .registers-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.widget-content .item-register {
+  background: #1e2731;
+  display: grid;
+  grid-template-columns: 0.3fr 1fr 4fr 1fr auto;
+  gap: 20px;
+  padding: 4px 8px;
+  font-size: 18px;
+  text-align: left;
+  align-items: center;
+  color: white;
+}
+
+.diary_register_icon {
+  width: 100px;
+  height: 150px;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* show */
+
+.register-show {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  color: rgb(196, 195, 216);
+  gap: 30px;
+  align-items: start;
+}
+
+.register-info {
   gap: 10px;
 }

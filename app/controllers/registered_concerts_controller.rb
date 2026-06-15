@@ -4,22 +4,35 @@ def index
     @registered_concerts = RegisteredConcert.joins(:concert).where(user_id: params[:user_id]).order("concerts.date DESC")
 end
 
+def show
+    @register = RegisteredConcert.find(params[:id])
+    @concert = Concert.find(@register.concert_id)
+    @artist = Artist.find(@concert.artist_id)
+end
+
 def new
-  @concert = Concert.find_by(ticketmaster_id: params[:concert_id])
-  @concert_api = TicketmasterService.concert_by_id(params[:concert_id]) if @concert.nil?
+  @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id])
+  @concert_api = TicketmasterService.concert_by_id(params[:ticketmaster_id]) if @concert.nil?
   @registered_concert = RegisteredConcert.new
   render layout: false
 end
 
 def create
-    @concert = Concert.get_or_create_by_id(params[:registered_concert][:concert_id])
     @registered_concert = RegisteredConcert.new(create_params)
-    @registered_concert.concert_id = @concert.id
 
-    if @registered_concert.save!
-        redirect_back fallback_location: root_path
-    else
-       redirect_back fallback_location: root_path
+    if !params[:ticketmaster_id].empty?
+        @concert = Concert.get_or_create_by_id(params[:ticketmaster_id]) 
+        @registered_concert.concert_id = @concert.id if @concert
+    end
+    
+    ActiveRecord::Base.transaction do
+        if @registered_concert.save!
+            future_assistance = FutureAssistance.find_by(concert_id: @registered_concert.concert_id, user_id: current_user.id)
+            future_assistance.destroy if future_assistance
+            redirect_to registered_concert_path(@registered_concert)
+        else
+            redirect_back fallback_location: root_path
+        end
     end
 end
 
@@ -38,12 +51,6 @@ def update
     else
         redirect_back fallback_location: root_path
     end
-end
-
-def show
-    @register = RegisteredConcert.find(params[:id])
-    @concert = Concert.find(@register.concert_id)
-    @artist = Artist.find(@concert.artist_id)
 end
 
 def destroy

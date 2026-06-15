@@ -4,7 +4,7 @@ class Concert < ApplicationRecord
 
   ## RELATIONSHIPS
 
-    belongs_to :artist
+    belongs_to :artist, optional: true #there are concerts without artists in ticketmaster
     belongs_to :ubication
     has_one_attached :photo
     has_many :interactuables, dependent: :destroy

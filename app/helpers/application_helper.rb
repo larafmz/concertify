@@ -10,4 +10,11 @@ module ApplicationHelper
       return nil if images.nil? || images.empty?
       images.find { |img| img["width"] > 1000 } || images.find { |img| img["width"] > 500 } || images.first
     end
+
+  def time_status(concert_date, concert_time = nil)
+    today = Date.today
+    return "past" if concert_date < today
+    return "future" if concert_date > today
+    concert_time.nil? || concert_time > Time.current ? "future" : "past"
+  end
 end

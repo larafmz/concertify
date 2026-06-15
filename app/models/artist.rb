@@ -27,6 +27,7 @@ class Artist < ApplicationRecord
     def self.get_or_create_by_id(id)
       artist = Artist.find_or_create_by!(ticketmaster_id: id) do |a|
         artist_api = TicketmasterService.artist_by_id(id)
+        return if artist_api.nil? #there are concerts with nil artist associated in ticketmaster
         a.name = artist_api.dig("name")
         if artist_api.dig("images").present?
           image = best_quality_image(artist_api.dig("images"))

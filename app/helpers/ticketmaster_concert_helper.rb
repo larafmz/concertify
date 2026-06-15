@@ -4,6 +4,10 @@ module TicketmasterConcertHelper
         concert.dig("name")
     end
 
+    def get_concert_id(concert)
+        concert.dig("id")
+    end
+
     def get_concert_artist_id(concert)
         concert.dig("_embedded", "attractions", 0, "id")
     end

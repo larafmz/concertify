@@ -13,12 +13,10 @@
                 .concert-info
                     %span{ style: "color: #696969;" }
                         = formatted_concert_date(concert_date, get_concert_time(concert))
-                    %br
-                    = link_to artist_path(get_concert_artist_id(concert)) do 
-                        = get_concert_artist_name(concert)
-                    = " - "                
+                    %br               
                     %span{ style: "font-weight: 600" }
-                        = get_concert_name(concert)
+                        = link_to concert_path(get_concert_id(concert)) do 
+                            = get_concert_name(concert)
                     %br
                     %span{ style: "color: #696969;" }
                         - venue = get_concert_venue(concert)
@@ -26,17 +24,19 @@
                             #{get_venue_city(venue)}, #{get_venue_state(venue)},  #{get_venue_country(venue)} • #{get_venue_address(venue)}
                 - if current_user
                     .button-concert
-                        - if concert_date < Date.today
+                        - concert_date_status = time_status(concert_date, get_concert_time(concert))
+                        - if concert_date_status == "past"
                             - register = RegisteredConcert.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
                             - if !register
-                                = link_to "He asistido", new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to "He asistido", new_registered_concert_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                             - else
                                 = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
-                        - if concert_date >= Date.today
+                        - if concert_date_status == "future"
                             - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
                             - if !future_assistance
-                                = link_to "Asistiré", new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to "Asistiré", new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                             - else
                                 = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
+
             .separator-horizontal{style: "background: rgb(202, 202, 202);"}
           

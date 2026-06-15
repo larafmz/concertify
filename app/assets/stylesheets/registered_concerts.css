@@ -32,6 +32,13 @@
   color: white;
 }
 
+.item-register > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .diary_register_icon {
   width: 100px;
   height: 150px;

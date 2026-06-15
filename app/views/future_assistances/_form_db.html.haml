@@ -23,6 +23,8 @@
             %div
               = f.check_box :alone
               = f.label :alone, "Voy solo"
+            %div
+              = f.text_field :from, placeholder: "Salgo de..."
             Ubicación en el concierto:
             %span{ style: "display: grid; grid-template-columns: 1fr 3fr; gap: 10px" }
               = f.select :concert_seat, FutureAssistance.concert_seats_for_select, prompt: "Seleccionar..."

@@ -27,21 +27,24 @@ class TicketmasterService
 
     
     def self.concert_by_id(id)
-        data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&id=#{id}&startDateTime=2010-01-01T00:00:00Z&sort=date,asc&size=200")
+        data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&id=#{id}&sort=date,asc&size=200")
         data.dig("_embedded","events").first if data.present?
     end
 
 
-    def self.concerts_by_name(name)
-        Rails.cache.fetch("ticketmaster_concerts_#{name}", expires_in: 10.minutes) do
-            data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&keyword=#{name}&startDateTime=2010-01-01T00:00:00Z&sort=date,asc&size=200")
+    def self.concerts_by(name, first_date, second_date)
+        Rails.cache.fetch("ticketmaster_concerts_#{name}_#{first_date}_#{second_date}", expires_in: 10.minutes) do
+            url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&keyword=#{name}&sort=date,asc&size=150"
+            url += "&startDateTime=#{first_date}" if first_date
+            url += "&endDateTime=#{second_date}" if second_date
+            data = call_api(url)
             data.dig("_embedded","events") if data.present?
         end
     end
 
     def self.concerts_by_artist_id(id)
         Rails.cache.fetch("ticketmaster_concerts_artist_#{id}", expires_in: 10.minutes) do
-            data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&attractionId=#{id}&startDateTime=2010-01-01T00:00:00Z&sort=date,asc&size=200")
+            data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&attractionId=#{id}&sort=date,asc&size=200")
             data.dig("_embedded","events") if data.present?
         end
     end

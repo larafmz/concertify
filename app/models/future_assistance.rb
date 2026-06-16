@@ -25,18 +25,6 @@ class FutureAssistance < ApplicationRecord
     end
   
   ## INSTANCE METHODS
-  
-  def full_ubication
-    if from && !from.empty?
-      if alone
-        return "✈︎ Asiste sin acompañantes desde #{from}." 
-      else
-        return "✈︎ Desde #{from}." 
-      end
-    end
-    return "Asiste sin acompañantes." if alone
-    nil
-  end
 
   def full_concert_seat
     str = ""

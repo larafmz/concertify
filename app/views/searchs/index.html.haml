@@ -1,19 +1,19 @@
 .widget-content.list
 
   = form_tag "/searchs", method: "GET" do
-    = text_field_tag :search, params[:text], placeholder: "🔍 #{t("search")}", class: "field-custom"
+    = text_field_tag :search, params[:search], placeholder: "🔍 Buscar usuarios, artistas, conciertos...", class: "field-custom"
   
-  .section-box
-    .filters-search
-      %div
-        = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
-        = date_field :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
-      %div
-        = label_tag :first_date, "🗓️ HASTA", class: "soft-color", style: "font-size: 13px;"
-        = date_field :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
-      %div
-        = label_tag :first_date, "📍 UBICACIÓN", class: "soft-color", style: "font-size: 13px;"
-        = select_tag :country, options_for_select(Country.all.map { |country| country.name }, params[:country]),include_blank: "Todas las ubicaciones", class: "field-custom", style: "background: #0F1419; padding: 0px;"
+    .section-box
+      .filters-search
+        %div
+          = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
+          = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
+        %div
+          = label_tag :second_date, "🗓️ HASTA", class: "soft-color", style: "font-size: 13px;"
+          = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
+        %div
+          = label_tag :country, "📍 UBICACIÓN", class: "soft-color", style: "font-size: 13px;"
+          = select_tag :country, options_for_select(Country.all.map { |country| country.name }, params[:country]),include_blank: "Todas las ubicaciones", class: "field-custom", style: "background: #0F1419; padding: 0px;"
 
   .section-box
     %h2 USUARIOS • #{@users.size} RESULTADOS
@@ -34,6 +34,9 @@
               = artist.dig("name")
 
   .section-box
-    %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
+    - if @concerts_api.size > 100
+      %h2 CONCIERTOS + 100 RESULTADOS
+    - else 
+      %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
     = render "concerts/index", concerts: @concerts_api
           

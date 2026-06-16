@@ -1,5 +1,5 @@
 
-.widget-content .artist-box {
+.two-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: white;

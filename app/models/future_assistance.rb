@@ -13,15 +13,15 @@ class FutureAssistance < ApplicationRecord
 
   ## VALIDATIONS
 
-    validates :concert_seat_details, :from, length: { maximum: 50 }, allow_nil: true
+    validates :concert_seat_details, :from, length: { maximum: 20 }, allow_nil: true
   
   ## CALLBACKS
 
     before_validation :truncate_data
 
     def truncate_data
-      self.concert_seat_details = concert_seat_details.truncate(50) if !concert_seat_details.blank?
-      self.from = from.truncate(50) if !from.blank?
+      self.concert_seat_details = concert_seat_details.truncate(20) if !concert_seat_details.blank?
+      self.from = from.truncate(20) if !from.blank?
     end
   
   ## INSTANCE METHODS
@@ -29,16 +29,16 @@ class FutureAssistance < ApplicationRecord
   def full_ubication
     if from && !from.empty?
       if alone
-        return "✈︎ Asiste solo desde #{from}." 
+        return "✈︎ Asiste sin acompañantes desde #{from}." 
       else
         return "✈︎ Desde #{from}." 
       end
     end
-    return "Voy solo." if alone
+    return "Asiste sin acompañantes." if alone
     nil
   end
 
-  def description
+  def full_concert_seat
     str = ""
     str += "#{get_concert_seat_name} " if concert_seat
     str += "#{concert_seat_details}" if concert_seat_details

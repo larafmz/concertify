@@ -13,6 +13,16 @@
   font-size: 14px;
   text-align: center;
   color: white;
-  background: #16192E;
+  background: #ff4517;
 }
 
+.filters-search {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.filters-search label {
+  display: block;
+  margin-bottom: 5px;
+}

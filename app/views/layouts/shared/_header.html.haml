@@ -7,7 +7,8 @@
       Concertify
 
   = form_tag "/searchs", method: "GET" do
-    = text_field_tag :search, params[:text], placeholder: t("search"), style: "background: rgb(53, 53, 70); color: white;"
+    = text_field_tag :search, params[:text], placeholder: "🔍 #{t("search")}", class: "field-custom"
+
 
   - if !current_user
     = link_to "Iniciar sesión", new_user_session_path, class: "btn-custom"
@@ -27,7 +28,7 @@
         %li
           = link_to "Mis Conciertos Registrados", registered_concerts_path(user_id: current_user.id), class: "dropdown-item"
         %li
-          = link_to "Mis Futuros Conciertos (TO/DO)", future_assistances_path(user_id: current_user.id), class: "dropdown-item"
+          = link_to "Mis Futuros Conciertos", future_assistances_path(user_id: current_user.id), class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li

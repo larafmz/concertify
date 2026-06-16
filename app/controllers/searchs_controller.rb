@@ -1,5 +1,7 @@
 require 'net/http'
 require "open-uri"
+include TicketmasterConcertHelper
+
 class SearchsController < ApplicationController
 
   API_KEY = Rails.application.credentials.ticketmaster[:api_key]

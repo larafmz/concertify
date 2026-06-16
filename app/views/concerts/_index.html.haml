@@ -11,14 +11,14 @@
                     - if concert_date.year != Date.today.year
                         = concert_date.year
                 .concert-info
-                    %span{ style: "color: #696969;" }
+                    %span{ class: "soft-color" }
                         = formatted_concert_date(concert_date, get_concert_time(concert))
                     %br               
                     %span{ style: "font-weight: 600" }
                         = link_to concert_path(get_concert_id(concert)) do 
                             = get_concert_name(concert)
                     %br
-                    %span{ style: "color: #696969;" }
+                    %span{ class: "soft-color" }
                         - venue = get_concert_venue(concert)
                         - if !venue.nil?
                             #{get_venue_city(venue)}, #{get_venue_state(venue)},  #{get_venue_country(venue)} • #{get_venue_address(venue)}
@@ -38,5 +38,5 @@
                             - else
                                 = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
 
-            .separator-horizontal{style: "background: rgb(202, 202, 202);"}
+            .separator{style: "background: rgb(202, 202, 202);"}
           

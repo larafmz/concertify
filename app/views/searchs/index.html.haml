@@ -1,25 +1,39 @@
 .widget-content.list
-  .card.card-body
 
-    .section-box
-      %h2 USUARIOS • #{@users.size} RESULTADOS
-      .items
-        - @users.each do |user|
-          .item-name
-            = user.email
+  = form_tag "/searchs", method: "GET" do
+    = text_field_tag :search, params[:text], placeholder: "🔍 #{t("search")}", class: "field-custom"
+  
+  .section-box
+    .filters-search
+      %div
+        = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
+        = date_field :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
+      %div
+        = label_tag :first_date, "🗓️ HASTA", class: "soft-color", style: "font-size: 13px;"
+        = date_field :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
+      %div
+        = label_tag :first_date, "📍 UBICACIÓN", class: "soft-color", style: "font-size: 13px;"
+        = select_tag :country, options_for_select(Country.all.map { |country| country.name }, params[:country]),include_blank: "Todas las ubicaciones", class: "field-custom", style: "background: #0F1419; padding: 0px;"
 
-    .section-box
-      %h2 ARTISTAS • #{@artists.size} RESULTADOS
-      .items
-        - @artists[0..9].each do |artist|
-          = link_to artist_path(artist.dig("id")) do
-            .item 
-              .rectangle_icon
-                = image_tag best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
-              .item-name
-                = artist.dig("name")
+  .section-box
+    %h2 USUARIOS • #{@users.size} RESULTADOS
+    .items
+      - @users.each do |user|
+        .item-name
+          = user.email
 
-    .section-box
-      %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
-      = render "concerts/index", concerts: @concerts_api
-            
+  .section-box
+    %h2 ARTISTAS • #{@artists.size} RESULTADOS
+    .items
+      - @artists[0..9].each do |artist|
+        = link_to artist_path(artist.dig("id")) do
+          .item 
+            .rectangle_icon
+              = image_tag best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
+            .item-name
+              = artist.dig("name")
+
+  .section-box
+    %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
+    = render "concerts/index", concerts: @concerts_api
+          

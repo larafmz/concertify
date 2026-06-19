@@ -13,7 +13,7 @@ class SearchsController < ApplicationController
     @artists = [] if @artists.nil?
 
     @concerts_api = TicketmasterService.concerts_by(query, nil, params[:first_date], params[:second_date], params[:country])
-    @concerts_db = Concert.search_by(query, nil, params[:first_date], params[:second_date], params[:country], @concerts_api)
+    @concerts_db = Concert.search_by(query, params[:first_date], params[:second_date], params[:country], @concerts_api)
    
     @users = User.where("email ILIKE ?", "%#{query}%")
   end

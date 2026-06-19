@@ -25,15 +25,15 @@
                 .button-concert
                     - concert_date_status = time_status(concert_date, concert.start_time)
                     - if concert_date_status == "past"
-                        - register = RegisteredConcert.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+                        - register = RegisteredConcert.joins(:concert).where(user_id: current_user.id, concerts: { concert_id: concert.id }).first
                         - if !register
-                            = link_to "He asistido", new_registered_concert_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            = link_to "He asistido", new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                         - else
                             = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
                     - if concert_date_status == "future"
-                        - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+                        - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { id: concert.id }).first
                         - if !future_assistance
-                            = link_to "Asistiré", new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            = link_to "Asistiré", new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                         - else
                             = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
 

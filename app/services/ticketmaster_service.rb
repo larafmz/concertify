@@ -48,9 +48,9 @@ class TicketmasterService
             data = call_api(url)
             data = data.dig("_embedded","events") if data.present?
             return [] if data.nil?
-            data = data.select do |concert|
-                get_concert_artist_name(concert).present?
-            end
+            # data = data.select do |concert|
+            #     get_concert_artist_name(concert).present?
+            # end
             data
         end
     end

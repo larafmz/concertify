@@ -3,15 +3,15 @@ include TicketmasterConcertHelper
 class Concert < ApplicationRecord
 
   ## RELATIONSHIPS
-
-    belongs_to :artist, optional: true #there are concerts without artists in ticketmaster
+    has_many :artists_concerts
+    has_many :artists, through: :artists_concerts
     belongs_to :ubication
     has_one_attached :photo
     has_many :interactuables, dependent: :destroy
 
   ## SCOPES
-    scope :by_name, -> (query) { left_joins(:artist).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%") }
-    scope :by_artist, -> (artist_id) { left_joins(:artist).where(artists: { id: artist_id }) }
+
+    scope :by_name, -> (query) { left_joins(:artists).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%").distinct }
     scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
 
   ## VALIDATIONS
@@ -24,8 +24,11 @@ class Concert < ApplicationRecord
     def self.get_or_create_by_id(id)
       concert = Concert.find_or_create_by!(ticketmaster_id: id) do |c|
         concert_api = TicketmasterService.concert_by_id(id)
-        artist = Artist.get_or_create_by_id(get_concert_artist_id(concert_api))
-        c.artist = artist
+        artists = get_concert_artists(concert_api)
+        artists.each do |artist|
+          a = Artist.get_or_create_by_id(artist["id"])
+          c.artists << a if a
+        end     
         c.date = get_concert_date(concert_api)
         c.tour_name = concert_api.dig("name")
         c.start_time = get_concert_time(concert_api)
@@ -41,23 +44,25 @@ class Concert < ApplicationRecord
       return concert
     end
 
-    def self.search_by(query, artist, first_date, second_date, country_code, concerts_api)
-      return [] if !query.present? && !artist.present?
-      if first_date || second_date || artist
-        first_date = Date.parse(first_date) if first_date && !first_date.empty?
-        second_date = Date.parse(second_date) if second_date && !second_date.empty?
+    def self.search_by(query, first_date, second_date, country_code, concerts_api)
+      return [] if !query.present?
+      concerts_db = Concert.by_name(query)
+
+      ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
+      concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)
+
+      concerts_db = concerts_db.by_country_code(country_code) if country_code.present?
+
+      if first_date || second_date
+        first_date = Date.parse(first_date) if first_date.present?
+        second_date = Date.parse(second_date) if second_date.present?
         second_date = first_date if !second_date.present?
         first_date ||= Date.today
-        
-        concerts_db = Concert.by_name(query) if query.present?
-        concerts_db = Concert.by_artist(artist.id) if artist.present?
-        concerts_db = concerts_db.by_country_code(country_code) if country_code.present?
-        ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
-        concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)
         concerts_db = concerts_db.where("date >= ?", first_date) if first_date.present?
         concerts_db = concerts_db.where("date <= ?", second_date) if second_date.present?
       end
-      concerts_db || []
+
+      concerts_db
     end
 
 

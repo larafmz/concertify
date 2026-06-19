@@ -13,7 +13,6 @@ class AddArtistAndConcert < ActiveRecord::Migration[7.2]
       t.date :date
       t.time :start_time
       t.time :end_time
-      t.references :artist, foreign_key: { on_delete: :cascade }
       t.timestamps
     end
 

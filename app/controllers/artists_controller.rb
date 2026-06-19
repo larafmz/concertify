@@ -9,7 +9,7 @@ class ArtistsController < ApplicationController
     @concerts_api = TicketmasterService.concerts_by(nil, params[:id], params[:first_date], params[:second_date], params[:country]) || []
 
     ticketmaster_ids = @concerts_api.map { |concert| concert["id"] }
-    @concerts_db = Concert.search_by(nil, @artist, params[:first_date], params[:second_date], params[:country], @concerts_api)
+    @concerts_db = @artist.search_concerts_by(params[:first_date], params[:second_date], params[:country], @concerts_api)
   end
 
 end

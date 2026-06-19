@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_29_185905) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_19_175613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,17 +51,25 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_29_185905) do
     t.index ["genre_id"], name: "index_artists_on_genre_id"
   end
 
+  create_table "artists_concerts", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.bigint "concert_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id", "concert_id"], name: "index_artists_concerts_on_artist_id_and_concert_id", unique: true
+    t.index ["artist_id"], name: "index_artists_concerts_on_artist_id"
+    t.index ["concert_id"], name: "index_artists_concerts_on_concert_id"
+  end
+
   create_table "concerts", force: :cascade do |t|
     t.string "ticketmaster_id"
     t.string "tour_name"
     t.date "date"
     t.time "start_time"
     t.time "end_time"
-    t.bigint "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ubication_id"
-    t.index ["artist_id"], name: "index_concerts_on_artist_id"
     t.index ["ubication_id"], name: "index_concerts_on_ubication_id"
   end
 
@@ -140,7 +148,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_29_185905) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "concerts", "artists", on_delete: :cascade
+  add_foreign_key "artists_concerts", "artists"
+  add_foreign_key "artists_concerts", "concerts"
   add_foreign_key "future_assistances", "concerts"
   add_foreign_key "future_assistances", "interactuables"
   add_foreign_key "future_assistances", "users"

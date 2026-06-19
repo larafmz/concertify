@@ -18,8 +18,9 @@
                 %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"
             %div{style: "font-size: 13px; margin: 10px 0;"}= "#{@concert.date.strftime("%d %b %Y")}, #{@concert.ubication.complete_name}"
             %div= @register.get_puntuation
-            %div{ style: "word-break: break-word; overflow-wrap: break-word; padding: 15px; margin: 10px 0; background: rgb(53, 53, 70);" }
-                = @register.text
+            - if !@register.text.empty?
+                %div{ style: "word-break: break-word; overflow-wrap: break-word; padding: 15px; margin: 10px 0; background: rgb(53, 53, 70);" }
+                    = @register.text
             %div{style: "margin-bottom: 40px;"}
                 - if current_user
                     ♡ 6 likes

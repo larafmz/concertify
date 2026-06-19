@@ -1,0 +1,18 @@
+.section-box
+    = form_tag request.path, method: "GET" do
+        = hidden_field_tag :search, params[:search]
+        .filters-search
+            %div
+                = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
+                = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
+            %div
+                = label_tag :second_date, "🗓️ HASTA", class: "soft-color", style: "font-size: 13px;"
+                = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
+            %div
+                = label_tag :country, "📍 UBICACIÓN", class: "soft-color", style: "font-size: 13px;"
+                = select_tag :country, options_for_select(Country.all.map { |country| country.name }, params[:country]),include_blank: "Todas las ubicaciones", class: "field-custom", style: "background: #0F1419; padding: 0px;"
+            %div
+                %br  
+                = submit_tag "Filtrar", class: "btn-custom"
+        %br  
+        = link_to "Limpiar filtros", url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"

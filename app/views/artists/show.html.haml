@@ -28,8 +28,10 @@
                     (TO/DO)
                 .name
                     Publicaciones
-            
 
     .section-box
         %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
-        = render "concerts/index", concerts: @concerts_api       
+        = render "searchs/filters"
+        .concerts-items
+            = render "concerts/index_db", concerts: @concerts_db
+            = render "concerts/index_api", concerts: @concerts_api       

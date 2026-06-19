@@ -17,7 +17,7 @@ module TicketmasterConcertHelper
     end
 
     def get_concert_date(concert)
-        return Date.parse(concert.dig("dates", "start", "dateTime")) if concert.dig("dates", "start", "dateTime")
+        #return Date.parse(concert.dig("dates", "start", "dateTime")) if concert.dig("dates", "start", "dateTime")
         Date.parse(concert.dig("dates", "start", "localDate"))
     end
 

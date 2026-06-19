@@ -32,20 +32,24 @@ class TicketmasterService
     end
 
 
-    def self.concerts_by(name, first_date, second_date)
-        Rails.cache.fetch("ticketmaster_concerts_#{name}_#{first_date}_#{second_date}", expires_in: 10.minutes) do
-            url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&keyword=#{name}&sort=date,asc&size=150"
-            url += "&startDateTime=#{first_date}" if first_date
-            url += "&endDateTime=#{second_date}" if second_date
-            data = call_api(url)
-            data.dig("_embedded","events") if data.present?
-        end
-    end
+    def self.concerts_by(name, artist_id, first_date, second_date)
+        first_date = Date.parse(first_date) if first_date.present?
+        second_date = Date.parse(second_date) if second_date.present? 
+        second_date ||= first_date
+        first_date = first_date.to_date.beginning_of_day.utc.iso8601 if first_date
+        second_date = second_date.to_date.end_of_day.utc.iso8601 if second_date
 
-    def self.concerts_by_artist_id(id)
-        Rails.cache.fetch("ticketmaster_concerts_artist_#{id}", expires_in: 10.minutes) do
-            data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&attractionId=#{id}&sort=date,asc&size=200")
-            data.dig("_embedded","events") if data.present?
+        return [] if (name.nil? || name.empty?) && (artist_id.nil? || artist_id.empty?)
+        Rails.cache.fetch("ticketmaster_concerts_#{name}_#{artist_id}_#{first_date}_#{second_date}", expires_in: 10.minutes) do
+            url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&keyword=#{name}&sort=date,asc&size=150&startDateTime=#{first_date}&endDateTime=#{second_date}"
+            url += "&attractionId=#{artist_id}" if artist_id.present?
+            data = call_api(url)
+            data = data.dig("_embedded","events") if data.present?
+            return [] if data.nil?
+            data = data.select do |concert|
+                get_concert_artist_name(concert).present?
+            end
+            data
         end
     end
 

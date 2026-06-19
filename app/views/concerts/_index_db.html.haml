@@ -1,0 +1,41 @@
+- if !concerts.nil?
+    - concerts.each do |concert|
+        .item-concert
+            - concert_date = concert.date
+            .date-concert
+                = concert_date.strftime("%B")[0,3].upcase
+                %br
+                %span{ style: "font-size: 20px;" }= concert_date.day
+                %br
+                - if concert_date.year != Date.today.year
+                    = concert_date.year
+            .concert-info
+                %span{ class: "soft-color" }
+                    = formatted_concert_date(concert_date, concert.start_time)
+                %br               
+                %span{ style: "font-weight: 600" }
+                    = link_to concert_path(concert.id) do 
+                        = concert.tour_name
+                %br
+                %span{ class: "soft-color" }
+                    - venue = concert.ubication
+                    - if !venue.nil?
+                        #{venue.city}, #{venue.state},  #{venue.country.name} • #{venue.address}
+            - if current_user
+                .button-concert
+                    - concert_date_status = time_status(concert_date, concert.start_time)
+                    - if concert_date_status == "past"
+                        - register = RegisteredConcert.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+                        - if !register
+                            = link_to "He asistido", new_registered_concert_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                        - else
+                            = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
+                    - if concert_date_status == "future"
+                        - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+                        - if !future_assistance
+                            = link_to "Asistiré", new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                        - else
+                            = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
+
+        .separator{style: "background: rgb(202, 202, 202);"}
+        

@@ -1,26 +1,12 @@
 .widget-content.list
 
-  = form_tag "/searchs", method: "GET" do
-    = text_field_tag :search, params[:search], placeholder: "🔍 Buscar usuarios, artistas, conciertos...", class: "field-custom"
-  
+  - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     .section-box
-      .filters-search
-        %div
-          = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
-          = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
-        %div
-          = label_tag :second_date, "🗓️ HASTA", class: "soft-color", style: "font-size: 13px;"
-          = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
-        %div
-          = label_tag :country, "📍 UBICACIÓN", class: "soft-color", style: "font-size: 13px;"
-          = select_tag :country, options_for_select(Country.all.map { |country| country.name }, params[:country]),include_blank: "Todas las ubicaciones", class: "field-custom", style: "background: #0F1419; padding: 0px;"
-
-  .section-box
-    %h2 USUARIOS • #{@users.size} RESULTADOS
-    .items
-      - @users.each do |user|
-        .item-name
-          = user.email
+      %h2 USUARIOS • #{@users.size} RESULTADOS
+      .items
+        - @users.each do |user|
+          .item-name
+            = user.email
 
   .section-box
     %h2 ARTISTAS • #{@artists.size} RESULTADOS
@@ -33,10 +19,14 @@
             .item-name
               = artist.dig("name")
 
+
   .section-box
-    - if @concerts_api.size > 100
+    - concerts_size = @concerts_api.size + @concerts_db.size
+    - if concerts_size > 100
       %h2 CONCIERTOS + 100 RESULTADOS
     - else 
-      %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
-    = render "concerts/index", concerts: @concerts_api
+      %h2 CONCIERTOS • #{concerts_size} RESULTADOS
+    = render "searchs/filters"
+    .concerts-items
+      = render "concerts/index_api", concerts: @concerts_api.first(10)
           

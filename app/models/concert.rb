@@ -9,16 +9,16 @@ class Concert < ApplicationRecord
     has_one_attached :photo
     has_many :interactuables, dependent: :destroy
 
+  ## SCOPES
+    scope :by_name, ->(query) { left_joins(:artist).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%") }
+    scope :by_artist, ->(artist_id) { left_joins(:artist).where(artists: { id: artist_id }) }
+
   ## VALIDATIONS
 
     validates :tour_name, :ticketmaster_id, :date, presence: true
     validates :ticketmaster_id, uniqueness: true
 
-  ## INSTANCE METHODS
-
-    def complete_name
-      tour_name
-    end
+  ## CLASS METHODS
 
     def self.get_or_create_by_id(id)
       concert = Concert.find_or_create_by!(ticketmaster_id: id) do |c|
@@ -39,5 +39,27 @@ class Concert < ApplicationRecord
       end
       return concert
     end
+
+    def self.search_by(query, artist, first_date, second_date, concerts_api)
+      if first_date || second_date || artist
+        first_date = Date.parse(first_date) if first_date && !first_date.empty?
+        second_date = Date.parse(second_date) if second_date && !second_date.empty?
+        first_date ||= Date.today
+        second_date ||= first_date
+        ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
+        concerts_db = Concert.by_name(query) if query
+        concerts_db = Concert.by_artist(artist.id) if artist
+        concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).where(date: first_date..second_date).order(date: :asc)
+      end
+      concerts_db || []
+    end
+
+
+  ## INSTANCE METHODS
+
+    def complete_name
+      tour_name
+    end
+
 
 end

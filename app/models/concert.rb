@@ -10,8 +10,9 @@ class Concert < ApplicationRecord
     has_many :interactuables, dependent: :destroy
 
   ## SCOPES
-    scope :by_name, ->(query) { left_joins(:artist).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%") }
-    scope :by_artist, ->(artist_id) { left_joins(:artist).where(artists: { id: artist_id }) }
+    scope :by_name, -> (query) { left_joins(:artist).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%") }
+    scope :by_artist, -> (artist_id) { left_joins(:artist).where(artists: { id: artist_id }) }
+    scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
 
   ## VALIDATIONS
 
@@ -40,16 +41,21 @@ class Concert < ApplicationRecord
       return concert
     end
 
-    def self.search_by(query, artist, first_date, second_date, concerts_api)
+    def self.search_by(query, artist, first_date, second_date, country_code, concerts_api)
+      return [] if !query.present? && !artist.present?
       if first_date || second_date || artist
         first_date = Date.parse(first_date) if first_date && !first_date.empty?
         second_date = Date.parse(second_date) if second_date && !second_date.empty?
+        second_date = first_date if !second_date.present?
         first_date ||= Date.today
-        second_date ||= first_date
+        
+        concerts_db = Concert.by_name(query) if query.present?
+        concerts_db = Concert.by_artist(artist.id) if artist.present?
+        concerts_db = concerts_db.by_country_code(country_code) if country_code.present?
         ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
-        concerts_db = Concert.by_name(query) if query
-        concerts_db = Concert.by_artist(artist.id) if artist
-        concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).where(date: first_date..second_date).order(date: :asc)
+        concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)
+        concerts_db = concerts_db.where("date >= ?", first_date) if first_date.present?
+        concerts_db = concerts_db.where("date <= ?", second_date) if second_date.present?
       end
       concerts_db || []
     end

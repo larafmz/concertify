@@ -5,7 +5,6 @@ class TicketmasterService
         begin
             puts url
             response = Net::HTTP.get(URI(url))
-            #response = "prueba error"
             return JSON.parse(response)
         rescue
             puts "Error al conectar con Ticketmaster" #TO/DO mostrar esto en un pop up o algo asi

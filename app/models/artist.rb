@@ -10,6 +10,10 @@ class Artist < ApplicationRecord
     has_many :interactuables
     belongs_to :genre, optional: true
 
+  ## SCOPES
+
+    scope :by_name, -> (query) { where("name ILIKE :q", q: "%#{query}%") }
+    
   ## VALIDATIONS
 
     validates :name, :ticketmaster_id, presence: true

@@ -9,8 +9,8 @@ class SearchsController < ApplicationController
   def index
     query = params[:search]
 
-    @artists = TicketmasterService.artists_by_name(query)
-    @artists = [] if @artists.nil?
+    @artists = TicketmasterService.artists_by_name(query) || []
+    @artists_db = Artist.by_name(query) || [] if @artists.nil?
 
     @concerts_api = TicketmasterService.concerts_by(query, nil, params[:first_date], params[:second_date], params[:country])
     @concerts_db = Concert.search_by(query, params[:first_date], params[:second_date], params[:country], @concerts_api)

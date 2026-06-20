@@ -5,10 +5,14 @@ def index
 end
 
 def new
-  @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id])
-  @concert_api = TicketmasterService.concert_by_id(params[:ticketmaster_id]) if @concert.nil?
-  @future_assistance = FutureAssistance.new
-  render layout: false
+    if params[:ticketmaster_id]
+        @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
+        @concert_api = TicketmasterService.concert_by_id(params[:ticketmaster_id]) if @concert.nil?
+    else
+        @concert = Concert.find(params[:concert_id])
+    end
+    @future_assistance = FutureAssistance.new
+    render layout: false
 end
 
 def create

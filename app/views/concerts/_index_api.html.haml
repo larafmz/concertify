@@ -14,7 +14,7 @@
                     = formatted_concert_date(concert_date, get_concert_time(concert))
                 %br               
                 %span{ style: "font-weight: 600" }
-                    = link_to concert_path(get_concert_id(concert)) do 
+                    = link_to concert_path(id: "ticketmaster", ticketmaster_id: get_concert_id(concert)) do 
                         = get_concert_name(concert)
                 %br
                 %span{ class: "soft-color" }

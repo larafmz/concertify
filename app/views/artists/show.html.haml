@@ -1,6 +1,6 @@
-.widget-content
 
-    .two-columns
+%div{ class: "widget-content", style: "background: #1f252b;"}
+    %div{ class: "artist-content", style: "background: #1f252b;"}
         .artist-info
             .circle_icon
                 = image_tag  @artist.photo, class: "artist-avatar" if @artist.photo.attached?
@@ -8,7 +8,7 @@
             .artist-name
                 = @artist.name
                 - if @artist.genre
-                    %span{ style: "color: #696969; font-size: 15x" }
+                    %span{ style: "color: #696969; font-size: 15px" }
                         = @artist.genre.name
 
         .artist-stats
@@ -29,6 +29,9 @@
                 .name
                     Publicaciones
 
+.separator{style: "background: #40556d; "}
+
+.widget-content
     .section-box
         %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
         = render "searchs/filters"

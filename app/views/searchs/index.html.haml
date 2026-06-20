@@ -13,19 +13,18 @@
     .items
       - @artists[0..9].each do |artist|
         = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do
-          .item 
+          %div 
             .rectangle_icon
               = image_tag best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
             .item-name
               = artist.dig("name")
       - @artists_db[0..9].each do |artist|
         = link_to artist_path(artist.id) do
-          .item 
+          %div
             .rectangle_icon
               = image_tag artist.photo, class: "artist-avatar"
             .item-name
               = artist.name
-
 
   .section-box
     - concerts_size = @concerts_api.size + @concerts_db.size

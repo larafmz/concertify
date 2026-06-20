@@ -1,0 +1,18 @@
+.widget-content
+    .section-box
+        %h2 REGISTROS POPULARES
+        .separator{style: "background: rgb(202, 202, 202);"}
+        - @registered_concerts[0..9].each do |register|
+            .review
+                .small_icon 
+                    = register.user.id
+                %div
+                    %div
+                        %span{style: "font-weight: 700", class: "soft-color"} Review by 
+                        -# = link_to user_path(current_user.id) do (TO/DO)
+                        %span{style: "font-weight: 700"}=current_user.email
+                        %span{style: "color: orange"}= register.get_puntuation
+                    %div
+                        =register.text
+
+                        

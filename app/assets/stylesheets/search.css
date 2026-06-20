@@ -1,19 +1,19 @@
 
 
-.widget-content .items {
+.items {
   display: flex;
   gap: 12px;
   overflow-x: auto;
 }
 
-.widget-content .item-name {
+.item-name {
   width: 200px;
   padding: 8px 10px;
   border: 1px solid #e6e6e6;
   font-size: 14px;
   text-align: center;
   color: white;
-  background: #ff4517;
+  background: #eb5d25;
 }
 
 .filters-search {

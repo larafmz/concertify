@@ -8,6 +8,8 @@ class Concert < ApplicationRecord
     belongs_to :ubication
     has_one_attached :photo
     has_many :interactuables, dependent: :destroy
+    has_many :registered_concerts
+    has_many :future_assistances, dependent: :destroy
 
   ## SCOPES
 
@@ -25,7 +27,7 @@ class Concert < ApplicationRecord
       concert = Concert.find_or_create_by!(ticketmaster_id: id) do |c|
         concert_api = TicketmasterService.concert_by_id(id)
         artists = get_concert_artists(concert_api)
-        artists.each do |artist|
+        artists&.each do |artist|
           a = Artist.get_or_create_by_id(artist["id"])
           c.artists << a if a
         end     
@@ -70,6 +72,10 @@ class Concert < ApplicationRecord
 
     def complete_name
       tour_name
+    end
+
+    def average_puntuation
+      registered_concerts.average(:puntuation).to_i || 0
     end
 
 

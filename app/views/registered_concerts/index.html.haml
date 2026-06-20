@@ -13,7 +13,7 @@
                         %br
                         - if concert_date.year != Date.today.year
                             = concert_date.year
-                    = link_to registered_concert_path(register.id) do 
+                    = link_to concert_path(concert.id) do 
                         .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
                             = image_tag concert.photo if concert.photo.attached?
                     %div
@@ -21,7 +21,7 @@
                             %span{ style: "font-size: 20px;" }= concert.tour_name
                         %br
                         %span{ class: "soft-color" }= concert.ubication.complete_name
-                    %div= register.get_puntuation
+                    %div{style: "color: orange"}= register.get_puntuation
                     - if register.user_id = current_user.id
                         .button-concert
                             = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }

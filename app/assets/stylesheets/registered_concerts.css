@@ -62,3 +62,12 @@
 .register-info {
   gap: 10px;
 }
+
+/* index in other pages */
+
+.review {
+  padding: 8px 4px;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}

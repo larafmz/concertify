@@ -11,8 +11,12 @@ def show
 end
 
 def new
-  @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id])
-  @concert_api = TicketmasterService.concert_by_id(params[:ticketmaster_id]) if @concert.nil?
+    if params[:ticketmaster_id]
+        @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
+        @concert_api = TicketmasterService.concert_by_id(params[:ticketmaster_id]) if @concert.nil?
+    else
+        @concert = Concert.find(params[:concert_id])
+    end
   @registered_concert = RegisteredConcert.new
   render layout: false
 end

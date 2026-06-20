@@ -1,13 +1,20 @@
 
 .two-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: white;
+}
+
+.artist-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    color: white;
+    background: #1f252b;
 }
 
 .artist-info  {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 25px;
 }
 

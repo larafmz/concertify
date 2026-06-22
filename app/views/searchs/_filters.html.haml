@@ -7,6 +7,7 @@
         - else
             = hidden_field_tag :search, params[:search]
         .filters-search
+            = hidden_field_tag :artist_id, @artist&.id
             %div
                 = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
                 = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"

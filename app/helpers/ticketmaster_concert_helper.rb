@@ -47,7 +47,7 @@ module TicketmasterConcertHelper
     end
 
     def get_venue_address(venue)
-        venue.dig("address", "line1")
+        venue.dig("name") || venue.dig("address", "line1")
     end
 
     def get_full_ubication(concert) 

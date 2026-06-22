@@ -6,7 +6,7 @@
                 
             .artist-name
                 %div= @concert.tour_name
-                %div{ style: "color: #999999; font-size: 15px;" }= "at #{@concert.ubication.complete_name} • #{@concert.date} • #{@concert.start_time&.strftime("%H:%M")}"         
+                %div{ style: "color: #999999; font-size: 15px;" }= "at #{@concert.ubication&.complete_name} • #{@concert.date} • #{@concert.start_time&.strftime("%H:%M")}"         
 
         .artist-stats
             .stat
@@ -54,8 +54,6 @@
                 - if @concert_date_status == "future"
                     - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !future_assistance
-                        - puts @concert.inspect
-                        - puts "ARRIBA"
                         = link_to "Asistiré", new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
                     - else
                         = link_to "Editar Futura Asistencia", edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }

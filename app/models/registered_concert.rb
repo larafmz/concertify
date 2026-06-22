@@ -26,7 +26,6 @@ class RegisteredConcert < Interactuable
     ## METHODS
 
     def get_puntuation
-        puts self.puntuation
         if self.puntuation.nil?
             self.puntuation = 0
         end

@@ -19,7 +19,7 @@ def create
     @future_assistance = FutureAssistance.new(create_params)
 
     if !params[:ticketmaster_id].empty?
-        @concert = Concert.get_or_create_by_id(params[:ticketmaster_id])
+        @concert = Concert.get_by_ticketmaster_id(params[:ticketmaster_id])
         @future_assistance.concert_id = @concert.id
     end
 

@@ -7,10 +7,14 @@ Rails.application.routes.draw do
   get "/searchs", to: "searchs#index"
 
   resources :artists
-  resources :concerts
   resources :registered_concerts
   resources :future_assistances
 
+  resources :concerts do
+    collection do
+      get :pending
+    end
+  end
 
 
 end

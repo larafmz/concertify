@@ -32,9 +32,12 @@ class TicketmasterService
 
 
     def self.concerts_by(name, artist_id, first_date, second_date, country_code)
-        first_date  = Date.parse(first_date)  if first_date.present?
-        second_date = Date.parse(second_date) if second_date.present?
-        second_date = first_date if !second_date.present?
+
+        first_date  = first_date.presence #converts empty to nil
+        second_date = second_date.presence #converts empty to nil
+        first_date  = Date.parse(first_date)  if first_date
+        second_date = Date.parse(second_date) if second_date
+        second_date = first_date if !second_date.present? 
         first_date ||= Date.today
         first_date  = "#{first_date.to_date}T00:00:00" if first_date.present?
         second_date = "#{second_date.to_date}T23:59:59" if second_date.present?

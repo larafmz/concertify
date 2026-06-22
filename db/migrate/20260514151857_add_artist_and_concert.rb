@@ -12,6 +12,7 @@ class AddArtistAndConcert < ActiveRecord::Migration[7.2]
       t.string :tour_name
       t.date :date
       t.time :start_time
+      t.integer :status
       t.references :user
       t.references :requesting_user, foreign_key: { to_table: :users }
       t.timestamps

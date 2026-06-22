@@ -2,6 +2,10 @@ include TicketmasterConcertHelper
 
 class Concert < ApplicationRecord
 
+  ##CONFIGURATIONS
+
+  kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
+
   ## RELATIONSHIPS
     has_many :artists_concerts
     has_many :artists, through: :artists_concerts
@@ -15,20 +19,22 @@ class Concert < ApplicationRecord
 
     scope :by_name, -> (query) { left_joins(:artists).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%").distinct }
     scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
+    scope :accepted, -> { where(status: 0).or(where(status: nil)) }
+    scope :pending, -> { where(status: 1) }
 
   ## VALIDATIONS
 
-    validates :tour_name, :ticketmaster_id, :date, presence: true
-    validates :ticketmaster_id, uniqueness: true
+    validates :tour_name, :date, presence: true
+    validates :ticketmaster_id, uniqueness: { allow_nil: true }
 
   ## CLASS METHODS
 
-    def self.get_or_create_by_id(id)
+    def self.get_by_ticketmaster_id(id)
       concert = Concert.find_or_create_by!(ticketmaster_id: id) do |c|
         concert_api = TicketmasterService.concert_by_id(id)
         artists = get_concert_artists(concert_api)
         artists&.each do |artist|
-          a = Artist.get_or_create_by_id(artist["id"])
+          a = Artist.get_by_ticketmaster_id(artist["id"])
           c.artists << a if a
         end     
         c.date = get_concert_date(concert_api)
@@ -48,7 +54,7 @@ class Concert < ApplicationRecord
 
     def self.search_by(query, first_date, second_date, country_code, concerts_api)
       return [] if !query.present?
-      concerts_db = Concert.by_name(query)
+      concerts_db = Concert.accepted.by_name(query)
 
       ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
       concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)

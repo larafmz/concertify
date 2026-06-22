@@ -2,13 +2,16 @@
 .custom_modal {
     background: #0F1419;
     color: white;
+    border-radius: 5%;
+    border: 1px solid #40556d;
+
 }
 
 .modal_header {
   display: flex;
   justify-content: space-between;
   padding: 10px 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #40556d;
 }
 
 .modal_close {

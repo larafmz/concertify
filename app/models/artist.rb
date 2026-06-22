@@ -21,7 +21,7 @@ class Artist < ApplicationRecord
     
   ## CLASS METHODS
 
-    def self.get_or_create_by_id(id)
+    def self.get_by_ticketmaster_id(id)
       artist = Artist.find_or_create_by!(ticketmaster_id: id) do |a|
         artist_api = TicketmasterService.artist_by_id(id)
         return if artist_api.nil? #there are concerts with nil artist associated in ticketmaster
@@ -50,7 +50,7 @@ class Artist < ApplicationRecord
     end
 
     def search_concerts_by(first_date, second_date, country_code, concerts_api)
-      concerts_db = self.concerts
+      concerts_db = self.concerts.accepted
       ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
       concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)
       if first_date.present? || second_date.present?

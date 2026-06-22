@@ -4,7 +4,7 @@ class Artist < ApplicationRecord
 
   ## RELATIONSHIPS
 
-    has_many :artists_concerts
+    has_many :artists_concerts, dependent: :destroy
     has_many :concerts, through: :artists_concerts
     has_one_attached :photo
     has_many :publications

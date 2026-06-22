@@ -36,6 +36,21 @@ class ConcertsController < ApplicationController
       end
   end
 
+  def pending
+    #TO/DO if role admin, show all pending
+    @concerts = Concert.where(requesting_user_id: current_user.id)
+  end
+
+      
+  def destroy
+      @concert = Concert.find(params[:id])
+      if @concert.requesting_user_id == current_user.id #TO/DO or admin
+        @concert.destroy
+      end
+      redirect_back fallback_location: root_path
+  end
+
+
   private
 
   def create_params

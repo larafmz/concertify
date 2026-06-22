@@ -25,13 +25,13 @@
         %li
           = link_to "Perfil TO/DO", "#", class: "dropdown-item"
         %li
-          = link_to "Mis Conciertos Registrados", registered_concerts_path(user_id: current_user.id), class: "dropdown-item"
+          = link_to "Mis Conciertos Registrados", registered_concerts_path, class: "dropdown-item"
         %li
-          = link_to "Mis Futuros Conciertos", future_assistances_path(user_id: current_user.id), class: "dropdown-item"
+          = link_to "Mis Futuros Conciertos", future_assistances_path, class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li
-          = link_to "Mis Conciertos Solicitados", pending_concerts_path(user_id: current_user.id), class: "dropdown-item"
+          = link_to "Mis Conciertos Solicitados", pending_concerts_path, class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li

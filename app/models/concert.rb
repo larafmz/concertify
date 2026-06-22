@@ -7,7 +7,7 @@ class Concert < ApplicationRecord
   kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
   ## RELATIONSHIPS
-    has_many :artists_concerts
+    has_many :artists_concerts, dependent: :destroy
     has_many :artists, through: :artists_concerts
     belongs_to :ubication
     has_one_attached :photo
@@ -72,7 +72,6 @@ class Concert < ApplicationRecord
 
       concerts_db
     end
-
 
   ## INSTANCE METHODS
 

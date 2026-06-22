@@ -1,0 +1,11 @@
+.widget-content.list
+
+  .section-box
+    %h2 ARTISTAS POPULARES #TO/DO filtrar por mas seguidores
+    .items
+      = render "artists/index_db", artists: @artists_db
+
+  .section-box
+    %h2 CONCIERTOS 
+    = render "concerts/index", concerts_db: @concerts_db, concerts_api: []
+          

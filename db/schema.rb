@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_19_175613) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_22_152631) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,10 +66,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_19_175613) do
     t.string "tour_name"
     t.date "date"
     t.time "start_time"
-    t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ubication_id"
+    t.bigint "requesting_user_id"
+    t.index ["requesting_user_id"], name: "index_concerts_on_requesting_user_id"
     t.index ["ubication_id"], name: "index_concerts_on_ubication_id"
   end
 
@@ -150,6 +151,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_19_175613) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artists_concerts", "artists"
   add_foreign_key "artists_concerts", "concerts"
+  add_foreign_key "concerts", "users", column: "requesting_user_id"
   add_foreign_key "future_assistances", "concerts"
   add_foreign_key "future_assistances", "interactuables"
   add_foreign_key "future_assistances", "users"

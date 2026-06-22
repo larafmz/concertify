@@ -8,8 +8,7 @@ class FutureAssistance < ApplicationRecord
 
     belongs_to :user
     belongs_to :concert
-    belongs_to :interactuable, optional: true
-
+    belongs_to :publication, optional: true
 
   ## VALIDATIONS
 

@@ -6,7 +6,7 @@
                 
             .artist-name
                 %div= @concert.tour_name
-                %div{ style: "color: #999999; font-size: 15px;" }= "at #{@concert.ubication.complete_name} • #{@concert.date} • #{@concert.start_time&.strftime("%H:%M")}"
+                %div{ style: "color: #999999; font-size: 15px;" }= "at #{@concert.ubication.complete_name} • #{@concert.date} • #{@concert.start_time&.strftime("%H:%M")}"         
 
         .artist-stats
             .stat
@@ -34,27 +34,37 @@
                 .name
                     Publicaciones
 
-    - if current_user
-        %div{ style: "justify-self: end; background: #1f252b;" }
-            - if @concert_date_status == "past"
-                - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: @concert.id)
-                - if !register
-                    = link_to "He asistido", new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
-                - else
-                    = link_to "Mi Registro", registered_concert_path(id: register.id), class: "btn-custom"
-            - if @concert_date_status == "future"
-                - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
-                - if !future_assistance
-                    - puts @concert.inspect
-                    - puts "ARRIBA"
-                    = link_to "Asistiré", new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
-                - else
-                    = link_to "Editar Futura Asistencia", edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
+    
+    %div{style: "display:flex; align-items:center; gap:8px; padding-top: 40px;"}
+
+        - @concert.artists.each do |artist|
+            = link_to artist_path(artist.id), style: "display:flex; align-items:center; gap:8px;" do 
+                .small_icon
+                    = image_tag  artist.photo, class: "artist-avatar" if artist.photo.attached?
+                = artist.name
+
+        - if current_user
+            %span{ style: "margin-left: auto; background: #1f252b;" }
+                - if @concert_date_status == "past"
+                    - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: @concert.id)
+                    - if !register
+                        = link_to "He asistido", new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                    - else
+                        = link_to "Mi Registro", registered_concert_path(id: register.id), class: "btn-custom"
+                - if @concert_date_status == "future"
+                    - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
+                    - if !future_assistance
+                        - puts @concert.inspect
+                        - puts "ARRIBA"
+                        = link_to "Asistiré", new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                    - else
+                        = link_to "Editar Futura Asistencia", edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
    
 
 .separator{style: "background: #40556d; "}
 
-- if @concert_date_status == "past"
-    = render "registered_concerts/reviews", registered_concerts: @registered_concerts
+.widget-content
+    - if @concert_date_status == "past"
+        = render "registered_concerts/reviews", registered_concerts: @registered_concerts
    
                 

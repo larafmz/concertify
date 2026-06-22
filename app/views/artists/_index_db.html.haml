@@ -1,0 +1,7 @@
+- artists[0..9].each do |artist|
+    = link_to artist_path(artist.id) do
+        %div
+        .rectangle_icon
+            = image_tag artist.photo, class: "artist-avatar"
+        .item-name
+            = artist.name

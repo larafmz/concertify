@@ -3,9 +3,6 @@ class Interactuable < ApplicationRecord
   ## RELATIONSHIPS
 
     belongs_to :user
-    belongs_to :artist, optional: true
-    belongs_to :concert, optional: true
-    belongs_to :future_assistance, optional: true
     has_many :tagged_users
     #has_many :comments TO/DO
     #has_many :likes

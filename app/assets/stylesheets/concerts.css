@@ -30,3 +30,13 @@
   font-size: 17px;
 }
 
+.concert_add {
+  padding: 30px 30px;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  background: #1e2731;  
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  border: 2px dashed #40556d;
+}
+

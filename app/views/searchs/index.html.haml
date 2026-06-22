@@ -9,22 +9,10 @@
             = user.email
 
   .section-box
-    %h2 ARTISTAS • #{@artists.size + @artists_db.size} RESULTADOS
+    %h2 ARTISTAS • #{@artists_api.size + @artists_db.size} RESULTADOS
     .items
-      - @artists[0..9].each do |artist|
-        = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do
-          %div 
-            .rectangle_icon
-              = image_tag best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
-            .item-name
-              = artist.dig("name")
-      - @artists_db[0..9].each do |artist|
-        = link_to artist_path(artist.id) do
-          %div
-            .rectangle_icon
-              = image_tag artist.photo, class: "artist-avatar"
-            .item-name
-              = artist.name
+      = render "artists/index_api", artists: @artists_api
+      = render "artists/index_db", artists: @artists_db
 
   .section-box
     - concerts_size = @concerts_api.size + @concerts_db.size
@@ -32,8 +20,5 @@
       %h2 CONCIERTOS + 100 RESULTADOS
     - else 
       %h2 CONCIERTOS • #{concerts_size} RESULTADOS
-    = render "searchs/filters"
-    .concerts-items
-      = render "concerts/index_db", concerts: @concerts_db.first(10)
-      = render "concerts/index_api", concerts: @concerts_api.first(10)
+      = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
           

@@ -14,7 +14,7 @@
         .artist-stats
             .stat
                 .number
-                    = @artist.interactuables.register.size
+                    =  @registered_concerts.count
                 .name
                     Registros totales
             
@@ -29,12 +29,15 @@
                 .name
                     Publicaciones
 
+    - if current_user
+        %div{ style: "justify-self: end; background: #1f252b;" }
+
 .separator{style: "background: #40556d; "}
 
 .widget-content
+    = render "registered_concerts/reviews", registered_concerts: @registered_concerts
+
     .section-box
         %h2 CONCIERTOS • #{@concerts_api.size} RESULTADOS
-        = render "searchs/filters"
-        .concerts-items
-            = render "concerts/index_db", concerts: @concerts_db
-            = render "concerts/index_api", concerts: @concerts_api       
+        = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+           

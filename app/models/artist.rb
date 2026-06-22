@@ -7,7 +7,7 @@ class Artist < ApplicationRecord
     has_many :artists_concerts
     has_many :concerts, through: :artists_concerts
     has_one_attached :photo
-    has_many :interactuables
+    has_many :publications
     belongs_to :genre, optional: true
 
   ## SCOPES
@@ -41,8 +41,12 @@ class Artist < ApplicationRecord
       name
     end
 
+    def registered_concerts
+      RegisteredConcert.by_artist(self.id)
+    end
+
     def average_puntuation
-      interactuables.publication.average(:puntuation) || 0
+      registered_concerts.average(:puntuation).to_i || 0
     end
 
     def search_concerts_by(first_date, second_date, country_code, concerts_api)

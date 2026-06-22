@@ -1,12 +1,12 @@
 /* form */
 
-.form-register {
+.form-modal {
     display: grid;
     grid-template-columns: auto auto;
     gap: 20px;
 }
 
-.register_info {
+.form-modal-info {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -57,10 +57,6 @@
   color: rgb(196, 195, 216);
   gap: 30px;
   align-items: start;
-}
-
-.register-info {
-  gap: 10px;
 }
 
 /* index in other pages */

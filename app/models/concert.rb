@@ -7,9 +7,9 @@ class Concert < ApplicationRecord
     has_many :artists, through: :artists_concerts
     belongs_to :ubication
     has_one_attached :photo
-    has_many :interactuables, dependent: :destroy
-    has_many :registered_concerts
+    has_many :registered_concerts, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
+    belongs_to :requesting_user, class_name: "User", optional: true
 
   ## SCOPES
 

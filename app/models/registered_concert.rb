@@ -11,7 +11,11 @@ class RegisteredConcert < Interactuable
     validates :concert_id, uniqueness: { scope: :user_id, message: "Ya has registrado este concierto" }
     validate :photos_limit
 
-      ## VALIDATION METHODS
+    ## SCOPES
+
+    scope :by_artist, ->(artist_id) { left_joins(concert: :artists).where(artists: { id: artist_id }) }
+
+    ## VALIDATION METHODS
 
     def photos_limit
         if photos.attached? && photos.count > 10

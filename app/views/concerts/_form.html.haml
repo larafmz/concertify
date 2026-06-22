@@ -27,7 +27,13 @@
             = label_tag :date, "🗓️ Fecha", class: "soft-color", style: "font-size: 13px;"
             = f.date_field :date, class: "field-custom"
 
-            = label_tag :country, "📍 País", class: "soft-color", style: "font-size: 13px;"
-            = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }), include_blank: "Seleccionar", class: "field-custom", style: "padding: 0px;"
+            .two-columns{style: "gap: 20px;"}
+              %div
+                = label_tag :country, "📍 País", class: "soft-color", style: "font-size: 13px;"
+                = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }), include_blank: "Seleccionar", class: "field-custom", style: "padding: 0px;"
+              %div
+                = label_tag :city, "📍 Ciudad", class: "soft-color", style: "font-size: 13px;"
+                = text_field_tag :city, "", class: "field-custom"
+
         %br
         = f.submit "Guardar", style: "float: right"

@@ -14,9 +14,10 @@ body {
   font-family: system-ui;
 }
 
-h2 {
+.title {
   font-size: 19px !important;
   letter-spacing: 1px;
+  color: white;
 }
 
 .widget-content {

@@ -1,11 +1,13 @@
 .widget-content.list
 
   .section-box
-    %h2 ARTISTAS POPULARES #TO/DO filtrar por mas seguidores
+    .title{style: "padding-bottom: 20px"}
+      ARTISTAS POPULARES #TO/DO filtrar por mas seguidores
     .items
       = render "artists/index_db", artists: @artists_db
 
   .section-box
-    %h2 CONCIERTOS 
+    .title
+      CONCIERTOS 
     = render "concerts/index", concerts_db: @concerts_db, concerts_api: []
           

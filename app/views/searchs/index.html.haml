@@ -2,14 +2,16 @@
 
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     .section-box
-      %h2 USUARIOS • #{@users.size} RESULTADOS
+      .title 
+        USUARIOS • #{@users.size} RESULTADOS
       .items
         - @users.each do |user|
           .item-name
             = user.email
 
   .section-box
-    %h2 ARTISTAS • #{@artists_api.size + @artists_db.size} RESULTADOS
+    .title{style: "padding-bottom: 20px"}
+      ARTISTAS • #{@artists_api.size + @artists_db.size} RESULTADOS
     .items
       = render "artists/index_api", artists: @artists_api
       = render "artists/index_db", artists: @artists_db
@@ -17,8 +19,10 @@
   .section-box
     - concerts_size = @concerts_api.size + @concerts_db.size
     - if concerts_size > 100
-      %h2 CONCIERTOS + 100 RESULTADOS
+      .title
+        CONCIERTOS + 100 RESULTADOS
     - else 
-      %h2 CONCIERTOS • #{concerts_size} RESULTADOS
-      = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+      .title
+        CONCIERTOS • #{concerts_size} RESULTADOS
+        = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
           

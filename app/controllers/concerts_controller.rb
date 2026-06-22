@@ -19,7 +19,6 @@ class ConcertsController < ApplicationController
   end
 
   def create
-
       @concert = Concert.new(create_params)
       @artist = Artist.find_by(name: params[:concert][:artist_name])
       if !@artist
@@ -27,7 +26,7 @@ class ConcertsController < ApplicationController
         @artist = Artist.get_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
       end
       @concert.artists << @artist if @artist
-      @concert.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id)
+      @concert.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
       if @concert.save!
           redirect_to concert_path(@concert)
@@ -39,6 +38,7 @@ class ConcertsController < ApplicationController
   def pending
     #TO/DO if role admin, show all pending
     @concerts = Concert.where(requesting_user_id: current_user.id)
+    puts @concert.inspect
   end
 
       

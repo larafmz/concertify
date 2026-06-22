@@ -38,6 +38,7 @@
     = render "registered_concerts/reviews", registered_concerts: @registered_concerts
 
     .section-box
-        %h2 CONCIERTOS • #{@concerts_api.size + @concerts_db.size} RESULTADOS
+        .title
+            CONCIERTOS • #{@concerts_api.size + @concerts_db.size} RESULTADOS
         = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
            

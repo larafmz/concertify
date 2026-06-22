@@ -1,5 +1,7 @@
 .widget-content.list
-    %h2{ style: "color: white;" } Conciertos registrados de #{current_user.email} #TO/DO username
+    %h4{ style: "color: white;" }
+        Conciertos registrados de #{current_user.email} #TO/DO username
+    %h6{ class: "soft-color", style: "font-weight: 400;" } #{@registered_concerts.count} conciertos registrados 
     .section-box
         .registers-items
             - @registered_concerts.each do |register|
@@ -20,7 +22,9 @@
                         = link_to registered_concert_path(register.id) do 
                             %span{ style: "font-size: 20px;" }= concert.tour_name
                         %br
-                        %span{ class: "soft-color" }= concert.ubication.complete_name
+                        %span{ class: "soft-color" } 📍#{concert.ubication.complete_name}
+                        %br
+                        %span{ class: "soft-color", style: "font-size: 15px;   font-style: italic;"  } "#{register.text.first(90)}..."
                     %div{style: "color: orange"}= register.get_puntuation
                     - if register.user_id = current_user.id
                         .button-concert

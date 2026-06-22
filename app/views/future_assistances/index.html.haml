@@ -1,5 +1,6 @@
 .widget-content.list
-    %h2{ style: "color: white;" } Futuros Conciertos de #{current_user.email} #TO/DO username
+    .title
+        Futuros Conciertos de #{current_user.email} #TO/DO username
     .section-box
         .registers-items
             - @future_assistances.each do |future_assistance|

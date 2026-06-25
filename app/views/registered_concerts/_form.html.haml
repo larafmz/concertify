@@ -32,7 +32,7 @@
               - if @concert_api
                 = "#{get_full_ubication(@concert_api)} - #{get_concert_date(@concert_api).strftime("%d %B %Y")}"
               - else
-                = "#{@concert.ubication.complete_name} - #{@concert.date.strftime("%d %B %Y")}"
+                = "#{@concert.ubication.complete_name} - #{short_date(@concert.date)}"
 
             .separator{style: "background: #40556d; "}
 

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :concerts do
     collection do
-      get :pending
+      get :requested
     end
   end
 

@@ -12,11 +12,11 @@ class Ubication < ApplicationRecord
   ## INSTANCE METHODS
 
     def complete_name_with_address
-      "#{address}, #{city}, #{state}, #{country.name}"
+      [address, city, state, country&.name].reject(&:blank?).join(", ")
     end  
 
     def complete_name 
-      "#{city}, #{state}, #{country.name}"
+      str = [city, state, country&.name].reject(&:blank?).join(", ")
     end
 
 end

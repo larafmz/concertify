@@ -8,14 +8,14 @@
     .modal_body
       = form_with model: @concert, data: { turbo: false } do |f|
         
-        = f.hidden_field :requesting_user_id, value: current_user&.id
+        = f.hidden_field :requester_id, value: current_user&.id
         = f.hidden_field :status, value: 1
         
         .form-modal
 
           .form-modal-info
           
-            = label_tag :artist_id, "🧑‍🎤 Artista", class: "soft-color", style: "font-size: 13px;"
+            = label_tag :artist_id, "🧑‍🎤 Artista *", class: "soft-color", style: "font-size: 13px;"
             = f.text_field :artist_name, placeholder: "Ej: Taylor Swift", class: "field-custom", list: "artists-list"
             %datalist#artists-list
               - Artist.all.each do |artist|
@@ -24,12 +24,12 @@
             = label_tag :tour_name, "🎶 Nombre del Tour / Evento", class: "soft-color", style: "font-size: 13px;"
             = f.text_field :tour_name, placeholder: "Ej: Eras Tour", class: "field-custom"
 
-            = label_tag :date, "🗓️ Fecha", class: "soft-color", style: "font-size: 13px;"
+            = label_tag :date, "🗓️ Fecha *", class: "soft-color", style: "font-size: 13px;"
             = f.date_field :date, class: "field-custom"
 
             .two-columns{style: "gap: 20px;"}
               %div
-                = label_tag :country, "📍 País", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :country, "📍 País *", class: "soft-color", style: "font-size: 13px;"
                 = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }), include_blank: "Seleccionar", class: "field-custom", style: "padding: 0px;"
               %div
                 = label_tag :city, "📍 Ciudad", class: "soft-color", style: "font-size: 13px;"

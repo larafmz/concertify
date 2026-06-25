@@ -6,6 +6,10 @@ module ApplicationHelper
       str
     end
 
+    def short_date(date)
+      date.strftime("%e %b %Y")
+    end
+
     def best_quality_image(images)
       return nil if images.nil? || images.empty?
       images.find { |img| img["width"] > 1000 } || images.find { |img| img["width"] > 500 } || images.first
@@ -17,4 +21,5 @@ module ApplicationHelper
     return "future" if concert_date > today
     concert_time.nil? || concert_time > Time.current ? "future" : "past"
   end
+  
 end

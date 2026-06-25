@@ -8,7 +8,7 @@
                 - concert = register.concert
                 - concert_date = concert.date
                 .item-register
-                    .date-concert{ style: "color: black;"}
+                    .date-concert
                         = concert_date.strftime("%B")[0,3].upcase
                         %br
                         %span{ style: "font-size: 20px;" }= concert_date.day

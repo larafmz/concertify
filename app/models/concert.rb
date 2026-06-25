@@ -13,7 +13,7 @@ class Concert < ApplicationRecord
     has_one_attached :photo
     has_many :registered_concerts, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
-    belongs_to :requesting_user, class_name: "User", optional: true
+    belongs_to :requester, class_name: "User", optional: true
 
   ## SCOPES
 
@@ -81,6 +81,62 @@ class Concert < ApplicationRecord
 
     def average_puntuation
       registered_concerts.average(:puntuation).to_i || 0
+    end
+    
+    def status_string
+      status ? get_status_name : "Aceptado"
+    end
+
+    def pending?
+      status == 1
+    end
+
+    def accepted?
+      status == 0 || status == nil
+    end
+
+    def color_request
+      case status
+      when 1
+        "rgb(252, 170, 46)"
+      when 2
+        "rgb(245, 83, 83)"
+      else
+        "rgb(88, 216, 94);"
+      end
+    end
+
+    def second_color_request
+      case status
+        when 1
+          "rgb(78, 61, 41)"
+        when 2
+          "rgb(78, 41, 41);"
+        else
+          "rgb(48, 66, 49)"
+        end
+    end
+
+    def message_request
+      case status
+      when 1
+        "Estamos verificando los detalles del evento."
+      when 2
+        "No hemos podido verificar este evento. Comprueba las fechas y el recinto e inténtalo de nuevo."
+      else
+        "Concierto verificado y añadido a la aplicación."
+      end
+    end
+
+     def emoji_request
+      case status
+      when 1
+        "⌛︎"
+      when 2
+        "X"
+      else
+        "✓"
+      end
     end
 
 

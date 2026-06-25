@@ -1,0 +1,50 @@
+.widget-content.list
+    %h4{ style: "color: white;" }
+        Conciertos solicitados
+    .section-box
+        .registers-items
+            - if @concerts.empty?
+                No se han encontrado conciertos solicitados
+
+            - @concerts.each do |concert|
+                - artist = concert.artists.first
+                - concert_date = concert.date
+                
+                %div{style: "background: #{concert.color_request}; border-radius: 15px;"}
+
+                    .item-register{  style: "margin-left: 5px;  grid-template-columns: 1fr 4fr 1fr auto;  border-bottom-left-radius: 0px; border-bottom-right-radius:0px; border-bottom: 0px;"}
+
+                        .rectangle_icon{ style: "height:80px; width: 150px;" }
+                            - if artist
+                                = link_to artist_path(artist.id) do
+                                    = image_tag artist.photo if artist.photo.attached?
+
+                        %div
+
+                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
+                            %br
+
+                            %span{ style: "font-size: 18px;", class: "soft-color" } #{concert.tour_name}
+                            %br
+
+                            - ub = concert.ubication&.complete_name || "ubication unidentified"
+                            .two-columns{ class: "softest-color", style: "font-size: 15px;" }
+                                %span= "📍#{ub} 🗓️ #{short_date(concert.date)}" 
+                            
+                            %span{style: "color: #{concert.color_request}; font-size: 16px;"}
+                                ● #{concert.message_request}
+
+                        %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
+                            %div{style: "background: #{concert.second_color_request}; color: #{concert.color_request}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
+                                #{concert.emoji_request} #{concert.status_string}
+                            - if concert.requester_id == current_user.id && concert.status == Concert::STATUS_PENDING
+                                %div{style: "display: flex; gap: 20px;"}
+                                    = link_to "✎", edit_concert_path(id: concert.id), data: { turbo_frame: "modal" }
+                                    = link_to "✗", concert_path(concert), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el concierto solicitado?" }
+                            - elsif concert.accepted?
+                                = link_to "Ver concierto", concert_path(concert), class: "btn-custom", style: "font-size: 13px; width: 150px;"
+                
+
+                    .sent_at
+                        Enviado hace #{time_ago_in_words(concert.created_at)}
+

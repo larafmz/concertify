@@ -45,8 +45,8 @@
               = f.text_field :concert_seat_details, placeholder: "Detalles de la Ubicación"
 
             %div
-              = f.check_box :alone
-              = f.label :alone, "Voy solo"     
+              = label_tag :company, "¿Con quien vas?", class: "soft-color", style: "font-size: 13px;"
+              = f.select :company, FutureAssistance.companies_for_select, class: "field-custom"
 
         %br
         = f.submit "Guardar", style: "float: right"

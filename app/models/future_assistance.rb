@@ -3,6 +3,7 @@ class FutureAssistance < ApplicationRecord
   ##CONFIGURATIONS
 
   kindable :concert_seat, { :pista => 0, :grada => 1, :vip => 2, :otro => 3 }
+  kindable :company, { :undefined => 0, :alone => 1, :accompanied => 2}
 
   ## RELATIONSHIPS
 
@@ -25,12 +26,21 @@ class FutureAssistance < ApplicationRecord
   
   ## INSTANCE METHODS
 
-  def full_concert_seat
-    str = ""
-    str += "#{get_concert_seat_name} " if concert_seat
-    str += "#{concert_seat_details}" if concert_seat_details
-    return nil if str.empty?
-    return "Ubicado en "+ str
+  def concert_seat_string
+    return get_concert_seat_name if concert_seat
+    nil
+  end 
+
+  
+  def company_string
+    case company
+    when 1
+      "👤 #{get_company_name}"
+    when 2
+      "👥 #{get_company_name}"
+    else
+      nil
+    end
   end
 
 

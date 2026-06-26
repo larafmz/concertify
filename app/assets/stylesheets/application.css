@@ -128,3 +128,13 @@ body {
 .softest-color {
   color: rgb(133, 133, 133);
 }
+
+.bubble {
+  display: inline-block;
+  background: #0F1419;
+  color: white; 
+  border-radius: 15px; 
+  font-size:15px; 
+  border: 2px solid #40556d;
+  padding: 1px 10px;
+}

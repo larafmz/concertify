@@ -56,7 +56,7 @@ end
 private
 
 def create_params
-    params.require(:future_assistance).permit(:concert_id, :user_id, :alone, :from, :concert_seat, :concert_seat_details)
+    params.require(:future_assistance).permit(:concert_id, :user_id, :company, :from, :concert_seat, :concert_seat_details)
 end 
 
 end

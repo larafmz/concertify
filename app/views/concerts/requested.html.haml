@@ -28,7 +28,7 @@
                             %br
 
                             - ub = concert.ubication&.complete_name || "ubication unidentified"
-                            .two-columns{ class: "softest-color", style: "font-size: 15px;" }
+                            .softest-color{style: "font-size: 15px;" }
                                 %span= "📍#{ub} 🗓️ #{short_date(concert.date)}" 
                             
                             %span{style: "color: #{concert.color_request}; font-size: 16px;"}

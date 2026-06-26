@@ -1,0 +1,31 @@
+es:
+  future_assistances:
+    concert_seats:
+      pista: Pista
+      grada: Grada
+      vip: VIP
+      otro: Otro
+    companies:
+      undefined: Sin definir
+      alone: Solo
+      accompanied: Acompañado
+
+  concerts:
+    statuses:
+      accepted: Aceptado
+      pending: Pendiente
+      denied: Denegado
+
+en: 
+  future_assistances:
+    concert_seats:
+      pista: Standing
+      grada: Seating
+      vip: VIP
+      otro: Other
+
+  concerts:
+    statuses:
+      accepted: Accepted
+      pending: Pending
+      denied: Denied

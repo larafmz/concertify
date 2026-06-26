@@ -23,7 +23,7 @@
 
       %ul.dropdown-menu
         %li
-          = link_to "Perfil TO/DO", "#", class: "dropdown-item"
+          = link_to "Perfil", user_path(current_user.id), class: "dropdown-item"
         %li
           = link_to "Mis Conciertos Registrados", registered_concerts_path, class: "dropdown-item"
         %li
@@ -43,5 +43,11 @@
         %li
           = link_to "Cerrar sesión (TO/DO)", "#", class: "dropdown-item"
 
-  = link_to "ES", url_for(locale: :es)
-  = link_to "EN", url_for(locale: :en)
+      
+  %div{style: "display: flex; gap: 30px; font-size: 25px;"}
+    = link_to "🔔", "#", style: "text-decoration: none;"
+    = link_to "💬", "#", style: "text-decoration: none;"
+    = link_to "✒️", "#", style: "text-decoration: none;"
+
+    = link_to "ES", url_for(locale: :es), style: "text-decoration: none;"
+    = link_to "EN", url_for(locale: :en), style: "text-decoration: none;"

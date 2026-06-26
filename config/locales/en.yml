@@ -2,15 +2,3 @@ en:
   search: Search...
   root_title: Go to home page
 
-  future_assistances:
-    concert_seats:
-      pista: Standing
-      grada: Seating
-      vip: VIP
-      otro: Other
-
-  concerts:
-    statuses:
-      accepted: Accepted
-      pending: Pending
-      denied: Denied

@@ -12,6 +12,7 @@ class AddUbication < ActiveRecord::Migration[7.2]
       t.string :state
       t.string :address
       t.references :country, foreign_key: { on_delete: :cascade }
+      t.references :user
       t.timestamps
     end
 

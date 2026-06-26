@@ -4,9 +4,13 @@
     %h6{ class: "soft-color", style: "font-weight: 400;" } #{@registered_concerts.count} conciertos registrados 
     .section-box
         .registers-items
+            - if @registered_concerts.empty?
+                No se han encontrado conciertos registrados
+
             - @registered_concerts.each do |register|
                 - concert = register.concert
                 - concert_date = concert.date
+
                 .item-register
                     .date-concert
                         = concert_date.strftime("%B")[0,3].upcase
@@ -15,15 +19,24 @@
                         %br
                         - if concert_date.year != Date.today.year
                             = concert_date.year
-                    = link_to concert_path(concert.id) do 
+
+                    = link_to registered_concert_path(register.id) do 
                         .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
                             = image_tag concert.photo if concert.photo.attached?
+
                     %div
-                        = link_to registered_concert_path(register.id) do 
-                            %span{ style: "font-size: 20px;" }= concert.tour_name
+                        - concert.artists.each_with_index  do |artist, index|
+                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
+                            - if index < concert.artists.size - 1
+                                ,
                         %br
-                        %span{ class: "soft-color" } 📍#{concert.ubication.complete_name}
-                        %br
+
+                        %span{ style: "font-size: 18px;", class: "soft-color; " } #{concert.tour_name}
+                       
+                        - ub = concert.ubication&.complete_name || "ubication unidentified"
+                        .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
+                            %span= "📍#{ub}" 
+
                         %span{ class: "soft-color", style: "font-size: 15px;   font-style: italic;"  } "#{register.text.first(90)}..."
                     %div{style: "color: orange"}= register.get_puntuation
                     - if register.user_id = current_user.id

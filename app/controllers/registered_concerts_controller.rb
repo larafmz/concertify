@@ -65,8 +65,8 @@ end
 
 private
 
-def create_params
-    params.require(:registered_concert).permit(:concert_id, :text, :user_id, :puntuation)
-end 
+    def create_params
+        params.require(:registered_concert).permit(:concert_id, :text, :user_id, :puntuation)
+    end 
 
 end

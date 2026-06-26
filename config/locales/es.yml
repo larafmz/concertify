@@ -2,22 +2,6 @@ es:
   search: Buscar...
   root_title: Ir a la página principal
 
-  future_assistances:
-    concert_seats:
-      pista: Pista
-      grada: Grada
-      vip: VIP
-      otro: Otro
-    companies:
-      undefined: Sin definir
-      alone: Solo
-      accompanied: Acompañado
-
-  concerts:
-    statuses:
-      accepted: Aceptado
-      pending: Pendiente
-      denied: Denegado
 
   genres:
     Alternative: Alternativa

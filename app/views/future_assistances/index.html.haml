@@ -52,7 +52,7 @@
                     %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
                         
                         - if future_assistance.company_string && future_assistance.company!= 0
-                            .bubble.soft_color
+                            .bubble
                                 #{future_assistance.company_string}
                     
                         - if future_assistance.user_id == current_user.id

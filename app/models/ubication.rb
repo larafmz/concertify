@@ -3,6 +3,7 @@ class Ubication < ApplicationRecord
   ## RELATIONSHIPS
 
     belongs_to :country
+    belongs_to :user, optional: true
     has_many :concerts
 
   ## VALIDATIONS

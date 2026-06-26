@@ -22,7 +22,7 @@ class ConcertsController < ApplicationController
       @concert = Concert.new(create_params)
       @artist = Artist.find_by(name: params[:concert][:artist_name])
       if !@artist
-        artist_api = TicketmasterService.artists_by_name(params[:concert][:artist_name])&.first
+        artist_api = TicketmasterService.artists_by(params[:concert][:artist_name], nil)&.first
         @artist = Artist.get_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
       end
       @concert.artists << @artist if @artist
@@ -45,10 +45,10 @@ class ConcertsController < ApplicationController
       @concert = Concert.find(params[:id])
       @artist = Artist.find_by(name: params[:concert][:artist_name])
       if !@artist
-        artist_api = TicketmasterService.artists_by_name(params[:concert][:artist_name])&.first
+        artist_api = TicketmasterService.artists_by(params[:concert][:artist_name], nil)&.first
         @artist = Artist.get_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
       end
-      @concert.artists << @artist if @artist
+      @concert.artists = [@artist] if @artist
       @concert.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
       if @concert.update(create_params)

@@ -19,6 +19,7 @@ class Concert < ApplicationRecord
 
     scope :by_name, -> (query) { left_joins(:artists).where("concerts.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%").distinct }
     scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
+    scope :by_genre, ->(genre_id) { left_joins(:artists).where(artists: { genre_id: genre_id }) }
     scope :accepted, -> { where(status: 0).or(where(status: nil)) }
     scope :pending, -> { where(status: 1) }
 

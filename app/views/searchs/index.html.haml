@@ -2,7 +2,7 @@
 
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     .section-box
-      .title 
+      %h5{style: "padding-bottom: 10px"}
         USUARIOS • #{@users.size} RESULTADOS
       .items
         - @users.each do |user|
@@ -10,8 +10,21 @@
             = user.email
 
   .section-box
-    .title{style: "padding-bottom: 20px"}
+    %h5{style: "padding-bottom: 10px"}
       ARTISTAS • #{@artists_api.size + @artists_db.size} RESULTADOS
+
+    = form_tag request.path, method: "GET" do
+      .filters-search{style: "margin-bottom:10px; gap: 20px;"}
+        %div
+          = label_tag :genre, "GÉNERO DE MÚSICA", class: "soft-color", style: "font-size: 13px;"
+          = select_tag :genre, options_for_select(Genre.all.map { |genre| [genre.get_name, genre.id] }, params[:genre]),include_blank: "Todos los géneros", class: "field-custom", style: "background: #0F1419; padding: 0px;"
+        %div
+          %br
+          = submit_tag "Filtrar", class: "btn-custom"
+        %div
+          %br
+          = link_to "Limpiar filtros", url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
+
     .items
       = render "artists/index_api", artists: @artists_api
       = render "artists/index_db", artists: @artists_db
@@ -19,10 +32,10 @@
   .section-box
     - concerts_size = @concerts_api.size + @concerts_db.size
     - if concerts_size > 100
-      .title
+      %h5
         CONCIERTOS + 100 RESULTADOS
     - else 
-      .title
+      %h5
         CONCIERTOS • #{concerts_size} RESULTADOS
-        = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+    = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api, filters: true, search_by_name: true
           

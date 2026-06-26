@@ -1,11 +1,9 @@
 .section-box
     = form_tag request.path, method: "GET" do
-        - if params["search"]
+        - if search_by_name 
             = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search")}", class: "field-custom"
             %br
             %br
-        - else
-            = hidden_field_tag :search, params[:search]
         .filters-search
             = hidden_field_tag :artist_id, @artist&.id
             %div

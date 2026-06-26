@@ -1,3 +1,42 @@
 es:
   search: Buscar...
   root_title: Ir a la página principal
+
+  future_assistances:
+    concert_seats:
+      pista: Pista
+      grada: Grada
+      vip: VIP
+      otro: Otro
+
+  concerts:
+    statuses:
+      accepted: Aceptado
+      pending: Pendiente
+      denied: Denegado
+
+  genres:
+    Alternative: Alternativa
+    Ballads/Romantic: Baladas/Romántica
+    Blues: Blues
+    Chanson Francaise: Canción francesa
+    "Children's Music": Música infantil
+    Classical: Clásica
+    Country: Country
+    Dance/Electronic: Dance/Electrónica
+    Folk: Folk
+    Hip-Hop/Rap: Hip-Hop/Rap
+    Holiday: Festiva
+    Jazz: Jazz
+    Latin: Latina
+    Medieval/Renaissance: Medieval/Renacentista
+    Metal: Metal
+    New Age: New Age
+    Other: Otro
+    Pop: Pop
+    R&B: R&B
+    Reggae: Reggae
+    Religious: Religiosa
+    Rock: Rock
+    Undefined: Sin definir
+    World: Música del mundo 

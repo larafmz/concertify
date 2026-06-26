@@ -13,6 +13,7 @@ class Artist < ApplicationRecord
   ## SCOPES
 
     scope :by_name, -> (query) { where("name ILIKE :q", q: "%#{query}%") }
+    scope :by_genre, ->(genre_id) { where(genre_id: genre_id ) }
     
   ## VALIDATIONS
 
@@ -33,6 +34,12 @@ class Artist < ApplicationRecord
         a.genre = Genre.find_by(name: artist_api.dig("classifications", 0, "genre", "name"))
       end 
       return artist
+    end
+
+    def self.search_by(name, genre_id)
+      artists_db =  Artist.by_name(name)
+      artists_db = artists_db.by_genre(params[:genre]) if params[:genre]
+      artists_db
     end
           
   ## INSTANCE METHODS

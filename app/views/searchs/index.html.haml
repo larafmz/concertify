@@ -37,5 +37,7 @@
     - else 
       %h5
         CONCIERTOS • #{concerts_size} RESULTADOS
-    = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api, filters: true, search_by_name: true
+    = render "concerts/filters", search_by_name: true
+    = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+    = render "concerts/manual_add"
           

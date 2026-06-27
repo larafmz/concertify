@@ -72,4 +72,12 @@ class Artist < ApplicationRecord
       concerts_db
     end
 
+    def follow(user_id)
+      Relation.find_or_create_by!(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)
+    end
+
+    def unfollow(user_id)
+      Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
+    end
+
 end

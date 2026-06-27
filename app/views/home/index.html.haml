@@ -9,6 +9,14 @@
 
   .section-box
     %h4{style: "padding-bottom: 15px"}
-      CONCIERTOS 
-    = render "concerts/index", concerts_db: @concerts_db, concerts_api: [], filters: false, search_by_name: false
-                    
+      CONCIERTOS
+    - if current_user && !current_user.followings.artists.empty? & !@concerts_following_db&.empty?
+      %h5
+        De Artistas que sigues
+      .section-box
+        = render "concerts/index", concerts_db: @concerts_following_db, concerts_api: []
+    %h5
+      Añadidos recientemente
+    .section-box
+      = render "concerts/index", concerts_db: @concerts_db, concerts_api: []
+  

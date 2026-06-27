@@ -32,6 +32,17 @@
     - if current_user
         %div{ style: "justify-self: end; background: #1f252b;" }
 
+
+    %div{style: "display:flex; align-items:center; gap:8px; padding-top: 40px;"}
+
+        - if current_user
+            %span{ style: "margin-left: auto; background: #1f252b;" }
+                - if current_user.follows_artist?(@artist.id)
+                    = link_to "Dejar de Seguir", unfollow_artist_path(@artist.id), class: "btn-custom", style: "background: #7034a1", data: { turbo_method: :delete }
+                - else
+                    = link_to "Seguir", follow_artist_path(@artist.id), class: "btn-custom", data: { turbo_method: :post }
+                   
+
 .separator{style: "background: #40556d; "}
 
 .widget-content
@@ -40,5 +51,7 @@
     .section-box
         .title
             CONCIERTOS • #{@concerts_api.size + @concerts_db.size} RESULTADOS
-        = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api, filters: true, search_by_name: false
+        = render "concerts/filters", search_by_name: false
+        = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+        = render "concerts/manual_add"
            

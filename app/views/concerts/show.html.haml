@@ -8,7 +8,7 @@
                 %div= @concert.tour_name
                 %div{ style: "color: #999999; font-size: 15px;" }= "#{t("filters.at")} #{@concert.ubication&.complete_name} • #{short_date(@concert.date)} • #{@concert.start_time&.strftime("%H:%M")}"         
 
-        .artist-stats
+        .stats
             .stat
                 - if @concert_date_status == "past"
                     .number

@@ -1,1 +1,46 @@
-= link_to t("crud.edit", model: User.singular), edit_user_path(current_user.id)
+%div{ class: "widget-content", style: "background: #1f252b;"}
+    %div{ class: "artist-content", style: "background: #1f252b;"}
+        .artist-info
+            .user_icon
+                = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
+                
+            .artist-name
+                %div= @user.name
+                - if current_user.id == @user.id
+                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user.id), class: "small-btn-custom"
+                %div{ style: "color: #999999; font-size: 15px;" } 📍 #{@user.ubication.complete_name}
+              
+        .stats
+            .stat
+                .number
+                    = @user.registered_concerts.size
+                .name
+                    = Concert.plural
+            
+            .stat
+                .number
+                    = @user.registered_concerts.joins(:concert).where("EXTRACT(YEAR FROM concerts.date) = ?", Date.current.year).size
+                .name
+                    = t("this_year")
+            .stat
+                .number
+                    = @user.followers.users.size
+                .name
+                    = t("followers")
+            .stat
+                .number
+                    = @user.followings.users.size
+                .name
+                    = t("follows")                                
+
+
+.separator{style: "background: #40556d; "}
+
+.widget-content{style: "color: #a4b3c4; "}
+
+    %div
+        FAVORITE ARTISTS
+        .separator{style: "background: #40556d; "}
+        
+
+    

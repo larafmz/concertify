@@ -57,6 +57,16 @@ class ArtistsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def mark_as_favorite
+    Artist.find(params[:id]).mark_as_favorite(current_user.id)
+    redirect_back fallback_location: root_path
+  end
+
+  def unmark_as_favorite
+    Artist.find(params[:id]).unmark_as_favorite(current_user.id)
+    redirect_back fallback_location: root_path
+  end
+
   def requested
     #TO/DO if role admin, show all requesteds
     @artists = Artist.where(requester_id: current_user.id).order("created_at DESC")

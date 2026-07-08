@@ -9,39 +9,49 @@
                     ● #{message}
                     %br
     
-        .two-columns{style: "gap: 20px;"}
-            .section-box
-                %h6{class: "soft-color"}= t("profile")
+        .section-box
+            %h6{class: "soft-color"}= t("profile")
 
-                = label_tag :username, User.human_attribute_name(:username), class: "soft-color", style: "font-size: 13px;"
-                = f.text_field :username, class: "field-custom"
-                %br
-                %br 
+            .two-columns{style: "gap: 20px;"}
+                %div
+                    = label_tag :username, User.human_attribute_name(:username), class: "soft-color", style: "font-size: 13px;"
+                    = f.text_field :username, class: "field-custom"
+                %div
+                    = label_tag :name, User.human_attribute_name(:name), class: "soft-color", style: "font-size: 13px;"
+                    = f.text_field :name, class: "field-custom"
+            %br  
 
-                = label_tag :name, User.human_attribute_name(:name), class: "soft-color", style: "font-size: 13px;"
-                = f.text_field :name, class: "field-custom"
-                %br   
-                %br 
+            = label_tag :email, User.human_attribute_name(:email), class: "soft-color", style: "font-size: 13px;"
+            = f.text_field :email, class: "field-custom"
+            %br   
+            %br  
 
-                = label_tag :email, User.human_attribute_name(:email), class: "soft-color", style: "font-size: 13px;"
-                = f.text_field :email, class: "field-custom"
-                %br   
-                %br  
-
-                .two-columns{style: "gap: 20px;"}
-                    %div
-                        = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                        = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, @user.ubication&.country&.code), include_blank: "Seleccionar", class: "field-custom", style: "padding: 0px;"
-                    %div
-                        = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
-                        = text_field_tag :city, @user.ubication&.city, class: "field-custom"
-                %br   
-                
-                = label_tag :description, User.human_attribute_name(:description), class: "soft-color", style: "font-size: 13px;"
-                = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), style: "width: 100%; height: 100px; resize: vertical;", class: "field-custom"
-              
+            .two-columns{style: "gap: 20px;"}
+                %div
+                    = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
+                    = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, @user.ubication&.country&.code), include_blank: "Seleccionar", class: "field-custom", style: "padding: 0px;"
+                %div
+                    = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
+                    = text_field_tag :city, @user.ubication&.city, class: "field-custom"
+            %br   
             
-            .section-box
-                %h6{class: "soft-color"}= t("favorite_artists")
+            = label_tag :description, User.human_attribute_name(:description), class: "soft-color", style: "font-size: 13px;"
+            = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), style: "width: 100%; height: 100px; resize: vertical;", class: "field-custom"
+            
+            
+            
+        .section-box
+            %h6{class: "soft-color"}= t("profile_icon")
+            .two-columns{style: "gap: 20px;"}
+                - if @user.icon.attached?
+                    .circle_icon
+                        = image_tag @user.icon
+                = f.file_field :icon
+
+            - if @user.icon.attached?
+                .delete-image-option
+                    = check_box_tag :remove_icon, "1", false
+                    = label_tag :remove_icon, "Eliminar imagen actual"
+        
             
         = f.submit t("verbs.save"), style: "float: right", class: "btn-custom"

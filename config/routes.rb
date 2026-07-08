@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     member do
       post :follow
       delete :unfollow
+      post :mark_as_favorite
+      delete :unmark_as_favorite
     end
     collection do
       get :requested

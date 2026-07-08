@@ -26,6 +26,8 @@ es:
     1: Estamos verificando los detalles.
     2: No hemos podido verificar la información. 
   genre_music: Género de Música
+  profile_icon: Icono de Perfil
+  this_year: Este año
       
   
 
@@ -47,6 +49,8 @@ es:
     login: Iniciar sesión
     register: Crear cuenta
     logout: Cerrar sesión
+    unmark_as_favorite: Quitar de Favoritos
+    mark_as_favorite: Marcar como Favorito
 
   filters:
     from: Desde

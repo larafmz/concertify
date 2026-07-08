@@ -13,7 +13,7 @@ class Artist < ApplicationRecord
     has_one_attached :photo
     has_many :publications
     belongs_to :genre, optional: true
-
+    
   ## SCOPES
 
     scope :by_name, -> (query) { where("name ILIKE :q", q: "%#{query}%") }
@@ -84,6 +84,14 @@ class Artist < ApplicationRecord
 
     def unfollow(user_id)
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
+    end
+
+    def mark_as_favorite(user_id)
+      FavoriteArtist.find_or_create_by!(user_id: user_id, artist_id: self.id)
+    end
+
+    def unmark_as_favorite(user_id)
+      FavoriteArtist.find_by(user_id: user_id, artist_id: self.id)&.destroy
     end
 
     def accepted?

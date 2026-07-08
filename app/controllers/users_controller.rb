@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     ubication.city = params[:city]
     ubication.save!
 
+    @user.icon.purge if params[:remove_icon] == "1" && @user.icon.attached?
+
     if @user.update(create_params)
       redirect_to user_path(@user.id)
     else
@@ -26,7 +28,7 @@ class UsersController < ApplicationController
 private
 
   def create_params
-      params.require(:user).permit(:username, :name, :email, :description)
+      params.require(:user).permit(:username, :name, :email, :description, :icon)
   end 
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_27_105422) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_08_141118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_27_105422) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "genre_id"
+    t.bigint "requester_id"
+    t.integer "status"
     t.index ["genre_id"], name: "index_artists_on_genre_id"
+    t.index ["requester_id"], name: "index_artists_on_requester_id"
   end
 
   create_table "artists_concerts", force: :cascade do |t|
@@ -106,6 +109,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_27_105422) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorite_artists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_favorite_artists_on_artist_id"
+    t.index ["user_id"], name: "index_favorite_artists_on_user_id"
   end
 
   create_table "future_assistances", force: :cascade do |t|
@@ -236,6 +248,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_27_105422) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "artists", "users", column: "requester_id"
   add_foreign_key "artists_concerts", "artists"
   add_foreign_key "artists_concerts", "concerts"
   add_foreign_key "chat_users", "chats"
@@ -243,6 +256,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_27_105422) do
   add_foreign_key "comments", "interactuables"
   add_foreign_key "comments", "users"
   add_foreign_key "concerts", "users", column: "requester_id"
+  add_foreign_key "favorite_artists", "artists"
+  add_foreign_key "favorite_artists", "users"
   add_foreign_key "future_assistances", "concerts"
   add_foreign_key "future_assistances", "interactuables"
   add_foreign_key "future_assistances", "users"

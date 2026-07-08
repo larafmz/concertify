@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       post :follow
       delete :unfollow
     end
+    collection do
+      get :requested
+    end    
   end
 
   resources :concerts do

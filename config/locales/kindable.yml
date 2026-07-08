@@ -15,6 +15,11 @@ es:
       accepted: Aceptado
       pending: Pendiente
       denied: Denegado
+  artists:
+    statuses:
+      accepted: Aceptado
+      pending: Pendiente
+      denied: Denegado
 
 en: 
   future_assistances:
@@ -25,6 +30,11 @@ en:
       otro: Other
 
   concerts:
+    statuses:
+      accepted: Accepted
+      pending: Pending
+      denied: Denied
+  artists:
     statuses:
       accepted: Accepted
       pending: Pending

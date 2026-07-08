@@ -2,6 +2,7 @@ es:
   search: Buscar...
   root_title: Ir a la página principal
   requested_concerts: Conciertos solicitados
+  requested_artists: Artistas solicitados
   all_masc: "Todos los %{model}"
   all_fem: "Todas las %{model}"
   totals: "%{model} Totales"
@@ -12,11 +13,21 @@ es:
   sent_ago: Enviado hace
   populars: Populares
   my_model: Mi %{model}
+  my_model_plural: Mis %{model}
   recently_added: Recientemente añadidos
   from_followed_artists: De Artistas que sigues
   account_configuration: Configuración de la cuenta
   profile: Perfil
   favorite_artists: Artistas Favoritos
+  followers: Seguidores
+  follows: Seguidos
+  request_message:
+    0: Información verificada y añadida a la aplicación.
+    1: Estamos verificando los detalles.
+    2: No hemos podido verificar la información. 
+  genre_music: Género de Música
+      
+  
 
   crud:
     add: "Añadir %{model}"
@@ -33,6 +44,9 @@ es:
     filter: Filtrar
     remove_filters: Limpiar filtros
     edit: Editar
+    login: Iniciar sesión
+    register: Crear cuenta
+    logout: Cerrar sesión
 
   filters:
     from: Desde
@@ -47,14 +61,7 @@ es:
     review_by: Reseña de
 
   messages: 
-    cant_find_concert: ¿No encuentras tu concierto?
-    manual_adition: Si el concierto no aparece en los resultados, puedes solicitar su adición manualmente.
+    cant_find: ¿No encuentras lo que buscas?
+    manual_adition: Si el concierto o artista no aparece en los resultados, puedes solicitar su adición manualmente.
     destroy_confirmation: ¿Esta seguro de que desea eliminar?
 
-  concerts:
-    request_message:
-      0: Concierto verificado y añadido a la aplicación.
-      1: Estamos verificando los detalles del evento.
-      2: No hemos podido verificar este evento. Comprueba las fechas y el recinto e inténtalo de nuevo.
-    genre_music: Género de Música
-      

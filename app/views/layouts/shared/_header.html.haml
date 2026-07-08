@@ -10,8 +10,8 @@
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search")}", class: "field-custom"
 
   - if !current_user
-    = link_to "Iniciar sesión", new_user_session_path, class: "btn-custom"
-    = link_to "Crear cuenta", new_user_registration_path, class: "btn-custom"
+    = link_to t("verbs.login"), new_user_session_path, class: "btn-custom"
+    = link_to t("verbs.register"), new_user_registration_path, class: "btn-custom"
   - else 
     .dropdown
       %button.btn.btn-secondary.dropdown-toggle{
@@ -23,25 +23,27 @@
 
       %ul.dropdown-menu
         %li
-          = link_to "Perfil", user_path(current_user.id), class: "dropdown-item"
+          = link_to t("profile"), user_path(current_user.id), class: "dropdown-item"
         %li
-          = link_to "Mis Conciertos Registrados", registered_concerts_path, class: "dropdown-item"
+          = link_to t("my_model_plural", model: RegisteredConcert.plural), registered_concerts_path, class: "dropdown-item"
         %li
-          = link_to "Mis Futuros Conciertos", future_assistances_path, class: "dropdown-item"
-        %li
-          %hr.dropdown-divider
-        %li
-          = link_to "Mis Conciertos Solicitados", requested_concerts_path, class: "dropdown-item"
+          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_path, class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li
-          = link_to "Seguidores (TO/DO)", "#", class: "dropdown-item"
+          = link_to t("my_model_plural", model: t("requested_concerts")), requested_concerts_path, class: "dropdown-item"
         %li
-          = link_to "Seguidos (TO/DO)", "#", class: "dropdown-item"
+          = link_to t("my_model_plural", model: t("requested_artists")), requested_artists_path, class: "dropdown-item"
+        %li
+          %hr.dropdown-divider
+        %li
+          = link_to t("followers"), "#", class: "dropdown-item"
+        %li
+          = link_to t("follows"), "#", class: "dropdown-item"
         %li
           %hr.dropdown-divider          
         %li
-          = link_to "Cerrar sesión (TO/DO)", "#", class: "dropdown-item"
+          = link_to t("verbs.logout"), "#", class: "dropdown-item"
 
   - if current_user
     %div{style: "display: flex; gap: 30px; font-size: 25px;"}

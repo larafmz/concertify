@@ -1,0 +1,42 @@
+.widget-content.list
+    %h4{ style: "color: white;" }= t("requested_artists")
+    .section-box
+        .registers-items
+            - if @artists.empty?
+                = t("not_found_model", model: t("requested_artists" ))
+
+            - @artists.each do |artist|
+                - status = artist.status
+                
+                %div{style: "background: #{color_request(status)}; border-radius: 15px;"}
+
+                    .item-register{  style: "margin-left: 5px;  grid-template-columns: 1fr 4fr 1fr auto;  border-bottom-left-radius: 0px; border-bottom-right-radius:0px; border-bottom: 0px;"}
+
+                        .rectangle_icon{ style: "height:80px; width: 150px;" }
+                            - if artist
+                                = link_to artist_path(artist.id) do
+                                    = image_tag artist.photo if artist.photo.attached?
+
+                        %div
+
+                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
+                            %br
+                            
+                            %span{style: "color: #{color_request(status)}; font-size: 16px;"}
+                                ● #{message_request(status)}
+
+                        %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
+                            %div{style: "background: #{second_color_request(status)}; color: #{color_request(status)}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
+                                #{emoji_request(status)} #{artist.status_string}
+                            - if artist.requester_id == current_user.id && artist.status == Artist::STATUS_PENDING
+                                %div{style: "display: flex; gap: 20px;"}
+                                    = link_to "✎", edit_artist_path(id: artist.id), data: { turbo_frame: "modal" }
+                                    = link_to "✗", artist_path(artist), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el concierto solicitado?" }
+                            - elsif artist.accepted?
+                                = link_to t("crud.show", model: Artist.singular), artist_path(artist), class: "btn-custom", style: "font-size: 13px; width: 150px;"
+                
+
+                    .sent_at
+                        = t("sent_ago")
+                        =time_ago_in_words(artist.created_at)
+

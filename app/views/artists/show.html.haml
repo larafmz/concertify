@@ -54,5 +54,7 @@
             #{Concert.plural.upcase} • #{@concerts_api.size + @concerts_db.size} #{t("results").upcase}
         = render "concerts/filters", search_by_name: false
         = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+
+    .section-box
         = render "concerts/manual_add"
            

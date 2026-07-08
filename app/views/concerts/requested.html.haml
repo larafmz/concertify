@@ -1,16 +1,16 @@
 .widget-content.list
-    %h4{ style: "color: white;" }
-        Conciertos solicitados
+    %h4{ style: "color: white;" }= t("requested_concerts")
     .section-box
         .registers-items
             - if @concerts.empty?
-                = t("not_found_model", model: requested_concerts.downcase )
+                = t("not_found_model", model: t("requested_concerts"))
 
             - @concerts.each do |concert|
                 - artist = concert.artists.first
                 - concert_date = concert.date
+                - status = concert.status
                 
-                %div{style: "background: #{concert.color_request}; border-radius: 15px;"}
+                %div{style: "background: #{color_request(status)}; border-radius: 15px;"}
 
                     .item-register{  style: "margin-left: 5px;  grid-template-columns: 1fr 4fr 1fr auto;  border-bottom-left-radius: 0px; border-bottom-right-radius:0px; border-bottom: 0px;"}
 
@@ -31,12 +31,12 @@
                             .softest-color{style: "font-size: 15px;" }
                                 %span= "📍#{ub} 🗓️ #{short_date(concert.date)}" 
                             
-                            %span{style: "color: #{concert.color_request}; font-size: 16px;"}
-                                ● #{concert.message_request}
+                            %span{style: "color: #{color_request(status)}; font-size: 16px;"}
+                                ● #{message_request(status)}
 
                         %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
-                            %div{style: "background: #{concert.second_color_request}; color: #{concert.color_request}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
-                                #{concert.emoji_request} #{concert.status_string}
+                            %div{style: "background: #{second_color_request(status)}; color: #{color_request(status)}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
+                                #{emoji_request(status)} #{concert.status_string}
                             - if concert.requester_id == current_user.id && concert.status == Concert::STATUS_PENDING
                                 %div{style: "display: flex; gap: 20px;"}
                                     = link_to "✎", edit_concert_path(id: concert.id), data: { turbo_frame: "modal" }

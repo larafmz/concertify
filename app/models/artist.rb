@@ -2,6 +2,10 @@ include ApplicationHelper
 
 class Artist < ApplicationRecord
 
+  ##CONFIGURATIONS
+
+    kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
+
   ## RELATIONSHIPS
 
     has_many :artists_concerts, dependent: :destroy
@@ -14,11 +18,13 @@ class Artist < ApplicationRecord
 
     scope :by_name, -> (query) { where("name ILIKE :q", q: "%#{query}%") }
     scope :by_genre, ->(genre_id) { where(genre_id: genre_id ) }
+    scope :accepted, -> { where(status: 0).or(where(status: nil)) }
+    scope :pending, -> { where(status: 1) }
     
   ## VALIDATIONS
 
-    validates :name, :ticketmaster_id, presence: true
-    validates :ticketmaster_id, uniqueness: true
+    validates :name, presence: true
+    validates :ticketmaster_id, uniqueness: { allow_nil: true }
     
   ## CLASS METHODS
 
@@ -78,6 +84,14 @@ class Artist < ApplicationRecord
 
     def unfollow(user_id)
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
+    end
+
+    def accepted?
+      status == 0 || status == nil
+    end
+
+    def status_string
+      status ? get_status_name : "Aceptado"
     end
 
 end

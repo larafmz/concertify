@@ -17,7 +17,7 @@
     = form_tag request.path, method: "GET" do
       .filters-search{style: "margin-bottom:10px; gap: 20px;"}
         %div
-          = label_tag :genre, t("concerts.genre_music").upcase, class: "soft-color", style: "font-size: 13px;"
+          = label_tag :genre, t("genre_music").upcase, class: "soft-color", style: "font-size: 13px;"
           = select_tag :genre, options_for_select(Genre.all.map { |genre| [genre.get_name, genre.id] }, params[:genre]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
         %div
           %br
@@ -40,5 +40,6 @@
         #{Concert.plural.upcase} • #{concerts_size} #{t("results").upcase}
     = render "concerts/filters", search_by_name: true
     = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
-    = render "concerts/manual_add"
+
+  = render "concerts/manual_add"
           

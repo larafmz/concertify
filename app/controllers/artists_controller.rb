@@ -1,6 +1,35 @@
 class ArtistsController < ApplicationController
   include ApplicationHelper
 
+  def new
+    @artist = Artist.new
+    render layout: false
+  end
+
+  def create
+      @artist = Artist.new(create_params)
+      if @artist.save!
+          redirect_to requested_artists_path
+      else
+          redirect_back fallback_location: root_path
+      end
+  end
+
+  def edit
+    @artist = Artist.find(params[:id])
+    render layout: false
+  end
+
+  def update
+      @artist = Artist.find(params[:id])
+      
+      if @artist.update(create_params)
+          redirect_to requested_artists_path
+      else
+          redirect_back fallback_location: root_path
+      end
+  end
+
   def show
 
     @artist = Artist.get_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
@@ -27,5 +56,24 @@ class ArtistsController < ApplicationController
     Artist.find(params[:id]).unfollow(current_user.id)
     redirect_back fallback_location: root_path
   end
+
+  def requested
+    #TO/DO if role admin, show all requesteds
+    @artists = Artist.where(requester_id: current_user.id).order("created_at DESC")
+  end
+
+  def destroy
+    @artist = Artist.find(params[:id])
+    if @artist.requester_id == current_user.id && @artist.pending? #TO/DO or admin
+      @artist.destroy
+    end
+    redirect_back fallback_location: root_path
+  end
+
+private
+
+  def create_params
+      params.require(:artist).permit(:name, :requester_id, :status)
+  end 
 
 end

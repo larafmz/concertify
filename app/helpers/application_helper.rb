@@ -22,5 +22,5 @@ module ApplicationHelper
     return "future" if concert_date > today
     concert_time.nil? || concert_time > Time.current ? "future" : "past"
   end
-  
+
 end

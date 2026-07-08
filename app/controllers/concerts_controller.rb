@@ -66,7 +66,7 @@ class ConcertsController < ApplicationController
       
   def destroy
       @concert = Concert.find(params[:id])
-      if @concert.requester_id == current_user.id & @concert.pending? #TO/DO or admin
+      if @concert.requester_id == current_user.id && @concert.pending? #TO/DO or admin
         @concert.destroy
       end
       redirect_back fallback_location: root_path

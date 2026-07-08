@@ -2,7 +2,7 @@
   = tag.dialog class: "custom_modal", data: { controller: "dialog" } do
 
     .modal_header
-      %h5 Asistiré a...
+      %h5 #{t("registers.will_assist")}...
       %button.modal_close{ data: { action: "dialog#close" } } ×
 
     .modal_body
@@ -36,17 +36,17 @@
             .separator{style: "background: #40556d; "}
 
             %div
-              = label_tag :from, "Salgo de:", class: "soft-color", style: "font-size: 13px;"
-              = f.text_field :from, placeholder: "Salgo de...", class: "field-custom"
+              = label_tag :from, FutureAssistance.human_attribute_name(:from), class: "soft-color", style: "font-size: 13px;"
+              = f.text_field :from, placeholder: FutureAssistance.human_attribute_name(:from), class: "field-custom"
          
-            = label_tag :concert_seat, "Ubicación en el concierto:", class: "soft-color", style: "font-size: 13px;"          
+            = label_tag :concert_seat, FutureAssistance.human_attribute_name(:concert_seat), class: "soft-color", style: "font-size: 13px;"          
             %span{ style: "display: grid; grid-template-columns: 1fr 3fr; gap: 10px" }
               = f.select :concert_seat, FutureAssistance.concert_seats_for_select, prompt: "Seleccionar...", class: "field-custom"
-              = f.text_field :concert_seat_details, placeholder: "Detalles de la Ubicación"
+              = f.text_field :concert_seat_details, placeholder: FutureAssistance.human_attribute_name(:concert_seat_details), class: "field-custom"
 
             %div
-              = label_tag :company, "¿Con quien vas?", class: "soft-color", style: "font-size: 13px;"
+              = label_tag :company, FutureAssistance.human_attribute_name(:company), class: "soft-color", style: "font-size: 13px;"
               = f.select :company, FutureAssistance.companies_for_select, class: "field-custom"
 
         %br
-        = f.submit "Guardar", style: "float: right"
+        = f.submit t("verbs.save"), style: "float: right"

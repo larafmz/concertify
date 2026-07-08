@@ -2,8 +2,8 @@
     .concert_add
         .two-columns{style: "grid-template-columns: auto 1fr;"}
             %div
-                %h5 ¿No encuentras tu concierto?
+                %h5= t("messages.cant_find_concert") 
                 .soft-color
-                    Si el concierto no aparece en los resultados, puedes solicitar su adición manualmente.
+                    %h5= t("messages.manual_adition") 
             %span{ style: "margin-left: auto" }
-                = link_to "+ Añadir concierto", new_concert_path, class: "btn-custom", data: { turbo_frame: "modal" }
+                = link_to "+ #{t("crud.add", model: Concert.singular)}", new_concert_path, class: "btn-custom", data: { turbo_frame: "modal" }

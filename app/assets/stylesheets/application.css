@@ -82,6 +82,10 @@ body {
   height: 1px;
 }
 
+.undecored_link {
+  text-decoration: none;
+  color: rgb(204, 193, 180);
+}
 
 /*
 * BOTÓN

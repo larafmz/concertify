@@ -1,13 +1,14 @@
 module ApplicationHelper
 
     def formatted_concert_date(date, start_time)
-      str = date.strftime("%A")
+      
+      str = I18n.t("date.day_names")[date.wday]
       str += " • #{start_time.strftime("%I:%M %p")}" if start_time
       str
     end
 
     def short_date(date)
-      date.strftime("%e %b %Y")
+      I18n.l(date, format: "%-d %b %Y")
     end
 
     def best_quality_image(images)

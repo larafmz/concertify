@@ -4,7 +4,7 @@
     .section-box
         .registers-items
             - if @concerts.empty?
-                No se han encontrado conciertos solicitados
+                = t("not_found_model", model: requested_concerts.downcase )
 
             - @concerts.each do |concert|
                 - artist = concert.artists.first
@@ -21,13 +21,13 @@
 
                         %div
 
-                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
+                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
                             %br
 
                             %span{ style: "font-size: 18px;", class: "soft-color" } #{concert.tour_name}
                             %br
 
-                            - ub = concert.ubication&.complete_name || "ubication unidentified"
+                            - ub = concert.ubication&.complete_name || t("not_found")
                             .softest-color{style: "font-size: 15px;" }
                                 %span= "📍#{ub} 🗓️ #{short_date(concert.date)}" 
                             
@@ -42,9 +42,10 @@
                                     = link_to "✎", edit_concert_path(id: concert.id), data: { turbo_frame: "modal" }
                                     = link_to "✗", concert_path(concert), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el concierto solicitado?" }
                             - elsif concert.accepted?
-                                = link_to "Ver concierto", concert_path(concert), class: "btn-custom", style: "font-size: 13px; width: 150px;"
+                                = link_to t("crud.show", model: Concert.singular), concert_path(concert), class: "btn-custom", style: "font-size: 13px; width: 150px;"
                 
 
                     .sent_at
-                        Enviado hace #{time_ago_in_words(concert.created_at)}
+                        = t("sent_ago")
+                        =time_ago_in_words(concert.created_at)
 

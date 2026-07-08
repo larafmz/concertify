@@ -1,9 +1,9 @@
 - if !concerts.nil?
-    - concerts.each do |concert|
+    - concerts.each_with_index  do |concert, index|
         .item-concert
             - concert_date = concert.date
             .date-concert
-                = concert_date.strftime("%B")[0,3].upcase
+                = I18n.l(concert_date, format: "%B")[0,3].upcase
                 %br
                 %span{ style: "font-size: 20px;" }= concert_date.day
                 %br
@@ -27,15 +27,16 @@
                     - if concert_date_status == "past"
                         - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: concert.id)
                         - if !register
-                            = link_to "He asistido", new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            = link_to t("registers.assisted"), new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                         - else
                             = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
                     - if concert_date_status == "future"
                         - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id )
                         - if !future_assistance
-                            = link_to "Asistiré", new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                         - else
                             = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
 
-        .separator{style: "background: rgb(202, 202, 202);"}
+        - if index != concerts.count-1
+            .separator{style: "background: rgb(202, 202, 202);"}
         

@@ -6,7 +6,7 @@
                 
             .artist-name
                 %div= @concert.tour_name
-                %div{ style: "color: #999999; font-size: 15px;" }= "at #{@concert.ubication&.complete_name} • #{@concert.date} • #{@concert.start_time&.strftime("%H:%M")}"         
+                %div{ style: "color: #999999; font-size: 15px;" }= "#{t("filters.at")} #{@concert.ubication&.complete_name} • #{short_date(@concert.date)} • #{@concert.start_time&.strftime("%H:%M")}"         
 
         .artist-stats
             .stat
@@ -14,49 +14,53 @@
                     .number
                         = @concert.registered_concerts.size
                     .name
-                        Registros totales
+                        = t("totals", model: RegisteredConcert.plural)
             
             .stat
                 - if @concert_date_status == "past"
                     .number
                         ★ #{@concert.average_puntuation} / 5
                     .name
-                        Media de Registros
+                        = t("average", model: RegisteredConcert.plural)
                 - else
                     .number
                         = @concert.future_assistances.size
                     .name
-                        Futuras Asistencias
+                        = t("totals", model: FutureAssistance.plural)
 
             .stat
                 .number
                     (TO/DO)
                 .name
-                    Publicaciones
+                    =Publication.plural
 
     
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 40px;"}
 
-        - @concert.artists.each do |artist|
-            = link_to artist_path(artist.id), style: "display:flex; align-items:center; gap:8px;" do 
-                .small_icon
-                    = image_tag  artist.photo, class: "artist-avatar" if artist.photo.attached?
-                = artist.name
+        
+        .section-box
+            %h5{ style: "color: white" }= Artist.plural
+            .artists-grid
+                - @concert.artists.each do |artist|
+                    = link_to artist_path(artist.id), style: "display:flex; align-items:center; gap:8px;" do 
+                        .small_icon
+                            = image_tag  artist.photo, class: "artist-avatar" if artist.photo.attached?
+                        = artist.name
 
         - if current_user
             %span{ style: "margin-left: auto; background: #1f252b;" }
                 - if @concert_date_status == "past"
                     - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !register
-                        = link_to "He asistido", new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to t("registers.assisted"), new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
                     - else
-                        = link_to "Mi Registro", registered_concert_path(id: register.id), class: "btn-custom"
+                        = link_to t("my_model", model: RegisteredConcert.singular), registered_concert_path(id: register.id), class: "btn-custom"
                 - if @concert_date_status == "future"
                     - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !future_assistance
-                        = link_to "Asistiré", new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
                     - else
-                        = link_to "Editar Futura Asistencia", edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
    
 
 .separator{style: "background: #40556d; "}

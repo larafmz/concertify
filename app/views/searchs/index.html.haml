@@ -1,29 +1,30 @@
 .widget-content.list
 
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
-    .section-box
-      %h5{style: "padding-bottom: 10px"}
-        USUARIOS • #{@users.size} RESULTADOS
-      .items
-        - @users.each do |user|
-          .item-name
-            = user.email
+    - if !@users.empty?
+      .section-box
+        %h5{style: "padding-bottom: 10px"}
+          #{User.plural.upcase} • #{@users.size} #{t("results").upcase}
+        .items
+          - @users.each do |user|
+            .item-name
+              = user.username
 
   .section-box
     %h5{style: "padding-bottom: 10px"}
-      ARTISTAS • #{@artists_api.size + @artists_db.size} RESULTADOS
+      #{Artist.plural.upcase} • #{@artists_api.size + @artists_db.size} #{t("results").upcase}
 
     = form_tag request.path, method: "GET" do
       .filters-search{style: "margin-bottom:10px; gap: 20px;"}
         %div
-          = label_tag :genre, "GÉNERO DE MÚSICA", class: "soft-color", style: "font-size: 13px;"
-          = select_tag :genre, options_for_select(Genre.all.map { |genre| [genre.get_name, genre.id] }, params[:genre]),include_blank: "Todos los géneros", class: "field-custom", style: "background: #0F1419; padding: 0px;"
+          = label_tag :genre, t("concerts.genre_music").upcase, class: "soft-color", style: "font-size: 13px;"
+          = select_tag :genre, options_for_select(Genre.all.map { |genre| [genre.get_name, genre.id] }, params[:genre]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
         %div
           %br
-          = submit_tag "Filtrar", class: "btn-custom"
+          = submit_tag t("verbs.filter"), class: "btn-custom"
         %div
           %br
-          = link_to "Limpiar filtros", url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
+          = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
 
     .items
       = render "artists/index_api", artists: @artists_api
@@ -33,10 +34,10 @@
     - concerts_size = @concerts_api.size + @concerts_db.size
     - if concerts_size > 100
       %h5
-        CONCIERTOS + 100 RESULTADOS
+        #{Concert.plural.upcase} + 100 #{t("results").upcase}
     - else 
       %h5
-        CONCIERTOS • #{concerts_size} RESULTADOS
+        #{Concert.plural.upcase} • #{concerts_size} #{t("results").upcase}
     = render "concerts/filters", search_by_name: true
     = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
     = render "concerts/manual_add"

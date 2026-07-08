@@ -6,27 +6,35 @@
             
         .register-info
             %div
-                Review by 
-                -# = link_to user_path(current_user.id) do (TO/DO)
-                %span{style: "font-weight: 700"}=current_user.email
+                =t("registers.review_by")
+                = link_to user_path(current_user.id), class: "undecored_link" do 
+                    %span{style: "font-weight: 700"}=current_user.username.upcase
 
             .separator{style: "background: rgb(78, 77, 102); margin: 10px 0;"}
 
             = link_to concert_path(@concert.id) do 
                 %span{ style: "color: white; font-size: 28px; font-weight: 600;" }= @concert.tour_name
+                
             - if @artist.genre && @artist.genre.name!="Undefined"
                 %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"
+
             %div{style: "font-size: 13px; margin: 10px 0;"}= "#{short_date(@concert.date)}, #{@concert.ubication.complete_name}"
+
             %div{style: "color: orange"}= @register.get_puntuation
+            
             - if !@register.text.empty?
                 %div{ style: "word-break: break-word; overflow-wrap: break-word; padding: 15px; margin: 10px 0; background: rgb(53, 53, 70);" }
                     = @register.text
+
             %div{style: "margin-bottom: 40px;"}
                 - if current_user
-                    ♡ 6 likes
+                    ♡ 6 #{t("registers.likes")}
+
             %div{style: "margin: 10px 0;"}
-                %span{style: "font-weight: 700"}=current_user.email.upcase
-                LIKED THESE REVIEWS
+                = link_to user_path(current_user.id), class: "undecored_link" do 
+                    %span{style: "font-weight: 700"}=current_user.username.upcase
+                =t("registers.liked_these_reviews")
+
             .separator{style: "background: rgb(78, 77, 102); margin: 10px 0;"}
             (TO/DO)
 
@@ -37,9 +45,9 @@
                     "data-bs-toggle" => "dropdown",
                     "aria-expanded" => "false"
                 }
-                    Editar
+                    =t("verbs.edit")
                 %ul.dropdown-menu
                     %li
-                        = link_to "Editar registro", edit_registered_concert_path(id: @register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
+                        = link_to t("crud.edit", model: RegisteredConcert.singular), edit_registered_concert_path(id: @register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
                     %li
-                        = link_to "Eliminar registro", registered_concert_path(@register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"
+                        = link_to t("crud.destroy", model: FutureAssistance.singular), registered_concert_path(@register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"

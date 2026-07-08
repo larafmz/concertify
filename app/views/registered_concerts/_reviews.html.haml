@@ -3,7 +3,8 @@
         REGISTROS POPULARES
     .separator{style: "background: rgb(202, 202, 202);"}
     - if @registered_concerts.empty?
-        No se encuentran registros.
+        = t("not_found_model", model: RegisteredConcert.plural.downcase )
+
     - @registered_concerts[0..9].each do |register|
         .review
             .small_icon 

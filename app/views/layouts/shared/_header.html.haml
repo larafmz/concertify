@@ -43,11 +43,12 @@
         %li
           = link_to "Cerrar sesión (TO/DO)", "#", class: "dropdown-item"
 
-      
+  - if current_user
+    %div{style: "display: flex; gap: 30px; font-size: 25px;"}
+      = link_to "🔔", "#", style: "text-decoration: none;"
+      = link_to "💬", "#", style: "text-decoration: none;"
+      = link_to "✒️", "#", style: "text-decoration: none;"
+    
   %div{style: "display: flex; gap: 30px; font-size: 25px;"}
-    = link_to "🔔", "#", style: "text-decoration: none;"
-    = link_to "💬", "#", style: "text-decoration: none;"
-    = link_to "✒️", "#", style: "text-decoration: none;"
-
-    = link_to "ES", url_for(locale: :es), style: "text-decoration: none;"
-    = link_to "EN", url_for(locale: :en), style: "text-decoration: none;"
+    = link_to "ES", change_locale_path(:es)
+    = link_to "EN", change_locale_path(:en)

@@ -120,14 +120,8 @@ class Concert < ApplicationRecord
     end
 
     def message_request
-      case status
-      when 1
-        "Estamos verificando los detalles del evento."
-      when 2
-        "No hemos podido verificar este evento. Comprueba las fechas y el recinto e inténtalo de nuevo."
-      else
-        "Concierto verificado y añadido a la aplicación."
-      end
+      return I18n.t("concerts.request_message.0") if status.nil?
+      I18n.t("concerts.request_message.#{status}")
     end
 
      def emoji_request

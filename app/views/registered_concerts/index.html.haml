@@ -5,7 +5,7 @@
     .section-box
         .registers-items
             - if @registered_concerts.empty?
-                No se han encontrado conciertos registrados
+                = t("not_found_model", model: RegisteredConcert.plural.downcase )
 
             - @registered_concerts.each do |register|
                 - concert = register.concert

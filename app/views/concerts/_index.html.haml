@@ -1,3 +1,7 @@
 .concerts-items
-    = render "concerts/index_db", concerts: concerts_db.first(10)
-    = render "concerts/index_api", concerts: concerts_api.first(10)
+    - if concerts_db.empty? && concerts_api.empty?
+        = t("not_found_model", model: Concert.plural.downcase )
+    - else
+        = render "concerts/index_db", concerts: concerts_db.first(10)
+        = render "concerts/index_api", concerts: concerts_api.first(10)
+ 

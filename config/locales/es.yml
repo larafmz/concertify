@@ -1,30 +1,60 @@
 es:
   search: Buscar...
   root_title: Ir a la página principal
+  requested_concerts: Conciertos solicitados
+  all_masc: "Todos los %{model}"
+  all_fem: "Todas las %{model}"
+  totals: "%{model} Totales"
+  average: "Media de %{model}"
+  results: Resultados
+  not_found_model: No se han encontrado %{model}
+  not_found: No se ha encontrado
+  sent_ago: Enviado hace
+  populars: Populares
+  my_model: Mi %{model}
+  recently_added: Recientemente añadidos
+  from_followed_artists: De Artistas que sigues
+  account_configuration: Configuración de la cuenta
+  profile: Perfil
+  favorite_artists: Artistas Favoritos
 
+  crud:
+    add: "Añadir %{model}"
+    show: "Ver %{model}"
+    edit: "Editar %{model}"
+    destroy: "Eliminar %{model}"
 
-  genres:
-    Alternative: Alternativa
-    Ballads/Romantic: Baladas/Romántica
-    Blues: Blues
-    Chanson Francaise: Canción francesa
-    "Children's Music": Música infantil
-    Classical: Clásica
-    Country: Country
-    Dance/Electronic: Dance/Electrónica
-    Folk: Folk
-    Hip-Hop/Rap: Hip-Hop/Rap
-    Holiday: Festiva
-    Jazz: Jazz
-    Latin: Latina
-    Medieval/Renaissance: Medieval/Renacentista
-    Metal: Metal
-    New Age: New Age
-    Other: Otro
-    Pop: Pop
-    R&B: R&B
-    Reggae: Reggae
-    Religious: Religiosa
-    Rock: Rock
-    Undefined: Sin definir
-    World: Música del mundo 
+  verbs:
+    register: Registrar
+    save: Guardar
+    select: Seleccionar
+    unfollow: Dejar de Seguir
+    follow: Seguir
+    filter: Filtrar
+    remove_filters: Limpiar filtros
+    edit: Editar
+
+  filters:
+    from: Desde
+    to: Hasta
+    at: En
+
+  registers:
+    assisted: He asistido
+    will_assist: Asistiré
+    liked_these_reviews: HA DADO LIKE A ESTAS RESEÑAS
+    likes: likes
+    review_by: Reseña de
+
+  messages: 
+    cant_find_concert: ¿No encuentras tu concierto?
+    manual_adition: Si el concierto no aparece en los resultados, puedes solicitar su adición manualmente.
+    destroy_confirmation: ¿Esta seguro de que desea eliminar?
+
+  concerts:
+    request_message:
+      0: Concierto verificado y añadido a la aplicación.
+      1: Estamos verificando los detalles del evento.
+      2: No hemos podido verificar este evento. Comprueba las fechas y el recinto e inténtalo de nuevo.
+    genre_music: Género de Música
+      

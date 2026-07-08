@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get "/searchs", to: "searchs#index"
-
+  get "change_locale/:locale", to: "application#change_locale", as: :change_locale
+  
   devise_for :users
   resources :users
   resources :registered_concerts
@@ -21,6 +22,8 @@ Rails.application.routes.draw do
       get :requested
     end
   end
+
+  
 
 
 end

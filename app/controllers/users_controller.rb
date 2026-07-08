@@ -8,13 +8,13 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
   end
 
-  
   def update
     @user = User.find(params[:id])
-    Ubication.find_or_create_by!(user_id: params[:id]) do |u|
-      u.country = Country.find_by(code: params[:country])
-      u.city = params[:city]
-    end
+
+    ubication = Ubication.find_or_initialize_by(user_id: @user.id)
+    ubication.country = Country.find_by(code: params[:country])
+    ubication.city = params[:city]
+    ubication.save!
 
     if @user.update(create_params)
       redirect_to user_path(@user.id)

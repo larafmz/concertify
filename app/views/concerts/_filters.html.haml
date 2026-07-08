@@ -7,16 +7,16 @@
         .filters-search
             = hidden_field_tag :artist_id, @artist&.id
             %div
-                = label_tag :first_date, "🗓️ DESDE", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :first_date, "🗓️ #{t("filters.from").upcase}", class: "soft-color", style: "font-size: 13px;"
                 = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
             %div
-                = label_tag :second_date, "🗓️ HASTA", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :second_date, "🗓️ #{t("filters.to").upcase}", class: "soft-color", style: "font-size: 13px;"
                 = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
             %div
-                = label_tag :country, "📍 UBICACIÓN", class: "soft-color", style: "font-size: 13px;"
-                = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, params[:country]),include_blank: "Todas las ubicaciones", class: "field-custom", style: "background: #0F1419; padding: 0px;"
+                = label_tag :country, "📍 #{Ubication.singular.upcase}", class: "soft-color", style: "font-size: 13px;"
+                = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
             %div
                 %br  
-                = submit_tag "Filtrar", class: "btn-custom"
+                = submit_tag t("verbs.filter"), class: "btn-custom"
         %br  
-        = link_to "Limpiar filtros", url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"
+        = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"

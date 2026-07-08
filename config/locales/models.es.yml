@@ -1,7 +1,53 @@
 es:
   activerecord:
+    models:
+      user:
+        one: Usuario
+        other: Usuarios
+      registered_concert:
+        one: Registro
+        other: Registros
+      publication:
+        one: Publicación
+        other: Publicaciones
+      concert:
+        one: Concierto
+        other: Conciertos
+      ubication:
+        one: Ubicación
+        other: Ubicaciones
+      artist:
+        one: Artista
+        other: Artistas
+      country: 
+        one: País
+        other: Paises
+      future_assistance:
+        one: Futura Asistencia
+        other: Futuras Asistencias
+      genre:
+        one: Género
+        other: Géneros
     attributes:
       user:
         email: Email
         username: Nombre de usuario
         name: Nombre
+        description: Descripción
+      concert:
+        tour_name: Nombre del Tour / Evento
+        date: Fecha
+        start_time: Hora de Inicio
+        status: Estado
+        requester_id: Usuario solicitante
+      artist:
+        name: Nombre
+      ubication:
+        city: Ciudad
+        state: Estado
+        address: Dirección
+      future_assistance:
+        from: Salgo Desde
+        concert_seat: Ubicación en el concierto
+        concert_seat_details: Detalles de Ubicación
+        company: ¿Con quien vas?

@@ -10,6 +10,11 @@ class User < ApplicationRecord
     has_one :ubication
     has_many :followings, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :followers, as: :followed, class_name: "Relation", dependent: :destroy
+    has_one_attached :icon
+
+  ## SCOPES
+  
+    scope :by_name, ->(query) { where("username ILIKE :q", q: "%#{query}%") } 
 
   ## VALIDATIONS
 

@@ -25,9 +25,9 @@
         %li
           = link_to t("profile"), user_path(current_user.id), class: "dropdown-item"
         %li
-          = link_to t("my_model_plural", model: RegisteredConcert.plural), registered_concerts_path, class: "dropdown-item"
+          = link_to t("my_model_plural", model: RegisteredConcert.plural), registered_concerts_path(user_id: current_user.id), class: "dropdown-item"
         %li
-          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_path, class: "dropdown-item"
+          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_path(user_id: current_user.id), class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li

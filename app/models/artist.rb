@@ -65,7 +65,7 @@ class Artist < ApplicationRecord
     def search_concerts_by(first_date, second_date, country_code, concerts_api)
       concerts_db = self.concerts.accepted
       ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
-      concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)
+      concerts_db = concerts_db.where(ticketmaster_id: nil).or(concerts_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
       if first_date.present? || second_date.present?
         first_date = Date.parse(first_date) if first_date && !first_date.empty?
         second_date = Date.parse(second_date) if second_date && !second_date.empty?

@@ -1,0 +1,17 @@
+- registers.limit(2).each_with_index do |register, index|
+    - concert = register.concert
+    .register_user
+        = link_to registered_concert_path(register.id) do 
+            .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid" }
+                = image_tag concert.photo if concert.photo.attached?
+        %div
+            %span{ style: "font-size: 20px; font-weight: 700;" }= concert.tour_name
+            .softest-color{style: "font-size: 15px;" }
+                %span= "📍#{concert.ubication&.complete_name} 🗓️ #{short_date(concert.date)}" 
+            %span{style: "color: orange; "}= register.get_puntuation
+            .section-box
+                %span{ class: "soft-color", style: "font-size: 15px;" }= simple_format(register.text)
+            %span{ class: "soft-color", style: "font-size: 15px;" } ♡ 6 #{t("registers.likes")}
+    - if index < registers.size-1
+        .separator{style: "background: #576a80; "}
+        

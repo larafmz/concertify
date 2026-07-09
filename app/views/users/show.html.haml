@@ -8,9 +8,10 @@
                 %div= @user.name
                 - if current_user.id == @user.id
                     = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user.id), class: "small-btn-custom"
-                %div{ style: "color: #999999; font-size: 15px;" } 📍 #{@user.ubication.complete_name}
+                - if @user.ubication
+                    %div{ style: "color: #999999; font-size: 15px;" } 📍 #{@user.ubication.complete_name}
               
-        .stats
+        .flex
             .stat
                 .number
                     = @user.registered_concerts.size
@@ -37,10 +38,67 @@
 .separator{style: "background: #40556d; "}
 
 .widget-content{style: "color: #a4b3c4; "}
+    .big-second-column{style: "color: #a4b3c4; "}
+        %div{style: "margin-right: 20px; "}
+            = User.human_attribute_name(:description).upcase
+            .separator{style: "background: #40556d; margin-bottom: 15px; "}
+            = simple_format(@user.description)
 
-    %div
-        FAVORITE ARTISTS
-        .separator{style: "background: #40556d; "}
+            %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+                = FutureAssistance.plural.upcase
+                = link_to future_assistances_path(user_id: @user.id), style: "text-decoration:none" do
+                    %span= @user.future_assistances.size   
+            .separator{style: "background: #40556d; margin-bottom: 15px; "}
+
+
+
+
+
+
+        %div{style: "margin-bottom: 20px; "}
+            %div{style: "margin-bottom: 20px; "}
+                =FavoriteArtist.plural.upcase
+                .separator{style: "background: #40556d;"}
+                .flex{style: "margin-top: 10px;"}
+                    = render "artists/index_db", artists: @favorite_artists 
+
+            %div{style: "margin-bottom: 20px; "}
+                %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+                    = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                        = RegisteredConcert.plural.upcase
+                        = t("recents").upcase
+                    = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                        %span= t("all").upcase
+                .separator{style: "background: #40556d;"}
+                .flex{style: "margin-top: 10px;"}
+                    - @registers.limit(4).each do |register|
+                        = link_to registered_concert_path(register.id), style: "text-decoration:none" do
+                            .rectangle_icon
+                                = image_tag register.concert.photo, class: "artist-avatar" if register.concert.photo.present?
+                            .item-name
+                                = register.concert.tour_name 
+                            %div{style: "text-align: left; color: #a4b3c4;"}= register.get_puntuation
+                                        
+            %div{style: "margin-bottom: 20px; "}
+                = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                    = RegisteredConcert.human_attribute_name(:reviews).upcase
+                    = t("recents").upcase
+                .separator{style: "background: #40556d; "}
+                = render "registered_concerts/show", registers: @registers_with_review.limit(2)
+            
+            %div{style: "margin-bottom: 20px; "}
+                = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                    = RegisteredConcert.human_attribute_name(:reviews).upcase 
+                    = t("populars").upcase
+                    TO/DO
+                .separator{style: "background: #40556d; "}
+                = render "registered_concerts/show", registers: RegisteredConcert.none
+                
+                
+                
+                
+
+
+
+
         
-
-    

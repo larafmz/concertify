@@ -50,4 +50,4 @@
                     %li
                         = link_to t("crud.edit", model: RegisteredConcert.singular), edit_registered_concert_path(id: @register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
                     %li
-                        = link_to t("crud.destroy", model: FutureAssistance.singular), registered_concert_path(@register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"
+                        = link_to t("crud.destroy", model: RegisteredConcert.singular), registered_concert_path(@register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"

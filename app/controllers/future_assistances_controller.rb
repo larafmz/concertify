@@ -1,7 +1,7 @@
 class FutureAssistancesController < ApplicationController
   
 def index
-    @future_assistances = FutureAssistance.joins(:concert).where(user_id: current_user.id).order("concerts.date ASC")
+    @future_assistances = FutureAssistance.joins(:concert).where(user_id: params[:user_id]).order("concerts.date ASC")
 end
 
 def new

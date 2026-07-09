@@ -7,8 +7,9 @@
           #{User.plural.upcase} • #{@users.size} #{t("results").upcase}
         .items
           - @users.each do |user|
-            .item-name
-              = user.username
+            = link_to user_path(user.id), class: "undecored_link" do 
+              .item-name
+                = user.username
 
   .section-box
     %h5{style: "padding-bottom: 10px"}

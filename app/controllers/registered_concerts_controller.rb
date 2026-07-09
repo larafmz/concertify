@@ -1,7 +1,7 @@
 class RegisteredConcertsController < ApplicationController
   
 def index
-    @registered_concerts = RegisteredConcert.joins(:concert).where(user_id: current_user.id).order("concerts.date DESC")
+    @registered_concerts = RegisteredConcert.joins(:concert).where(user_id: params[:user_id]).order("concerts.date DESC")
 end
 
 def show

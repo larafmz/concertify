@@ -1,7 +1,7 @@
 .widget-content.list
     %h4{ style: "color: white;" }
-        Conciertos registrados de #{current_user.email} #TO/DO username
-    %h6{ class: "soft-color", style: "font-weight: 400;" } #{@registered_concerts.count} conciertos registrados 
+        = t("from_user", model: RegisteredConcert.plural, user: current_user.username)
+    %h6{ class: "soft-color", style: "font-weight: 400;" } #{@registered_concerts.count} #{RegisteredConcert.plural.downcase}
     .section-box
         .registers-items
             - if @registered_concerts.empty?
@@ -36,8 +36,8 @@
                         - ub = concert.ubication&.complete_name || "ubication unidentified"
                         .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
                             %span= "📍#{ub}" 
-
-                        %span{ class: "soft-color", style: "font-size: 15px;   font-style: italic;"  } "#{register.text.first(90)}..."
+                        - if register.text && !register.text.empty?
+                            %span{ class: "soft-color", style: "font-size: 15px;   font-style: italic;"  } "#{register.text.first(90)}..."
                     %div{style: "color: orange"}= register.get_puntuation
                     - if register.user_id = current_user.id
                         .button-concert

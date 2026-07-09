@@ -5,6 +5,7 @@ es:
   requested_artists: Artistas solicitados
   all_masc: "Todos los %{model}"
   all_fem: "Todas las %{model}"
+  all: Todo
   totals: "%{model} Totales"
   average: "Media de %{model}"
   results: Resultados
@@ -28,8 +29,10 @@ es:
   genre_music: Género de Música
   profile_icon: Icono de Perfil
   this_year: Este año
-      
-  
+  recents: recientes
+  populars: populares
+  from_user: "%{model} de %{user}"  
+  more: Más
 
   crud:
     add: "Añadir %{model}"

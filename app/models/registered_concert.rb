@@ -29,7 +29,7 @@ class RegisteredConcert < Interactuable
         if self.puntuation.nil?
             self.puntuation = 0
         end
-        "★" * self.puntuation + "☆" * (5 - self.puntuation)
+        "★" * self.puntuation
     end
 
 end

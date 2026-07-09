@@ -1,7 +1,7 @@
 .widget-content.list
     %h4{ style: "color: white;" }
-        Futuros Conciertos de #{current_user.email} #TO/DO username
-    %h6{ class: "soft-color", style: "font-weight: 400;" } #{@future_assistances.count} #{RegisteredConcert.plural}
+        = t("from_user", model: FutureAssistance.plural, user: current_user.username)
+        %h6{ class: "soft-color", style: "font-weight: 400;" } #{@future_assistances.count} #{FutureAssistance.plural.downcase}
     .section-box
         .registers-items
             - if @future_assistances.empty?

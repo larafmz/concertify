@@ -2,6 +2,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    if @user
+      @favorite_artists = @user.favorite_artists.map(&:artist)
+      @registers = @user.registered_concerts.order(created_at: :desc)
+      @registers_with_review = @registers.where.not(text: nil).where("TRIM(text) != ''")
+    end
   end
 
   def edit

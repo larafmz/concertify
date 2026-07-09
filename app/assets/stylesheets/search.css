@@ -8,12 +8,13 @@
 
 .item-name {
   width: 200px;
-  padding: 8px 10px;
-  border: 1px solid #e6e6e6;
+  padding: 1px;
   font-size: 14px;
   text-align: center;
   color: white;
-  background: #eb5d25;
+  background: #40556d; 
+  border: 2px solid #40556d;
+
 }
 
 .filters-search {

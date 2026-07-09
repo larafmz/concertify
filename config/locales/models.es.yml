@@ -28,6 +28,9 @@ es:
       genre:
         one: Género
         other: Géneros
+      favorite_artist:
+        one: Artista Favorito
+        other: Artistas Favoritos
     attributes:
       user:
         email: Email
@@ -51,3 +54,6 @@ es:
         concert_seat: Ubicación en el concierto
         concert_seat_details: Detalles de Ubicación
         company: ¿Con quien vas?
+      registered_concert:
+        review: Reseña
+        reviews: Reseñas

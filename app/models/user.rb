@@ -7,6 +7,7 @@ class User < ApplicationRecord
   ## RELATIONSHIPS
 
     has_many :registered_concerts, dependent: :destroy
+    has_many :future_assistances, dependent: :destroy
     has_one :ubication
     has_many :followings, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :followers, as: :followed, class_name: "Relation", dependent: :destroy
@@ -21,6 +22,7 @@ class User < ApplicationRecord
 
     validates :email, :username, :name, presence: true
     validates :email, :username, uniqueness: true
+    validates :description, length: { maximum: 500, message: ->(object, data) {"solo permite #{data[:count]} carácteres y has usado #{data[:value].to_s.length} carácteres" }}, allow_nil: true
 
   ## INSTANCE METHODS
  
@@ -36,6 +38,9 @@ class User < ApplicationRecord
       favorite_artists.find_by(artist_id: artist_id).present?
     end
 
+    def can_mark_favorite?
+      favorite_artists.count < 4
+    end
    
 
 

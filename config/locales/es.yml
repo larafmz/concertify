@@ -50,6 +50,7 @@ es:
     follow: Seguir
     filter: Filtrar
     remove_filters: Limpiar filtros
+    remove_filter: Limpiar filtro
     edit: Editar
     login: Iniciar sesión
     register: Crear cuenta

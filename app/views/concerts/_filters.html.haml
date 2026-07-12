@@ -1,22 +1,21 @@
-.section-box
-    = form_tag request.path, method: "GET" do
-        - if search_by_name 
-            = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search")}", class: "field-custom"
-            %br
-            %br
-        .filters-search
-            = hidden_field_tag :artist_id, @artist&.id
-            %div
-                = label_tag :first_date, "🗓️ #{t("filters.from").upcase}", class: "soft-color", style: "font-size: 13px;"
-                = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
-            %div
-                = label_tag :second_date, "🗓️ #{t("filters.to").upcase}", class: "soft-color", style: "font-size: 13px;"
-                = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
-            %div
-                = label_tag :country, "📍 #{Ubication.singular.upcase}", class: "soft-color", style: "font-size: 13px;"
-                = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
-            %div
-                %br  
-                = submit_tag t("verbs.filter"), class: "btn-custom"
-        %br  
-        = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"
+= form_tag request.path, method: "GET" do
+    - if search_by_name 
+        = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search")}", class: "field-custom"
+        %br
+        %br
+    .filters-search
+        = hidden_field_tag :artist_id, @artist&.id
+        %div
+            = label_tag :first_date, "🗓️ #{t("filters.from").upcase}", class: "soft-color", style: "font-size: 13px;"
+            = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
+        %div
+            = label_tag :second_date, "🗓️ #{t("filters.to").upcase}", class: "soft-color", style: "font-size: 13px;"
+            = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
+        %div
+            = label_tag :country, "📍 #{Ubication.singular.upcase}", class: "soft-color", style: "font-size: 13px;"
+            = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
+        %div
+            %br  
+            = submit_tag t("verbs.filter"), class: "btn-custom"
+    %br  
+    = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"

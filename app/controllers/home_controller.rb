@@ -6,9 +6,8 @@ class HomeController < ApplicationController
     @concerts_db = Concert.accepted.order("created_at DESC")
 
     if current_user && !current_user.followings.artists.empty?
-      @concerts_following_db = current_user.followings.artists.flat_map do |relation|
-        Artist.find(relation.followed_id).concerts.accepted
-      end
+      artist_ids = current_user.followings.artists.pluck(:followed_id)
+      @concerts_following_db = Concert.accepted.joins(:artists).where(artists: { id: artist_ids }).distinct
     end
 
 

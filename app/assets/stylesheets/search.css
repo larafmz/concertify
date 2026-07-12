@@ -27,3 +27,26 @@
   display: block;
   margin-bottom: 5px;
 }
+
+/* Barra desplazaadora */
+
+.items::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Fondo de la barra */
+.items::-webkit-scrollbar-track {
+  background: #0F1419;
+  border-radius: 10px;
+}
+
+/* Parte que se mueve */
+.items::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+
+/* Al pasar el ratón */
+.items::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

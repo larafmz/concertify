@@ -1,20 +1,19 @@
-.widget-content.list
+.widget-content
 
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     - if !@users.empty?
-      .section-box
-        %h5{style: "padding-bottom: 10px"}
-          #{User.plural.upcase} • #{@users.size} #{t("results").upcase}
+      .section-box{style: "color: #dfdfdf;"}
+        #{User.plural.upcase} • #{@users.size} #{t("results").upcase}
+        .separator{style: "background: #40556d; margin-bottom: 15px; "}
         .items
           - @users.each do |user|
             = link_to user_path(user.id), class: "undecored_link" do 
               .item-name
                 = user.username
 
-  .section-box
-    %h5{style: "padding-bottom: 10px"}
-      #{Artist.plural.upcase} • #{@artists_api.size + @artists_db.size} #{t("results").upcase}
-
+  .section-box{style: "color: #dfdfdf;"}
+    #{Artist.plural.upcase} • #{@artists_api.size + @artists_db.size} #{t("results").upcase}
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
     = form_tag request.path, method: "GET" do
       .filters-search{style: "margin-bottom:10px; gap: 20px;"}
         %div
@@ -23,23 +22,21 @@
         %div
           %br
           = submit_tag t("verbs.filter"), class: "btn-custom"
-        %div
-          %br
-          = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
-
+          = link_to t("verbs.remove_filter"), url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
     .items
       = render "artists/index_api", artists: @artists_api.first(10)
       = render "artists/index_db", artists: @artists_db.first(10)
 
-  .section-box
+  .section-box{style: "color: #dfdfdf;"}
     - concerts_size = @concerts_api.size + @concerts_db.size
     - if concerts_size > 100
-      %h5
-        #{Concert.plural.upcase} + 100 #{t("results").upcase}
+      #{Concert.plural.upcase} + 100 #{t("results").upcase}
     - else 
-      %h5
-        #{Concert.plural.upcase} • #{concerts_size} #{t("results").upcase}
+      #{Concert.plural.upcase} • #{concerts_size} #{t("results").upcase}
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
     = render "concerts/filters", search_by_name: true
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
     = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
 
   = render "concerts/manual_add"

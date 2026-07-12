@@ -1,5 +1,5 @@
-- artists[0..9].each do |artist|
-    = link_to artist_path(artist.id), style: "text-decoration:none" do
+- artists.each do |artist|
+    = link_to artist_path(artist.id), style: "text-decoration:none", class: "hover-border" do
         %div
         .rectangle_icon
             = image_tag artist.photo, class: "artist-avatar" if artist.photo.present?

@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   ## VALIDATIONS
 
-    validates :email, :username, :name, presence: true
+    validates :email, :username, presence: true
     validates :email, :username, uniqueness: true
     validates :description, length: { maximum: 500, message: ->(object, data) {"solo permite #{data[:count]} carácteres y has usado #{data[:value].to_s.length} carácteres" }}, allow_nil: true
 

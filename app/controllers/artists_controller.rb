@@ -41,6 +41,7 @@ class ArtistsController < ApplicationController
       ticketmaster_ids = @concerts_api.map { |concert| concert["id"] }
       @concerts_db = @artist.search_concerts_by(params[:first_date], params[:second_date], params[:country], @concerts_api)
       @registered_concerts = @artist.registered_concerts
+      @reviews = @registered_concerts.with_review
     else
       redirect_back fallback_location: root_path
       #TO/DO error o mensaje idk

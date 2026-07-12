@@ -5,7 +5,7 @@
       #{Artist.plural.upcase} #{t("populars").upcase} (#TO/DO filtrar por mas seguidores)
 
     .items
-      = render "artists/index_db", artists: @artists_db
+      = render "artists/index_db", artists: @artists_db.first(10)
 
   .section-box
     %h4{style: "padding-bottom: 15px"}

@@ -7,6 +7,3 @@
                     %h5= t("messages.manual_adition") 
             %span{ style: "margin-left: auto" }
                 = link_to "+ #{t("crud.add", model: Concert.singular)}", new_concert_path, class: "btn-custom", data: { turbo_frame: "modal" }
-                %br
-                %br
-                = link_to "+ #{t("crud.add", model: Artist.singular)}", new_artist_path, class: "btn-custom", data: { turbo_frame: "modal" }

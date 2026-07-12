@@ -1,4 +1,4 @@
-- registers.limit(2).each_with_index do |register, index|
+- registers.each_with_index do |register, index|
     - concert = register.concert
     .register_user
         = link_to registered_concert_path(register.id) do 

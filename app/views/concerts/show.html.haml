@@ -11,10 +11,11 @@
         .flex
             .stat
                 - if @concert_date_status == "past"
-                    .number
+                    .number 
                         = @concert.registered_concerts.size
                     .name
-                        = t("totals", model: RegisteredConcert.plural)
+                        = link_to registered_concerts_path(concert_id: @concert.id) do   
+                            = t("totals", model: RegisteredConcert.plural)
             
             .stat
                 - if @concert_date_status == "past"
@@ -65,8 +66,17 @@
 
 .separator{style: "background: #40556d; "}
 
-.widget-content
+.widget-content{style: "color: #a4b3c4;"}
+
     - if @concert_date_status == "past"
-        = render "registered_concerts/reviews", registered_concerts: @registered_concerts
+        = link_to registered_concerts_path(concert_id: @concert.id), style: "text-decoration:none; " do   
+            =RegisteredConcert.han("reviews").upcase 
+            =t("populars").upcase
+            (TO/DO)
+        .separator{style: "background: #40556d; margin-bottom: 15px; "}
+        - if @reviews.empty?
+            = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
+        = render "registered_concerts/reviews", registered_concerts: @reviews
+
    
                 

@@ -1,0 +1,50 @@
+%div{ class: "widget-content", style: "background: #1f252b;"}
+    %div{ class: "artist-content", style: "background: #1f252b;"}
+        .artist-info
+            .user_icon
+                = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
+                
+            .artist-name
+                %div= @user.username
+                - if current_user.id == @user.id
+                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user.id), class: "small-btn-custom"
+                - if @user.ubication
+                    %div{ style: "color: #999999; font-size: 15px;" } 📍 #{@user.ubication.complete_name}
+              
+        .flex
+            .stat
+                .number
+                    = @user.registered_concerts.size
+                .name
+                    = link_to diary_registered_concerts_path(user_id: @user.id) do
+                        = Concert.plural
+            
+            .stat
+                .number
+                    = @user.registered_concerts.joins(:concert).where("EXTRACT(YEAR FROM concerts.date) = ?", Date.current.year).size
+                .name
+                    = link_to registered_concerts_path(user_id: @user.id) do
+                        = t("this_year")
+            .stat
+                .number
+                    = @user.followers.users.size
+                .name
+                    = t("followers")
+            .stat
+                .number
+                    = @user.followings.users.size
+                .name
+                    = t("follows")                                
+
+
+.separator{style: "background: #40556d; "}
+
+.widget-content{style: "color: #a4b3c4; "}
+
+    .widget-content{style: "display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid #263241;"}
+        = link_to t("profile"), user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :profile)
+        = link_to RegisteredConcert.han("reviews"), registered_concerts_path(user_id: @user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :reviews)
+        = link_to t("diary"), diary_registered_concerts_path(user_id: @user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :diary)
+        = link_to FutureAssistance.plural, future_assistances_path(user_id: @user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :future_assistances)
+        = link_to t("likes"), "#", style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :likes)
+        = link_to Artist.plural, "#", style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :likes)

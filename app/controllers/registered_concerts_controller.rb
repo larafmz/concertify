@@ -1,7 +1,19 @@
 class RegisteredConcertsController < ApplicationController
   
 def index
-    @registered_concerts = RegisteredConcert.joins(:concert).where(user_id: params[:user_id]).order("concerts.date DESC")
+    @registered_concerts = RegisteredConcert.joins(:concert).where(user_id: params[:user_id]).order("concerts.date DESC") if params[:user_id].present?
+    @user = User.find(params[:user_id]) if params[:user_id].present?
+
+    @registered_concerts = RegisteredConcert.joins(:concert).where(concert_id: params[:concert_id]).order("concerts.date DESC") if params[:concert_id].present?
+    @concert = Concert.find(params[:concert_id]) if params[:concert_id].present?
+
+    @registered_concerts = RegisteredConcert.joins(:concert).by_artist(params[:artist_id]).order("concerts.date DESC") if params[:artist_id].present?
+    @artist = Artist.find(params[:artist_id]) if params[:artist_id].present?
+end
+
+def diary
+    @registered_concerts = RegisteredConcert.joins(:concert).where(user_id: params[:user_id]).order("concerts.date DESC") if params[:user_id].present?
+    @user = User.find(params[:user_id]) if params[:user_id].present?
 end
 
 def show

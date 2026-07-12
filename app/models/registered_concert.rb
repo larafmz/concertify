@@ -14,6 +14,7 @@ class RegisteredConcert < Interactuable
     ## SCOPES
 
     scope :by_artist, ->(artist_id) { left_joins(concert: :artists).where(artists: { id: artist_id }) }
+    scope :with_review, -> { where.not(text: nil).where("TRIM(text) != ''") }
 
     ## VALIDATION METHODS
 

@@ -20,9 +20,13 @@
                                     = image_tag artist.photo if artist.photo.attached?
 
                         %div
-
-                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
-                            %br
+                            - if artist
+                                - if artist.accepted?
+                                    = link_to artist_path(artist.id) do
+                                        %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
+                                - else
+                                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
+                                %br
 
                             %span{ style: "font-size: 18px;", class: "soft-color" } #{concert.tour_name}
                             %br

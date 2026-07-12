@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   
   devise_for :users
   resources :users
-  resources :registered_concerts
+  
+  resources :registered_concerts do
+    collection do
+      get :diary
+    end   
+  end
+
   resources :future_assistances
 
   resources :artists do
@@ -21,6 +27,7 @@ Rails.application.routes.draw do
       get :requested
     end    
   end
+
 
   resources :concerts do
     collection do

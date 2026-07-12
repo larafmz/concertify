@@ -6,7 +6,8 @@ class ConcertsController < ApplicationController
     @concert = Concert.accepted.find_by(id: params[:id]) if @concert.nil?
     if @concert
       @concert_date_status = time_status(@concert.date, @concert.start_time)
-      @registered_concerts = Array(RegisteredConcert.where(concert_id: @concert.id).order("created_at ASC")) # TO/DO order by likes
+      @registered_concerts = RegisteredConcert.where(concert_id: @concert.id).order("created_at ASC") # TO/DO order by likes
+      @reviews = @registered_concerts.with_review
     else
       redirect_back fallback_location: root_path
     end
@@ -20,12 +21,18 @@ class ConcertsController < ApplicationController
 
   def create
       @concert = Concert.new(create_params)
+      
+      # Search artist in DB
       @artist = Artist.find_by(name: params[:concert][:artist_name])
+      # Search artist in Ticketmaster
       if !@artist
         artist_api = TicketmasterService.artists_by(params[:concert][:artist_name], nil)&.first
         @artist = Artist.get_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
       end
-      @concert.artists << @artist if @artist
+      #Create artist with status pending
+      @artist = Artist.create(name: params[:concert][:artist_name], requester_id: current_user.id, status: 1) if !@artist
+      
+      @concert.artists << @artist
       @concert.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
       if @concert.save!

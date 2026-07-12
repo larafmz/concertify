@@ -13,7 +13,7 @@
             .separator{style: "background: rgb(78, 77, 102); margin: 10px 0;"}
 
             = link_to concert_path(@concert.id) do 
-                %span{ style: "color: white; font-size: 28px; font-weight: 600;" }= @concert.tour_name
+                %span{ style: "font-size: 28px; font-weight: 600;" }= @concert.tour_name
                 
             - if @artist.genre && @artist.genre.name!="Undefined"
                 %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"

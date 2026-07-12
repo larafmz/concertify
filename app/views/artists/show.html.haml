@@ -16,7 +16,8 @@
                 .number
                     =  @registered_concerts.count
                 .name
-                    = t("totals", model: RegisteredConcert.plural)
+                    = link_to registered_concerts_path(artist_id: @artist.id) do   
+                        = t("totals", model: RegisteredConcert.plural)
             
             .stat
                 .number
@@ -51,10 +52,19 @@
 
 .separator{style: "background: #40556d; "}
 
-.widget-content
-    = render "registered_concerts/reviews", registered_concerts: @registered_concerts
+.widget-content{style: "color: #a4b3c4;"}
 
-    .section-box
+    = link_to registered_concerts_path(artist_id: @artist.id), style: "text-decoration:none; " do   
+        =RegisteredConcert.han("reviews").upcase 
+        =t("populars").upcase
+        (TO/DO)
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    - if @reviews.empty?
+        = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
+    = render "registered_concerts/reviews", registered_concerts: @reviews
+
+    
+    .section-box{style: "margin-top: 50px;"}
         .title
             #{Concert.plural.upcase} • #{@concerts_api.size + @concerts_db.size} #{t("results").upcase}
         = render "concerts/filters", search_by_name: false

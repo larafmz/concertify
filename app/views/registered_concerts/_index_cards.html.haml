@@ -1,0 +1,8 @@
+.flex{style: "margin-top: 10px;"}
+    - registers.each do |register|
+        = link_to registered_concert_path(register.id), style: "text-decoration:none" do
+            .rectangle_icon
+                = image_tag register.concert.photo, class: "artist-avatar" if register.concert.photo.present?
+            .item-name
+                = register.concert.tour_name 
+            %div{style: "text-align: left; color: #a4b3c4;"}= register.get_puntuation

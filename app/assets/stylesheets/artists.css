@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     color: white;
+    gap: 30px;
 }
 
 .artist-content {

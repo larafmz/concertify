@@ -9,4 +9,8 @@ class ApplicationRecord < ActiveRecord::Base
     self.model_name.human(count: 2)
   end
 
+  def self.han(attribute)
+    self.human_attribute_name(attribute)
+  end
+
 end

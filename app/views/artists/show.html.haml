@@ -46,8 +46,10 @@
                 - if current_user.favorite_artist?(@artist.id)
                     = link_to "❤ #{t("verbs.unmark_as_favorite")}", unmark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #7397da", data: { turbo_method: :delete }
                 - elsif current_user.can_mark_favorite?
-                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #da7395", data: { turbo_method: :post }
-
+                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #da7395", data: {  turbo_method: :post}
+                - else
+                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #da7395", 
+                        data: {  turbo_method: :post, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") }
                  
 
 .separator{style: "background: #40556d; "}

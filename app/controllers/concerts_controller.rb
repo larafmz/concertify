@@ -67,7 +67,8 @@ class ConcertsController < ApplicationController
 
   def requested
     #TO/DO if role admin, show all requesteds
-    @concerts = Concert.where(requester_id: current_user.id).order("created_at DESC")
+    @concerts = Concert.where(requester_id: params[:user_id]).order("created_at DESC")
+    @user = User.find(params[:user_id]) if params[:user_id].present?
   end
 
       

@@ -53,6 +53,11 @@ a:hover {
   border-color: #00c3ff;
 }
 
+.hover-border-icon:hover .header_icon,
+.header_icon.active {
+  border-color: #00c3ff;
+}
+
 .rectangle_icon {
   width: 200px;
   height: 150px;
@@ -135,6 +140,18 @@ a:hover {
   justify-content: center;
   border-radius: 50%;
   border: 2px solid #cecfd1;
+}
+
+.header_icon {
+  width: 45px;
+  height: 45px;
+  background: #1f2731;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #2c3744;
 }
 
 .rectangle_img, img {
@@ -243,6 +260,13 @@ a:hover {
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
+}
+
+.four-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-items: start;
 }
 
 .stat {

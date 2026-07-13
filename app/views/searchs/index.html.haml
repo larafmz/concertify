@@ -1,5 +1,9 @@
 .widget-content
 
+  - if @concerts.size==0
+    .message
+      = t("messages.how_to_find_concert") 
+
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     - if !@users.empty?
       .section-box{style: "color: #dfdfdf;"}
@@ -11,32 +15,34 @@
               .item-name
                 = user.username
 
-  .section-box{style: "color: #dfdfdf;"}
-    #{Artist.plural.upcase} • #{@artists_api.size + @artists_db.size} #{t("results").upcase}
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
-    = form_tag request.path, method: "GET" do
-      .filters-search{style: "margin-bottom:10px; gap: 20px;"}
-        %div
-          = label_tag :genre, t("genre_music").upcase, class: "soft-color", style: "font-size: 13px;"
-          = select_tag :genre, options_for_select(Genre.all.map { |genre| [genre.get_name, genre.id] }, params[:genre]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
-        %div
-          %br
-          = submit_tag t("verbs.filter"), class: "btn-custom"
-          = link_to t("verbs.remove_filter"), url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
-    .items
-      = render "artists/index_api", artists: @artists_api.first(10)
-      = render "artists/index_db", artists: @artists_db.first(10)
+  - if @artists_api.size!=0 || @artists_db.size!=0
+    .section-box{style: "color: #dfdfdf;"}
+      #{Artist.plural.upcase} • #{@artists_api.size + @artists_db.size} #{t("results").upcase}
+      .separator{style: "background: #40556d; margin-bottom: 15px; "}
+      = form_tag request.path, method: "GET" do
+        .filters-search{style: "margin-bottom:10px; gap: 20px;"}
+          %div
+            = label_tag :genre, t("genre_music").upcase, class: "soft-color", style: "font-size: 13px;"
+            = select_tag :genre, options_for_select(Genre.all.map { |genre| [genre.get_name, genre.id] }, params[:genre]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
+          %div
+            %br
+            = submit_tag t("verbs.filter"), class: "btn-custom"
+            = link_to t("verbs.remove_filter"), url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
+      .separator{style: "background: #40556d; margin-bottom: 15px; "}
+      .items
+        = render "artists/index_api", artists: @artists_api.first(10)
+        = render "artists/index_db", artists: @artists_db.first(10)
 
-  .section-box{style: "color: #dfdfdf;"}
-    - if @concerts.size > 100
-      #{Concert.plural.upcase} + 100 #{t("results").upcase}
-    - else 
-      #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
-    = render "concerts/filters", search_by_name: true
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
-    = render "concerts/index", concerts: @concerts[0,10]
+  - if @concerts.size!=0
+    .section-box{style: "color: #dfdfdf;"}
+      - if @concerts.size > 100
+        #{Concert.plural.upcase} + 100 #{t("results").upcase}
+      - else 
+        #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}
+      .separator{style: "background: #40556d; margin-bottom: 15px; "}
+      = render "concerts/filters", search_by_name: true
+      .separator{style: "background: #40556d; margin-bottom: 15px; "}
+      = render "concerts/index", concerts: @concerts[0,10]
 
   = render "concerts/manual_add"
           

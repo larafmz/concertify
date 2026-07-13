@@ -42,3 +42,16 @@
   border: 2px dashed #40556d;
 }
 
+.message {
+  padding: 15px;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  background: #2f7185;  
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  border: 2px dashed #50a5be;
+  font-size: 15px;
+  font-weight: 600; 
+}
+

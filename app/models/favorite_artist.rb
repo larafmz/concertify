@@ -11,7 +11,7 @@ class FavoriteArtist < ApplicationRecord
 
     def max_favorite_artists
       if user.favorite_artists.size+1 > 4
-        errors.add(:favorite_artists, "(TO/DO) no puede tener más de 4 artistas favoritos")
+        errors.add(:favorite_artists, I18n.t("messages.cant_mark_as_favorite"))
       end
     end
 

@@ -1,6 +1,11 @@
 class ArtistsController < ApplicationController
   include ApplicationHelper
 
+  def index
+    @user = User.find(params[:user_id]) if params[:user_id].present?
+    @artists = @user.followings.artists if @user.present?
+  end
+
   def new
     @artist = Artist.new
     render layout: false
@@ -61,7 +66,9 @@ class ArtistsController < ApplicationController
   end
 
   def mark_as_favorite
-    Artist.find(params[:id]).mark_as_favorite(current_user.id)
+    if current_user.can_mark_favorite?
+      Artist.find(params[:id]).mark_as_favorite(current_user.id)
+    end
     redirect_back fallback_location: root_path
   end
 
@@ -71,8 +78,8 @@ class ArtistsController < ApplicationController
   end
 
   def requested
-    #TO/DO if role admin, show all requesteds
-    @artists = Artist.where(requester_id: current_user.id).order("created_at DESC")
+    #TO/DO only to admin role, or maybe delete idk
+    @artists = Artist.where.not(requester_id: nil).order("created_at DESC")
   end
 
   def destroy

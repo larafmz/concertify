@@ -1,6 +1,6 @@
 = form_tag request.path, method: "GET" do
     - if search_by_name 
-        = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search")}", class: "field-custom"
+        = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_concert")}", class: "field-custom"
         %br
         %br
     .filters-search

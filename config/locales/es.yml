@@ -1,5 +1,7 @@
 es:
   search: Buscar...
+  search_concert: Buscar por nombre de tour o de artista...
+  main_search: Buscar usuarios, artistas, conciertos...
   root_title: Ir a la página principal
   requested_concerts: Conciertos solicitados
   requested_artists: Artistas solicitados
@@ -35,6 +37,8 @@ es:
   more: Más
   of: de
   diary: Diario
+  requests: Solicitudes
+  asistenece: Asistencia
 
   crud:
     add: "Añadir %{model}"
@@ -57,6 +61,7 @@ es:
     logout: Cerrar sesión
     unmark_as_favorite: Quitar de Favoritos
     mark_as_favorite: Marcar como Favorito
+    request: Solicitar %{model}
 
   filters:
     from: Desde
@@ -74,4 +79,7 @@ es:
     cant_find: ¿No encuentras lo que buscas?
     manual_adition: Si el concierto no aparece en los resultados, puedes solicitar su adición manualmente.
     destroy_confirmation: ¿Esta seguro de que desea eliminar?
-
+    how_to_find_concert: ℹ️ Para buscar y registrar un concierto, escribe el nombre del tour o del artista en el buscador.
+    cant_mark_as_favorite: |  
+      No puedes marcar como favorito a más de 4 artistas.
+      Para marcar uno nuevo, primero debes desmarcar a otro.

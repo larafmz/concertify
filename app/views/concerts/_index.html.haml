@@ -1,7 +1,73 @@
 .concerts-items
-    - if concerts_db.empty? && concerts_api.empty?
+    - if concerts.empty? 
         = t("not_found_model", model: Concert.plural.downcase )
     - else
-        = render "concerts/index_db", concerts: concerts_db.first(10)
-        = render "concerts/index_api", concerts: concerts_api.first(10)
- 
+        - concerts.each_with_index do |item, index|
+            - concert = item[:concert]
+            - concert_date = item[:date]
+            - concert_time = item[:time]
+
+            - if index == 0
+                .separator{style: "background: rgb(202, 202, 202);"}
+
+            .item-concert
+                .date-concert
+                    = I18n.l(concert_date, format: "%B")[0,3].upcase
+                    %br
+                    %span{style: "font-size:20px;"}= concert_date.day
+                    %br
+                    - if concert_date.year != Date.today.year
+                        = concert_date.year
+
+                .concert-info
+                    %span.soft-color
+                        = formatted_concert_date(concert_date, concert_time)
+                    %br
+                    %span{style: "font-weight:600"}
+                        - if item[:source] == :db
+                            = link_to concert_path(concert) do
+                                = concert.tour_name
+                        - else
+                            = link_to concert_path(id: "ticketmaster", ticketmaster_id: get_concert_id(concert)) do
+                                = get_concert_name(concert)
+                    %br
+                    %span.soft-color
+                        - if item[:source] == :db
+                            - venue = concert.ubication
+                            - if venue
+                                #{venue.city}, #{venue.state}, #{venue.country.name} • #{venue.address}
+                        - else
+                            - venue = get_concert_venue(concert)
+                            - if venue
+                                #{get_venue_city(venue)}, #{get_venue_state(venue)}, #{get_venue_country(venue)} • #{get_venue_address(venue)}
+
+                - if current_user
+                    .button-concert
+                        - concert_date_status = time_status(concert_date, concert_time)
+                        - if concert_date_status == "past"
+                            - if item[:source] == :db
+                                - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: concert.id)
+                            - else
+                                - register = RegisteredConcert.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+
+                            - if register
+                                = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
+                            - elsif item[:source] == :db
+                                = link_to t("registers.assisted"), new_registered_concert_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to t("registers.assisted"), new_registered_concert_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                        - elsif concert_date_status == "future"
+                            - if item[:source] == :db
+                                - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id)
+                            - else
+                                - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
+
+                            - if future_assistance
+                                = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
+                            - elsif item[:source] == :db
+                                = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+            
+            - if index != concerts.count-1
+                .separator{style: "background: rgb(202, 202, 202);"}

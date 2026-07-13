@@ -13,11 +13,11 @@
     .separator{style: "background: #40556d; margin-bottom: 15px; "}
     - if current_user && !current_user.followings.artists.empty? & !@concerts_following_db&.empty?
       .section-box
-        = render "concerts/index", concerts_db: @concerts_following_db.limit(5), concerts_api: []
+        = render "concerts/index_db", concerts: @concerts_following_db.limit(5)
 
   =Concert.plural.upcase 
   =t("recently_added").upcase
   .separator{style: "background: #40556d; margin-bottom: 15px; "}
   .section-box
-    = render "concerts/index", concerts_db: @concerts_db.limit(5), concerts_api: []
+    = render "concerts/index_db", concerts: @concerts_db.limit(5)
   

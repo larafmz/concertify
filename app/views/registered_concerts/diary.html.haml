@@ -1,7 +1,7 @@
 = render "users/header", active: :diary if @user
 
 .widget-content{style: "padding-top:0px;"}  
-    .registers-items
+    .registers-items{style: "background: #1e2731; border-radius: 15px; gap: 0px;"}
         - if @registered_concerts.empty?
             = t("not_found_model", model: RegisteredConcert.plural.downcase )
 
@@ -9,38 +9,31 @@
             - concert = register.concert
             - concert_date = concert.date
 
-            .item-register
-                .date-concert
-                    = concert_date.strftime("%B")[0,3].upcase
-                    %br
-                    %span{ style: "font-size: 20px;" }= concert_date.day
-                    %br
-                    - if concert_date.year != Date.today.year
-                        = concert_date.year
+            .diary-wrapper
+                = link_to registered_concert_path(register.id), class: "diary-link" do 
+                    .diary-obj
+                        .date-concert
+                            = concert_date.strftime("%B")[0,3].upcase
+                            %br
+                            %span{ style: "font-size: 20px;" }= concert_date.day
+                            %br
+                            - if concert_date.year != Date.today.year
+                                = concert_date.year
 
-                = link_to registered_concert_path(register.id) do 
-                    .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
-                        = image_tag concert.photo if concert.photo.attached?
+                        .diary_icon
+                            = image_tag concert.photo if concert.photo.attached?
 
-                %div
-                    - concert.artists.each_with_index  do |artist, index|
-                        = link_to artist_path(artist&.id) do 
-                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
-                        - if index < concert.artists.size - 1
-                            ,
-                    %br
+                        %div
+                            - concert.artists.each_with_index  do |artist, index|
+                                %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
+                                - if index < concert.artists.size - 1
+                                    ,
+                            %br
 
-                    = link_to concert_path(concert.id) do 
-                        %span{ style: "font-size: 18px;", class: "soft-color; " } #{concert.tour_name}
-                    
-                    - ub = concert.ubication&.complete_name || "ubication unidentified"
-                    .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
-                        %span= "📍#{ub}" 
-                    - if register.text && !register.text.empty?
-                        %span{ class: "soft-color", style: "font-size: 15px;   font-style: italic;"  } "#{register.text.first(90)}..."
-                %div{style: "color: orange"}= register.get_puntuation
-                - if register.user_id = current_user.id
-                    .button-concert
-                        = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
-                
-
+                            %span{ style: "font-size: 18px;", class: "soft-color; " } #{concert.tour_name}
+                            
+                            - ub = concert.ubication&.complete_name || "ubication unidentified"
+                            .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
+                                %span= "📍#{ub}" 
+                        %div{style: "color: orange"}= register.get_puntuation
+   

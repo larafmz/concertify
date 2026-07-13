@@ -1,42 +1,45 @@
-- if !concerts.nil?
-    - concerts.each_with_index  do |concert, index|
-        .item-concert
-            - concert_date = concert.date
-            .date-concert
-                = I18n.l(concert_date, format: "%B")[0,3].upcase
-                %br
-                %span{ style: "font-size: 20px;" }= concert_date.day
-                %br
-                - if concert_date.year != Date.today.year
-                    = concert_date.year
-            .concert-info
-                %span{ class: "soft-color" }
-                    = formatted_concert_date(concert_date, concert.start_time)
-                %br               
-                %span{ style: "font-weight: 600" }
-                    = link_to concert_path(concert.id) do 
-                        = concert.tour_name
-                %br
-                %span{ class: "soft-color" }
-                    - venue = concert.ubication
-                    - if !venue.nil?
-                        #{venue.city}, #{venue.state},  #{venue.country.name} • #{venue.address}
-            - if current_user
-                .button-concert
-                    - concert_date_status = time_status(concert_date, concert.start_time)
-                    - if concert_date_status == "past"
-                        - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: concert.id)
-                        - if !register
-                            = link_to t("registers.assisted"), new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
-                        - else
-                            = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
-                    - if concert_date_status == "future"
-                        - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id )
-                        - if !future_assistance
-                            = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
-                        - else
-                            = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
+.concerts-items
+    - if concerts.empty? 
+        = t("not_found_model", model: Concert.plural.downcase )
+    - else
+        - concerts.each_with_index  do |concert, index|
+            .item-concert
+                - concert_date = concert.date
+                .date-concert
+                    = I18n.l(concert_date, format: "%B")[0,3].upcase
+                    %br
+                    %span{ style: "font-size: 20px;" }= concert_date.day
+                    %br
+                    - if concert_date.year != Date.today.year
+                        = concert_date.year
+                .concert-info
+                    %span{ class: "soft-color" }
+                        = formatted_concert_date(concert_date, concert.start_time)
+                    %br               
+                    %span{ style: "font-weight: 600" }
+                        = link_to concert_path(concert.id) do 
+                            = concert.tour_name
+                    %br
+                    %span{ class: "soft-color" }
+                        - venue = concert.ubication
+                        - if !venue.nil?
+                            #{venue.city}, #{venue.state},  #{venue.country.name} • #{venue.address}
+                - if current_user
+                    .button-concert
+                        - concert_date_status = time_status(concert_date, concert.start_time)
+                        - if concert_date_status == "past"
+                            - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: concert.id)
+                            - if !register
+                                = link_to t("registers.assisted"), new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
+                        - if concert_date_status == "future"
+                            - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id )
+                            - if !future_assistance
+                                = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
 
-        - if index != concerts.count-1
-            .separator{style: "background: rgb(202, 202, 202);"}
-        
+            - if index != concerts.count-1
+                .separator{style: "background: rgb(202, 202, 202);"}
+            

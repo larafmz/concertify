@@ -39,7 +39,7 @@ class TicketmasterService
         first_date  = Date.parse(first_date)  if first_date
         second_date = Date.parse(second_date) if second_date
         second_date = first_date if !second_date.present? 
-        first_date ||= Date.today
+        first_date ||= Date.today-365.days
         first_date  = "#{first_date.to_date}T00:00:00" if first_date.present?
         second_date = "#{second_date.to_date}T23:59:59" if second_date.present?
 
@@ -65,6 +65,23 @@ class TicketmasterService
         genres
     end
 
+    def self.merge_concerts(concerts_db, concerts_api)
+        concerts = (concerts_db.map do |concert|
+            {
+                source: :db,
+                concert: concert,
+                date: concert.date,
+                time: concert.start_time
+            }
+            end + concerts_api.map do |concert|
+            {
+                source: :api,
+                concert: concert,
+                date: get_concert_date(concert),
+                time: get_concert_time(concert)
+            }
+            end).sort_by { |c| [c[:date], c[:time] || Time.new(2000)] }
+    end
 
 
 end

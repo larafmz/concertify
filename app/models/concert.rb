@@ -57,9 +57,9 @@ class Concert < ApplicationRecord
     def self.search_by(query, first_date, second_date, country_code, concerts_api)
       return [] if !query.present?
       concerts_db = Concert.accepted.by_name(query)
-
+      
       ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
-      concerts_db = concerts_db.where.not(ticketmaster_id: ticketmaster_ids).order(date: :asc)
+      concerts_db = concerts_db.where(ticketmaster_id: nil).or(concerts_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
 
       concerts_db = concerts_db.by_country_code(country_code) if country_code.present?
 
@@ -67,7 +67,7 @@ class Concert < ApplicationRecord
         first_date = Date.parse(first_date) if first_date.present?
         second_date = Date.parse(second_date) if second_date.present?
         second_date = first_date if !second_date.present?
-        first_date ||= Date.today
+        first_date ||= Date.today-365.days
         concerts_db = concerts_db.where("date >= ?", first_date) if first_date.present?
         concerts_db = concerts_db.where("date <= ?", second_date) if second_date.present?
       end

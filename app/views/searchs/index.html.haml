@@ -29,15 +29,14 @@
       = render "artists/index_db", artists: @artists_db.first(10)
 
   .section-box{style: "color: #dfdfdf;"}
-    - concerts_size = @concerts_api.size + @concerts_db.size
-    - if concerts_size > 100
+    - if @concerts.size > 100
       #{Concert.plural.upcase} + 100 #{t("results").upcase}
     - else 
-      #{Concert.plural.upcase} • #{concerts_size} #{t("results").upcase}
+      #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}
     .separator{style: "background: #40556d; margin-bottom: 15px; "}
     = render "concerts/filters", search_by_name: true
     .separator{style: "background: #40556d; margin-bottom: 15px; "}
-    = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+    = render "concerts/index", concerts: @concerts[0,10]
 
   = render "concerts/manual_add"
           

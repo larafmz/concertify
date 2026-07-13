@@ -66,9 +66,9 @@
     
     .section-box{style: "margin-top: 50px;"}
         .title
-            #{Concert.plural.upcase} • #{@concerts_api.size + @concerts_db.size} #{t("results").upcase}
+            #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}
         = render "concerts/filters", search_by_name: false
-        = render "concerts/index", concerts_db: @concerts_db, concerts_api: @concerts_api
+        = render "concerts/index", concerts: @concerts[0,10]
 
     .section-box
         = render "concerts/manual_add"

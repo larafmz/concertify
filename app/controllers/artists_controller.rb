@@ -3,7 +3,9 @@ class ArtistsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id]) if params[:user_id].present?
-    @artists = @user.followings.artists if @user.present?
+    @favorites = @user.favorite_artists.map(&:artist)
+    @artists = @user.followings.artists.map(&:followed).reject { |artist| @favorites.map(&:id).include?(artist.id) }
+
   end
 
   def new

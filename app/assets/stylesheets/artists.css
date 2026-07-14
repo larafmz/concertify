@@ -36,3 +36,8 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
+
+.artists-index{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}

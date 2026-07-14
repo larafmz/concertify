@@ -34,13 +34,13 @@
   - if current_user
     .flex{style: "display: flex; justify-content: right; gap: 30px; padding: 10px; font-size: 18px; color: white; "}
       = link_to user_path(current_user), class: "hover-border-icon" do
-        .header_icon{ class: ("active" if current_page?(user_path(current_user))) }
+        .link_icon{ class: ("active" if current_page?(user_path(current_user))) }
           👤
       = link_to "#", class: "hover-border-icon" do
-        .header_icon{ class: ("active" if current_page?("#")) }
+        .link_icon{ class: ("active" if current_page?("#")) }
           🔔
       = link_to "#", class: "hover-border-icon" do
-        .header_icon{ class: ("active" if current_page?("#")) }
+        .link_icon{ class: ("active" if current_page?("#")) }
           💬
 
     .dropdown

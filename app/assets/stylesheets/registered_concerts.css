@@ -23,7 +23,7 @@
 .register_user {
   border-radius: 15px;
   display: grid;
-  grid-template-columns: 1fr 4fr ;
+  grid-template-columns: 0.1fr 0.5fr 4fr ;
   gap: 20px;
   padding: 15px 15px;
   font-size: 18px;

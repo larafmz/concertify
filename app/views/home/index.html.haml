@@ -1,23 +1,31 @@
 .widget-content{style: "color: #a4b3c4;"}
-  #{Artist.plural.upcase} #{t("populars").upcase} (TO/DO filtrar por mas seguidores)
-  .separator{style: "background: #40556d; margin-bottom: 15px; "}
-  .items
-    = render "artists/index_db", artists: @artists_db.first(10)
 
-  %br
 
-  - if current_user
+  %div{style: "margin-top: 20px;"}
+    %div{ style: "display: flex; justify-content: space-between; align-items: center; color: #a4b3c4;" }
+      =link_to registered_concerts_path do
+        =RegisteredConcert.plural.upcase 
+        =t("recents").upcase
+      =link_to registered_concerts_path do
+        = t("more").upcase
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    = render "registered_concerts/index_cards", registers: @registers.limit(6)
+
+  %div{style: "margin-top: 20px;"}
+    %div{ style: "display: flex; justify-content: space-between; align-items: center; color: #a4b3c4;" }
+      =link_to artists_path do
+        #{Artist.plural.upcase} #{t("populars").upcase}
+      =link_to artists_path do
+        = t("more").upcase
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    .items
+      = render "artists/index_db", artists: @artists_db.first(10)
+
+
+  %div{style: "margin-top: 20px;"}
     =Concert.plural.upcase 
     =t("recents").upcase
-    =t("from_followed_artists").upcase
     .separator{style: "background: #40556d; margin-bottom: 15px; "}
-    - if current_user && !current_user.followings.artists.empty? & !@concerts_following_db&.empty?
+    - if !@concerts_db.empty?
       .section-box
-        = render "concerts/index_db", concerts: @concerts_following_db.limit(5)
-
-  =Concert.plural.upcase 
-  =t("recently_added").upcase
-  .separator{style: "background: #40556d; margin-bottom: 15px; "}
-  .section-box
-    = render "concerts/index_db", concerts: @concerts_db.limit(5)
-  
+        = render "concerts/index_db", concerts: @concerts_db.limit(5)

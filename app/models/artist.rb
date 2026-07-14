@@ -13,6 +13,7 @@ class Artist < ApplicationRecord
     has_one_attached :photo
     has_many :publications
     belongs_to :genre, optional: true
+    has_many :relations, as: :followed, dependent: :destroy
     
   ## SCOPES
 
@@ -58,8 +59,8 @@ class Artist < ApplicationRecord
       RegisteredConcert.by_artist(self.id)
     end
 
-    def average_puntuation
-      registered_concerts.average(:puntuation).to_i || 0
+    def average_rating
+      registered_concerts.average(:rating).to_i || 0
     end
 
     def search_concerts_by(first_date, second_date, country_code, concerts_api)

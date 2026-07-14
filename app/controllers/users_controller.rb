@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if @user
       @favorite_artists = @user.favorite_artists.map(&:artist)
       @registers = @user.registered_concerts.order(created_at: :desc)
-      @registers_with_review = @registers.where.not(text: nil).where("TRIM(text) != ''")
+      @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''")
       @future_assistances = @user.future_assistances.order(created_at: :desc)
     end
   end

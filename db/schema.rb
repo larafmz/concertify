@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_12_110130) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -144,10 +144,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_12_110130) do
   create_table "interactuables", force: :cascade do |t|
     t.string "type"
     t.bigint "user_id", null: false
-    t.string "text"
+    t.string "review"
     t.bigint "artist_id"
     t.bigint "concert_id"
-    t.integer "puntuation"
+    t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_interactuables_on_artist_id"

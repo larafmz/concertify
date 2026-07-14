@@ -13,7 +13,8 @@ es:
   results: Resultados
   not_found_model: No se han encontrado %{model}
   not_found: No se ha encontrado
-  sent_ago: Enviado hace
+  created_ago: Creado hace %{time}
+  sent_ago: Enviado hace %{time}
   populars: Populares
   my_model: Mi %{model}
   my_model_plural: Mis %{model}
@@ -47,7 +48,7 @@ es:
     destroy: "Eliminar %{model}"
 
   verbs:
-    register: Registrar
+    log: Registrar
     save: Guardar
     select: Seleccionar
     unfollow: Dejar de Seguir
@@ -62,6 +63,7 @@ es:
     unmark_as_favorite: Quitar de Favoritos
     mark_as_favorite: Marcar como Favorito
     request: Solicitar %{model}
+    logged: registró
 
   filters:
     from: Desde
@@ -73,13 +75,14 @@ es:
     will_assist: Asistiré
     liked_these_reviews: HA DADO LIKE A ESTAS RESEÑAS
     likes: likes
-    review_by: Reseña de
+    logged_by: Registrado por
+    ratings: Puntuaciones
 
   messages: 
     cant_find: ¿No encuentras lo que buscas?
     manual_adition: Si el concierto no aparece en los resultados, puedes solicitar su adición manualmente.
     destroy_confirmation: ¿Esta seguro de que desea eliminar?
-    how_to_find_concert: ℹ️ Para buscar y registrar un concierto, escribe el nombre del tour o del artista en el buscador.
+    how_to_find_concert: Para buscar y registrar un concierto, escribe el nombre del tour o del artista en el buscador.
     cant_mark_as_favorite: |  
       No puedes marcar como favorito a más de 4 artistas.
       Para marcar uno nuevo, primero debes desmarcar a otro.

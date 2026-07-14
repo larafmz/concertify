@@ -119,6 +119,18 @@ a:hover {
   border-radius: 50%;
 }
 
+
+.smaller_icon {
+  width: 40px;
+  height: 40px;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
 .circle_icon {
   width: 200px;
   height: 200px;
@@ -218,6 +230,7 @@ a:hover {
   height: 40px;
   width: 100%;
   background: rgb(53, 53, 70); 
+  border: 1px solid rgb(87, 87, 124);
   color: white; 
   border-radius: 10px;
   padding: 10px;
@@ -260,6 +273,12 @@ a:hover {
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
+}
+
+.columns {
+  display: grid;
+  gap: 10px;
+  align-items: start;
 }
 
 .four-columns {

@@ -20,7 +20,7 @@
             .stat
                 - if @concert_date_status == "past"
                     .number
-                        ★ #{@concert.average_puntuation} / 5
+                        ★ #{@concert.average_rating} / 5
                     .name
                         = t("average", model: RegisteredConcert.plural)
                 - else
@@ -69,7 +69,7 @@
 .widget-content{style: "color: #a4b3c4;"}
 
     - if @concert_date_status == "past"
-        = link_to registered_concerts_path(concert_id: @concert.id), style: "text-decoration:none; " do   
+        = link_to registered_concerts_path(concert_id: @concert.id) do   
             =RegisteredConcert.han("reviews").upcase 
             =t("populars").upcase
             (TO/DO)

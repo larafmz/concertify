@@ -2,9 +2,13 @@ class ArtistsController < ApplicationController
   include ApplicationHelper
 
   def index
-    @user = User.find(params[:user_id]) if params[:user_id].present?
-    @favorites = @user.favorite_artists.map(&:artist)
-    @artists = @user.followings.artists.map(&:followed).reject { |artist| @favorites.map(&:id).include?(artist.id) }
+    if params[:user_id].present?
+      @user = User.find(params[:user_id]) 
+      @favorites = @user.favorite_artists.map(&:artist)
+      @artists = @user.followings.artists.map(&:followed).reject { |artist| @favorites.map(&:id).include?(artist.id) }
+    else
+      @artists = Artist.accepted.left_joins(:relations).group(:id).order("COUNT(relations.id) DESC")
+    end
 
   end
 

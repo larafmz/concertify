@@ -2,7 +2,11 @@
 
   - if @concerts.size==0
     .message
+      ℹ️
       = t("messages.how_to_find_concert") 
+    = form_tag request.path, method: "GET" do
+      = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_concert")}", class: "field-custom", style: "margin-top:20px;"
+
 
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     - if !@users.empty?

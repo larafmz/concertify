@@ -11,7 +11,7 @@ class Interactuable < ApplicationRecord
 
   ## VALIDATIONS
   
-    validates :puntuation, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }, allow_nil: true
+    validates :rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }, allow_nil: true
     validates :type, presence: true
     validate :photos_limit
   

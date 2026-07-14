@@ -5,21 +5,24 @@
         
     .big-second-column{style: "color: #a4b3c4; "}
         %div{style: "margin-right: 20px; "}
+
             = User.human_attribute_name(:description).upcase
             .separator{style: "background: #40556d; margin-bottom: 15px; "}
             = simple_format(@user.description)
 
-            %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+            %div{ style: "display: flex; justify-content: space-between; align-items: center ;margin-top: 15px; " }
                 = link_to future_assistances_path(user_id: @user.id) do
                     = FutureAssistance.plural.upcase
                 = link_to future_assistances_path(user_id: @user.id) do
                     %span= @user.future_assistances.size   
             .separator{style: "background: #40556d; margin-bottom: 15px; "}
             .flex{style: "margin-top: 10px;"}
-                = link_to future_assistances_path(user_id: @user.id), class: "hover-border", style: "text-decoration:none; display: flex; align-items: flex-start; justify-content: space-between;" do
+                = link_to future_assistances_path(user_id: @user.id), class: "hover-border", style: "display: flex; align-items: flex-start; justify-content: space-between;" do
                     - @future_assistances.limit(5).each do |future_assistance|
                         .small_vertical_rectangle
                             = image_tag future_assistance.concert.photo, class: "artist-avatar" if future_assistance.concert.photo.present?
+
+
 
         %div{style: "margin-bottom: 20px; "}
             %div{style: "margin-bottom: 20px; "}
@@ -41,27 +44,23 @@
                                         
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                    = link_to registered_concerts_path(user_id: @user.id) do
                         = RegisteredConcert.human_attribute_name(:reviews).upcase
                         = t("recents").upcase
-                    = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                    = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator{style: "background: #40556d; "}
                 = render "registered_concerts/index", registers: @registers_with_review.limit(2)
             
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                    = link_to registered_concerts_path(user_id: @user.id) do
                         = RegisteredConcert.human_attribute_name(:reviews).upcase 
                         = t("populars").upcase
-                    = link_to registered_concerts_path(user_id: @user.id), style: "text-decoration:none" do
+                    = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator{style: "background: #40556d; "}
                 = render "registered_concerts/index", registers: RegisteredConcert.none
-                
-                
-                
-                
 
 
 

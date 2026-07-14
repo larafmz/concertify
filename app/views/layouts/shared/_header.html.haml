@@ -9,26 +9,12 @@
   = form_tag "/searchs", method: "GET" do
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"
 
-  - if !current_user
-    = link_to t("verbs.login"), new_user_session_path, class: "btn-custom"
-    = link_to t("verbs.register"), new_user_registration_path, class: "btn-custom"
-
-  .dropdown
-    %button.btn.btn-secondary.dropdown-toggle{
-      type: "button",
-      "data-bs-toggle" => "dropdown",
-      "aria-expanded" => "false",
-      style: "background: #eb5d25;"
-    }
-      + Crear
- 
-    %ul.dropdown-menu
-      %li
-        = link_to t("crud.add", model: RegisteredConcert.singular), searchs_path, class: "dropdown-item"
-      %li
-        %hr.dropdown-divider         
-      %li
-        = link_to  t("verbs.request", model: Concert.singular), new_concert_path, data: { turbo_frame: "modal" }, class: "dropdown-item"
+  %div
+    - if !current_user
+      = link_to t("verbs.login"), new_user_session_path, class: "btn-custom"
+      = link_to t("verbs.log"), new_user_registration_path, class: "btn-custom"
+    - else  
+      = link_to "+ #{t("verbs.log")}", searchs_path, class: "btn-custom", style: "height:35px;"
 
 
   - if current_user

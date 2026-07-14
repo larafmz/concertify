@@ -2,8 +2,11 @@
 
 .widget-content{style: "padding-top:0px;"}  
     .registers-items
+
         - if @concerts.empty?
-            = t("not_found_model", model: t("requested_concerts"))
+            .message
+                ℹ️
+                = t("not_found_model", model: t("requested_concerts").downcase)
 
         - @concerts.each do |concert|
             - artist = concert.artists.first
@@ -50,6 +53,5 @@
             
 
                 .sent_at
-                    = t("sent_ago")
-                    =time_ago_in_words(concert.created_at)
+                    = t("sent_ago", time:  time_ago_in_words(concert.created_at))
 

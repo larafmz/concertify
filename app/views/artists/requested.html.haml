@@ -37,6 +37,5 @@
                 
 
                     .sent_at
-                        = t("sent_ago")
-                        =time_ago_in_words(artist.created_at)
+                        = t("sent_ago", time:  time_ago_in_words(artist.created_at))
 

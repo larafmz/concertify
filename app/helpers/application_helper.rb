@@ -8,7 +8,7 @@ module ApplicationHelper
     end
 
     def short_date(date)
-      I18n.l(date, format: "%-d %b %Y")
+      date.year == Date.current.year ? I18n.l(date, format: "%-d %b") : I18n.l(date, format: "%-d %b %Y")
     end
 
     def best_quality_image(images)

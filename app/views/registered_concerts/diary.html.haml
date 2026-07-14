@@ -1,9 +1,13 @@
 = render "users/options", active: :diary if @user
 
 .widget-content{style: "padding-top:0px;"}  
-    .registers-items{style: "background: #1e2731; border-radius: 15px; gap: 0px;"}
-        - if @registered_concerts.empty?
+
+    - if @registered_concerts.empty?
+        .message
+            ℹ️
             = t("not_found_model", model: RegisteredConcert.plural.downcase )
+
+    .registers-items{style: "background: #1e2731; border-radius: 15px; gap: 0px;"}
 
         - @registered_concerts.each do |register|
             - concert = register.concert
@@ -35,5 +39,5 @@
                             - ub = concert.ubication&.complete_name || "ubication unidentified"
                             .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
                                 %span= "📍#{ub}" 
-                        %div{style: "color: orange"}= register.get_puntuation
+                        %div{style: "color: orange"}= register.get_rating
    

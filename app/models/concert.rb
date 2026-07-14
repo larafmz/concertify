@@ -81,8 +81,8 @@ class Concert < ApplicationRecord
       tour_name
     end
 
-    def average_puntuation
-      registered_concerts.average(:puntuation).to_i || 0
+    def average_rating
+      registered_concerts.average(:rating).to_i || 0
     end
     
     def status_string

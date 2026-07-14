@@ -3,6 +3,7 @@ class RegisteredConcert < Interactuable
     ## RELATIONSHIPS
     
     belongs_to :concert
+    belongs_to :user
     has_many_attached :photos
 
     ## VALIDATIONS
@@ -14,7 +15,7 @@ class RegisteredConcert < Interactuable
     ## SCOPES
 
     scope :by_artist, ->(artist_id) { left_joins(concert: :artists).where(artists: { id: artist_id }) }
-    scope :with_review, -> { where.not(text: nil).where("TRIM(text) != ''") }
+    scope :with_review, -> { where.not(review: nil).where("TRIM(review) != ''") }
 
     ## VALIDATION METHODS
 
@@ -26,11 +27,11 @@ class RegisteredConcert < Interactuable
 
     ## METHODS
 
-    def get_puntuation
-        if self.puntuation.nil?
-            self.puntuation = 0
+    def get_rating
+        if self.rating.nil?
+            self.rating = 0
         end
-        "★" * self.puntuation
+        "★" * self.rating
     end
 
 end

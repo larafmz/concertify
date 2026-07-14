@@ -1,8 +1,13 @@
 = render "users/options", active: :reviews if @user
+- if !@user
+    %br
 
 .widget-content{style: "padding-top:0px;"}  
     .registers-items
         - if @registered_concerts.empty?
-            = t("not_found_model", model: RegisteredConcert.plural.downcase )
+            .message
+                ℹ️
+                = t("not_found_model", model: RegisteredConcert.plural.downcase )
+
         = render "registered_concerts/index", registers: @registered_concerts
         

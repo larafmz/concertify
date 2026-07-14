@@ -1,17 +1,30 @@
 - registers.each_with_index do |register, index|
     - concert = register.concert
     .register_user
+        = link_to user_path(register.user_id) do 
+            .smaller_icon
+                = image_tag register.user.icon if register.user.icon.attached?
+
         = link_to registered_concert_path(register.id) do 
             .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid" }
                 = image_tag concert.photo if concert.photo.attached?
         %div
+            .soft-color{style: "font-size: 15px;" }
+                = link_to user_path(register.user_id) do 
+                    = register.user.username
+                %span{class: "softest-color"}= t("verbs.logged")
             %span{ style: "font-size: 20px; font-weight: 700;" }= concert.tour_name
             .softest-color{style: "font-size: 15px;" }
                 %span= "📍#{concert.ubication&.complete_name} 🗓️ #{short_date(concert.date)}" 
-            %span{style: "color: orange; "}= register.get_puntuation
-            .section-box
-                %span{ class: "soft-color", style: "font-size: 15px;" }= simple_format(register.text)
+            %span{style: "color: orange; "}= register.get_rating
+            - if register.review.present?
+                .section-box
+                    %span{ class: "soft-color", style: "font-size: 15px;" }= simple_format(register.review)
             %span{ class: "soft-color", style: "font-size: 15px;" } ♡ 6 #{t("registers.likes")}
+        
+    %div{style: " font-size: 12px; color: #808891;"}
+        = t("created_ago", time:  time_ago_in_words(register.created_at))
+
     - if index < registers.size-1
         .separator{style: "background: #576a80; "}
         

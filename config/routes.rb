@@ -6,7 +6,13 @@ Rails.application.routes.draw do
   get "change_locale/:locale", to: "application#change_locale", as: :change_locale
   
   devise_for :users
-  resources :users
+
+  resources :users do
+    member do
+      post :follow
+      delete :unfollow
+    end
+  end
   
   resources :registered_concerts do
     collection do

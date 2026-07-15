@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     member do
       post :follow
       delete :unfollow
+      get :followers
+      get :followings
     end
   end
   
@@ -20,7 +22,15 @@ Rails.application.routes.draw do
     end   
   end
 
+  resources :interactuables do
+    member do
+      post :like
+      get :likes
+    end
+  end
+
   resources :future_assistances
+  resources :likes
 
   resources :artists do
     member do

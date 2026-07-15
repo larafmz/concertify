@@ -31,6 +31,9 @@ es:
       favorite_artist:
         one: Artista Favorito
         other: Artistas Favoritos
+      notification:
+        one: Notificación
+        other: Notificaciones
     attributes:
       user:
         email: Email

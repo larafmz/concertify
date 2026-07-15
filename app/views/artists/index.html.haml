@@ -24,7 +24,7 @@
                         =artist.name
 
 
-        - @artists.limit(48).each do |artist|
+        - @artists[0..48].each do |artist|
             %div
                 %div{ style: "height:10px;"}    
 

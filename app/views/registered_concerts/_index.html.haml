@@ -20,7 +20,19 @@
             - if register.review.present?
                 .section-box
                     %span{ class: "soft-color", style: "font-size: 15px;" }= simple_format(register.review)
-            %span{ class: "soft-color", style: "font-size: 15px;" } ♡ 6 #{t("registers.likes")}
+            - heart = register.likes.count == 0 ? "♡" : "❤"
+            .soft-color{style: "font-size: 15px;"}
+                - if !current_user || (current_user.id == register.user.id)
+                    = heart
+                - else
+                    = link_to like_interactuable_path(register.id), data: { turbo_method: :post } do 
+                        = heart
+                - if register.likes.count == 0
+                    = t("registers.no_likes_yet")
+                - else
+                    = link_to likes_interactuable_path(register.id) do 
+                        = register.likes.count
+                        = t("registers.likes")
         
     %div{style: " font-size: 12px; color: #808891;"}
         = t("created_ago", time:  time_ago_in_words(register.created_at))

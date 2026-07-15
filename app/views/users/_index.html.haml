@@ -1,0 +1,23 @@
+.registers-items
+    - users.each_with_index do |user, index|
+
+        .register_user{style: "grid-template-columns: 0.1fr 4fr;"}
+            = link_to user_path(user.id), class: "hover-border-icon" do 
+                .link_icon
+                    = image_tag user.icon if user.icon.attached?
+
+            %div
+                = link_to user_path(user.id) do
+                    %span{ style: "font-size: 15px; font-weight: 700;" }= user.username
+                .softest-color{style: "font-size: 12px;" }
+                    = link_to followers_user_path(user.id), class: "hover-border-icon" do 
+                        = user.followers.count
+                        = t("followers").downcase
+                    ,
+                    = link_to followers_user_path(user.id), class: "hover-border-icon" do 
+                        = user.followings.users.count
+                        = t("follows").downcase
+        
+        - if index < users.size-1
+            .separator{style: "background: #576a80; "}
+            

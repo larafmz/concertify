@@ -5,8 +5,8 @@ class Interactuable < ApplicationRecord
     belongs_to :user
     has_many :tagged_users
     #has_many :comments TO/DO
-    #has_many :likes
-    #has_many :reposts
+    has_many :likes
+    #has_many :reposts TO/DO
     has_many_attached :photos
 
   ## VALIDATIONS
@@ -24,7 +24,7 @@ class Interactuable < ApplicationRecord
 
     def photos_limit
         if photos.attached? && photos.count > 4
-            errors.add(:photos, "4 fotos máximo")
+            errors.add(:photos, "4 fotos máximo") #TO/DO en form y show de registro y de concierto/artista
         end
     end
 

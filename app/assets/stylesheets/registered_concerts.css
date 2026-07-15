@@ -47,7 +47,7 @@
 
 .diary-obj {
   display: grid;
-  grid-template-columns: 0.3fr 1fr 4fr 1fr auto;
+  grid-template-columns: 0.3fr auto 3fr 1fr ;
   gap: 20px;
   padding: 0px 15px;
   font-size: 18px;

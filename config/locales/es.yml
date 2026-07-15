@@ -40,6 +40,7 @@ es:
   diary: Diario
   requests: Solicitudes
   asistenece: Asistencia
+  likes_of_model_from_user: ME GUSTAS SOBRE %{model} DE %{user} DE
 
   crud:
     add: "Añadir %{model}"
@@ -74,9 +75,10 @@ es:
     assisted: He asistido
     will_assist: Asistiré
     liked_these_reviews: HA DADO LIKE A ESTAS RESEÑAS
-    likes: likes
+    likes: Me Gustas
     logged_by: Registrado por
     ratings: Puntuaciones
+    no_likes_yet: Sin Me Gustas
 
   messages: 
     cant_find: ¿No encuentras lo que buscas?
@@ -86,3 +88,4 @@ es:
     cant_mark_as_favorite: |  
       No puedes marcar como favorito a más de 4 artistas.
       Para marcar uno nuevo, primero debes desmarcar a otro.
+    cant_like_own: No se puede dar like a un registro o publicacion propio

@@ -1,0 +1,11 @@
+= render "users/options", active: :follows if @user
+
+.widget-content{style: "padding-top:0px;"}  
+
+    %div{style: "display: flex; gap: 20px; color: white;"}
+        = link_to t("following").upcase, followings_user_path(@user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@followings.count} #{User.plural}" 
+        = link_to t("followers").upcase, followers_user_path(@user.id), title: "#{@followers.count} #{User.plural}"
+
+    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+
+    = render "users/index", users: @followings    

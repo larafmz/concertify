@@ -41,6 +41,14 @@ class User < ApplicationRecord
     def can_mark_favorite?
       favorite_artists.count < 4
     end
+
+    def follow(user_id)
+      Relation.find_or_create_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)
+    end
+
+    def unfollow(user_id)
+      Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)&.destroy
+    end
    
 
 

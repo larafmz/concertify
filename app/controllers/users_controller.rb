@@ -30,6 +30,28 @@ class UsersController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.users.users.map(&:followed)
+    @followers = @user.followers.users.map(&:follower)
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @followings = @user.followings.users.map(&:followed)
+    @followers = @user.followers.users.map(&:follower)
+  end
+
+  def follow
+    User.find(params[:id]).follow(current_user.id)
+    redirect_back fallback_location: root_path
+  end
+
+  def unfollow
+    User.find(params[:id]).unfollow(current_user.id)
+    redirect_back fallback_location: root_path
+  end
   
 private
 

@@ -6,7 +6,7 @@
         .message
             ℹ️
             = t("not_found_model", model: Artist.plural.downcase )
-            = t("follows").downcase
+            = t("following").downcase
 
     .artists-index{style: "color:#e9e9e9; "}
         - @favorites&.each do |artist|

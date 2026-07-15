@@ -24,7 +24,7 @@ es:
   profile: Perfil
   favorite_artists: Artistas Favoritos
   followers: Seguidores
-  follows: Seguidos
+  following: Siguiendo
   request_message:
     0: Información verificada y añadida a la aplicación.
     1: Estamos verificando los detalles.

@@ -16,7 +16,7 @@
                     ,
                     = link_to followers_user_path(user.id), class: "hover-border-icon" do 
                         = user.followings.users.count
-                        = t("follows").downcase
+                        = t("following").downcase
         
         - if index < users.size-1
             .separator{style: "background: #576a80; "}

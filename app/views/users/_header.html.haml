@@ -29,12 +29,14 @@
                 .number
                     = @user.followers.users.size
                 .name
-                    = t("followers")
+                    = link_to followers_user_path(user_id: @user.id) do
+                        = t("followers")
             .stat
                 .number
                     = @user.followings.users.size
                 .name
-                    = t("follows")                                
+                    = link_to followings_user_path(user_id: @user.id) do
+                        = t("following")                                
 
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 

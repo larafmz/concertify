@@ -4,7 +4,7 @@ class Interactuable < ApplicationRecord
 
     belongs_to :user
     has_many :tagged_users
-    #has_many :comments TO/DO
+    has_many :comments
     has_many :likes
     #has_many :reposts TO/DO
     has_many_attached :photos

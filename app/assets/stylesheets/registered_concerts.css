@@ -90,7 +90,7 @@
 
 .register-show {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto 3fr 1fr;
   color: rgb(196, 195, 216);
   gap: 30px;
   align-items: start;

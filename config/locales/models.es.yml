@@ -34,6 +34,12 @@ es:
       notification:
         one: Notificación
         other: Notificaciones
+      like:
+        one: Me Gusta
+        other: Me Gustas
+      comment: 
+        one: Comentario
+        other: Comentarios
     attributes:
       user:
         email: Email

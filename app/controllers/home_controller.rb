@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       @registers = RegisteredConcert.all.where(user_id: current_user.followings.users.pluck(:followed_id)).order("created_at DESC")
     end
 
-    @registers = RegisteredConcert.all.order("created_at DESC") if @registers || @registers.empty?
+    @registers = RegisteredConcert.all.order("created_at DESC") if !@registers.present? || @registers.empty?
 
 
   end

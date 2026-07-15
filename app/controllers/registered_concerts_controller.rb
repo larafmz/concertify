@@ -22,6 +22,7 @@ def show
     @register = RegisteredConcert.find(params[:id])
     @concert = Concert.find(@register.concert_id)
     @artist = Artist.find(@concert.artists.first.id)
+    @user = @register.user
 end
 
 def new

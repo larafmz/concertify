@@ -30,7 +30,7 @@
             .two-columns{style: "gap: 20px;"}
               %div
                 = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, @concert.ubication&.country&.code), include_blank: t("verbs.select"), class: "field-custom", style: "padding: 0px;"
+                = select_tag :country, options_for_select(Country.all.map { |country| [t(country.name), country.code] }, @concert.ubication&.country&.code), include_blank: t("verbs.select"), class: "field-custom", style: "padding: 0px;"
               %div
                 = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
                 = text_field_tag :city, @concert.ubication&.city, class: "field-custom", placeholder: "Ex: Madrid"

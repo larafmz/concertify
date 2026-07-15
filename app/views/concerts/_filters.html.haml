@@ -13,7 +13,7 @@
             = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
         %div
             = label_tag :country, "📍 #{Ubication.singular.upcase}", class: "soft-color", style: "font-size: 13px;"
-            = select_tag :country, options_for_select(Country.all.map { |country| [country.name, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
+            = select_tag :country, options_for_select(Country.all.map { |country| [t(country.name), country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
         %div
             %br  
             = submit_tag t("verbs.filter"), class: "btn-custom"

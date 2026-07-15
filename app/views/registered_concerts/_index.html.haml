@@ -13,7 +13,7 @@
                 = link_to user_path(register.user_id) do 
                     = register.user.username
                 %span{class: "softest-color"}= t("verbs.logged")
-            %span{ style: "font-size: 20px; font-weight: 700;" }= concert.tour_name
+            %span{ style: "font-size: 20px; font-weight: 700; font-family: Georgia, 'Times New Roman', Times, serif;" }= concert.tour_name
             .softest-color{style: "font-size: 15px;" }
                 %span= "📍#{concert.ubication&.complete_name} 🗓️ #{short_date(concert.date)}" 
             %span{style: "color: orange; "}= register.get_rating
@@ -32,7 +32,7 @@
                 - else
                     = link_to likes_interactuable_path(register.id) do 
                         = register.likes.count
-                        = t("registers.likes")
+                        = Like.plural
         
     %div{style: " font-size: 12px; color: #808891;"}
         = t("created_ago", time:  time_ago_in_words(register.created_at))

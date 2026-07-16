@@ -8,6 +8,7 @@ class ConcertsController < ApplicationController
       @concert_date_status = time_status(@concert.date, @concert.start_time)
       @registered_concerts = RegisteredConcert.where(concert_id: @concert.id).order("created_at ASC") # TO/DO order by likes
       @reviews = @registered_concerts.with_review
+      @future_assistances = FutureAssistance.where(concert_id: @concert.id).order("created_at ASC") 
     else
       redirect_back fallback_location: root_path
     end

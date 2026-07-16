@@ -16,6 +16,6 @@
             = select_tag :country, options_for_select(Country.all.map { |country| [t(country.name), country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
         %div
             %br  
-            = submit_tag t("verbs.filter"), class: "btn-custom"
+            = submit_tag t("verbs.filter"), class: "btn-custom", style: "height:auto"
     %br  
     = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"

@@ -7,7 +7,7 @@
         %div{style: "margin-right: 20px; "}
 
             = User.human_attribute_name(:description).upcase
-            .separator{style: "background: #40556d; margin-bottom: 15px; "}
+            .separator{style: "margin-bottom: 15px; "}
             = simple_format(@user.description)
 
             %div{ style: "display: flex; justify-content: space-between; align-items: center ;margin-top: 15px; " }
@@ -15,7 +15,7 @@
                     = FutureAssistance.plural.upcase
                 = link_to future_assistances_path(user_id: @user.id) do
                     %span= @user.future_assistances.size   
-            .separator{style: "background: #40556d; margin-bottom: 15px; "}
+            .separator{style: "margin-bottom: 15px; "}
             .flex{style: "margin-top: 10px;"}
                 = link_to future_assistances_path(user_id: @user.id), class: "hover-border", style: "display: flex; align-items: flex-start; justify-content: space-between;" do
                     - @future_assistances.limit(5).each do |future_assistance|
@@ -27,7 +27,7 @@
         %div{style: "margin-bottom: 20px; "}
             %div{style: "margin-bottom: 20px; "}
                 =FavoriteArtist.plural.upcase
-                .separator{style: "background: #40556d;"}
+                .separator
                 .four-columns{style: "margin-top: 10px;"}
                     = render "artists/index_db", artists: @favorite_artists.first(4)
 
@@ -38,7 +38,7 @@
                         = t("recents").upcase
                     = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
-                .separator{style: "background: #40556d;"}
+                .separator
                 = render "registered_concerts/index_cards", registers: @registers.limit(4)
 
                                         
@@ -49,7 +49,7 @@
                         = t("recents").upcase
                     = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
-                .separator{style: "background: #40556d; "}
+                .separator
                 = render "registered_concerts/index", registers: @registers_with_review.limit(2)
             
             %div{style: "margin-bottom: 20px; "}
@@ -59,7 +59,7 @@
                         = t("populars").upcase
                     = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
-                .separator{style: "background: #40556d; "}
+                .separator
                 = render "registered_concerts/index", registers: RegisteredConcert.none
 
 

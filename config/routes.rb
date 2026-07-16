@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :future_assistances
   resources :likes
+  resources :publications
 
   resources :artists do
     member do

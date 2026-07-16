@@ -8,7 +8,7 @@
             - concert_time = item[:time]
 
             - if index == 0
-                .separator{style: "background: rgb(202, 202, 202);"}
+                .separator
 
             .item-concert
                 .date-concert
@@ -49,9 +49,8 @@
                                 - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: concert.id)
                             - else
                                 - register = RegisteredConcert.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
-
                             - if register
-                                = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
+                                = link_to t("crud.edit", model: RegisteredConcert.singular), edit_registered_concert_path(id: register.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                             - elsif item[:source] == :db
                                 = link_to t("registers.assisted"), new_registered_concert_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
                             - else
@@ -61,13 +60,12 @@
                                 - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id)
                             - else
                                 - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
-
                             - if future_assistance
-                                = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
+                                = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                             - elsif item[:source] == :db
                                 = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
                             - else
                                 = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
             
             - if index != concerts.count-1
-                .separator{style: "background: rgb(202, 202, 202);"}
+                .separator

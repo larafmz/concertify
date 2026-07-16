@@ -1,6 +1,5 @@
 .widget-content{style: "padding-top:0px;"}  
 
-
     %div{style: "margin-top: 20px;"}
         .soft-color{style: "font-size: 15px;" }
             = t("likes_of_model_from_user", model: RegisteredConcert.singular.upcase, user: @interactuable.user.username.upcase)
@@ -12,6 +11,6 @@
             %span= "📍#{@interactuable.concert.ubication&.complete_name} 🗓️ #{short_date(@interactuable.concert.date)}"
 
         %br
-        .separator{style: "background: #40556d; margin-bottom: 15px; "}
+        .separator{style: "margin-bottom: 15px; "}
 
     = render "users/index", users: @users

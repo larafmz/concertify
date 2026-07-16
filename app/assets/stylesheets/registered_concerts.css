@@ -105,6 +105,12 @@
   grid-template-columns: auto 1fr;
 }
 
+.future_assistance{
+  gap: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
 .sent_at {
   border-radius: 15px; 
   border-top-left-radius: 0px; 

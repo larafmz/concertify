@@ -8,7 +8,7 @@
         =t("recents").upcase
       =link_to registered_concerts_path do
         = t("more").upcase
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    .separator{style: "margin-bottom: 15px; "}
     = render "registered_concerts/index_cards", registers: @registers.limit(6)
 
   %div{style: "margin-top: 20px;"}
@@ -17,7 +17,7 @@
         #{Artist.plural.upcase} #{t("populars").upcase}
       =link_to artists_path do
         = t("more").upcase
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    .separator{style: "margin-bottom: 15px; "}
     .items
       = render "artists/index_db", artists: @artists_db.first(10)
 
@@ -25,7 +25,7 @@
   %div{style: "margin-top: 20px;"}
     =Concert.plural.upcase 
     =t("recents").upcase
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    .separator{style: "margin-bottom: 15px; "}
     - if !@concerts_db.empty?
       .section-box
         = render "concerts/index_db", concerts: @concerts_db.limit(5)

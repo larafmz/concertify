@@ -11,6 +11,10 @@ module ApplicationHelper
       date.year == Date.current.year ? I18n.l(date, format: "%-d %b") : I18n.l(date, format: "%-d %b %Y")
     end
 
+    def short_date_with_year(date)
+      I18n.l(date, format: "%-d %b %Y")
+    end
+
     def best_quality_image(images)
       return nil if images.nil? || images.empty?
       images.find { |img| img["width"] > 1000 } || images.find { |img| img["width"] > 500 } || images.first

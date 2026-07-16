@@ -33,7 +33,7 @@
               - else
                 = "#{@concert.ubication.complete_name} - #{short_date(@concert.date)}"
 
-            .separator{style: "background: #40556d; "}
+            .separator
 
             %div
               = label_tag :from, FutureAssistance.human_attribute_name(:from), class: "soft-color", style: "font-size: 13px;"

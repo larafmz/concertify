@@ -1,8 +1,13 @@
 class FutureAssistancesController < ApplicationController
   
 def index
-    @future_assistances = FutureAssistance.joins(:concert).where(user_id: params[:user_id]).order("concerts.date ASC")
-    @user = User.find(params[:user_id])
+    if params[:user_id]
+        @future_assistances = FutureAssistance.joins(:concert).where(user_id: params[:user_id]).order("concerts.date ASC")
+        @user = User.find(params[:user_id])
+    elsif params[:concert_id]
+        @future_assistances = FutureAssistance.where(concert_id: params[:concert_id]).order("created_at DESC")
+        @concert = Concert.find(params[:concert_id])
+    end
 end
 
 def new
@@ -24,11 +29,9 @@ def create
         @future_assistance.concert_id = @concert.id
     end
 
-    if @future_assistance.save!
-        redirect_to future_assistances_path(user_id: current_user.id)
-    else
-       redirect_back fallback_location: root_path
-    end
+    @future_assistance.save!
+    redirect_back fallback_location: root_path
+
 end
 
 def edit

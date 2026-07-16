@@ -59,7 +59,7 @@ es:
         state: Estado
         address: Dirección
       future_assistance:
-        from: Salgo Desde
+        from: Desde
         concert_seat: Ubicación en el concierto
         concert_seat_details: Detalles de Ubicación
         company: ¿Con quien vas?

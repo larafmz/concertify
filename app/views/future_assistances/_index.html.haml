@@ -1,0 +1,41 @@
+- if @future_assistances.empty?
+    .message
+        ℹ️
+        = t("not_found_model", model: FutureAssistance.plural.downcase )
+
+- @future_assistances[0..10].each do |future_assistance|
+    - concert = future_assistance.concert
+    - concert_date = concert.date
+    - concert_date_status = time_status(concert_date, concert.start_time)
+
+    .future_assistance
+        = link_to user_path(future_assistance.user.id), class: "hover-border-icon" do
+            .link_icon 
+                = image_tag future_assistance.user.icon if future_assistance.user.icon.attached?
+
+        %div
+            .flex-left
+                .softest-color{style: "font-weight: 700"} #{FutureAssistance.singular} #{t("by")}
+                = link_to user_path(future_assistance.user.id) do 
+                    %span{style: "font-weight: 700; color: white;"}=future_assistance.user.username.upcase
+  
+            .flex-left
+                %div{style: "margin-top:10px;"}
+                    - if future_assistance.concert_seat_string || !future_assistance.concert_seat_details.empty?
+                        .bubble
+                            %span= "🎟️ #{future_assistance.concert_seat_string}"
+                            %span{class: "softest-color"}= " · #{future_assistance.concert_seat_details}"
+                
+                %div{style: "margin-top:10px;"}
+                    - if future_assistance.from && !future_assistance.from.empty?
+                        .bubble
+                            %span{style: "color: rgb(230, 230, 230);"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
+
+                %div{style: "margin-top:10px;"}
+                    - if future_assistance.company_string && future_assistance.company!= 0
+                        .bubble
+                            #{future_assistance.company_string}
+
+    .separator{style: "margin-top:10px;"}
+
+

@@ -6,8 +6,8 @@
                 
             .artist-name
                 %div= @concert.tour_name
-                %div{ style: "color: #999999; font-size: 15px;" }= "#{t("filters.at")} #{@concert.ubication&.complete_name} • #{short_date(@concert.date)} • #{@concert.start_time&.strftime("%H:%M")}"         
-
+                .soft-color{ style: "font-size: 15px;" }
+                    %span= "📍#{@concert.ubication&.complete_name} 🗓️ #{short_date_with_year(@concert.date)}" 
         .flex
             .stat
                 - if @concert_date_status == "past"
@@ -53,15 +53,15 @@
                 - if @concert_date_status == "past"
                     - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !register
-                        = link_to t("registers.assisted"), new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to t("registers.assisted"), new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("my_model", model: RegisteredConcert.singular), registered_concert_path(id: register.id), class: "btn-custom"
+                        = link_to t("my_model", model: RegisteredConcert.singular), registered_concert_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
                 - if @concert_date_status == "future"
                     - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !future_assistance
-                        = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user.id), class: "btn-custom-orange", style: "height: auto;"
    
 
 .separator{style: "background: #40556d; "}
@@ -69,14 +69,25 @@
 .widget-content{style: "color: #a4b3c4;"}
 
     - if @concert_date_status == "past"
-        = link_to registered_concerts_path(concert_id: @concert.id) do   
-            =RegisteredConcert.han("reviews").upcase 
-            =t("populars").upcase
-            (TO/DO)
-        .separator{style: "background: #40556d; margin-bottom: 15px; "}
+        %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+            = link_to registered_concerts_path(concert_id: @concert.id) do   
+                =RegisteredConcert.han("reviews").upcase 
+                =t("populars").upcase
+            = link_to registered_concerts_path(concert_id: @concert.id) do   
+                %span= t("more").upcase
+        .separator{style: "margin-bottom: 15px; "}
         - if @reviews.empty?
             = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
         = render "registered_concerts/reviews", registered_concerts: @reviews
-
+    - else
+        %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+            = link_to future_assistances_path(concert_id: @concert.id) do   
+                =FutureAssistance.plural.upcase 
+            = link_to future_assistances_path(concert_id: @concert.id) do   
+                %span= t("more").upcase
+        .separator{style: "margin-bottom: 15px; "}
+        - if @future_assistances.empty?
+            = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
+        = render "future_assistances/index", future_assistances: @future_assistances
    
                 

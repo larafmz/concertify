@@ -1,0 +1,13 @@
+= render "users/options", active: :publications if @user
+- if !@user
+    %br
+
+.widget-content{style: "padding-top:0px;"}  
+    .registers-items
+        - if @publications.empty?
+            .message
+                ℹ️
+                = t("not_found_model", model: Publication.plural.downcase )
+
+        = render "publications/index", publications: @publications
+        

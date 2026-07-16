@@ -8,7 +8,7 @@
             .artist-name
                 = @artist.name
                 - if @artist.genre
-                    %span{ style: "color: #696969; font-size: 15px" }
+                    .softest-color{ style: "font-size: 15px" }
                         = @artist.genre.name
 
         .flex
@@ -35,27 +35,29 @@
         - if current_user
             %span{ style: "margin-left: auto; background: #1f252b;" }
                 - if current_user.follows_artist?(@artist.id)
-                    = link_to t("verbs.unfollow"), unfollow_artist_path(@artist.id), class: "btn-custom", style: "background: #7034a1", data: { turbo_method: :delete }
+                    = link_to t("verbs.unfollow"), unfollow_artist_path(@artist.id), class: "btn-custom-orange", data: { turbo_method: :delete }
                 - else
                     = link_to t("verbs.follow"), follow_artist_path(@artist.id), class: "btn-custom", data: { turbo_method: :post }
                 - if current_user.favorite_artist?(@artist.id)
-                    = link_to "❤ #{t("verbs.unmark_as_favorite")}", unmark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #7397da", data: { turbo_method: :delete }
+                    = link_to "♡ #{t("verbs.unmark_as_favorite")}", unmark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", data: { turbo_method: :delete }
                 - elsif current_user.can_mark_favorite?
-                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #da7395", data: {  turbo_method: :post}
+                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", data: {  turbo_method: :post}
                 - else
-                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", style: "background: #da7395", 
+                    = link_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom", 
                         data: {  turbo_method: :post, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") }
                  
 
-.separator{style: "background: #40556d; "}
+.separator
 
 .widget-content{style: "color: #a4b3c4;"}
 
-    = link_to registered_concerts_path(artist_id: @artist.id) do   
-        =RegisteredConcert.han("reviews").upcase 
-        =t("populars").upcase
-        (TO/DO)
-    .separator{style: "background: #40556d; margin-bottom: 15px; "}
+    %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+        = link_to registered_concerts_path(artist_id: @artist.id) do   
+            =RegisteredConcert.han("reviews").upcase 
+            =t("populars").upcase
+        = link_to registered_concerts_path(artist_id: @artist.id) do   
+            %span= t("more").upcase
+    .separator{style: "margin-bottom: 15px; "}
     - if @reviews.empty?
         = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
     = render "registered_concerts/reviews", registered_concerts: @reviews

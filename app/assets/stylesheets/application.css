@@ -177,6 +177,7 @@ a:hover {
  
 .separator {
   height: 1px;
+  background: #40556d;
 }
 
 .undecored_link {
@@ -189,6 +190,29 @@ a:hover {
 */
 
 .btn-custom {
+  background: #7034a1;
+  color: white !important;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  height: 35px;
+  width: auto;
+}
+
+.btn-custom::after {
+  content: "›";
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn-custom-orange {
   background: #eb5d25;
   color: white !important;
   border: none;
@@ -201,9 +225,11 @@ a:hover {
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  height: 35px;
+  width: auto;
 }
 
-.btn-custom::after {
+.btn-custom-orange::after {
   content: "›";
   font-size: 18px;
   font-weight: 700;
@@ -265,14 +291,19 @@ a:hover {
   padding: 14px 18px;
 }
 
-/*
-* ESTADISTICAS
-*/
+
 .flex {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
+}
+
+.flex-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .columns {
@@ -302,7 +333,7 @@ a:hover {
 }
 
 .stat .name {
-    color: #696969; 
+    color: #5a626b; 
     font-size: 15px;
     text-transform: uppercase;
     

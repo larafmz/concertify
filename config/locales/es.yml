@@ -41,6 +41,8 @@ es:
   requests: Solicitudes
   asistenece: Asistencia
   likes_of_model_from_user: ME GUSTAS SOBRE %{model} DE %{user} DE
+  follows_you: Te sigue
+  by: por
 
   crud:
     add: "Añadir %{model}"

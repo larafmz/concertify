@@ -9,7 +9,8 @@
                 - if current_user.id == @user.id
                     = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user.id), class: "small-btn-custom"
                 - if @user.ubication
-                    %div{ style: "color: #999999; font-size: 15px;" } 📍 #{@user.ubication.complete_name}
+                    .soft-color{style: "font-size: 15px;" } 
+                        📍 #{@user.ubication.complete_name}
               
         .flex
             .stat
@@ -41,12 +42,14 @@
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
         - if current_user && current_user.id!=@user.id
-            %span{ style: "margin-left: auto; background: #1f252b;" }
+            %span{ style: "margin-left: auto; background: #1f252b;", class: "soft-color"}
                 - if current_user.follows_user?(@user.id)
                     = link_to t("verbs.unfollow"), unfollow_user_path(@user.id), class: "btn-custom", style: "background: #7034a1", data: { turbo_method: :delete }
                 - else
                     = link_to t("verbs.follow"), follow_user_path(@user.id), class: "btn-custom", data: { turbo_method: :post }
+                %span{style: "margin-left: 10px;"}= t("follows_you")
 
+            
 
 .separator{style: "background: #40556d; "}
 

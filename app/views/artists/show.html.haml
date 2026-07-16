@@ -62,7 +62,19 @@
         = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
     = render "registered_concerts/reviews", registered_concerts: @reviews
 
-    
+    %div{ style: "margin-top: 20px;" }
+        %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+            = link_to publications_path(artist_id: @artist.id) do   
+                =Publication.plural.upcase 
+                =t("populars").upcase
+            = link_to publications_path(artist_id: @artist.id) do   
+                %span= t("more").upcase
+        .separator{style: "margin-bottom: 15px; "}
+        - if @reviews.empty?
+            = t("not_found_model", model: Publication.plural.downcase )
+        = render "publications/index", publications: @publications
+        TO/DO
+
     .section-box{style: "margin-top: 50px;"}
         .title
             #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}

@@ -3,7 +3,7 @@
     - concert_date = concert.date
     - concert_date_status = time_status(concert_date, concert.start_time)
 
-    .future_assistance
+    .future_assistance{style: "margin:20px 0px 20px 0px;"}
         = link_to user_path(future_assistance.user.id), class: "hover-border-icon" do
             .link_icon 
                 = image_tag future_assistance.user.icon if future_assistance.user.icon.attached?

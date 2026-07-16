@@ -44,7 +44,7 @@
             .artists-grid
                 - @concert.artists.each do |artist|
                     = link_to artist_path(artist.id), style: "display:flex; align-items:center; gap:8px;" do 
-                        .small_icon
+                        .icon
                             = image_tag  artist.photo, class: "artist-avatar" if artist.photo.attached?
                         = artist.name
 
@@ -90,4 +90,15 @@
             = t("not_found_model", model: FutureAssistance.plural.downcase )
         = render "future_assistances/index", future_assistances: @future_assistances
    
-                
+    %div{ style: "margin-top: 20px;" }
+        %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
+            = link_to publications_path(concert_id: @concert.id) do   
+                =Publication.plural.upcase 
+                =t("populars").upcase
+            = link_to publications_path(concert_id: @concert.id) do   
+                %span= t("more").upcase
+        .separator{style: "margin-bottom: 15px; "}
+        - if @reviews.empty?
+            = t("not_found_model", model: Publication.plural.downcase )
+        = render "publications/index", publications: @publications
+        TO/DO

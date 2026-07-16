@@ -2,7 +2,7 @@
 
     %div{style: "margin-top: 20px;"}
         .soft-color{style: "font-size: 15px;" }
-            = t("likes_of_model_from_user", model: RegisteredConcert.singular.upcase, user: @interactuable.user.username.upcase)
+            = t("likes_of_model_from_user", model: RegisteredConcert.singular, user: @interactuable.user.username)
 
         %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
             = link_to @interactuable.concert.tour_name, concert_path( @interactuable.concert.id)
@@ -10,7 +10,6 @@
         .softest-color{style: "font-size: 15px;" }
             %span= "📍#{@interactuable.concert.ubication&.complete_name} 🗓️ #{short_date(@interactuable.concert.date)}"
 
-        %br
         .separator{style: "margin-bottom: 15px; "}
 
     = render "users/index", users: @users

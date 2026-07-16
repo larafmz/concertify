@@ -9,4 +9,4 @@
         = link_to Artist.plural, artists_path(user_id: @user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :artists)
         - if @user.id == current_user.id
             = link_to t("requests"), requested_concerts_path(user_id: @user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :requests)
-        = link_to t("followers"), followers_user_path(@user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :follows)
+        = link_to t("network"), followers_user_path(@user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :follows)

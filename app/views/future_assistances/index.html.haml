@@ -9,7 +9,7 @@
         %div{style: "margin-top: 20px;"}
             .soft-color{style: "font-size: 15px;" }
                 = FutureAssistance.plural
-                de
+                = t("of")
 
             %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
                 = link_to @concert.tour_name, concert_path( @concert.id)
@@ -24,5 +24,5 @@
         .message
             ℹ️
             = t("not_found_model", model: FutureAssistance.plural.downcase )
-
-    = render "future_assistances/index", future_assistances: @future_assistances
+    - else
+        = render "future_assistances/index", future_assistances: @future_assistances

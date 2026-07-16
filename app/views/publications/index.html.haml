@@ -1,13 +1,27 @@
 = render "users/options", active: :publications if @user
-- if !@user
-    %br
 
 .widget-content{style: "padding-top:0px;"}  
-    .registers-items
-        - if @publications.empty?
-            .message
-                ℹ️
-                = t("not_found_model", model: Publication.plural.downcase )
 
+    - if @concert || @artist
+        %div{style: "margin-top: 20px;"}
+            .soft-color{style: "font-size: 15px;" }
+                = Publication.plural
+                = t("of")
+
+            %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
+                = link_to @concert.tour_name, concert_path( @concert.id) if @concert
+                = link_to @artist.name, artist_path( @artist.id) if @artist
+
+            - if @concert
+                .softest-color{style: "font-size: 15px;" }
+                    %span= "📍#{@concert.ubication&.complete_name} 🗓️ #{short_date(@concert.date)}"
+
+            .separator{style: "margin-bottom: 15px; "}
+            
+    - if @publications.empty?
+        .message
+            ℹ️
+            = t("not_found_model", model: Publication.plural.downcase )
+    - else
         = render "publications/index", publications: @publications
         

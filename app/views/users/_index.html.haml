@@ -1,7 +1,7 @@
 .registers-items
     - users.each_with_index do |user, index|
 
-        .register_user{style: "grid-template-columns: 0.1fr 4fr;"}
+        .register_user{style: "grid-template-columns: 0.1fr 4fr auto;"}
             = link_to user_path(user.id), class: "hover-border-icon" do 
                 .link_icon
                     = image_tag user.icon if user.icon.attached?
@@ -17,7 +17,15 @@
                     = link_to followers_user_path(user.id), class: "hover-border-icon" do 
                         = user.followings.users.count
                         = t("following").downcase
+
+            .softest-color
+                - if current_user.follows_user?(user.id)
+                    = link_to t("verbs.unfollow"), unfollow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :delete }
+                - else
+                    = link_to t("verbs.follow"), follow_user_path(user.id), class: "btn-custom", data: { turbo_method: :post }
+                - if user.follows_user?(current_user.id)   
+                    %span{style: "margin-left: 10px;"}= t("follows_you")
+            
         
-        - if index < users.size-1
-            .separator
+        .separator
             

@@ -14,8 +14,20 @@
       = link_to t("verbs.login"), new_user_session_path, class: "btn-custom"
       = link_to t("verbs.log"), new_user_registration_path, class: "btn-custom"
     - else  
-      = link_to "+ #{t("verbs.log")}", searchs_path, class: "btn-custom-orange", title: "#{t("verbs.log")} #{Concert.singular.downcase}"
+      .dropdown
+        %button.btn.btn-secondary.dropdown-toggle{
+          type: "button",
+          "data-bs-toggle" => "dropdown",
+          "aria-expanded" => "false",
+          style: "background: #eb5d25" 
+        }
+          + Crear
 
+        %ul.dropdown-menu
+          %li
+            = link_to RegisteredConcert.singular, searchs_path, class: "dropdown-item"
+          %li
+            = link_to Publication.singular, new_publication_path, class: "dropdown-item", data: { turbo_frame: "modal" }
 
   - if current_user
     .flex{style: "display: flex; justify-content: right; gap: 30px; padding: 10px; font-size: 18px; color: white; "}
@@ -34,15 +46,13 @@
         type: "button",
         "data-bs-toggle" => "dropdown",
         "aria-expanded" => "false",
-        style: "background: #7034a1" 
+        style: "background: #51485a" 
       }
         Opciones
 
       %ul.dropdown-menu
         %li
           = link_to t("verbs.logout"), "#", class: "dropdown-item"
-        %li
-          %hr.dropdown-divider     
     
   %div{style: "display: flex; gap: 30px; font-size: 25px;"}
     = link_to "ES", change_locale_path(:es)

@@ -1,8 +1,9 @@
 - registers.each_with_index do |register, index|
     - concert = register.concert
     .register_user
-        = link_to user_path(register.user_id) do 
-            .smaller_icon
+
+        = link_to user_path(register.user.id), class: "hover-border-icon" do
+            .link_icon 
                 = image_tag register.user.icon if register.user.icon.attached?
 
         = link_to registered_concert_path(register.id) do 
@@ -37,6 +38,5 @@
     %div{style: " font-size: 12px; color: #808891;"}
         = t("created_ago", time:  time_ago_in_words(register.created_at))
 
-    - if index < registers.size-1
-        .separator
+    .separator
         

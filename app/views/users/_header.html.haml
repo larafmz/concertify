@@ -42,7 +42,7 @@
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
         - if current_user && current_user.id!=@user.id
-            %span{ style: "margin-left: auto; background: #1f252b;", class: "soft-color"}
+            .soft-color{ style: "margin-left: auto; background: #1f252b;"}
                 - if current_user.blocked_user?(@user.id)
                     .red-message
                         =User.singular.upcase

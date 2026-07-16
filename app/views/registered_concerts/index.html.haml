@@ -1,8 +1,28 @@
 = render "users/options", active: :reviews if @user
-- if !@user
-    %br
 
-.widget-content{style: "padding-top:0px;"}  
+
+.widget-content{style: "padding-top:0px;"}
+
+    - if !@user
+        %div{style: "margin-top: 20px;"}
+            - if @concert || @artist
+                .soft-color{style: "font-size: 15px;" }
+                    = RegisteredConcert.plural
+                    = t("of")
+
+            %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
+                = link_to @concert.tour_name, concert_path( @concert.id) if @concert
+                = link_to @artist.name, artist_path( @artist.id) if @artist
+                = RegisteredConcert.plural
+                = t("recents")
+
+            - if @concert
+                .softest-color{style: "font-size: 15px;" }
+                    %span= "📍#{@concert.ubication&.complete_name} 🗓️ #{short_date(@concert.date)}"
+
+            .separator{style: "margin-bottom: 15px; "}
+
+
     .registers-items
         - if @registered_concerts.empty?
             .message

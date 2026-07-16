@@ -33,13 +33,9 @@
                     %br
                     %span.soft-color
                         - if item[:source] == :db
-                            - venue = concert.ubication
-                            - if venue
-                                #{venue.city}, #{venue.state}, #{venue.country.name} • #{venue.address}
+                            = concert.ubication&.complete_name_with_address
                         - else
-                            - venue = get_concert_venue(concert)
-                            - if venue
-                                #{get_venue_city(venue)}, #{get_venue_state(venue)}, #{get_venue_country(venue)} • #{get_venue_address(venue)}
+                            = get_full_ubication(concert)
 
                 - if current_user
                     .button-concert

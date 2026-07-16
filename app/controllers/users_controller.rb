@@ -44,12 +44,26 @@ class UsersController < ApplicationController
   end
 
   def follow
-    User.find(params[:id]).follow(current_user.id)
+    if params[:follower_id]
+      User.find(params[:follower_id]).follow(current_user.id) 
+    else
+      current_user.follow(params[:id])
+    end
     redirect_back fallback_location: root_path
   end
 
   def unfollow
-    User.find(params[:id]).unfollow(current_user.id)
+    current_user.unfollow(params[:id])
+    redirect_back fallback_location: root_path
+  end
+
+  def block
+    User.find(params[:id]).block(current_user.id)
+    redirect_back fallback_location: root_path
+  end
+
+  def unblock
+    User.find(params[:id]).unblock(current_user.id)
     redirect_back fallback_location: root_path
   end
   

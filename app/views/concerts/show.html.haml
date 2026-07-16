@@ -87,7 +87,7 @@
                 %span= t("more").upcase
         .separator{style: "margin-bottom: 15px; "}
         - if @future_assistances.empty?
-            = t("not_found_model", model: RegisteredConcert.han("reviews").downcase )
+            = t("not_found_model", model: FutureAssistance.plural.downcase )
         = render "future_assistances/index", future_assistances: @future_assistances
    
                 

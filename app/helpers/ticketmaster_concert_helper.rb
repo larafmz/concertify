@@ -52,7 +52,10 @@ module TicketmasterConcertHelper
 
     def get_full_ubication(concert) 
         venue = get_concert_venue(concert)
-        "#{get_venue_city(venue)}, #{get_venue_state(venue)}, #{get_venue_country(venue)}"
+        parts = [get_venue_address(venue), get_venue_city(venue)]
+        parts << get_venue_state(venue) unless get_venue_country(venue) == "Spain"
+        parts << get_venue_country(venue)
+        parts.reject(&:blank?).join(", ")
     end
 
 end

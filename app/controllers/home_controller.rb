@@ -3,11 +3,12 @@ class HomeController < ApplicationController
   def index
     
     @artists_db = Artist.accepted.left_joins(:relations).group(:id).order("COUNT(relations.id) DESC")
-    @concerts_db = Concert.accepted.where("date >= ?", Date.today).order("date ASC")
+    @concerts = Concert.accepted.where("date >= ?", Date.today).order("date ASC")
 
     if current_user
       artist_ids = current_user.followings.artists.pluck(:followed_id)
-      @concerts_db = @concerts_db.joins(:artists).where(artists: { id: artist_ids }).distinct
+      @concerts = @concerts.joins(:artists).where(artists: { id: artist_ids }).distinct
+      @concerts_close = @concerts.by_country_code(current_user.ubication&.country.code) 
       @registers = RegisteredConcert.all.where(user_id: current_user.followings.users.pluck(:followed_id)).order("created_at DESC")
     end
 

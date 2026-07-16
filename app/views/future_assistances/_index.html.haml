@@ -1,8 +1,3 @@
-- if @future_assistances.empty?
-    .message
-        ℹ️
-        = t("not_found_model", model: FutureAssistance.plural.downcase )
-
 - @future_assistances[0..10].each do |future_assistance|
     - concert = future_assistance.concert
     - concert_date = concert.date

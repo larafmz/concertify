@@ -43,6 +43,9 @@ es:
   likes_of_model_from_user: ME GUSTAS SOBRE %{model} DE %{user} DE
   follows_you: Te sigue
   by: por
+  from_followed_artists: De tus artistas seguidos
+  close_to_you: Cerca de ti
+  blocked: Bloqueado
 
   crud:
     add: "Añadir %{model}"
@@ -56,6 +59,8 @@ es:
     select: Seleccionar
     unfollow: Dejar de Seguir
     follow: Seguir
+    block: Bloquear
+    unblock: Desbloquear
     filter: Filtrar
     remove_filters: Limpiar filtros
     remove_filter: Limpiar filtro
@@ -83,10 +88,11 @@ es:
 
   messages: 
     cant_find: ¿No encuentras lo que buscas?
-    manual_adition: Si el concierto no aparece en los resultados, puedes solicitar su adición manualmente.
+    manual_adition: Si el concierto ya ha pasado ó no aparece en los resultados, puedes solicitar su adición manualmente.
     destroy_confirmation: ¿Esta seguro de que desea eliminar?
     how_to_find_concert: Para buscar y registrar un concierto, escribe el nombre del tour o del artista en el buscador.
     cant_mark_as_favorite: |  
       No puedes marcar como favorito a más de 4 artistas.
       Para marcar uno nuevo, primero debes desmarcar a otro.
     cant_like_own: No se puede dar like a un registro o publicacion propio
+    cant_follow_blocked_user: No se puede seguir a un usuario bloqueado

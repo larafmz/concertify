@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     member do
       post :follow
       delete :unfollow
+      post :block
+      delete :unblock
       get :followers
       get :followings
     end

@@ -9,8 +9,9 @@ class User < ApplicationRecord
     has_many :registered_concerts, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
     has_one :ubication
-    has_many :followings, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
-    has_many :followers, as: :followed, class_name: "Relation", dependent: :destroy
+    has_many :followings, -> { where(relation_type: 0)  }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
+    has_many :followers, -> {  where(relation_type: 0) }, as: :followed, class_name: "Relation", dependent: :destroy
+    has_many :blocked_users, -> {  where(relation_type: 1) }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :favorite_artists
     has_one_attached :icon
 
@@ -27,11 +28,15 @@ class User < ApplicationRecord
   ## INSTANCE METHODS
  
     def follows_artist?(artist_id)
-      followings.find_by(followed_id: artist_id, followed_type: "Artist", relation_type: 0).present?
+      followings.find_by(followed_id: artist_id, followed_type: "Artist").present?
     end
 
      def follows_user?(user_id)
-      followings.find_by(followed_id: user_id, followed_type: "User", relation_type: 0).present?
+      followings.find_by(followed_id: user_id, followed_type: "User").present?
+    end
+
+    def blocked_user?(user_id)
+      blocked_users.find_by(followed_id: user_id, followed_type: "User").present?
     end
 
     def favorite_artist?(artist_id)
@@ -43,11 +48,22 @@ class User < ApplicationRecord
     end
 
     def follow(user_id)
-      Relation.find_or_create_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)
+      Relation.find_or_create_by!(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)
     end
 
     def unfollow(user_id)
+      Relation.find_by(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)&.destroy
+    end
+
+    def block(user_id)
+      Relation.find_or_create_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 1)
+      # destroy followings relations if the exist
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)&.destroy
+      Relation.find_by(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)&.destroy
+    end
+
+     def unblock(user_id)
+      Relation.find_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 1)&.destroy
     end
    
 

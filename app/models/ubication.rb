@@ -13,11 +13,16 @@ class Ubication < ApplicationRecord
   ## INSTANCE METHODS
 
     def complete_name_with_address
-      [address, city, state, country&.name].reject(&:blank?).join(", ")
-    end  
+      parts = [address, city]
+      parts << state unless country&.name == "Spain"
+      parts << country&.name
+      parts.reject(&:blank?).join(", ")
+    end
 
     def complete_name 
       str = [city, state, country&.name].reject(&:blank?).join(", ")
     end
+
+
 
 end

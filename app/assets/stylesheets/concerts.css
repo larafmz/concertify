@@ -54,3 +54,16 @@
   font-weight: 600; 
 }
 
+.red-message {
+  height: 35px;
+  display:flex;
+  align-items: center;
+  padding: 10px;
+  margin-right: 15px;
+  background: #bb3a3a;  
+  color: white;
+  border-radius: 15px;
+  border: 2px dashed #ff9696;
+  font-size: 15px;
+  font-weight: 600; 
+}

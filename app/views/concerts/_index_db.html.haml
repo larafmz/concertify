@@ -21,9 +21,7 @@
                             = concert.tour_name
                     %br
                     %span{ class: "soft-color" }
-                        - venue = concert.ubication
-                        - if !venue.nil?
-                            #{venue.city}, #{venue.state},  #{venue.country.name} • #{venue.address}
+                        = concert.ubication.complete_name_with_address
                 - if current_user
                     .button-concert
                         - concert_date_status = time_status(concert_date, concert.start_time)

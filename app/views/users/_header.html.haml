@@ -43,13 +43,36 @@
 
         - if current_user && current_user.id!=@user.id
             %span{ style: "margin-left: auto; background: #1f252b;", class: "soft-color"}
-                - if current_user.follows_user?(@user.id)
-                    = link_to t("verbs.unfollow"), unfollow_user_path(@user.id), class: "btn-custom", style: "background: #7034a1", data: { turbo_method: :delete }
+                - if current_user.blocked_user?(@user.id)
+                    .red-message
+                        =User.singular.upcase
+                        =t("blocked").upcase
                 - else
-                    = link_to t("verbs.follow"), follow_user_path(@user.id), class: "btn-custom", data: { turbo_method: :post }
-                %span{style: "margin-left: 10px;"}= t("follows_you")
+                    - if current_user.follows_user?(@user.id)
+                        = link_to t("verbs.unfollow"), unfollow_user_path(@user.id), class: "btn-custom-orange", data: { turbo_method: :delete }
+                    - else
+                        = link_to t("verbs.follow"), follow_user_path(@user.id), class: "btn-custom", data: { turbo_method: :post }
+                    - if @user.follows_user?(current_user.id)   
+                        %span{style: "margin-left: 10px;"}= t("follows_you")
 
-            
+
+            .dropdown
+                .dropdown-toggle{
+                    "data-bs-toggle" => "dropdown",
+                    style: "color: white" 
+                }
+                    ⁝
+                %ul.dropdown-menu
+                    %li
+                        - if current_user.blocked_user?(@user.id)
+                            = link_to t("verbs.unblock"), unblock_user_path(@user.id), class: "dropdown-item", data: { turbo_method: :delete }
+                        - else
+                            = link_to t("verbs.block"), block_user_path(@user.id), class: "dropdown-item", data: { turbo_method: :post }
+                    - if @user.follows_user?(current_user.id)
+                        %li
+                            %hr.dropdown-divider     
+                        %li
+                            = link_to t("crud-delete", model: t("follower")), unfollow_user_path(follower_id: user.id), class: "dropdown-item", data: { turbo_method: :delete }
 
 .separator{style: "background: #40556d; "}
 

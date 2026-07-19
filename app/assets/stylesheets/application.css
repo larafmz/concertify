@@ -56,6 +56,7 @@ a:hover {
 .hover-border-icon:hover .link_icon,
 .link_icon.active {
   border-color: #00c3ff;
+  background:#51485a; 
 }
 
 .rectangle_icon {
@@ -105,6 +106,13 @@ a:hover {
 
 .small_vertical_rectangle:first-child {
   margin-left: 0;
+}
+
+.form-columns {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    color: white;
+    gap: 10px;
 }
 
 .icon {
@@ -165,6 +173,13 @@ a:hover {
 .separator {
   height: 1px;
   background: #40556d;
+}
+
+.title_section {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  color: #a4b3c4;
 }
 
 .undecored_link {

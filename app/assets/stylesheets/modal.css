@@ -2,9 +2,13 @@
 .custom_modal {
     background: #0F1419;
     color: white;
-    border-radius: 5%;
+    border-radius: 15px;
     border: 1px solid #40556d;
     width: 800px;
+}
+
+.custom_modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .modal_header {
@@ -24,3 +28,4 @@
 .modal_body {
   padding: 20px;
 }
+

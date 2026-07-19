@@ -16,7 +16,6 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     color: white;
-    background: #1f252b;
 }
 
 .artist-info  {

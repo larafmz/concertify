@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     member do
       post :like
       get :likes
+      get :comments
     end
   end
 

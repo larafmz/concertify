@@ -23,8 +23,20 @@
   font-size: 20px;
 }
 
-.header .dropdown {
-  width: 100%;
+
+.dropdown-menu.show {
+  background:#51485a; 
+  color: white; 
+}
+
+.dropdown-menu .dropdown-item {
+  color: white !important;
+  background:#51485a; 
+}
+
+.dropdown-item:hover {
+  background-color: #756783 !important;
+  color: white !important;
 }
 
 .header form {

@@ -1,32 +1,5 @@
-- publications.each_with_index do |publication, index|
-    .artist-info{style: "margin-top:15px;"}
-        = link_to user_path(publication.user.id), class: "hover-border-icon" do
-            .link_icon 
-                = image_tag publication.user.icon if publication.user.icon.attached?
-
-        %div
-            .soft-color{style: "font-size: 15px;" }
-                = link_to user_path(publication.user_id) do 
-                    = publication.user.username
-                •
-                %span{class: "softest-color"}
-                    = time_ago_in_words(publication.created_at)
-
-            %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(publication.review)
-            - heart = publication.likes.count == 0 ? "♡" : "❤"
-            .soft-color{style: "font-size: 15px;"}
-                - if !current_user || (current_user.id == publication.user.id)
-                    = heart
-                - else
-                    = link_to like_interactuable_path(publication.id), data: { turbo_method: :post } do 
-                        = heart
-                - if publication.likes.count == 0
-                    = t("registers.no_likes_yet")
-                - else
-                    = link_to likes_interactuable_path(publication.id) do 
-                        = publication.likes.count
-                        = Like.plural
-        %div
+%div{style: "border: 1px solid #40556d;"}
+    - publications.each do |publication|
+        = render "publications/show", publication: publication
+        .separator
             
-    .separator
-        

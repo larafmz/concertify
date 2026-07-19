@@ -1,8 +1,4 @@
-- if @user
-    - if @interactuable.publication?
-        = render "users/options", active: :publications
-    - elsif @interactuable.register?
-        = render "users/options", active: :reviews
+= render "users/options", active: :none if @user
 
 .widget-content{style: "padding-top:0px; border: "}  
 
@@ -21,8 +17,8 @@
                 = render "publications/show", publication: @interactuable
 
         %div{style: "display: flex; gap: 20px; color: white; margin-left:20px;"}
-            = link_to Like.plural, likes_interactuable_path(@interactuable.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.likes.count} #{Like.plural}" 
-            = link_to Comment.plural, comments_interactuable_path(@interactuable.id), title: "#{@interactuable.comments.count} #{Comment.plural}"
+            = link_to Like.plural, likes_interactuable_path(@interactuable.id), title: "#{@interactuable.likes.count} #{Like.plural}" 
+            = link_to Comment.plural, comments_interactuable_path(@interactuable.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.comments.count} #{Comment.plural}"
         .separator
 
-        = render "users/index", users: @users
+        = render "users/index", users: @users        

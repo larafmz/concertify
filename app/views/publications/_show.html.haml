@@ -1,0 +1,41 @@
+.artist-info{style: "margin-top:15px; border-down: 1px solid white; padding-left:15px; padding-right:15px;"}
+    = link_to user_path(publication.user.id), class: "hover-border-icon" do
+        .link_icon 
+            = image_tag publication.user.icon if publication.user.icon.attached?
+
+    %div
+        .title_section
+            .soft-color{style: "font-size: 15px;" }
+                = link_to user_path(publication.user_id) do 
+                    = publication.user.username
+                •
+                %span{class: "softest-color"}
+                    = custom_time_ago_in_words(publication.created_at)
+
+            - if current_user.id == publication.user_id
+                .dropdown
+                    %button{
+                        "data-bs-toggle" => "dropdown",
+                        style: "background: none; border:0px; color: white;"
+                    }
+                        ⁝
+                    %ul.dropdown-menu
+                        %li
+                            = link_to t("verbs.destroy"), publication_path(publication.id), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar la publicación?" }, class: "dropdown-item"
+
+
+        %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(publication.review)
+        - heart = publication.likes.count == 0 ? "♡" : "❤"
+        .soft-color{style: "font-size: 15px;"}
+            - if !current_user || (current_user.id == publication.user.id)
+                = heart
+            - else
+                = link_to like_interactuable_path(publication.id), data: { turbo_method: :post } do 
+                    = heart
+            - if publication.likes.count == 0
+                = t("registers.no_likes_yet")
+            - else
+                = link_to likes_interactuable_path(publication.id) do 
+                    = publication.likes.count
+                    = Like.plural
+    %div

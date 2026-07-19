@@ -22,7 +22,13 @@ class PublicationsController < ApplicationController
     def create
         @publication = Publication.new(create_params)
         @publication.save!
-        redirect_back fallback_location: root_path
+        redirect_to publications_path(user_id: current_user.id)
+    end
+
+    def destroy
+      @publication = Publication.find(params[:id])
+      @publication.destroy
+      redirect_back fallback_location: root_path
     end
     
 private

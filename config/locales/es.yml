@@ -15,6 +15,7 @@ es:
   not_found: No se ha encontrado
   created_ago: Creado hace %{time}
   sent_ago: Enviado hace %{time}
+  ago: Hace %{time}
   populars: Populares
   my_model: Mi %{model}
   my_model_plural: Mis %{model}
@@ -48,6 +49,7 @@ es:
   blocked: Bloqueado
   network: Red
   whats_going_on: ¿Qué está pasando?
+  options: Opciones
 
   crud:
     add: "Añadir %{model}"
@@ -56,6 +58,7 @@ es:
     destroy: "Eliminar %{model}"
 
   verbs:
+    destroy: "Eliminar"
     log: Registrar
     save: Guardar
     select: Seleccionar

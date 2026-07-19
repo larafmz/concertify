@@ -13,6 +13,13 @@ class InteractuablesController < ApplicationController
     def likes
         @users = Interactuable.find(params[:id]).likes.map(&:user) 
         @interactuable = Interactuable.find(params[:id])
+        @user = User.find(@interactuable.user_id)
+    end
+
+    def comments
+        @users = Interactuable.find(params[:id]).comments.map(&:user) 
+        @interactuable = Interactuable.find(params[:id])
+        @user = User.find(@interactuable.user_id)
     end
 
 end

@@ -2,7 +2,7 @@
 
 
   %div{style: "margin-top: 20px;"}
-    %div{ style: "display: flex; justify-content: space-between; align-items: center; color: #a4b3c4;" }
+    .title_section
       =link_to registered_concerts_path do
         =RegisteredConcert.plural.upcase 
         =t("recents").upcase
@@ -12,7 +12,7 @@
     = render "registered_concerts/index_cards", registers: @registers.limit(6)
 
   %div{style: "margin-top: 20px;"}
-    %div{ style: "display: flex; justify-content: space-between; align-items: center; color: #a4b3c4;" }
+    .title_section
       =link_to artists_path do
         #{Artist.plural.upcase} #{t("populars").upcase}
       =link_to artists_path do

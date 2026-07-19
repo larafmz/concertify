@@ -17,7 +17,7 @@ class Interactuable < ApplicationRecord
   
   ## SCOPES
 
-    scope :register, -> { where(type: "Register") }
+    scope :register, -> { where(type: "RegisteredConcert") }
     scope :publication, -> { where(type: "Publication") }
 
   ## VALIDATION METHODS
@@ -32,6 +32,14 @@ class Interactuable < ApplicationRecord
 
     def complete_name
       tour_name
+    end
+
+    def register?
+      self.type == "RegisteredConcert"
+    end
+
+    def publication?
+      self.type == "Publication"
     end
 
 end

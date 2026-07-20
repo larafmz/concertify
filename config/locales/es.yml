@@ -48,7 +48,6 @@ es:
   close_to_you: Cerca de ti
   blocked: Bloqueado
   network: Red
-  whats_going_on: ¿Qué está pasando?
   options: Opciones
 
   crud:
@@ -77,6 +76,7 @@ es:
     mark_as_favorite: Marcar como Favorito
     request: Solicitar %{model}
     logged: registró
+    answer: Responder
 
   filters:
     from: Desde
@@ -101,3 +101,7 @@ es:
       Para marcar uno nuevo, primero debes desmarcar a otro.
     cant_like_own: No se puede dar like a un registro o publicacion propio
     cant_follow_blocked_user: No se puede seguir a un usuario bloqueado
+    cant_follow_self: No puedes seguir o bloquear a ti mismo
+    write_your_review: Escribe tu reseña
+    write_your_answer: Escribe tu respuesta
+    whats_going_on: ¿Qué está pasando?

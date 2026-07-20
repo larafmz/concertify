@@ -19,12 +19,13 @@
                         = t("following").downcase
 
             .softest-color
-                - if current_user.follows_user?(user.id)
-                    = link_to t("verbs.unfollow"), unfollow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :delete }
-                - else
-                    = link_to t("verbs.follow"), follow_user_path(user.id), class: "btn-custom", data: { turbo_method: :post }
-                - if user.follows_user?(current_user.id)   
-                    %span{style: "margin-left: 10px;"}= t("follows_you")
+                - if current_user.id != user.id
+                    - if current_user.follows_user?(user.id)
+                        = link_to t("verbs.unfollow"), unfollow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :delete }
+                    - else
+                        = link_to t("verbs.follow"), follow_user_path(user.id), class: "btn-custom", data: { turbo_method: :post }
+                    - if user.follows_user?(current_user.id)   
+                        %span{style: "margin-left: 10px;"}= t("follows_you")
             
         
             

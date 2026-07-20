@@ -27,8 +27,10 @@ Rails.application.routes.draw do
   resources :interactuables do
     member do
       post :like
+      post :comment
       get :likes
       get :comments
+      delete :uncomment
     end
   end
 

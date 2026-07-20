@@ -25,17 +25,7 @@
 
 
         %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(publication.review)
-        - heart = publication.likes.count == 0 ? "♡" : "❤"
-        .soft-color{style: "font-size: 15px;"}
-            - if !current_user || (current_user.id == publication.user.id)
-                = heart
-            - else
-                = link_to like_interactuable_path(publication.id), data: { turbo_method: :post } do 
-                    = heart
-            - if publication.likes.count == 0
-                = t("registers.no_likes_yet")
-            - else
-                = link_to likes_interactuable_path(publication.id) do 
-                    = publication.likes.count
-                    = Like.plural
+
+        = render "interactuables/footer", interactuable: publication
+        
     %div

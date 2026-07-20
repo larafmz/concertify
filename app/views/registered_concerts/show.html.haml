@@ -31,19 +31,7 @@
                     = @register.review
 
             %div{style: "margin-bottom: 40px;"}
-                - heart = @register.likes.count == 0 ? "♡" : "❤"
-                .soft-color{style: "font-size: 15px;"}
-                    - if !current_user || (current_user.id == @register.user.id)
-                        = heart
-                    - else
-                        = link_to like_interactuable_path(@register.id), data: { turbo_method: :post } do 
-                            = heart
-                    - if @register.likes.count == 0
-                        = t("registers.no_likes_yet")
-                    - else
-                        = link_to likes_interactuable_path(@register.id) do 
-                            = @register.likes.count
-                            = Like.plural
+                = render "interactuables/footer", interactuable: @register
 
             .soft-color{style: "margin: 10px 0;"}
                 = link_to user_path(current_user.id), class: "undecored_link" do 

@@ -192,10 +192,10 @@ a:hover {
 */
 
 .btn-custom {
-  background: #7034a1;
+  background: #3a485a;
   color: white !important;
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 10px 18px;
   font-size: 15px;
   font-weight: 600;
@@ -204,7 +204,9 @@ a:hover {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  height: 35px;
+  height: auto;
+  padding-bottom: 8px;
+  padding-top: 8px;
   width: auto;
 }
 
@@ -339,4 +341,10 @@ a:hover {
     font-size: 15px;
     text-transform: uppercase;
     
+}
+
+.button-without-format {
+  background: none;
+  color:white;
+  border: none;
 }

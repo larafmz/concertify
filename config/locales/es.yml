@@ -99,7 +99,8 @@ es:
     cant_mark_as_favorite: |  
       No puedes marcar como favorito a más de 4 artistas.
       Para marcar uno nuevo, primero debes desmarcar a otro.
-    cant_like_own: No se puede dar like a un registro o publicacion propio
+    cant_like_own: No se puede dar like a un registro o publicacion propia
+    cant_repost_own: No se puede repostear a un registro o publicacion propia
     cant_follow_blocked_user: No se puede seguir a un usuario bloqueado
     cant_follow_self: No puedes seguir o bloquear a ti mismo
     write_your_review: Escribe tu reseña

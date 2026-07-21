@@ -18,13 +18,6 @@ def diary
     @user = User.find(params[:user_id]) if params[:user_id].present?
 end
 
-def show
-    @register = RegisteredConcert.find(params[:id])
-    @concert = Concert.find(@register.concert_id)
-    @artist = Artist.find(@concert.artists.first.id)
-    @user = @register.user
-end
-
 def new
     if params[:ticketmaster_id]
         @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
@@ -48,7 +41,7 @@ def create
         if @registered_concert.save!
             future_assistance = FutureAssistance.find_by(concert_id: @registered_concert.concert_id, user_id: current_user.id)
             future_assistance.destroy if future_assistance
-            redirect_to registered_concert_path(@registered_concert)
+            redirect_to interactuable_path(@registered_concert)
         else
             redirect_back fallback_location: root_path
         end

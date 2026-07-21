@@ -1,31 +1,32 @@
-.artist-info{style: "margin-top:15px; border-down: 1px solid white; padding-left:15px; padding-right:15px;"}
-    = link_to user_path(publication.user.id), class: "hover-border-icon" do
-        .link_icon 
+.publication-grid
+
+    = link_to interactuable_path(publication.id), class: "publication-link" do
+
+        .link_icon
             = image_tag publication.user.icon if publication.user.icon.attached?
 
-    %div
-        .title_section
-            .soft-color{style: "font-size: 15px;" }
-                = link_to user_path(publication.user_id) do 
+        %div
+            .title_section
+                .soft-color{style: "font-size: 15px;"}
                     = publication.user.username
-                •
-                %span{class: "softest-color"}
-                    = custom_time_ago_in_words(publication.created_at)
+                    •
+                    %span.softest-color
+                        = custom_time_ago_in_words(publication.created_at)
 
-            - if current_user.id == publication.user_id
-                .dropdown
-                    %button{
-                        "data-bs-toggle" => "dropdown",
-                        style: "background: none; border:0px; color: white;"
-                    }
-                        ⁝
-                    %ul.dropdown-menu
-                        %li
-                            = link_to t("verbs.destroy"), publication_path(publication.id), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar la publicación?" }, class: "dropdown-item"
+            %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
+                = simple_format(publication.review)
 
-
-        %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(publication.review)
-
-        = render "interactuables/footer", interactuable: publication
-        
     %div
+        - if current_user.id == publication.user_id
+            .dropdown
+                %button{
+                    "data-bs-toggle" => "dropdown",
+                    style: "background: none; border:0px; color: white;"
+                }
+                    ⁝
+                %ul.dropdown-menu
+                    %li
+                        = link_to t("verbs.destroy"), publication_path(publication.id), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar la publicación?" }, class: "dropdown-item"
+
+
+    = render "interactuables/footer", interactuable: publication

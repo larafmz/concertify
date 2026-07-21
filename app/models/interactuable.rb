@@ -3,10 +3,10 @@ class Interactuable < ApplicationRecord
   ## RELATIONSHIPS
 
     belongs_to :user
-    has_many :tagged_users
-    has_many :comments
-    has_many :likes
-    #has_many :reposts TO/DO
+    has_many :tagged_users, dependent: :destroy
+    has_many :comments, dependent: :destroy
+    has_many :likes, dependent: :destroy
+    has_many :reposts, dependent: :destroy
     has_many_attached :photos
 
   ## VALIDATIONS

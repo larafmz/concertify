@@ -62,8 +62,16 @@ class User < ApplicationRecord
       Relation.find_by(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)&.destroy
     end
 
-     def unblock(user_id)
+    def unblock(user_id)
       Relation.find_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 1)&.destroy
+    end
+
+    def liked?(interactuable_id)
+      Like.find_by(interactuable_id: interactuable_id, user_id: self.id).present?
+    end
+
+    def reposted?(interactuable_id)
+      Repost.find_by(interactuable_id: interactuable_id, user_id: self.id).present?
     end
    
 

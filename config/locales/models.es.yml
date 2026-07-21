@@ -40,6 +40,9 @@ es:
       comment: 
         one: Comentario
         other: Comentarios
+      repost: 
+        one: Republicación
+        other: Republicaciones
     attributes:
       user:
         email: Email

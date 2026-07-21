@@ -1,5 +1,11 @@
 class InteractuablesController < ApplicationController
 
+    def show
+        @users = Interactuable.find(params[:id]).likes.map(&:user) 
+        @interactuable = Interactuable.find(params[:id])
+        @user = User.find(@interactuable.user_id)
+    end
+
     def like
         existing_like = Like.find_by(interactuable_id: params[:id], user_id: current_user.id)
         if existing_like
@@ -10,15 +16,24 @@ class InteractuablesController < ApplicationController
         redirect_back fallback_location: root_path
     end
 
+    def repost
+        existing_repost = Repost.find_by(interactuable_id: params[:id], user_id: current_user.id)
+        if existing_repost
+            existing_repost.destroy
+        else
+            existing_repost = Repost.create!(interactuable_id: params[:id], user_id: current_user.id)
+        end
+        redirect_back fallback_location: root_path
+    end
+
     def comment
         Comment.create!(interactuable_id: params[:id], user_id: current_user.id, text: params[:text])
         redirect_to comments_interactuable_path(params[:id])
     end
 
-    def likes
-        @users = Interactuable.find(params[:id]).likes.map(&:user) 
-        @interactuable = Interactuable.find(params[:id])
-        @user = User.find(@interactuable.user_id)
+    def uncomment
+        Comment.find(params[:comment_id]).destroy
+        redirect_back fallback_location: root_path
     end
 
     def comments
@@ -27,9 +42,10 @@ class InteractuablesController < ApplicationController
         @user = User.find(@interactuable.user_id)
     end
 
-    def uncomment
-        Comment.find(params[:comment_id]).destroy
-        redirect_back fallback_location: root_path
+    def reposts
+        @users = Interactuable.find(params[:id]).reposts.map(&:user) 
+        @interactuable = Interactuable.find(params[:id])
+        @user = User.find(@interactuable.user_id)
     end
-
+    
 end

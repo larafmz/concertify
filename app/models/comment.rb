@@ -7,13 +7,8 @@ class Comment < ApplicationRecord
 
     ## VALIDATIONS
 
+        validates :text, presence: true
 
-    ## SCOPES
-
-    ## VALIDATION METHODS
-
-
-    ## INSTANCE METHODS
 
 
 end

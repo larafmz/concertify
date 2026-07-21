@@ -55,7 +55,7 @@
                     - if !register
                         = link_to t("registers.assisted"), new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("my_model", model: RegisteredConcert.singular), registered_concert_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
+                        = link_to t("my_model", model: RegisteredConcert.singular), interactuable_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
                 - if @concert_date_status == "future"
                     - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !future_assistance

@@ -1,19 +1,31 @@
-- heart = interactuable.likes.count == 0 ? "♡" : "❤"
-.soft-color{style: "font-size: 15px; gap:30px; display: flex;"}
+.soft-color{style: "font-size: 15px; gap:30px; display: flex; align-items: center;"}
     %div{style: "display: flex;"}
         - if !current_user || (current_user.id == interactuable.user.id)
-            = link_to likes_interactuable_path(interactuable.id) do 
-                = heart
+            %span{style: "color: white; font-size:18px; "} ♡ 
         - else
             = button_to like_interactuable_path(interactuable), method: :post, form: { data: { turbo: false } }, class: "button-without-format" do
-                = heart
+                - if !current_user.liked?(interactuable.id)
+                    %span{style: "color: white; font-size:18px; "} ♡ 
+                - else
+                    %span{style: "color: #db4949; font-size:18px; "} ♡ 
         - if interactuable.likes.count != 0
-            = link_to likes_interactuable_path(interactuable.id) do 
+            = link_to interactuable_path(interactuable.id) do 
                 = interactuable.likes.count
 
     %div
-        = link_to comments_interactuable_path(interactuable.id) do 
-            💬
+        💬
         - if interactuable.comments.count != 0
-            = link_to comments_interactuable_path(interactuable.id) do 
-                = interactuable.comments.count
+            = interactuable.comments.count
+
+    %div{style: "display: flex; align-items: center"}
+        - if !current_user || (current_user.id == interactuable.user.id)
+            %span{style: "color: white; font-size:18px; "} 🗘
+        - else
+            = button_to repost_interactuable_path(interactuable), method: :post, form: { data: { turbo: false } }, class: "button-without-format" do
+                - if !current_user.reposted?(interactuable.id)
+                    %span{style: "color: white; font-size:18px; "} 🗘
+                - else
+                    %span{style: "color: #1c911c; font-size:18px; "} 🗘
+        - if interactuable.reposts.count != 0
+            = link_to reposts_interactuable_path(interactuable.id) do 
+                = interactuable.reposts.count                

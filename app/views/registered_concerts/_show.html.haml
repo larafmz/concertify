@@ -1,0 +1,57 @@
+- @concert = Concert.find(register.concert_id)
+- @artist = Artist.find(@concert.artists.first.id)
+.register-show
+    = link_to concert_path(@concert.id) do 
+        .rectangle_icon{ style: "border: 1px solid " }
+            = image_tag @concert.photo if @concert.photo.attached?
+        
+    .register-info
+        .flex-left
+            = link_to user_path(@user.id), class: "hover-border-icon" do
+                .link_icon{style: "width: 25px; height: 25px;"}
+                    = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
+            = t("registers.logged_by")
+            = link_to user_path(@user.id), class: "undecored_link" do 
+                %span{style: "font-weight: 700"}=@user.username.upcase
+
+        .separator{style: "margin: 10px 0;"}
+
+        = link_to concert_path(@concert.id) do 
+            %span{ style: "font-size: 28px; font-weight: 600;" }= @concert.tour_name
+            
+        - if @artist.genre && @artist.genre.name!="Undefined"
+            %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"
+
+        .softest-color{style: "font-size: 15px;" }
+            %span= "📍#{@concert.ubication&.complete_name} 🗓️ #{short_date(@concert.date)}" 
+
+        %div{style: "color: orange"}= register.get_rating
+        
+        - if !register.review.empty?
+            %div{ style: "word-break: break-word; overflow-wrap: break-word; padding: 15px; margin: 10px 0; background: rgb(53, 53, 70);" }
+                = register.review
+
+        %div{style: "margin-bottom: 40px;"}
+            = render "interactuables/footer", interactuable: register
+
+        .soft-color{style: "margin: 10px 0;"}
+            = link_to user_path(current_user.id), class: "undecored_link" do 
+                %span{style: "font-weight: 700"}=@user.username.upcase
+            =t("registers.liked_these_reviews")
+            .separator
+            (TO/DO)
+
+    - if current_user && current_user.id == register.user_id
+        .dropdown
+            %button.btn.btn-secondary.dropdown-toggle{
+                type: "button",
+                "data-bs-toggle" => "dropdown",
+                "aria-expanded" => "false",
+                style: "background: #eb5d25;"
+            }
+                =t("verbs.edit")
+            %ul.dropdown-menu
+                %li
+                    = link_to t("crud.edit", model: RegisteredConcert.singular), edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
+                %li
+                    = link_to t("crud.destroy", model: RegisteredConcert.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"

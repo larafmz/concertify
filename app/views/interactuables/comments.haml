@@ -3,29 +3,25 @@
         = render "users/options", active: :publications
     - elsif @interactuable.register?
         = render "users/options", active: :reviews
-        
-.widget-content{style: "padding-top:0px;"}  
+
+.widget-content{style: "padding-top:0px; border: "}  
 
     %div{style: "border: 1px solid #40556d;"}
 
         %div{style: "margin:20px; margin-bottom:0px;"}
-            - if @interactuable.register?
+            - if @interactuable.register? 
+                %div
+                    = render "registered_concerts/show", register: @interactuable
+            - elsif @interactuable.publication?
+                %div
+                    = render "publications/show", publication: @interactuable
 
-                %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
-                    = link_to @interactuable.concert.tour_name, concert_path( @interactuable.concert.id)
-
-                .softest-color{style: "font-size: 15px;" }
-                    %span= "📍#{@interactuable.concert.ubication&.complete_name} 🗓️ #{short_date(@interactuable.concert.date)}"           
-            
-            %div
-                = render "publications/show", publication: @interactuable
-
-        %div{style: "display: flex; gap: 20px; color: white; margin-left:20px;"}
-            = link_to Like.plural, likes_interactuable_path(@interactuable.id), title: "#{@interactuable.likes.count} #{Like.plural}" 
+        %div{style: "display: flex; gap: 20px; color: white; margin-left:20px; margin-top: 15px;"}
+            = link_to Like.plural, interactuable_path(@interactuable.id), title: "#{@interactuable.likes.count} #{Like.plural}" 
             = link_to Comment.plural, comments_interactuable_path(@interactuable.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.comments.count} #{Comment.plural}"
+            = link_to Repost.plural, reposts_interactuable_path(@interactuable.id), title: "#{@interactuable.reposts.count} #{Repost.plural}"
         .separator
 
-        
         - if current_user
             %div{style: "border-bottom: 1px solid #40556d;"}
                 = form_tag comment_interactuable_path(@interactuable), method: :post, data: { turbo: false } do

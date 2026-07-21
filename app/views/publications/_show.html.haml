@@ -1,20 +1,35 @@
 .publication-grid
 
-    = link_to interactuable_path(publication.id), class: "publication-link" do
+    - if action_name == "show"
+        .publication
+            = link_to user_path(publication.user.id), class: "hover-border-icon" do
+                .link_icon
+                    = image_tag publication.user.icon if publication.user.icon.attached?
+            %div
+                .title_section
+                    .soft-color{style: "font-size: 15px;"}
+                        = link_to user_path(publication.user_id) do 
+                            = publication.user.username
+                        •
+                        %span.softest-color
+                            = custom_time_ago_in_words(publication.created_at)
 
-        .link_icon
-            = image_tag publication.user.icon if publication.user.icon.attached?
+                %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
+                    = simple_format(publication.review)
+    - else
+        = link_to interactuable_path(publication.id), class: "publication-link" do
+            .link_icon
+                = image_tag publication.user.icon if publication.user.icon.attached?
+            %div
+                .title_section
+                    .soft-color{style: "font-size: 15px;"}
+                        = publication.user.username
+                        •
+                        %span.softest-color
+                            = custom_time_ago_in_words(publication.created_at)
 
-        %div
-            .title_section
-                .soft-color{style: "font-size: 15px;"}
-                    = publication.user.username
-                    •
-                    %span.softest-color
-                        = custom_time_ago_in_words(publication.created_at)
-
-            %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
-                = simple_format(publication.review)
+                %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
+                    = simple_format(publication.review)
 
     %div
         - if current_user.id == publication.user_id

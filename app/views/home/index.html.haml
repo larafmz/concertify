@@ -1,6 +1,5 @@
 .widget-content{style: "color: #a4b3c4;"}
 
-
   %div{style: "margin-top: 20px;"}
     .title_section
       =link_to registered_concerts_path do
@@ -11,6 +10,17 @@
     .separator{style: "margin-bottom: 15px; "}
     = render "registered_concerts/index_cards", registers: @registers.limit(6)
 
+    
+  %div{style: "margin-top: 20px;"}
+    .title_section
+      =link_to publications_path do
+        =Publication.plural.upcase 
+        =t("recents").upcase
+      =link_to publications_path do
+        = t("more").upcase
+    .separator{style: "margin-bottom: 15px; "}
+    = render "publications/index", publications: @publications.limit(3)
+
   %div{style: "margin-top: 20px;"}
     .title_section
       =link_to artists_path do
@@ -20,7 +30,6 @@
     .separator{style: "margin-bottom: 15px; "}
     .items
       = render "artists/index_db", artists: @artists_db.first(10)
-
 
   %div{style: "margin-top: 20px;"}
     =Concert.plural.upcase 

@@ -69,7 +69,7 @@
   background-color: #263241;
 }
 
-.publication-link {
+.publication {
   padding: 5px;
   border-radius: 10px;
   display: grid;
@@ -88,6 +88,15 @@
   padding-left:15px; 
   padding-right:15px;
   background: none;
+}
+
+.publication-link {
+  padding: 5px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 25px;
+  text-decoration: none;
 }
 
 .publication-link:hover {

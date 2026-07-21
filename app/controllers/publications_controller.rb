@@ -10,6 +10,8 @@ class PublicationsController < ApplicationController
         elsif params[:artist_id]
             @artist = Artist.find(params[:artist_id])
             @publications = Publication.where(artist_id: params[:artist_id])
+        else
+            @publications = Publication.all
         end
         @publications = @publications.order("created_at DESC") if @publications
     end
@@ -26,9 +28,14 @@ class PublicationsController < ApplicationController
     end
 
     def destroy
-      @publication = Publication.find(params[:id])
-      @publication.destroy
-      redirect_back fallback_location: root_path
+        @publication = Publication.find(params[:id])
+        user = @publication.user
+        @publication.destroy
+        if request.referer == interactuable_url(@publication)
+            redirect_to publications_path(user_id: user.id)
+        else
+            redirect_back fallback_location: publications_path(user_id: user.id)
+        end
     end
     
 private

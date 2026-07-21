@@ -2,6 +2,15 @@
 
 .widget-content{style: "padding-top:0px;"}  
 
+    - if !@user
+        %div{style: "margin-top: 20px;"}
+
+            %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
+                = Publication.plural
+                = t("recents")
+
+            .separator{style: "margin-bottom: 15px; "}
+
     - if @concert || @artist
         %div{style: "margin-top: 20px;"}
             .soft-color{style: "font-size: 15px;" }
@@ -23,5 +32,6 @@
             ℹ️
             = t("not_found_model", model: Publication.plural.downcase )
     - else
-        = render "publications/index", publications: @publications
+        %div{style: "border: 1px solid #40556d;"}
+            = render "publications/index", publications: @publications
         

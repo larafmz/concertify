@@ -1,6 +1,5 @@
-%div{style: "border: 1px solid #40556d;"}
-    - publications.each do |publication|
-        %div{style: "margin:20px; margin-bottom:0px;"}
-            = render "publications/show", publication: publication
-        .separator
+- publications.each do |publication|
+    %div{style: "margin:20px; margin-bottom:0px;"}
+        = render "publications/show", publication: publication
+    .separator
             

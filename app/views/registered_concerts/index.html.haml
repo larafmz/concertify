@@ -13,8 +13,7 @@
             %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
                 = link_to @concert.tour_name, concert_path( @concert.id) if @concert
                 = link_to @artist.name, artist_path( @artist.id) if @artist
-                = RegisteredConcert.plural
-                = t("recents")
+                = t("recents", model: RegisteredConcert.plural)
 
             - if @concert
                 .softest-color{style: "font-size: 15px;" }

@@ -16,7 +16,6 @@ es:
   created_ago: Creado hace %{time}
   sent_ago: Enviado hace %{time}
   ago: Hace %{time}
-  populars: Populares
   my_model: Mi %{model}
   my_model_plural: Mis %{model}
   recently_added: Recientemente añadidos
@@ -33,8 +32,8 @@ es:
   genre_music: Género de Música
   profile_icon: Icono de Perfil
   this_year: Este año
-  recents: recientes
-  populars: populares
+  recents: "%{model} recientes"
+  populars: "%{model} populares"
   from_user: "%{model} de %{user}"  
   more: Más
   of: de
@@ -57,7 +56,7 @@ es:
     destroy: "Eliminar %{model}"
 
   verbs:
-    destroy: "Eliminar"
+    destroy: Eliminar
     log: Registrar
     save: Guardar
     select: Seleccionar
@@ -77,6 +76,7 @@ es:
     request: Solicitar %{model}
     logged: registró
     answer: Responder
+    post: Publicar
 
   filters:
     from: Desde

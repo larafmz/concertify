@@ -3,8 +3,7 @@
   %div{style: "margin-top: 20px;"}
     .title_section
       =link_to registered_concerts_path do
-        =RegisteredConcert.plural.upcase 
-        =t("recents").upcase
+        =t("recents", model: RegisteredConcert.plural).upcase
       =link_to registered_concerts_path do
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
@@ -14,8 +13,7 @@
   %div{style: "margin-top: 20px;"}
     .title_section
       =link_to publications_path do
-        =Publication.plural.upcase 
-        =t("recents").upcase
+        =t("recents", model: Publication.plural).upcase
       =link_to publications_path do
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
@@ -24,7 +22,7 @@
   %div{style: "margin-top: 20px;"}
     .title_section
       =link_to artists_path do
-        #{Artist.plural.upcase} #{t("populars").upcase}
+        = t("populars", model: Artist.plural).upcase
       =link_to artists_path do
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
@@ -32,8 +30,7 @@
       = render "artists/index_db", artists: @artists_db.first(10)
 
   %div{style: "margin-top: 20px;"}
-    =Concert.plural.upcase 
-    =t("recents").upcase
+    =t("recents", model: Concert.plural).upcase
     - if current_user && current_user.ubication&.country
       =t("from_followed_artists").upcase
     .separator{style: "margin-bottom: 15px; "}
@@ -43,8 +40,7 @@
 
   - if @concerts_close.present?
     %div{style: "margin-top: 20px;"}
-      =Concert.plural.upcase 
-      =t("recents").upcase
+      =t("recents", model: Concert.plural).upcase
       =t("close_to_you").upcase
       .separator{style: "margin-bottom: 15px; "}
       - if !@concerts_close.empty?

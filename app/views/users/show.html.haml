@@ -34,8 +34,7 @@
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
                     = link_to registered_concerts_path(user_id: @user.id) do
-                        = RegisteredConcert.plural.upcase
-                        = t("recents").upcase
+                        = t("recents", model: RegisteredConcert.plural).upcase
                     = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator
@@ -45,8 +44,7 @@
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
                     = link_to registered_concerts_path(user_id: @user.id) do
-                        = RegisteredConcert.human_attribute_name(:reviews).upcase
-                        = t("recents").upcase
+                        = t("recents", model: RegisteredConcert.human_attribute_name(:reviews)).upcase
                     = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator
@@ -55,8 +53,7 @@
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
                     = link_to registered_concerts_path(user_id: @user.id) do
-                        = RegisteredConcert.human_attribute_name(:reviews).upcase 
-                        = t("populars").upcase
+                        = t("populars", model: RegisteredConcert.human_attribute_name(:reviews)).upcase
                     = link_to registered_concerts_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator

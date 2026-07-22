@@ -1,0 +1,58 @@
+- @future_assistances.each do |future_assistance|
+    - concert = future_assistance.concert
+    - concert_date = concert.date
+    - concert_date_status = time_status(concert_date, concert.start_time)
+
+    .item-register{style: "margin-bottom:10px;"}
+        .date-concert
+            = I18n.l(concert_date, format: "%B")[0,3].upcase
+            %br
+            %span{ style: "font-size: 20px;" }= concert_date.day
+            %br
+            - if concert_date.year != Date.today.year
+                = concert_date.year
+
+        .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
+            = image_tag concert.photo if concert.photo.attached?
+
+        %div
+
+            - concert.artists.each_with_index  do |artist, index|
+                = link_to artist_path(artist.id) do 
+                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
+                - if index < concert.artists.size - 1
+                    ,
+            %br
+
+            = link_to concert_path(concert.id) do 
+                %span{ style: "font-size: 18px;", class: "soft-color; " } #{concert.tour_name}
+            
+            - ub = concert.ubication&.complete_name || t("not_found")
+            .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
+                %span= "📍#{ub}" 
+                
+            %div
+                - if future_assistance.concert_seat_string || !future_assistance.concert_seat_details.empty?
+                    .bubble
+                        %span= "🎟️ #{future_assistance.concert_seat_string}"
+                        %span{class: "softest-color"}= " · #{future_assistance.concert_seat_details}"
+                - if future_assistance.from && !future_assistance.from.empty?
+                    .bubble
+                        %span{style: "color: rgb(230, 230, 230);"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
+                            
+        %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
+            
+            - if future_assistance.company_string && future_assistance.company!= 0
+                .bubble
+                    #{future_assistance.company_string}
+        
+            - if future_assistance.user_id == current_user.id
+                - if concert_date_status == "future"
+                    = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
+                    = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
+            
+        - if concert_date_status != "future"
+            %div
+                = link_to "#{t("verbs.log")} Concert.singular", new_registered_concert_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
+        

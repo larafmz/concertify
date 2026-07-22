@@ -53,8 +53,7 @@
 
     %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
         = link_to registered_concerts_path(artist_id: @artist.id) do   
-            =RegisteredConcert.han("reviews").upcase 
-            =t("populars").upcase
+            =t("populars", model: RegisteredConcert.han("reviews")).upcase
         = link_to registered_concerts_path(artist_id: @artist.id) do   
             %span= t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
@@ -64,9 +63,8 @@
 
     %div{ style: "margin-top: 20px;" }
         %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-            = link_to publications_path(artist_id: @artist.id) do   
-                =Publication.plural.upcase 
-                =t("populars").upcase
+            = link_to publications_path(artist_id: @artist.id) do  
+                =t("populars", model: Publication.plural).upcase
             = link_to publications_path(artist_id: @artist.id) do   
                 %span= t("more").upcase
         .separator{style: "margin-bottom: 15px; "}

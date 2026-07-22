@@ -24,5 +24,7 @@
         .message
             ℹ️
             = t("not_found_model", model: FutureAssistance.plural.downcase )
+    - elsif @user
+        = render "future_assistances/index_for_user", future_assistances: @future_assistances
     - else
         = render "future_assistances/index", future_assistances: @future_assistances

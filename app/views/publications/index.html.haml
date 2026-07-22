@@ -6,8 +6,7 @@
         %div{style: "margin-top: 20px;"}
 
             %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
-                = Publication.plural
-                = t("recents")
+                = t("recents", model: Publication.plural)
 
             .separator{style: "margin-bottom: 15px; "}
 

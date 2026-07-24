@@ -29,7 +29,7 @@ class PublicationsController < ApplicationController
 private
 
     def create_params
-        params.require(:publication).permit(:type, :user_id, :artist_id, :concert_id, :review)
+        params.require(:publication).permit(:type, :user_id, :review)
     end 
 
 end

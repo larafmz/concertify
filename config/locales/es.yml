@@ -36,18 +36,20 @@ es:
   populars: "%{model} populares"
   from_user: "%{model} de %{user}"  
   more: Más
-  of: de
   diary: Diario
   requests: Solicitudes
   asistenece: Asistencia
   likes_of_model_from_user: Me gustas sobre %{model} de %{user} de
   follows_you: Te sigue
-  by: por
   from_followed_artists: De tus artistas seguidos
   close_to_you: Cerca de ti
   blocked: Bloqueado
   network: Red
   options: Opciones
+
+  by: por
+  about: sobre
+  of: de
 
   crud:
     add: "Añadir %{model}"
@@ -107,3 +109,4 @@ es:
     write_your_review: Escribe tu reseña
     write_your_answer: Escribe tu respuesta
     whats_going_on: ¿Qué está pasando?
+    post_about: Publica sobre %{model}

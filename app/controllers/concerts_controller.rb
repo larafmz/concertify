@@ -85,6 +85,11 @@ class ConcertsController < ApplicationController
     @publications = @concert.publications.order("created_at DESC")
   end
 
+  def post
+    Publication.create!(concert_id: params[:id], user_id: current_user.id, review: params[:text])
+    redirect_to publications_concert_path(@concert)
+  end 
+
   private
 
   def set_artist

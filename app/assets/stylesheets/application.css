@@ -316,7 +316,8 @@ a:hover {
 
 .columns {
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, 190px);
+  gap: 9px;
   align-items: start;
 }
 

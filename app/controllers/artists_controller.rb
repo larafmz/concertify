@@ -70,6 +70,11 @@ class ArtistsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def post
+    Publication.create!(artist_id: params[:id], user_id: current_user.id, review: params[:text])
+    redirect_to publications_artist_path(@artist)
+  end 
+
 private
 
   def set_artist

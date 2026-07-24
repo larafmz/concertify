@@ -11,13 +11,13 @@
             = simple_format(@user.description)
 
             %div{ style: "display: flex; justify-content: space-between; align-items: center ;margin-top: 15px; " }
-                = link_to future_assistances_path(user_id: @user.id) do
+                = link_to future_assistances_user_path(@user) do
                     = FutureAssistance.plural.upcase
-                = link_to future_assistances_path(user_id: @user.id) do
+                = link_to future_assistances_user_path(@user) do
                     %span= @user.future_assistances.size   
             .separator{style: "margin-bottom: 15px; "}
             .flex{style: "margin-top: 10px;"}
-                = link_to future_assistances_path(user_id: @user.id), class: "hover-border", style: "display: flex; align-items: flex-start; justify-content: space-between;" do
+                = link_to future_assistances_user_path(@user), class: "hover-border", style: "display: flex; align-items: flex-start; justify-content: space-between;" do
                     - @future_assistances.limit(5).each do |future_assistance|
                         .small_vertical_rectangle
                             = image_tag future_assistance.concert.photo, class: "artist-avatar" if future_assistance.concert.photo.present?
@@ -33,9 +33,9 @@
 
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registers_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         = t("recents", model: Register.plural).upcase
-                    = link_to registers_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         %span= t("more").upcase
                 .separator
                 = render "registers/index_cards", registers: @registers.limit(4)
@@ -43,21 +43,21 @@
                                         
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registers_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         = t("recents", model: Register.human_attribute_name(:reviews)).upcase
-                    = link_to registers_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         %span= t("more").upcase
                 .separator
                 = render "registers/index", registers: @registers_with_review.limit(2)
             
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registers_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         = t("populars", model: Register.human_attribute_name(:reviews)).upcase
-                    = link_to registers_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         %span= t("more").upcase
-                .separator
-                = render "registers/index", registers: Register.none
+                .separator{style: "margin-bottom: 15px;"}
+                = render "registers/index", registers: @populars_registers.limit(2)
 
 
 

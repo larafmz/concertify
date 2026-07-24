@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   resources :artists do
     member do
+      post :post
       post :follow
       delete :unfollow
       post :mark_as_favorite
@@ -56,12 +57,12 @@ Rails.application.routes.draw do
     end    
   end
 
-
   resources :concerts do
     collection do
       get :requested
     end
     member do
+      post :post
       get :registers
       get :future_assistances
       get :publications

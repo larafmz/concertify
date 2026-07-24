@@ -7,14 +7,24 @@
                     = image_tag publication.user.icon if publication.user.icon.attached?
             %div
                 .title_section
-                    .soft-color{style: "font-size: 15px;"}
+                    %div{style: "font-size: 15px; color: #dee5eb"}
                         = link_to user_path(publication.user_id) do 
                             = publication.user.username
+                        - if publication.artist
+                            %span{class: "soft-color"}=t("about")
+                            %span{style: "color: #65dbff"}
+                                = link_to artist_path(publication.artist) do 
+                                    = publication.artist.name
+                        - if publication.concert
+                            %span{class: "soft-color"}=t("about")
+                            %span{style: "color: #65dbff"}
+                                = link_to concert_path(publication.concert) do 
+                                    = publication.concert.tour_name
                         •
                         %span.softest-color
                             = custom_time_ago_in_words(publication.created_at)
 
-                %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
+                %span{style: "font-size: 15px; color: white; overflow-wrap: anywhere;"}
                     = simple_format(publication.review)
     - else
         = link_to interactuable_path(publication.id), class: "publication-link" do
@@ -22,8 +32,14 @@
                 = image_tag publication.user.icon if publication.user.icon.attached?
             %div
                 .title_section
-                    .soft-color{style: "font-size: 15px;"}
+                    %div{style: "font-size: 15px; color: #dee5eb"}
                         = publication.user.username
+                        - if publication.artist
+                            %span{class: "soft-color"}=t("about")
+                            %span{style: "color: #65dbff"}= publication.artist.name
+                        - if publication.concert
+                            %span{class: "soft-color"}=t("about")
+                            %span{style: "color: #65dbff"}= publication.concert.tour_name                            
                         •
                         %span.softest-color
                             = custom_time_ago_in_words(publication.created_at)
@@ -32,7 +48,7 @@
                     = simple_format(publication.review)
 
     %div
-        - if current_user.id == publication.user_id
+        - if current_user && current_user.id == publication.user_id
             .dropdown
                 %button{
                     "data-bs-toggle" => "dropdown",

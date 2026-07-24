@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   ## RELATIONSHIPS
 
-    has_many :registered_concerts, dependent: :destroy
+    has_many :registers, dependent: :destroy
     has_many :publications, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
     has_one :ubication, dependent: :destroy

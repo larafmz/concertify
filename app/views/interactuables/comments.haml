@@ -11,7 +11,7 @@
         %div{style: "margin:20px; margin-bottom:0px;"}
             - if @interactuable.register? 
                 %div
-                    = render "registered_concerts/show", register: @interactuable
+                    = render "registers/show", register: @interactuable
             - elsif @interactuable.publication?
                 %div
                     = render "publications/show", publication: @interactuable

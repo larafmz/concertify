@@ -4,7 +4,7 @@ es:
       user:
         one: Usuario
         other: Usuarios
-      registered_concert:
+      register:
         one: Registro
         other: Registros
       publication:
@@ -66,6 +66,6 @@ es:
         concert_seat: Ubicación en el concierto
         concert_seat_details: Detalles de Ubicación
         company: ¿Con quien vas?
-      registered_concert:
+      register:
         review: Reseña
         reviews: Reseñas

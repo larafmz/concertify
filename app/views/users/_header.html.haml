@@ -15,14 +15,14 @@
         .flex
             .stat
                 .number
-                    = @user.registered_concerts.size
+                    = @user.registers.size
                 .name
                     = link_to diary_user_path(@user) do
                         = Concert.plural
             
             .stat
                 .number
-                    = @user.registered_concerts.joins(:concert).where("EXTRACT(YEAR FROM concerts.date) = ?", Date.current.year).size
+                    = @user.registers.joins(:concert).where("EXTRACT(YEAR FROM concerts.date) = ?", Date.current.year).size
                 .name
                     = link_to registers_user_path(@user) do
                         = t("this_year")

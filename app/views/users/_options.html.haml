@@ -2,7 +2,7 @@
 
     .widget-content{style: "display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid #263241;"}
         = link_to "👤 #{@user.username}", user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :profile)
-        = link_to RegisteredConcert.han("reviews"), registers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :reviews)
+        = link_to Register.han("reviews"), registers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :reviews)
         = link_to t("diary"), diary_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :diary)
         = link_to FutureAssistance.plural, future_assistances_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :future_assistances)
         = link_to Publication.plural, publications_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :publications)

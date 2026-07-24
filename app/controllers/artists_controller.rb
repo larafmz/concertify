@@ -33,7 +33,7 @@ class ArtistsController < ApplicationController
   end
 
   def registers
-    @registers = @artist.registered_concerts.order("created_at DESC")
+    @registers = @artist.registers.order("created_at DESC")
   end
 
   def follow

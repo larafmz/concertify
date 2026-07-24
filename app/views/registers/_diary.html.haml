@@ -1,13 +1,13 @@
 .widget-content{style: "padding-top:0px;"}  
 
-    - if registered_concerts.empty?
+    - if registers.empty?
         .message
             ℹ️
-            = t("not_found_model", model: RegisteredConcert.plural.downcase )
+            = t("not_found_model", model: Register.plural.downcase )
 
     .registers-items{style: "background: #1e2731; border-radius: 15px; gap: 0px;"}
 
-        - registered_concerts.each do |register|
+        - registers.each do |register|
             - concert = register.concert
             - concert_date = concert.date
 

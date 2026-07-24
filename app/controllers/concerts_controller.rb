@@ -78,7 +78,7 @@ class ConcertsController < ApplicationController
   end
 
   def registers
-    @registers = @concert.registered_concerts.order("created_at DESC")
+    @registers = @concert.registers.order("created_at DESC")
   end
 
   def publications

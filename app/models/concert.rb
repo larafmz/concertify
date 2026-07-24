@@ -11,7 +11,7 @@ class Concert < ApplicationRecord
     has_many :artists, through: :artists_concerts
     belongs_to :ubication
     has_one_attached :photo
-    has_many :registered_concerts, dependent: :destroy
+    has_many :registers, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
     has_many :publications, dependent: :destroy
     belongs_to :requester, class_name: "User", optional: true
@@ -83,7 +83,7 @@ class Concert < ApplicationRecord
     end
 
     def average_rating
-      registered_concerts.average(:rating).to_i || 0
+      registers.average(:rating).to_i || 0
     end
     
     def status_string

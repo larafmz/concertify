@@ -33,31 +33,31 @@
 
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registered_concerts_path(user_id: @user.id) do
-                        = t("recents", model: RegisteredConcert.plural).upcase
-                    = link_to registered_concerts_path(user_id: @user.id) do
+                    = link_to registers_path(user_id: @user.id) do
+                        = t("recents", model: Register.plural).upcase
+                    = link_to registers_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator
-                = render "registered_concerts/index_cards", registers: @registers.limit(4)
+                = render "registers/index_cards", registers: @registers.limit(4)
 
                                         
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registered_concerts_path(user_id: @user.id) do
-                        = t("recents", model: RegisteredConcert.human_attribute_name(:reviews)).upcase
-                    = link_to registered_concerts_path(user_id: @user.id) do
+                    = link_to registers_path(user_id: @user.id) do
+                        = t("recents", model: Register.human_attribute_name(:reviews)).upcase
+                    = link_to registers_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator
-                = render "registered_concerts/index", registers: @registers_with_review.limit(2)
+                = render "registers/index", registers: @registers_with_review.limit(2)
             
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registered_concerts_path(user_id: @user.id) do
-                        = t("populars", model: RegisteredConcert.human_attribute_name(:reviews)).upcase
-                    = link_to registered_concerts_path(user_id: @user.id) do
+                    = link_to registers_path(user_id: @user.id) do
+                        = t("populars", model: Register.human_attribute_name(:reviews)).upcase
+                    = link_to registers_path(user_id: @user.id) do
                         %span= t("more").upcase
                 .separator
-                = render "registered_concerts/index", registers: RegisteredConcert.none
+                = render "registers/index", registers: Register.none
 
 
 

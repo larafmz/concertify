@@ -3,7 +3,7 @@
         - if registers.empty?
             .message
                 ℹ️
-                = t("not_found_model", model: RegisteredConcert.plural.downcase )
+                = t("not_found_model", model: Register.plural.downcase )
 
         - registers.each_with_index do |register, index|
             - concert = register.concert

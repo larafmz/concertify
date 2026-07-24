@@ -4,7 +4,7 @@
  *= require artists
  *= require concerts
  *= require modal
- *= require registered_concerts
+ *= require registers
  */
 
  @import "bootstrap";

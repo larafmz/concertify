@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :registered_concerts 
+  resources :registers 
 
   resources :interactuables do
     member do

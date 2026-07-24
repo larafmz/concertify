@@ -55,12 +55,12 @@ class Artist < ApplicationRecord
       name
     end
 
-    def registered_concerts
-      RegisteredConcert.by_artist(self.id)
+    def registers
+      Register.by_artist(self.id)
     end
 
     def average_rating
-      registered_concerts.average(:rating).to_i || 0
+      registers.average(:rating).to_i || 0
     end
 
     def search_concerts_by(first_date, second_date, country_code, concerts_api)

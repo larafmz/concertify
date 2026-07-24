@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def show
     @favorite_artists = @user.favorite_artists.map(&:artist)
-    @registers = @user.registered_concerts.order(created_at: :desc)
+    @registers = @user.registers.order(created_at: :desc)
     @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''")
     @future_assistances = @user.future_assistances.order(created_at: :desc)
   end
@@ -28,11 +28,11 @@ class UsersController < ApplicationController
   end
 
   def registers
-    @registers = @user.registered_concerts.order("created_at DESC")
+    @registers = @user.registers.order("created_at DESC")
   end
 
   def diary
-    @registers = @user.registered_concerts.joins(:concert).order("concerts.date DESC")
+    @registers = @user.registers.joins(:concert).order("concerts.date DESC")
   end
 
   def artists

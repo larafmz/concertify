@@ -1,4 +1,4 @@
-class RegisteredConcert < Interactuable
+class Register < Interactuable
 
     ## RELATIONSHIPS
     

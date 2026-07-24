@@ -52,6 +52,6 @@
                 =t("verbs.edit")
             %ul.dropdown-menu
                 %li
-                    = link_to t("crud.edit", model: RegisteredConcert.singular), edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
+                    = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
                 %li
-                    = link_to t("crud.destroy", model: RegisteredConcert.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"
+                    = link_to t("crud.destroy", model: Register.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"

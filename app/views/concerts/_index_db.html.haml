@@ -26,11 +26,11 @@
                     .button-concert
                         - concert_date_status = time_status(concert_date, concert.start_time)
                         - if concert_date_status == "past"
-                            - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: concert.id)
+                            - register = Register.find_by(user_id: current_user.id, concert_id: concert.id)
                             - if !register
-                                = link_to t("registers.assisted"), new_registered_concert_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to t("registers.assisted"), new_register_path(concert_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
                             - else
-                                = link_to "✎", edit_registered_concert_path(id: register.id), data: { turbo_frame: "modal" }
+                                = link_to "✎", edit_register_path(id: register.id), data: { turbo_frame: "modal" }
                         - if concert_date_status == "future"
                             - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id )
                             - if !future_assistance

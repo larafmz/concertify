@@ -14,15 +14,15 @@
             - if @concert_date_status == "past"
                 .stat
                     .number 
-                        = @concert.registered_concerts.size
+                        = @concert.registers.size
                     .name
                         = link_to registers_concert_path(@concert) do
-                            = t("totals", model: RegisteredConcert.plural)
+                            = t("totals", model: Register.plural)
                 .stat
                     .number
                         ★ #{@concert.average_rating} / 5
                     .name
-                        = t("average", model: RegisteredConcert.plural)
+                        = t("average", model: Register.plural)
             - else
                 .stat
                     .number
@@ -44,11 +44,11 @@
         - if current_user
             %span{ style: "margin-left: auto; background: #1f252b;" }
                 - if @concert_date_status == "past"
-                    - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: @concert.id)
+                    - register = Register.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !register
-                        = link_to t("registers.assisted"), new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
+                        = link_to t("registers.assisted"), new_register_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("my_model", model: RegisteredConcert.singular), interactuable_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
+                        = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
                 - if @concert_date_status == "future"
                     - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !future_assistance

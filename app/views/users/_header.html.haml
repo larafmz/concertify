@@ -5,7 +5,7 @@
                 = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
                 
             .artist-name
-                %div= @user.username
+                %div{style: "margin-bottom:5px; font-size:25px;"}= @user.username
                 - if current_user.id == @user.id
                     = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user.id), class: "small-btn-custom"
                 - if @user.ubication
@@ -17,26 +17,26 @@
                 .number
                     = @user.registered_concerts.size
                 .name
-                    = link_to diary_registered_concerts_path(user_id: @user.id) do
+                    = link_to diary_user_path(@user) do
                         = Concert.plural
             
             .stat
                 .number
                     = @user.registered_concerts.joins(:concert).where("EXTRACT(YEAR FROM concerts.date) = ?", Date.current.year).size
                 .name
-                    = link_to registered_concerts_path(user_id: @user.id) do
+                    = link_to registers_user_path(@user) do
                         = t("this_year")
             .stat
                 .number
                     = @user.followers.users.size
                 .name
-                    = link_to followers_user_path(user_id: @user.id) do
+                    = link_to followers_user_path(@user) do
                         = t("followers")
             .stat
                 .number
                     = @user.followings.users.size
                 .name
-                    = link_to followings_user_path(user_id: @user.id) do
+                    = link_to followings_user_path(@user) do
                         = t("following")                                
 
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}

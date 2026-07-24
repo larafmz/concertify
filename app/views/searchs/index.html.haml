@@ -34,8 +34,8 @@
             = link_to t("verbs.remove_filter"), url_for(params.to_unsafe_h.except(:genre)), style: "font-size: 13px;"
       .separator{style: "margin-bottom: 15px; "}
       .items
-        = render "artists/index_api", artists: @artists_api.first(10)
-        = render "artists/index_db", artists: @artists_db.first(10)
+        = render "artists/index_cards", artists: @artists_api.first(10)
+        = render "artists/index_cards", artists: @artists_db.first(10)
 
   - if @concerts.size!=0
     .section-box{style: "color: #dfdfdf;"}

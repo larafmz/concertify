@@ -1,7 +1,0 @@
-- artists.each do |artist|
-    = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border" do
-        %div 
-        .rectangle_icon
-            = image_tag best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
-        .item-name
-            = artist.dig("name")

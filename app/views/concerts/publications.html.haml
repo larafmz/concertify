@@ -1,0 +1,4 @@
+= render "concerts/header"
+= render "concerts/options", active: :publications
+.widget-content{style: "padding-top: 0px;"}
+    = render "publications/index", publications: @publications

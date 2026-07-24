@@ -54,6 +54,7 @@ es:
     show: "Ver %{model}"
     edit: "Editar %{model}"
     destroy: "Eliminar %{model}"
+    create: "Crear %{model}"
 
   verbs:
     destroy: Eliminar

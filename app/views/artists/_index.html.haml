@@ -1,0 +1,33 @@
+.widget-content{style: "padding-top:0px;"}  
+    - if artists.empty?
+        .message
+            ℹ️
+            = t("not_found_model", model: Artist.plural.downcase )
+    - else
+        %div{style: "border: 1px solid #40556d;"}       
+            .registers-items
+                - artists.each_with_index do |artist, index|
+
+                    .register_user{style: "grid-template-columns: 0.1fr 4fr auto;"}
+                        = link_to artist_path(artist.id), class: "hover-border-icon" do 
+                            .link_icon
+                                = image_tag artist.photo if artist.photo.attached?
+
+                        %div
+                            = link_to artist_path(artist.id) do
+                                %span{ style: "font-size: 15px; font-weight: 700;" }= artist.name
+                            .softest-color{style: "font-size: 12px;" }
+                                = link_to followers_artist_path(artist), class: "hover-border-icon" do 
+                                    = artist.relations.count
+                                    = t("followers").downcase
+
+                        .softest-color
+                            - if current_user
+                                - if current_user.follows_artist?(artist.id)
+                                    = link_to t("verbs.unfollow"), unfollow_artist_path(artist.id), class: "btn-custom-orange", data: { turbo_method: :delete }
+                                - else
+                                    = link_to t("verbs.follow"), follow_artist_path(artist.id), class: "btn-custom", data: { turbo_method: :post }
+
+                        
+                    
+                        

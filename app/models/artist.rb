@@ -10,10 +10,10 @@ class Artist < ApplicationRecord
 
     has_many :artists_concerts, dependent: :destroy
     has_many :concerts, through: :artists_concerts
-    has_one_attached :photo
-    has_many :publications
+    has_many :publications, dependent: :destroy
     belongs_to :genre, optional: true
     has_many :relations, as: :followed, dependent: :destroy
+    has_one_attached :photo
     
   ## SCOPES
 

@@ -1,20 +1,19 @@
 class ConcertsController < ApplicationController
   include ApplicationHelper
 
+  before_action :set_artist, except: [:show, :new, :create, :requested]
+
   def show
     @concert = Concert.get_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
     @concert = Concert.accepted.find_by(id: params[:id]) if @concert.nil?
     if @concert
+      @artists = @concert.artists
       @concert_date_status = time_status(@concert.date, @concert.start_time)
-      @registered_concerts = RegisteredConcert.where(concert_id: @concert.id).order("created_at ASC") # TO/DO order by likes
-      @reviews = @registered_concerts.with_review
-      @future_assistances = FutureAssistance.where(concert_id: @concert.id).order("created_at ASC") 
     else
       redirect_back fallback_location: root_path
     end
   end
 
-  
   def new
     @concert = Concert.new
     render layout: false
@@ -43,14 +42,11 @@ class ConcertsController < ApplicationController
       end
   end
 
-    
   def edit
-    @concert = Concert.find(params[:id])
     render layout: false
   end
 
   def update
-      @concert = Concert.find(params[:id])
       @artist = Artist.find_by(name: params[:concert][:artist_name])
       if !@artist
         artist_api = TicketmasterService.artists_by(params[:concert][:artist_name], nil)&.first
@@ -68,21 +64,33 @@ class ConcertsController < ApplicationController
 
   def requested
     #TO/DO if role admin, show all requesteds
-    @concerts = Concert.where(requester_id: params[:user_id]).order("created_at DESC")
-    @user = User.find(params[:user_id]) if params[:user_id].present?
   end
 
-      
   def destroy
-      @concert = Concert.find(params[:id])
-      if @concert.requester_id == current_user.id && @concert.pending? #TO/DO or admin
-        @concert.destroy
-      end
-      redirect_back fallback_location: root_path
+    if @concert.requester_id == current_user.id && @concert.pending? #TO/DO or admin
+      @concert.destroy
+    end
+    redirect_back fallback_location: root_path
   end
 
+  def future_assistances
+    @future_assistances = @concert.future_assistances.order("created_at DESC")
+  end
+
+  def registers
+    @registers = @concert.registered_concerts.order("created_at DESC")
+  end
+
+  def publications
+    @publications = @concert.publications.order("created_at DESC")
+  end
 
   private
+
+  def set_artist
+    @concert = Concert.find(params[:id])
+    @concert_date_status = time_status(@concert.date, @concert.start_time)
+  end
 
   def create_params
       params.require(:concert).permit(:date, :tour_name, :artist_id, :requester_id, :status, :ubication_id)

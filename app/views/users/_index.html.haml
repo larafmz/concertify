@@ -1,31 +1,38 @@
-.registers-items
-    - users.each_with_index do |user, index|
+.widget-content{style: "padding-top:0px;"}  
+    - if users.empty?
+        .message
+            ℹ️
+            = t("not_found_model", model: User.plural.downcase )
+    - else
+        %div{style: "border: 1px solid #40556d;"}       
+            .registers-items
+                - users.each_with_index do |user, index|
 
-        .register_user{style: "grid-template-columns: 0.1fr 4fr auto;"}
-            = link_to user_path(user.id), class: "hover-border-icon" do 
-                .link_icon
-                    = image_tag user.icon if user.icon.attached?
+                    .register_user{style: "grid-template-columns: 0.1fr 4fr auto;"}
+                        = link_to user_path(user.id), class: "hover-border-icon" do 
+                            .link_icon
+                                = image_tag user.icon if user.icon.attached?
 
-            %div
-                = link_to user_path(user.id) do
-                    %span{ style: "font-size: 15px; font-weight: 700;" }= user.username
-                .softest-color{style: "font-size: 12px;" }
-                    = link_to followers_user_path(user.id), class: "hover-border-icon" do 
-                        = user.followers.count
-                        = t("followers").downcase
-                    ,
-                    = link_to followers_user_path(user.id), class: "hover-border-icon" do 
-                        = user.followings.users.count
-                        = t("following").downcase
+                        %div
+                            = link_to user_path(user.id) do
+                                %span{ style: "font-size: 15px; font-weight: 700;" }= user.username
+                            .softest-color{style: "font-size: 12px;" }
+                                = link_to followers_user_path(user.id), class: "hover-border-icon" do 
+                                    = user.followers.count
+                                    = t("followers").downcase
+                                ,
+                                = link_to followers_user_path(user.id), class: "hover-border-icon" do 
+                                    = user.followings.users.count
+                                    = t("following").downcase
 
-            .softest-color
-                - if current_user.id != user.id
-                    - if current_user.follows_user?(user.id)
-                        = link_to t("verbs.unfollow"), unfollow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :delete }
-                    - else
-                        = link_to t("verbs.follow"), follow_user_path(user.id), class: "btn-custom", data: { turbo_method: :post }
-                    - if user.follows_user?(current_user.id)   
-                        %span{style: "margin-left: 10px;"}= t("follows_you")
-            
-        
-            
+                        .softest-color
+                            - if current_user.id != user.id
+                                - if current_user.follows_user?(user.id)
+                                    = link_to t("verbs.unfollow"), unfollow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :delete }
+                                - else
+                                    = link_to t("verbs.follow"), follow_user_path(user.id), class: "btn-custom", data: { turbo_method: :post }
+                                - if user.follows_user?(current_user.id)   
+                                    %span{style: "margin-left: 10px;"}= t("follows_you")
+                        
+                    
+                        

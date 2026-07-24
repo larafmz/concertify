@@ -1,19 +1,7 @@
 class PublicationsController < ApplicationController
 
     def index
-        if params[:user_id]
-            @user = User.find(params[:user_id])
-            @publications = Publication.where(user_id: params[:user_id])
-        elsif params[:concert_id]
-            @concert = Concert.find(params[:concert_id])
-            @publications = Publication.where(concert_id: params[:concert_id])
-        elsif params[:artist_id]
-            @artist = Artist.find(params[:artist_id])
-            @publications = Publication.where(artist_id: params[:artist_id])
-        else
-            @publications = Publication.all
-        end
-        @publications = @publications.order("created_at DESC") if @publications
+        @publications = Publication.all.order("created_at DESC") 
     end
 
     def new

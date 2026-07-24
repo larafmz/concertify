@@ -1,0 +1,58 @@
+%div{ style: "padding: 30px 70px 10px; background: #1f252b;"}
+    .artist-content{style: "background: #1f252b;"}
+        .artist-info
+            .user_icon
+                = image_tag  @concert.photo, class: "artist-avatar" if @concert.photo.attached?
+                
+            .artist-name
+                %div= @concert.tour_name
+                .soft-color{ style: "font-size: 15px; margin-bottom:5px" }
+                    %div= "📍#{@concert.ubication&.complete_name} "
+                .soft-color{ style: "font-size: 15px;" }
+                    %div= "🗓️ #{formatted_concert_date(@concert.date, @concert.start_time)}" 
+        .flex
+            - if @concert_date_status == "past"
+                .stat
+                    .number 
+                        = @concert.registered_concerts.size
+                    .name
+                        = link_to registers_concert_path(@concert) do
+                            = t("totals", model: RegisteredConcert.plural)
+                .stat
+                    .number
+                        ★ #{@concert.average_rating} / 5
+                    .name
+                        = t("average", model: RegisteredConcert.plural)
+            - else
+                .stat
+                    .number
+                        = @concert.future_assistances.size
+                    .name
+                        = link_to future_assistances_concert_path(@concert) do
+                            = t("totals", model: FutureAssistance.plural)
+
+            .stat
+                .number
+                    = @concert.publications.size
+                .name
+                    = link_to publications_concert_path(@concert) do
+                        =Publication.plural
+
+    
+    %div{style: "display:flex; align-items:center; padding-top: 10px; gap: 20px;"}
+
+        - if current_user
+            %span{ style: "margin-left: auto; background: #1f252b;" }
+                - if @concert_date_status == "past"
+                    - register = RegisteredConcert.find_by(user_id: current_user.id, concert_id: @concert.id)
+                    - if !register
+                        = link_to t("registers.assisted"), new_registered_concert_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
+                    - else
+                        = link_to t("my_model", model: RegisteredConcert.singular), interactuable_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
+                - if @concert_date_status == "future"
+                    - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
+                    - if !future_assistance
+                        = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
+                    - else
+                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user.id), class: "btn-custom-orange", style: "height: auto;"
+   

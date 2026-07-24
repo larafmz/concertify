@@ -1,14 +1,12 @@
-= render "users/options", active: :requests if @user
-
 .widget-content{style: "padding-top:0px;"}  
     .registers-items
 
-        - if @concerts.empty?
+        - if concerts.empty?
             .message
                 ℹ️
                 = t("not_found_model", model: t("requested_concerts").downcase)
 
-        - @concerts.each do |concert|
+        - concerts.each do |concert|
             - artist = concert.artists.first
             - concert_date = concert.date
             - status = concert.status

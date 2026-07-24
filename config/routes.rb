@@ -15,14 +15,16 @@ Rails.application.routes.draw do
       delete :unblock
       get :followers
       get :followings
+      get :registers
+      get :diary
+      get :future_assistances
+      get :publications
+      get :artists
+      get :requests
     end
   end
   
-  resources :registered_concerts do
-    collection do
-      get :diary
-    end   
-  end
+  resources :registered_concerts 
 
   resources :interactuables do
     member do
@@ -45,6 +47,9 @@ Rails.application.routes.draw do
       delete :unfollow
       post :mark_as_favorite
       delete :unmark_as_favorite
+      get :followers
+      get :publications
+      get :registers
     end
     collection do
       get :requested
@@ -55,6 +60,12 @@ Rails.application.routes.draw do
   resources :concerts do
     collection do
       get :requested
+    end
+    member do
+      get :registers
+      get :future_assistances
+      get :publications
+      get :artists
     end
   end
 

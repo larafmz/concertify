@@ -13,6 +13,7 @@ class Concert < ApplicationRecord
     has_one_attached :photo
     has_many :registered_concerts, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
+    has_many :publications, dependent: :destroy
     belongs_to :requester, class_name: "User", optional: true
 
   ## SCOPES

@@ -7,12 +7,13 @@ class User < ApplicationRecord
   ## RELATIONSHIPS
 
     has_many :registered_concerts, dependent: :destroy
+    has_many :publications, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
-    has_one :ubication
+    has_one :ubication, dependent: :destroy
     has_many :followings, -> { where(relation_type: 0)  }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :followers, -> {  where(relation_type: 0) }, as: :followed, class_name: "Relation", dependent: :destroy
     has_many :blocked_users, -> {  where(relation_type: 1) }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
-    has_many :favorite_artists
+    has_many :favorite_artists, dependent: :destroy
     has_one_attached :icon
 
   ## SCOPES

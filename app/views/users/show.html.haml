@@ -29,7 +29,7 @@
                 =FavoriteArtist.plural.upcase
                 .separator
                 .four-columns{style: "margin-top: 10px;"}
-                    = render "artists/index_db", artists: @favorite_artists.first(4)
+                    = render "artists/index_cards", artists: @favorite_artists.first(4)
 
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }

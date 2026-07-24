@@ -1,36 +1,9 @@
-= render "users/options", active: :publications if @user
+%div{ style: "background: #1f252b;color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 0px 0px 50px;" }
+    = link_to @concert.tour_name, concert_path( @concert.id) if @concert
+    = link_to @artist.name, artist_path( @artist.id) if @artist
+    = t("recents", model: Publication.plural)
 
-.widget-content{style: "padding-top:0px;"}  
+.separator{style: "margin-bottom: 15px; "}
 
-    - if !@user
-        %div{style: "margin-top: 20px;"}
-
-            %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
-                = t("recents", model: Publication.plural)
-
-            .separator{style: "margin-bottom: 15px; "}
-
-    - if @concert || @artist
-        %div{style: "margin-top: 20px;"}
-            .soft-color{style: "font-size: 15px;" }
-                = Publication.plural
-                = t("of")
-
-            %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px;" }
-                = link_to @concert.tour_name, concert_path( @concert.id) if @concert
-                = link_to @artist.name, artist_path( @artist.id) if @artist
-
-            - if @concert
-                .softest-color{style: "font-size: 15px;" }
-                    %span= "📍#{@concert.ubication&.complete_name} 🗓️ #{short_date(@concert.date)}"
-
-            .separator{style: "margin-bottom: 15px; "}
-            
-    - if @publications.empty?
-        .message
-            ℹ️
-            = t("not_found_model", model: Publication.plural.downcase )
-    - else
-        %div{style: "border: 1px solid #40556d;"}
-            = render "publications/index", publications: @publications
-        
+.widget-content{style: "padding-top: 0px;"}
+    =render "publications/index", publications: @publications

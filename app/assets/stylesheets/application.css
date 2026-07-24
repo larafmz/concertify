@@ -218,9 +218,9 @@ a:hover {
 
 .btn-custom-orange {
   background: #eb5d25;
-  color: white !important;
+ color: white !important;
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 10px 18px;
   font-size: 15px;
   font-weight: 600;
@@ -229,7 +229,9 @@ a:hover {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  height: 35px;
+  height: auto;
+  padding-bottom: 8px;
+  padding-top: 8px;
   width: auto;
 }
 
@@ -240,6 +242,8 @@ a:hover {
 }
 
 .small-btn-custom {
+  justify-self: start;
+  width: fit-content;
   background: #5c5768;
   color: rgb(226, 211, 211);
   border-radius: 7px;

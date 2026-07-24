@@ -1,5 +1,11 @@
-- publications.each do |publication|
-    %div{style: "margin:20px; margin-bottom:0px;"}
-        = render "publications/show", publication: publication
-    .separator
-            
+- if publications.empty?
+    .message
+        ℹ️
+        = t("not_found_model", model: Publication.plural.downcase )
+- else
+    %div{style: "border: 1px solid #40556d;"}
+        - publications.each do |publication|
+            %div{style: "margin:20px; margin-bottom:0px;"}
+                = render "publications/show", publication: publication
+            .separator
+        

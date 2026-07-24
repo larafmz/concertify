@@ -8,7 +8,6 @@
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
     = render "registered_concerts/index_cards", registers: @registers.limit(6)
-
     
   %div{style: "margin-top: 20px;"}
     .title_section
@@ -27,7 +26,7 @@
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
     .items
-      = render "artists/index_db", artists: @artists_db.first(10)
+      = render "artists/index_cards", artists: @artists_db.first(10)
 
   %div{style: "margin-top: 20px;"}
     =t("recents", model: Concert.plural).upcase

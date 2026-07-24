@@ -1,14 +1,4 @@
 class FutureAssistancesController < ApplicationController
-  
-def index
-    if params[:user_id]
-        @future_assistances = FutureAssistance.joins(:concert).where(user_id: params[:user_id]).order("concerts.date ASC")
-        @user = User.find(params[:user_id])
-    elsif params[:concert_id]
-        @future_assistances = FutureAssistance.where(concert_id: params[:concert_id]).order("created_at DESC")
-        @concert = Concert.find(params[:concert_id])
-    end
-end
 
 def new
     if params[:ticketmaster_id]

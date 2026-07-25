@@ -47,7 +47,7 @@
                                 = link_to "✎", edit_concert_path(id: concert.id), data: { turbo_frame: "modal" }
                                 = link_to "✗", concert_path(concert), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el concierto solicitado?" }
                         - elsif concert.accepted?
-                            = link_to t("crud.show", model: Concert.singular), concert_path(concert), class: "btn-custom", style: "font-size: 13px; width: 150px;"
+                            = link_to t("crud.show", model: Concert.singular), concert_path(concert), class: "btn-custom-orange", style: "font-size: 13px; width: 150px;"
             
 
                 .sent_at

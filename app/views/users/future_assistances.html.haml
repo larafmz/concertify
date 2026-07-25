@@ -1,11 +1,11 @@
 = render "users/options", active: :future_assistances
 
-- if @future_assistances.empty?
-    .message
-        ℹ️
-        = t("not_found_model", model: FutureAssistance.plural.downcase )
-- else
-    .widget-content{style: "padding-top:0px;"}
+.widget-content{style: "padding-top:0px;"}
+    - if @future_assistances.empty?
+        .message
+            ℹ️
+            = t("not_found_model", model: FutureAssistance.plural.downcase )
+    - else
         - @future_assistances.each do |future_assistance|
             - concert = future_assistance.concert
             - concert_date = concert.date
@@ -61,6 +61,6 @@
                     
                 - if concert_date_status != "future"
                     %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
-                        = link_to "#{t("verbs.log")} #{Concert.singular}", new_register_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                        = link_to "#{t("verbs.log")} #{Concert.singular}", new_register_path(concert_id: concert.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                         = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
                 

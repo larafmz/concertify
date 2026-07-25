@@ -46,13 +46,13 @@
                 - if @concert_date_status == "past"
                     - register = Register.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !register
-                        = link_to t("registers.assisted"), new_register_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
+                        = link_to t("registers.assisted"), new_register_path(concert_id: @concert.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom-orange", style: "height: auto;"
+                        = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom", style: "height: auto;"
                 - if @concert_date_status == "future"
                     - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: @concert.id)
                     - if !future_assistance
-                        = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: @concert.id), class: "btn-custom", data: { turbo_frame: "modal" }, style: "height: auto;"
+                        = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: @concert.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user.id), class: "btn-custom-orange", style: "height: auto;"
+                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user.id), class: "btn-custom", style: "height: auto;"
    

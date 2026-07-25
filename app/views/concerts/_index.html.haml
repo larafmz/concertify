@@ -46,22 +46,22 @@
                             - else
                                 - register = Register.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
                             - if register
-                                = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                                = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), class: "btn-custom", data: { turbo_frame: "modal" }
                             - elsif item[:source] == :db
-                                = link_to t("registers.assisted"), new_register_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to t("registers.assisted"), new_register_path(concert_id: concert.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                             - else
-                                = link_to t("registers.assisted"), new_register_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to t("registers.assisted"), new_register_path(ticketmaster_id: concert["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                         - elsif concert_date_status == "future"
                             - if item[:source] == :db
                                 - future_assistance = FutureAssistance.find_by(user_id: current_user.id, concert_id: concert.id)
                             - else
                                 - future_assistance = FutureAssistance.joins(:concert).where(user_id: current_user.id, concerts: { ticketmaster_id: concert["id"] }).first
                             - if future_assistance
-                                = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                                = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
                             - elsif item[:source] == :db
-                                = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to t("registers.will_assist"), new_future_assistance_path(concert_id: concert.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                             - else
-                                = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom", data: { turbo_frame: "modal" }
+                                = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: concert["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
             
             - if index != concerts.count-1
                 .separator

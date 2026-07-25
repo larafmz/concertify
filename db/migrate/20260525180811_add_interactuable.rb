@@ -6,7 +6,7 @@ class AddInteractuable < ActiveRecord::Migration[7.2]
       t.references :user, null: false, foreign_key: true
       t.string :review
       t.references :artist
-      t.references :concert
+      t.references :event
       t.integer :rating
       t.timestamps
     end

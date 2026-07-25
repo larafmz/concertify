@@ -2,24 +2,24 @@ class FutureAssistance < ApplicationRecord
 
   ##CONFIGURATIONS
 
-  kindable :concert_seat, { :pista => 0, :grada => 1, :vip => 2, :otro => 3 }
+  kindable :event_seat, { :pista => 0, :grada => 1, :vip => 2, :otro => 3 }
   kindable :company, { :undefined => 0, :alone => 1, :accompanied => 2}
 
   ## RELATIONSHIPS
 
     belongs_to :user
-    belongs_to :concert
+    belongs_to :event
 
   ## VALIDATIONS
 
-    validates :concert_seat_details, :from, length: { maximum: 20 }, allow_nil: true
+    validates :event_seat_details, :from, length: { maximum: 20 }, allow_nil: true
   
   ## CALLBACKS
 
     before_validation :truncate_data
 
     def truncate_data
-      self.concert_seat_details = concert_seat_details.truncate(20) if !concert_seat_details.blank?
+      self.event_seat_details = event_seat_details.truncate(20) if !event_seat_details.blank?
       self.from = from.truncate(20) if !from.blank?
     end
 
@@ -36,8 +36,8 @@ class FutureAssistance < ApplicationRecord
   
   ## INSTANCE METHODS
 
-  def concert_seat_string
-    return get_concert_seat_name if concert_seat
+  def event_seat_string
+    return get_event_seat_name if event_seat
     nil
   end 
   

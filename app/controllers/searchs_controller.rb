@@ -1,4 +1,4 @@
-include TicketmasterConcertHelper
+include TicketmasterEventHelper
 
 class SearchsController < ApplicationController
 
@@ -13,9 +13,9 @@ class SearchsController < ApplicationController
     @artists_api = query.present? || genre_name ? Array(TicketmasterService.artists_by(query, genre_name)) : []
     @artists_db =  @artists_api.nil? && (query.present? || genre_name) ? Artist.search_by(query, params[:genre]) : []
     
-    concerts_api = TicketmasterService.concerts_by(query, nil, params[:first_date], params[:second_date], params[:country])
-    concerts_db = Concert.search_by(query, params[:first_date], params[:second_date], params[:country], concerts_api)
-    @concerts = TicketmasterService.merge_concerts(concerts_db, concerts_api)
+    events_api = TicketmasterService.events_by(query, nil, params[:first_date], params[:second_date], params[:country])
+    events_db = Event.search_by(query, params[:first_date], params[:second_date], params[:country], events_api)
+    @events = TicketmasterService.merge_events(events_db, events_api)
    
   end
 

@@ -1,9 +1,9 @@
 es:
   search: Buscar...
-  search_concert: Buscar por nombre de tour o de artista...
-  main_search: Buscar usuarios, artistas, conciertos...
+  search_event: Buscar por nombre de tour o de artista...
+  main_search: Buscar usuarios, artistas, eventos...
   root_title: Ir a la página principal
-  requested_concerts: Conciertos solicitados
+  requested_events: Eventos solicitados
   requested_artists: Artistas solicitados
   all_masc: "Todos los %{model}"
   all_fem: "Todas las %{model}"
@@ -98,9 +98,9 @@ es:
 
   messages: 
     cant_find: ¿No encuentras lo que buscas?
-    manual_adition: Si el concierto ya ha pasado ó no aparece en los resultados, puedes solicitar su adición manualmente.
+    manual_adition: Si el evento ya ha pasado ó no aparece en los resultados, puedes solicitar su adición manualmente.
     destroy_confirmation: ¿Esta seguro de que desea eliminar?
-    how_to_find_concert: Para buscar y registrar un concierto, escribe el nombre del tour o del artista en el buscador.
+    how_to_find_event: Para buscar y registrar un evento, escribe el nombre del tour o del artista en el buscador.
     cant_mark_as_favorite: |  
       No puedes marcar como favorito a más de 4 artistas.
       Para marcar uno nuevo, primero debes desmarcar a otro.

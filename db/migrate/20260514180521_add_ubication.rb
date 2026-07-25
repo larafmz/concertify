@@ -16,7 +16,7 @@ class AddUbication < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_reference :concerts, :ubication
+    add_reference :events, :ubication
 
   end
 end

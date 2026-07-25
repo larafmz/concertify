@@ -26,13 +26,13 @@ class TicketmasterService
     end
 
     
-    def self.concert_by_id(id)
+    def self.event_by_id(id)
         data = call_api("https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&id=#{id}&sort=date,asc&size=200")
         data.dig("_embedded","events").first if data.present?
     end
 
-    def self.recent_concerts(country_code)
-        Rails.cache.fetch("recents_ticketmaster_concerts_#{country_code}", expires_in: 10.minutes) do
+    def self.recent_events(country_code)
+        Rails.cache.fetch("recents_ticketmaster_events_#{country_code}", expires_in: 10.minutes) do
             url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&sort=date,asc&size=8&localStartDateTime=#{"#{Date.today.to_date}T00:00:00"}"
             url += "&countryCode=#{country_code}" if country_code.present?
             data = call_api(url)
@@ -42,7 +42,7 @@ class TicketmasterService
         end
     end
 
-    def self.concerts_by(query, artist_id, first_date, second_date, country_code)
+    def self.events_by(query, artist_id, first_date, second_date, country_code)
 
         first_date  = first_date.presence #converts empty to nil
         second_date = second_date.presence #converts empty to nil
@@ -54,7 +54,7 @@ class TicketmasterService
         second_date = "#{second_date.to_date}T23:59:59" if second_date.present?
 
         return [] if (query.nil? || query.empty?) && (artist_id.nil? || artist_id.empty?)
-        Rails.cache.fetch("ticketmaster_concerts_#{query}_#{artist_id}_#{first_date}_#{second_date}", expires_in: 10.minutes) do
+        Rails.cache.fetch("ticketmaster_events_#{query}_#{artist_id}_#{first_date}_#{second_date}", expires_in: 10.minutes) do
             url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&sort=date,asc&size=150&localStartDateTime=#{first_date},#{second_date}"
             url += "&keyword=#{query}" if query
             url += "&attractionId=#{artist_id}" if artist_id.present?
@@ -62,8 +62,8 @@ class TicketmasterService
             data = call_api(url)
             data = data.dig("_embedded","events") if data.present?
             return [] if data.nil?
-            # data = data.select do |concert|
-            #     get_concert_artist_name(concert).present?
+            # data = data.select do |event|
+            #     get_event_artist_name(event).present?
             # end
             data
         end
@@ -75,20 +75,20 @@ class TicketmasterService
         genres
     end
 
-    def self.merge_concerts(concerts_db, concerts_api)
-        concerts = (concerts_db.map do |concert|
+    def self.merge_events(events_db, events_api)
+        events = (events_db.map do |event|
             {
                 source: :db,
-                concert: concert,
-                date: concert.date,
-                time: concert.start_time
+                event: event,
+                date: event.date,
+                time: event.start_time
             }
-            end + concerts_api.map do |concert|
+            end + events_api.map do |event|
             {
                 source: :api,
-                concert: concert,
-                date: get_concert_date(concert),
-                time: get_concert_time(concert)
+                event: event,
+                date: get_event_date(event),
+                time: get_event_time(event)
             }
             end).sort_by { |c| [c[:date], c[:time] || Time.new(2000)] }
     end

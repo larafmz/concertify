@@ -1,13 +1,13 @@
 
-/*CONCIERTOS*/ 
+/*EVENTOS*/ 
 
-.concerts-items {
+.events-items {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.item-concert {
+.item-event {
   padding: 0px 8px;
   border-radius: 8px;
   font-size: 18px;
@@ -17,12 +17,12 @@
   align-items: center;
 }
 
-.button-concert {
+.button-event {
   padding: 0px 25px;
   margin-left: auto;
 }
 
-.date-concert {
+.date-event {
   background: #2d3b4b;
   border-radius: 8px;
   color: #e6e6e6;
@@ -32,7 +32,7 @@
   font-size: 17px;
 }
 
-.concert_add {
+.event_add {
   padding: 30px 30px;
   margin-bottom: 15px;
   margin-top: 40px;

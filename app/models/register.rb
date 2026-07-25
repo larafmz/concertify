@@ -2,19 +2,19 @@ class Register < Interactuable
 
     ## RELATIONSHIPS
     
-    belongs_to :concert
+    belongs_to :event
     belongs_to :user
     has_many_attached :photos
 
     ## VALIDATIONS
 
-    validates :concert_id, presence: true
-    validates :concert_id, uniqueness: { scope: :user_id, message: "Ya has registrado este concierto" }
+    validates :event_id, presence: true
+    validates :event_id, uniqueness: { scope: :user_id, message: "Ya has registrado este evento" }
     validate :photos_limit
 
     ## SCOPES
 
-    scope :by_artist, ->(artist_id) { left_joins(concert: :artists).where(artists: { id: artist_id }) }
+    scope :by_artist, ->(artist_id) { left_joins(event: :artists).where(artists: { id: artist_id }) }
     scope :with_review, -> { where.not(review: nil).where("TRIM(review) != ''") }
 
     ## VALIDATION METHODS

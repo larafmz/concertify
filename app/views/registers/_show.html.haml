@@ -1,9 +1,9 @@
-- @concert = Concert.find(register.concert_id)
-- @artist = Artist.find(@concert.artists.first.id)
+- @event = Event.find(register.event_id)
+- @artist = Artist.find(@event.artists.first.id)
 .register-show
-    = link_to concert_path(@concert.id) do 
+    = link_to event_path(@event.id) do 
         .rectangle_icon{ style: "border: 1px solid " }
-            = image_tag @concert.photo if @concert.photo.attached?
+            = image_tag @event.photo if @event.photo.attached?
         
     .register-info
         .flex-left
@@ -16,14 +16,14 @@
 
         .separator{style: "margin: 10px 0;"}
 
-        = link_to concert_path(@concert.id) do 
-            %span{ style: "font-size: 28px; font-weight: 600;" }= @concert.tour_name
+        = link_to event_path(@event.id) do 
+            %span{ style: "font-size: 28px; font-weight: 600;" }= @event.tour_name
             
         - if @artist.genre && @artist.genre.name!="Undefined"
             %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"
 
         .softest-color{style: "font-size: 15px;" }
-            %span= "📍#{@concert.ubication&.complete_name} 🗓️ #{short_date(@concert.date)}" 
+            %span= "📍#{@event.ubication&.complete_name} 🗓️ #{short_date(@event.date)}" 
 
         %div{style: "color: orange"}= register.get_rating
         

@@ -14,10 +14,10 @@ class ArtistsController < ApplicationController
 
     if @artist.present?
       ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id
-      concerts_api = TicketmasterService.concerts_by(nil, ticketmaster_id, params[:first_date], params[:second_date], params[:country]) ||[]
-      ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
-      concerts_db = @artist.search_concerts_by(params[:first_date], params[:second_date], params[:country], concerts_api)
-      @concerts = TicketmasterService.merge_concerts(concerts_db, concerts_api)
+      events_api = TicketmasterService.events_by(nil, ticketmaster_id, params[:first_date], params[:second_date], params[:country]) ||[]
+      ticketmaster_ids = events_api.map { |event| event["id"] }
+      events_db = @artist.search_events_by(params[:first_date], params[:second_date], params[:country], events_api)
+      @events = TicketmasterService.merge_events(events_db, events_api)
     else
       redirect_back fallback_location: root_path
       #TO/DO error o mensaje idk

@@ -6,10 +6,10 @@ end
 
 def new
     if params[:ticketmaster_id]
-        @concert = Concert.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
-        @concert_api = TicketmasterService.concert_by_id(params[:ticketmaster_id]) if @concert.nil?
+        @event = Event.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
+        @event_api = TicketmasterService.event_by_id(params[:ticketmaster_id]) if @event.nil?
     else
-        @concert = Concert.find(params[:concert_id])
+        @event = Event.find(params[:event_id])
     end
   @register = Register.new
   render layout: false
@@ -19,13 +19,13 @@ def create
     @register = Register.new(create_params)
 
     if !params[:ticketmaster_id].empty?
-        @concert = Concert.get_by_ticketmaster_id(params[:ticketmaster_id]) 
-        @register.concert_id = @concert.id if @concert
+        @event = Event.get_by_ticketmaster_id(params[:ticketmaster_id]) 
+        @register.event_id = @event.id if @event
     end
     
     ActiveRecord::Base.transaction do
         if @register.save!
-            future_assistance = FutureAssistance.find_by(concert_id: @register.concert_id, user_id: current_user.id)
+            future_assistance = FutureAssistance.find_by(event_id: @register.event_id, user_id: current_user.id)
             future_assistance.destroy if future_assistance
             redirect_to interactuable_path(@register)
         else
@@ -36,13 +36,13 @@ end
 
 def edit
     @register = Register.find(params[:id])
-    @concert = Concert.find(@register.concert_id)
+    @event = Event.find(@register.event_id)
     render layout: false
 end
 
 def update
     @register = Register.find(params[:id])
-    @concert = Concert.find(@register.concert_id)
+    @event = Event.find(@register.event_id)
 
     if @register.update!(create_params)
         redirect_back fallback_location: root_path
@@ -60,7 +60,7 @@ end
 private
 
     def create_params
-        params.require(:register).permit(:concert_id, :review, :user_id, :rating)
+        params.require(:register).permit(:event_id, :review, :user_id, :rating)
     end 
 
 end

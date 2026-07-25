@@ -1,0 +1,67 @@
+.events-items
+    - if events.empty? 
+        = t("not_found_model", model: Event.plural.downcase )
+    - else
+        - events.each_with_index do |item, index|
+            - event = item[:event]
+            - event_date = item[:date]
+            - event_time = item[:time]
+
+            - if index == 0
+                .separator
+
+            .item-event
+                .date-event
+                    = I18n.l(event_date, format: "%B")[0,3].upcase
+                    %br
+                    %span{style: "font-size:20px;"}= event_date.day
+                    %br
+                    - if event_date.year != Date.today.year
+                        = event_date.year
+
+                .event-info
+                    %span.soft-color
+                        = formatted_event_date(event_date, event_time)
+                    %br
+                    %span{style: "font-weight:600"}
+                        - if item[:source] == :db
+                            = link_to event_path(event) do
+                                = event.tour_name
+                        - else
+                            = link_to event_path(id: "ticketmaster", ticketmaster_id: get_event_id(event)) do
+                                = get_event_name(event)
+                    %br
+                    %span.soft-color
+                        - if item[:source] == :db
+                            = event.ubication&.complete_name_with_address
+                        - else
+                            = get_full_ubication(event)
+
+                - if current_user
+                    .button-event
+                        - event_date_status = time_status(event_date, event_time)
+                        - if event_date_status == "past"
+                            - if item[:source] == :db
+                                - register = Register.find_by(user_id: current_user.id, event_id: event.id)
+                            - else
+                                - register = Register.joins(:event).where(user_id: current_user.id, events: { ticketmaster_id: event["id"] }).first
+                            - if register
+                                = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - elsif item[:source] == :db
+                                = link_to t("registers.assisted"), new_register_path(event_id: event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to t("registers.assisted"), new_register_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                        - elsif event_date_status == "future"
+                            - if item[:source] == :db
+                                - future_assistance = FutureAssistance.find_by(user_id: current_user.id, event_id: event.id)
+                            - else
+                                - future_assistance = FutureAssistance.joins(:event).where(user_id: current_user.id, events: { ticketmaster_id: event["id"] }).first
+                            - if future_assistance
+                                = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
+                            - elsif item[:source] == :db
+                                = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                            - else
+                                = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+            
+            - if index != events.count-1
+                .separator

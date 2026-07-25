@@ -1,0 +1,58 @@
+%div{ style: "padding: 30px 70px 10px; background: #1f252b;"}
+    .artist-content{style: "background: #1f252b;"}
+        .artist-info
+            .user_icon
+                = image_tag  @event.photo, class: "artist-avatar" if @event.photo.attached?
+                
+            .artist-name
+                %div= @event.tour_name
+                .soft-color{ style: "font-size: 15px; margin-bottom:5px" }
+                    %div= "📍#{@event.ubication&.complete_name} "
+                .soft-color{ style: "font-size: 15px;" }
+                    %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
+        .flex
+            - if @event_date_status == "past"
+                .stat
+                    .number 
+                        = @event.registers.viewables(current_user).size
+                    .name
+                        = link_to registers_event_path(@event) do
+                            = t("totals", model: Register.plural)
+                .stat
+                    .number
+                        ★ #{@event.average_rating} / 5
+                    .name
+                        = t("average", model: Register.plural)
+            - else
+                .stat
+                    .number
+                        = @event.future_assistances.viewables(current_user).size
+                    .name
+                        = link_to future_assistances_event_path(@event) do
+                            = t("totals", model: FutureAssistance.plural)
+
+            .stat
+                .number
+                    = @event.publications.viewables(current_user).size
+                .name
+                    = link_to publications_event_path(@event) do
+                        =Publication.plural
+
+    
+    %div{style: "display:flex; align-items:center; padding-top: 10px; gap: 20px;"}
+
+        - if current_user
+            %span{ style: "margin-left: auto; background: #1f252b;" }
+                - if @event_date_status == "past"
+                    - register = Register.find_by(user_id: current_user.id, event_id: @event.id)
+                    - if !register
+                        = link_to t("registers.assisted"), new_register_path(event_id: @event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
+                    - else
+                        = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom", style: "height: auto;"
+                - if @event_date_status == "future"
+                    - future_assistance = FutureAssistance.find_by(user_id: current_user.id, event_id: @event.id)
+                    - if !future_assistance
+                        = link_to t("registers.will_assist"), new_future_assistance_path(event_id: @event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
+                    - else
+                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user.id), class: "btn-custom", style: "height: auto;"
+   

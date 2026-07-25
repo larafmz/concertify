@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     end    
   end
 
-  resources :concerts do
+  resources :events do
     collection do
       get :requested
     end

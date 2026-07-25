@@ -10,9 +10,9 @@ es:
       publication:
         one: Publicación
         other: Publicaciones
-      concert:
-        one: Concierto
-        other: Conciertos
+      event:
+        one: Evento
+        other: Eventos
       ubication:
         one: Ubicación
         other: Ubicaciones
@@ -49,7 +49,7 @@ es:
         username: Nombre de usuario
         name: Nombre
         description: Descripción
-      concert:
+      event:
         tour_name: Nombre del Tour / Evento
         date: Fecha
         start_time: Hora de Inicio
@@ -63,8 +63,8 @@ es:
         address: Dirección
       future_assistance:
         from: Desde
-        concert_seat: Ubicación en el concierto
-        concert_seat_details: Detalles de Ubicación
+        event_seat: Ubicación en el evento
+        event_seat_details: Detalles de Ubicación
         company: ¿Con quien vas?
       register:
         review: Reseña

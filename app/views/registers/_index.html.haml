@@ -6,7 +6,7 @@
                 = t("not_found_model", model: Register.plural.downcase )
 
         - registers.each_with_index do |register, index|
-            - concert = register.concert
+            - event = register.event
             .register_user
 
                 = link_to user_path(register.user.id), class: "hover-border-icon" do
@@ -15,15 +15,15 @@
 
                 = link_to comments_interactuable_path(register.id) do 
                     .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid" }
-                        = image_tag concert.photo if concert.photo.attached?
+                        = image_tag event.photo if event.photo.attached?
                 %div
                     .soft-color{style: "font-size: 15px;" }
                         = link_to user_path(register.user_id) do 
                             = register.user.username
                         %span{class: "softest-color"}= t("verbs.logged")
-                    %span{ style: "font-size: 20px; font-weight: 700; font-family: Georgia, 'Times New Roman', Times, serif;" }= concert.tour_name
+                    %span{ style: "font-size: 20px; font-weight: 700; font-family: Georgia, 'Times New Roman', Times, serif;" }= event.tour_name
                     .softest-color{style: "font-size: 15px;" }
-                        %span= "📍#{concert.ubication&.complete_name} 🗓️ #{short_date(concert.date)}" 
+                        %span= "📍#{event.ubication&.complete_name} 🗓️ #{short_date(event.date)}" 
                     %span{style: "color: orange; "}= register.get_rating
                     - if register.review.present?
                         .section-box

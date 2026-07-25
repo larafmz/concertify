@@ -1,8 +1,0 @@
-.widget-content{style: "color: #a4b3c4; background: #1f252b; display: flex; justify-content: left; gap: 60px; padding: 0px 0px 0px 90px;"}
-    = link_to Artist.plural, concert_path(@concert), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :artists)
-    - if @concert_date_status == "past"
-        = link_to Register.plural, registers_concert_path(@concert), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :registers)
-    - else
-        = link_to FutureAssistance.plural, future_assistances_concert_path(@concert), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :future_assistances)
-    = link_to Publication.plural, publications_concert_path(@concert), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :publications)
-.separator{style: "margin-bottom:20px;"}

@@ -18,11 +18,11 @@
                     = @user.registers.size
                 .name
                     = link_to diary_user_path(@user) do
-                        = Concert.plural
+                        = Event.plural
             
             .stat
                 .number
-                    = @user.registers.joins(:concert).where("EXTRACT(YEAR FROM concerts.date) = ?", Date.current.year).size
+                    = @user.registers.joins(:event).where("EXTRACT(YEAR FROM events.date) = ?", Date.current.year).size
                 .name
                     = link_to registers_user_path(@user) do
                         = t("this_year")

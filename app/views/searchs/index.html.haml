@@ -1,11 +1,11 @@
 .widget-content
 
-  - if @concerts.size==0
+  - if @events.size==0
     .message
       ℹ️
-      = t("messages.how_to_find_concert") 
+      = t("messages.how_to_find_event") 
     = form_tag request.path, method: "GET" do
-      = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_concert")}", class: "field-custom", style: "margin-top:20px;"
+      = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_event")}", class: "field-custom", style: "margin-top:20px;"
 
 
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
@@ -36,16 +36,16 @@
         = render "artists/index_cards", artists: @artists_api.first(10)
         = render "artists/index_cards", artists: @artists_db.first(10)
 
-  - if @concerts.size!=0
+  - if @events.size!=0
     .section-box{style: "color: #dfdfdf;"}
-      - if @concerts.size > 100
-        #{Concert.plural.upcase} + 100 #{t("results").upcase}
+      - if @events.size > 100
+        #{Event.plural.upcase} + 100 #{t("results").upcase}
       - else 
-        #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}
+        #{Event.plural.upcase} • #{@events.size} #{t("results").upcase}
       .separator{style: "margin-bottom: 15px; "}
-      = render "concerts/filters", search_by_name: true
+      = render "events/filters", search_by_name: true
       .separator{style: "margin-bottom: 15px; "}
-      = render "concerts/index", concerts: @concerts[0,10]
+      = render "events/index", events: @events[0,10]
 
-  = render "concerts/manual_add"
+  = render "events/manual_add"
           

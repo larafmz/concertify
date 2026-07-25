@@ -1,6 +1,6 @@
 es:
   future_assistances:
-    concert_seats:
+    event_seats:
       pista: Pista
       grada: Grada
       vip: VIP
@@ -10,7 +10,7 @@ es:
       alone: Solo
       accompanied: Acompañado
 
-  concerts:
+  events:
     statuses:
       accepted: Aceptado
       pending: Pendiente
@@ -23,13 +23,13 @@ es:
 
 en: 
   future_assistances:
-    concert_seats:
+    event_seats:
       pista: Standing
       grada: Seating
       vip: VIP
       otro: Other
 
-  concerts:
+  events:
     statuses:
       accepted: Accepted
       pending: Pending

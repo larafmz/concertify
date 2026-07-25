@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-    def formatted_concert_date(date, start_time)
+    def formatted_event_date(date, start_time)
       str = I18n.t("date.day_names")[date.wday]
       str += " • #{formatted_time(start_time)}" if start_time
       str
@@ -27,11 +27,11 @@ module ApplicationHelper
       images.find { |img| img["width"] > 1000 } || images.find { |img| img["width"] > 500 } || images.first
     end
 
-  def time_status(concert_date, concert_time = nil)
+  def time_status(event_date, event_time = nil)
     today = Date.today
-    return "past" if concert_date < today
-    return "future" if concert_date > today
-    concert_time.nil? || concert_time > Time.current ? "future" : "past"
+    return "past" if event_date < today
+    return "future" if event_date > today
+    event_time.nil? || event_time > Time.current ? "future" : "past"
   end
 
   def custom_time_ago_in_words(time)

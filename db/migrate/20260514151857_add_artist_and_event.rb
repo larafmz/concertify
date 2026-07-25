@@ -1,4 +1,4 @@
-class AddArtistAndConcert < ActiveRecord::Migration[7.2]
+class AddArtistAndEvent < ActiveRecord::Migration[7.2]
   def change
     
     create_table :artists do |t|
@@ -9,7 +9,7 @@ class AddArtistAndConcert < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    create_table :concerts do |t|
+    create_table :events do |t|
       t.string :ticketmaster_id
       t.string :tour_name
       t.date :date

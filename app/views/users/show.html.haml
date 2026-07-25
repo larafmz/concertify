@@ -20,7 +20,7 @@
                 = link_to future_assistances_user_path(@user), class: "hover-border", style: "display: flex; align-items: flex-start; justify-content: space-between;" do
                     - @future_assistances.limit(5).each do |future_assistance|
                         .small_vertical_rectangle
-                            = image_tag future_assistance.concert.photo, class: "artist-avatar" if future_assistance.concert.photo.present?
+                            = image_tag future_assistance.event.photo, class: "artist-avatar" if future_assistance.event.photo.present?
 
 
 

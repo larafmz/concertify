@@ -8,33 +8,33 @@
     .registers-items{style: "background: #1e2731; border-radius: 15px; gap: 0px;"}
 
         - registers.each do |register|
-            - concert = register.concert
-            - concert_date = concert.date
+            - event = register.event
+            - event_date = event.date
 
             .diary-wrapper
                 = link_to comments_interactuable_path(register.id), class: "diary-link" do 
                     .diary-obj
-                        .date-concert
-                            = concert_date.strftime("%B")[0,3].upcase
+                        .date-event
+                            = event_date.strftime("%B")[0,3].upcase
                             %br
-                            %span{ style: "font-size: 20px;" }= concert_date.day
+                            %span{ style: "font-size: 20px;" }= event_date.day
                             %br
-                            - if concert_date.year != Date.today.year
-                                = concert_date.year
+                            - if event_date.year != Date.today.year
+                                = event_date.year
 
                         .diary_icon
-                            = image_tag concert.photo if concert.photo.attached?
+                            = image_tag event.photo if event.photo.attached?
 
                         %div
-                            - concert.artists.each_with_index  do |artist, index|
+                            - event.artists.each_with_index  do |artist, index|
                                 %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
-                                - if index < concert.artists.size - 1
+                                - if index < event.artists.size - 1
                                     ,
                             %br
 
-                            %span{ style: "font-size: 18px;", class: "soft-color; " } #{concert.tour_name}
+                            %span{ style: "font-size: 18px;", class: "soft-color; " } #{event.tour_name}
                             
-                            - ub = concert.ubication&.complete_name || "ubication unidentified"
+                            - ub = event.ubication&.complete_name || "ubication unidentified"
                             .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
                                 %span= "📍#{ub}" 
                         %div{style: "color: orange"}= register.get_rating

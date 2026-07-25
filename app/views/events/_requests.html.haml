@@ -1,15 +1,15 @@
 .widget-content{style: "padding-top:0px;"}  
     .registers-items
 
-        - if concerts.empty?
+        - if events.empty?
             .message
                 ℹ️
-                = t("not_found_model", model: t("requested_concerts").downcase)
+                = t("not_found_model", model: t("requested_events").downcase)
 
-        - concerts.each do |concert|
-            - artist = concert.artists.first
-            - concert_date = concert.date
-            - status = concert.status
+        - events.each do |event|
+            - artist = event.artists.first
+            - event_date = event.date
+            - status = event.status
             
             %div{style: "background: #{color_request(status)}; border-radius: 15px;"}
 
@@ -29,27 +29,27 @@
                                 %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
                             %br
 
-                        %span{ style: "font-size: 18px;", class: "soft-color" } #{concert.tour_name}
+                        %span{ style: "font-size: 18px;", class: "soft-color" } #{event.tour_name}
                         %br
 
-                        - ub = concert.ubication&.complete_name || t("not_found")
+                        - ub = event.ubication&.complete_name || t("not_found")
                         .softest-color{style: "font-size: 15px;" }
-                            %span= "📍#{ub} 🗓️ #{short_date(concert.date)}" 
+                            %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
                         
                         %span{style: "color: #{color_request(status)}; font-size: 16px;"}
                             ● #{message_request(status)}
 
                     %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
                         %div{style: "background: #{second_color_request(status)}; color: #{color_request(status)}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
-                            #{emoji_request(status)} #{concert.status_string}
-                        - if concert.requester_id == current_user.id && concert.status == Concert::STATUS_PENDING
+                            #{emoji_request(status)} #{event.status_string}
+                        - if event.requester_id == current_user.id && event.status == Event::STATUS_PENDING
                             %div{style: "display: flex; gap: 20px;"}
-                                = link_to "✎", edit_concert_path(id: concert.id), data: { turbo_frame: "modal" }
-                                = link_to "✗", concert_path(concert), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el concierto solicitado?" }
-                        - elsif concert.accepted?
-                            = link_to t("crud.show", model: Concert.singular), concert_path(concert), class: "btn-custom-orange", style: "font-size: 13px; width: 150px;"
+                                = link_to "✎", edit_event_path(id: event.id), data: { turbo_frame: "modal" }
+                                = link_to "✗", event_path(event), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }
+                        - elsif event.accepted?
+                            = link_to t("crud.show", model: Event.singular), event_path(event), class: "btn-custom-orange", style: "font-size: 13px; width: 150px;"
             
 
                 .sent_at
-                    = t("sent_ago", time:  time_ago_in_words(concert.created_at))
+                    = t("sent_ago", time:  time_ago_in_words(event.created_at))
 

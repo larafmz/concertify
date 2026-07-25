@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_25_200140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,14 +54,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
     t.index ["requester_id"], name: "index_artists_on_requester_id"
   end
 
-  create_table "artists_concerts", force: :cascade do |t|
+  create_table "artists_events", force: :cascade do |t|
     t.bigint "artist_id", null: false
-    t.bigint "concert_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["artist_id", "concert_id"], name: "index_artists_concerts_on_artist_id_and_concert_id", unique: true
-    t.index ["artist_id"], name: "index_artists_concerts_on_artist_id"
-    t.index ["concert_id"], name: "index_artists_concerts_on_concert_id"
+    t.index ["artist_id", "event_id"], name: "index_artists_events_on_artist_id_and_event_id", unique: true
+    t.index ["artist_id"], name: "index_artists_events_on_artist_id"
+    t.index ["event_id"], name: "index_artists_events_on_event_id"
   end
 
   create_table "chat_users", force: :cascade do |t|
@@ -90,7 +90,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "concerts", force: :cascade do |t|
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
     t.string "ticketmaster_id"
     t.string "tour_name"
     t.date "date"
@@ -100,15 +107,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
     t.bigint "ubication_id"
     t.integer "status"
     t.bigint "requester_id"
-    t.index ["requester_id"], name: "index_concerts_on_requester_id"
-    t.index ["ubication_id"], name: "index_concerts_on_ubication_id"
-  end
-
-  create_table "countries", force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["requester_id"], name: "index_events_on_requester_id"
+    t.index ["ubication_id"], name: "index_events_on_ubication_id"
   end
 
   create_table "favorite_artists", force: :cascade do |t|
@@ -122,15 +122,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
 
   create_table "future_assistances", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "concert_id", null: false
+    t.bigint "event_id", null: false
     t.string "from"
-    t.integer "concert_seat"
-    t.string "concert_seat_details"
+    t.integer "event_seat"
+    t.string "event_seat_details"
     t.bigint "interactuable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "company"
-    t.index ["concert_id"], name: "index_future_assistances_on_concert_id"
+    t.index ["event_id"], name: "index_future_assistances_on_event_id"
     t.index ["interactuable_id"], name: "index_future_assistances_on_interactuable_id"
     t.index ["user_id"], name: "index_future_assistances_on_user_id"
   end
@@ -146,12 +146,12 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
     t.bigint "user_id", null: false
     t.string "review"
     t.bigint "artist_id"
-    t.bigint "concert_id"
+    t.bigint "event_id"
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_interactuables_on_artist_id"
-    t.index ["concert_id"], name: "index_interactuables_on_concert_id"
+    t.index ["event_id"], name: "index_interactuables_on_event_id"
     t.index ["user_id"], name: "index_interactuables_on_user_id"
   end
 
@@ -248,16 +248,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_14_133453) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artists", "users", column: "requester_id"
-  add_foreign_key "artists_concerts", "artists"
-  add_foreign_key "artists_concerts", "concerts"
+  add_foreign_key "artists_events", "artists"
+  add_foreign_key "artists_events", "events"
   add_foreign_key "chat_users", "chats"
   add_foreign_key "chat_users", "users"
   add_foreign_key "comments", "interactuables"
   add_foreign_key "comments", "users"
-  add_foreign_key "concerts", "users", column: "requester_id"
+  add_foreign_key "events", "users", column: "requester_id"
   add_foreign_key "favorite_artists", "artists"
   add_foreign_key "favorite_artists", "users"
-  add_foreign_key "future_assistances", "concerts"
+  add_foreign_key "future_assistances", "events"
   add_foreign_key "future_assistances", "interactuables"
   add_foreign_key "future_assistances", "users"
   add_foreign_key "interactuables", "users"

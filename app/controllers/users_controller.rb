@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def diary
-    @registers = @user.registers.joins(:concert).order("concerts.date DESC")
+    @registers = @user.registers.joins(:event).order("events.date DESC")
   end
 
   def artists
@@ -43,11 +43,11 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @requests = Concert.where(requester_id: @user.id).order("created_at DESC")
+    @requests = Event.where(requester_id: @user.id).order("created_at DESC")
   end
 
   def future_assistances
-    @future_assistances = @user.future_assistances.joins(:concert).order("concerts.date ASC")
+    @future_assistances = @user.future_assistances.joins(:event).order("events.date ASC")
   end
 
   def publications

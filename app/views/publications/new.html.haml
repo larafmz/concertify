@@ -9,27 +9,27 @@
       = form_with model: @publication, data: { turbo: false } do |f|
         
         = hidden_field_tag :ticketmaster_id, params[:ticketmaster_id]
-        = f.hidden_field :concert_id, value: params[:concert_id] if @publication.concert_id.nil?
+        = f.hidden_field :event_id, value: params[:event_id] if @publication.event_id.nil?
         = f.hidden_field :user_id, value: current_user&.id
         
         .artist-info
 
-          - if @concert
+          - if @event
             .rectangle_icon
-              - if @concert_api
-                = image_tag get_concert_image_url(@concert_api)
+              - if @event_api
+                = image_tag get_event_image_url(@event_api)
               - else
-                = image_tag  @concert.photo if @concert.photo.attached?
+                = image_tag  @event.photo if @event.photo.attached?
 
               .form-modal-info
                 %span{ style: "font-size: 20px;" }
-                  - if @concert_api
-                    = get_concert_name(@concert_api)
+                  - if @event_api
+                    = get_event_name(@event_api)
                   - else
-                    = @concert.tour_name
+                    = @event.tour_name
 
               %span{ style: "font-size: 13px;" }
-                = "#{@concert.ubication.complete_name} - #{short_date(@concert.date)}"
+                = "#{@event.ubication.complete_name} - #{short_date(@event.date)}"
             .separator
 
           .link_icon 

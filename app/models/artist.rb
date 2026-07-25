@@ -8,8 +8,8 @@ class Artist < ApplicationRecord
 
   ## RELATIONSHIPS
 
-    has_many :artists_concerts, dependent: :destroy
-    has_many :concerts, through: :artists_concerts
+    has_many :artists_events, dependent: :destroy
+    has_many :events, through: :artists_events
     has_many :publications, dependent: :destroy
     belongs_to :genre, optional: true
     has_many :relations, as: :followed, dependent: :destroy
@@ -33,7 +33,7 @@ class Artist < ApplicationRecord
     def self.get_by_ticketmaster_id(id)
       artist = Artist.find_or_create_by!(ticketmaster_id: id) do |a|
         artist_api = TicketmasterService.artist_by_id(id)
-        return if artist_api.nil? #there are concerts with nil artist associated in ticketmaster
+        return if artist_api.nil? #there are events with nil artist associated in ticketmaster
         a.name = artist_api.dig("name")
         if artist_api.dig("images").present?
           image = best_quality_image(artist_api.dig("images"))
@@ -64,20 +64,20 @@ class Artist < ApplicationRecord
       registers.average(:rating).to_i || 0
     end
 
-    def search_concerts_by(first_date, second_date, country_code, concerts_api)
-      concerts_db = self.concerts.accepted
-      ticketmaster_ids = concerts_api.map { |concert| concert["id"] }
-      concerts_db = concerts_db.where(ticketmaster_id: nil).or(concerts_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
+    def search_events_by(first_date, second_date, country_code, events_api)
+      events_db = self.events.accepted
+      ticketmaster_ids = events_api.map { |event| event["id"] }
+      events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
       if first_date.present? || second_date.present?
         first_date = Date.parse(first_date) if first_date && !first_date.empty?
         second_date = Date.parse(second_date) if second_date && !second_date.empty?
         second_date = first_date if !second_date.present?
         first_date ||= Date.today
-        concerts_db = concerts_db.where("date >= ?", first_date)
-        concerts_db = concerts_db.where("date <= ?", second_date)
+        events_db = events_db.where("date >= ?", first_date)
+        events_db = events_db.where("date <= ?", second_date)
       end
-      concerts_db = concerts_db.by_country_code(country_code) if country_code.present?
-      concerts_db
+      events_db = events_db.by_country_code(country_code) if country_code.present?
+      events_db
     end
 
     def follow(user_id)

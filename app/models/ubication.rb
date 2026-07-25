@@ -4,11 +4,11 @@ class Ubication < ApplicationRecord
 
     belongs_to :country
     belongs_to :user, optional: true
-    has_many :concerts
+    has_many :events
 
   ## VALIDATIONS
 
-  # there are concerts in ticketmaster without state or city
+  # there are events in ticketmaster without state or city
     
   ## INSTANCE METHODS
 

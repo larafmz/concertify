@@ -6,9 +6,9 @@
             = t("not_found_model", model: FutureAssistance.plural.downcase )
     - else
         - future_assistances[0..10].each do |future_assistance|
-            - concert = future_assistance.concert
-            - concert_date = concert.date
-            - concert_date_status = time_status(concert_date, concert.start_time)
+            - event = future_assistance.event
+            - event_date = event.date
+            - event_date_status = time_status(event_date, event.start_time)
 
             .future_assistance{style: "margin:20px 0px 20px 0px;"}
                 = link_to user_path(future_assistance.user.id), class: "hover-border-icon" do
@@ -23,10 +23,10 @@
         
                     .flex-left
                         %div{style: "margin-top:10px;"}
-                            - if future_assistance.concert_seat_string || !future_assistance.concert_seat_details.empty?
+                            - if future_assistance.event_seat_string || !future_assistance.event_seat_details.empty?
                                 .bubble
-                                    %span= "🎟️ #{future_assistance.concert_seat_string}"
-                                    %span{class: "softest-color"}= " · #{future_assistance.concert_seat_details}"
+                                    %span= "🎟️ #{future_assistance.event_seat_string}"
+                                    %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
                         
                         %div{style: "margin-top:10px;"}
                             - if future_assistance.from && !future_assistance.from.empty?

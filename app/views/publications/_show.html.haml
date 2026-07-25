@@ -15,11 +15,11 @@
                             %span{style: "color: #65dbff"}
                                 = link_to artist_path(publication.artist) do 
                                     = publication.artist.name
-                        - if publication.concert
+                        - if publication.event
                             %span{class: "soft-color"}=t("about")
                             %span{style: "color: #65dbff"}
-                                = link_to concert_path(publication.concert) do 
-                                    = publication.concert.tour_name
+                                = link_to event_path(publication.event) do 
+                                    = publication.event.tour_name
                         •
                         %span.softest-color
                             = custom_time_ago_in_words(publication.created_at)
@@ -37,9 +37,9 @@
                         - if publication.artist
                             %span{class: "soft-color"}=t("about")
                             %span{style: "color: #65dbff"}= publication.artist.name
-                        - if publication.concert
+                        - if publication.event
                             %span{class: "soft-color"}=t("about")
-                            %span{style: "color: #65dbff"}= publication.concert.tour_name                            
+                            %span{style: "color: #65dbff"}= publication.event.tour_name                            
                         •
                         %span.softest-color
                             = custom_time_ago_in_words(publication.created_at)

@@ -1,17 +1,17 @@
 
 = render "artists/header"
 
-= render "artists/options", active: :concerts
+= render "artists/options", active: :events
 
 .widget-content{style: "color: #a4b3c4; padding-top: 0px;"}
 
     .section-box{style: "margin-top:0px;"}
         .title
-            #{Concert.plural.upcase} • #{@concerts.size} #{t("results").upcase}
-        = render "concerts/filters", search_by_name: false
-        = render "concerts/index", concerts: @concerts[0,10]
+            #{Event.plural.upcase} • #{@events.size} #{t("results").upcase}
+        = render "events/filters", search_by_name: false
+        = render "events/index", events: @events[0,10]
 
     .section-box
-        = render "concerts/manual_add"
+        = render "events/manual_add"
         
            

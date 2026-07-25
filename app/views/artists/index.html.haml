@@ -1,5 +1,5 @@
 %div{ style: "background: #1f252b;color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 0px 0px 50px;" }
-    = link_to @concert.tour_name, concert_path( @concert.id) if @concert
+    = link_to @event.tour_name, event_path( @event.id) if @event
     = link_to @artist.name, artist_path( @artist.id) if @artist
     = t("populars", model: Artist.plural)
 

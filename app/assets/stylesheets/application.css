@@ -192,6 +192,8 @@ a:hover {
 */
 
 .btn-custom-orange,
+.btn-standard,
+.btn-standard-orange,
 .btn-custom {
   background: #3a485a;
   color: white !important;
@@ -218,7 +220,8 @@ a:hover {
   font-weight: 700;
 }
 
-.btn-custom-orange {
+.btn-custom-orange,
+.btn-standard-orange {
   background: #eb5d25;
 }
 

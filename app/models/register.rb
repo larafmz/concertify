@@ -25,7 +25,18 @@ class Register < Interactuable
         end
     end
 
-    ## METHODS
+  ## CLASS METHODS
+
+    def self.viewables(user)
+      if user.present?
+        #Remove Registers from users than have BLOCKED ME
+        Register.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+      else
+        Register.all
+      end
+    end
+
+  ## INSTANCE METHODS
 
     def get_rating
         if self.rating.nil?

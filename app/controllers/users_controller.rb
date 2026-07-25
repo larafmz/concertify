@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, except: [:follow, :unfollow]
+  before_action :network, only: [:followers, :followings, :blocked]
   
   def show
     @favorite_artists = @user.favorite_artists.map(&:artist)
@@ -53,19 +54,24 @@ class UsersController < ApplicationController
     @publications = @user.publications.order("created_at DESC")
   end
 
-  def followings
+  def network
     @followings = @user.followings.users.users.map(&:followed)
     @followers = @user.followers.users.map(&:follower)
+    @blocked = @user.blocked_users.users.map(&:followed)
+  end
+  
+  def followings
   end
 
   def followers
-    @followings = @user.followings.users.map(&:followed)
-    @followers = @user.followers.users.map(&:follower)
+  end
+
+  def blocked
   end
 
   def follow
     if params[:follower_id]
-      User.find(params[:follower_id]).follow(current_user.id) 
+      User.viewables(current_user).find(params[:follower_id]).follow(current_user.id) 
     else
       current_user.follow(params[:id])
     end
@@ -90,7 +96,11 @@ class UsersController < ApplicationController
 private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.viewables(current_user).find_by(id: params[:id])
+    #TO/DO mostrar error de q no encontró al usuario o whatever, de "ha ocurrido un error", se ve muy bien entrando en un like o comentario pasado del usuario q te ha bloqueado
+    if !@user
+      redirect_back fallback_location: root_path
+    end
   end
 
   def create_params

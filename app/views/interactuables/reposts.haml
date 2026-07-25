@@ -22,4 +22,12 @@
             = link_to Repost.plural, reposts_interactuable_path(@interactuable.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.reposts.count} #{Repost.plural}"
         .separator
 
-= render "users/index", users: @users
+.widget-content{style: "padding-top:0px;"}  
+    - if @users.empty?
+        .message
+            ℹ️
+            = t("not_found_model", model: User.plural.downcase )
+    - else
+        %div{style: "border: 1px solid #40556d;"}       
+            .registers-items
+                = render "users/index", users: @users

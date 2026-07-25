@@ -1,8 +1,7 @@
-- if @user
-    - if @interactuable.publication?
-        = render "users/options", active: :publications
-    - elsif @interactuable.register?
-        = render "users/options", active: :reviews
+- if @interactuable.publication?
+    = render "users/options", active: :publications
+- elsif @interactuable.register?
+    = render "users/options", active: :reviews
 
 .widget-content{style: "padding-top:0px; border: "}  
 
@@ -50,7 +49,7 @@
                             %span{class: "softest-color"}
                                 = custom_time_ago_in_words(comment.created_at)
 
-                        - if current_user.id == comment.user_id
+                        - if current_user.id == comment.user_id || current_user.id == comment.interactuable.user_id
                             .dropdown
                                 %button{
                                     "data-bs-toggle" => "dropdown",

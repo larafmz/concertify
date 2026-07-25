@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       delete :unblock
       get :followers
       get :followings
+      get :blocked
       get :registers
       get :diary
       get :future_assistances

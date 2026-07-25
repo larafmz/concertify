@@ -13,6 +13,7 @@ class Artist < ApplicationRecord
     has_many :publications, dependent: :destroy
     belongs_to :genre, optional: true
     has_many :relations, as: :followed, dependent: :destroy
+    has_many :followers, through: :relations, source: :follower
     has_one_attached :photo
     
   ## SCOPES

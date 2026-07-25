@@ -26,6 +26,18 @@ class User < ApplicationRecord
     validates :email, :username, uniqueness: true
     validates :description, length: { maximum: 500, message: ->(object, data) {"solo permite #{data[:count]} carácteres y has usado #{data[:value].to_s.length} carácteres" }}, allow_nil: true
 
+  ## CLASS METHODS
+
+    def self.viewables(user)
+      if user.present?
+        #Remove users than have BLOCKED ME
+        User.where.not(id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        # blocked users can be seen by the blocker user
+      else
+        User.all
+      end
+    end
+
   ## INSTANCE METHODS
  
     def follows_artist?(artist_id)

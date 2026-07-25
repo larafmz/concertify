@@ -25,15 +25,12 @@ class ArtistsController < ApplicationController
   end
 
   def followers
-    @followers = @artist.relations.map(&:follower)
   end
 
   def publications
-    @publications = @artist.publications.order("created_at DESC")
   end
 
   def registers
-    @registers = @artist.registers.order("created_at DESC")
   end
 
   def follow
@@ -58,11 +55,6 @@ class ArtistsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  def requested
-    #TO/DO only to admin role, or maybe delete idk
-    @artists = Artist.where.not(requester_id: nil).order("created_at DESC")
-  end
-
   def destroy
     if @artist.requester_id == current_user.id && @artist.pending? #TO/DO or admin
       @artist.destroy
@@ -71,7 +63,7 @@ class ArtistsController < ApplicationController
   end
 
   def post
-    Publication.create!(artist_id: params[:id], user_id: current_user.id, review: params[:text])
+    Publication.create(artist_id: params[:id], user_id: current_user.id, review: params[:text])
     redirect_to publications_artist_path(@artist)
   end 
 
@@ -79,6 +71,9 @@ private
 
   def set_artist
     @artist = Artist.find(params[:id])
+    @publications = @artist.publications.viewables(current_user).order("created_at DESC")
+    @registers = @artist.registers.viewables(current_user).order("created_at DESC")
+    @followers = @artist.followers.viewables(current_user)
   end
 
   def create_params

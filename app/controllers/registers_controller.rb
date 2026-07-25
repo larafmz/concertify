@@ -1,7 +1,7 @@
 class RegistersController < ApplicationController
   
 def index
-    @registers = Register.all.order("created_at DESC") if @registers.nil?
+    @registers = Register.viewables(current_user).order("created_at DESC") if @registers.nil?
 end
 
 def new

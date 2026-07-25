@@ -46,6 +46,7 @@ es:
   blocked: Bloqueado
   network: Red
   options: Opciones
+  favorite: Favorito
 
   by: por
   about: sobre
@@ -73,7 +74,6 @@ es:
     login: Iniciar sesión
     register: Crear cuenta
     logout: Cerrar sesión
-    unmark_as_favorite: Quitar de Favoritos
     mark_as_favorite: Marcar como Favorito
     request: Solicitar %{model}
     logged: registró

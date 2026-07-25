@@ -1,6 +1,6 @@
 .publication-grid
 
-    - if action_name == "show"
+    - if action_name != "publications" 
         .publication
             = link_to user_path(publication.user.id), class: "hover-border-icon" do
                 .link_icon
@@ -27,7 +27,7 @@
                 %span{style: "font-size: 15px; color: white; overflow-wrap: anywhere;"}
                     = simple_format(publication.review)
     - else
-        = link_to interactuable_path(publication.id), class: "publication-link" do
+        = link_to comments_interactuable_path(publication.id), class: "publication-link" do
             .link_icon
                 = image_tag publication.user.icon if publication.user.icon.attached?
             %div

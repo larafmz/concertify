@@ -22,6 +22,17 @@ class FutureAssistance < ApplicationRecord
       self.concert_seat_details = concert_seat_details.truncate(20) if !concert_seat_details.blank?
       self.from = from.truncate(20) if !from.blank?
     end
+
+  ## CLASS METHODS
+
+    def self.viewables(user)
+      if user.present?
+        #Remove FA's from users than have BLOCKED ME
+        FutureAssistance.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+      else
+        FutureAssistance.all
+      end
+    end
   
   ## INSTANCE METHODS
 
@@ -29,7 +40,6 @@ class FutureAssistance < ApplicationRecord
     return get_concert_seat_name if concert_seat
     nil
   end 
-
   
   def company_string
     case company

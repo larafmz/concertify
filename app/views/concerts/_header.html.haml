@@ -14,7 +14,7 @@
             - if @concert_date_status == "past"
                 .stat
                     .number 
-                        = @concert.registers.size
+                        = @concert.registers.viewables(current_user).size
                     .name
                         = link_to registers_concert_path(@concert) do
                             = t("totals", model: Register.plural)
@@ -26,14 +26,14 @@
             - else
                 .stat
                     .number
-                        = @concert.future_assistances.size
+                        = @concert.future_assistances.viewables(current_user).size
                     .name
                         = link_to future_assistances_concert_path(@concert) do
                             = t("totals", model: FutureAssistance.plural)
 
             .stat
                 .number
-                    = @concert.publications.size
+                    = @concert.publications.viewables(current_user).size
                 .name
                     = link_to publications_concert_path(@concert) do
                         =Publication.plural

@@ -3,7 +3,7 @@ class InteractuablesController < ApplicationController
     def show
         @users = Interactuable.find(params[:id]).likes.map(&:user) 
         @interactuable = Interactuable.find(params[:id])
-        @user = User.find(@interactuable.user_id)
+        @user = User.viewables(current_user).find(@interactuable.user_id)
     end
 
     def like
@@ -39,13 +39,13 @@ class InteractuablesController < ApplicationController
     def comments
         @comments = Interactuable.find(params[:id]).comments.order("created_at DESC")
         @interactuable = Interactuable.find(params[:id])
-        @user = User.find(@interactuable.user_id)
+        @user = User.viewables(current_user).find(@interactuable.user_id)
     end
 
     def reposts
         @users = Interactuable.find(params[:id]).reposts.map(&:user) 
         @interactuable = Interactuable.find(params[:id])
-        @user = User.find(@interactuable.user_id)
+        @user = User.viewables(current_user).find(@interactuable.user_id)
     end
     
 end

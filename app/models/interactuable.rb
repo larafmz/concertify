@@ -28,6 +28,17 @@ class Interactuable < ApplicationRecord
         end
     end
 
+  ## CLASS METHODS
+
+    def self.viewables(user)
+      if user.present?
+        #Remove Interactuables from users than have BLOCKED ME
+        Interactuable.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+      else
+        Interactuable.all
+      end
+    end
+
   ## INSTANCE METHODS
 
     def complete_name

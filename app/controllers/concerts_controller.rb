@@ -62,27 +62,24 @@ class ConcertsController < ApplicationController
       end
   end
 
-  def requested
-    #TO/DO if role admin, show all requesteds
-  end
-
   def destroy
     if @concert.requester_id == current_user.id && @concert.pending? #TO/DO or admin
       @concert.destroy
     end
     redirect_back fallback_location: root_path
   end
+  
+  def requested
+    #TO/DO if role admin, show all requesteds
+  end
 
   def future_assistances
-    @future_assistances = @concert.future_assistances.order("created_at DESC")
   end
 
   def registers
-    @registers = @concert.registers.order("created_at DESC")
   end
 
   def publications
-    @publications = @concert.publications.order("created_at DESC")
   end
 
   def post
@@ -95,6 +92,9 @@ class ConcertsController < ApplicationController
   def set_artist
     @concert = Concert.find(params[:id])
     @concert_date_status = time_status(@concert.date, @concert.start_time)
+    @future_assistances = @concert.future_assistances.viewables(current_user).order("created_at DESC")
+    @registers = @concert.registers.viewables(current_user).order("created_at DESC")
+    @publications = @concert.publications.viewables(current_user).order("created_at DESC")
   end
 
   def create_params

@@ -13,7 +13,8 @@
                 = interactuable.likes.count
 
     %div
-        💬
+        = link_to comments_interactuable_path(interactuable.id) do 
+            💬
         - if interactuable.comments.count != 0
             = interactuable.comments.count
 

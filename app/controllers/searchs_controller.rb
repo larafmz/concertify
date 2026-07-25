@@ -1,5 +1,3 @@
-require 'net/http'
-require "open-uri"
 include TicketmasterConcertHelper
 
 class SearchsController < ApplicationController
@@ -10,7 +8,7 @@ class SearchsController < ApplicationController
     query = params[:search] 
     genre_name = params[:genre] ? Genre.find(params[:genre]).name: nil
 
-    @users = query.present? ? User.by_name(query) : []
+    @users = query.present? ? User.viewables(current_user).by_name(query) : []
     
     @artists_api = query.present? || genre_name ? Array(TicketmasterService.artists_by(query, genre_name)) : []
     @artists_db =  @artists_api.nil? && (query.present? || genre_name) ? Artist.search_by(query, params[:genre]) : []

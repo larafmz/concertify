@@ -13,7 +13,7 @@
         .flex
             .stat
                 .number
-                    =  @artist.relations.count
+                    =  @artist.followers.viewables(current_user).count
                 .name
                     = link_to followers_artist_path(@artist) do   
                         = t("followers")
@@ -29,17 +29,17 @@
         - if current_user
             %span{ style: "display: flex; margin-left: auto; background: #1f252b; gap:10px;" }
                 - if current_user.follows_artist?(@artist.id)
-                    = button_to unfollow_artist_path(@artist), class: "btn-custom-orange", method: :delete, form: { data: { turbo: false } } do
+                    = button_to unfollow_artist_path(@artist), class: "btn-standard", method: :delete, form: { data: { turbo: false } } do
                         = t("following")
                 - else
-                    = button_to follow_artist_path(@artist), method: :post, form: { data: { turbo: false } }, class: "btn-custom-orange" do
+                    = button_to follow_artist_path(@artist), method: :post, form: { data: { turbo: false } }, class: "btn-standard-orange" do                  
                         = t("verbs.follow")
                 - if current_user.favorite_artist?(@artist.id)
-                    = link_to "♡ #{t("verbs.unmark_as_favorite")}", unmark_as_favorite_artist_path(@artist.id), class: "btn-custom", data: { turbo_method: :delete }
+                    = link_to "♡ #{t("favorite")}", unmark_as_favorite_artist_path(@artist.id), class: "btn-standard", data: { turbo_method: :delete }
                 - elsif current_user.can_mark_favorite?
-                    = button_to mark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false } } do
+                    = button_to mark_as_favorite_artist_path(@artist.id), class: "btn-standard-orange", method: :post, form: { data: { turbo: false } } do
                         ♡ #{t("verbs.mark_as_favorite")}
                 - else
-                    = button_to mark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
+                    = button_to mark_as_favorite_artist_path(@artist.id), class: "btn-standard-orange", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
                         ♡ #{t("verbs.mark_as_favorite")}
                  

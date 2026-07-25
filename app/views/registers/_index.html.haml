@@ -13,7 +13,7 @@
                     .link_icon 
                         = image_tag register.user.icon if register.user.icon.attached?
 
-                = link_to interactuable_path(register.id) do 
+                = link_to comments_interactuable_path(register.id) do 
                     .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid" }
                         = image_tag concert.photo if concert.photo.attached?
                 %div

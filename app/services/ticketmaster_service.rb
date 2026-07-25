@@ -31,13 +31,23 @@ class TicketmasterService
         data.dig("_embedded","events").first if data.present?
     end
 
+    def self.recent_concerts(country_code)
+        Rails.cache.fetch("recents_ticketmaster_concerts_#{country_code}", expires_in: 10.minutes) do
+            url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&sort=date,asc&size=8&localStartDateTime=#{"#{Date.today.to_date}T00:00:00"}"
+            url += "&countryCode=#{country_code}" if country_code.present?
+            data = call_api(url)
+            data = data.dig("_embedded","events") if data.present?
+            return [] if data.nil?
+            data
+        end
+    end
 
     def self.concerts_by(query, artist_id, first_date, second_date, country_code)
 
         first_date  = first_date.presence #converts empty to nil
         second_date = second_date.presence #converts empty to nil
-        first_date  = Date.parse(first_date)  if first_date
-        second_date = Date.parse(second_date) if second_date
+        first_date  = Date.parse(first_date) if first_date && !first_date.is_a?(Date)
+        second_date = Date.parse(second_date) if second_date && !second_date.is_a?(Date)
         second_date = first_date if !second_date.present? 
         first_date ||= Date.today-365.days
         first_date  = "#{first_date.to_date}T00:00:00" if first_date.present?

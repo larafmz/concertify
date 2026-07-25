@@ -28,20 +28,17 @@
     .items
       = render "artists/index_cards", artists: @artists_db.first(10)
 
+
   %div{style: "margin-top: 20px;"}
-    =t("recents", model: Concert.plural).upcase
+    =t("upcoming").upcase
+    =Concert.plural.upcase
     - if current_user && current_user.ubication&.country
-      =t("from_followed_artists").upcase
+      = t("in").upcase
+      = t(current_user.ubication.country.name).upcase
     .separator{style: "margin-bottom: 15px; "}
     - if !@concerts.empty?
       .section-box
-        = render "concerts/index_db", concerts: @concerts.limit(5)
-
-  - if @concerts_close.present?
-    %div{style: "margin-top: 20px;"}
-      =t("recents", model: Concert.plural).upcase
-      =t("close_to_you").upcase
-      .separator{style: "margin-bottom: 15px; "}
-      - if !@concerts_close.empty?
-        .section-box
-          = render "concerts/index_db", concerts: @concerts_close.limit(5)
+        - puts "ABAJO"
+        -puts @concerts.inspect
+        = render "concerts/index", concerts: @concerts
+        

@@ -56,7 +56,7 @@ class Concert < ApplicationRecord
     end
 
     def self.search_by(query, first_date, second_date, country_code, concerts_api)
-      return [] if !query.present?
+      return Concert.none if !query.present?
       concerts_db = Concert.accepted.by_name(query)
       
       ticketmaster_ids = concerts_api.map { |concert| concert["id"] }

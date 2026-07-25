@@ -47,10 +47,13 @@ es:
   network: Red
   options: Opciones
   favorite: Favorito
+  upcoming: Próximos
+  today: Hoy
 
   by: por
   about: sobre
   of: de
+  in: En
 
   crud:
     add: "Añadir %{model}"

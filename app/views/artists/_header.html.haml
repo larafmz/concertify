@@ -29,13 +29,17 @@
         - if current_user
             %span{ style: "display: flex; margin-left: auto; background: #1f252b; gap:10px;" }
                 - if current_user.follows_artist?(@artist.id)
-                    = button_to t("following"), unfollow_artist_path(@artist), class: "btn-custom", method: :delete, form: { data: { turbo: false } }
+                    = button_to unfollow_artist_path(@artist), class: "btn-custom-orange", method: :delete, form: { data: { turbo: false } } do
+                        = t("following")
                 - else
-                    = button_to t("verbs.follow"), follow_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false } }
+                    = button_to follow_artist_path(@artist), method: :post, form: { data: { turbo: false } }, class: "btn-custom-orange" do
+                        = t("verbs.follow")
                 - if current_user.favorite_artist?(@artist.id)
                     = link_to "♡ #{t("verbs.unmark_as_favorite")}", unmark_as_favorite_artist_path(@artist.id), class: "btn-custom", data: { turbo_method: :delete }
                 - elsif current_user.can_mark_favorite?
-                    = button_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false } }
+                    = button_to mark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false } } do
+                        ♡ #{t("verbs.mark_as_favorite")}
                 - else
-                    = button_to "♡ #{t("verbs.mark_as_favorite")}", mark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } }
+                    = button_to mark_as_favorite_artist_path(@artist.id), class: "btn-custom-orange", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
+                        ♡ #{t("verbs.mark_as_favorite")}
                  

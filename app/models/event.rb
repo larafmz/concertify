@@ -15,6 +15,7 @@ class Event < ApplicationRecord
     has_many :future_assistances, dependent: :destroy
     has_many :publications, dependent: :destroy
     belongs_to :requester, class_name: "User", optional: true
+    has_one :chat, dependent: :destroy 
 
   ## SCOPES
 

@@ -28,6 +28,11 @@
             %div{style: "margin-bottom: 20px; "}
                 =FavoriteArtist.plural.upcase
                 .separator
+                - if  @favorite_artists.empty?
+                    %div{style: "padding-top:15px;"}
+                        .message
+                            ℹ️
+                            = t("not_found_model", model: Artist.plural.downcase )
                 .four-columns{style: "margin-top: 10px;"}
                     = render "artists/index_cards", artists: @favorite_artists.first(4)
 
@@ -48,7 +53,8 @@
                     = link_to registers_user_path(@user) do
                         %span= t("more").upcase
                 .separator
-                = render "registers/index", registers: @registers_with_review.limit(2)
+                %div{style: "padding-top:15px;"}
+                    = render "registers/index", registers: @registers_with_review.limit(2)
             
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }

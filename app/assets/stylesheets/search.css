@@ -38,19 +38,40 @@
   height: 10px;
 }
 
+.chat-container {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.chat {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.items::-webkit-scrollbar {
+  height: 10px;
+}
+
+.chat::-webkit-scrollbar {
+  width: 10px;
+}
+
 /* Fondo de la barra */
-.items::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #0F1419;
   border-radius: 10px;
 }
 
 /* Parte que se mueve */
-.items::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #6f6e85;
   border-radius: 10px;
 }
 
 /* Al pasar el ratón */
-.items::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: #666;
 }

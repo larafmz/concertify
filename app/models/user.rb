@@ -15,6 +15,8 @@ class User < ApplicationRecord
     has_many :blocked_users, -> {  where(relation_type: 1) }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :favorite_artists, dependent: :destroy
     has_one_attached :icon
+    has_many :chat_users, dependent: :destroy
+    has_many :chats, through: :chat_users
 
   ## SCOPES
   

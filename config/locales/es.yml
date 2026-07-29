@@ -25,6 +25,7 @@ es:
   favorite_artists: Artistas Favoritos
   followers: Seguidores
   following: Siguiendo
+  follower: Seguidor
   request_message:
     0: Información verificada y añadida a la aplicación.
     1: Estamos verificando los detalles.
@@ -49,6 +50,12 @@ es:
   favorite: Favorito
   upcoming: Próximos
   today: Hoy
+  send_message: Envíar mensaje
+  send_a_message: Envía un mensaje...
+  languages: Idiomas
+  spanish: Español
+  english: Ingles
+  switch_to: Cambiar a %{model}
 
   by: por
   about: sobre

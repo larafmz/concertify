@@ -1,0 +1,25 @@
+
+.big-second-column{style: "height: calc(100vh - 120px); overflow:hidden; min-height: 0;"}
+    = render "chats/sidebar"
+
+    %div{style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden;"}
+        = link_to user_path(@user.id), style: "background: #1f252b" do 
+            .artist-info{style: "gap: 15px; margin: 5px;"}
+                .link_icon{style: "height: 50px; width: 50px;"}
+                    = image_tag @user.icon if @user.icon.attached?
+                .artist-name 
+                    %div{style: "margin-bottom:5px; font-size:15px;"}= @user.username
+            .separator{style: "padding:0px;"}
+        .chat-container
+            - if @messages
+                .chat{ data: { controller: "chat" }, style: "margin: 5px;" }
+                    - @messages.each do |message|
+                        - if message.user_id == current_user.id
+                            %div{style: "display:flex; justify-content:flex-end;"}
+                                %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #0290bb"}
+                                    =message.text
+                        - else 
+                            %div{style: "display:flex; justify-content:start;"}
+                                %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
+                                    =message.text
+        = render "chats/send_message"

@@ -26,6 +26,11 @@ Rails.application.routes.draw do
   end
   
   resources :registers 
+  resources :chats do
+    member do
+      post :send_message
+    end
+  end
 
   resources :interactuables do
     member do

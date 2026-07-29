@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    current_user.unfollow(params[:id])
+    params[:follower_id] ? User.find(params[:follower_id]).unfollow(current_user.id) : current_user.unfollow(params[:id])
     redirect_back fallback_location: root_path
   end
 

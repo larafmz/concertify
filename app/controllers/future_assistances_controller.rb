@@ -15,7 +15,7 @@ def create
     @future_assistance = FutureAssistance.new(create_params)
 
     if !params[:ticketmaster_id].empty?
-        @event = Event.get_by_ticketmaster_id(params[:ticketmaster_id])
+        @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id])
         @future_assistance.event_id = @event.id
     end
 

@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 
   def follow
     if params[:follower_id]
-      User.viewables(current_user).find(params[:follower_id]).follow(current_user.id) 
+      User.viewables(current_user).find(params[:follower_id]).follow(current_user&.id) 
     else
       current_user.follow(params[:id])
     end
@@ -84,12 +84,12 @@ class UsersController < ApplicationController
   end
 
   def block
-    @user.block(current_user.id)
+    @user.block(current_user&.id)
     redirect_back fallback_location: root_path
   end
 
   def unblock
-    @user.unblock(current_user.id)
+    @user.unblock(current_user&.id)
     redirect_back fallback_location: root_path
   end
   

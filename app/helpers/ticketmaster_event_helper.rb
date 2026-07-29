@@ -17,9 +17,16 @@ module TicketmasterEventHelper
         Date.parse(event.dig("dates", "start", "localDate"))
     end
 
+    #get the local time to show directly
     def get_event_time(event)
         time = event.dig("dates", "start", "localTime")
         time ? Time.parse(time) : nil
+    end
+
+    def get_event_datetime(event)
+        local_date = event.dig("dates", "start", "localDate")
+        local_time = event.dig("dates", "start", "localTime")
+        Time.zone.parse("#{local_date} #{local_time}")
     end
 
     def get_event_venue(event)
@@ -52,6 +59,7 @@ module TicketmasterEventHelper
 
     def get_full_ubication(event) 
         venue = get_event_venue(event)
+        return if venue.nil?
         parts = [get_venue_address(venue), get_venue_city(venue)]
         parts << get_venue_state(venue) unless get_venue_country(venue) == "Spain"
         parts << get_venue_country(venue)

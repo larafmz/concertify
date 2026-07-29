@@ -2,6 +2,13 @@ module ApplicationHelper
 
     def formatted_event_date(date, start_time)
       str = I18n.t("date.day_names")[date.wday]
+      str += " #{short_date_with_year(date)}"
+      str += " • #{formatted_time(start_time)}" if start_time
+      str
+    end
+
+    def wday_time(date, start_time)
+      str = I18n.t("date.day_names")[date.wday]
       str += " • #{formatted_time(start_time)}" if start_time
       str
     end

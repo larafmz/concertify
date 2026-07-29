@@ -44,15 +44,15 @@
         - if current_user
             %span{ style: "margin-left: auto; background: #1f252b;" }
                 - if @event_date_status == "past"
-                    - register = Register.find_by(user_id: current_user.id, event_id: @event.id)
+                    - register = Register.find_by(user_id: current_user&.id, event_id: @event.id)
                     - if !register
                         = link_to t("registers.assisted"), new_register_path(event_id: @event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
                         = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom", style: "height: auto;"
                 - if @event_date_status == "future"
-                    - future_assistance = FutureAssistance.find_by(user_id: current_user.id, event_id: @event.id)
+                    - future_assistance = FutureAssistance.find_by(user_id: current_user&.id, event_id: @event.id)
                     - if !future_assistance
                         = link_to t("registers.will_assist"), new_future_assistance_path(event_id: @event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
                     - else
-                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user.id), class: "btn-custom", style: "height: auto;"
+                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user&.id), class: "btn-custom", style: "height: auto;"
    

@@ -1,9 +1,8 @@
-- if current_user
-    .event_add
-        .two-columns{style: "grid-template-columns: auto 1fr;"}
-            %div
-                %h5= t("messages.cant_find") 
-                .soft-color
-                    %h5= t("messages.manual_adition") 
-            %span{ style: "margin-left: auto" }
-                = link_to "+ #{t("crud.add", model: Event.singular)}", new_event_path, class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto"
+.event_add
+    .two-columns{style: "grid-template-columns: auto 1fr;"}
+        %div
+            %h5= t("messages.cant_find") 
+            .soft-color
+                %h5= t("messages.manual_adition") 
+        %span{ style: "margin-left: auto" }
+            = link_to "+ #{t("crud.add", model: Event.singular)}", new_event_path, class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto"

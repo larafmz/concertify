@@ -12,7 +12,7 @@ class PublicationsController < ApplicationController
     def create
         @publication = Publication.new(create_params)
         @publication.save!
-        redirect_to publications_path(user_id: current_user.id)
+        redirect_to publications_path(user_id: current_user&.id)
     end
 
     def destroy

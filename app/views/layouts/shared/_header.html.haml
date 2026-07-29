@@ -4,7 +4,7 @@
       = image_tag("icon_logo.png", alt: t("root_title"))
   .app_name
     = link_to root_path do
-      Eventify
+      Concertify
 
   = form_tag "/searchs", method: "GET" do
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"

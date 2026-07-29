@@ -1,4 +1,5 @@
 include ApplicationHelper
+require "open-uri"
 
 class Artist < ApplicationRecord
 
@@ -30,23 +31,34 @@ class Artist < ApplicationRecord
     
   ## CLASS METHODS
 
-    def self.get_by_ticketmaster_id(id)
-      artist = Artist.find_or_create_by!(ticketmaster_id: id) do |a|
+    def self.create_or_update_by_ticketmaster_id(id)
+      artist = Artist.find_or_initialize_by(ticketmaster_id: id)
+      if artist.new_record? || artist.updated_at < 5.hours.ago
         artist_api = TicketmasterService.artist_by_id(id)
         return if artist_api.nil? #there are events with nil artist associated in ticketmaster
-        a.name = artist_api.dig("name")
-        if artist_api.dig("images").present?
-          image = best_quality_image(artist_api.dig("images"))
-          a.photo.attach(io: URI.open(image.dig("url")), filename: image.dig("url"), content_type: "image/jpg")
+        
+        artist.name = artist_api.dig("name")
+        artist.genre = Genre.find_by(name: artist_api.dig("classifications", 0, "genre", "name"))
+        
+        if artist.new_record?
+          if artist_api.dig("images").present?
+            image = best_quality_image(artist_api.dig("images"))
+            artist.photo.attach(io: URI.open(image.dig("url")), filename: image.dig("url"), content_type: "image/jpg")
+          end
         end
-        a.genre = Genre.find_by(name: artist_api.dig("classifications", 0, "genre", "name"))
+        artist.save!
       end 
+
       return artist
     end
 
-    def self.search_by(name, genre_id)
+    def self.search_by(name, genre_id, artists_api)
       artists_db =  Artist.by_name(name)
-      artists_db = artists_db.by_genre(params[:genre]) if params[:genre]
+      artists_db = artists_db.by_genre(genre_id) if genre_id
+
+      ticketmaster_ids = artists_api.map { |artist| artist["id"] }
+      artists_db = artists_db.where(ticketmaster_id: nil).or(artists_db.where.not(ticketmaster_id: ticketmaster_ids))
+
       artists_db
     end
           

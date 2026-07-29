@@ -32,13 +32,11 @@
   %div{style: "margin-top: 20px;"}
     =t("upcoming").upcase
     =Event.plural.upcase
-    - if current_user && current_user.ubication&.country
+    - if current_user && current_user&.ubication&.country
       = t("in").upcase
       = t(current_user.ubication.country.name).upcase
     .separator{style: "margin-bottom: 15px; "}
     - if !@events.empty?
       .section-box
-        - puts "ABAJO"
-        -puts @events.inspect
         = render "events/index", events: @events
         

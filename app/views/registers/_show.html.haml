@@ -35,13 +35,13 @@
             = render "interactuables/footer", interactuable: register
 
         .soft-color{style: "margin: 10px 0;"}
-            = link_to user_path(current_user.id), class: "undecored_link" do 
+            = link_to user_path(@user.id) do 
                 %span{style: "font-weight: 700"}=@user.username.upcase
             =t("registers.liked_these_reviews")
             .separator
             (TO/DO)
 
-    - if current_user && current_user.id == register.user_id
+    - if current_user && current_user&.id == register.user_id
         .dropdown
             %button.btn.btn-secondary.dropdown-toggle{
                 type: "button",

@@ -9,9 +9,11 @@
         .title
             #{Event.plural.upcase} • #{@events.size} #{t("results").upcase}
         = render "events/filters", search_by_name: false
+        .separator{style: "margin-bottom: 15px; "}
         = render "events/index", events: @events[0,10]
 
-    .section-box
-        = render "events/manual_add"
+    - if current_user
+        .section-box
+            = render "events/manual_add"
         
            

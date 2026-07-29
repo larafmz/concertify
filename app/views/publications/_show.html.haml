@@ -48,7 +48,7 @@
                     = simple_format(publication.review)
 
     %div
-        - if current_user && current_user.id == publication.user_id
+        - if current_user && current_user&.id == publication.user_id
             .dropdown
                 %button{
                     "data-bs-toggle" => "dropdown",

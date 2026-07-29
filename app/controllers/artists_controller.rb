@@ -9,7 +9,7 @@ class ArtistsController < ApplicationController
 
   def show
 
-    @artist = Artist.get_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
+    @artist = Artist.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
     @artist = Artist.find_by(id: params[:artist_id] || params[:id]) if !@artist
 
     if @artist.present?
@@ -34,36 +34,36 @@ class ArtistsController < ApplicationController
   end
 
   def follow
-    @artist.follow(current_user.id)
+    @artist.follow(current_user&.id)
     redirect_back fallback_location: root_path
   end
 
   def unfollow
-    @artist.unfollow(current_user.id)
+    @artist.unfollow(current_user&.id)
     redirect_back fallback_location: root_path
   end
 
   def mark_as_favorite
     if current_user.can_mark_favorite?
-      @artist.mark_as_favorite(current_user.id)
+      @artist.mark_as_favorite(current_user&.id)
     end
     redirect_back fallback_location: root_path
   end
 
   def unmark_as_favorite
-    @artist.unmark_as_favorite(current_user.id)
+    @artist.unmark_as_favorite(current_user&.id)
     redirect_back fallback_location: root_path
   end
 
   def destroy
-    if @artist.requester_id == current_user.id && @artist.pending? #TO/DO or admin
+    if @artist.requester_id == current_user&.id && @artist.pending? #TO/DO or admin
       @artist.destroy
     end
     redirect_back fallback_location: root_path
   end
 
   def post
-    Publication.create(artist_id: params[:id], user_id: current_user.id, review: params[:text])
+    Publication.create(artist_id: params[:id], user_id: current_user&.id, review: params[:text])
     redirect_to publications_artist_path(@artist)
   end 
 

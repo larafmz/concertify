@@ -1,6 +1,6 @@
 .soft-color{style: "font-size: 15px; gap:30px; display: flex; align-items: center;"}
     %div{style: "display: flex;"}
-        - if !current_user || (current_user.id == interactuable.user.id)
+        - if !current_user || (current_user&.id == interactuable.user.id)
             %span{style: "color: white; font-size:18px; "} ♡ 
         - else
             = button_to like_interactuable_path(interactuable), method: :post, form: { data: { turbo: false } }, class: "button-without-format" do
@@ -19,7 +19,7 @@
             = interactuable.comments.count
 
     %div{style: "display: flex; align-items: center"}
-        - if !current_user || (current_user.id == interactuable.user.id)
+        - if !current_user || (current_user&.id == interactuable.user.id)
             %span{style: "color: white; font-size:18px; "} 🗘
         - else
             = button_to repost_interactuable_path(interactuable), method: :post, form: { data: { turbo: false } }, class: "button-without-format" do

@@ -6,8 +6,8 @@
                 
             .artist-name
                 %div{style: "margin-bottom:5px; font-size:25px;"}= @user.username
-                - if current_user.id == @user.id
-                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user.id), class: "small-btn-custom"
+                - if current_user&.id == @user.id
+                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user&.id), class: "small-btn-custom"
                 - if @user.ubication
                     .soft-color{style: "font-size: 15px;" } 
                         📍 #{@user.ubication.complete_name}
@@ -42,7 +42,7 @@
 
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
-        - if current_user && current_user.id!=@user.id
+        - if current_user && current_user&.id!=@user.id
             .soft-color{ style: "margin-left: auto; background: #1f252b;"}
                 - if current_user.blocked_user?(@user.id)
                     .red-message
@@ -53,7 +53,7 @@
                         = link_to t("following"), unfollow_user_path(@user.id), class: "btn-standard", data: { turbo_method: :delete }
                     - else
                         = link_to t("verbs.follow"), follow_user_path(@user.id), class: "btn-standard-orange", data: { turbo_method: :post }
-                    - if @user.follows_user?(current_user.id)   
+                    - if @user.follows_user?(current_user&.id)   
                         %span{style: "margin-left: 10px;"}= t("follows_you")
 
 
@@ -69,7 +69,7 @@
                             = link_to t("verbs.unblock"), unblock_user_path(@user.id), class: "dropdown-item", data: { turbo_method: :delete }
                         - else
                             = link_to t("verbs.block"), block_user_path(@user.id), class: "dropdown-item", data: { turbo_method: :post }
-                    - if @user.follows_user?(current_user.id)
+                    - if @user.follows_user?(current_user&.id)
                         %li
                             %hr.dropdown-divider     
                         %li

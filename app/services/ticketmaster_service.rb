@@ -1,3 +1,7 @@
+require "net/http"
+require "uri"
+require "json"
+
 class TicketmasterService
     API_KEY = Rails.application.credentials.ticketmaster[:api_key]
 
@@ -7,7 +11,7 @@ class TicketmasterService
             response = Net::HTTP.get(URI(url))
             return JSON.parse(response)
         rescue
-            puts "Error al conectar con Ticketmaster" #TO/DO mostrar esto en un pop up o algo asi
+            puts "Error al conectar con Ticketmaster" #TO/DO mostraget_venue_address(venue)r esto en un pop up o algo asi
             return nil
         end
     end

@@ -54,7 +54,7 @@
                         .bubble
                             #{future_assistance.company_string}
                 
-                    - if future_assistance.user_id == current_user.id
+                    - if future_assistance.user_id == current_user&.id
                         - if event_date_status == "future"
                             = link_to "✎", edit_future_assistance_path(id: future_assistance.id), data: { turbo_frame: "modal" }
                             = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }

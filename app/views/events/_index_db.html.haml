@@ -1,6 +1,8 @@
 .events-items
     - if events.empty? 
-        = t("not_found_model", model: Event.plural.downcase )
+        .message
+            ℹ️
+            = t("not_found_model", model: Event.plural.downcase )
     - else
         - events.each_with_index  do |event, index|
             .item-event
@@ -14,7 +16,7 @@
                         = event_date.year
                 .event-info
                     %span{ class: "soft-color" }
-                        = formatted_event_date(event_date, event.start_time)
+                        = wday_time(event_date, event.start_time)
                     %br               
                     %span{ style: "font-weight: 600" }
                         = link_to event_path(event.id) do 
@@ -26,13 +28,13 @@
                     .button-event
                         - event_date_status = time_status(event_date, event.start_time)
                         - if event_date_status == "past"
-                            - register = Register.find_by(user_id: current_user.id, event_id: event.id)
+                            - register = Register.find_by(user_id: current_user&.id, event_id: event.id)
                             - if !register
                                 = link_to t("registers.assisted"), new_register_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                             - else
                                 = link_to "✎", edit_register_path(id: register.id), data: { turbo_frame: "modal" }
                         - if event_date_status == "future"
-                            - future_assistance = FutureAssistance.find_by(user_id: current_user.id, event_id: event.id )
+                            - future_assistance = FutureAssistance.find_by(user_id: current_user&.id, event_id: event.id )
                             - if !future_assistance
                                 = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                             - else

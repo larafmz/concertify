@@ -1,6 +1,6 @@
 .widget-content
 
-  - if @events.size==0
+  - if @events.size==0 && current_user
     .message
       ℹ️
       = t("messages.how_to_find_event") 
@@ -47,5 +47,6 @@
       .separator{style: "margin-bottom: 15px; "}
       = render "events/index", events: @events[0,10]
 
-  = render "events/manual_add"
+  - if current_user
+    = render "events/manual_add"
           

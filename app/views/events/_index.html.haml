@@ -1,6 +1,8 @@
 .events-items
     - if events.empty? 
-        = t("not_found_model", model: Event.plural.downcase )
+        .message
+            ℹ️
+            = t("not_found_model", model: Event.plural.downcase )
     - else
         - events.each_with_index do |item, index|
             - event = item[:event]
@@ -21,7 +23,7 @@
 
                 .event-info
                     %span.soft-color
-                        = formatted_event_date(event_date, event_time)
+                        = wday_time(event_date, event_time)
                     %br
                     %span{style: "font-weight:600"}
                         - if item[:source] == :db
@@ -42,9 +44,9 @@
                         - event_date_status = time_status(event_date, event_time)
                         - if event_date_status == "past"
                             - if item[:source] == :db
-                                - register = Register.find_by(user_id: current_user.id, event_id: event.id)
+                                - register = Register.find_by(user_id: current_user&.id, event_id: event.id)
                             - else
-                                - register = Register.joins(:event).where(user_id: current_user.id, events: { ticketmaster_id: event["id"] }).first
+                                - register = Register.joins(:event).where(user_id: current_user&.id, events: { ticketmaster_id: event["id"] }).first
                             - if register
                                 = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), class: "btn-custom", data: { turbo_frame: "modal" }
                             - elsif item[:source] == :db
@@ -53,9 +55,9 @@
                                 = link_to t("registers.assisted"), new_register_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
                         - elsif event_date_status == "future"
                             - if item[:source] == :db
-                                - future_assistance = FutureAssistance.find_by(user_id: current_user.id, event_id: event.id)
+                                - future_assistance = FutureAssistance.find_by(user_id: current_user&.id, event_id: event.id)
                             - else
-                                - future_assistance = FutureAssistance.joins(:event).where(user_id: current_user.id, events: { ticketmaster_id: event["id"] }).first
+                                - future_assistance = FutureAssistance.joins(:event).where(user_id: current_user&.id, events: { ticketmaster_id: event["id"] }).first
                             - if future_assistance
                                 = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
                             - elsif item[:source] == :db

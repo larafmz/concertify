@@ -9,7 +9,7 @@ class Event < ApplicationRecord
   ## RELATIONSHIPS
     has_many :artists_events, dependent: :destroy
     has_many :artists, through: :artists_events
-    belongs_to :ubication
+    belongs_to :ubication, optional: true
     has_one_attached :photo
     has_many :registers, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
@@ -32,25 +32,29 @@ class Event < ApplicationRecord
 
   ## CLASS METHODS
 
-    def self.get_by_ticketmaster_id(id)
-      event = Event.find_or_create_by!(ticketmaster_id: id) do |c|
-        event_api = TicketmasterService.event_by_id(id)
-        artists = get_event_artists(event_api)
-        artists&.each do |artist|
-          a = Artist.get_by_ticketmaster_id(artist["id"])
-          c.artists << a if a
-        end     
-        c.date = get_event_date(event_api)
-        c.tour_name = event_api.dig("name")
-        c.start_time = get_event_time(event_api)
-
-        if event_api.dig("images").present?
-          image = get_event_image_url(event_api)
-          c.photo.attach(io: URI.open(image), filename: image, content_type: "image/jpg")
+    def self.create_or_update_by_ticketmaster_id(ticketmaster_id)
+      event = Event.find_or_initialize_by(ticketmaster_id: ticketmaster_id)
+      if event.new_record? || event.updated_at < 5.hours.ago
+        event_api = TicketmasterService.event_by_id(ticketmaster_id)
+        
+        if event.new_record?
+          artists = get_event_artists(event_api)
+          artists&.each do |artist|
+            a = Artist.create_or_update_by_ticketmaster_id(artist["id"])
+            event.artists << a if a
+          end     
+          if event_api.dig("images").present?
+            image = get_event_image_url(event_api)
+            event.photo.attach(io: URI.open(image), filename: image, content_type: "image/jpg")
+          end
         end
 
+        event.tour_name = event_api.dig("name")
+        event.date = get_event_date(event_api)
+        event.start_time = get_event_datetime(event_api)
         venue = get_event_venue(event_api)
-        c.ubication = Ubication.find_or_create_by(city: get_venue_city(venue), state: get_venue_state(venue), country: Country.find_by(code: get_venue_country_code(venue)), address: get_venue_address(venue))
+        event.ubication = venue.nil? ? nil : Ubication.find_or_create_by(city: get_venue_city(venue), state: get_venue_state(venue), country: Country.find_by(code: get_venue_country_code(venue)), address: get_venue_address(venue))
+        event.save!
       end
       return event
     end

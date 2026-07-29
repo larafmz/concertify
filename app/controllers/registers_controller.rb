@@ -19,13 +19,13 @@ def create
     @register = Register.new(create_params)
 
     if !params[:ticketmaster_id].empty?
-        @event = Event.get_by_ticketmaster_id(params[:ticketmaster_id]) 
+        @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) 
         @register.event_id = @event.id if @event
     end
     
     ActiveRecord::Base.transaction do
         if @register.save!
-            future_assistance = FutureAssistance.find_by(event_id: @register.event_id, user_id: current_user.id)
+            future_assistance = FutureAssistance.find_by(event_id: @register.event_id, user_id: current_user&.id)
             future_assistance.destroy if future_assistance
             redirect_to interactuable_path(@register)
         else

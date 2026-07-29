@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_25_200140) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_29_120218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,12 +101,12 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_25_200140) do
     t.string "ticketmaster_id"
     t.string "tour_name"
     t.date "date"
-    t.time "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ubication_id"
     t.integer "status"
     t.bigint "requester_id"
+    t.datetime "start_time"
     t.index ["requester_id"], name: "index_events_on_requester_id"
     t.index ["ubication_id"], name: "index_events_on_ubication_id"
   end

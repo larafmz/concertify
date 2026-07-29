@@ -7,27 +7,27 @@ class InteractuablesController < ApplicationController
     end
 
     def like
-        existing_like = Like.find_by(interactuable_id: params[:id], user_id: current_user.id)
+        existing_like = Like.find_by(interactuable_id: params[:id], user_id: current_user&.id)
         if existing_like
             existing_like.destroy
         else
-            existing_like = Like.create!(interactuable_id: params[:id], user_id: current_user.id)
+            existing_like = Like.create!(interactuable_id: params[:id], user_id: current_user&.id)
         end
         redirect_back fallback_location: root_path
     end
 
     def repost
-        existing_repost = Repost.find_by(interactuable_id: params[:id], user_id: current_user.id)
+        existing_repost = Repost.find_by(interactuable_id: params[:id], user_id: current_user&.id)
         if existing_repost
             existing_repost.destroy
         else
-            existing_repost = Repost.create!(interactuable_id: params[:id], user_id: current_user.id)
+            existing_repost = Repost.create!(interactuable_id: params[:id], user_id: current_user&.id)
         end
         redirect_back fallback_location: root_path
     end
 
     def comment
-        Comment.create!(interactuable_id: params[:id], user_id: current_user.id, text: params[:text])
+        Comment.create!(interactuable_id: params[:id], user_id: current_user&.id, text: params[:text])
         redirect_to comments_interactuable_path(params[:id])
     end
 

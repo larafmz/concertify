@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_29_154059) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_30_140236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,19 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_154059) do
     t.index ["artist_id", "event_id"], name: "index_artists_events_on_artist_id_and_event_id", unique: true
     t.index ["artist_id"], name: "index_artists_events_on_artist_id"
     t.index ["event_id"], name: "index_artists_events_on_event_id"
+  end
+
+  create_table "chat_entries", force: :cascade do |t|
+    t.string "text"
+    t.bigint "chat_id"
+    t.bigint "user_id"
+    t.bigint "message_father_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "chat_type"
+    t.index ["chat_id"], name: "index_chat_entries_on_chat_id"
+    t.index ["message_father_id"], name: "index_chat_entries_on_message_father_id"
+    t.index ["user_id"], name: "index_chat_entries_on_user_id"
   end
 
   create_table "chat_users", force: :cascade do |t|
@@ -164,18 +177,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_154059) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "text"
-    t.bigint "chat_id"
-    t.bigint "user_id"
-    t.bigint "message_father_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_messages_on_chat_id"
-    t.index ["message_father_id"], name: "index_messages_on_message_father_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
   create_table "notifications", force: :cascade do |t|
     t.string "text"
     t.date "date"
@@ -250,6 +251,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_154059) do
   add_foreign_key "artists", "users", column: "requester_id"
   add_foreign_key "artists_events", "artists"
   add_foreign_key "artists_events", "events"
+  add_foreign_key "chat_entries", "chat_entries", column: "message_father_id"
   add_foreign_key "chat_users", "chats"
   add_foreign_key "chat_users", "users"
   add_foreign_key "comments", "interactuables"
@@ -263,7 +265,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_154059) do
   add_foreign_key "interactuables", "users"
   add_foreign_key "likes", "interactuables"
   add_foreign_key "likes", "users"
-  add_foreign_key "messages", "messages", column: "message_father_id"
   add_foreign_key "notifications", "users"
   add_foreign_key "relations", "users", column: "follower_id"
   add_foreign_key "reposts", "interactuables"

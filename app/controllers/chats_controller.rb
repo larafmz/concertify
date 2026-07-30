@@ -6,22 +6,21 @@ class ChatsController < ApplicationController
   end
 
   def show
-    #cant enter a chat if youre not assisting the event
-    if @event && ( !Register.exists?(user_id: current_user&.id, event_id: @event.id) && !FutureAssistance.exists?(user_id: current_user&.id, event_id: @event.id) )
-      redirect_to event_path(@event)
-      return
-    end
-    @chat_entries = @chat.chat_entries if @chat
+    @chat_entries = @chat.chat_entries.order("created_at ASC") if @chat
   end
 
   def send_message
     @chat = Chat.new(event_id: params[:event_id]) if !@chat.present?
-    @chat.chat_users << ChatUser.new(user_id: params[:user_id]) if params[:user_id]
+
+    if params[:user_id] && !@chat.chat_users.exists?(user_id: params[:user_id])
+      @chat.chat_users << ChatUser.new(user_id: params[:user_id]) 
+    end
 
     if !@chat.chat_users.exists?(user_id: current_user.id)
       @chat.chat_users << ChatUser.new(user_id: current_user.id) 
       ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: "entered_chat", chat_type: 1)
     end
+    
     @chat.save!
 
     ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
@@ -51,6 +50,9 @@ class ChatsController < ApplicationController
           @chat = Chat.find(params[:id])
           @event = @chat.event if @chat.event.present?
           @user = @chat.other_user(current_user) if !@chat.event.present?
+          if !@chat.chat_users.exists?(user_id: current_user.id)
+            redirect_to chats_path
+          end
         end
         @chats = current_user.chats
       end

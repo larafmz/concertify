@@ -1,4 +1,12 @@
 class ChatUser < ApplicationRecord
-  belongs_to :user
-  belongs_to :chat
+
+  ## RELATIONSHIPS
+
+    belongs_to :user
+    belongs_to :chat
+
+  ## VALIDATIONS
+
+    validates :user_id, uniqueness: { scope: :chat_id }
+
 end

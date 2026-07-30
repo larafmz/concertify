@@ -5,7 +5,7 @@ class Chat < ApplicationRecord
     has_many :chat_users, dependent: :destroy
     accepts_nested_attributes_for :chat_users
     
-    has_many :messages, dependent: :destroy
+    has_many :chat_entries, dependent: :destroy
     belongs_to :event, optional: true
 
   ## SCOPES

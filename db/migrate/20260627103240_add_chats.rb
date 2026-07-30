@@ -6,11 +6,12 @@ class AddChats < ActiveRecord::Migration[7.2]
       t.timestamps
     end    
 
-    create_table :messages do |t|
+    create_table :chat_entries do |t|
       t.string :text
       t.references :chat
       t.references :user
-      t.references :message_father, foreign_key: { to_table: :messages }
+      t.integer :chat_type
+      t.references :message_father, foreign_key: { to_table: :chat_entries }
       t.timestamps
     end    
 

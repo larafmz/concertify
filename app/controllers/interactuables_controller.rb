@@ -5,6 +5,12 @@ class InteractuablesController < ApplicationController
         @interactuable = Interactuable.find(params[:id])
         @user = User.viewables(current_user).find(@interactuable.user_id)
     end
+        
+    def destroy
+        interactuable = Interactuable.find(params[:id])
+        interactuable.destroy
+        redirect_to registers_user_path(current_user)
+    end
 
     def like
         existing_like = Like.find_by(interactuable_id: params[:id], user_id: current_user&.id)

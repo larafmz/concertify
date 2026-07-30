@@ -1,4 +1,6 @@
-class Message < ApplicationRecord
+class ChatEntry < ApplicationRecord
+
+    kindable :chat_type, { :user_message => 0, :info_message => 1 }
 
   ## RELATIONSHIPS
 

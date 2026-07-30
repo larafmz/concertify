@@ -59,6 +59,11 @@ es:
   access_chat: Acceder a Chat
   members: Miembros
   exit_group: Salir del Grupo
+  exited_chat: "%{model} salió del grupo"
+  entered_chat: "%{model} se unió al grupo"
+  you_exited_chat: Saliste del grupo
+  you_entered_chat: Te uniste al grupo
+  
 
   by: por
   about: sobre

@@ -6,21 +6,31 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @messages = @chat.messages if @chat
+    #cant enter a chat if youre not assisting the event
+    if @event && ( !Register.exists?(user_id: current_user&.id, event_id: @event.id) && !FutureAssistance.exists?(user_id: current_user&.id, event_id: @event.id) )
+      redirect_to event_path(@event)
+      return
+    end
+    @chat_entries = @chat.chat_entries if @chat
   end
 
   def send_message
     @chat = Chat.new(event_id: params[:event_id]) if !@chat.present?
     @chat.chat_users << ChatUser.new(user_id: params[:user_id]) if params[:user_id]
-    @chat.chat_users << ChatUser.new(user_id: current_user.id) if !@chat.chat_users.exists?(user_id: current_user.id)
+
+    if !@chat.chat_users.exists?(user_id: current_user.id)
+      @chat.chat_users << ChatUser.new(user_id: current_user.id) 
+      ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: "entered_chat", chat_type: 1)
+    end
     @chat.save!
 
-    Message.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message])
+    ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
     redirect_back fallback_location: root_path
   end
 
   def exit
     ChatUser.destroy_by(user_id: params[:user_id], chat_id: params[:id])
+    ChatEntry.create(chat_id: params[:id], user_id: params[:user_id], text: "exited_chat", chat_type: 1)
     redirect_to chats_path
   end
 

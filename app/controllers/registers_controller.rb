@@ -27,7 +27,7 @@ def create
         if @register.save!
             future_assistance = FutureAssistance.find_by(event_id: @register.event_id, user_id: current_user&.id)
             future_assistance.destroy if future_assistance
-            redirect_to interactuable_path(@register)
+            redirect_back fallback_location: root_path
         else
             redirect_back fallback_location: root_path
         end
@@ -49,12 +49,6 @@ def update
     else
         redirect_back fallback_location: root_path
     end
-end
-
-def destroy
-  @register = Register.find(params[:id])
-  @register.destroy
-  redirect_to root_path
 end
 
 private

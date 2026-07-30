@@ -7,6 +7,7 @@ class ChatsController < ApplicationController
 
   def show
     @chat_entries = @chat.chat_entries.order("created_at ASC") if @chat
+    current_user.notifications.for_chats.where(notificable_id: @chat.id).update(opened: true)
   end
 
   def send_message
@@ -24,6 +25,7 @@ class ChatsController < ApplicationController
     @chat.save!
 
     ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
+    Notification.create_for_chat(current_user.id, @chat.id)
     redirect_back fallback_location: root_path
   end
 
@@ -54,7 +56,8 @@ class ChatsController < ApplicationController
             redirect_to chats_path
           end
         end
-        @chats = current_user.chats
+        #order by recent messages
+        @chats = current_user.chats.left_joins(:chat_entries).where(chat_entries: { chat_type: 0}).group(:id).order(Arel.sql("MAX(chat_entries.created_at) DESC"))
       end
     end
 

@@ -4,6 +4,7 @@ class Chat < ApplicationRecord
 
     has_many :chat_users, dependent: :destroy
     accepts_nested_attributes_for :chat_users
+    has_many :users, through: :chat_users
     
     has_many :chat_entries, dependent: :destroy
     belongs_to :event, optional: true
@@ -15,6 +16,10 @@ class Chat < ApplicationRecord
     }
 
   ## INSTANCE METHODS
+
+    def messages
+      chat_entries.user_messages 
+    end
 
     def other_user(current_user)
       chat_users.where.not(user_id: current_user&.id).first.user
@@ -28,6 +33,10 @@ class Chat < ApplicationRecord
     def photo(current_user)
       return event.photo if event
       other_user(current_user).icon
+    end
+
+    def has_notification?(user_id)
+      Notification.exists?(user_id: user_id, notificable_type: "Chat", notificable_id: self.id, opened: false)
     end
 
 end

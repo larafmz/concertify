@@ -52,7 +52,7 @@
                             - if chat_entry.user_id == current_user.id
                                 %div{style: "display:flex; justify-content:flex-end;"}
                                     %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #0290bb"}
-                                        = chat_entry.text
+                                        %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
                                         %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
                             - else 
 
@@ -64,7 +64,7 @@
                                         %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}
                                             = chat_entry.user.username
                                         %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
-                                            = chat_entry.text
+                                            %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
                                             %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
                         - else
                             .soft-color{style: "display:flex; justify-content:center; font-size:13px;"}

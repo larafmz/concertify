@@ -2,14 +2,45 @@
 .big-second-column{style: "height: calc(100vh - 120px); overflow:hidden; min-height: 0;"}
     = render "chats/sidebar"
 
-    %div{style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden;"}
-        = link_to user_path(@user.id), style: "background: #1f252b" do 
-            .artist-info{style: "gap: 15px; margin: 5px;"}
-                .link_icon{style: "height: 50px; width: 50px;"}
-                    = image_tag @user.icon if @user.icon.attached?
-                .artist-name 
-                    %div{style: "margin-bottom:5px; font-size:15px;"}= @user.username
-            .separator{style: "padding:0px;"}
+    %div{style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; "}
+
+        %div{style: "display: grid; grid-template-columns: 1fr 1fr auto; background: #1f252b"}
+            - if @user
+                = link_to user_path(@user.id) do 
+                    .artist-info{style: "gap: 15px; margin: 5px;"}
+                        .link_icon{style: "height: 50px; width: 50px;"}
+                            = image_tag @user.icon if @user.icon.attached?
+                        .artist-name 
+                            %div{style: "margin-bottom:5px; font-size:15px;"}= @user.username
+            - elsif @event
+                = link_to event_path(@event.id) do 
+                    .artist-info{style: "gap: 15px; margin: 5px;"}
+                        .link_icon{style: "height: 50px; width: 50px;"}
+                            = image_tag @event.photo if @event.photo.attached?
+                        .artist-name 
+                            %div{style: "font-size:15px;"}= @event.tour_name
+                            .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
+                                %div= "📍#{@event.ubication&.complete_name} 🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
+                %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
+                    %div{style: "margin-right: 15px;"}
+                        = @chat ? @chat.chat_users.count : "0"
+                        =t("members")
+                - if @chat
+                    - exit_title = @chat.event.present? ? t("exit_group") : t("crud.destroy", model: Chat.singular)
+                    %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
+                        .dropdown
+                            %button{
+                                "data-bs-toggle" => "dropdown",
+                                style: "background: none; border:0px; color: white;"
+                            }
+                                ⁝
+                            %ul.dropdown-menu
+                                %li
+                                    = button_to exit_title, exit_chat_path(@chat, user_id: current_user.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
+                        
+                        
+        .separator{style: "padding:0px;"}
+
         .chat-container
             - if @messages
                 .chat{ data: { controller: "chat" }, style: "margin: 5px;" }
@@ -17,9 +48,17 @@
                         - if message.user_id == current_user.id
                             %div{style: "display:flex; justify-content:flex-end;"}
                                 %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #0290bb"}
-                                    =message.text
+                                    = message.text
                         - else 
-                            %div{style: "display:flex; justify-content:start;"}
-                                %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
-                                    =message.text
+
+                            %div{style: "display:flex; justify-content:start; align-items:center;"}
+                                = link_to user_path(message.user.id) do 
+                                    .link_icon{style: "height: 40px; width: 40px;"}
+                                        = image_tag message.user.icon if message.user.icon.attached?
+                                %div
+                                    %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}
+                                        = message.user.username
+                                    %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
+                                        = message.text
+        
         = render "chats/send_message"

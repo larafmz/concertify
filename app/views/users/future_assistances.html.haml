@@ -20,8 +20,9 @@
                     - if event_date.year != Date.today.year
                         = event_date.year
 
-                .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
-                    = image_tag event.photo if event.photo.attached?
+                = link_to event_path(event.id) do 
+                    .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
+                        = image_tag event.photo if event.photo.attached?
 
                 %div
 

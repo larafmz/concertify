@@ -56,6 +56,9 @@ es:
   spanish: Español
   english: Ingles
   switch_to: Cambiar a %{model}
+  access_chat: Acceder a Chat
+  members: Miembros
+  exit_group: Salir del Grupo
 
   by: por
   about: sobre

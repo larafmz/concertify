@@ -17,16 +17,16 @@ class Chat < ApplicationRecord
   ## INSTANCE METHODS
 
     def other_user(current_user)
-      chat_users.where.not(user_id: current_user.id).first.user
+      chat_users.where.not(user_id: current_user&.id).first.user
     end
 
     def name(current_user)
-      event.tour_name if event
+      return event.tour_name if event
       other_user(current_user).username
     end
 
     def photo(current_user)
-      event.photo if event
+      return event.photo if event
       other_user(current_user).icon
     end
 

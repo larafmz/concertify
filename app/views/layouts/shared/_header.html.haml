@@ -37,24 +37,25 @@
       = link_to "#", class: "hover-border-icon", title: "TO/DO" do
         .link_icon{ class: ("active" if current_page?("#")) }
           🔔
-      = link_to chats_path, class: "hover-border-icon", title: "TO/DO" do
-        .link_icon{ class: ("active" if current_page?("#")) }
+      = link_to chats_path, class: "hover-border-icon", title: Chat.plural do
+        .link_icon{ class: ("active" if controller_name == "chats") }
           💬
 
-    .dropdown
-      %button.btn.btn-secondary.dropdown-toggle{
-        type: "button",
-        "data-bs-toggle" => "dropdown",
-        "aria-expanded" => "false",
-        style: "background: #51485a" 
-      }
-        =t("options")
+  .dropdown
+    %button.btn.btn-secondary.dropdown-toggle{
+      type: "button",
+      "data-bs-toggle" => "dropdown",
+      "aria-expanded" => "false",
+      style: "background: #51485a" 
+    }
+      =t("options")
 
-      %ul.dropdown-menu
-        %li
-          = link_to t("switch_to", model: t("spanish")), change_locale_path(:es), class: "dropdown-item"
-        %li
-          = link_to t("switch_to", model: t("english")), change_locale_path(:en), class: "dropdown-item"
+    %ul.dropdown-menu
+      %li
+        = link_to t("switch_to", model: t("spanish")), change_locale_path(:es), class: "dropdown-item"
+      %li
+        = link_to t("switch_to", model: t("english")), change_locale_path(:en), class: "dropdown-item"
+      - if current_user
         %li
           %hr.dropdown-divider
         %li

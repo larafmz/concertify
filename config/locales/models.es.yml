@@ -43,6 +43,9 @@ es:
       repost: 
         one: Republicación
         other: Republicaciones
+      chat:
+        one: Chat
+        other: Chats
     attributes:
       user:
         email: Email

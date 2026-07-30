@@ -1,4 +1,4 @@
-%div{style: "margin:15px 0px 5px 10px;"}
+%div{style: "margin:15px 15px 5px 20px;"}
     = form_tag chats_path, method: "GET" do
         = text_field_tag :search, params[:search], placeholder: t("search"), class: "field-custom"
 
@@ -10,4 +10,8 @@
                         .link_icon{style: "height: 50px; width: 50px;"}
                             = image_tag chat.photo(current_user) if chat.photo(current_user).present?
                         .artist-name 
-                            %div{style: "margin-bottom:5px; font-size:15px;"}= chat.name(current_user)
+                            %div{style: "font-size:15px;"}= chat.name(current_user)
+                            - if chat.event.present? 
+                                .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
+                                    %div= "📍#{chat.event.ubication&.complete_name} "
+                                    %div= "🗓️ #{formatted_event_date(chat.event.date, chat.event.start_time)}" 

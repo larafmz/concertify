@@ -37,6 +37,7 @@ class Event < ApplicationRecord
       event = Event.find_or_initialize_by(ticketmaster_id: ticketmaster_id)
       if event.new_record? || event.updated_at < 5.hours.ago
         event_api = TicketmasterService.event_by_id(ticketmaster_id)
+        exit if event_api.nil?
         
         if event.new_record?
           artists = get_event_artists(event_api)

@@ -26,7 +26,7 @@ class ChatsController < ApplicationController
 
     ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
     Notification.create_for_chat(current_user.id, @chat.id)
-    redirect_back fallback_location: root_path
+    head :ok
   end
 
   def exit

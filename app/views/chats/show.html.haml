@@ -1,4 +1,4 @@
-
+= turbo_stream_from [@chat, current_user] if @chat
 .big-second-column{style: "height: calc(100vh - 120px); overflow:hidden; min-height: 0;"}
     = render "chats/sidebar"
 
@@ -43,35 +43,8 @@
 
         .chat-container
             - if @chat_entries
-                .chat{ data: { controller: "chat" }, style: "margin: 5px;" }
-                    - @chat_entries.each_with_index do |chat_entry, index|
-                        - if index == 0 || chat_entry.created_at.to_date != @chat_entries[index-1].created_at.to_date
-                            .soft-color{style: "display:flex; justify-content:center; font-size:13px;"}
-                                = short_date(chat_entry.created_at)
-                        - if chat_entry.chat_type == 0
-                            - if chat_entry.user_id == current_user.id
-                                %div{style: "display:flex; justify-content:flex-end;"}
-                                    %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #0290bb"}
-                                        %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
-                                        %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
-                            - else 
+                .chat{id: "chat_entries", data: { controller: "chat" }, style: "margin: 5px;" }
+                    - @chat_entries.each do |chat_entry|
+                        = render "chat_entries/show", chat_entry: chat_entry
 
-                                %div{style: "display:flex; justify-content:start; align-items:center;"}
-                                    = link_to user_path(chat_entry.user.id) do 
-                                        .link_icon{style: "height: 40px; width: 40px;"}
-                                            = image_tag chat_entry.user.icon if chat_entry.user.icon.attached?
-                                    %div
-                                        %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}
-                                            = chat_entry.user.username
-                                        %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
-                                            %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
-                                            %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
-                        - else
-                            .soft-color{style: "display:flex; justify-content:center; font-size:13px;"}
-                                - if chat_entry.user_id == current_user.id
-                                    = t("you_#{chat_entry.text}", model: chat_entry.user.username)
-                                - else
-                                    = t(chat_entry.text, model: chat_entry.user.username)
-
-        
         = render "chats/send_message"

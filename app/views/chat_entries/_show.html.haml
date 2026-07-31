@@ -1,0 +1,32 @@
+.chat_entry
+    - if chat_entry.show_date_separator?
+        .soft-color{style: "display:flex; justify-content:center; font-size:13px;"}
+            = short_date(chat_entry.created_at)
+    - if chat_entry.chat_type == 0
+        - if chat_entry.user_id == current_user.id
+            %div{style: "display:flex; justify-content:flex-end;"}
+                %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #0290bb"}
+                    %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
+                    %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
+        - else 
+            %div{style: "display:flex; justify-content:start; align-items:center;"}
+                - if !chat_entry.same_previous_user?
+                    = link_to user_path(chat_entry.user.id) do 
+                        .link_icon{style: "height: 40px; width: 40px;"}
+                            = image_tag chat_entry.user.icon if chat_entry.user.icon.attached?
+                - else
+                    %div{style: "height: 40px; width: 40px;"}
+
+                %div
+                    - if !chat_entry.same_previous_user?
+                        %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}
+                            = chat_entry.user.username
+                    %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
+                        %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
+                        %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
+    - else
+        .soft-color{style: "display:flex; justify-content:center; font-size:13px;"}
+            - if chat_entry.user_id == current_user.id
+                = t("you_#{chat_entry.text}", model: chat_entry.user.username)
+            - else
+                = t(chat_entry.text, model: chat_entry.user.username)

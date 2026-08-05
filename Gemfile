@@ -69,3 +69,5 @@ gem "turbo-rails"
 gem 'stimulus-rails'
 
 gem "solid_cable"
+
+gem "noticed"

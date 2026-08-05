@@ -8,12 +8,12 @@ class ChatsController < ApplicationController
 
   def show
     @chat_entries = @chat.chat_entries.order("created_at ASC") if @chat
-    current_user.notifications.for_chats.where(notificable_id: @chat.id, opened: false).update_all(opened: true) if @chat
+    current_user.notifications.for_record(@chat).mark_as_read
   end
 
   def send_message
-    ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
-    Notification.create_for_chat(current_user.id, @chat.id)
+    message = ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
+    NewMessageNotifier.with(sender: current_user, record: @chat).deliver(@chat.users.where.not(id: current_user.id))
     render json: {}, status: :no_content #rendering nothing
   end
 
@@ -24,8 +24,8 @@ class ChatsController < ApplicationController
   end
 
   def read
-    current_user.notifications.for_chats.where(notificable_id: params[:id], opened: false).update_all(opened: true)
-    head :ok
+    #current_user.notifications.for_chats.where(notificable_id: params[:id], opened: false).update_all(opened: true)
+    render json: {}, status: :no_content #rendering nothing
   end
 
   private 

@@ -9,6 +9,8 @@ class Chat < ApplicationRecord
     has_many :chat_entries, dependent: :destroy
     belongs_to :event, optional: true
 
+    has_many :notifications, as: :notificable, dependent: :destroy
+
   ## SCOPES
 
     scope :by_users, ->(user1_id, user2_id) { 
@@ -57,8 +59,8 @@ class Chat < ApplicationRecord
       other_user(current_user).icon
     end
 
-    def has_notification?(user_id)
-      Notification.exists?(user_id: user_id, notificable_type: "Chat", notificable_id: self.id, opened: false)
+    def has_notification?(current_user)
+      current_user.notifications.for_record(self).where(read_at: nil).exists?
     end
 
 end

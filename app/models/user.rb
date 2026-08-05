@@ -16,7 +16,7 @@ class User < ApplicationRecord
     has_many :favorite_artists, dependent: :destroy
     has_many :chat_users, dependent: :destroy
     has_many :chats, through: :chat_users
-    has_many :notifications, dependent: :destroy
+    has_many :notifications, class_name: "Noticed::Notification", as: :recipient, dependent: :destroy
 
     has_one_attached :icon
 

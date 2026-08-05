@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_08_141118) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_05_153928) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -174,18 +174,28 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_08_141118) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.string "text"
-    t.date "date"
-    t.time "time"
-    t.boolean "opened"
-    t.string "notificable_type", null: false
-    t.integer "notificable_id", null: false
-    t.integer "user_id", null: false
+  create_table "noticed_events", force: :cascade do |t|
+    t.string "type"
+    t.string "record_type"
+    t.bigint "record_id"
+    t.json "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["notificable_type", "notificable_id"], name: "index_notifications_on_notificable"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.integer "notifications_count"
+    t.index ["record_type", "record_id"], name: "index_noticed_events_on_record"
+  end
+
+  create_table "noticed_notifications", force: :cascade do |t|
+    t.string "type"
+    t.bigint "event_id", null: false
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "read_at", precision: nil
+    t.datetime "seen_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_noticed_notifications_on_event_id"
+    t.index ["recipient_type", "recipient_id"], name: "index_noticed_notifications_on_recipient"
   end
 
   create_table "relations", force: :cascade do |t|
@@ -272,7 +282,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_08_141118) do
   add_foreign_key "interactuables", "users"
   add_foreign_key "likes", "interactuables"
   add_foreign_key "likes", "users"
-  add_foreign_key "notifications", "users"
   add_foreign_key "relations", "users", column: "follower_id"
   add_foreign_key "reposts", "interactuables"
   add_foreign_key "reposts", "users"

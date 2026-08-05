@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     member do
       post :send_message
       delete :exit
+      post :read
     end
   end
 
@@ -80,7 +81,6 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
-  
 
 
 end

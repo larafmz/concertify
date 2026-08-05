@@ -68,3 +68,4 @@ gem "bootstrap", "~> 5.3"
 gem "turbo-rails"
 gem 'stimulus-rails'
 
+gem "solid_cable"

@@ -3,20 +3,21 @@
         = text_field_tag :search, params[:search], placeholder: t("search"), class: "field-custom"
 
     %div{style: "margin:15px 0px 5px 10px;"}
-        - @chats.each do |chat|
+        - chats.order_by_recent_messages.each do |chat|
             - color = chat.has_notification?(current_user.id) ? "white" : "#a4b3c4"
-            .wrapper{ style: ("background: #263241; border-radius:15px;" if chat.id == @chat&.id) }
+            .wrapper{ style: ("background: #263241; border-radius:15px;" if chat.id == open_chat&.id) }
                 = link_to chat_path(chat.id), class: "diary-link" do 
+                    - last_message = chat.messages.order(created_at: :desc).first
                     .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
                         .link_icon{style: "height: 50px; width: 50px;"}
                             = image_tag chat.photo(current_user) if chat.photo(current_user).present?
                         .artist-name 
                             %div{style: "font-size:15px; color: #{color}"}= chat.name(current_user)
-                            %div{style: "font-size:12px; color: #{color}"}= chat.messages.last.text.truncate(30)
+                            %div{style: "font-size:12px; color: #{color}"}= last_message.text.truncate(30)
                             - if chat.event.present? 
                                 .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
                                     %div= "📍#{chat.event.ubication&.complete_name} "
                                     %div= "🗓️ #{formatted_event_date(chat.event.date, chat.event.start_time)}"  
                          
-                        %div{style: "font-size:12px; color: #{color}"}=short_time_ago(chat.messages.last.created_at)
+                        %div{style: "font-size:12px; color: #{color}"}=short_time_ago(last_message.created_at)
             .separator

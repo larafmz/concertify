@@ -1,13 +1,5 @@
 .widget-content
 
-  - if @events.size==0 && current_user
-    .message
-      ℹ️
-      = t("messages.how_to_find_event") 
-    = form_tag request.path, method: "GET" do
-      = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_event")}", class: "field-custom", style: "margin-top:20px;"
-
-
   - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
     - if !@users.empty?
       .section-box{style: "color: #dfdfdf;"}
@@ -16,7 +8,12 @@
         .three-columns
           = render "users/index", users: @users
                   
-                                
+  - if @events.size==0 && current_user
+    .message
+      ℹ️
+      = t("messages.how_to_find_event") 
+    = form_tag request.path, method: "GET" do
+      = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_event")}", class: "field-custom", style: "margin-top:20px;"
 
   - if @artists_api.size!=0 || @artists_db.size!=0
     .section-box{style: "color: #dfdfdf;"}

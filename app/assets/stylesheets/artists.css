@@ -19,6 +19,10 @@
     gap: 30px;
 }
 
+.big-second-column > div:last-child {
+  min-height: 100%;
+}
+
 .artist-content {
     display: grid;
     grid-template-columns: 2fr 1fr;

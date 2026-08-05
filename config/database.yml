@@ -6,13 +6,26 @@ default: &default
   password: password
   host: localhost
 
+sqlite: &sqlite
+  adapter: sqlite3 
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
 development:
-  <<: *default
-  database: concertify_development
+  primary:
+    <<: *default
+    database: concertify_development 
+  cable:
+    <<: *sqlite
+    database: storage/concertify_development_cable.sqlite3
 
 test:
-  <<: *default
-  database: concertify_test
+  primary:
+    <<: *default
+    database: concertify_production
+  cable:
+    <<: *sqlite
+    database: storage/concertify_production_cable.sqlite3
 
 production:
   <<: *default

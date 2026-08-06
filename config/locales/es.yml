@@ -15,6 +15,7 @@ es:
   not_found: No se ha encontrado
   created_ago: Creado hace %{time}
   sent_ago: Enviado hace %{time}
+  sent: Enviado
   ago: Hace %{time}
   my_model: Mi %{model}
   my_model_plural: Mis %{model}

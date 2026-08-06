@@ -1,11 +1,11 @@
-%div{style: "margin:15px 15px 5px 20px;"}
+= turbo_stream_from current_user, "sidebar" if @chat
+%div{id: "chat_sidebar", style: "margin:15px 15px 5px 20px;"}
     = form_tag chats_path, method: "GET" do
         = text_field_tag :search, params[:search], placeholder: t("search"), class: "field-custom"
-
     %div{style: "margin:15px 0px 5px 10px;"}
         - chats.order_by_recent_messages.each do |chat|
             - color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
-            .wrapper{ style: ("background: #263241; border-radius:15px;" if chat.id == open_chat&.id) }
+            .wrapper{ style: ("background: #263241; border-radius:15px;" if chat.id == open_chat_id) }
                 = link_to chat_path(chat.id), class: "diary-link" do 
                     - last_message = chat.messages.order(created_at: :desc).first
                     .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
@@ -13,8 +13,11 @@
                             = image_tag chat.photo(current_user) if chat.photo(current_user).present?
                         .artist-name 
                             %div{style: "font-size:15px; color: #{color}"}= chat.name(current_user)
-                            %div{style: "font-size:12px; color: #{color}"}= last_message.text.truncate(30)
-                            - if chat.event.present? 
+                            - if last_message.user_id == current_user.id
+                                %div{style: "font-size:12px; color: #{color}"}= t("sent")
+                            - else
+                                %div{style: "font-size:12px; color: #{color}"}= last_message.text.truncate(30)
+                            - if chat.group_chat? 
                                 .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
                                     %div= "📍#{chat.event.ubication&.complete_name} "
                                     %div= "🗓️ #{formatted_event_date(chat.event.date, chat.event.start_time)}"  

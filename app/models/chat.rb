@@ -41,6 +41,10 @@ class Chat < ApplicationRecord
 
   ## INSTANCE METHODS
 
+    def group_chat?
+      event.present?
+    end
+
     def messages
       chat_entries.user_messages 
     end

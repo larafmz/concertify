@@ -7,13 +7,13 @@ class ChatsController < ApplicationController
   end
 
   def show
+    current_user.update(open_chat_id: @chat.id)
     @chat_entries = @chat.chat_entries.order("created_at ASC") if @chat
     current_user.notifications.for_record(@chat).mark_as_read
   end
 
   def send_message
     message = ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
-    NewMessageNotifier.with(sender: current_user, record: @chat).deliver(@chat.users.where.not(id: current_user.id))
     render json: {}, status: :no_content #rendering nothing
   end
 
@@ -24,7 +24,7 @@ class ChatsController < ApplicationController
   end
 
   def read
-    #current_user.notifications.for_chats.where(notificable_id: params[:id], opened: false).update_all(opened: true)
+    current_user.notifications.for_record(@chat).mark_as_read
     render json: {}, status: :no_content #rendering nothing
   end
 
@@ -47,8 +47,8 @@ class ChatsController < ApplicationController
         @chat = Chat.create_event_chat(params[:event_id], current_user.id)
       elsif params[:id] && Chat.exists?(params[:id])
         @chat = Chat.find(params[:id])
-        @event = @chat.event if @chat.event.present?
-        @user = @chat.other_user(current_user) if !@chat.event.present?
+        @event = @chat.event if @chat.group_chat?
+        @user = @chat.other_user(current_user) if !@chat.group_chat?
         if !@chat.chat_users.exists?(user_id: current_user.id)
           redirect_to chats_path
         end

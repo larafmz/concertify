@@ -1,7 +1,7 @@
 .big-second-column{style: "height: calc(100vh - 120px); overflow:hidden; min-height: 0;"}
     
     .sidebar{id: "chats_sidebar"}
-        = render "chats/sidebar", chats: @chats, open_chat: @chat
+        = render "chats/sidebar", chats: @chats, open_chat_id: @chat.id
 
     %div{style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; "}
 
@@ -27,7 +27,7 @@
                         = @chat ? @chat.chat_users.count : "0"
                         =t("members")
                 - if @chat && @chat.chat_users.exists?(user_id: current_user.id)
-                    - exit_title = @chat.event.present? ? t("exit_group") : t("crud.destroy", model: Chat.singular)
+                    - exit_title = @chat.group_chat? ? t("exit_group") : t("crud.destroy", model: Chat.singular)
                     %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
                         .dropdown
                             %button{

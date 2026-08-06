@@ -5,7 +5,7 @@ module NotificationExtensions
 
     belongs_to :organization
 
-    scope :messages, -> { where(type: NewMessageNotifier::Notification.sti_name) }
+    #scope :messages, -> { where(type: NewMessageNotifier::Notification.sti_name) }
     scope :for_record, ->(record) { joins(:event).where( noticed_events: { record_type: record.class.name, record_id: record.id } ) }
 
   end

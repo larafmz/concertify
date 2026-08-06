@@ -26,7 +26,9 @@ class ChatEntry < ApplicationRecord
   private
 
     def create_notification
-      NewMessageNotifier.with(sender: user, record: chat).deliver(chat.users.where.not(id: user.id))
+      ChatUser.where(chat_id: chat.id).where.not(user_id: user.id).each do |chat_user|
+        chat_user.mark_as_unread
+      end
 
       chat.users.each do |current_user|
         broadcast_replace_to( # se reemplaza todo el sidebar
@@ -34,7 +36,7 @@ class ChatEntry < ApplicationRecord
             [ current_user, "sidebar" ], # = turbo_stream_from current_user, "sidebar" if @chat
             target: "chat_sidebar", # {id: "chat_sidebar" ... }
             partial: "chats/sidebar",
-            locals: { chats: current_user.chats, current_user: current_user, open_chat_id: current_user.open_chat_id }
+            locals: { chats: current_user.chats, current_user: current_user }
           )
       end
     end

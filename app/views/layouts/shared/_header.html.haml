@@ -42,9 +42,9 @@
         %div{style: "display:flex; flex-direction:column; align-items:center;"}
           .link_icon{ class: ("active" if controller_name == "chats") }
             💬
-          - if current_user.notifications.messages.unread.count > 0
+          - if current_user.chat_users.unread.size  > 0
             %div{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
-              = current_user.notifications.messages.unread.joins(:event).distinct.count("noticed_events.record_id")
+              = current_user.chat_users.unread.size 
 
   .dropdown
     %button.btn.btn-secondary.dropdown-toggle{

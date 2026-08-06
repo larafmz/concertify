@@ -5,7 +5,7 @@
     %div{style: "margin:15px 0px 5px 10px;"}
         - chats.order_by_recent_messages.each do |chat|
             - color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
-            .wrapper{ style: ("background: #263241; border-radius:15px;" if chat.id == open_chat_id) }
+            .wrapper
                 = link_to chat_path(chat.id), class: "diary-link" do 
                     - last_message = chat.messages.order(created_at: :desc).first
                     .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}

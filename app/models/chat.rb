@@ -3,13 +3,10 @@ class Chat < ApplicationRecord
   ## RELATIONSHIPS
 
     has_many :chat_users, dependent: :destroy
-    accepts_nested_attributes_for :chat_users
     has_many :users, through: :chat_users
     
     has_many :chat_entries, dependent: :destroy
     belongs_to :event, optional: true
-
-    has_many :notifications, as: :notificable, dependent: :destroy
 
   ## SCOPES
 
@@ -64,7 +61,7 @@ class Chat < ApplicationRecord
     end
 
     def has_notification?(current_user)
-      current_user.notifications.for_record(self).where(read_at: nil).exists?
+      !ChatUser.find_by(chat_id: id, user_id: current_user.id).read?
     end
 
 end

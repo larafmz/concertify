@@ -1,15 +1,18 @@
 class ChatsController < ApplicationController
 
   before_action :authenticate_user
-  before_action :set_chat
+  before_action :set_chat 
 
   def index
   end
 
   def show
-    current_user.update(open_chat_id: @chat.id)
+    if !@chat
+      redirect_to chats_path
+      return
+    end
     @chat_entries = @chat.chat_entries.order("created_at ASC") if @chat
-    current_user.notifications.for_record(@chat).mark_as_read
+    @chat_user.mark_as_read
   end
 
   def send_message
@@ -24,7 +27,7 @@ class ChatsController < ApplicationController
   end
 
   def read
-    current_user.notifications.for_record(@chat).mark_as_read
+    @chat_user.mark_as_read
     render json: {}, status: :no_content #rendering nothing
   end
 
@@ -53,6 +56,7 @@ class ChatsController < ApplicationController
           redirect_to chats_path
         end
       end
+      @chat_user = @chat.chat_users.find_by(user_id: current_user.id) if @chat
       @chats = current_user.chats
     end
 

@@ -18,40 +18,17 @@ class ChatEntry < ApplicationRecord
 
   ## CALLBACKS
 
-   after_create_commit :create_notification
+   after_create_commit :mark_as_unread
    after_create_commit :broadcast_message
 
   ## CALLBACKS METHODS
 
   private
 
-    def create_notification
+    def mark_as_unread
       ChatUser.where(chat_id: chat.id).where.not(user_id: user.id).each do |chat_user|
         chat_user.mark_as_unread
       end
-
-      #update sidebar
-      chat.users.each do |current_user|
-        broadcast_replace_to( # se reemplaza todo el sidebar
-            # hace actualizacion a a todos los usuarios, aunque no esten en el mismo que esten en el chat
-            [ current_user, "sidebar" ], # = turbo_stream_from current_user, "sidebar" if @chat
-            target: "chat_sidebar", # {id: "chat_sidebar" ... }
-            partial: "chats/sidebar",
-            locals: { chats: current_user.chats, current_user: current_user }
-          )
-      end
-
-      # update header
-      chat.users.each do |current_user|
-        broadcast_replace_to( # se reemplaza todo el trozo del header 
-            # hace actualizacion a a todos los usuarios
-            [ current_user, "messages_header" ], # = turbo_stream_from current_user, "messages_header"
-            target: "messages_header", # {id: "messages_header" ... }
-            partial: "layouts/shared/messages_bubble",
-            locals: { current_user: current_user }
-          )
-      end
-
     end
 
     def broadcast_message   

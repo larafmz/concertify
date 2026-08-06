@@ -47,7 +47,7 @@ class Chat < ApplicationRecord
     end
 
     def other_user(current_user)
-      chat_users.where.not(user_id: current_user&.id).first.user
+      users.find { |u| u.id != current_user.id }
     end
 
     def name(current_user)
@@ -61,7 +61,7 @@ class Chat < ApplicationRecord
     end
 
     def has_notification?(current_user)
-      !ChatUser.find_by(chat_id: id, user_id: current_user.id).read?
+      !chat_users.find { |cu| cu.user_id == current_user.id }.read?
     end
 
 end

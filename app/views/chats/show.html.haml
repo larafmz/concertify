@@ -1,10 +1,8 @@
 .big-second-column{style: "height: calc(100vh - 120px); overflow:hidden; min-height: 0;"}
     
-    .sidebar{id: "chats_sidebar"}
-        = render "chats/sidebar", chats: @chats
-        
-    %div{style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; "}
+    = render "chats/sidebar", chats: @chats
 
+    = turbo_frame_tag "chat_content", style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; " do
         %div{style: "display: grid; grid-template-columns: 1fr 1fr auto; background: #1f252b"}
             - if @user
                 = link_to user_path(@user.id) do 

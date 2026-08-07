@@ -1,4 +1,3 @@
-
 = render "artists/header"
 
 = render "artists/options", active: :events
@@ -6,11 +5,11 @@
 .widget-content{style: "color: #a4b3c4; padding-top: 0px;"}
 
     .section-box{style: "margin-top:0px;"}
-        .title
-            #{Event.plural.upcase} • #{@events.size} #{t("results").upcase}
+        = render "events/index_header"
+        .separator{style: "margin-bottom: 15px; "}
         = render "events/filters", search_by_name: false
         .separator{style: "margin-bottom: 15px; "}
-        = render "events/index", events: @events[0,10]
+        = render "events/index", events: @events[0,10], photo: false
 
     - if current_user
         .section-box

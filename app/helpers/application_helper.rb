@@ -38,7 +38,8 @@ module ApplicationHelper
     today = Date.today
     return "past" if event_date < today
     return "future" if event_date > today
-    event_time.nil? || event_time > Time.current ? "future" : "past"
+    event_time.nil? || event_time+3.hours > Time.current ? "future" : "past"
+    # +3 default hours for event aproximate duration
   end
 
   def custom_time_ago_in_words(time)

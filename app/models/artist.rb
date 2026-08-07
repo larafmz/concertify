@@ -81,12 +81,12 @@ class Artist < ApplicationRecord
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
       if first_date.present? || second_date.present?
-        first_date = Date.parse(first_date) if first_date && !first_date.empty?
-        second_date = Date.parse(second_date) if second_date && !second_date.empty?
+        first_date = Date.parse(first_date) if first_date.present?
+        second_date = Date.parse(second_date) if second_date.present?
         second_date = first_date if !second_date.present?
-        first_date ||= Date.today
-        events_db = events_db.where("date >= ?", first_date)
-        events_db = events_db.where("date <= ?", second_date)
+        first_date ||= Date.today-365.days
+        events_db = events_db.where("date >= ?", first_date) if first_date.present?
+        events_db = events_db.where("date <= ?", second_date) if second_date.present?
       end
       events_db = events_db.by_country_code(country_code) if country_code.present?
       events_db

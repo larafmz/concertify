@@ -1,6 +1,8 @@
 .widget-content
 
-  - if (!params[:first_date] && !params[:second_date] && !params[:country]) || (params[:first_date].empty? && params[:second_date].empty? && params[:country].empty?)
+  - any_params_present = params[:first_date].present? || params[:second_date].present? || params[:country].present?
+
+  - if !any_params_present
     - if !@users.empty?
       .section-box{style: "color: #dfdfdf;"}
         #{User.plural.upcase} • #{@users.size} #{t("results").upcase}
@@ -8,12 +10,12 @@
         .three-columns
           = render "users/index", users: @users
                   
-  - if @events.size==0 && current_user
-    .message
-      ℹ️
-      = t("messages.how_to_find_event") 
-    = form_tag request.path, method: "GET" do
-      = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_event")}", class: "field-custom", style: "margin-top:20px;"
+    - if @events.size==0 && current_user
+      .message
+        ℹ️
+        = t("messages.how_to_find_event") 
+      = form_tag request.path, method: "GET" do
+        = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_event")}", class: "field-custom", style: "margin-top:20px;"
 
   - if @artists_api.size!=0 || @artists_db.size!=0
     .section-box{style: "color: #dfdfdf;"}
@@ -33,16 +35,13 @@
         = render "artists/index_cards", artists: @artists_api.first(10)
         = render "artists/index_cards", artists: @artists_db.first(10)
 
-  - if @events.size!=0
+  - if !@events.empty? || any_params_present
     .section-box{style: "color: #dfdfdf;"}
-      - if @events.size > 100
-        #{Event.plural.upcase} + 100 #{t("results").upcase}
-      - else 
-        #{Event.plural.upcase} • #{@events.size} #{t("results").upcase}
+      = render "events/index_header"
       .separator{style: "margin-bottom: 15px; "}
       = render "events/filters", search_by_name: true
       .separator{style: "margin-bottom: 15px; "}
-      = render "events/index", events: @events[0,10]
+      = render "events/index", events: @events[0,10], photo: false
 
   - if current_user
     = render "events/manual_add"

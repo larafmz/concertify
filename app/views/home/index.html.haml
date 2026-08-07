@@ -30,13 +30,17 @@
 
 
   %div{style: "margin-top: 20px;"}
-    =t("upcoming").upcase
-    =Event.plural.upcase
-    - if current_user && current_user&.ubication&.country
-      = t("in").upcase
-      = t(current_user.ubication.country.name).upcase
+    .title_section
+      =link_to events_path(country: current_user&.ubication&.country.code) do
+        =t("upcoming").upcase
+        =Event.plural.upcase
+        - if current_user && current_user&.ubication&.country
+          = t("in").upcase
+          = t(current_user.ubication.country.name).upcase
+      =link_to events_path(country: current_user&.ubication&.country.code) do
+        = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
     - if !@events.empty?
       .section-box
-        = render "events/index", events: @events
+        = render "events/index", events: @events, photo: false
         

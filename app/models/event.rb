@@ -37,7 +37,7 @@ class Event < ApplicationRecord
       event = Event.find_or_initialize_by(ticketmaster_id: ticketmaster_id)
       if event.new_record? || event.updated_at < 5.hours.ago
         event_api = TicketmasterService.event_by_id(ticketmaster_id)
-        exit if event_api.nil?
+        return event if event_api.nil?
         
         if event.new_record?
           artists = get_event_artists(event_api)
@@ -64,7 +64,7 @@ class Event < ApplicationRecord
     def self.search_by(query, first_date, second_date, country_code, events_api)
       return Event.none if !query.present?
       events_db = Event.accepted.by_name(query)
-      
+
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
 
@@ -74,7 +74,7 @@ class Event < ApplicationRecord
         first_date = Date.parse(first_date) if first_date.present?
         second_date = Date.parse(second_date) if second_date.present?
         second_date = first_date if !second_date.present?
-        first_date ||= Date.today-365.days
+        #first_date ||= Date.today-365.days
         events_db = events_db.where("date >= ?", first_date) if first_date.present?
         events_db = events_db.where("date <= ?", second_date) if second_date.present?
       end

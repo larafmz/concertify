@@ -1,0 +1,30 @@
+.title_section{style: "color: inherit"}
+    %div
+        =link_to events_path(params.permit!.to_h) do
+            =Event.plural
+            - if params[:search].present?
+                =t("of")
+                =params[:search]
+            - if params[:country].present?
+                =t("in").downcase
+                =t(Country.find_by(code:params[:country]).name)
+            - if @events.size >= 100
+                + 100 #{t("results").downcase}
+            - else 
+                • #{@events.size} #{t("results").downcase}
+
+    %div
+        - if params[:first_date].present? && params[:second_date].present? && params[:first_date]==params[:second_date]
+            = short_date_with_year(Date.parse(params[:first_date]))
+        - else
+            - if params[:first_date].present?
+                = short_date_with_year(Date.parse(params[:first_date]))
+            - else
+                ∞
+            - if params[:second_date].present?
+                ="-" 
+                = short_date_with_year(Date.parse(params[:second_date]))
+            - else
+                ="- ∞" 
+
+            

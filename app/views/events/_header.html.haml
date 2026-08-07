@@ -1,3 +1,4 @@
+- event_date_status = time_status(@event.date, @event.start_time)
 %div{ style: "padding: 30px 70px 10px; background: #1f252b;"}
     .artist-content{style: "background: #1f252b;"}
         .artist-info
@@ -11,7 +12,7 @@
                 .soft-color{ style: "font-size: 15px;" }
                     %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
         .flex
-            - if @event_date_status == "past"
+            - if event_date_status == "past"
                 .stat
                     .number 
                         = @event.registers.viewables(current_user).size
@@ -43,18 +44,4 @@
 
         - if current_user
             %span{ style: "margin-left: auto;" }
-                - register = Register.find_by(user_id: current_user&.id, event_id: @event.id)
-                - future_assistance = FutureAssistance.find_by(user_id: current_user&.id, event_id: @event.id)
-                - if @event_date_status == "past"
-                    - if !register
-                        = link_to t("registers.assisted"), new_register_path(event_id: @event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
-                    - else
-                        = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom", style: "height: auto;"
-                - if @event_date_status == "future"
-                    - if !future_assistance
-                        = link_to t("registers.will_assist"), new_future_assistance_path(event_id: @event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto;"
-                    - else
-                        = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user&.id), class: "btn-custom", style: "height: auto;"
-                - if future_assistance || register
-                    = link_to t("access_chat"), chat_path(event_id: @event.id), class: "btn-standard-orange"
-
+                = render "events/assistance_buttoms", event: @event

@@ -18,4 +18,4 @@
             %br  
             = submit_tag t("verbs.filter"), class: "btn-custom-orange", style: "height:auto"
     %br  
-    = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country)), style: "font-size: 13px;"
+    = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country, :search)), style: "font-size: 13px;"

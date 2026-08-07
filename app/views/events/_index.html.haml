@@ -9,10 +9,8 @@
             - event_date = item[:date]
             - event_time = item[:time]
 
-            - if index == 0
-                .separator
-
             .item-event
+
                 .date-event
                     = I18n.l(event_date, format: "%B")[0,3].upcase
                     %br
@@ -20,6 +18,16 @@
                     %br
                     - if event_date.year != Date.today.year
                         = event_date.year
+
+                - if photo
+                    - if item[:source] == :api
+                        = link_to event_path(id: "ticketmaster", ticketmaster_id: get_event_id(event)), class: "hover-border-icon" do
+                            .link_icon{style: "height: 80px; width: 100px; border-radius: 0%;"}
+                                = image_tag get_event_image_url(event)
+                    - else
+                        = link_to event_path(event) do
+                            .link_icon{style: "height: 80px; width: 100px; border-radius: 0%;"}
+                                = image_tag event.photo if event.photo.attached?
 
                 .event-info
                     %span.soft-color
@@ -40,30 +48,23 @@
                             = get_full_ubication(event)
 
                 - if current_user
-                    .button-event
-                        - event_date_status = time_status(event_date, event_time)
-                        - if event_date_status == "past"
-                            - if item[:source] == :db
-                                - register = Register.find_by(user_id: current_user&.id, event_id: event.id)
-                            - else
+                    - if item[:source] == :db
+                        = render "events/assistance_buttoms", event: event
+                    - else  
+                        .button-event
+                            - event_date_status = time_status(event_date, event_time)
+                            - if event_date_status == "past"
                                 - register = Register.joins(:event).where(user_id: current_user&.id, events: { ticketmaster_id: event["id"] }).first
-                            - if register
-                                = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), class: "btn-custom", data: { turbo_frame: "modal" }
-                            - elsif item[:source] == :db
-                                = link_to t("registers.assisted"), new_register_path(event_id: event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
-                            - else
-                                = link_to t("registers.assisted"), new_register_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
-                        - elsif event_date_status == "future"
-                            - if item[:source] == :db
-                                - future_assistance = FutureAssistance.find_by(user_id: current_user&.id, event_id: event.id)
-                            - else
+                                - if register
+                                    = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom", style: "height: auto;"
+                                - else
+                                    = link_to t("registers.assisted"), new_register_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                            - elsif event_date_status == "future"
                                 - future_assistance = FutureAssistance.joins(:event).where(user_id: current_user&.id, events: { ticketmaster_id: event["id"] }).first
-                            - if future_assistance
-                                = link_to t("crud.edit", model: FutureAssistance.singular), edit_future_assistance_path(id: future_assistance.id), class: "btn-custom", data: { turbo_frame: "modal" }
-                            - elsif item[:source] == :db
-                                = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }
-                            - else
-                                = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
-            
+                                - if future_assistance
+                                    = link_to t("my_model", model: FutureAssistance.singular), future_assistances_user_path(current_user&.id), class: "btn-custom", style: "height: auto;"
+                                - else
+                                    = link_to t("registers.will_assist"), new_future_assistance_path(ticketmaster_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+                
             - if index != events.count-1
                 .separator

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :users do
+  resources :users, only: [:show, :edit, :update] do
     member do
       post :follow
       delete :unfollow
@@ -25,9 +25,9 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :registers 
+  resources :registers, only: [:index, :edit, :update, :new, :create]
   
-  resources :chats do
+  resources :chats, only: [:index, :show] do
     member do
       post :send_message
       delete :exit
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :interactuables do
+  resources :interactuables, only: [:show, :destroy] do
     member do
       post :like
       post :repost
@@ -46,11 +46,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :future_assistances
-  resources :likes
-  resources :publications
+  resources :future_assistances, only: [:new, :create, :index, :destroy]
 
-  resources :artists do
+  resources :publications, only: [:index, :new, :create, :show]
+
+  resources :artists, only: [:show, :index] do
     member do
       post :post
       post :follow
@@ -66,7 +66,7 @@ Rails.application.routes.draw do
     end    
   end
 
-  resources :events do
+  resources :events, only: [:show, :index, :new, :create, :destroy, :edit, :update] do
     collection do
       get :requested
     end
@@ -79,8 +79,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: [:index]
+
   mount ActionCable.server => "/cable"
 
-
+  # loads home when route doesnt exist (excepts for rails/active_storage routes; used to load photos)
+  get "*unmatched_route",
+    to: redirect("/"),
+    constraints: ->(request) {
+      !request.path.start_with?("/rails/active_storage")
+    }
 
 end

@@ -70,11 +70,7 @@ class UsersController < ApplicationController
   end
 
   def follow
-    if params[:follower_id]
-      User.viewables(current_user).find(params[:follower_id]).follow(current_user&.id) 
-    else
-      current_user.follow(params[:id])
-    end
+    current_user.follow(params[:id])
     redirect_back fallback_location: root_path
   end
 

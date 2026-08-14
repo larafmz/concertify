@@ -5,7 +5,7 @@ class Relation < ApplicationRecord
     belongs_to :follower, class_name: "User", optional: true
     belongs_to :followed, polymorphic: true
 
-    ## SCOPES
+  ## SCOPES
 
     scope :artists, -> { where(followed_type: "Artist" ) }
     scope :users, -> { where(followed_type: "User" ) }
@@ -19,7 +19,23 @@ class Relation < ApplicationRecord
     validate :cant_follow_blocked_user
     validate :cant_follow_self
 
-  ## SCOPES
+  ## CALLBACKS
+
+   after_create_commit :create_notification, if: -> { relation_type == 0 && followed_type == "User" }
+   after_destroy_commit :remove_notification, if: -> { relation_type == 0 && followed_type == "User" }
+
+  ## CALLBACK METHODS
+
+  private
+
+    def create_notification
+      notification = InteractionNotificationNotifier.with(message: I18n.t("notifications.new_follower", user: follower.username), follower: follower, record: self)
+      notification.deliver(User.find(followed_id))
+    end
+
+    def remove_notification
+      Notification.for_record(followed_id, self).destroy_all
+    end
 
   ## VALIDATION METHODS
 

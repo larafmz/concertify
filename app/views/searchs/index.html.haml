@@ -10,7 +10,7 @@
         .three-columns
           = render "users/index", users: @users
                   
-    - if @events.size==0 && current_user
+    - if @events.size==0 && current_user && @users.size==0
       .message
         ℹ️
         = t("messages.how_to_find_event") 

@@ -1,22 +1,24 @@
 .widget-content{style: "color: #a4b3c4;"}
 
-  %div{style: "margin-top: 20px;"}
-    .title_section
-      =link_to registers_path do
-        =t("recents", model: Register.plural).upcase
-      =link_to registers_path do
-        = t("more").upcase
-    .separator{style: "margin-bottom: 15px; "}
-    = render "registers/index_cards", registers: @registers.limit(6)
+  - if @registers.present?
+    %div{style: "margin-top: 20px;"}
+      .title_section
+        =link_to registers_path do
+          =t("recents", model: Register.plural).upcase
+        =link_to registers_path do
+          = t("more").upcase
+      .separator{style: "margin-bottom: 15px; "}
+      = render "registers/index_cards", registers: @registers.limit(6)
     
-  %div{style: "margin-top: 20px;"}
-    .title_section
-      =link_to publications_path do
-        =t("recents", model: Publication.plural).upcase
-      =link_to publications_path do
-        = t("more").upcase
-    .separator{style: "margin-bottom: 15px; "}
-    = render "publications/index", publications: @publications.limit(3)
+  - if @publications.present?
+    %div{style: "margin-top: 20px;"}
+      .title_section
+        =link_to publications_path do
+          =t("recents", model: Publication.plural).upcase
+        =link_to publications_path do
+          = t("more").upcase
+      .separator{style: "margin-bottom: 15px; "}
+      = render "publications/index", publications: @publications.limit(3)
 
   %div{style: "margin-top: 20px;"}
     .title_section
@@ -31,13 +33,13 @@
 
   %div{style: "margin-top: 20px;"}
     .title_section
-      =link_to events_path(country: current_user&.ubication&.country.code) do
+      =link_to events_path(country: current_user&.ubication&.country&.code) do
         =t("upcoming").upcase
         =Event.plural.upcase
         - if current_user && current_user&.ubication&.country
           = t("in").upcase
           = t(current_user.ubication.country.name).upcase
-      =link_to events_path(country: current_user&.ubication&.country.code) do
+      =link_to events_path(country: current_user&.ubication&.country&.code) do
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
     - if !@events.empty?

@@ -5,7 +5,10 @@
                 = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
                 
             .artist-name
-                %div{style: "margin-bottom:5px; font-size:25px;"}= @user.username
+                %div{style: "margin-bottom:5px; font-size:25px;"}
+                    = @user.username
+                    - if @user.follows_user?(current_user&.id)   
+                        %span{class: "softest-color", style: "margin-left:5px; font-size:13px;"}= t("follows_you")
                 - if current_user&.id == @user.id
                     = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user&.id), class: "small-btn-custom"
                 - if @user.ubication
@@ -53,8 +56,6 @@
                         = link_to t("following"), unfollow_user_path(@user.id), class: "btn-standard", data: { turbo_method: :delete }
                     - else
                         = link_to t("verbs.follow"), follow_user_path(@user.id), class: "btn-standard-orange", data: { turbo_method: :post }
-                    - if @user.follows_user?(current_user&.id)   
-                        %span{style: "margin-left: 10px;"}= t("follows_you")
                     = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-standard-orange"
                      
             .dropdown

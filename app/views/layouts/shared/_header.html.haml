@@ -55,7 +55,7 @@
       = link_to user_path(current_user), class: "hover-border-icon", title: t("profile") do
         .link_icon{ class: ("active" if current_page?(user_path(current_user))) }
           👤
-      = link_to "#", class: "hover-border-icon", title: "TO/DO" do
+      = link_to notifications_path, class: "hover-border-icon", title: Notification.plural do
         .link_icon{ class: ("active" if current_page?("#")) }
           🔔
 

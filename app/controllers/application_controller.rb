@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
+  
   before_action :set_locale
+  
+  rescue_from AbstractController::ActionNotFound, with: :redirect_to_home
 
   def change_locale
     session[:locale] = params[:locale]
@@ -11,4 +14,9 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = session[:locale] || I18n.default_locale
   end
+
+  def redirect_to_home
+    redirect_to root_path
+  end
+
 end

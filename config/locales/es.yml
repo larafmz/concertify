@@ -107,6 +107,7 @@ es:
   registers:
     assisted: He asistido
     will_assist: Asistiré
+    i_assisted_to: Asistí a...
     liked_these_reviews: HA DADO LIKE A ESTAS RESEÑAS
     logged_by: Registrado por
     ratings: Puntuaciones
@@ -128,3 +129,10 @@ es:
     write_your_answer: Escribe tu respuesta
     whats_going_on: ¿Qué está pasando?
     post_about: Publica sobre %{model}
+
+  notifications:
+    new_follower: "%{user} ha comenzado a seguirte"
+    new_like: "%{user} ha indicado que le gusta tu %{model}"
+    new_likes: "%{users} han indicado que les gusta tu %{model}"
+    new_comment: "%{user} ha escrito un comentario en tu %{model}: %{comment}"
+    new_repost: "%{user} ha republicado tu %{model}"

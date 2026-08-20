@@ -1,6 +1,6 @@
 .publication-grid
 
-    - if action_name != "publications" 
+    - unless current_page?(publications_path)
         .publication
             = link_to user_path(publication.user.id), class: "hover-border-icon" do
                 .link_icon

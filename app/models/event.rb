@@ -10,12 +10,13 @@ class Event < ApplicationRecord
     has_many :artists_events, dependent: :destroy
     has_many :artists, through: :artists_events
     belongs_to :ubication, optional: true
-    has_one_attached :photo
     has_many :registers, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
     has_many :publications, dependent: :destroy
     belongs_to :requester, class_name: "User", optional: true
     has_one :chat, dependent: :destroy 
+    
+    has_one_attached :photo
 
   ## SCOPES
 

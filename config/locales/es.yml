@@ -131,8 +131,8 @@ es:
     post_about: Publica sobre %{model}
 
   notifications:
-    new_follower: "%{user} ha comenzado a seguirte"
-    new_like: "%{user} ha indicado que le gusta tu %{model}"
-    new_likes: "%{users} han indicado que les gusta tu %{model}"
-    new_comment: "%{user} ha escrito un comentario en tu %{model}: %{comment}"
-    new_repost: "%{user} ha republicado tu %{model}"
+    new_follower: "ha comenzado a seguirte"
+    new_like: "ha indicado que le gusta tu %{model}"
+    new_likes: "han indicado que les gusta tu %{model}"
+    new_comment: "ha escrito un comentario en tu %{model}: %{comment}"
+    new_repost: "ha republicado tu %{model}"

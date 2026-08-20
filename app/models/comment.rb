@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
 
     ## CALLBACKS
 
-        after_create_commit :create_notification
+        after_create_commit :create_notification, if: -> { user_id != interactuable.user.id }
         after_destroy :remove_notification
 
     ## CALLBACK METHODS
@@ -19,7 +19,11 @@ class Comment < ApplicationRecord
     private
 
         def create_notification
-            notification = InteractionNotificationNotifier.with(message: I18n.t("notifications.new_comment", user: user.username, model: interactuable.class.singular, comment: text), follower: interactuable.user, record: self)
+            notification = InteractionNotificationNotifier.with(
+                message: I18n.t("notifications.new_comment", user: user.username, model: interactuable.class.singular.downcase, comment: text), 
+                follower: user, 
+                record: self, 
+                path: Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id))
             notification.deliver(User.find(interactuable.user_id))
         end
 

@@ -53,4 +53,12 @@ class Interactuable < ApplicationRecord
       self.type == "Publication"
     end
 
+    def photo
+      if register?
+        return event.photo
+      elsif publication?
+        return photos.first
+      end
+    end
+
 end

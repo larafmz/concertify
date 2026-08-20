@@ -2,13 +2,11 @@ class Notification < Noticed::Notification
   
     ## RELATIONSHIPS
 
-        belongs_to :user
-        belongs_to :sender, class_name: "User"
-        belongs_to :notificable, polymorphic: true
+        belongs_to :chat, optional: true
 
     ## VALIDATIONS
 
-        validates :recipient_id, uniqueness: { scope: :chat_id }
+        validates :recipient_id, uniqueness: { scope: :chat_id }, if: :chat_id?
 
     ## SCOPES
 
@@ -16,13 +14,17 @@ class Notification < Noticed::Notification
             .joins(:event).where(noticed_events: { record_type: record.class.name, record_id: record.id } )
         }
 
+        scope :read, -> { where.not(read_at: nil) }
+        scope :unread, -> { where(read_at: nil) }
+
     ## CALLBACKS
 
-        after_create_commit :broadcast_notification
+        after_create :broadcast_notification
 
     ## CALLBACKS METHODS
 
         def broadcast_notification
+            puts "ENTRA EN AFTER CREATE"
             # TO/DO
         end
 

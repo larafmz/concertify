@@ -84,6 +84,7 @@ es:
     save: Guardar
     select: Seleccionar
     follow: Seguir
+    follow_back: Seguir de vuelta
     block: Bloquear
     unblock: Desbloquear
     filter: Filtrar
@@ -94,6 +95,7 @@ es:
     register: Crear cuenta
     logout: Cerrar sesión
     mark_as_favorite: Marcar como Favorito
+    mark_all_read: Marcar todo como leido
     request: Solicitar %{model}
     logged: registró
     answer: Responder

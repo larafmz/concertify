@@ -1,5 +1,5 @@
 - background = notification.read? ? "inherit" : "#30363d"
-%div{style: "background: #{background}; display: grid; grid-template-columns: auto 1fr auto; gap: 25px; align-items: center; border-bottom: 1px solid #40556d; padding: 5px 40px 5px 40px; "}
+%div{style: "background: #{background}; display: grid; grid-template-columns: auto 1fr auto auto; gap: 25px; align-items: center; border-bottom: 1px solid #40556d; padding: 5px 40px 5px 40px; "}
     - user = notification.user
     %div
         - if user
@@ -17,5 +17,10 @@
             - if notification.icon
                 .link_icon{style:  "width: 45px; height: 45px; border-radius: 20%; "}
                     = image_tag notification.icon if notification.icon.attached?
+        
+        %div{style: "align-self: start;"}
+            - if notification.for_follow?
+                = render "users/relation_bottoms", user: user
+
     - if !notification.read?
         = link_to "👁", mark_as_read_notification_path(notification.id), data: { turbo_method: :post }

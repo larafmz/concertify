@@ -83,6 +83,9 @@ Rails.application.routes.draw do
     member do
       post :mark_as_read
     end
+    collection do
+      post :mark_all_read
+    end
   end
 
   mount ActionCable.server => "/cable"

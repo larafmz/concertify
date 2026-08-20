@@ -60,4 +60,8 @@ class Notification < Noticed::Notification
         def path
             self.params[:path]
         end
+
+        def for_follow?
+            self.record.class.name == Relation.name
+        end
 end

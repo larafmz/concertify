@@ -65,7 +65,22 @@
                 .separator{style: "margin-bottom: 15px;"}
                 = render "registers/index", registers: @populars_registers.limit(2)
 
+            %div{style: "margin-top: 20px;"}
+                .title_section
+                    =link_to publications_user_path(@user) do
+                        =t("recents", model: Publication.plural).upcase
+                    =link_to publications_user_path(@user) do
+                        = t("more").upcase
+                .separator{style: "margin-bottom: 15px; "}
+                = render "publications/index", publications: @publications.limit(3)
 
-
+            %div{style: "margin-top: 20px;"}
+                .title_section
+                    =link_to publications_user_path(@user) do
+                        =t("populars", model: Publication.plural).upcase
+                    =link_to publications_user_path(@user) do
+                        = t("more").upcase
+                .separator{style: "margin-bottom: 15px; "}
+                = render "publications/index", publications: @populars_publications.limit(3)                
 
         

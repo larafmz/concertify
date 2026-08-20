@@ -32,7 +32,26 @@ class Event < ApplicationRecord
     validates :tour_name, :date, presence: true
     validates :ticketmaster_id, uniqueness: { allow_nil: true }
 
+  ## CALLBACKS
+
+      after_update :create_notification, if: :saved_change_to_status?
+
+  ## CALLBACK METHODS
+
+  private
+
+      def create_notification
+        notification = InteractionNotificationNotifier.with(
+            record: self, 
+            status: status, 
+            status_str: get_status_name, 
+            path: Rails.application.routes.url_helpers.requests_user_path(requester.id))
+        notification.deliver(requester)
+      end
+
   ## CLASS METHODS
+
+  public
 
     def self.create_or_update_by_ticketmaster_id(ticketmaster_id)
       event = Event.find_or_initialize_by(ticketmaster_id: ticketmaster_id)
@@ -103,6 +122,53 @@ class Event < ApplicationRecord
 
     def accepted?
       status == 0 || status == nil
+    end
+
+    def notification_message(noti)
+      str = I18n.t("notifications.event_update")
+      status_string = I18n.t("events.statuses.#{noti.params[:status_str].downcase}")
+      str+= "<span style='color: #{color_request(status: noti.params[:status])}'>#{status_string.upcase}</span>"
+      str.html_safe
+    end
+
+    ## REQUESTS METHODS 
+    
+    def color_request(status: self.status)
+      case status
+        when 1
+          "rgb(252, 170, 46)"
+        when 2
+          "rgb(245, 83, 83)"
+        else
+          "rgb(88, 216, 94);"
+        end
+    end
+
+    def second_color_request
+      case status
+        when 1
+          "rgb(78, 61, 41)"
+        when 2
+          "rgb(78, 41, 41);"
+        else
+          "rgb(48, 66, 49)"
+        end
+    end
+
+    def message_request
+      return I18n.t("request_message.0") if status.nil?
+      I18n.t("request_message.#{status}")
+    end
+
+    def emoji_request
+      case status
+      when 1
+        "⌛︎"
+      when 2
+        "X"
+      else
+        "✓"
+      end
     end
 
 end

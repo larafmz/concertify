@@ -48,7 +48,7 @@ class EventsController < ApplicationController
       @event.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
       if @event.save!
-          redirect_to requested_events_path
+          redirect_to requests_users_path(current_user)
       else
           redirect_back fallback_location: root_path
       end
@@ -68,7 +68,7 @@ class EventsController < ApplicationController
       @event.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
       if @event.update(create_params)
-          redirect_to requested_events_path
+          redirect_to requests_user_path(current_user)
       else
           redirect_back fallback_location: root_path
       end

@@ -136,3 +136,4 @@ es:
     new_likes: "han indicado que les gusta tu %{model}"
     new_comment: "ha escrito un comentario en tu %{model}: %{comment}"
     new_repost: "ha republicado tu %{model}"
+    event_update: "Se ha actualizado tu solicitud de concierto al estado: "

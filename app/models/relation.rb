@@ -30,7 +30,6 @@ class Relation < ApplicationRecord
 
     def create_notification
       notification = InteractionNotificationNotifier.with(
-        message: I18n.t("notifications.new_follower", user: follower.username), 
         follower: follower, 
         record: self,
         path: Rails.application.routes.url_helpers.user_path(follower_id))
@@ -38,7 +37,7 @@ class Relation < ApplicationRecord
     end
 
     def remove_notification
-      Notification.for_record(followed_id, self).destroy_all
+      Notification.for_user(followed_id).for_record(self).destroy_all
     end
 
   ## VALIDATION METHODS
@@ -53,6 +52,14 @@ class Relation < ApplicationRecord
         if follower.id == followed.id
             errors.add(:follower, I18n.t("messages.cant_follow_self"))
         end
+    end
+
+  ## ISTANCE METHODS
+
+  public
+            
+    def notification_message(noti)
+        I18n.t("notifications.new_follower")
     end
 
 end

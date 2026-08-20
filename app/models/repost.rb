@@ -30,15 +30,22 @@ class Repost < ApplicationRecord
 
         def create_notification
             notification = InteractionNotificationNotifier.with(
-                message: I18n.t("notifications.new_repost", user: user.username, model: interactuable.class.singular.downcase), 
                 follower: user, 
                 record: self,
                 path: Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id))
-            notification.deliver(User.find(interactuable.user_id))
+            notification.deliver(interactuable.user)
         end
 
         def remove_notification
-            Notification.for_record(interactuable.user_id, self).destroy_all
-        end        
+            Notification.for_user(interactuable.user_id).for_record(self).destroy_all
+        end   
+        
+    ## INSTANCE METHODS
+
+    public
+                    
+        def notification_message(noti)
+            I18n.t("notifications.new_repost", model: interactuable.class.singular.downcase)
+        end
 
 end

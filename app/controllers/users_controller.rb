@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''")
     @populars_registers = @user.registers.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
     @future_assistances = @user.future_assistances.order(created_at: :desc)
+    @publications = @user.publications.order(created_at: :desc)
+    @populars_publications = @user.publications.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
   end
 
   def edit

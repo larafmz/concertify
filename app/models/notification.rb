@@ -39,6 +39,13 @@ class Notification < Noticed::Notification
             self.human_attribute_name(attribute)
         end
 
+        def self.create_for_upcoming_future_assistance(future_assistance)
+            notification = InteractionNotificationNotifier.with(
+                record: future_assistance, 
+                path: Rails.application.routes.url_helpers.event_path(future_assistance.event.id))
+            notification.deliver(future_assistance.user)
+        end
+
     ## ISTANCE METHODS
 
     public
@@ -48,12 +55,14 @@ class Notification < Noticed::Notification
         end
 
         def full_message
-            self.record.notification_message(self)
+            self.record&.notification_message(self)
         end
 
         def icon
             if self.record.respond_to?(:interactuable) && self.record.interactuable.photo&.attached?
                 self.record.interactuable.photo
+            elsif self.record.respond_to?(:event) && self.record.event.photo&.attached?
+                self.record.event.photo
             end
         end
 

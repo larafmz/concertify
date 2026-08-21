@@ -12,7 +12,7 @@
             - if !future_assistance
                 = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
             - else
-                = link_to t("my_model", model: FutureAssistance.singular), future_assistances_path(user_id: current_user&.id), class: "btn-custom", style: "height: auto;"
+                = link_to t("my_model", model: FutureAssistance.singular), future_assistances_user_path(current_user&.id), class: "btn-custom", style: "height: auto;"
         - if future_assistance || register
             = link_to t("access_chat"), chat_path(event_id: event.id), class: "btn-standard-orange"
 

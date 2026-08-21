@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :future_assistances, only: [:new, :create, :index, :destroy]
+  resources :future_assistances, only: [:new, :create, :destroy, :edit, :update]
 
   resources :publications, only: [:index, :new, :create, :show]
 

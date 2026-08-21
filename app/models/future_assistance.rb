@@ -10,6 +10,10 @@ class FutureAssistance < ApplicationRecord
     belongs_to :user
     belongs_to :event
 
+  ## SCOPES
+
+    scope :upcoming, -> { joins(:event).where(events: { date: Date.today...8.days.from_now.to_date }) }
+
   ## VALIDATIONS
 
     validates :event_seat_details, :from, length: { maximum: 20 }, allow_nil: true
@@ -50,6 +54,11 @@ class FutureAssistance < ApplicationRecord
     else
       nil
     end
+  end
+
+  def notification_message(noti)
+    days_left = (noti.created_at.to_date - self.event.date).to_i.abs
+    I18n.t("notifications.upcoming_event_#{days_left}", time: days_left, event: self.event.tour_name)
   end
 
 

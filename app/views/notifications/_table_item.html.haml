@@ -18,9 +18,9 @@
                 .link_icon{style:  "width: 45px; height: 45px; border-radius: 20%; "}
                     = image_tag notification.icon if notification.icon.attached?
         
-        %div{style: "align-self: start;"}
-            - if notification.for_follow?
-                = render "users/relation_bottoms", user: user
+    %div
+        - if notification.for_follow?
+            = render "users/relation_bottoms", user: user
 
     - if !notification.read?
         = link_to "👁", mark_as_read_notification_path(notification.id), data: { turbo_method: :post }

@@ -1,9 +1,8 @@
-.title_section
-    %div{ style: "background: #1f252b;color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 0px 0px 50px; " }
+.title_section{ style: "background: #1f252b;"}
+    %div{ style: "color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 0px 0px 50px; " }
         = Notification.plural
     %div{style: "margin-right: 50px"}
         =link_to t("verbs.mark_all_read"), mark_all_read_notifications_path(user_id: current_user), data: { turbo_method: :post }
-
 
 .separator
 

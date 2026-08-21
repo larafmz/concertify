@@ -131,6 +131,10 @@ class Event < ApplicationRecord
       str.html_safe
     end
 
+    def days_left(actual: Date.today)
+      (actual - self.date).to_i.abs
+    end
+
     ## REQUESTS METHODS 
     
     def color_request(status: self.status)

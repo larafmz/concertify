@@ -7,10 +7,18 @@
             = t("not_found_model", model: FutureAssistance.plural.downcase )
     - else
         - @future_assistances.each do |future_assistance|
+
             - event = future_assistance.event
             - event_date = event.date
             - event_date_status = time_status(event_date, event.start_time)
-
+            
+            - if event_date_status == "future" 
+                .event_tag
+                    - if event.date == Date.today   
+                        = t("messages.its_today")
+                    - else
+                        = t("messages.in_x_days", days: event.days_left)
+            
             .item-register{style: "margin-bottom:10px;"}
                 .date-event
                     = I18n.l(event_date, format: "%B")[0,3].upcase
@@ -38,7 +46,7 @@
                     
                     - ub = event.ubication&.complete_name || t("not_found")
                     .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
-                        %span= "📍#{ub}" 
+                        %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
                         
                     %div
                         - if future_assistance.event_seat_string || !future_assistance.event_seat_details.empty?

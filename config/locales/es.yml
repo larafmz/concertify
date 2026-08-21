@@ -131,6 +131,10 @@ es:
     write_your_answer: Escribe tu respuesta
     whats_going_on: ¿Qué está pasando?
     post_about: Publica sobre %{model}
+    its_today: ¡ ES HOY !
+    in_x_days: "%{days} días"
+    has_past: ¡ Ya ha pasado !
+    
 
   notifications:
     new_follower: "ha comenzado a seguirte"
@@ -146,4 +150,4 @@ es:
     upcoming_event_3: "¡Solo quedan 3 días para %{event}! 🤩 ¡Ya casi está aquí!"
     upcoming_event_2: "¡Quedan 2 días para %{event}! 🎸 ¡La cuenta atrás está llegando a su fin!"
     upcoming_event_1: "¡Mañana es el gran día! 🎶 %{event} está a la vuelta de la esquina. ¡Prepárate para disfrutarlo!"
-    upcoming_event_0: "¡Hoy es el gran día! 🎉 ¡Disfruta de %{event} y que empiece la música!"
+    upcoming_event_0: "¡Hoy es el gran día! 🎉 ¡Disfruta de %{event} y que empiece la música! ¡No olvides registrar el evento al salir!"

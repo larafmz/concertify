@@ -67,3 +67,18 @@
   font-size: 15px;
   font-weight: 600; 
 }
+
+.event_tag {
+  position: relative;
+  left: 15px;
+  color: #e6e6e6;
+  background: #40556d;
+  padding: 5px 15px;
+  display: inline-block;
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 100%,
+    0 100%
+  );
+}

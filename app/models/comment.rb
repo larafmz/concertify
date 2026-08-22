@@ -5,13 +5,16 @@ class Comment < ApplicationRecord
         belongs_to :user
         belongs_to :interactuable
 
+        belongs_to :comment_father, class_name: "Comment", optional: true
+        has_many :replies, class_name: "Comment", foreign_key: :comment_father_id, dependent: :destroy
+
     ## VALIDATIONS
 
         validates :text, presence: true
 
     ## CALLBACKS
 
-        after_create_commit :create_notification, if: -> { user_id != interactuable.user.id }
+        after_create_commit :create_notification
         after_destroy :remove_notification
 
     ## CALLBACK METHODS
@@ -22,8 +25,8 @@ class Comment < ApplicationRecord
             notification = InteractionNotificationNotifier.with(
                 follower: user, 
                 record: self, 
-                path: Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id))
-            notification.deliver(interactuable.user)
+                path: father_link)
+            notification.deliver(all_users)
         end
 
         def remove_notification
@@ -33,7 +36,23 @@ class Comment < ApplicationRecord
     public
 
         def notification_message(noti)
+            return I18n.t("notifications.new_reply", model: interactuable.class.singular.downcase, comment: text) if comment_father
             I18n.t("notifications.new_comment", model: interactuable.class.singular.downcase, comment: text)
+        end
+
+        def father_link
+            return Rails.application.routes.url_helpers.comment_path(comment_father.id) if comment_father
+            return Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id)
+        end
+
+        def all_users
+            users = [ interactuable.user ]
+            comment = self
+            while comment
+                users << comment.user if comment.user
+                comment = comment.comment_father
+            end
+            users.uniq.excluding(self.user)
         end
 
 end

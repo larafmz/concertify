@@ -5,6 +5,12 @@ class InteractuablesController < ApplicationController
         @interactuable = Interactuable.find(params[:id])
         @user = User.viewables(current_user).find(@interactuable.user_id)
     end
+
+    def comments
+        @comments = Interactuable.find(params[:id]).comments.order("created_at DESC").where(comment_father_id: nil)
+        @interactuable = Interactuable.find(params[:id])
+        @user = User.viewables(current_user).find(@interactuable.user_id)
+    end
         
     def destroy
         interactuable = Interactuable.find(params[:id])
@@ -38,14 +44,10 @@ class InteractuablesController < ApplicationController
     end
 
     def uncomment
-        Comment.find(params[:comment_id]).destroy
-        redirect_back fallback_location: root_path
-    end
-
-    def comments
-        @comments = Interactuable.find(params[:id]).comments.order("created_at DESC")
-        @interactuable = Interactuable.find(params[:id])
-        @user = User.viewables(current_user).find(@interactuable.user_id)
+        comment = Comment.find(params[:comment_id])
+        path = father_link(comment)
+        comment.destroy
+        redirect_to path
     end
 
     def reposts

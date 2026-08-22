@@ -64,5 +64,10 @@ module ApplicationHelper
       "#{(seconds / 31_536_000).to_i}y"
     end
   end
+
+  def father_link(comment)
+    return comment_path(comment.comment_father.id) if comment.comment_father
+    return comments_interactuable_path(comment.interactuable.id)
+  end
   
 end

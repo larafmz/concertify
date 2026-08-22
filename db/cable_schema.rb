@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_08_20_103640) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_21_111242) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -98,6 +98,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_20_103640) do
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comment_father_id"
+    t.index ["comment_father_id"], name: "index_comments_on_comment_father_id"
     t.index ["interactuable_id"], name: "index_comments_on_interactuable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -275,6 +277,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_20_103640) do
   add_foreign_key "chat_entries", "chat_entries", column: "message_father_id"
   add_foreign_key "chat_users", "chats"
   add_foreign_key "chat_users", "users"
+  add_foreign_key "comments", "comments", column: "comment_father_id"
   add_foreign_key "comments", "interactuables"
   add_foreign_key "comments", "users"
   add_foreign_key "events", "users", column: "requester_id"

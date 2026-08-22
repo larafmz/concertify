@@ -1,29 +1,25 @@
-- if @interactuable.publication?
+- if @comment.interactuable.publication?
     = render "users/options", active: :publications
-- elsif @interactuable.register?
+- elsif @comment.interactuable.register?
     = render "users/options", active: :reviews
 
-.widget-content{style: "padding-top:0px; border: "}  
+.widget-content{style: "padding-top:0px;"}  
+
+    .event_tag
+        = link_to "⬅️", father_link(@comment)
 
     %div{style: "border: 1px solid #40556d;"}
 
         %div{style: "margin:20px; margin-bottom:0px;"}
-            - if @interactuable.register? 
-                %div
-                    = render "registers/show", register: @interactuable
-            - elsif @interactuable.publication?
-                %div
-                    = render "publications/show", publication: @interactuable
+            = render "comments/show", comment: @comment
 
-        %div{style: "display: flex; gap: 20px; color: white; margin-left:20px; margin-top: 15px;"}
-            = link_to Like.plural, interactuable_path(@interactuable.id), title: "#{@interactuable.likes.count} #{Like.plural}" 
-            = link_to Comment.plural, comments_interactuable_path(@interactuable.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.comments.count} #{Comment.plural}"
-            = link_to Repost.plural, reposts_interactuable_path(@interactuable.id), title: "#{@interactuable.reposts.count} #{Repost.plural}"
+        %div{style: "display: flex; color: white; margin-left:20px; "}
+            = Comment.plural
         .separator
 
         - if current_user
             %div{style: "border-bottom: 1px solid #40556d;"}
-                = form_tag comment_interactuable_path(@interactuable), method: :post, data: { turbo: false } do
+                = form_tag reply_comment_path(father_id: @comment), method: :post, data: { turbo: false } do
                     %div{data: { controller: "character-counter" }, style: "margin:15px; display: grid; grid-template-columns: auto 1fr auto; color: white; gap: 10px; "}
                         %div
                             = link_to user_path(current_user&.id), class: "hover-border-icon",style: "display: block;" do 
@@ -34,5 +30,7 @@
                     %div{style: "display: flex; justify-content: flex-end; margin: 10px;"}
                         = submit_tag t("verbs.answer"), class: "btn-custom-orange"
 
-        - @comments.each do |comment|
+        - @replies.each do |comment|
             = render "comments/show", comment: comment
+            
+        .separator

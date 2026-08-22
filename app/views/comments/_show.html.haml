@@ -1,0 +1,26 @@
+.artist-info{style: "margin-top:15px; padding-left:15px; padding-right:15px;"}
+    = link_to user_path(comment.user_id), class: "hover-border-icon" do
+        .link_icon 
+            = image_tag comment.user.icon if comment.user.icon.attached?
+
+    %div
+        .title_section
+            .soft-color{style: "font-size: 15px;" }
+                = link_to user_path(comment.user_id) do 
+                    = comment.user.username
+                •
+                %span{class: "softest-color"}
+                    = custom_time_ago_in_words(comment.created_at)
+
+            - if current_user&.id == comment.user_id || current_user&.id == comment.interactuable.user_id
+                .dropdown
+                    %button{
+                        "data-bs-toggle" => "dropdown",
+                        style: "background: none; border:0px; color: white;"
+                    }
+                        ⁝
+                    %ul.dropdown-menu
+                        %li
+                            = button_to t("verbs.destroy"), uncomment_interactuable_path(comment_id: comment.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
+        = link_to comment_path(comment), class: "publication-link", style: "display: grid; grid-template-columns: 1fr auto;" do
+            %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(comment.text)

@@ -5,6 +5,7 @@ class AddCommentsLikesReposts < ActiveRecord::Migration[7.2]
       t.references :user, null: false, foreign_key: true
       t.references :interactuable, null: false, foreign_key: true
       t.string :text
+      t.references :comment_father, foreign_key: { to_table: :comments }
       t.timestamps
     end
 

@@ -18,3 +18,6 @@ if Genre.count == 0
     Genre.find_or_create_by!(name: genre["name"])
   end
 end
+
+Role.find_or_create_by!(name: "admin")
+Role.find_or_create_by!(name: "user")

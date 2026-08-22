@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   ## RELATIONSHIPS
 
+    belongs_to :role
+
     has_many :registers, dependent: :destroy
     has_many :publications, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
@@ -43,6 +45,14 @@ class User < ApplicationRecord
     end
 
   ## INSTANCE METHODS
+
+    def admin?
+      role.admin?
+    end
+
+    def user?
+      role.user?
+    end
  
     def follows_artist?(artist_id)
       followings.find_by(followed_id: artist_id, followed_type: "Artist").present?

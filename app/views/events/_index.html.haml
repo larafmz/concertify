@@ -43,7 +43,7 @@
                     %br
                     %span.soft-color
                         - if item[:source] == :db
-                            = event.ubication&.complete_name_with_address
+                            = event.ubication&.complete_name_with_venue
                         - else
                             = get_full_ubication(event)
 

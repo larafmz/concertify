@@ -56,9 +56,9 @@ class FutureAssistance < ApplicationRecord
     end
   end
 
-  def notification_message(noti)
-    days_left = self.event.days_left(actual: noti.created_at.to_date)
-    event_str = "<span style='font-weight: bold' > #{self.event.tour_name} </span>"
+  def notification_message
+    days_left = self.event.days_left(actual: Date.today)
+    event_str = "<span style='font-weight: bold' > #{self.event.complete_name} </span>"
     I18n.t("notifications.upcoming_event_#{days_left}", time: days_left, event: event_str ).html_safe
   end
 

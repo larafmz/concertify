@@ -9,6 +9,7 @@ class RequestsController < ApplicationController
     def new
         @request = Request.new
         @event = @request.event || @request.build_event
+        @ubication = @event.ubication || @event.build_ubication
         render layout: false
     end
 
@@ -27,9 +28,8 @@ class RequestsController < ApplicationController
         @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], requester_id: current_user&.id, status: 1) if !@artist
         
         @event.artists << @artist
-        @event.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
-        if @event.save!
+        if @request.save!
             redirect_to requests_user_path(current_user)
         else
             redirect_back fallback_location: root_path
@@ -42,15 +42,16 @@ class RequestsController < ApplicationController
     end
 
     def update
-        @artist = Artist.find_by(name: params[:event_attributes][:artist_name])
+        @event = @request.event
+
+        @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
         if !@artist
-            artist_api = TicketmasterService.artists_by(params[:event_attributes][:artist_name], nil)&.first
+            artist_api = TicketmasterService.artists_by(params[:request][:event_attributes][:artist_name], nil)&.first
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
         @event.artists = [@artist] if @artist
-        @event.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
-        if @event.update(create_params)
+        if @request.update(create_params)
             redirect_to requests_user_path(current_user)
         else
             redirect_back fallback_location: root_path
@@ -65,7 +66,7 @@ class RequestsController < ApplicationController
 private
 
     def create_params
-        params.require(:request).permit(:requester_id, :status, event_attributes: [:date, :tour_name, :artist_id, :ubication_id])
+        params.require(:request).permit(:requester_id, :status, :message, event_attributes: [:id, :start_time, :date, :tour_name, :artist_id, ubication_attributes: [:id, :city, :venue, :country_id] ])
     end 
 
 end

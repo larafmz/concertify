@@ -9,8 +9,7 @@
     = link_to notification.path, class: "publication-link", style: "display: grid; grid-template-columns: 1fr auto;" do
         %div
             %div{style: "font-size: 15px ; color: white;"}
-                %strong= user.username if user
-                = notification.full_message
+                = notification.message.html_safe
             %div.softest-color
                 = custom_time_ago_in_words(notification.created_at)
         %div

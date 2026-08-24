@@ -14,33 +14,35 @@
             
             %div{style: "background: #{request.color_request}; border-radius: 15px;"}
 
-                .item-register{  style: "margin-left: 5px;  grid-template-columns: 1fr 4fr 1fr auto;  border-bottom-left-radius: 0px; border-bottom-right-radius:0px; border-bottom: 0px;"}
+                .request
+                    
+                    - if artist
+                        = link_to artist_path(artist.id) do
+                            = image_tag artist.photo if artist.photo.attached?
+                    - else
+                        %div
 
-                    .rectangle_icon{ style: "height:80px; width: 150px;" }
-                        - if artist
-                            = link_to artist_path(artist.id) do
-                                = image_tag artist.photo if artist.photo.attached?
 
-                    %div
+                    %div{style: "padding: 15px 15px;"}
                         - if artist
                             - if artist.accepted?
                                 = link_to artist_path(artist.id) do
-                                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
+                                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.complete_name || t("not_found")
                             - else
-                                %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
+                                %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.complete_name || t("not_found")
                             %br
 
-                        %span{ style: "font-size: 18px;", class: "soft-color" } #{event.tour_name}
+                        %span{ style: "font-size: 18px;", class: "soft-color" } #{event.complete_name}
                         %br
 
-                        - ub = event.ubication&.complete_name || t("not_found")
+                        - ub = event.ubication&.complete_name_with_venue || t("not_found")
                         .softest-color{style: "font-size: 15px;" }
                             %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
                         
                         %span{style: "color: #{request.color_request}; font-size: 16px;"}
                             ● #{request.message_request}
 
-                    %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
+                    %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 15px 15px;"}
                         %div{style: "background: #{request.second_color_request}; color: #{request.color_request}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
                             #{request.emoji_request} #{request.status_string}
                         - if can?(:edit, request)
@@ -52,5 +54,5 @@
             
 
                 .sent_at
-                    = t("sent_ago", time:  time_ago_in_words(request.created_at))
+                    = t("sent_ago_by", user: request.requester.username , time: time_ago_in_words(request.created_at))
 

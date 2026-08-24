@@ -2,11 +2,15 @@
   = tag.dialog class: "custom_modal", data: { controller: "dialog" }, style: "background: #1e2731;" do
 
     .modal_header
-      %h5=t("crud.add", model: Event.singular)
+      %div
+        %h5=t("crud.add", model: Event.singular)
+        - if @request.requester&.username && @request.created_at
+          .soft-color{style: "font-size: 13px;"}
+            = t("sent_ago_by", user: @request.requester.username , time: time_ago_in_words(@request.created_at))
       %button.modal_close{ data: { action: "dialog#close" } } ×
 
-    .modal_body
-      = form_with model: @request, data: { turbo: false } do |f|
+    = form_with model: @request, data: { turbo: false } do |f|
+      .modal_body
         
         = f.hidden_field :requester_id, value: current_user&.id
         = f.hidden_field :status, value: 1
@@ -15,9 +19,19 @@
 
           .form-modal-info
 
+
             %div{id: "event"}
               = f.fields_for :event do |event_fields|
                 = render "events/form_fields", f: event_fields
 
-        %br
+            - if current_user.admin?
+              .separator{style: "margin-top:10px;"}
+              
+              = label_tag :status, Request.human_attribute_name(:status).upcase, class: "soft-color", style: "font-size: 13px;"
+              = f.select :status, options_for_select(Request.statuses_for_select, @request.status), {}, { class: "field-custom", style: "padding: 0px;" }
+              
+              = label_tag :message, Request.human_attribute_name(:message).upcase, class: "soft-color", style: "font-size: 13px;"
+              = f.text_field :message, class: "field-custom"
+
+      %div
         = f.submit t("verbs.save"), style: "float: right; height: auto;", class: "btn-custom-orange"

@@ -25,6 +25,7 @@ class Comment < ApplicationRecord
             notification = InteractionNotificationNotifier.with(
                 follower: user, 
                 record: self, 
+                message: notification_message,
                 path: father_link)
             notification.deliver(all_users)
         end
@@ -35,9 +36,10 @@ class Comment < ApplicationRecord
 
     public
 
-        def notification_message(noti)
-            return I18n.t("notifications.new_reply", model: interactuable.class.singular.downcase, comment: text) if comment_father
-            I18n.t("notifications.new_comment", model: interactuable.class.singular.downcase, comment: text)
+        def notification_message
+            str = "<strong> #{user.username} </strong>"
+            return str + I18n.t("notifications.new_reply", model: interactuable.class.singular.downcase, comment: text) if comment_father
+            str + I18n.t("notifications.new_comment", model: interactuable.class.singular.downcase, comment: text)
         end
 
         def father_link

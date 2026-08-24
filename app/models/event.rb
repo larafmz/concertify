@@ -11,6 +11,7 @@ class Event < ApplicationRecord
     has_one :chat, dependent: :destroy 
 
     belongs_to :ubication, optional: true
+    accepts_nested_attributes_for :ubication, allow_destroy: false
     belongs_to :request, optional: true
 
     has_one_attached :photo
@@ -23,7 +24,7 @@ class Event < ApplicationRecord
     scope :by_artist, -> (artist_id) { left_joins(:artists).where(artists: { id: artist_id} )}
 
     scope :requests, -> { where.not(request: nil) }
-    scope :accepted, -> { joins(:request).merge(Request.accepted) }
+    scope :accepted, -> { left_joins(:request).merge(Request.accepted).or(where(requests: { id: nil })) }
     scope :pending, -> { joins(:request).merge(Request.pending) }
 
   ## VALIDATIONS
@@ -57,7 +58,7 @@ class Event < ApplicationRecord
         event.date = get_event_date(event_api)
         event.start_time = get_event_datetime(event_api)
         venue = get_event_venue(event_api)
-        event.ubication = venue.nil? ? nil : Ubication.find_or_create_by(city: get_venue_city(venue), state: get_venue_state(venue), country: Country.find_by(code: get_venue_country_code(venue)), address: get_venue_address(venue))
+        event.ubication = venue.nil? ? nil : Ubication.find_or_create_by(city: get_venue_city(venue), state: get_venue_state(venue), country: Country.find_by(code: get_venue_country_code(venue)), venue: get_venue_address(venue))
         event.save!
       end
       return event

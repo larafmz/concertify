@@ -32,6 +32,7 @@ class Relation < ApplicationRecord
       notification = InteractionNotificationNotifier.with(
         follower: follower, 
         record: self,
+        message: notification_message,
         path: Rails.application.routes.url_helpers.user_path(follower_id))
       notification.deliver(User.find(followed_id))
     end
@@ -58,8 +59,9 @@ class Relation < ApplicationRecord
 
   public
             
-    def notification_message(noti)
-        I18n.t("notifications.new_follower")
+    def notification_message
+        str = "<strong> #{follower.username} </strong>"
+        str + I18n.t("notifications.new_follower")
     end
 
 end

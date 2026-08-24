@@ -10,7 +10,7 @@ class AddUbication < ActiveRecord::Migration[7.2]
     create_table :ubications do |t|
       t.string :city
       t.string :state
-      t.string :address
+      t.string :venue
       t.references :country, foreign_key: { on_delete: :cascade }
       t.references :user
       t.timestamps

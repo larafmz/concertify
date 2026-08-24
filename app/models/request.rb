@@ -31,18 +31,21 @@ class Request < ApplicationRecord
   private
 
       def create_notification
+        remove_notification #remove old notis ab this request
         notification = InteractionNotificationNotifier.with(
-            record: self, 
-            status: status, 
-            status_str: get_status_name, 
-            path: Rails.application.routes.url_helpers.requests_user_path(requester.id))
+          record: self, 
+          path: Rails.application.routes.url_helpers.requests_user_path(requester.id),
+          message: "#{I18n.t("notifications.event_update")} <span style='color: #{color_request(status: self.status)}'>#{get_status_name.upcase}</span>"
+        )
         notification.deliver(requester)
       end
 
       def create_notification_for_admins
         notification = InteractionNotificationNotifier.with(
             record: self,
-            path: Rails.application.routes.url_helpers.requests_path)
+            path: Rails.application.routes.url_helpers.requests_path,
+            message:  I18n.t("notifications.new_event", tour_name: self.event.complete_name, artist: self.event.artists&.first&.name)        
+          )
         notification.deliver(User.admins)
       end
 
@@ -101,19 +104,6 @@ class Request < ApplicationRecord
         "X"
       else
         "✓"
-      end
-    end
-
-    ## NOTIFICATION METHODS 
-
-    def notification_message(noti)
-      if noti.params[:status]
-        str = I18n.t("notifications.event_update")
-        status_string = I18n.t("events.statuses.#{noti.params[:status_str].downcase}")
-        str+= "<span style='color: #{color_request(status: noti.params[:status])}'>#{status_string.upcase}</span>"
-        str.html_safe
-      else
-        I18n.t("notifications.new_event", tour_name: self.event.tour_name, artist: self.event.artists.first.name)
       end
     end
 

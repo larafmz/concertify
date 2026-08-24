@@ -43,6 +43,24 @@
   text-align: left;
   align-items: center;
   color: white;
+  margin-bottom:10px
+}
+
+.request{
+  border-radius: 15px;
+  border: 1px solid #40556d;
+  background: #161e25;
+  display: grid;
+  gap: 20px;
+  font-size: 18px;
+  text-align: left;
+  align-items: stretch;
+  color: white;
+  margin-left: 5px;  
+  grid-template-columns: 1fr 4fr 1fr auto;  
+  border-bottom-left-radius: 0px; 
+  border-bottom-right-radius:0px; 
+  border-bottom: 0px;
 }
 
 .diary-obj {

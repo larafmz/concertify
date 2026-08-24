@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
   include ApplicationHelper
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:show]
 
   before_action :set_artist, except: [:index, :requests, :show]
 

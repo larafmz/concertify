@@ -23,6 +23,7 @@ class Like < ApplicationRecord
             notification = InteractionNotificationNotifier.with( 
                 follower: user, 
                 record: self, 
+                message: notification_message,
                 path: Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id))
             notification.deliver(interactuable.user)
         end
@@ -43,8 +44,9 @@ class Like < ApplicationRecord
 
     public
         
-        def notification_message(noti)
-            I18n.t("notifications.new_like", model: interactuable.class.singular.downcase)
+        def notification_message
+            str = "<strong> #{user.username} </strong>"
+            str + I18n.t("notifications.new_like", model: interactuable.class.singular.downcase)
         end
  
 end

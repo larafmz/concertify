@@ -13,6 +13,7 @@ class Ability
  
         cannot :edit, Event do |event| event.requester_id != user.id || event.status !=  1 end
         cannot :requests, User do |other_user| other_user.id != user.id end
+        cannot :read, Request 
 
       elsif user.admin?
 

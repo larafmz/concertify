@@ -11,7 +11,7 @@ class TicketmasterService
             response = Net::HTTP.get(URI(url))
             return JSON.parse(response)
         rescue
-            puts "Error al conectar con Ticketmaster" #TO/DO mostraget_venue_address(venue)r esto en un pop up o algo asi
+            puts "Error al conectar con Ticketmaster" #TO/DO mostrar esto en un pop up o algo asi
             return nil
         end
     end

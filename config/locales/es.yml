@@ -15,7 +15,7 @@ es:
   not_found_model: No se han encontrado %{model}
   not_found: No se ha encontrado
   created_ago: Creado hace %{time}
-  sent_ago: Enviado hace %{time}
+  sent_ago_by: Enviado por @%{user} hace %{time}
   sent: Enviado
   ago: Hace %{time}
   my_model: Mi %{model}
@@ -64,6 +64,7 @@ es:
   entered_chat: "%{model} se unió al grupo"
   you_exited_chat: Saliste del grupo
   you_entered_chat: Te uniste al grupo
+  details_of: Datos de %{data}
   
 
   by: por

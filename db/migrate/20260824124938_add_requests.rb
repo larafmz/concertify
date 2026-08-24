@@ -3,6 +3,7 @@ class AddRequests < ActiveRecord::Migration[7.2]
 
     create_table :requests do |t|
       t.integer :status
+      t.string :message
       t.references :requester, foreign_key: { to_table: :users }
       t.timestamps
     end

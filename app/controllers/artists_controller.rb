@@ -15,7 +15,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.find_by(id: params[:artist_id] || params[:id]) if !@artist
 
     if @artist.present?
-      ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id
+      ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id || "unfound_artist"
       events_api = TicketmasterService.events_by(query: nil, artist_id: ticketmaster_id, first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) ||[]
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = @artist.search_events_by(params[:first_date], params[:second_date], params[:country], events_api)

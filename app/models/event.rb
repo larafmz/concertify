@@ -38,6 +38,7 @@ class Event < ApplicationRecord
 
       after_update :create_notification, if: :saved_change_to_status?
       after_create :create_notification_for_admins
+      after_destroy :remove_notification
 
   ## CALLBACK METHODS
 
@@ -57,6 +58,10 @@ class Event < ApplicationRecord
             record: self,
             path: Rails.application.routes.url_helpers.requests_events_path)
         notification.deliver(User.admins)
+      end
+
+      def remove_notification
+        Notification.for_record(self).destroy_all
       end
 
   ## CLASS METHODS

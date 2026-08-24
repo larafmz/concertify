@@ -91,7 +91,6 @@
       - if current_user
         %li
           %hr.dropdown-divider
-        %li
-          = link_to t("verbs.logout"), "#", class: "dropdown-item"
-
+        %li 
+          = button_to t("verbs.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
 .separator{style: "background: #40556d; "}

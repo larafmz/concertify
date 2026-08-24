@@ -26,8 +26,6 @@
 
           %ul.dropdown-menu
             %li
-              = link_to Register.singular, searchs_path, class: "dropdown-item"
-            %li
               = link_to Publication.singular, new_publication_path, class: "dropdown-item", data: { turbo_frame: "modal" }
 
         .dropdown
@@ -41,13 +39,27 @@
 
           %ul.dropdown-menu
             %li
+              = link_to Event.plural,events_path, class: "dropdown-item"
+            %li
               = link_to Register.plural, registers_path, class: "dropdown-item"
             %li
               = link_to Publication.plural, publications_path, class: "dropdown-item"
             %li
-              = link_to Event.plural,events_path, class: "dropdown-item"
-            %li
               = link_to Artist.plural, artists_path, class: "dropdown-item"
+
+        - if current_user.admin?
+          .dropdown
+            %button.btn.btn-secondary.dropdown-toggle{
+              type: "button",
+              "data-bs-toggle" => "dropdown",
+              "aria-expanded" => "false",
+              style: "background: #eb5d25" 
+            }
+              =t("admin")
+
+            %ul.dropdown-menu
+              %li
+                = link_to t("requested_events"), requests_events_path, class: "dropdown-item"            
 
 
   - if current_user

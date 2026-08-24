@@ -1,0 +1,7 @@
+%div{ style: "background: #1f252b;color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 50px 0px 50px;" }
+    .title_section{style: "color: inherit"}
+        %div
+            = t("requested_events")
+.separator
+%div{style: "padding-top:30px;"}
+    = render "events/requests", events: @requests

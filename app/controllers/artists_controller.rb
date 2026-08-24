@@ -1,7 +1,9 @@
 class ArtistsController < ApplicationController
   include ApplicationHelper
 
-  before_action :set_artist, except: [:index, :requested, :show]
+  load_and_authorize_resource
+
+  before_action :set_artist, except: [:index, :requests, :show]
 
   def index
     @artists = Artist.accepted.left_joins(:relations).group(:id).order("COUNT(relations.id) DESC")
@@ -56,9 +58,7 @@ class ArtistsController < ApplicationController
   end
 
   def destroy
-    if @artist.requester_id == current_user&.id && @artist.pending? #TO/DO or admin
-      @artist.destroy
-    end
+    @artist.destroy
     redirect_back fallback_location: root_path
   end
 

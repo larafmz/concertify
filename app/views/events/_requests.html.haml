@@ -42,7 +42,7 @@
                     %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
                         %div{style: "background: #{event.second_color_request}; color: #{event.color_request}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
                             #{event.emoji_request} #{event.status_string}
-                        - if event.requester_id == current_user&.id && event.status == Event::STATUS_PENDING
+                        - if can?(:edit, event)
                             %div{style: "display: flex; gap: 20px;"}
                                 = link_to "✎", edit_event_path(id: event.id), data: { turbo_frame: "modal" }
                                 = link_to "✗", event_path(event), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }

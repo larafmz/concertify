@@ -10,13 +10,6 @@
         .three-columns
           = render "users/index", users: @users
                   
-    - if @events.size==0 && current_user && @users.size==0
-      .message
-        ℹ️
-        = t("messages.how_to_find_event") 
-      = form_tag request.path, method: "GET" do
-        = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_event")}", class: "field-custom", style: "margin-top:20px;"
-
   - if @artists_api.size!=0 || @artists_db.size!=0
     .section-box{style: "color: #dfdfdf;"}
       #{Artist.plural.upcase} • #{@artists_api.size + @artists_db.size} #{t("results").upcase}
@@ -35,13 +28,12 @@
         = render "artists/index_cards", artists: @artists_api.first(10)
         = render "artists/index_cards", artists: @artists_db.first(10)
 
-  - if !@events.empty? || any_params_present
-    .section-box{style: "color: #dfdfdf;"}
-      = render "events/index_header"
-      .separator{style: "margin-bottom: 15px; "}
-      = render "events/filters", search_by_name: true
-      .separator{style: "margin-bottom: 15px; "}
-      = render "events/index", events: @events[0,10], photo: false
+  .section-box{style: "color: #dfdfdf;"}
+    = render "events/index_header"
+    .separator{style: "margin-bottom: 15px; "}
+    = render "events/filters", search_by_name: true
+    .separator{style: "margin-bottom: 15px; "}
+    = render "events/index", events: @events[0,10], photo: false
 
   - if current_user
     = render "events/manual_add"

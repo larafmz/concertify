@@ -7,9 +7,10 @@
 .separator
 
 - if @notifications.empty?
-    .message
-        ℹ️
-        = t("not_found_model", model: Notification.plural.downcase )
+    .widget-content
+        .message
+            ℹ️
+            = t("not_found_model", model: Notification.plural.downcase )
 
 - @notifications.each do |notification|  
     = render "notifications/table_item", notification: notification

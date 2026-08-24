@@ -1,7 +1,9 @@
 class EventsController < ApplicationController
   include ApplicationHelper
 
-  before_action :set_artist, except: [:show, :new, :create, :requested, :index]
+  load_and_authorize_resource
+
+  before_action :set_artist, except: [:show, :new, :create, :requests, :index]
 
   def index
     events_api = TicketmasterService.events_by(query: params[:search], artist_id: params[:ticketmaster_id], first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) 
@@ -48,7 +50,7 @@ class EventsController < ApplicationController
       @event.ubication = Ubication.create(country_id: Country.find_by(code: params[:country])&.id, city: params[:city])
 
       if @event.save!
-          redirect_to requests_users_path(current_user)
+          redirect_to requests_user_path(current_user)
       else
           redirect_back fallback_location: root_path
       end
@@ -75,14 +77,12 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    if @event.requester_id == current_user&.id && @event.pending? #TO/DO or admin
-      @event.destroy
-    end
+    @event.destroy
     redirect_back fallback_location: root_path
   end
   
-  def requested
-    #TO/DO if role admin, show all requesteds
+  def requests
+    @requests = Event.requests.order("created_at DESC")
   end
 
   def future_assistances

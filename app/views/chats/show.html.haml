@@ -5,14 +5,14 @@
     = turbo_frame_tag "chat_content", style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; " do
         %div{style: "display: grid; grid-template-columns: 1fr 1fr auto; background: #1f252b"}
             - if @user
-                = link_to user_path(@user.id) do 
+                = link_to user_path(@user.id), data: { turbo_frame: "_top" } do 
                     .artist-info{style: "gap: 15px; margin: 5px;"}
                         .link_icon{style: "height: 50px; width: 50px;"}
                             = image_tag @user.icon if @user.icon.attached?
                         .artist-name 
                             %div{style: "margin-bottom:5px; font-size:15px;"}= @user.username
             - elsif @event
-                = link_to event_path(@event.id) do 
+                = link_to event_path(@event.id), data: { turbo_frame: "_top" } do 
                     .artist-info{style: "gap: 15px; margin: 5px;"}
                         .link_icon{style: "height: 50px; width: 50px;"}
                             = image_tag @event.photo if @event.photo.attached?

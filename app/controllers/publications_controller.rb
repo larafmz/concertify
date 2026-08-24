@@ -1,4 +1,6 @@
 class PublicationsController < ApplicationController
+    
+    load_and_authorize_resource
 
     def index
         @publications = Publication.all.order("created_at DESC") 

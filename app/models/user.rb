@@ -25,6 +25,7 @@ class User < ApplicationRecord
   ## SCOPES
   
     scope :by_name, ->(query) { where("username ILIKE :q", q: "%#{query}%") } 
+    scope :admins, -> { where(role_id: Role.find_by(name: "admin").id) }
 
   ## VALIDATIONS
 

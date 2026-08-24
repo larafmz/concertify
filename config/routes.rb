@@ -68,13 +68,13 @@ Rails.application.routes.draw do
       get :registers
     end
     collection do
-      get :requested
+      get :requests #TO/DO or delete
     end    
   end
 
   resources :events, only: [:show, :index, :new, :create, :destroy, :edit, :update] do
     collection do
-      get :requested
+      get :requests
     end
     member do
       post :post

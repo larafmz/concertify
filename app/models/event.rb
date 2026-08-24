@@ -9,12 +9,13 @@ class Event < ApplicationRecord
   ## RELATIONSHIPS
     has_many :artists_events, dependent: :destroy
     has_many :artists, through: :artists_events
-    belongs_to :ubication, optional: true
     has_many :registers, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
     has_many :publications, dependent: :destroy
-    belongs_to :requester, class_name: "User", optional: true
     has_one :chat, dependent: :destroy 
+    
+    belongs_to :requester, class_name: "User", optional: true
+    belongs_to :ubication, optional: true
     
     has_one_attached :photo
 
@@ -24,6 +25,7 @@ class Event < ApplicationRecord
     scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
     scope :by_genre, ->(genre_id) { left_joins(:artists).where(artists: { genre_id: genre_id }) }
     scope :by_artist, -> (artist_id) { left_joins(:artists).where(artists: { id: artist_id} )}
+    scope :requests, -> { where.not(requester_id: nil) }
     scope :accepted, -> { where(status: 0).or(where(status: nil)) }
     scope :pending, -> { where(status: 1) }
 
@@ -35,6 +37,7 @@ class Event < ApplicationRecord
   ## CALLBACKS
 
       after_update :create_notification, if: :saved_change_to_status?
+      after_create :create_notification_for_admins
 
   ## CALLBACK METHODS
 
@@ -47,6 +50,13 @@ class Event < ApplicationRecord
             status_str: get_status_name, 
             path: Rails.application.routes.url_helpers.requests_user_path(requester.id))
         notification.deliver(requester)
+      end
+
+      def create_notification_for_admins
+        notification = InteractionNotificationNotifier.with(
+            record: self,
+            path: Rails.application.routes.url_helpers.requests_events_path)
+        notification.deliver(User.admins)
       end
 
   ## CLASS METHODS
@@ -124,13 +134,6 @@ class Event < ApplicationRecord
       status == 0 || status == nil
     end
 
-    def notification_message(noti)
-      str = I18n.t("notifications.event_update")
-      status_string = I18n.t("events.statuses.#{noti.params[:status_str].downcase}")
-      str+= "<span style='color: #{color_request(status: noti.params[:status])}'>#{status_string.upcase}</span>"
-      str.html_safe
-    end
-
     def days_left(actual: Date.today)
       (actual - self.date).to_i.abs
     end
@@ -172,6 +175,19 @@ class Event < ApplicationRecord
         "X"
       else
         "✓"
+      end
+    end
+
+    ## NOTIFICATION METHODS 
+
+    def notification_message(noti)
+      if noti.params[:status]
+        str = I18n.t("notifications.event_update")
+        status_string = I18n.t("events.statuses.#{noti.params[:status_str].downcase}")
+        str+= "<span style='color: #{color_request(status: noti.params[:status])}'>#{status_string.upcase}</span>"
+        str.html_safe
+      else
+        I18n.t("notifications.new_event", tour_name: self.tour_name, artist: self.artists.first.name)
       end
     end
 

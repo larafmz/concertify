@@ -70,4 +70,8 @@ gem 'stimulus-rails'
 
 gem "solid_cable"
 
+# For notifications
 gem "noticed"
+
+# For permissions
+gem "cancancan"

@@ -1,4 +1,6 @@
 class InteractuablesController < ApplicationController
+    
+    load_and_authorize_resource
 
     def show
         @users = Interactuable.find(params[:id]).likes.map(&:user) 

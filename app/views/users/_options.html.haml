@@ -7,6 +7,6 @@
         = link_to FutureAssistance.plural, future_assistances_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :future_assistances)
         = link_to Publication.plural, publications_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :publications)
         = link_to Artist.plural, artists_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :artists)
-        - if @user.id == current_user&.id
+        - if can?(:requests, @user)
             = link_to t("requests"), requests_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :requests)
         = link_to t("network"), followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :follows)

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  load_and_authorize_resource
+
   before_action :set_user, except: [:follow, :unfollow]
   before_action :network, only: [:followers, :followings, :blocked]
   

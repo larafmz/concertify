@@ -40,7 +40,6 @@ es:
   from_user: "%{model} de %{user}"  
   more: Más
   diary: Diario
-  requests: Solicitudes
   asistenece: Asistencia
   likes_of_model_from_user: Me gustas sobre %{model} de %{user} de
   follows_you: Te sigue

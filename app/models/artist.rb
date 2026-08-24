@@ -16,6 +16,8 @@ class Artist < ApplicationRecord
     has_many :relations, as: :followed, dependent: :destroy
     has_many :followers, through: :relations, source: :follower
     has_one_attached :photo
+
+    belongs_to :request, optional: true
     
   ## SCOPES
 

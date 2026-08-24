@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_08_22_133141) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_24_135737) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,7 +47,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_22_133141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "genre_id"
+    t.integer "request_id"
     t.index ["genre_id"], name: "index_artists_on_genre_id"
+    t.index ["request_id"], name: "index_artists_on_request_id"
     t.index ["requester_id"], name: "index_artists_on_requester_id"
   end
 
@@ -116,12 +118,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_22_133141) do
     t.string "tour_name"
     t.date "date"
     t.datetime "start_time"
-    t.integer "status"
-    t.integer "requester_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ubication_id"
-    t.index ["requester_id"], name: "index_events_on_requester_id"
+    t.integer "request_id"
+    t.index ["request_id"], name: "index_events_on_request_id"
     t.index ["ubication_id"], name: "index_events_on_ubication_id"
   end
 
@@ -224,6 +225,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_22_133141) do
     t.index ["user_id"], name: "index_reposts_on_user_id"
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.integer "status"
+    t.integer "requester_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["requester_id"], name: "index_requests_on_requester_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -289,7 +298,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_22_133141) do
   add_foreign_key "comments", "comments", column: "comment_father_id"
   add_foreign_key "comments", "interactuables"
   add_foreign_key "comments", "users"
-  add_foreign_key "events", "users", column: "requester_id"
   add_foreign_key "favorite_artists", "artists"
   add_foreign_key "favorite_artists", "users"
   add_foreign_key "future_assistances", "events"
@@ -301,6 +309,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_22_133141) do
   add_foreign_key "relations", "users", column: "follower_id"
   add_foreign_key "reposts", "interactuables"
   add_foreign_key "reposts", "users"
+  add_foreign_key "requests", "users", column: "requester_id"
   add_foreign_key "tagged_users", "interactuables"
   add_foreign_key "tagged_users", "users"
   add_foreign_key "ubications", "countries", on_delete: :cascade

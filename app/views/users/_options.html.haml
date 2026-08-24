@@ -8,5 +8,5 @@
         = link_to Publication.plural, publications_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :publications)
         = link_to Artist.plural, artists_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :artists)
         - if can?(:requests, @user)
-            = link_to t("requests"), requests_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :requests)
+            = link_to Request.plural, requests_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :requests)
         = link_to t("network"), followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :follows)

@@ -72,10 +72,7 @@ Rails.application.routes.draw do
     end    
   end
 
-  resources :events, only: [:show, :index, :new, :create, :destroy, :edit, :update] do
-    collection do
-      get :requests
-    end
+  resources :events, only: [:show, :index] do
     member do
       post :post
       get :registers
@@ -84,6 +81,8 @@ Rails.application.routes.draw do
       get :artists
     end
   end
+
+  resources :requests, only: [:index, :new, :create, :destroy, :edit, :update]
 
   resources :notifications, only: [:index] do
     member do

@@ -2,10 +2,6 @@ include TicketmasterEventHelper
 
 class Event < ApplicationRecord
 
-  ##CONFIGURATIONS
-
-  kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
-
   ## RELATIONSHIPS
     has_many :artists_events, dependent: :destroy
     has_many :artists, through: :artists_events
@@ -13,10 +9,10 @@ class Event < ApplicationRecord
     has_many :future_assistances, dependent: :destroy
     has_many :publications, dependent: :destroy
     has_one :chat, dependent: :destroy 
-    
-    belongs_to :requester, class_name: "User", optional: true
+
     belongs_to :ubication, optional: true
-    
+    belongs_to :request, optional: true
+
     has_one_attached :photo
 
   ## SCOPES
@@ -25,44 +21,15 @@ class Event < ApplicationRecord
     scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
     scope :by_genre, ->(genre_id) { left_joins(:artists).where(artists: { genre_id: genre_id }) }
     scope :by_artist, -> (artist_id) { left_joins(:artists).where(artists: { id: artist_id} )}
-    scope :requests, -> { where.not(requester_id: nil) }
-    scope :accepted, -> { where(status: 0).or(where(status: nil)) }
-    scope :pending, -> { where(status: 1) }
+
+    scope :requests, -> { where.not(request: nil) }
+    scope :accepted, -> { joins(:request).merge(Request.accepted) }
+    scope :pending, -> { joins(:request).merge(Request.pending) }
 
   ## VALIDATIONS
 
     validates :tour_name, :date, presence: true
     validates :ticketmaster_id, uniqueness: { allow_nil: true }
-
-  ## CALLBACKS
-
-      after_update :create_notification, if: :saved_change_to_status?
-      after_create :create_notification_for_admins
-      after_destroy :remove_notification
-
-  ## CALLBACK METHODS
-
-  private
-
-      def create_notification
-        notification = InteractionNotificationNotifier.with(
-            record: self, 
-            status: status, 
-            status_str: get_status_name, 
-            path: Rails.application.routes.url_helpers.requests_user_path(requester.id))
-        notification.deliver(requester)
-      end
-
-      def create_notification_for_admins
-        notification = InteractionNotificationNotifier.with(
-            record: self,
-            path: Rails.application.routes.url_helpers.requests_events_path)
-        notification.deliver(User.admins)
-      end
-
-      def remove_notification
-        Notification.for_record(self).destroy_all
-      end
 
   ## CLASS METHODS
 
@@ -126,74 +93,17 @@ class Event < ApplicationRecord
     def average_rating
       registers.average(:rating).to_i || 0
     end
-    
-    def status_string
-      status ? get_status_name : "Aceptado"
-    end
 
-    def pending?
-      status == 1
-    end
+    # def pending?
+    #   request.present? && request.status == 1
+    # end
 
-    def accepted?
-      status == 0 || status == nil
-    end
+    # def accepted?
+    #   request.present? && (request.status == 0 || request.status == nil)
+    # end
 
     def days_left(actual: Date.today)
       (actual - self.date).to_i.abs
-    end
-
-    ## REQUESTS METHODS 
-    
-    def color_request(status: self.status)
-      case status
-        when 1
-          "rgb(252, 170, 46)"
-        when 2
-          "rgb(245, 83, 83)"
-        else
-          "rgb(88, 216, 94);"
-        end
-    end
-
-    def second_color_request
-      case status
-        when 1
-          "rgb(78, 61, 41)"
-        when 2
-          "rgb(78, 41, 41);"
-        else
-          "rgb(48, 66, 49)"
-        end
-    end
-
-    def message_request
-      return I18n.t("request_message.0") if status.nil?
-      I18n.t("request_message.#{status}")
-    end
-
-    def emoji_request
-      case status
-      when 1
-        "⌛︎"
-      when 2
-        "X"
-      else
-        "✓"
-      end
-    end
-
-    ## NOTIFICATION METHODS 
-
-    def notification_message(noti)
-      if noti.params[:status]
-        str = I18n.t("notifications.event_update")
-        status_string = I18n.t("events.statuses.#{noti.params[:status_str].downcase}")
-        str+= "<span style='color: #{color_request(status: noti.params[:status])}'>#{status_string.upcase}</span>"
-        str.html_safe
-      else
-        I18n.t("notifications.new_event", tour_name: self.tour_name, artist: self.artists.first.name)
-      end
     end
 
 end

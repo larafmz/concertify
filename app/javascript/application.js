@@ -2,6 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "channels"
+import "jquery";
+import "cocoon";
 
 window.addEventListener("pageshow", () => {
   document.querySelectorAll("dialog[open]").forEach((dialog) => {

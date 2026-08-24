@@ -10,7 +10,7 @@ es:
       alone: Solo
       accompanied: Acompañado
 
-  events:
+  requests:
     statuses:
       accepted: Aceptado
       pending: Pendiente

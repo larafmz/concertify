@@ -46,6 +46,9 @@ es:
       chat:
         one: Chat
         other: Chats
+      request:
+        one: Solicitud
+        other: Solicitudes
     attributes:
       user:
         email: Email

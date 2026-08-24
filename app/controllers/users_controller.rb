@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @requests = Event.where(requester_id: @user.id).order("created_at DESC")
+    @requests = Request.where(requester_id: @user.id).order("created_at DESC")
   end
 
   def future_assistances

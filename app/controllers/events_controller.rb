@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   include ApplicationHelper
 
-  load_and_authorize_resource except: [:show]
+  authorize_resource
 
   before_action :set_artist, except: [:show, :new, :create, :requests, :index]
 
@@ -45,7 +45,12 @@ class EventsController < ApplicationController
   private
 
   def set_artist
-    @event = Event.find(params[:id])    
+    @event = Event.find_by(id: params[:id])    
+    unless @event
+      flash[:alert] = t("not_found_masc", model: Event.singular.downcase)
+      redirect_back fallback_location: root_path
+      return
+    end
     @future_assistances = @event.future_assistances.viewables(current_user).order("created_at DESC")
     @registers = @event.registers.viewables(current_user).order("created_at DESC")
     @publications = @event.publications.viewables(current_user).order("created_at DESC")

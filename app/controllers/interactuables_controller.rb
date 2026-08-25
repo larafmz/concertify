@@ -1,21 +1,22 @@
 class InteractuablesController < ApplicationController
     
-    load_and_authorize_resource
+    authorize_resource
+
+    before_action :set_interactuable, only: [:show, :comments, :reposts]
 
     def show
-        @users = Interactuable.find(params[:id]).likes.map(&:user) 
-        @interactuable = Interactuable.find(params[:id])
-        @user = User.viewables(current_user).find(@interactuable.user_id)
+        @users = @interactuable.likes.map(&:user) #likes
     end
 
     def comments
-        @comments = Interactuable.find(params[:id]).comments.order("created_at DESC").where(comment_father_id: nil)
-        @interactuable = Interactuable.find(params[:id])
-        @user = User.viewables(current_user).find(@interactuable.user_id)
+        @comments = @interactuable.comments.order("created_at DESC").where(comment_father_id: nil) #comments
+    end
+
+    def reposts
+        @users = @interactuable.reposts.map(&:user) #reposts
     end
         
     def destroy
-        interactuable = Interactuable.find(params[:id])
         interactuable.destroy
         redirect_to registers_user_path(current_user)
     end
@@ -52,10 +53,18 @@ class InteractuablesController < ApplicationController
         redirect_to path
     end
 
-    def reposts
-        @users = Interactuable.find(params[:id]).reposts.map(&:user) 
-        @interactuable = Interactuable.find(params[:id])
+private
+    
+    def set_interactuable
+        @interactuable = Interactuable.viewables(current_user).find_by(id: params[:id])
+        unless @interactuable
+            flash[:alert] = t("not_found")
+            redirect_back fallback_location: root_path
+            return
+        end
         @user = User.viewables(current_user).find(@interactuable.user_id)
+        @liked_by_creator = @user
     end
+
     
 end

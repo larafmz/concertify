@@ -14,7 +14,7 @@ es:
   results: Resultados
   not_found_model: No se han encontrado %{model}
   not_found: No se ha encontrado
-  not_found_user: No se ha encontrado el usuario
+  not_found_masc: No se ha encontrado el %{model}
   created_ago: Creado hace %{time}
   sent_ago_by: Enviado por @%{user} hace %{time}
   sent: Enviado

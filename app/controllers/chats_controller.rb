@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:show]
 
   before_action :authenticate_user
   before_action :set_chat 
@@ -10,6 +10,7 @@ class ChatsController < ApplicationController
 
   def show
     unless @chat
+      flash[:alert] = t("not_found_masc", model: Chat.singular.downcase)
       redirect_to chats_path
       return
     end

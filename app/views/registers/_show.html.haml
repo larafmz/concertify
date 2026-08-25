@@ -34,12 +34,13 @@
         %div{style: "margin-bottom: 40px;"}
             = render "interactuables/footer", interactuable: register
 
-        .soft-color{style: "margin: 10px 0;"}
-            = link_to user_path(@user) do 
-                %span{style: "font-weight: 700"}=@user.username.upcase
-            =t("registers.liked_these_reviews")
-            .separator
-            (TO/DO)
+        - if @user
+            .soft-color{style: "margin: 10px 0;"}
+                = link_to user_path(@user) do 
+                    %span{style: "font-weight: 700"}=@user.username.upcase
+                =t("registers.liked_these_reviews")
+                .separator
+                (TO/DO)
 
     - if current_user && current_user&.id == register.user_id
         .dropdown

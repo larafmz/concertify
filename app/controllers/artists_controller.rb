@@ -20,6 +20,10 @@ class ArtistsController < ApplicationController
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = @artist.search_events_by(params[:first_date], params[:second_date], params[:country], events_api)
       @events = TicketmasterService.merge_events(events_db, events_api)
+    else
+      flash[:alert] = t("not_found_masc", model: Artist.singular.downcase)
+      redirect_back fallback_location: root_path
+      return
     end
   end
 
@@ -75,7 +79,12 @@ class ArtistsController < ApplicationController
 private
 
   def set_artist
-    @artist = Artist.accepted.find(params[:id])
+    @artist = Artist.accepted.find_by(id: params[:id])
+    unless @artist
+      flash[:alert] = t("not_found_masc", model: Artist.singular.downcase)
+      redirect_back fallback_location: root_path
+      return
+    end
     @publications = @artist.publications.viewables(current_user).order("created_at DESC")
     @registers = @artist.registers.viewables(current_user).order("created_at DESC")
     @followers = @artist.followers.viewables(current_user)

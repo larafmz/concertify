@@ -79,7 +79,12 @@ class Request < ApplicationRecord
     end
 
     def accepted?
-      status == 0 || status == nil
+      status == 0 
+    end
+
+    def get_event_id
+      return event.id if accepted?
+      return existing_event_id if status == 2 && existing_event_id.present?
     end
 
     def color_request(status: self.status)
@@ -106,6 +111,7 @@ class Request < ApplicationRecord
 
     def message_request
       return I18n.t("request_message.0") if status.nil?
+      return message if message.present?
       I18n.t("request_message.#{status}")
     end
 

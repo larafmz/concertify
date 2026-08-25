@@ -3,7 +3,7 @@
 .register-show
     = link_to event_path(@event.id) do 
         .rectangle_icon{ style: "border: 1px solid " }
-            = image_tag @event.photo if @event.photo.attached?
+            = image_tag @event.get_photo if @event.get_photo.attached?
         
     .register-info
         .flex-left
@@ -52,6 +52,6 @@
                 =t("verbs.edit")
             %ul.dropdown-menu
                 %li
-                    = link_to t("crud.edit", model: Register.singular), edit_register_path(id: register.id), data: { turbo_frame: "modal" }, class: "dropdown-item"
+                    = link_to t("crud.edit", model: Register.singular), edit_register_path(register), data: { turbo_frame: "modal" }, class: "dropdown-item"
                 %li
                     = link_to t("crud.destroy", model: Register.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"

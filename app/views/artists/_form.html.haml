@@ -1,0 +1,23 @@
+= turbo_frame_tag "modal" do
+  = tag.dialog class: "custom_modal", data: { controller: "dialog" }, style: "background: #1e2731;" do
+
+    .modal_header
+      %div
+        %h5=t("crud.edit", model: Artist.singular)
+      %button.modal_close{ data: { action: "dialog#close" } } ×
+
+    = form_with model: @artist, data: { turbo: false } do |f|
+      .modal_body        
+        .form-modal
+          .form-modal-info
+
+            %div
+              = label_tag :name, "🧑‍🎤 #{Artist.human_attribute_name(:name)}", class: "soft-color", style: "font-size: 13px;"
+              = f.text_field :name, placeholder: "Ej: Taylor Swift", class: "field-custom"
+
+            %div
+              = label_tag :photo, "📷 #{Artist.human_attribute_name(:photo)}", class: "soft-color", style: "font-size: 13px;"
+              = f.file_field :photo, class: "field-custom", style: "padding: 0px;"
+
+      %div
+        = f.submit t("verbs.save"), style: "float: right; height: auto;", class: "btn-custom-orange"

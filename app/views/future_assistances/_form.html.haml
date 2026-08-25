@@ -18,7 +18,7 @@
             - if @event_api
               = image_tag get_event_image_url(@event_api)
             - else
-              = image_tag  @event.photo if @event.photo.attached?
+              = image_tag  @event.get_photo if @event.get_photo.attached?
 
           .form-modal-info
             %span{ style: "font-size: 20px;" }

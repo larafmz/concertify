@@ -6,7 +6,7 @@
             = link_to user_path(user.id), class: "hover-border-icon" do
                 .link_icon
                     = image_tag user.icon if user.icon.attached?
-    = link_to notification.path, class: "publication-link", style: "display: grid; grid-template-columns: 1fr auto;" do
+    = button_to read_and_redirect_notification_path(notification), class: "notification-button", method: :post, form: { data: { turbo: false } } do
         %div
             %div{style: "font-size: 15px ; color: white;"}
                 = notification.message.html_safe

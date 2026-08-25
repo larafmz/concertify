@@ -21,11 +21,11 @@ class RequestsController < ApplicationController
         @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
         # Search artist in Ticketmaster
         if !@artist
-            artist_api = TicketmasterService.artists_by(params[:request][:event_attributes][:artist_name], nil)&.first
+            artist_api = TicketmasterService.artists_by(params[:request][:event_attributes][:artist_name])&.first
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
         #Create artist with status pending
-        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], requester_id: current_user&.id, status: 1) if !@artist
+        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) if !@artist
         
         @event.artists << @artist
 
@@ -46,16 +46,21 @@ class RequestsController < ApplicationController
 
         @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
         if !@artist
-            artist_api = TicketmasterService.artists_by(params[:request][:event_attributes][:artist_name], nil)&.first
+            artist_api = TicketmasterService.artist_by_name(params[:request][:event_attributes][:artist_name])
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
+        #Create artist with status pending and delete the old artist if needed
+        if !@artist
+            old_artist = @event.artists.first 
+            old_artist.destroy if  old_artist.events.count==1 && !old_artist.accepted?
+            @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) if !@artist
+        end
+
         @event.artists = [@artist] if @artist
 
-        if @request.update(create_params)
-            redirect_to requests_user_path(current_user)
-        else
-            redirect_back fallback_location: root_path
-        end
+        @request.update(create_params)
+        redirect_back fallback_location: root_path
+        
     end
 
     def destroy
@@ -66,7 +71,7 @@ class RequestsController < ApplicationController
 private
 
     def create_params
-        params.require(:request).permit(:requester_id, :status, :message, event_attributes: [:id, :start_time, :date, :tour_name, :artist_id, ubication_attributes: [:id, :city, :venue, :country_id] ])
+        params.require(:request).permit(:requester_id, :status, :message, :existing_event_id, event_attributes: [:id, :start_time, :date, :tour_name, :artist_id, ubication_attributes: [:id, :city, :venue, :country_id] ])
     end 
 
 end

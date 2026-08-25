@@ -12,7 +12,7 @@ class ArtistsController < ApplicationController
   def show
 
     @artist = Artist.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
-    @artist = Artist.find_by(id: params[:artist_id] || params[:id]) if !@artist
+    @artist = Artist.accepted.find_by(id: params[:artist_id] || params[:id]) if !@artist
 
     if @artist.present?
       ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id || "unfound_artist"
@@ -24,6 +24,14 @@ class ArtistsController < ApplicationController
       redirect_back fallback_location: root_path
       #TO/DO error o mensaje idk
     end
+  end
+
+  def edit
+  end
+
+  def update
+    @artist.update(create_params)
+    redirect_back fallback_location: root_path
   end
 
   def followers
@@ -70,14 +78,14 @@ class ArtistsController < ApplicationController
 private
 
   def set_artist
-    @artist = Artist.find(params[:id])
+    @artist = Artist.accepted.find(params[:id])
     @publications = @artist.publications.viewables(current_user).order("created_at DESC")
     @registers = @artist.registers.viewables(current_user).order("created_at DESC")
     @followers = @artist.followers.viewables(current_user)
   end
 
   def create_params
-      params.require(:artist).permit(:name, :requester_id, :status)
+      params.require(:artist).permit(:name, :requester_id, :status, :photo)
   end 
 
 end

@@ -7,12 +7,16 @@ class NotificationsController < ApplicationController
     end
 
     def mark_as_read
-        @notification = Notification.find(params[:id])
         @notification.mark_as_read 
         respond_to do |format|
             format.json { head :no_content }
             format.js {}
         end
+    end
+
+    def read_and_redirect
+        @notification.mark_as_read 
+        redirect_to @notification.path
     end
 
     def mark_all_read

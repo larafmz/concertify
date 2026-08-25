@@ -23,7 +23,7 @@
                                 = event_date.year
 
                         .diary_icon
-                            = image_tag event.photo if event.photo.attached?
+                            = image_tag event.get_photo if event.get_photo.attached?
 
                         %div
                             - event.artists.each_with_index  do |artist, index|

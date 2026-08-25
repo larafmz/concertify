@@ -12,7 +12,8 @@
     = form_with model: @request, data: { turbo: false } do |f|
       .modal_body
         
-        = f.hidden_field :requester_id, value: current_user&.id
+        - if !@request.requester_id.present?
+          = f.hidden_field :requester_id, value: current_user&.id
         = f.hidden_field :status, value: 1
         
         .form-modal
@@ -24,14 +25,24 @@
               = f.fields_for :event do |event_fields|
                 = render "events/form_fields", f: event_fields
 
-            - if current_user.admin?
+            - if current_user.admin? && @request.persisted?
               .separator{style: "margin-top:10px;"}
-              
-              = label_tag :status, Request.human_attribute_name(:status).upcase, class: "soft-color", style: "font-size: 13px;"
-              = f.select :status, options_for_select(Request.statuses_for_select, @request.status), {}, { class: "field-custom", style: "padding: 0px;" }
-              
-              = label_tag :message, Request.human_attribute_name(:message).upcase, class: "soft-color", style: "font-size: 13px;"
-              = f.text_field :message, class: "field-custom"
+
+              .two-columns
+                %div
+                
+                  = label_tag :status, Request.human_attribute_name(:status).upcase, class: "soft-color", style: "font-size: 13px;"
+                  = f.select :status, options_for_select(Request.statuses_for_select, @request.status), {}, { class: "field-custom", style: "padding: 0px;" }
+                %div
+                
+                  = label_tag :message, Request.human_attribute_name(:message).upcase, class: "soft-color", style: "font-size: 13px;"
+                  = f.text_field :message, class: "field-custom"
+
+              .separator{style: "margin-top:10px;"}
+              = label_tag :existing_event_id, t("messages.exists_in_app_already").upcase, class: "soft-color", style: "font-size: 13px;"
+              = f.select :existing_event_id, 
+                options_for_select(@request.matching_events.sort_by(&:tour_name).map { |event| [event.complete_info, event.id] }, 
+                @request.existing_event_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }
 
       %div
         = f.submit t("verbs.save"), style: "float: right; height: auto;", class: "btn-custom-orange"

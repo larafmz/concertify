@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+    def date_in_numbers(date)
+      date.strftime("%d/%m/%y")
+    end
+
     def formatted_event_date(date, start_time)
       str = I18n.t("date.day_names")[date.wday]
       str += " #{short_date_with_year(date)}"

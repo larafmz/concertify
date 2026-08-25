@@ -7,7 +7,7 @@
             - if !register
                 = link_to t("registers.assisted"), new_register_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
             - else
-                = link_to t("my_model", model: Register.singular), interactuable_path(id: register.id), class: "btn-custom", style: "height: auto;"
+                = link_to t("my_model", model: Register.singular), interactuable_path(register), class: "btn-custom", style: "height: auto;"
         - else
             - if !future_assistance
                 = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }

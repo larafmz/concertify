@@ -66,7 +66,6 @@ es:
   you_entered_chat: Te uniste al grupo
   details_of: Datos de %{data}
   
-
   by: por
   about: sobre
   of: de
@@ -133,9 +132,8 @@ es:
     post_about: Publica sobre %{model}
     its_today: ¡ ES HOY !
     in_x_days: "%{days} días"
-    has_past: ¡ Ya ha pasado !
+    exists_in_app_already: Ya existe en la app
     
-
   notifications:
     new_follower: "ha comenzado a seguirte"
     new_like: "ha indicado que le gusta tu %{model}"
@@ -143,7 +141,7 @@ es:
     new_comment: "ha escrito un comentario en tu %{model}: %{comment}"
     new_reply: "ha respondido a tu comentario en tu %{model}: %{comment}"
     new_repost: "ha republicado tu %{model}"
-    event_update: "Se ha actualizado tu solicitud de concierto al estado: "
+    event_update: "Se ha actualizado tu solicitud de %{event} al estado: "
     new_event: "Un usuario ha solicitada la adición de un nuevo evento: %{tour_name} de %{artist}"
     upcoming_event_7: "¡Queda solo una semana para %{event}! 🎶 ¡La cuenta atrás ha comenzado!"
     upcoming_event_6: "¡Quedan 6 días para %{event}! 🎸 ¡Cada vez falta menos!"

@@ -12,16 +12,17 @@ class Event < ApplicationRecord
 
     belongs_to :ubication, optional: true
     accepts_nested_attributes_for :ubication, allow_destroy: false
-    belongs_to :request, optional: true
+    belongs_to :request, optional: true, dependent: :destroy
 
     has_one_attached :photo
 
   ## SCOPES
 
     scope :by_name, -> (query) { left_joins(:artists).where("events.tour_name ILIKE :q OR artists.name ILIKE :q", q: "%#{query}%").distinct }
-    scope :by_country_code, ->(country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
-    scope :by_genre, ->(genre_id) { left_joins(:artists).where(artists: { genre_id: genre_id }) }
+    scope :by_country_code, -> (country_code) { left_joins(ubication: :country).where(countries: { code: country_code }) }
+    scope :by_genre, -> (genre_id) { left_joins(:artists).where(artists: { genre_id: genre_id }) }
     scope :by_artist, -> (artist_id) { left_joins(:artists).where(artists: { id: artist_id} )}
+    scope :by_date, -> (date) { where(date: date) }
 
     scope :requests, -> { where.not(request: nil) }
     scope :accepted, -> { left_joins(:request).merge(Request.accepted).or(where(requests: { id: nil })) }
@@ -91,20 +92,21 @@ class Event < ApplicationRecord
       tour_name
     end
 
+    def complete_info
+      [tour_name, date_in_numbers(date), start_time, ubication.complete_name_with_venue].reject(&:blank?).join(", ")
+    end
+
     def average_rating
       registers.average(:rating).to_i || 0
     end
 
-    # def pending?
-    #   request.present? && request.status == 1
-    # end
-
-    # def accepted?
-    #   request.present? && (request.status == 0 || request.status == nil)
-    # end
-
     def days_left(actual: Date.today)
       (actual - self.date).to_i.abs
+    end
+
+    def get_photo
+      self.photo if self.photo.attached?
+      self.artists.first.photo 
     end
 
 end

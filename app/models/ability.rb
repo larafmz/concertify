@@ -11,7 +11,7 @@ class Ability
  
       if user.user?
  
-        cannot :edit, Event do |event| event.requester_id != user.id || event.status !=  1 end
+        cannot :edit, Request do |request| request.requester_id != user.id || request.status !=  1 end
         cannot :requests, User do |other_user| other_user.id != user.id end
         cannot :read, Request 
 

@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
   resources :publications, only: [:index, :new, :create, :show]
 
-  resources :artists, only: [:show, :index] do
+  resources :artists, only: [:show, :index, :edit, :update] do
     member do
       post :post
       post :follow
@@ -87,6 +87,7 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index] do
     member do
       post :mark_as_read
+      post :read_and_redirect
     end
     collection do
       post :mark_all_read

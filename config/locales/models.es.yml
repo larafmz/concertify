@@ -63,6 +63,8 @@ es:
         requester_id: Usuario solicitante
       artist:
         name: Nombre
+        photo: Foto
+        status: Estado
       ubication:
         city: Ciudad
         state: Estado
@@ -77,3 +79,4 @@ es:
         reviews: Reseñas
       request:
         status: Estado
+        message: Mensaje

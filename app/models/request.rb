@@ -8,10 +8,8 @@ class Request < ApplicationRecord
 
   ## RELATIONSHIPS
     belongs_to :requester, class_name: "User", optional: true
-    has_one :event
+    has_one :event, dependent: :destroy
     accepts_nested_attributes_for :event, allow_destroy: false
-    has_one :artist #TO/DO
-    accepts_nested_attributes_for :artist, allow_destroy: false
 
   ## SCOPES
 
@@ -22,40 +20,55 @@ class Request < ApplicationRecord
 
   ## CALLBACKS
 
-      after_update :create_notification, if: :saved_change_to_status?
       after_create :create_notification_for_admins
+      after_update :create_notification, if: :saved_change_to_status?
+      after_update :change_to_accepted, if: :saved_change_to_status?
       after_destroy :remove_notification
 
   ## CALLBACK METHODS
 
   private
 
+      def create_notification_for_admins
+        notification = InteractionNotificationNotifier.with(
+            record: self,
+            path: Rails.application.routes.url_helpers.requests_path,
+            message:  I18n.t("notifications.new_event", tour_name: self.event.complete_name, artist: self.artist&.name)        
+          )
+        notification.deliver(User.admins)
+      end
+
       def create_notification
         remove_notification #remove old notis ab this request
         notification = InteractionNotificationNotifier.with(
           record: self, 
           path: Rails.application.routes.url_helpers.requests_user_path(requester.id),
-          message: "#{I18n.t("notifications.event_update")} <span style='color: #{color_request(status: self.status)}'>#{get_status_name.upcase}</span>"
+          message: "#{I18n.t("notifications.event_update", event: self.event.tour_name)} <span style='color: #{color_request(status: self.status)}'>#{get_status_name.upcase}</span>"
         )
         notification.deliver(requester)
       end
 
-      def create_notification_for_admins
-        notification = InteractionNotificationNotifier.with(
-            record: self,
-            path: Rails.application.routes.url_helpers.requests_path,
-            message:  I18n.t("notifications.new_event", tour_name: self.event.complete_name, artist: self.event.artists&.first&.name)        
-          )
-        notification.deliver(User.admins)
+      def change_to_accepted
+        event.artists.first&.update(status: 0) if status == 0
       end
 
       def remove_notification
         Notification.for_record(self).destroy_all
       end
 
-  ## CLASS METHODS
+
+  ## INSTANCE METHODS
 
   public
+
+    def artist
+      self.event&.artists&.first
+    end
+
+    def matching_events
+      return nil if !self.event.artists.first.present?
+      self.artist.events.accepted.by_date(self.event.date).by_country_code(self.event.ubication.country.code)
+    end
 
     def status_string
       status ? get_status_name : ""

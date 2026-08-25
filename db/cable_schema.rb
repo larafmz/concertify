@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_08_24_171822) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -231,6 +231,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_24_171822) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "message"
+    t.bigint "existing_event_id"
     t.index ["requester_id"], name: "index_requests_on_requester_id"
   end
 

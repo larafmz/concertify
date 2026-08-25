@@ -4,7 +4,7 @@
         .soft-color
             = t("details_of", data: Event.singular ).upcase
 
-        .two-columns{style: "gap:10px;"}
+        .two-columns
             %div
                 = label_tag :artist_id, "🧑‍🎤 #{Artist.singular} *", class: "soft-color", style: "font-size: 13px;"
                 = f.text_field :artist_name, 
@@ -18,7 +18,7 @@
                 = label_tag :tour_name, "🎶 #{Event.human_attribute_name(:tour_name)}", class: "soft-color", style: "font-size: 13px;"
                 = f.text_field :tour_name, placeholder: "Ej: Eras Tour", class: "field-custom"
 
-        .two-columns{style: "gap:10px;"}
+        .two-columns
             %div
                 = label_tag :date, "🗓️  #{Event.human_attribute_name(:date)} *", class: "soft-color", style: "font-size: 13px;"
                 = f.date_field :date, class: "field-custom"
@@ -36,12 +36,12 @@
             .nested-fields
                 .three-columns{style: "gap: 20px;"}
                     %div
-                        = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                        = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }
+                        = label_tag :venue, "#{Ubication.human_attribute_name(:venue)}", class: "soft-color", style: "font-size: 13px;"
+                        = ubication_fields.text_field :venue, class: "field-custom", placeholder: "Ex: WiZink Center"
+
                     %div
                         = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
                         = ubication_fields.text_field :city, class: "field-custom", placeholder: "Ex: Madrid"
                     %div
-                        = label_tag :venue, "#{Ubication.human_attribute_name(:venue)}", class: "soft-color", style: "font-size: 13px;"
-                        = ubication_fields.text_field :venue, class: "field-custom", placeholder: "Ex: WiZink Center"
-
+                        = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
+                        = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }

@@ -108,7 +108,7 @@
   background: none;
 }
 
-.publication-link {
+.publication-link, .notification-button {
   padding: 5px;
   border-radius: 10px;
   display: grid;
@@ -117,8 +117,18 @@
   text-decoration: none;
 }
 
-.publication-link:hover {
+.publication-link:hover, .notification-button:hover {
   background: #1f252b;
+}
+
+.notification-button {
+  grid-template-columns: 1fr auto;
+  width: 100%;
+  background: none;
+  border: none;
+  margin: 0;
+  text-align: left;
+
 }
 
 .item-register > div:last-child {

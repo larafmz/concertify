@@ -10,14 +10,12 @@ class Artist < ApplicationRecord
   ## RELATIONSHIPS
 
     has_many :artists_events, dependent: :destroy
-    has_many :events, through: :artists_events
+    has_many :events, through: :artists_events, dependent: :destroy
     has_many :publications, dependent: :destroy
     belongs_to :genre, optional: true
     has_many :relations, as: :followed, dependent: :destroy
     has_many :followers, through: :relations, source: :follower
     has_one_attached :photo
-
-    belongs_to :request, optional: true
     
   ## SCOPES
 
@@ -25,6 +23,7 @@ class Artist < ApplicationRecord
     scope :by_genre, ->(genre_id) { where(genre_id: genre_id ) }
     scope :accepted, -> { where(status: 0).or(where(status: nil)) }
     scope :pending, -> { where(status: 1) }
+    scope :manually_added, -> { where( ticketmaster_id: nil ) }
     
   ## VALIDATIONS
 
@@ -111,11 +110,11 @@ class Artist < ApplicationRecord
     end
 
     def accepted?
-      status == 0 || status == nil
+      !manually_added || (!status.nil? && status == 0)
     end
 
-    def status_string
-      status ? get_status_name : "Aceptado"
+    def manually_added
+      ticketmaster_id.nil?
     end
 
 end

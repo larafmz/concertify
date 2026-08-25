@@ -30,7 +30,7 @@
 
                 = link_to event_path(event.id) do 
                     .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
-                        = image_tag event.get_photo if event.get_photo.attached?
+                        = image_tag event.get_photo if event.get_photo&.attached?
 
                 %div
 

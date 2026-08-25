@@ -336,3 +336,15 @@ a:hover {
   color:white;
   border: none;
 }
+
+.flash-message {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 9999;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #30363d;
+  color: white;
+  border: 1px solid #40556d;
+}

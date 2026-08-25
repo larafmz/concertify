@@ -15,9 +15,9 @@ class EventsController < ApplicationController
   def show
     if params[:ticketmaster_id].present?
       @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
-    else
+    elsif params[:id]
       @event = Event.accepted.find_by(id: params[:id])
-      @event = Event.create_or_update_by_ticketmaster_id(@event.ticketmaster_id) if !params[:ticketmaster_id].present? && @event.ticketmaster_id
+      @event = Event.create_or_update_by_ticketmaster_id(@event.ticketmaster_id) if !params[:ticketmaster_id].present? && @event&.ticketmaster_id
     end
 
     if @event

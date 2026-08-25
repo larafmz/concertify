@@ -12,6 +12,9 @@
     %script{ src: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", defer: true }
   %body
     = render "layouts/shared/header"
+    - if flash[:alert]
+      .flash-message
+        = flash[:alert]
     = turbo_frame_tag "modal"
     = yield
     - unless controller_name == "chats"

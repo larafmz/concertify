@@ -20,9 +20,6 @@ class ArtistsController < ApplicationController
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = @artist.search_events_by(params[:first_date], params[:second_date], params[:country], events_api)
       @events = TicketmasterService.merge_events(events_db, events_api)
-    else
-      redirect_back fallback_location: root_path
-      #TO/DO error o mensaje idk
     end
   end
 

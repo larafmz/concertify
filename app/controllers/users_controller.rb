@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:show]
 
   before_action :set_user, except: [:follow, :unfollow]
   before_action :network, only: [:followers, :followings, :blocked]
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   end
 
   def block
-    @user.block(current_user&.id)
+    current_user.block(@user.id) if @user.user?
     redirect_back fallback_location: root_path
   end
 
@@ -98,8 +98,10 @@ private
   def set_user
     @user = User.viewables(current_user).find_by(id: params[:id])
     #TO/DO mostrar error de q no encontró al usuario o whatever, de "ha ocurrido un error", se ve muy bien entrando en un like o comentario pasado del usuario q te ha bloqueado
-    if !@user
+    unless @user
+      flash[:alert] = t("not_found_user")
       redirect_back fallback_location: root_path
+      return
     end
   end
 

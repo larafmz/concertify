@@ -27,7 +27,7 @@
                     - else
                         = link_to event_path(event) do
                             .link_icon{style: "height: 80px; width: 100px; border-radius: 0%;"}
-                                = image_tag event.get_photo if event.get_photo.attached?
+                                = image_tag event.get_photo if event.get_photo&.attached?
 
                 .event-info
                     %span.soft-color

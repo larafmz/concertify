@@ -85,8 +85,8 @@ class User < ApplicationRecord
     end
 
     def block(user_id)
-      Relation.find_or_create_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 1)
-      # destroy followings relations if the exist
+      Relation.find_or_create_by!(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 1)
+      # destroy followings relations if they exist
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)&.destroy
       Relation.find_by(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)&.destroy
     end

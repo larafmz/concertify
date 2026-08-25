@@ -9,11 +9,11 @@
                 - else
                     %span{style: "color: #db4949; font-size:18px; "} ♡ 
         - if interactuable.likes.count != 0
-            = link_to interactuable_path(interactuable.id) do 
+            = link_to interactuable_path(interactuable) do 
                 = interactuable.likes.count
 
     %div
-        = link_to comments_interactuable_path(interactuable.id) do 
+        = link_to comments_interactuable_path(interactuable) do 
             💬
         - if interactuable.comments.count != 0
             = interactuable.comments.count
@@ -28,5 +28,5 @@
                 - else
                     %span{style: "color: #1c911c; font-size:18px; "} 🗘
         - if interactuable.reposts.count != 0
-            = link_to reposts_interactuable_path(interactuable.id) do 
+            = link_to reposts_interactuable_path(interactuable) do 
                 = interactuable.reposts.count                

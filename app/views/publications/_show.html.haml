@@ -2,13 +2,13 @@
 
     - unless current_page?(publications_path)
         .publication
-            = link_to user_path(publication.user.id), class: "hover-border-icon" do
+            = link_to user_path(publication.user), class: "hover-border-icon" do
                 .link_icon
                     = image_tag publication.user.icon if publication.user.icon.attached?
             %div
                 .title_section
                     %div{style: "font-size: 15px; color: #dee5eb"}
-                        = link_to user_path(publication.user_id) do 
+                        = link_to user_path(publication.user) do 
                             = publication.user.username
                         - if publication.artist
                             %span{class: "soft-color"}=t("about")
@@ -27,7 +27,7 @@
                 %span{style: "font-size: 15px; color: white; overflow-wrap: anywhere;"}
                     = simple_format(publication.review)
     - else
-        = link_to comments_interactuable_path(publication.id), class: "publication-link" do
+        = link_to comments_interactuable_path(publication), class: "publication-link" do
             .link_icon
                 = image_tag publication.user.icon if publication.user.icon.attached?
             %div
@@ -57,7 +57,7 @@
                     ⁝
                 %ul.dropdown-menu
                     %li
-                        = link_to t("verbs.destroy"), publication_path(publication.id), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar la publicación?" }, class: "dropdown-item"
+                        = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar la publicación?" }, class: "dropdown-item"
 
 
     = render "interactuables/footer", interactuable: publication

@@ -22,7 +22,7 @@
                 = form_tag reply_comment_path(father_id: @comment), method: :post, data: { turbo: false } do
                     %div{data: { controller: "character-counter" }, style: "margin:15px; display: grid; grid-template-columns: auto 1fr auto; color: white; gap: 10px; "}
                         %div
-                            = link_to user_path(current_user&.id), class: "hover-border-icon",style: "display: block;" do 
+                            = link_to user_path(current_user), class: "hover-border-icon",style: "display: block;" do 
                                 .link_icon
                                     = image_tag current_user.icon if current_user.icon.attached?
                         = text_area_tag :text, nil, maxlength: 500, placeholder: t("messages.write_your_answer"), style: "outline:none; color: white; border: none; background:none; width: 100%; height: 50px; resize: none;", data: {  character_counter_target: "input", action: "input->character-counter#update" }

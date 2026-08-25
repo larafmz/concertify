@@ -26,7 +26,7 @@
                     %div{style: "padding: 15px 15px;"}
                         - if artist
                             - if artist.accepted?
-                                = link_to artist_path(artist.id) do
+                                = link_to artist_path(artist) do
                                     %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.complete_name || t("not_found")
                             - else
                                 %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.complete_name || t("not_found")

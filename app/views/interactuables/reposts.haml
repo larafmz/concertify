@@ -17,9 +17,9 @@
                     = render "publications/show", publication: @interactuable
 
         %div{style: "display: flex; gap: 20px; color: white; margin-left:20px; margin-top: 15px;"}
-            = link_to Like.plural, interactuable_path(@interactuable.id), title: "#{@interactuable.likes.count} #{Like.plural}" 
-            = link_to Comment.plural, comments_interactuable_path(@interactuable.id), title: "#{@interactuable.comments.count} #{Comment.plural}"
-            = link_to Repost.plural, reposts_interactuable_path(@interactuable.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.reposts.count} #{Repost.plural}"
+            = link_to Like.plural, interactuable_path(@interactuable), title: "#{@interactuable.likes.count} #{Like.plural}" 
+            = link_to Comment.plural, comments_interactuable_path(@interactuable), title: "#{@interactuable.comments.count} #{Comment.plural}"
+            = link_to Repost.plural, reposts_interactuable_path(@interactuable), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@interactuable.reposts.count} #{Repost.plural}"
         .separator
 
 .widget-content{style: "padding-top:0px;"}  

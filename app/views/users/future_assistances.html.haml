@@ -28,20 +28,20 @@
                     - if event_date.year != Date.today.year
                         = event_date.year
 
-                = link_to event_path(event.id) do 
+                = link_to event_path(event) do 
                     .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
                         = image_tag event.get_photo if event.get_photo&.attached?
 
                 %div
 
                     - event.artists.each_with_index  do |artist, index|
-                        = link_to artist_path(artist.id) do 
+                        = link_to artist_path(artist) do 
                             %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
                         - if index < event.artists.size - 1
                             ,
                     %br
 
-                    = link_to event_path(event.id) do 
+                    = link_to event_path(event) do 
                         %span{ style: "font-size: 18px;", class: "soft-color; " } #{event.tour_name}
                     
                     - ub = event.ubication&.complete_name || t("not_found")

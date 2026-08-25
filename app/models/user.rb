@@ -56,12 +56,12 @@ class User < ApplicationRecord
       role.user?
     end
  
-    def follows_artist?(artist_id)
-      followings.find_by(followed_id: artist_id, followed_type: "Artist").present?
+    def follows_artist?(artist)
+      followings.find_by(followed_id: artist&.id, followed_type: "Artist").present?
     end
 
-     def follows_user?(user_id)
-      followings.find_by(followed_id: user_id, followed_type: "User").present?
+     def follows_user?(user)
+      followings.find_by(followed_id: user&.id, followed_type: "User").present?
     end
 
     def blocked_user?(user_id)

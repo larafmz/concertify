@@ -1,12 +1,12 @@
 - registers[0..9].each do |register|
     .review
-        = link_to user_path(register.user.id), class: "hover-border-icon" do
+        = link_to user_path(register.user), class: "hover-border-icon" do
             .link_icon 
                 = image_tag register.user.icon if register.user.icon.attached?
         %div
             %div
                 %span{style: "font-weight: 700", class: "soft-color"} Review by 
-                = link_to user_path(register.user.id) do 
+                = link_to user_path(register.user) do 
                     %span{style: "font-weight: 700"}=register.user.username.upcase
                 %span{style: "color: orange"}= register.get_rating
             %div

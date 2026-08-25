@@ -7,10 +7,10 @@
             .artist-name
                 %div{style: "margin-bottom:5px; font-size:25px;"}
                     = @user.username
-                    - if @user.follows_user?(current_user&.id)   
+                    - if @user.follows_user?(current_user)   
                         %span{class: "softest-color", style: "margin-left:5px; font-size:13px;"}= t("follows_you")
                 - if current_user&.id == @user.id
-                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user&.id), class: "small-btn-custom"
+                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user), class: "small-btn-custom"
                 - if @user.ubication
                     .soft-color{style: "font-size: 15px;" } 
                         📍 #{@user.ubication.complete_name}
@@ -52,10 +52,10 @@
                         =User.singular.upcase
                         =t("blocked").upcase
                 - else
-                    - if current_user.follows_user?(@user.id)
-                        = link_to t("following"), unfollow_user_path(@user.id), class: "btn-standard", data: { turbo_method: :delete }
+                    - if current_user.follows_user?(@user)
+                        = link_to t("following"), unfollow_user_path(@user), class: "btn-standard", data: { turbo_method: :delete }
                     - else
-                        = link_to t("verbs.follow"), follow_user_path(@user.id), class: "btn-standard-orange", data: { turbo_method: :post }
+                        = link_to t("verbs.follow"), follow_user_path(@user), class: "btn-standard-orange", data: { turbo_method: :post }
                     = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-standard-orange"
                      
             - if @user.user?
@@ -68,10 +68,10 @@
                     %ul.dropdown-menu
                         %li
                             - if current_user.blocked_user?(@user.id)
-                                = link_to t("verbs.unblock"), unblock_user_path(@user.id), class: "dropdown-item", data: { turbo_method: :delete }
+                                = link_to t("verbs.unblock"), unblock_user_path(@user), class: "dropdown-item", data: { turbo_method: :delete }
                             - else
-                                = link_to t("verbs.block"), block_user_path(@user.id), class: "dropdown-item", data: { turbo_method: :post }
-                        - if @user.follows_user?(current_user&.id)
+                                = link_to t("verbs.block"), block_user_path(@user), class: "dropdown-item", data: { turbo_method: :post }
+                        - if @user.follows_user?(current_user)
                             %li
                                 %hr.dropdown-divider     
                             %li

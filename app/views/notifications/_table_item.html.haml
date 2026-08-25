@@ -3,7 +3,7 @@
     - user = notification.user
     %div
         - if user
-            = link_to user_path(user.id), class: "hover-border-icon" do
+            = link_to user_path(user), class: "hover-border-icon" do
                 .link_icon
                     = image_tag user.icon if user.icon.attached?
     = button_to read_and_redirect_notification_path(notification), class: "notification-button", method: :post, form: { data: { turbo: false } } do
@@ -22,4 +22,4 @@
             = render "users/relation_bottoms", user: user
 
     - unless notification.read?
-        = link_to "👁", mark_as_read_notification_path(notification.id), data: { turbo_method: :post }
+        = link_to "👁", mark_as_read_notification_path(notification), data: { turbo_method: :post }

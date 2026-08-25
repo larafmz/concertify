@@ -4,10 +4,10 @@
             .red-message
                 =t("blocked").upcase
         - else
-            - if current_user&.follows_user?(user.id)
-                = link_to t("following"), unfollow_user_path(user.id), class: "btn-custom", data: { turbo_method: :delete }
-            - elsif user&.follows_user?(current_user.id)
-                = link_to t("verbs.follow_back"), follow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :post }
+            - if current_user&.follows_user?(user)
+                = link_to t("following"), unfollow_user_path(user), class: "btn-custom", data: { turbo_method: :delete }
+            - elsif user&.follows_user?(current_user)
+                = link_to t("verbs.follow_back"), follow_user_path(user), class: "btn-custom-orange", data: { turbo_method: :post }
             - else
-                = link_to t("verbs.follow"), follow_user_path(user.id), class: "btn-custom-orange", data: { turbo_method: :post }
+                = link_to t("verbs.follow"), follow_user_path(user), class: "btn-custom-orange", data: { turbo_method: :post }
     

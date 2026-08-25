@@ -6,7 +6,7 @@
 .columns
   - registers.each do |register|
     .event-card{style: "display: flex; flex-direction: column; "}
-      = link_to interactuable_path(register.id), class: "hover-border" do
+      = link_to interactuable_path(register), class: "hover-border" do
         .item-name{style: "width: 190px; height: 30px;", class: "soft-color"}
           %div{style: "display: flex; align-items: center; justify-content: flex-start; gap: 8px;"}
             .icon{style: "width: 25px; height: 25px; margin-left: 5px;"}

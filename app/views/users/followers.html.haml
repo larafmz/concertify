@@ -3,13 +3,13 @@
 .widget-content{style: "padding-top:0px;"}  
 
     %div{style: "display: flex; gap: 20px; color: white;"}
-        = link_to followings_user_path(@user.id), title: "#{@followings.count} #{User.plural}" do
+        = link_to followings_user_path(@user), title: "#{@followings.count} #{User.plural}" do
             =t("following").upcase
             (#{@followings.count})
-        = link_to followers_user_path(@user.id), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@followers.count} #{User.plural}" do
+        = link_to followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@followers.count} #{User.plural}" do
             =t("followers").upcase
             (#{@followers.count})
-        = link_to blocked_user_path(@user.id), title: "#{@blocked.count} #{User.plural}" do
+        = link_to blocked_user_path(@user), title: "#{@blocked.count} #{User.plural}" do
             =t("blocked").upcase
             (#{@blocked.count})
 

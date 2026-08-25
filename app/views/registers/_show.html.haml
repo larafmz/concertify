@@ -1,22 +1,22 @@
 - @event = Event.find(register.event_id)
-- @artist = Artist.find(@event.artists.first.id)
+- @artist = @event.artists.first
 .register-show
-    = link_to event_path(@event.id) do 
+    = link_to event_path(@event) do 
         .rectangle_icon{ style: "border: 1px solid " }
             = image_tag @event.get_photo if @event.get_photo.attached?
         
     .register-info
         .flex-left
-            = link_to user_path(@user.id), class: "hover-border-icon" do
+            = link_to user_path(@user), class: "hover-border-icon" do
                 .link_icon{style: "width: 25px; height: 25px;"}
                     = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
             = t("registers.logged_by")
-            = link_to user_path(@user.id), class: "undecored_link" do 
+            = link_to user_path(@user), class: "undecored_link" do 
                 %span{style: "font-weight: 700"}=@user.username.upcase
 
         .separator{style: "margin: 10px 0;"}
 
-        = link_to event_path(@event.id) do 
+        = link_to event_path(@event) do 
             %span{ style: "font-size: 28px; font-weight: 600;" }= @event.tour_name
             
         - if @artist.genre && @artist.genre.name!="Undefined"
@@ -35,7 +35,7 @@
             = render "interactuables/footer", interactuable: register
 
         .soft-color{style: "margin: 10px 0;"}
-            = link_to user_path(@user.id) do 
+            = link_to user_path(@user) do 
                 %span{style: "font-weight: 700"}=@user.username.upcase
             =t("registers.liked_these_reviews")
             .separator

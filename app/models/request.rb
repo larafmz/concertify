@@ -13,8 +13,9 @@ class Request < ApplicationRecord
 
   ## SCOPES
 
-    scope :accepted, -> { where(status: 0).or(where(status: nil)) }
+    scope :accepted, -> { where(status: 0) }
     scope :pending, -> { where(status: 1) }
+    scope :denied, -> { where(status: 2) }
     scope :by_status, -> (status) { where(status: status) }
 
   ## VALIDATIONS

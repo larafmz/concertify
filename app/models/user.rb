@@ -19,6 +19,7 @@ class User < ApplicationRecord
     has_many :chat_users, dependent: :destroy
     has_many :chats, through: :chat_users
     has_many :notifications, class_name: "Noticed::Notification", as: :recipient, dependent: :destroy
+    has_many :requests, foreign_key: :requester_id #dependent: :destroy, DONT DESTROY
 
     has_one_attached :icon
 

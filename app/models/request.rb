@@ -15,6 +15,7 @@ class Request < ApplicationRecord
 
     scope :accepted, -> { where(status: 0).or(where(status: nil)) }
     scope :pending, -> { where(status: 1) }
+    scope :by_status, -> (status) { where(status: status) }
 
   ## VALIDATIONS
 
@@ -56,6 +57,15 @@ class Request < ApplicationRecord
         Notification.for_record(self).destroy_all
       end
 
+  ## CLASS METHODS
+
+    def self.do_search(params={}, order_by="created_at DESC", user: nil)
+        params ||= {}
+        requests = Request.order(order_by)
+        requests = requests.where(requester_id: user.id) if user.present?
+        requests = requests.by_status(params[:status].to_i) if params[:status]
+        requests
+    end
 
   ## INSTANCE METHODS
 
@@ -85,17 +95,6 @@ class Request < ApplicationRecord
     def get_event_id
       return event.id if accepted?
       return existing_event_id if status == 2 && existing_event_id.present?
-    end
-
-    def color_request(status: self.status)
-      case status
-        when 1
-          "rgb(252, 170, 46)"
-        when 2
-          "rgb(245, 83, 83)"
-        else
-          "rgb(88, 216, 94);"
-        end
     end
 
     def second_color_request

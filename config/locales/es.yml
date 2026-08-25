@@ -131,7 +131,9 @@ es:
     whats_going_on: ¿Qué está pasando?
     post_about: Publica sobre %{model}
     its_today: ¡ ES HOY !
-    in_x_days: "%{days} días"
+    in_x_days: 
+      one: "Queda %{count} día"
+      other: "Quedan %{count} días"
     exists_in_app_already: Ya existe en la app
     
   notifications:

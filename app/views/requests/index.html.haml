@@ -4,4 +4,4 @@
             = t("requested_events")
 .separator
 %div{style: "padding-top:30px;"}
-    = render "requests/index", requests: @requests
+    = render "requests/index", requests: @requests, status: params[:status]

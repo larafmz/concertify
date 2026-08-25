@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @requests = Request.where(requester_id: @user.id).order("created_at DESC")
+    @requests = Request.do_search(params, user: @user)
   end
 
   def future_assistances

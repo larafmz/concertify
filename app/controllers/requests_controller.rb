@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
     load_and_authorize_resource
 
     def index
-        @requests = Request.order("created_at DESC")
+        @requests = Request.do_search(params)
     end
 
     def new

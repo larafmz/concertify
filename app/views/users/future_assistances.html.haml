@@ -17,7 +17,7 @@
                     - if event.date == Date.today   
                         = t("messages.its_today")
                     - else
-                        = t("messages.in_x_days", days: event.days_left)
+                        = t("messages.in_x_days", count: event.days_left)
             
             .item-register
                 .date-event

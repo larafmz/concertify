@@ -74,4 +74,15 @@ module ApplicationHelper
     return comments_interactuable_path(comment.interactuable.id)
   end
   
+  def color_request(status)
+    case status.to_i
+      when 1
+        "rgb(252, 170, 46)"
+      when 2
+        "rgb(245, 83, 83)"
+      else
+        "rgb(88, 216, 94);"
+      end
+  end
+
 end

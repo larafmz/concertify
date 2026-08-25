@@ -28,7 +28,7 @@ class Chat < ApplicationRecord
 
     def self.create_event_chat(event_id, user_id)
       chat = Chat.find_or_create_by(event_id: event_id)
-      if !chat.chat_users.exists?(user_id: user_id)
+      unless chat.chat_users.exists?(user_id: user_id)
         chat.chat_users << ChatUser.new(user_id: user_id) 
         ChatEntry.create(chat_id: chat.id, user_id: user_id, text: "entered_chat", chat_type: 1)
         chat.save!

@@ -2,8 +2,8 @@
 
   - any_params_present = params[:first_date].present? || params[:second_date].present? || params[:country].present?
 
-  - if !any_params_present
-    - if !@users.empty?
+  - unless any_params_present
+    - unless @users.empty?
       .section-box{style: "color: #dfdfdf;"}
         #{User.plural.upcase} • #{@users.size} #{t("results").upcase}
         .separator{style: "margin-bottom: 15px; "}

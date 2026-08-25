@@ -77,7 +77,7 @@ class Request < ApplicationRecord
     end
 
     def matching_events
-      return nil if !self.event.artists.first.present?
+      return nil unless self.event.artists.first.present?
       self.artist.events.accepted.by_date(self.event.date).by_country_code(self.event.ubication.country.code)
     end
 

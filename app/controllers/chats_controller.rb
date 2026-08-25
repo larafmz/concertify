@@ -9,7 +9,7 @@ class ChatsController < ApplicationController
   end
 
   def show
-    if !@chat
+    unless @chat
       redirect_to chats_path
       return
     end
@@ -36,7 +36,7 @@ class ChatsController < ApplicationController
   private 
 
     def authenticate_user
-      if !current_user.present?
+      unless current_user.present?
         redirect_back fallback_location: root_path
         return
       end
@@ -46,15 +46,15 @@ class ChatsController < ApplicationController
       if params[:user_id]
         @user = User.find(params[:user_id])
         @chat = Chat.by_users(current_user.id, @user.id).first
-        @chat = Chat.create_private_chat(current_user.id, @user.id) if !@chat
+        @chat = Chat.create_private_chat(current_user.id, @user.id) unless @chat
       elsif params[:event_id]
         @event = Event.find(params[:event_id])
         @chat = Chat.create_event_chat(params[:event_id], current_user.id)
       elsif params[:id] && Chat.exists?(params[:id])
         @chat = Chat.find(params[:id])
         @event = @chat.event if @chat.group_chat?
-        @user = @chat.other_user(current_user) if !@chat.group_chat?
-        if !@chat.chat_users.exists?(user_id: current_user.id)
+        @user = @chat.other_user(current_user) unless @chat.group_chat?
+        unless @chat.chat_users.exists?(user_id: current_user.id)
           redirect_to chats_path
         end
       end

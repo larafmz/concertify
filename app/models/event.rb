@@ -66,7 +66,7 @@ class Event < ApplicationRecord
     end
 
     def self.search_by(query, first_date, second_date, country_code, events_api)
-      return Event.none if !query.present?
+      return Event.none unless query.present?
       events_db = Event.accepted.by_name(query)
 
       ticketmaster_ids = events_api.map { |event| event["id"] }
@@ -77,7 +77,7 @@ class Event < ApplicationRecord
       if first_date || second_date
         first_date = Date.parse(first_date) if first_date.present?
         second_date = Date.parse(second_date) if second_date.present?
-        second_date = first_date if !second_date.present?
+        second_date = first_date unless second_date.present?
         #first_date ||= Date.today-365.days
         events_db = events_db.where("date >= ?", first_date) if first_date.present?
         events_db = events_db.where("date <= ?", second_date) if second_date.present?

@@ -20,7 +20,7 @@ class RegistersController < ApplicationController
     def create
         @register = Register.new(create_params)
 
-        if !params[:ticketmaster_id].empty?
+        unless params[:ticketmaster_id].empty?
             @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) 
             @register.event_id = @event.id if @event
         end

@@ -12,7 +12,7 @@ class ArtistsController < ApplicationController
   def show
 
     @artist = Artist.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
-    @artist = Artist.accepted.find_by(id: params[:artist_id] || params[:id]) if !@artist
+    @artist = Artist.accepted.find_by(id: params[:artist_id] || params[:id]) unless @artist
 
     if @artist.present?
       ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id || "unfound_artist"

@@ -20,12 +20,12 @@ class RequestsController < ApplicationController
         # Search artist in DB
         @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
         # Search artist in Ticketmaster
-        if !@artist
+        unless @artist
             artist_api = TicketmasterService.artists_by(params[:request][:event_attributes][:artist_name])&.first
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
         #Create artist with status pending
-        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) if !@artist
+        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) unless @artist
         
         @event.artists << @artist
 
@@ -45,15 +45,15 @@ class RequestsController < ApplicationController
         @event = @request.event
 
         @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
-        if !@artist
+        unless @artist
             artist_api = TicketmasterService.artist_by_name(params[:request][:event_attributes][:artist_name])
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
         #Create artist with status pending and delete the old artist if needed
-        if !@artist
+        unless @artist
             old_artist = @event.artists.first 
             old_artist.destroy if  old_artist.events.count==1 && !old_artist.accepted?
-            @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) if !@artist
+            @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) unless @artist
         end
 
         @event.artists = [@artist] if @artist

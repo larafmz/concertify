@@ -23,8 +23,8 @@ class FutureAssistance < ApplicationRecord
     before_validation :truncate_data
 
     def truncate_data
-      self.event_seat_details = event_seat_details.truncate(20) if !event_seat_details.blank?
-      self.from = from.truncate(20) if !from.blank?
+      self.event_seat_details = event_seat_details.truncate(20) unless event_seat_details.blank?
+      self.from = from.truncate(20) unless from.blank?
     end
 
   ## CLASS METHODS

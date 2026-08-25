@@ -12,7 +12,7 @@
     = form_with model: @request, data: { turbo: false } do |f|
       .modal_body
         
-        - if !@request.requester_id.present?
+        - unless @request.requester_id.present?
           = f.hidden_field :requester_id, value: current_user&.id
         = f.hidden_field :status, value: 1
         

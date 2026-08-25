@@ -42,7 +42,7 @@
       =link_to events_path(country: current_user&.ubication&.country&.code) do
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
-    - if !@events.empty?
+    - unless @events.empty?
       .section-box
         = render "events/index", events: @events, photo: false
         

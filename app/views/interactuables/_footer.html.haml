@@ -4,7 +4,7 @@
             %span{style: "color: white; font-size:18px; "} ♡ 
         - else
             = button_to like_interactuable_path(interactuable), method: :post, form: { data: { turbo: false } }, class: "button-without-format" do
-                - if !current_user.liked?(interactuable.id)
+                - unless current_user.liked?(interactuable.id)
                     %span{style: "color: white; font-size:18px; "} ♡ 
                 - else
                     %span{style: "color: #db4949; font-size:18px; "} ♡ 
@@ -23,7 +23,7 @@
             %span{style: "color: white; font-size:18px; "} 🗘
         - else
             = button_to repost_interactuable_path(interactuable), method: :post, form: { data: { turbo: false } }, class: "button-without-format" do
-                - if !current_user.reposted?(interactuable.id)
+                - unless current_user.reposted?(interactuable.id)
                     %span{style: "color: white; font-size:18px; "} 🗘
                 - else
                     %span{style: "color: #1c911c; font-size:18px; "} 🗘

@@ -84,7 +84,7 @@ class Artist < ApplicationRecord
       if first_date.present? || second_date.present?
         first_date = Date.parse(first_date) if first_date.present?
         second_date = Date.parse(second_date) if second_date.present?
-        second_date = first_date if !second_date.present?
+        second_date = first_date unless second_date.present?
         first_date ||= Date.today-365.days
         events_db = events_db.where("date >= ?", first_date) if first_date.present?
         events_db = events_db.where("date <= ?", second_date) if second_date.present?

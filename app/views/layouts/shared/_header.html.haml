@@ -10,7 +10,7 @@
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"
 
   %div
-    - if !current_user
+    - unless current_user
       = link_to t("verbs.login"), new_user_session_path, class: "btn-custom-orange"
       = link_to t("verbs.log"), new_user_registration_path, class: "btn-custom-orange"
     - else  

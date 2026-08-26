@@ -13,7 +13,7 @@
               = image_tag register.user.icon, style: "width: 100%; height: 100%; object-fit: cover;" if register.user.icon.attached?
             %span= register.user.username
         .rectangle_icon{style: "width: 190px; height: 150px;"}
-          = image_tag register.event.get_photo, class: "artist-avatar" if register.event.get_photo.present?
+          = image_tag register.event.get_photo if register.event.get_photo.present?
         .item-name{style: "width: 190px;"}
           = register.event.tour_name
       .title_section

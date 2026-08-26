@@ -2,7 +2,7 @@
     %div{ class: "artist-content", style: "background: #1f252b;"}
         .artist-info
             .user_icon
-                = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
+                = image_tag  @user.icon if @user.icon.attached?
                 
             .artist-name
                 %div{style: "margin-bottom:5px; font-size:25px;"}

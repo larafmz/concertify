@@ -1,16 +1,17 @@
-.widget-content{style: "background: #1f252b;"}
+%div{ style: "padding: 0px 70px 10px 0px; background: #1f252b;"}
     .artist-content
         .artist-info
-            .user_icon
-                = image_tag  @artist.photo, class: "artist-avatar" if @artist.photo.attached?
-                
+            = image_tag @artist.photo, style: "width: 300px;" if @artist.photo.attached?
+
             .artist-name
+                .adapted-bubble
+                    =Artist.singular.upcase
                 = @artist.name
                 - if @artist.genre && @artist.genre.name != "Undefined"
                     .softest-color{ style: "font-size: 15px" }
                         = @artist.genre.name
 
-        .flex
+        .flex{ style: "padding-top: 30px;"}
             .stat
                 .number
                     =  @artist.followers.viewables(current_user).count

@@ -9,7 +9,7 @@
         .flex-left
             = link_to user_path(@user), class: "hover-border-icon" do
                 .link_icon{style: "width: 25px; height: 25px;"}
-                    = image_tag  @user.icon, class: "artist-avatar" if @user.icon.attached?
+                    = image_tag  @user.icon if @user.icon.attached?
             = t("registers.logged_by")
             = link_to user_path(@user), class: "undecored_link" do 
                 %span{style: "font-weight: 700"}=@user.username.upcase

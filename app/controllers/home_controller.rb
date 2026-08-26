@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     
     @artists_db = Artist.accepted.left_joins(:relations).group(:id).order("COUNT(relations.id) DESC")
     events_api = TicketmasterService.events_by(query: nil, artist_id: nil, first_date: nil, second_date: nil, country_code: current_user&.ubication&.country&.code, size: 8)
-    events_db = Event.accepted.search_by(nil, Date.today, nil, nil, events_api)
+    events_db = Event.accepted.search_by(params, events_api)
     @events = TicketmasterService.merge_events(events_db, events_api)
 
     if current_user

@@ -110,8 +110,8 @@ es:
     at: En
 
   registers:
-    assisted: He asistido
-    will_assist: Asistiré
+    assisted: + He asistido
+    will_assist: + Asistiré
     i_assisted_to: Asistí a...
     liked_these_reviews: HA DADO LIKE A ESTAS RESEÑAS
     logged_by: Registrado por

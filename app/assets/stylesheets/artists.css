@@ -54,3 +54,14 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
 }
+
+.artists-list{
+    gap:0px; 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr)
+}
+
+.artists-list > :nth-child(even) {
+  border-left: 1px solid #40556d;
+  padding-left: 20px;
+}

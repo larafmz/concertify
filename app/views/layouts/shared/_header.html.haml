@@ -6,7 +6,7 @@
     = link_to root_path do
       Concertify
 
-  = form_tag "/searchs", method: "GET" do
+  = form_tag "/users", method: "GET" do
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"
 
   %div

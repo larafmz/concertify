@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   def index
     events_api = TicketmasterService.events_by(query: params[:search], artist_id: params[:ticketmaster_id], first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) 
     # el tamaño de la consulta afecta a los resultados, x eso aqui sale alguno diferentes que en home
-    events_db = Event.search_by(params[:search], params[:first_date], params[:second_date], params[:country], events_api)
+    events_db = Event.search_by(params, events_api)
     @events = TicketmasterService.merge_events(events_db, events_api)
   end
 

@@ -21,7 +21,7 @@ class RequestsController < ApplicationController
         @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
         # Search artist in Ticketmaster
         unless @artist
-            artist_api = TicketmasterService.artists_by(params[:request][:event_attributes][:artist_name])&.first
+            artist_api = TicketmasterService.artist_by_name(params[:request][:event_attributes][:artist_name])&.first
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
         #Create artist with status pending
@@ -52,7 +52,7 @@ class RequestsController < ApplicationController
         #Create artist with status pending and delete the old artist if needed
         unless @artist
             old_artist = @event.artists.first 
-            old_artist.destroy if  old_artist.events.count==1 && !old_artist.accepted?
+            old_artist.destroy if old_artist && old_artist.events.count==1 && !old_artist.accepted?
             @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) unless @artist
         end
 

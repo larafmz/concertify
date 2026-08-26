@@ -3,7 +3,7 @@
 .register-show
     = link_to event_path(@event) do 
         .rectangle_icon{ style: "border: 1px solid " }
-            = image_tag @event.get_photo if @event.get_photo.attached?
+            = image_tag @event.get_photo if @event.get_photo&.attached?
         
     .register-info
         .flex-left
@@ -19,7 +19,7 @@
         = link_to event_path(@event) do 
             %span{ style: "font-size: 28px; font-weight: 600;" }= @event.tour_name
             
-        - if @artist.genre && @artist.genre.name!="Undefined"
+        - if @artist && @artist.genre && @artist.genre.name!="Undefined"
             %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"
 
         .softest-color{style: "font-size: 15px;" }

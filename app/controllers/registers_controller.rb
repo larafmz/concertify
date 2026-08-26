@@ -3,7 +3,8 @@ class RegistersController < ApplicationController
   load_and_authorize_resource
 
     def index
-        @registers = Register.viewables(current_user).order("created_at DESC") if @registers.nil?
+        @registers = Register.by_friends(current_user).order("created_at DESC")
+        
     end
 
     def new

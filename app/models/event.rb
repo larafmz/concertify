@@ -44,16 +44,17 @@ class Event < ApplicationRecord
         return event if event_api.nil?
         
         if event.new_record?
-          artists = get_event_artists(event_api)
-          artists&.each do |artist|
-            a = Artist.create_or_update_by_ticketmaster_id(artist["id"])
-            event.artists << a if a
-          end     
           if event_api.dig("images").present?
             image = get_event_image_url(event_api)
             event.photo.attach(io: URI.open(image), filename: image, content_type: "image/jpg")
           end
         end
+
+        artists = get_event_artists(event_api)
+          artists&.each do |artist|
+            a = Artist.create_or_update_by_ticketmaster_id(artist["id"])
+            event.artists << a if a && !event.artists.include?(a)
+        end 
 
         event.tour_name = event_api.dig("name")
         event.date = get_event_date(event_api)
@@ -65,14 +66,18 @@ class Event < ApplicationRecord
       return event
     end
 
-    def self.search_by(query, first_date, second_date, country_code, events_api)
-      return Event.none unless query.present?
-      events_db = Event.accepted.by_name(query)
+    def self.search_by(params, events_api)
+      return Event.none unless params[:search].present?
+
+      events_db = Event.accepted.by_name(params[:search])
 
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
+      
+      events_db = events_db.by_country_code(params[:country]) if params[:country].present?
 
-      events_db = events_db.by_country_code(country_code) if country_code.present?
+      first_date = params[:first_date]
+      second_date = params[:second_date], params[:country]
 
       if first_date || second_date
         first_date = Date.parse(first_date) if first_date.present?

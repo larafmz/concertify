@@ -41,7 +41,7 @@
               .separator{style: "margin-top:10px;"}
               = label_tag :existing_event_id, t("messages.exists_in_app_already").upcase, class: "soft-color", style: "font-size: 13px;"
               = f.select :existing_event_id, 
-                options_for_select(@request.matching_events.sort_by(&:tour_name).map { |event| [event.complete_info, event.id] }, 
+                options_for_select(Array(@request.matching_events).sort_by(&:tour_name).map { |event| [event.complete_info, event.id] }, 
                 @request.existing_event_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }
 
       %div

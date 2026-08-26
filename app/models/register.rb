@@ -16,6 +16,7 @@ class Register < Interactuable
 
     scope :by_artist, ->(artist_id) { left_joins(event: :artists).where(artists: { id: artist_id }) }
     scope :with_review, -> { where.not(review: nil).where("TRIM(review) != ''") }
+    scope :by_friends, -> (current_user) { where(user_id: current_user.followings.pluck(:followed_id)) }
 
     ## VALIDATION METHODS
 

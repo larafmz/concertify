@@ -16,18 +16,18 @@ class TicketmasterService
         end
     end
 
-    def self.artists_by(name, genre: nil)
+    def self.artists_by(params)
+        name = params[:search]
+        genre = params[:genre_id] ? Genre.find(params[:genre_id]).name : "music"
         Rails.cache.fetch("ticketmaster_artists_#{name}", expires_in: 10.minutes) do
-            genre = "music" if genre.nil? || genre.empty? 
             data = call_api("https://app.ticketmaster.com/discovery/v2/attractions.json?apikey=#{API_KEY}&classificationName=#{genre}&keyword=#{name}")
             data.dig("_embedded","attractions") if data.present?
         end
     end
 
-    
     def self.artist_by_name(name)
-        attractions = artists_by(name)
-        exact_match = attractions.find do |artist|
+        attractions = artists_by(search: name)
+        exact_match = attractions&.find do |artist|
             artist["name"].casecmp?(name)
         end
         exact_match || nil

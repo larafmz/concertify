@@ -3,7 +3,7 @@
     .artist-content{style: "background: #1f252b;"}
         .artist-info
             .user_icon
-                = image_tag  @event.get_photo, class: "artist-avatar" if @event.get_photo.attached?
+                = image_tag  @event.get_photo, class: "artist-avatar" if @event.get_photo&.attached?
                 
             .artist-name
                 %div= @event.tour_name

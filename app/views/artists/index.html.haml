@@ -1,25 +1,38 @@
-%div{ style: "background: #1f252b;color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 0px 0px 50px;" }
-    = link_to @event.tour_name, event_path(@event) if @event
-    = link_to @artist.name, artist_path(@artist) if @artist
-    = t("populars", model: Artist.plural)
+= render "searchs/options", active: :artists
 
-.separator{style: "margin-bottom: 15px; "}
+.separator
 
-.widget-content{style: "padding-top: 0px;"}
-    - if @artists.empty?
+.widget-content{style: "color: #a4b3c4; padding-top:0px;"}
+
+    %div{style: "margin-bottom:15px; margin-top:15px;"}
+        = form_tag artists_path, method: "GET" do
+            = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_artist")}", class: "field-custom"
+        
+    - if @artists.empty? && @artists_api.empty?
         .message
             ℹ️
             = t("not_found_model", model: Artist.plural.downcase )
-    .artists-index{style: "color:#e9e9e9; "}
+    -else 
 
-        - @artists[0..48].each do |artist|
-            %div
-                %div{ style: "height:10px;"}    
+        .artists-index{style: "color:#e9e9e9; "}
+            - @artists_db.each do |artist|
+                %div
+                    %div{ style: "height:10px;"}    
 
-                = link_to artist_path(artist), class: "hover-border-icon" do
-                    .link_icon{style: "width: 120px; height: 120px;"}
-                        = image_tag  artist.photo, class: "artist-avatar" if artist.photo.attached?
-                
-                .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
-                    = link_to artist_path(artist) do
-                        = artist.name
+                    = link_to artist_path(artist), class: "hover-border-icon" do
+                        .link_icon{style: "width: 120px; height: 120px;"}
+                            = image_tag  artist.photo, class: "artist-avatar" if artist.photo.attached?
+                    
+                    .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
+                        = link_to artist_path(artist) do
+                            = artist.name
+            - @artists_api.each do |artist|
+                %div
+                    %div{ style: "height:10px;"}    
+                    = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border-icon" do
+                        .link_icon{style: "width: 120px; height: 120px;"}
+                            = image_tag  best_quality_image(artist.dig("images")).dig("url"), class: "artist-avatar"
+                    .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
+                        = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do
+                            = artist.dig("name")                          
+

@@ -2,12 +2,11 @@ Rails.application.routes.draw do
   get "home/index"
   root 'home#index'
 
-  get "/searchs", to: "searchs#index"
   get "change_locale/:locale", to: "application#change_locale", as: :change_locale
   
   devise_for :users
 
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: [:show, :edit, :update, :index] do
     member do
       post :follow
       delete :unfollow

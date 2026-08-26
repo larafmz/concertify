@@ -18,9 +18,11 @@
 
                     - if request.accepted? ||  (request.status == 2 && request.existing_event_id.present?)
                         = link_to event_path(request.get_event_id) do
-                            = image_tag artist.photo if artist.photo.attached?
-                    - elsif artist.accepted?
-                        = image_tag artist.photo if artist.photo.attached?
+                            = image_tag artist&.photo if artist&.photo&.attached?
+                    - elsif artist&.accepted?
+                        = image_tag artist&.photo if artist&.photo.attached?
+                    - else
+                        %div
 
 
                     %div{style: "padding: 15px 15px;"}

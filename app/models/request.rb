@@ -45,7 +45,7 @@ class Request < ApplicationRecord
         notification = InteractionNotificationNotifier.with(
           record: self, 
           path: Rails.application.routes.url_helpers.requests_user_path(requester.id),
-          message: "#{I18n.t("notifications.event_update", event: self.event.tour_name)} <span style='color: #{color_request(status: self.status)}'>#{get_status_name.upcase}</span>"
+          message: "#{I18n.t("notifications.event_update", event: self.event.tour_name)} <span style='color: #{color_request(self.status)}'>#{get_status_name.upcase}</span>"
         )
         notification.deliver(requester)
       end

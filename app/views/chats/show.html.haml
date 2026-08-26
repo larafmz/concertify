@@ -15,7 +15,7 @@
                 = link_to event_path(@event), data: { turbo_frame: "_top" } do 
                     .artist-info{style: "gap: 15px; margin: 5px;"}
                         .link_icon{style: "height: 50px; width: 50px;"}
-                            = image_tag @event.get_photo if @event.get_photo.attached?
+                            = image_tag @event.get_photo if @event.get_photo&.attached?
                         .artist-name 
                             %div{style: "font-size:15px;"}= @event.tour_name
                             .softest-color{ style: "font-size: 12px; margin-bottom:5px" }

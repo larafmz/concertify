@@ -1,0 +1,5 @@
+.widget-content{style: "background: #1f252b; color: #a4b3c4; display: flex; justify-content: center; gap: 60px; padding: 10px; "}
+    = link_to "👤 #{User.plural}", users_path(search: params[:search]), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :users)
+    = link_to "🎶 #{Event.plural}", events_path(search: params[:search]), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :events)
+    = link_to "🧑‍🎤 #{Artist.plural}", artists_path(search: params[:search]), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :artists)
+.separator

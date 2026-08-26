@@ -2,9 +2,13 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource except: [:show]
 
-  before_action :set_user, except: [:follow, :unfollow]
+  before_action :set_user, except: [:follow, :unfollow, :index]
   before_action :network, only: [:followers, :followings, :blocked]
-  
+
+  def index
+    @users = User.viewables(current_user).by_name(params[:search] )
+  end
+
   def show
     @favorite_artists = @user.favorite_artists.map(&:artist)
     @registers = @user.registers.order(created_at: :desc)

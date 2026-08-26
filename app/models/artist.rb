@@ -7,6 +7,10 @@ class Artist < ApplicationRecord
 
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
+  ## CALLBACKS
+
+    before_destroy :destroy_orphan_events #before the associations line
+
   ## RELATIONSHIPS
 
     has_many :artists_events, dependent: :destroy
@@ -24,11 +28,20 @@ class Artist < ApplicationRecord
     scope :accepted, -> { where(status: 0).or(where(status: nil)) }
     scope :pending, -> { where(status: 1) }
     scope :manually_added, -> { where( ticketmaster_id: nil ) }
+    scope :most_followed, -> { left_joins(:relations).group(:id).order("COUNT(relations.id) DESC") }
     
   ## VALIDATIONS
 
     validates :name, presence: true
     validates :ticketmaster_id, uniqueness: { allow_nil: true }
+
+  ## CALLBACKS METHODS
+  
+    def destroy_orphan_events
+      events.each do |event|
+        event.destroy if event.artists.where.not(id: id).empty?
+      end
+    end
     
   ## CLASS METHODS
 
@@ -53,14 +66,19 @@ class Artist < ApplicationRecord
       return artist
     end
 
-    def self.search_by(name, genre_id, artists_api)
-      artists_db =  Artist.by_name(name)
-      artists_db = artists_db.by_genre(genre_id) if genre_id
+    def self.search_by(params, artists_api)
+      query = params[:search]
+      genre = params[:genre_id] ? Genre.find(params[:genre_id]): nil
+      
+      artists = Artist.accepted
+      artists = artists.by_name(query)
+      artists = artists.by_genre(genre.id) if genre
 
+      # exclude ticketmaster ids
       ticketmaster_ids = artists_api.map { |artist| artist["id"] }
-      artists_db = artists_db.where(ticketmaster_id: nil).or(artists_db.where.not(ticketmaster_id: ticketmaster_ids))
+      artists = artists.where(ticketmaster_id: nil).or(artists.where.not(ticketmaster_id: ticketmaster_ids))
 
-      artists_db
+      artists
     end
           
   ## INSTANCE METHODS

@@ -1,0 +1,16 @@
+= render "searchs/options", active: :users
+ 
+.separator
+
+.widget-content{style: "color: #a4b3c4; padding-top:0px;"}
+
+    %div{style: "margin-bottom:15px; margin-top:15px;"}
+        = form_tag users_path, method: "GET" do
+            = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_user")}", class: "field-custom"
+        
+    - if @users.empty?
+        .message
+            ℹ️
+            = t("not_found_model", model: User.plural.downcase )
+    -else 
+        = render "users/index", users: @users

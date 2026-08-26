@@ -6,7 +6,8 @@ class ArtistsController < ApplicationController
   before_action :set_artist, except: [:index, :requests, :show]
 
   def index
-    @artists = Artist.accepted.left_joins(:relations).group(:id).order("COUNT(relations.id) DESC")
+    @artists_api = Array(TicketmasterService.artists_by(params))
+    @artists_db = Artist.search_by(params, @artists_api).most_followed
   end
 
   def show

@@ -29,7 +29,7 @@ class ChatsController < ApplicationController
     redirect_to chats_path
   end
 
-  def read
+  def mark_as_read
     @chat_user.mark_as_read
     render json: {}, status: :no_content #rendering nothing
   end

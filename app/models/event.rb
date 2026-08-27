@@ -113,4 +113,13 @@ class Event < ApplicationRecord
       self.photo if self.photo.attached?
       self.artists&.first&.photo 
     end
+
+    def accepted?
+      !manually_added || (request && request.accepted?)
+    end
+
+    def manually_added
+      ticketmaster_id.nil?
+    end
+
 end

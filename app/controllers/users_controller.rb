@@ -62,12 +62,10 @@ class UsersController < ApplicationController
     @publications = @user.publications.order("created_at DESC")
   end
 
-  def network
-    @followings = @user.followings.users.users.map(&:followed)
-    @followers = @user.followers.users.map(&:follower)
-    @blocked = @user.blocked_users.users.map(&:followed)
+  def notifications
+    @notifications = @user.notifications.order(created_at: :desc)
   end
-  
+
   def followings
   end
 
@@ -99,8 +97,14 @@ class UsersController < ApplicationController
   
 private
 
+  def network
+    @followings = @user.followings.users.users.map(&:followed)
+    @followers = @user.followers.users.map(&:follower)
+    @blocked = @user.blocked_users.users.map(&:followed)
+  end
+
   def set_user
-    @user = User.viewables(current_user).find_by(id: params[:id])
+    @user = User.find(params[:id])
     unless @user
       flash[:alert] = t("not_found_masc", model: User.singular.downcase)
       redirect_back fallback_location: root_path

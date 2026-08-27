@@ -10,11 +10,30 @@
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"
 
   %div
-    - unless current_user
-      = link_to t("verbs.login"), new_user_session_path, class: "btn-custom-orange"
-      = link_to t("verbs.log"), new_user_registration_path, class: "btn-custom-orange"
-    - else  
-      %div{style: "display: flex; gap: 10px;"}
+    %div{style: "display: flex; gap: 10px; align-items: center;"}
+      .dropdown
+        %button.btn.btn-secondary.dropdown-toggle{
+          type: "button",
+          "data-bs-toggle" => "dropdown",
+          "aria-expanded" => "false",
+          style: "background: #eb5d25" 
+        }
+          =t("crud.show", model: "")
+
+        %ul.dropdown-menu
+          %li
+            = link_to Event.plural,events_path, class: "dropdown-item"
+          %li
+            = link_to Register.plural, registers_path, class: "dropdown-item"
+          %li
+            = link_to Publication.plural, publications_path, class: "dropdown-item"
+          %li
+            = link_to Artist.plural, artists_path, class: "dropdown-item"
+
+      - if can?(:create, Publication)
+        = link_to "+ #{t("verbs.post")}", new_publication_path, class: "btn-custom-orange", data: { turbo_frame: "modal" }
+
+      - if can?(:read, Request)
         .dropdown
           %button.btn.btn-secondary.dropdown-toggle{
             type: "button",
@@ -22,44 +41,11 @@
             "aria-expanded" => "false",
             style: "background: #eb5d25" 
           }
-            + #{t("crud.create", model: "")}
+            =t("admin")
 
           %ul.dropdown-menu
             %li
-              = link_to Publication.singular, new_publication_path, class: "dropdown-item", data: { turbo_frame: "modal" }
-
-        .dropdown
-          %button.btn.btn-secondary.dropdown-toggle{
-            type: "button",
-            "data-bs-toggle" => "dropdown",
-            "aria-expanded" => "false",
-            style: "background: #eb5d25" 
-          }
-            =t("crud.show", model: "")
-
-          %ul.dropdown-menu
-            %li
-              = link_to Event.plural,events_path, class: "dropdown-item"
-            %li
-              = link_to Register.plural, registers_path, class: "dropdown-item"
-            %li
-              = link_to Publication.plural, publications_path, class: "dropdown-item"
-            %li
-              = link_to Artist.plural, artists_path, class: "dropdown-item"
-
-        - if current_user.admin?
-          .dropdown
-            %button.btn.btn-secondary.dropdown-toggle{
-              type: "button",
-              "data-bs-toggle" => "dropdown",
-              "aria-expanded" => "false",
-              style: "background: #eb5d25" 
-            }
-              =t("admin")
-
-            %ul.dropdown-menu
-              %li
-                = link_to t("requested_events"), requests_path, class: "dropdown-item"            
+              = link_to t("requested_events"), requests_path, class: "dropdown-item"            
 
 
   - if current_user
@@ -67,11 +53,30 @@
       = link_to user_path(current_user), class: "hover-border-icon", title: t("profile") do
         .link_icon{ class: ("active" if current_page?(user_path(current_user))) }
           👤
-      = link_to notifications_path, class: "hover-border-icon", title: Notification.plural do
+      = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural do
         = render "layouts/shared/notifications_bubble"
-
       = link_to chats_path, class: "hover-border-icon", title: Chat.plural do
         = render "layouts/shared/messages_bubble"
+
+  .dropdown
+    %button.btn.btn-secondary.dropdown-toggle{
+      type: "button",
+      "data-bs-toggle" => "dropdown",
+      "aria-expanded" => "false",
+      style: "background: #51485a" 
+    }
+      =t("session")
+
+    %ul.dropdown-menu
+      
+      - if current_user
+        %li 
+          = button_to t("verbs.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
+      - else
+        %li
+        = link_to t("verbs.login"), new_user_session_path, class: "dropdown-item"
+        %li
+        = link_to t("verbs.log"), new_user_registration_path, class: "dropdown-item"
 
 
   .dropdown
@@ -88,9 +93,6 @@
         = link_to t("switch_to", model: t("spanish")), change_locale_path(:es), class: "dropdown-item"
       %li
         = link_to t("switch_to", model: t("english")), change_locale_path(:en), class: "dropdown-item"
-      - if current_user
-        %li
-          %hr.dropdown-divider
-        %li 
-          = button_to t("verbs.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
+
+
 .separator{style: "background: #40556d; "}

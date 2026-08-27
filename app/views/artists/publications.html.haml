@@ -2,7 +2,7 @@
 = render "artists/options", active: :publications
 
 .widget-content{style: "padding-top: 0px;"}
-    - if current_user
+    - if can?(:post, @artist)
         .separator{style: "margin-bottom: 15px;"}
         %div
             = form_tag post_artist_path(@artist), method: :post, data: { turbo: false } do

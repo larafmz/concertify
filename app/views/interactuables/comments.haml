@@ -21,7 +21,7 @@
             = link_to Repost.plural, reposts_interactuable_path(@interactuable), title: "#{@interactuable.reposts.count} #{Repost.plural}"
         .separator
 
-        - if current_user
+        - if can?(:comment, @interactuable)
             %div{style: "border-bottom: 1px solid #40556d;"}
                 = form_tag comment_interactuable_path(@interactuable), method: :post, data: { turbo: false } do
                     %div{data: { controller: "character-counter" }, style: "margin:15px; display: grid; grid-template-columns: auto 1fr auto; color: white; gap: 10px; "}

@@ -1,7 +1,5 @@
 - if publications.empty?
-    .message
-        ℹ️
-        = t("not_found_model", model: Publication.plural.downcase )
+    = render "common/empty_list_message", model: Publication
 - else
     %div{style: "border: 1px solid #40556d;"}
         - publications.each do |publication|

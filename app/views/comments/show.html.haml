@@ -17,7 +17,7 @@
             = Comment.plural
         .separator
 
-        - if current_user
+        - if can?(:reply, @comment)
             %div{style: "border-bottom: 1px solid #40556d;"}
                 = form_tag reply_comment_path(father_id: @comment), method: :post, data: { turbo: false } do
                     %div{data: { controller: "character-counter" }, style: "margin:15px; display: grid; grid-template-columns: auto 1fr auto; color: white; gap: 10px; "}

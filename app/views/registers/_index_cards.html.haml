@@ -1,8 +1,6 @@
 - if registers.empty?
   %div{style: "padding-top:15px;"}
-    .message
-      ℹ️
-      = t("not_found_model", model: Register.plural.downcase )
+    = render "common/empty_list_message", model: Register
 .columns
   - registers.each do |register|
     .event-card{style: "display: flex; flex-direction: column; "}

@@ -119,8 +119,8 @@ class Artist < ApplicationRecord
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
     end
 
-    def mark_as_favorite(user_id)
-      FavoriteArtist.find_or_create_by!(user_id: user_id, artist_id: self.id)
+    def mark_as_favorite(user)
+      FavoriteArtist.find_or_create_by!(user_id: user.id, artist_id: self.id) if user.can_mark_favorite?
     end
 
     def unmark_as_favorite(user_id)

@@ -46,10 +46,12 @@
             
             .rating
               %div= label_tag :rating, "Rating:", class: "soft-color", style: "font-size: 13px;"
-              - (1..5).each do |i|
-                = f.radio_button :rating, i
-                = f.label :"rating_#{i}" do
-                  - (1..i).each do 
-                    ★
+              %div{style: "display: flex; gap: 15px;"}
+                - (1..5).each do |i|
+                  %div
+                    = f.radio_button :rating, i
+                    = f.label :"rating_#{i}" do
+                      - (1..i).each do 
+                        ★
         %br
         = f.submit "Guardar", style: "float: right"

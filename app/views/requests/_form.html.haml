@@ -25,7 +25,7 @@
               = f.fields_for :event do |event_fields|
                 = render "events/form_fields", f: event_fields
 
-            - if current_user.admin? && @request.persisted?
+            - if current_user&.admin? && @request.persisted?
               .separator{style: "margin-top:10px;"}
 
               .two-columns

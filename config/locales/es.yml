@@ -1,5 +1,6 @@
 es:
   admin: Administrador
+  session: Sesión
   search: Buscar...
   search_event: Buscar por nombre de tour o de artista...
   search_user: Buscar por nombre de usuario
@@ -51,7 +52,7 @@ es:
   blocked: Bloqueado
   network: Red
   options: Opciones
-  favorite: Favorito
+  is_favorite: ♡ Favorito ♡
   upcoming: Próximos
   today: Hoy
   send_message: Envíar mensaje
@@ -68,6 +69,7 @@ es:
   you_exited_chat: Saliste del grupo
   you_entered_chat: Te uniste al grupo
   details_of: Datos de %{data}
+  not_authorized: No tienes permiso para acceder a esta página.
   
   by: por
   about: sobre
@@ -83,7 +85,7 @@ es:
 
   verbs:
     destroy: Eliminar
-    log: Registrar
+    log: Registrarte
     save: Guardar
     select: Seleccionar
     follow: Seguir

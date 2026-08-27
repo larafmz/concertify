@@ -62,8 +62,8 @@ private
             redirect_back fallback_location: root_path
             return
         end
-        @user = User.viewables(current_user).find(@interactuable.user_id)
-        @liked_by_creator = @user
+        @user = User.find(@interactuable.user_id)
+        @liked_by_creator = Interactuable.where(id: @user.likes.for_event(@interactuable.event_id).pluck(:interactuable_id))
     end
 
     

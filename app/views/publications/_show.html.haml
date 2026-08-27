@@ -1,54 +1,32 @@
 .publication-grid
 
-    - unless current_page?(publications_path)
-        .publication
-            = link_to user_path(publication.user), class: "hover-border-icon" do
-                .link_icon
-                    = image_tag publication.user.icon if publication.user.icon.attached?
-            %div
-                .title_section
-                    %div{style: "font-size: 15px; color: #dee5eb"}
-                        = link_to user_path(publication.user) do 
-                            = publication.user.username
-                        - if publication.artist
-                            %span{class: "soft-color"}=t("about")
-                            %span{style: "color: #65dbff"}
-                                = link_to artist_path(publication.artist) do 
-                                    = publication.artist.name
-                        - if publication.event
-                            %span{class: "soft-color"}=t("about")
-                            %span{style: "color: #65dbff"}
-                                = link_to event_path(publication.event) do 
-                                    = publication.event.tour_name
-                        •
-                        %span.softest-color
-                            = custom_time_ago_in_words(publication.created_at)
+    = link_to user_path(publication.user), class: "hover-border-icon", style: "width: fit-content;" do
+        .link_icon
+            = image_tag publication.user.icon if publication.user.icon.attached?
 
-                %span{style: "font-size: 15px; color: white; overflow-wrap: anywhere;"}
-                    = simple_format(publication.review)
-    - else
+    %div{style: "margin-left: 15px;"}
+        %div{style: "font-size: 15px; color: #dee5eb"}
+            = link_to user_path(publication.user) do 
+                = publication.user.username
+            - if publication.artist
+                %span{class: "soft-color"}=t("about")
+                %span{style: "color: #65dbff"}
+                    = link_to artist_path(publication.artist) do 
+                        = publication.artist.name
+            - if publication.event
+                %span{class: "soft-color"}=t("about")
+                %span{style: "color: #65dbff"}
+                    = link_to event_path(publication.event) do 
+                        = publication.event.tour_name                            
+            •
+            %span.softest-color
+                = custom_time_ago_in_words(publication.created_at)
+
         = link_to comments_interactuable_path(publication), class: "publication-link" do
-            .link_icon
-                = image_tag publication.user.icon if publication.user.icon.attached?
-            %div
-                .title_section
-                    %div{style: "font-size: 15px; color: #dee5eb"}
-                        = publication.user.username
-                        - if publication.artist
-                            %span{class: "soft-color"}=t("about")
-                            %span{style: "color: #65dbff"}= publication.artist.name
-                        - if publication.event
-                            %span{class: "soft-color"}=t("about")
-                            %span{style: "color: #65dbff"}= publication.event.tour_name                            
-                        •
-                        %span.softest-color
-                            = custom_time_ago_in_words(publication.created_at)
-
-                %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
-                    = simple_format(publication.review)
-
+            %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
+                = simple_format(publication.review)
     %div
-        - if current_user && current_user&.id == publication.user_id
+        - if can?(:destroy, publication)
             .dropdown
                 %button{
                     "data-bs-toggle" => "dropdown",
@@ -59,5 +37,5 @@
                     %li
                         = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar la publicación?" }, class: "dropdown-item"
 
-
+%div{style: "margin:0px 0px 20px 30px;"}
     = render "interactuables/footer", interactuable: publication

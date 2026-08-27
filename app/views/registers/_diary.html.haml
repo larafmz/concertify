@@ -1,9 +1,7 @@
 .widget-content{style: "padding-top:0px;"}  
 
     - if registers.empty?
-        .message
-            ℹ️
-            = t("not_found_model", model: Register.plural.downcase )
+        = render "common/empty_list_message", model: Register
 
     .registers-items{style: "background: #1e2731; border-radius: 15px; gap: 0px;"}
 

@@ -1,8 +1,7 @@
 .widget-content{style: "padding-top:0px;"}  
     - if artists.empty?
-        .message
-            ℹ️
-            = t("not_found_model", model: Artist.plural.downcase )
+        render "common/empty_list", model: Artist
+        
     - else
         %div      
             .artists-list
@@ -22,12 +21,7 @@
                                     = t("followers").downcase
 
                         .softest-color
-                            - if current_user
-                                - if current_user.follows_artist?(artist)
-                                    = link_to t("following"), unfollow_artist_path(artist), class: "btn-custom", data: { turbo_method: :delete }
-                                - else
-                                    = link_to t("verbs.follow"), follow_artist_path(artist), class: "btn-custom-orange", data: { turbo_method: :post }
-
-                        
+                            = render "artists/follow_buttoms", artist: artist
+                            
                     
                         

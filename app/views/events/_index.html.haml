@@ -1,8 +1,6 @@
 .events-items
     - if events.empty? 
-        .message
-            ℹ️
-            = t("not_found_model", model: Event.plural.downcase )
+        render "common/empty_list", model: Event
     - else
         - events.each_with_index do |item, index|
             - event = item[:event]

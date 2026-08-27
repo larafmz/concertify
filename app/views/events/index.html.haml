@@ -12,5 +12,5 @@
         .separator{style: "margin-bottom: 15px; "}
         = render "events/index", events: @events, photo: true
 
-    - if current_user
+    - if can?(:create, Request)
         = render "events/manual_add"

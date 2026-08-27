@@ -5,7 +5,7 @@
                 
             .artist-name
                 .adapted-bubble
-                    =Event.singular.upcase
+                    ="##{Event.singular.upcase}"
                 %div= @event.tour_name
                 .soft-color{ style: "font-size: 15px; margin-bottom:5px" }
                     %div= "📍#{@event.ubication&.complete_name} "
@@ -43,7 +43,5 @@
 
     
     %div{style: "display:flex; align-items:center; padding-top: 10px; gap: 20px;"}
-
-        - if current_user
-            %span{ style: "margin-left: auto;" }
-                = render "events/assistance_buttoms", event: @event
+        %span{ style: "margin-left: auto;" }
+            = render "events/assistance_buttoms", event: @event

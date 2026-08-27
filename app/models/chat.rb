@@ -64,4 +64,6 @@ class Chat < ApplicationRecord
       !chat_users.find { |cu| cu.user_id == current_user.id }.read?
     end
 
+
+
 end

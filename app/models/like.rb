@@ -10,6 +10,10 @@ class Like < ApplicationRecord
         validates :user_id, uniqueness: { scope: :interactuable_id }
         validate :cant_like_own
 
+    ## SCOPES
+
+        scope :for_event, ->(event_id) { joins(:interactuable).where(interactuables: { event_id: event_id }).where(interactuables: { type: "Register" }) }
+
     ## CALLBACKS
 
         after_create_commit :create_notification

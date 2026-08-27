@@ -8,9 +8,7 @@
 
 - if @notifications.empty?
     .widget-content
-        .message
-            ℹ️
-            = t("not_found_model", model: Notification.plural.downcase )
+        render "common/empty_list", model: Notification
 
 - @notifications.each do |notification|  
     = render "notifications/table_item", notification: notification

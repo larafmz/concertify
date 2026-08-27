@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get :publications
       get :artists
       get :requests
+      get :notifications
     end
   end
   
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
     member do
       post :send_message
       delete :exit
-      post :read
+      post :mark_as_read
     end
   end
 
@@ -66,9 +67,6 @@ Rails.application.routes.draw do
       get :publications
       get :registers
     end
-    collection do
-      get :requests #TO/DO or delete
-    end    
   end
 
   resources :events, only: [:show, :index] do
@@ -83,7 +81,7 @@ Rails.application.routes.draw do
 
   resources :requests, only: [:index, :new, :create, :destroy, :edit, :update]
 
-  resources :notifications, only: [:index] do
+  resources :notifications do
     member do
       post :mark_as_read
       post :read_and_redirect

@@ -1,7 +1,7 @@
 = render "events/header"
 = render "events/options", active: :publications
 .widget-content{style: "padding-top: 0px;"}
-    - if current_user
+    - if can?(:post, @event)
         .separator{style: "margin-bottom: 15px;"}
         %div
             = form_tag post_event_path(@event), method: :post, data: { turbo: false } do

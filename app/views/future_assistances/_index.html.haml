@@ -1,9 +1,7 @@
 
 .widget-content{style: "padding-top:0px;"}  
     - if future_assistances.empty?
-        .message
-            ℹ️
-            = t("not_found_model", model: FutureAssistance.plural.downcase )
+        render "common/empty_list", model: FutureAssistance
     - else
         - future_assistances[0..10].each do |future_assistance|
             - event = future_assistance.event

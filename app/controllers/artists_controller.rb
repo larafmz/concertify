@@ -56,9 +56,7 @@ class ArtistsController < ApplicationController
   end
 
   def mark_as_favorite
-    if current_user.can_mark_favorite?
-      @artist.mark_as_favorite(current_user&.id)
-    end
+    @artist.mark_as_favorite(current_user)
     redirect_back fallback_location: root_path
   end
 

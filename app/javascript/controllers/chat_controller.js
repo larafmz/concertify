@@ -26,7 +26,7 @@ export default class extends Controller {
   }
 
   markAsRead() {
-    fetch(`/chats/${this.chatIdValue}/read`, {
+    fetch(`/chats/${this.chatIdValue}/mark_as_read`, {
       method: "POST",
       headers: {
         "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content

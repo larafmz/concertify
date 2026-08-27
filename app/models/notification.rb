@@ -3,6 +3,7 @@ class Notification < Noticed::Notification
     ## RELATIONSHIPS
 
         belongs_to :chat, optional: true
+        belongs_to :recipient, polymorphic: true
 
     ## VALIDATIONS
 

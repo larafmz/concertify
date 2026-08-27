@@ -20,6 +20,7 @@ class User < ApplicationRecord
     has_many :chats, through: :chat_users
     has_many :notifications, class_name: "Noticed::Notification", as: :recipient, dependent: :destroy
     has_many :requests, foreign_key: :requester_id #dependent: :destroy, DONT DESTROY
+    has_many :likes
 
     has_one_attached :icon
 
@@ -40,7 +41,8 @@ class User < ApplicationRecord
       if user.present?
         #Remove users than have BLOCKED ME
         User.where.not(id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
-        # blocked users can be seen by the blocker user
+        #Remove users than I HAVE BLOCKED
+        User.where.not(id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
       else
         User.all
       end
@@ -89,6 +91,7 @@ class User < ApplicationRecord
       # destroy followings relations if they exist
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)&.destroy
       Relation.find_by(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)&.destroy
+      ChatUser.destroy()
     end
 
     def unblock(user_id)
@@ -102,7 +105,17 @@ class User < ApplicationRecord
     def reposted?(interactuable_id)
       Repost.find_by(interactuable_id: interactuable_id, user_id: self.id).present?
     end
-   
 
+    def has_unread_chats?
+      self.chat_users.unread.size > 0
+    end
+
+    def has_unread_notifications?
+      self.notifications.unread.size > 0
+    end
+
+    def viewable_chats
+      chats.group_chat?
+    end
 
 end

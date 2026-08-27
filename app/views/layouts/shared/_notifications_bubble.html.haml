@@ -1,8 +1,8 @@
 = turbo_stream_from current_user, "notifications_header"
 %div{id: "notifications_header", style: "display:flex; flex-direction:column; align-items:center;"}
-    .link_icon{ class: ("active" if current_page?(notifications_path)) }
+    .link_icon{ class: ("active" if current_page?(notifications_user_path(current_user))) }
         🔔
-    - if current_user.notifications.unread.size  > 0
+    - if current_user.has_unread_notifications?
         %div{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
             = current_user.notifications.unread.size 
 

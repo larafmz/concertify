@@ -26,7 +26,7 @@ class Comment < ApplicationRecord
                 follower: user, 
                 record: self, 
                 message: notification_message,
-                path: father_link)
+                path: Rails.application.routes.url_helpers.comment_path(self.id))
             notification.deliver(all_users)
         end
 
@@ -42,10 +42,10 @@ class Comment < ApplicationRecord
             str + I18n.t("notifications.new_comment", model: interactuable.class.singular.downcase, comment: text)
         end
 
-        def father_link
-            return Rails.application.routes.url_helpers.comment_path(comment_father.id) if comment_father
-            return Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id)
-        end
+        # def father_link
+        #     return Rails.application.routes.url_helpers.comment_path(comment_father.id) if comment_father
+        #     return Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id)
+        # end
 
         def all_users
             users = [ interactuable.user ]

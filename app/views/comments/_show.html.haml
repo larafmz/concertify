@@ -12,7 +12,7 @@
                 %span{class: "softest-color"}
                     = custom_time_ago_in_words(comment.created_at)
 
-            - if current_user&.id == comment.user_id || current_user&.id == comment.interactuable.user_id
+            - if can?(:destroy, comment)
                 .dropdown
                     %button{
                         "data-bs-toggle" => "dropdown",

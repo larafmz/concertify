@@ -4,7 +4,6 @@ class RegistersController < ApplicationController
 
     def index
         @registers = Register.by_friends(current_user).order("created_at DESC")
-        
     end
 
     def new

@@ -9,9 +9,10 @@
         = link_to followers_user_path(@user), title: "#{@followers.count} #{User.plural}" do
             =t("followers").upcase
             (#{@followers.count})
-        = link_to blocked_user_path(@user), title: "#{@blocked.count} #{User.plural}" do
-            =t("blocked").upcase
-            (#{@blocked.count})
+        - if can?(:blocked, @user)
+            = link_to blocked_user_path(@user), title: "#{@blocked.count} #{User.plural}" do
+                =t("blocked").upcase
+                (#{@blocked.count})
     .separator
 
 

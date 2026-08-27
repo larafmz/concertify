@@ -36,6 +36,19 @@ class Comment < ApplicationRecord
 
     public
 
+      ## CLASS METHODS
+
+        def self.viewables(user)
+            if user.present?
+                comms = Comment.where.not( user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id) )
+                comms.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id) )
+            else
+                Comment.all
+            end
+        end
+
+      ## INSTANCE METHODS
+
         def notification_message
             str = "<strong> #{user.username} </strong>"
             return str + I18n.t("notifications.new_reply", model: interactuable.class.singular.downcase, comment: text) if comment_father

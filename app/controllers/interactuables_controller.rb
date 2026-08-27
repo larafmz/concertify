@@ -1,6 +1,6 @@
 class InteractuablesController < ApplicationController
     
-    authorize_resource
+    load_and_authorize_resource
 
     before_action :set_interactuable, only: [:show, :comments, :reposts]
 
@@ -9,7 +9,7 @@ class InteractuablesController < ApplicationController
     end
 
     def comments
-        @comments = @interactuable.comments.order("created_at DESC").where(comment_father_id: nil) #comments
+        @comments = @interactuable.comments.viewables(current_user).order("created_at DESC").where(comment_father_id: nil) #comments
     end
 
     def reposts
@@ -56,7 +56,6 @@ class InteractuablesController < ApplicationController
 private
     
     def set_interactuable
-        @interactuable = Interactuable.viewables(current_user).find_by(id: params[:id])
         unless @interactuable
             flash[:alert] = t("not_found")
             redirect_back fallback_location: root_path

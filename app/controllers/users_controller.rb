@@ -97,8 +97,8 @@ class UsersController < ApplicationController
 private
 
   def network
-    @followings = @user.followings.users.users.map(&:followed)
-    @followers = @user.followers.users.map(&:follower)
+    @followings = User.viewables(current_user).where(id: @user.followings.users.select(:followed_id))
+    @followers = User.viewables(current_user).where(id: @user.followers.users.select(:follower_id))
     @blocked = @user.blocked_users.users.map(&:followed)
   end
 

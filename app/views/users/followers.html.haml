@@ -5,10 +5,10 @@
     %div{style: "display: flex; gap: 20px; color: white;"}
         = link_to followings_user_path(@user), title: "#{@followings.count} #{User.plural}" do
             =t("following").upcase
-            (#{@followings.count})
+            (#{@user.followings.users.count})
         = link_to followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@followers.count} #{User.plural}" do
             =t("followers").upcase
-            (#{@followers.count})
+            (#{@user.followers.count})
         - if can?(:blocked, @user)
             = link_to blocked_user_path(@user), title: "#{@blocked.count} #{User.plural}" do
                 =t("blocked").upcase

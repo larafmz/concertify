@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
 
-  load_and_authorize_resource except: [:show]
+  authorize_resource except: [:show]
 
   before_action :authenticate_user
   before_action :set_chat 

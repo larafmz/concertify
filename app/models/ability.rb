@@ -43,9 +43,13 @@ class Ability
         end
         
         # Interactuable permissions
-        can [:like, :repost, :comment], Interactuable do |interactuable| interactuable.user_id != user.id end
+        can [:like, :repost, :comment], Interactuable do |interactuable| 
+          interactuable.user_id != user.id && !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
+        end
         can [:uncomment], Interactuable, user_id: user.id
-        can [:reply], Comment
+        can [:reply], Comment do |comment| 
+          !comment.interactuable.user.blocked_user?(user.id) && !user.blocked_user?(comment.interactuable.user.id)
+        end
         can [:destroy], Comment do |comment| comment.user_id == user.id || comment.interactuable.user_id == user.id end
 
         # Artist/Event permissions
@@ -55,7 +59,10 @@ class Ability
         # User permissions
         can :read, User do |target| !target.blocked_user?(user.id) end
         can [:update, :blocked, :requests, :notifications], User, id: user.id
-        can [:follow, :unfollow, :block, :unblock], User do |target|
+        can [:follow, :unfollow], User do |target|
+          target.id != user.id && !target.blocked_user?(user.id)
+        end
+        can [:block, :unblock], User do |target|
           target.id != user.id && !target.admin? && !target.blocked_user?(user.id)
         end
         can [:followers, :followings, :registers, :diary, :future_assistances, :publications, :artists], User do |target| 

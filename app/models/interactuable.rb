@@ -33,7 +33,9 @@ class Interactuable < ApplicationRecord
     def self.viewables(user)
       if user.present?
         #Remove Interactuables from users than have BLOCKED ME
-        Interactuable.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        int = Interactuable.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        #Remove Interactuables from users than I HAVE BLOCKED
+        int.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
       else
         Interactuable.all
       end

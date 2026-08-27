@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource except: [:show]
+  load_and_authorize_resource
 
-  before_action :set_user, except: [:follow, :unfollow, :index]
   before_action :network, only: [:followers, :followings, :blocked]
 
   def index
@@ -101,15 +100,6 @@ private
     @followings = @user.followings.users.users.map(&:followed)
     @followers = @user.followers.users.map(&:follower)
     @blocked = @user.blocked_users.users.map(&:followed)
-  end
-
-  def set_user
-    @user = User.find(params[:id])
-    unless @user
-      flash[:alert] = t("not_found_masc", model: User.singular.downcase)
-      redirect_back fallback_location: root_path
-      return
-    end
   end
 
   def create_params

@@ -32,7 +32,9 @@ class FutureAssistance < ApplicationRecord
     def self.viewables(user)
       if user.present?
         #Remove FA's from users than have BLOCKED ME
-        FutureAssistance.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        fa = FutureAssistance.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        #Remove FA's from users than I HAVE BLOCKED
+        fa.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
       else
         FutureAssistance.all
       end

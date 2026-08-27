@@ -3,7 +3,7 @@
 
 .widget-content{style: "padding-top:0px;"}  
     - if @followers.empty?
-        render "common/empty_list", model: User
+        = render "common/empty_list_message", model: User
     - else
         %div{style: "border: 1px solid #40556d;"}       
             .registers-items

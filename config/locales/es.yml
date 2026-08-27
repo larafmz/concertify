@@ -85,7 +85,7 @@ es:
 
   verbs:
     destroy: Eliminar
-    log: Registrarte
+    log: Registrar
     save: Guardar
     select: Seleccionar
     follow: Seguir
@@ -140,6 +140,7 @@ es:
       one: "Queda %{count} día"
       other: "Quedan %{count} días"
     exists_in_app_already: Ya existe en la app
+    cant_send_message: No puedes enviar mensajes en este chat.
     
   notifications:
     new_follower: "ha comenzado a seguirte"

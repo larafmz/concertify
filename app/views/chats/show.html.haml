@@ -37,12 +37,15 @@
                                 %li
                                     = button_to exit_title, exit_chat_path(@chat, user_id: current_user.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
                         
-                        
         .separator{style: "padding:0px;"}
 
         .chat-container
             - if @chat_entries
                 = render "chat_entries/show", chat_entries: @chat_entries
 
-        - if @chat
+        - if @chat && can?(:send_message, @chat)
             = render "chats/send_message"
+        - else
+            %div{style: "border-radius: 15px; border: 1px solid #40556d; height:70px; padding: 10px; margin:10px;"}
+                %div{style: "display: flex; align-items: center; justify-content: center; height: 100%; color: white;"}
+                    = t("messages.cant_send_message")

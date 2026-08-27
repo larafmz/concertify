@@ -1,6 +1,6 @@
 .widget-content{style: "padding-top:0px;"}  
     - if artists.empty?
-        render "common/empty_list", model: Artist
+        = render "common/empty_list_message", model: Artist
         
     - else
         %div      

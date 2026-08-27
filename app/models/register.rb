@@ -31,7 +31,9 @@ class Register < Interactuable
     def self.viewables(user)
       if user.present?
         #Remove Registers from users than have BLOCKED ME
-        Register.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        reg = Register.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        #Remove Registers from users than I HAVE BLOCKED
+        reg.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
       else
         Register.all
       end

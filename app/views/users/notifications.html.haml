@@ -8,7 +8,7 @@
 
 - if @notifications.empty?
     .widget-content
-        render "common/empty_list", model: Notification
+        = render "common/empty_list_message", model: Notification
 
 - @notifications.each do |notification|  
     = render "notifications/table_item", notification: notification

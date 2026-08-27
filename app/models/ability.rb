@@ -31,8 +31,15 @@ class Ability
           chat.chat_users.exists?(user_id: user.id)
         end
 
-        can [:send_message], Chat do |chat| 
-          chat.chat_users.exists?(user_id: user.id) && (chat.group_chat? || (!chat.group_chat? && !chat.other_user(user).blocked_user?(user.id) ))
+        can :send_message, Chat do |chat|
+          chat.chat_users.exists?(user_id: user.id) &&
+            (
+              chat.group_chat? ||
+              (
+                !chat.other_user(user).blocked_user?(user.id) &&
+                !user.blocked_user?(chat.other_user(user).id)
+              )
+            )
         end
         
         # Interactuable permissions
@@ -51,7 +58,7 @@ class Ability
         can [:follow, :unfollow, :block, :unblock], User do |target|
           target.id != user.id && !target.admin? && !target.blocked_user?(user.id)
         end
-        can [:followers, :following, :registers, :diary, :future_assistances, :publications, :artists], User do |target| 
+        can [:followers, :followings, :registers, :diary, :future_assistances, :publications, :artists], User do |target| 
           !target.blocked_user?(user.id) 
         end
         

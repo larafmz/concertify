@@ -3,7 +3,7 @@ class PublicationsController < ApplicationController
     load_and_authorize_resource
 
     def index
-        @publications = Publication.all.order("created_at DESC") 
+        @publications = Publication.viewables(current_user).all.order("created_at DESC") 
     end
 
     def new

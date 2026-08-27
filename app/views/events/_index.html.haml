@@ -1,6 +1,6 @@
 .events-items
     - if events.empty? 
-        render "common/empty_list", model: Event
+        = render "common/empty_list_message", model: Event
     - else
         - events.each_with_index do |item, index|
             - event = item[:event]

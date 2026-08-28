@@ -22,8 +22,9 @@
 
 .filters-search {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr auto auto;
   gap: 15px;
+  margin-bottom: 10px;
 }
 
 .filters-search label {

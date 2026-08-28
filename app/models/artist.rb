@@ -50,7 +50,6 @@ class Artist < ApplicationRecord
     def self.create_or_update_by_ticketmaster_id(id)
       artist = Artist.find_or_initialize_by(ticketmaster_id: id)
       if artist.new_record? || artist.updated_at < 5.hours.ago
-        puts "ENTRA!"
         artist_api = TicketmasterService.artist_by_id(id)
         return if artist_api.nil? #there are events with nil artist associated in ticketmaster
         
@@ -66,17 +65,13 @@ class Artist < ApplicationRecord
         artist.save!
         artist.touch # updates "updated_at" field
       end 
-
       return artist
     end
 
-    def self.search_by(params, artists_api)
-      query = params[:search]
-      genre = params[:genre_id] ? Genre.find(params[:genre_id]): nil
-      
+    def self.search_by(params, artists_api)      
       artists = Artist.accepted
-      artists = artists.by_name(query)
-      artists = artists.by_genre(genre.id) if genre
+      artists = artists.by_name(params[:search]) if params[:search].present?
+      artists = artists.by_genre(Genre.find(params[:genre_id]).id) if params[:genre_id].present?
 
       # exclude ticketmaster ids
       ticketmaster_ids = artists_api.map { |artist| artist["id"] }

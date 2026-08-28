@@ -64,6 +64,7 @@ class Event < ApplicationRecord
         venue = get_event_venue(event_api)
         event.ubication = venue.nil? ? nil : Ubication.find_or_create_by(city: get_venue_city(venue), state: get_venue_state(venue), country: Country.find_by(code: get_venue_country_code(venue)), venue: get_venue_address(venue))
         event.save!
+        event.touch # updates "updated_at" field
       end
       return event
     end

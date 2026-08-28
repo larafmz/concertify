@@ -192,6 +192,7 @@ a:hover {
 
 .btn-standard,
 .btn-custom {
+  white-space: nowrap;
   background: #3a485a;
   color: white !important;
   border: none;
@@ -204,10 +205,11 @@ a:hover {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  height: auto;
   padding-bottom: 5px;
   padding-top: 5px;
   width: auto;
+  justify-content: center;
+  height: 40px;
 }
 
 .btn-custom::after {

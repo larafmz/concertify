@@ -1,9 +1,9 @@
-include ApplicationHelper
-require "open-uri"
-
 class Artist < ApplicationRecord
 
   ##CONFIGURATIONS
+
+    include ApplicationHelper
+    require "open-uri"
 
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
@@ -13,11 +13,14 @@ class Artist < ApplicationRecord
 
   ## RELATIONSHIPS
 
+    belongs_to :genre, optional: true
+    belongs_to :requester, class_name: "User", optional: true
+
     has_many :artists_events, dependent: :destroy
     has_many :events, through: :artists_events, dependent: :destroy
-    belongs_to :genre, optional: true
     has_many :relations, as: :followed, dependent: :destroy
     has_many :followers, through: :relations, source: :follower
+    
     has_one_attached :photo
     
   ## SCOPES

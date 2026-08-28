@@ -3,8 +3,6 @@ class Register < Interactuable
     ## RELATIONSHIPS
     
     belongs_to :event
-    belongs_to :user
-    has_many_attached :photos
 
     ## VALIDATIONS
 
@@ -42,10 +40,8 @@ class Register < Interactuable
   ## INSTANCE METHODS
 
     def get_rating
-        if self.rating.nil?
-            self.rating = 0
-        end
-        "★" * self.rating
+      rating = self.rating.nil? ? 0 : self.rating
+      return "★" * rating
     end
 
 end

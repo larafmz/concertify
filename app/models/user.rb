@@ -20,7 +20,7 @@ class User < ApplicationRecord
     has_many :chats, through: :chat_users
     has_many :notifications, class_name: "Noticed::Notification", as: :recipient, dependent: :destroy
     has_many :requests, foreign_key: :requester_id #dependent: :destroy, DONT DESTROY
-    has_many :likes
+    has_many :likes, dependent: :destroy
 
     has_one_attached :icon
 
@@ -91,7 +91,12 @@ class User < ApplicationRecord
       # destroy followings relations if they exist
       Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 0)&.destroy
       Relation.find_by(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 0)&.destroy
-      ChatUser.destroy()
+      # destroy likes between users
+      Like.for_user(user_id).for_interactuable_user(self.id).destroy_all
+      Like.for_user(self.id).for_interactuable_user(user_id).destroy_all
+      # destroy resposts between users
+      Repost.for_user(self.id).for_interactuable_user(user_id).destroy_all
+      Repost.for_user(self.id).for_interactuable_user(user_id).destroy_all
     end
 
     def unblock(user_id)

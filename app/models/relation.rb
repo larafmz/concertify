@@ -60,8 +60,11 @@ class Relation < ApplicationRecord
   public
             
     def notification_message
-        str = "<strong> #{follower.username} </strong>"
-        str + I18n.t("notifications.new_follower")
+      user_str = "<strong> #{follower.username} </strong>"
+      {
+          key: "new_follower",
+          user: user_str,
+      }
     end
 
 end

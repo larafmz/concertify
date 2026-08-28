@@ -8,7 +8,7 @@ class RegistersController < ApplicationController
 
     def new
         if params[:ticketmaster_id]
-            @event = Event.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
+            @event = Event.find_by(ticketmaster_id: params[:ticketmaster_id])
             @event_api = TicketmasterService.event_by_id(params[:ticketmaster_id]) if @event.nil?
         else
             @event = Event.find(params[:event_id])
@@ -20,13 +20,13 @@ class RegistersController < ApplicationController
     def create
         @register = Register.new(create_params)
 
-        unless params[:ticketmaster_id].empty?
+        unless params[:ticketmaster_id].blank?
             @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) 
             @register.event_id = @event.id if @event
         end
         
         ActiveRecord::Base.transaction do
-            if @register.save!
+            if @register.save
                 future_assistance = FutureAssistance.find_by(event_id: @register.event_id, user_id: current_user&.id)
                 future_assistance.destroy if future_assistance
                 redirect_back fallback_location: root_path
@@ -46,7 +46,7 @@ class RegistersController < ApplicationController
         @register = Register.find(params[:id])
         @event = Event.find(@register.event_id)
 
-        if @register.update!(create_params)
+        if @register.update(create_params)
             redirect_back fallback_location: root_path
         else
             redirect_back fallback_location: root_path

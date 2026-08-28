@@ -44,7 +44,7 @@ class Notification < Noticed::Notification
             notification = InteractionNotificationNotifier.with(
                 record: future_assistance, 
                 message: future_assistance.notification_message, 
-                path: Rails.application.routes.url_helpers.event_path(future_assistance.event.id))
+                path: Rails.application.routes.url_helpers.future_assistances_user_path(future_assistance.user))
             notification.deliver(future_assistance.user)
         end
 
@@ -57,7 +57,8 @@ class Notification < Noticed::Notification
         end
 
         def message
-            self.params[:message]
+            data = params[:message]
+            I18n.t("notifications.#{data[:key]}", **data.except(:key).symbolize_keys )
         end
 
         def icon

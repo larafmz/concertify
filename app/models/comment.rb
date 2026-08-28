@@ -15,7 +15,7 @@ class Comment < ApplicationRecord
     ## CALLBACKS
 
         after_create_commit :create_notification
-        after_destroy :remove_notification
+        after_destroy_commit :remove_notification
 
     ## CALLBACK METHODS
 
@@ -50,15 +50,15 @@ class Comment < ApplicationRecord
       ## INSTANCE METHODS
 
         def notification_message
-            str = "<strong> #{user.username} </strong>"
-            return str + I18n.t("notifications.new_reply", model: interactuable.class.singular.downcase, comment: text) if comment_father
-            str + I18n.t("notifications.new_comment", model: interactuable.class.singular.downcase, comment: text)
+            user_str = "<strong> #{user.username} </strong>"
+            key = comment_father ? "new_reply" : "new_comment"
+            {
+                key: key,
+                user: user_str,
+                model: interactuable.class.singular.downcase,
+                comment: text,
+            }
         end
-
-        # def father_link
-        #     return Rails.application.routes.url_helpers.comment_path(comment_father.id) if comment_father
-        #     return Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id)
-        # end
 
         def all_users
             users = [ interactuable.user ]

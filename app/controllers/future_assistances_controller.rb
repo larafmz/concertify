@@ -4,7 +4,7 @@ class FutureAssistancesController < ApplicationController
 
 def new
     if params[:ticketmaster_id]
-        @event = Event.find_by(ticketmaster_id: params[:ticketmaster_id]) if 
+        @event = Event.find_by(ticketmaster_id: params[:ticketmaster_id])
         @event_api = TicketmasterService.event_by_id(params[:ticketmaster_id]) if @event.nil?
     else
         @event = Event.find(params[:event_id])
@@ -16,7 +16,7 @@ end
 def create
     @future_assistance = FutureAssistance.new(create_params)
 
-    unless params[:ticketmaster_id].empty?
+    unless params[:ticketmaster_id].blank?
         @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id])
         @future_assistance.event_id = @event.id
     end
@@ -36,7 +36,7 @@ def update
     @future_assistance = FutureAssistance.find(params[:id])
     @event = Event.find(@future_assistance.event_id)
 
-    if @future_assistance.update!(create_params)
+    if @future_assistance.update(create_params)
         redirect_back fallback_location: root_path
     else
         redirect_back fallback_location: root_path

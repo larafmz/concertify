@@ -1,5 +1,7 @@
 class InteractuablesController < ApplicationController
     
+    include ApplicationHelper
+    
     load_and_authorize_resource
 
     before_action :set_interactuable, only: [:show, :comments, :reposts]
@@ -17,7 +19,7 @@ class InteractuablesController < ApplicationController
     end
         
     def destroy
-        interactuable.destroy
+        @interactuable.destroy
         redirect_to registers_user_path(current_user)
     end
 

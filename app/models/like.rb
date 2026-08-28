@@ -13,6 +13,8 @@ class Like < ApplicationRecord
     ## SCOPES
 
         scope :for_event, ->(event_id) { joins(:interactuable).where(interactuables: { event_id: event_id }).where(interactuables: { type: "Register" }) }
+        scope :for_interactuable_user, -> (user_id) { joins(:interactuable).where(interactuables: { user_id: user_id }) }
+        scope :for_user, -> (user_id) { where(user_id: user_id)}
 
     ## CALLBACKS
 
@@ -33,6 +35,7 @@ class Like < ApplicationRecord
         end
 
         def remove_notification
+            puts "ARRIBA remove_notification"
             Notification.for_user(interactuable.user_id).for_record(self).destroy_all
         end
 
@@ -40,7 +43,7 @@ class Like < ApplicationRecord
 
         def cant_like_own
             if user.id == interactuable.user.id
-                errors.add(:photos, t("messages.cant_like_own"))
+                errors.add(:base, t("messages.cant_like_own"))
             end
         end
 
@@ -49,8 +52,12 @@ class Like < ApplicationRecord
     public
         
         def notification_message
-            str = "<strong> #{user.username} </strong>"
-            str + I18n.t("notifications.new_like", model: interactuable.class.singular.downcase)
+            user_str = "<strong> #{user.username} </strong>"
+            {
+                key: "new_like",
+                user: user_str,
+                model: interactuable.class.singular.downcase,
+            }
         end
  
 end

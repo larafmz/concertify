@@ -8,7 +8,6 @@ class AddFutureAssistance < ActiveRecord::Migration[7.2]
       t.string :from
       t.integer :event_seat
       t.string :event_seat_details
-      t.references :interactuable, foreign_key: true
       t.timestamps
     end
     

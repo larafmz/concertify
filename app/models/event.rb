@@ -1,6 +1,8 @@
-include TicketmasterEventHelper
-
 class Event < ApplicationRecord
+
+  ##CONFIGURATIONS
+
+    include TicketmasterEventHelper
 
   ## RELATIONSHIPS
     has_many :artists_events, dependent: :destroy
@@ -77,7 +79,7 @@ class Event < ApplicationRecord
       events_db = events_db.by_country_code(params[:country]) if params[:country].present?
 
       first_date = params[:first_date]
-      second_date = params[:second_date], params[:country]
+      second_date = params[:second_date]
 
       if first_date || second_date
         first_date = Date.parse(first_date) if first_date.present?

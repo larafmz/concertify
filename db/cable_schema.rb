@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_28_112828) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,9 +47,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "genre_id"
-    t.integer "request_id"
     t.index ["genre_id"], name: "index_artists_on_genre_id"
-    t.index ["request_id"], name: "index_artists_on_request_id"
     t.index ["requester_id"], name: "index_artists_on_requester_id"
   end
 
@@ -68,11 +66,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
     t.integer "chat_id"
     t.integer "user_id"
     t.integer "chat_type"
-    t.integer "message_father_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_id"], name: "index_chat_entries_on_chat_id"
-    t.index ["message_father_id"], name: "index_chat_entries_on_message_father_id"
     t.index ["user_id"], name: "index_chat_entries_on_user_id"
   end
 
@@ -142,11 +138,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
     t.string "from"
     t.integer "event_seat"
     t.string "event_seat_details"
-    t.integer "interactuable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_future_assistances_on_event_id"
-    t.index ["interactuable_id"], name: "index_future_assistances_on_interactuable_id"
     t.index ["user_id"], name: "index_future_assistances_on_user_id"
   end
 
@@ -294,7 +288,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
   add_foreign_key "artists", "users", column: "requester_id"
   add_foreign_key "artists_events", "artists"
   add_foreign_key "artists_events", "events"
-  add_foreign_key "chat_entries", "chat_entries", column: "message_father_id"
   add_foreign_key "chat_users", "chats"
   add_foreign_key "chat_users", "users"
   add_foreign_key "comments", "comments", column: "comment_father_id"
@@ -303,7 +296,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_08_25_110643) do
   add_foreign_key "favorite_artists", "artists"
   add_foreign_key "favorite_artists", "users"
   add_foreign_key "future_assistances", "events"
-  add_foreign_key "future_assistances", "interactuables"
   add_foreign_key "future_assistances", "users"
   add_foreign_key "interactuables", "users"
   add_foreign_key "likes", "interactuables"

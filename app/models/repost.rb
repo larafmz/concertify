@@ -10,19 +10,23 @@ class Repost < ApplicationRecord
         validates :user_id, uniqueness: { scope: :interactuable_id }
         validate :cant_repost_own
 
-    ## VALIDATION METHODS
+    ## SCOPES
 
-        def cant_repost_own
-            if user.id == interactuable.user.id
-                errors.add(:photos, t("messages.cant_repost_own"))
-            end
-        end
-
+        scope :for_interactuable_user, -> (user_id) { joins(:interactuable).where(interactuables: { user_id: user_id }) }
+        scope :for_user, -> (user_id) { where(user_id: user_id)}
 
     ## CALLBACKS
 
         after_create_commit :create_notification
-        after_destroy :remove_notification
+        after_destroy_commit :remove_notification
+
+    ## VALIDATION METHODS
+
+        def cant_repost_own
+            if user.id == interactuable.user.id
+                errors.add(:base, t("messages.cant_repost_own"))
+            end
+        end    
 
     ## CALLBACK METHODS
 
@@ -46,8 +50,12 @@ class Repost < ApplicationRecord
     public
                     
         def notification_message
-            str = "<strong> #{user.username} </strong>"
-            str + I18n.t("notifications.new_repost", model: interactuable.class.singular.downcase)
+            user_str = "<strong> #{user.username} </strong>"
+            {
+                key: "new_repost",
+                user: user_str,
+                model: interactuable.class.singular.downcase,
+            }
         end
 
 end

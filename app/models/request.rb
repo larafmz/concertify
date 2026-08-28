@@ -1,10 +1,10 @@
-include TicketmasterEventHelper
-
 class Request < ApplicationRecord
 
   ##CONFIGURATIONS
 
-  kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
+    include TicketmasterEventHelper
+
+    kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
   ## RELATIONSHIPS
     belongs_to :requester, class_name: "User", optional: true
@@ -25,7 +25,7 @@ class Request < ApplicationRecord
       after_create :create_notification_for_admins
       after_update :create_notification, if: :saved_change_to_status?
       after_update :change_to_accepted, if: :saved_change_to_status?
-      after_destroy :remove_notification
+      after_destroy_commit :remove_notification
 
   ## CALLBACK METHODS
 

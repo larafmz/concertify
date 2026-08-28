@@ -25,11 +25,11 @@ class RequestsController < ApplicationController
             @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
         end
         #Create artist with status pending
-        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1) unless @artist
+        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1, requester_id: params[:request][:requester_id]) unless @artist
         
         @event.artists << @artist
 
-        if @request.save!
+        if @request.save
             redirect_to requests_user_path(current_user)
         else
             redirect_back fallback_location: root_path

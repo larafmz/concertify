@@ -8,7 +8,7 @@
         = form_tag artists_path, method: "GET" do
             = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_artist")}", class: "field-custom"
         
-    - if @artists.empty? && @artists_api.empty?
+    - if @artists_db.empty? && @artists_api.empty?
         = render "common/empty_list_message", model: Artist
     -else 
 

@@ -30,9 +30,7 @@
                 .separator
                 - if  @favorite_artists.empty?
                     %div{style: "padding-top:15px;"}
-                        .message
-                            ℹ️
-                            = t("not_found_model", model: Artist.plural.downcase )
+                        = render "common/empty_list_message", model: Artist
                 .four-columns{style: "margin-top: 10px;"}
                     = render "artists/index_cards", artists: @favorite_artists.first(4)
 

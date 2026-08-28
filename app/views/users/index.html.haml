@@ -9,8 +9,6 @@
             = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_user")}", class: "field-custom"
         
     - if @users.empty?
-        .message
-            ℹ️
-            = t("not_found_model", model: User.plural.downcase )
+        = render "common/empty_list_message", model: User
     -else 
         = render "users/index", users: @users

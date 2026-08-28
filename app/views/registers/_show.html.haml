@@ -45,7 +45,7 @@
                         .link_icon
                             = image_tag  register_liked.user.icon if register_liked.user.icon.attached?
 
-    - if current_user && current_user&.id == register.user_id # TO/DO continuar aqui!
+    - if can?(:edit, register)
         .dropdown
             %button.btn.btn-secondary.dropdown-toggle{
                 type: "button",

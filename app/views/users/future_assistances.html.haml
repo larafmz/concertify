@@ -2,9 +2,7 @@
 
 .widget-content{style: "padding-top:0px;"}
     - if @future_assistances.empty?
-        .message
-            ℹ️
-            = t("not_found_model", model: FutureAssistance.plural.downcase )
+        = render "common/empty_list_message", model: FutureAssistance
     - else
         - @future_assistances.each do |future_assistance|
 

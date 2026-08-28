@@ -80,7 +80,7 @@ class Ability
     else
         # can read ALL users
         can :read, User
-        can [:followers, :following, :registers, :diary, :future_assistances, :publications, :artists], User
+        can [:followers, :followings, :registers, :diary, :future_assistances, :publications, :artists], User
     end
 
   end

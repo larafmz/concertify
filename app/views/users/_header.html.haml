@@ -9,11 +9,9 @@
                     = @user.username
                     - if @user.follows_user?(current_user)   
                         %span{class: "softest-color", style: "margin-left:5px; font-size:13px;"}= t("follows_you")
-                - if current_user&.id == @user.id
+                - if can?(:edit, @user)
                     = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user), class: "small-btn-custom"
-                - if @user.ubication
-                    .soft-color{style: "font-size: 15px;" } 
-                        📍 #{@user.ubication.complete_name}
+                .soft-color{style: "font-size: 15px;" }= "📍 #{@user.ubication.complete_name}" if @user.ubication
               
         .flex
             .stat
@@ -45,20 +43,20 @@
 
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
-        - if current_user && current_user&.id!=@user.id
+        - if can?(:follow, @user) #follow para englobar todo
             .soft-color{ style: "margin-left: auto; background: #1f252b;"}
                 - if current_user.blocked_user?(@user.id)
                     .red-message
                         =User.singular.upcase
                         =t("blocked").upcase
                 - else
-                    - if current_user.follows_user?(@user)
+                    - if can?(:unfollow, @user) && current_user.follows_user?(@user)
                         = link_to t("following"), unfollow_user_path(@user), class: "btn-standard", data: { turbo_method: :delete }
-                    - else
+                    - elsif can?(:follow, @user)
                         = link_to t("verbs.follow"), follow_user_path(@user), class: "btn-standard-orange", data: { turbo_method: :post }
                     = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-standard-orange"
                      
-            - if @user.user?
+            - if can?(:block, @user) || @user.follows_user?(current_user)
                 .dropdown
                     .dropdown-toggle{
                         "data-bs-toggle" => "dropdown",
@@ -67,9 +65,9 @@
                         ⁝
                     %ul.dropdown-menu
                         %li
-                            - if current_user.blocked_user?(@user.id)
+                            - if can?(:unblock, @user) && current_user.blocked_user?(@user.id)
                                 = link_to t("verbs.unblock"), unblock_user_path(@user), class: "dropdown-item", data: { turbo_method: :delete }
-                            - else
+                            - elsif can?(:block, @user)
                                 = link_to t("verbs.block"), block_user_path(@user), class: "dropdown-item", data: { turbo_method: :post }
                         - if @user.follows_user?(current_user)
                             %li

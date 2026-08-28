@@ -2,9 +2,7 @@
     .registers-items
 
         - if requests.empty?
-            .message
-                ℹ️
-                = t("not_found_model", model: Request.plural.downcase)
+            = render "common/empty_list_message", model: Request
 
         - requests.each do |request| 
             - event = request.event

@@ -3,7 +3,7 @@ class ArtistsController < ApplicationController
 
   load_and_authorize_resource except: [:show]
 
-  before_action :set_artist, except: [:index, :requests, :show]
+  before_action :get_attributes, except: [:index, :requests]
 
   def index
     @artists_api = Array(TicketmasterService.artists_by(params))
@@ -21,6 +21,7 @@ class ArtistsController < ApplicationController
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = @artist.search_events_by(params[:first_date], params[:second_date], params[:country], events_api)
       @events = TicketmasterService.merge_events(events_db, events_api)
+      get_attributes
     else
       flash[:alert] = t("not_found_masc", model: Artist.singular.downcase)
       redirect_back fallback_location: root_path
@@ -77,16 +78,17 @@ class ArtistsController < ApplicationController
 
 private
 
-  def set_artist
-    @artist = Artist.accepted.find_by(id: params[:id])
-    unless @artist
-      flash[:alert] = t("not_found_masc", model: Artist.singular.downcase)
-      redirect_back fallback_location: root_path
-      return
+  def get_attributes
+    puts "ENTRA"
+    if @artist
+      @publications = @artist.publications.viewables(current_user).order("created_at DESC")
+      @registers = @artist.registers.viewables(current_user).order("created_at DESC")
+      @followers = @artist.followers.viewables(current_user)
+      @followers_count = @followers.count 
+      @average_rating = @artist.average_rating 
+      @publications_count = @artist.publications.count 
+      @can_mark_favorite = current_user.can_mark_favorite?
     end
-    @publications = @artist.publications.viewables(current_user).order("created_at DESC")
-    @registers = @artist.registers.viewables(current_user).order("created_at DESC")
-    @followers = @artist.followers.viewables(current_user)
   end
 
   def create_params

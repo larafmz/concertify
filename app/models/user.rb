@@ -111,14 +111,6 @@ class User < ApplicationRecord
       Repost.find_by(interactuable_id: interactuable_id, user_id: self.id).present?
     end
 
-    def has_unread_chats?
-      self.chat_users.unread.size > 0
-    end
-
-    def has_unread_notifications?
-      self.notifications.unread.size > 0
-    end
-
     def viewable_chats
       chats.group_chat?
     end

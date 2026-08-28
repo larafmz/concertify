@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   include ApplicationHelper
 
-  authorize_resource
+  load_and_authorize_resource except: [:show]
 
-  before_action :set_artist, except: [:show, :new, :create, :requests, :index]
+  before_action :get_attributes, except: [:new, :create, :requests, :index]
 
   def index
     events_api = TicketmasterService.events_by(query: params[:search], artist_id: params[:ticketmaster_id], first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) 
@@ -22,6 +22,7 @@ class EventsController < ApplicationController
 
     if @event
       @artists = @event.artists
+      get_attributes
     else
       redirect_back fallback_location: root_path
     end
@@ -44,16 +45,16 @@ class EventsController < ApplicationController
 
   private
 
-  def set_artist
-    @event = Event.find_by(id: params[:id])    
-    unless @event
-      flash[:alert] = t("not_found_masc", model: Event.singular.downcase)
-      redirect_back fallback_location: root_path
-      return
+  def get_attributes  
+    if @event
+      @future_assistances = @event.future_assistances.viewables(current_user).order("created_at DESC")
+      @registers = @event.registers.viewables(current_user).order("created_at DESC")
+      @publications = @event.publications.viewables(current_user).order("created_at DESC")
+      @future_assistances_count = @event.future_assistances.count
+      @average_rating = @event.average_rating
+      @event_registers_count = @event.registers.viewables(current_user).size
+      @event_publications_count = @event.publications.viewables(current_user).size
     end
-    @future_assistances = @event.future_assistances.viewables(current_user).order("created_at DESC")
-    @registers = @event.registers.viewables(current_user).order("created_at DESC")
-    @publications = @event.publications.viewables(current_user).order("created_at DESC")
   end
 
 

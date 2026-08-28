@@ -2,6 +2,7 @@
 %div{id: "messages_header", style: "display:flex; flex-direction:column; align-items:center;"}
     .link_icon{ class: ("active" if controller_name == "chats") }
         💬
-    - if current_user.has_unread_chats?
+    - unread_chats = current_user.chat_users.unread.size
+    - if unread_chats > 0
         %div{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
-            = current_user.chat_users.unread.size 
+            = unread_chats

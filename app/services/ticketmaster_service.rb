@@ -3,6 +3,9 @@ require "uri"
 require "json"
 
 class TicketmasterService
+
+    extend TicketmasterEventHelper
+
     API_KEY = Rails.application.credentials.ticketmaster[:api_key]
 
     def self.call_api(url) 

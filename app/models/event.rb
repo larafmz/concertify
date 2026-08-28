@@ -2,7 +2,7 @@ class Event < ApplicationRecord
 
   ##CONFIGURATIONS
 
-    include TicketmasterEventHelper
+    extend TicketmasterEventHelper
 
   ## RELATIONSHIPS
     has_many :artists_events, dependent: :destroy

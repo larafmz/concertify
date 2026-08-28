@@ -20,6 +20,7 @@ class ArtistsController < ApplicationController
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = Event.search_by(params, events_api, artist: @artist)
       @events = TicketmasterService.merge_events(events_db, events_api)
+      @events = Kaminari.paginate_array(@events).page(params[:page]).per(10)
       get_attributes
     else
       flash[:alert] = t("not_found_masc", model: Artist.singular.downcase)
@@ -85,7 +86,7 @@ private
       @followers_count = @followers.count 
       @average_rating = @artist.average_rating 
       @publications_count = @artist.publications.count 
-      @can_mark_favorite = current_user.can_mark_favorite?
+      @can_mark_favorite = current_user&.can_mark_favorite?
     end
   end
 

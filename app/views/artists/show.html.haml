@@ -9,7 +9,7 @@
         .separator{style: "margin-bottom: 15px; "}
         = render "events/filters", search_by_name: false
         .separator{style: "margin-bottom: 15px; "}
-        = render "events/index", events: @events[0,10], photo: false
+        = render "events/index", events: @events, photo: false
 
     - if can?(:create, Request)
         = render "events/manual_add"

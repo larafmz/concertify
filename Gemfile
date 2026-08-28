@@ -81,3 +81,6 @@ gem "jquery-rails"
 
 # nested fields in forms
 gem "cocoon"
+
+# pagination
+gem "kaminari"

@@ -5,6 +5,7 @@
  *= require events
  *= require modal
  *= require registers
+ *= require pagination
  */
 
  @import "bootstrap";

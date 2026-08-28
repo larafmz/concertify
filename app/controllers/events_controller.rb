@@ -10,6 +10,8 @@ class EventsController < ApplicationController
     # el tamaño de la consulta afecta a los resultados, x eso aqui sale alguno diferentes que en home
     events_db = Event.search_by(params, events_api)
     @events = TicketmasterService.merge_events(events_db, events_api)
+    @events = Kaminari.paginate_array(@events).page(params[:page]).per(10)
+    
   end
 
   def show

@@ -8,10 +8,10 @@
             - if params[:country].present?
                 =t("in").downcase
                 =t(Country.find_by(code:params[:country]).name)
-            - if @events.size >= 100
+            - if @events.total_count >= 100
                 + 100 #{t("results").downcase}
             - else 
-                • #{@events.size} #{t("results").downcase}
+                • #{@events.total_count} #{t("results").downcase}
 
     %div
         - if params[:first_date].present? && params[:second_date].present? && params[:first_date]==params[:second_date]

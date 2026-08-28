@@ -28,7 +28,7 @@ class Event < ApplicationRecord
     scope :by_date, -> (date) { where(date: date) }
 
     scope :requests, -> { where.not(request: nil) }
-    scope :accepted, -> { left_joins(:request).merge(Request.accepted).or(where(requests: { id: nil })) }
+    scope :accepted, -> { left_joins(:request).merge(Request.accepted).or(where(requests: { id: nil }).where.not(ticketmaster_id: nil)) }
     scope :pending, -> { joins(:request).merge(Request.pending) }
 
   ## VALIDATIONS
@@ -85,8 +85,8 @@ class Event < ApplicationRecord
       second_date = params[:second_date]
 
       if first_date || second_date
-        first_date = Date.parse(first_date) if first_date.present?
-        second_date = Date.parse(second_date) if second_date.present?
+        first_date =  Date.parse(first_date) if first_date.present? && !first_date.is_a?(Date)
+        second_date = Date.parse(second_date) if second_date.present? && !second_date.is_a?(Date)
         #first_date ||= Date.today-365.days
         events_db = events_db.where("date >= ?", first_date) if first_date.present?
         events_db = events_db.where("date <= ?", second_date) if second_date.present?

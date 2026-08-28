@@ -28,7 +28,7 @@
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}
     .items
-      = render "artists/index_cards", artists: @artists_db.first(10)
+      = render "artists/index_cards", artists: @artists
 
 
   %div{style: "margin-top: 20px;"}

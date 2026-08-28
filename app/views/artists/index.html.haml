@@ -19,29 +19,32 @@
                     %br  
                     = link_to t("verbs.remove_filters"), artists_path, class: "btn-custom artist-color"
         
-    - if @artists_db.empty? && @artists_api.empty?
+    - if @artists.empty?
         = render "common/empty_list_message", model: Artist
     -else 
 
         .artists-index{style: "color:#e9e9e9; "}
-            - @artists_db[0..50].each do |artist|
-                %div
-                    %div{ style: "height:10px;"}    
+            - @artists.each do |item|
+                - artist = item[:artist]
 
-                    = link_to artist_path(artist), class: "hover-border-icon" do
-                        .link_icon{style: "width: 120px; height: 120px;"}
-                            = image_tag  artist.photo if artist.photo.attached?
-                    
-                    .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
-                        = link_to artist_path(artist) do
-                            = artist.name
-            - @artists_api[0...(49 - @artists_db.size)].each do |artist|
                 %div
                     %div{ style: "height:10px;"}    
-                    = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border-icon" do
-                        .link_icon{style: "width: 120px; height: 120px;"}
-                            = image_tag  best_quality_image(artist.dig("images")).dig("url")
+                    - if item[:source] == :db
+                        = link_to artist_path(artist), class: "hover-border-icon" do
+                            .link_icon{style: "width: 120px; height: 120px;"}
+                                = image_tag  artist.photo if artist.photo.attached?
+                    - else
+                        = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border-icon" do
+                            .link_icon{style: "width: 120px; height: 120px;"}
+                                = image_tag  best_quality_image(artist.dig("images")).dig("url")
+
                     .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
-                        = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do
-                            = artist.dig("name")                          
+                        - if item[:source] == :db
+                            = link_to artist_path(artist) do
+                                = artist.name
+                        - else
+                            = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do
+                                = artist.dig("name")      
+
+        = paginate @artists                    
 

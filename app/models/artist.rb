@@ -3,6 +3,7 @@ class Artist < ApplicationRecord
   ##CONFIGURATIONS
 
     extend ApplicationHelper
+    require "open-uri" #used to open a photo from a url (save the one from ticketmaster url)
 
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 

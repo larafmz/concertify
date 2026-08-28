@@ -6,8 +6,10 @@ class ArtistsController < ApplicationController
   before_action :get_attributes, except: [:index, :requests]
 
   def index
-    @artists_api = Array(TicketmasterService.artists_by(params))
-    @artists_db = Artist.search_by(params, @artists_api).most_followed
+    artists_api = Array(TicketmasterService.artists_by(params))
+    artists_db = Artist.search_by(params, artists_api).most_followed
+    artists = TicketmasterService.merge_artists(artists_db, artists_api)
+    @artists = Kaminari.paginate_array(artists).page(params[:page]).per(48)
   end
 
   def show

@@ -1,37 +1,43 @@
-%div{ style: "padding: 0px 70px 10px 0px; background: #1f252b;"}
-    .artist-content
-        .artist-info
-            = image_tag @artist.photo, style: "width: 300px;" if @artist.photo.attached?
-
-            .artist-name
+%div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{url_for(@artist.photo)}'); background-size: cover; background-position: center 30%;" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%)" }
+    .artist-content{ style: "position: relative; z-index: 1;" }
+        .artist-info{style:"margin:40px;"}
+            .artist-name{style:"padding: 10px;"}
                 .adapted-bubble.artist-color
                     ="##{Artist.singular.upcase}"
                 = @artist.name
                 - if @artist.genre && @artist.genre.name != "Undefined"
-                    .softest-color{ style: "font-size: 15px" }
+                    %div{ style: "font-size: 15px" }
                         = @artist.genre.name
 
         .flex{ style: "padding-top: 30px;"}
             .stat
                 .number
-                    =  @artist.followers.viewables(current_user).count
-                .name
+                    =  @followers_count
+                .name{style: "color: white"}
                     = link_to followers_artist_path(@artist) do   
                         = t("followers")
             
             .stat
                 .number
-                    ★ #{@artist.average_rating} / 5
-                .name
+                    ★ #{@average_rating} / 5
+                .name{style: "color: white"}
                     = t("average", model: Register.plural)
+            
+            .stat
+                .number
+                    = @publications_count
+                .name{style: "color: white"}
+                    = link_to publications_artist_path(@artist) do   
+                        = Publication.plural.upcase             
                     
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
-        %span{ style: "display: flex; margin-left: auto; background: #1f252b; gap:10px;" }
+        %span{ style: "display: flex; margin-left: auto; gap:10px; position: relative; z-index: 2;" }
             = render "artists/follow_buttoms", artist: @artist
             - if can?(:unmark_as_favorite, @artist) && current_user.favorite_artist?(@artist)
                 = link_to "#{t("is_favorite")}", unmark_as_favorite_artist_path(@artist), class: "btn-standard", style: "background: #da4778;", data: { turbo_method: :delete }
-            - elsif can?(:mark_as_favorite, @artist) && current_user.can_mark_favorite?
+            - elsif can?(:mark_as_favorite, @artist) && @can_mark_favorite
                 = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard artist-color", method: :post, form: { data: { turbo: false } } do
                     ♡ #{t("verbs.mark_as_favorite")}
             - else

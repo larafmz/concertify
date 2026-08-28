@@ -1,15 +1,14 @@
-%div{ style: "padding: 0px 70px 10px 0px; background: #1f252b;"}
-    .artist-content
-        .artist-info
-            = image_tag  @event.get_photo, style: "width: 300px;" if @event.get_photo&.attached?
-                
+%div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{url_for(@event.get_photo)}'); background-size: cover; background-position: center 30%;" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%)" }
+    .artist-content{ style: "position: relative; z-index: 1;" }
+        .artist-info{style:"margin:40px;"}
             .artist-name
                 .adapted-bubble.event-color
                     ="##{Event.singular.upcase}"
                 %div= @event.tour_name
-                .soft-color{ style: "font-size: 15px; margin-bottom:5px" }
+                %div{ style: "font-size: 15px; margin-bottom:5px" }
                     %div= "📍#{@event.ubication&.complete_name} "
-                .soft-color{ style: "font-size: 15px;" }
+                %div{ style: "font-size: 15px;" }
                     %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
                     
         .flex{ style: "padding-top: 30px;"}
@@ -17,27 +16,27 @@
             - if event_date_status == "past"
                 .stat
                     .number 
-                        = @event.registers.viewables(current_user).size
-                    .name
+                        = @event_registers_count
+                    .name{style: "color: white"}
                         = link_to registers_event_path(@event) do
                             = t("totals", model: Register.plural)
                 .stat
                     .number
-                        ★ #{@event.average_rating} / 5
-                    .name
+                        ★ #{@average_rating} / 5
+                    .name{style: "color: white"}
                         = t("average", model: Register.plural)
             - else
                 .stat
                     .number
-                        = @event.future_assistances.viewables(current_user).size
-                    .name
+                        = @future_assistances_count
+                    .name{style: "color: white"}
                         = link_to future_assistances_event_path(@event) do
                             = t("totals", model: FutureAssistance.plural)
 
             .stat
                 .number
-                    = @event.publications.viewables(current_user).size
-                .name
+                    = @event_publications_count
+                .name{style: "color: white"}
                     = link_to publications_event_path(@event) do
                         =Publication.plural
 

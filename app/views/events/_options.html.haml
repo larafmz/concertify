@@ -1,5 +1,6 @@
+.separator
 - event_date_status = time_status(@event.date, @event.start_time)
-.widget-content{style: "color: #a4b3c4; background: #1f252b; display: flex; justify-content: left; gap: 60px; padding: 0px 0px 0px 90px;"}
+.widget-content{style: "color: #a4b3c4; display: flex; justify-content: left; gap: 60px; padding: 0px 0px 0px 90px;"}
     = link_to Artist.plural, event_path(@event), style: ("color: white; border-bottom: 2px solid #{artist_color};" if active == :artists)
     - if event_date_status == "past"
         = link_to "#{@event.registers.count} #{Register.plural}", registers_event_path(@event), style: ("color: white; border-bottom: 2px solid #{event_color};" if active == :registers)

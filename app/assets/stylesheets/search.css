@@ -6,7 +6,7 @@
   overflow-x: auto;
 }
 
-.item-name-artist, .item-name-event {
+.item-name {
    display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -15,19 +15,9 @@
   width: 200px;
   font-size: 13px;
   text-align: center;
-  color: white;
-  background: #8926b8; 
+  color: white; 
   border: 2px solid #40556d;
   overflow-wrap: anywhere;
-}
-
-.item-name-artist {
-  background: #8926b8; 
-
-}
-
-.item-name-event {
-  background: #8926b8; 
 }
 
 .filters-search {

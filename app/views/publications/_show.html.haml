@@ -10,12 +10,12 @@
                 = publication.user.username
             - if publication.artist
                 %span{class: "soft-color"}=t("about")
-                %span{style: "color: #65dbff"}
+                %span{style: "color: #{artist_color}"}
                     = link_to artist_path(publication.artist) do 
                         = publication.artist.name
             - if publication.event
                 %span{class: "soft-color"}=t("about")
-                %span{style: "color: #65dbff"}
+                %span{style: "color: #{event_color}"}
                     = link_to event_path(publication.event) do 
                         = publication.event.tour_name                            
             •

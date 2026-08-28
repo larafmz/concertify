@@ -50,7 +50,7 @@
                                 = link_to "✎", edit_request_path(request), data: { turbo_frame: "modal" }
                                 = link_to "✗", request_path(request), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }
                         - if request.accepted? ||  (request.status == 2 && request.existing_event_id.present?)
-                            = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom-orange", style: "background-color: #069e34;font-size: 13px; width: 150px;"
+                            = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom event-color", style: "background-color: #069e34;font-size: 13px; width: 150px;"
                    
                 .sent_at
                     = t("sent_ago_by", user: request.requester&.username , time: time_ago_in_words(request.created_at))

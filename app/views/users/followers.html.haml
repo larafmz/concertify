@@ -6,7 +6,7 @@
         = link_to followings_user_path(@user), title: "#{@followings.count} #{User.plural}" do
             =t("following").upcase
             (#{@user.followings.users.count})
-        = link_to followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #eb5d25;"), title: "#{@followers.count} #{User.plural}" do
+        = link_to followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};"), title: "#{@followers.count} #{User.plural}" do
             =t("followers").upcase
             (#{@user.followers.count})
         - if can?(:blocked, @user)

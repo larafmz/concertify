@@ -2,5 +2,5 @@
     = button_to unfollow_artist_path(artist), class: "btn-standard", method: :delete, form: { data: { turbo: false } } do
         = t("following")
 - elsif can?(:follow, artist)
-    = button_to follow_artist_path(artist), method: :post, form: { data: { turbo: false } }, class: "btn-standard-orange" do                  
+    = button_to follow_artist_path(artist), method: :post, form: { data: { turbo: false } }, class: "btn-standard artist-color" do                  
         = t("verbs.follow")

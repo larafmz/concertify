@@ -53,8 +53,8 @@
                     - if can?(:unfollow, @user) && current_user.follows_user?(@user)
                         = link_to t("following"), unfollow_user_path(@user), class: "btn-standard", data: { turbo_method: :delete }
                     - elsif can?(:follow, @user)
-                        = link_to t("verbs.follow"), follow_user_path(@user), class: "btn-standard-orange", data: { turbo_method: :post }
-                    = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-standard-orange"
+                        = link_to t("verbs.follow"), follow_user_path(@user), class: "btn-standard orange-color", data: { turbo_method: :post }
+                    = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-standard orange-color"
                      
             - if can?(:block, @user) || @user.follows_user?(current_user)
                 .dropdown

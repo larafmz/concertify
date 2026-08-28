@@ -4,7 +4,7 @@
             = image_tag @artist.photo, style: "width: 300px;" if @artist.photo.attached?
 
             .artist-name
-                .adapted-bubble
+                .adapted-bubble.artist-color
                     ="##{Artist.singular.upcase}"
                 = @artist.name
                 - if @artist.genre && @artist.genre.name != "Undefined"
@@ -32,11 +32,11 @@
             - if can?(:unmark_as_favorite, @artist) && current_user.favorite_artist?(@artist)
                 = link_to "#{t("is_favorite")}", unmark_as_favorite_artist_path(@artist), class: "btn-standard", style: "background: #da4778;", data: { turbo_method: :delete }
             - elsif can?(:mark_as_favorite, @artist) && current_user.can_mark_favorite?
-                = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard-orange", method: :post, form: { data: { turbo: false } } do
+                = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard artist-color", method: :post, form: { data: { turbo: false } } do
                     ♡ #{t("verbs.mark_as_favorite")}
             - else
-                = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard-orange", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
+                = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard artist-color", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
                     ♡ #{t("verbs.mark_as_favorite")}
         - if current_user&.admin? && @artist.manually_added
-            = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard-orange"
+            = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard artist-color"
                        

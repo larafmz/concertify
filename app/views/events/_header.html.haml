@@ -4,7 +4,7 @@
             = image_tag  @event.get_photo, style: "width: 300px;" if @event.get_photo&.attached?
                 
             .artist-name
-                .adapted-bubble
+                .adapted-bubble.event-color
                     ="##{Event.singular.upcase}"
                 %div= @event.tour_name
                 .soft-color{ style: "font-size: 15px; margin-bottom:5px" }

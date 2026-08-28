@@ -5,4 +5,4 @@
             .soft-color
                 %h5= t("messages.manual_adition") 
         %span{ style: "margin-left: auto" }
-            = link_to "+ #{t("crud.add", model: Event.singular)}", new_request_path(artist_id: @artist&.id), class: "btn-custom-orange", data: { turbo_frame: "modal" }, style: "height: auto"
+            = link_to "+ #{t("crud.add", model: Event.singular)}", new_request_path(artist_id: @artist&.id), class: "btn-custom event-color", data: { turbo_frame: "modal" }, style: "height: auto"

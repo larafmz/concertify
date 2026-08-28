@@ -16,7 +16,7 @@
           type: "button",
           "data-bs-toggle" => "dropdown",
           "aria-expanded" => "false",
-          style: "background: #eb5d25" 
+          style: "background: #{orange_color}" 
         }
           =t("crud.show", model: "")
 
@@ -31,7 +31,7 @@
             = link_to Artist.plural, artists_path, class: "dropdown-item"
 
       - if can?(:create, Publication)
-        = link_to "+ #{t("verbs.post")}", new_publication_path, class: "btn-custom-orange", data: { turbo_frame: "modal" }
+        = link_to "+ #{t("verbs.post")}", new_publication_path, class: "btn-custom orange-color", data: { turbo_frame: "modal" }
 
       - if can?(:read, Request)
         .dropdown
@@ -39,7 +39,7 @@
             type: "button",
             "data-bs-toggle" => "dropdown",
             "aria-expanded" => "false",
-            style: "background: #eb5d25" 
+            style: "background: #{orange_color}" 
           }
             =t("admin")
 

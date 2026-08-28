@@ -4,14 +4,13 @@
 .button-event{style: "display: flex; gap: 10px;"}
     - if event_date_status == "past" && can?(:create, Register)
         - unless register
-            = link_to t("registers.assisted"), new_register_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+            = link_to t("registers.assisted"), new_register_path(event_id: event["id"]), class: "btn-custom event-color", data: { turbo_frame: "modal" }
         - else
             = link_to t("my_model", model: Register.singular), interactuable_path(register), class: "btn-custom", style: "height: auto;"
     - elsif can?(:create, FutureAssistance)
         - unless future_assistance
-            = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom-orange", data: { turbo_frame: "modal" }
+            = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom event-color", data: { turbo_frame: "modal" }
         - else
             = link_to t("my_model", model: FutureAssistance.singular), future_assistances_user_path(current_user), class: "btn-custom", style: "height: auto;"
-    - if future_assistance || register
-        = link_to t("access_chat"), chat_path(event_id: event.id), class: "btn-standard-orange"
+
 

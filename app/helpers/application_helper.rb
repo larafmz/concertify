@@ -85,4 +85,16 @@ module ApplicationHelper
       end
   end
 
+  def artist_color
+    return "#18A999"
+  end
+
+  def event_color
+    return "#8926b8"
+  end
+
+  def orange_color
+    return "#eb5d25"
+  end
+
 end

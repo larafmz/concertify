@@ -190,9 +190,7 @@ a:hover {
 * BOTÓN
 */
 
-.btn-custom-orange,
 .btn-standard,
-.btn-standard-orange,
 .btn-custom {
   background: #3a485a;
   color: white !important;
@@ -212,16 +210,10 @@ a:hover {
   width: auto;
 }
 
-.btn-custom-orange::after,
 .btn-custom::after {
   content: "›";
   font-size: 18px;
   font-weight: 700;
-}
-
-.btn-custom-orange,
-.btn-standard-orange {
-  background: #eb5d25;
 }
 
 .small-btn-custom {
@@ -274,11 +266,22 @@ a:hover {
 .adapted-bubble {
   display: inline-block;
   width: fit-content;
-  background: #8926b8;
   color: white; 
   border-radius: 15px; 
   font-size:15px; 
   padding: 1px 10px;
+}
+
+.artist-color {
+  background: #18A999;
+}
+
+.event-color {
+  background: #8926b8;
+}
+
+.orange-color {
+  background: #eb5d25;
 }
 
 /*

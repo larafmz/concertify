@@ -50,6 +50,7 @@ class Artist < ApplicationRecord
     def self.create_or_update_by_ticketmaster_id(id)
       artist = Artist.find_or_initialize_by(ticketmaster_id: id)
       if artist.new_record? || artist.updated_at < 5.hours.ago
+        puts "ENTRA!"
         artist_api = TicketmasterService.artist_by_id(id)
         return if artist_api.nil? #there are events with nil artist associated in ticketmaster
         
@@ -63,6 +64,7 @@ class Artist < ApplicationRecord
           end
         end
         artist.save!
+        artist.touch # updates "updated_at" field
       end 
 
       return artist

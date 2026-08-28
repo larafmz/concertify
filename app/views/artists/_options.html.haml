@@ -1,6 +1,6 @@
 .widget-content{style: "color: #a4b3c4; background: #1f252b; display: flex; justify-content: left; gap: 60px; padding: 0px 0px 0px 90px;"}
-    = link_to Event.plural, artist_path(@artist), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :events)
-    = link_to "#{@artist.registers.count} #{Register.plural}", registers_artist_path(@artist), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :registers)
-    = link_to "#{@artist.publications.count} #{Publication.plural}", publications_artist_path(@artist), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :publications)
-    = link_to "#{@artist.followers.count} #{t("followers")}", followers_artist_path(@artist), style: ("color: white; border-bottom: 2px solid #eb5d25;" if active == :followers)
+    = link_to Event.plural, artist_path(@artist), style: ("color: white; border-bottom: 2px solid #{event_color};" if active == :events)
+    = link_to "#{@artist.registers.count} #{Register.plural}", registers_artist_path(@artist), style: ("color: white; border-bottom: 2px solid #{event_color};" if active == :registers)
+    = link_to "#{@artist.publications.count} #{Publication.plural}", publications_artist_path(@artist), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :publications)
+    = link_to "#{@artist.followers.count} #{t("followers")}", followers_artist_path(@artist), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :followers)
 .separator{style: "margin-bottom:20px;"}

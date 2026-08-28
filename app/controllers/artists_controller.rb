@@ -11,7 +11,6 @@ class ArtistsController < ApplicationController
   end
 
   def show
-
     @artist = Artist.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
     @artist = Artist.accepted.find_by(id: params[:artist_id] || params[:id]) unless @artist
 
@@ -19,7 +18,7 @@ class ArtistsController < ApplicationController
       ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id || "unfound_artist"
       events_api = TicketmasterService.events_by(query: nil, artist_id: ticketmaster_id, first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) ||[]
       ticketmaster_ids = events_api.map { |event| event["id"] }
-      events_db = @artist.search_events_by(params[:first_date], params[:second_date], params[:country], events_api)
+      events_db = Event.search_by(params, events_api, artist: @artist)
       @events = TicketmasterService.merge_events(events_db, events_api)
       get_attributes
     else
@@ -79,7 +78,6 @@ class ArtistsController < ApplicationController
 private
 
   def get_attributes
-    puts "ENTRA"
     if @artist
       @publications = @artist.publications.viewables(current_user).order("created_at DESC")
       @registers = @artist.registers.viewables(current_user).order("created_at DESC")

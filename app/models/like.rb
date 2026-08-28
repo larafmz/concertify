@@ -35,7 +35,6 @@ class Like < ApplicationRecord
         end
 
         def remove_notification
-            puts "ARRIBA remove_notification"
             Notification.for_user(interactuable.user_id).for_record(self).destroy_all
         end
 

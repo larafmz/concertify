@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   ##CONFIGURATIONS
 
     extend TicketmasterEventHelper
+    include ApplicationHelper
 
   ## RELATIONSHIPS
     has_many :artists_events, dependent: :destroy
@@ -69,10 +70,11 @@ class Event < ApplicationRecord
       return event
     end
 
-    def self.search_by(params, events_api)
-      return Event.none unless params[:search].present?
+    def self.search_by(params, events_api, artist: nil)
+      #return Event.none unless params[:search].present?
 
       events_db = Event.accepted.by_name(params[:search])
+      events_db = events_db.by_artist(artist.id) if artist
 
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
@@ -85,7 +87,6 @@ class Event < ApplicationRecord
       if first_date || second_date
         first_date = Date.parse(first_date) if first_date.present?
         second_date = Date.parse(second_date) if second_date.present?
-        second_date = first_date unless second_date.present?
         #first_date ||= Date.today-365.days
         events_db = events_db.where("date >= ?", first_date) if first_date.present?
         events_db = events_db.where("date <= ?", second_date) if second_date.present?

@@ -19,5 +19,5 @@
             = submit_tag t("verbs.filter"), class: "btn-custom event-color"
         %div
             %br  
-            = link_to t("verbs.remove_filters"), events_path, class: "btn-custom event-color"
+            = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:first_date, :second_date, :country, :search)), class: "btn-custom event-color"
             

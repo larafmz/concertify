@@ -1,5 +1,5 @@
 %div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{url_for(@artist.photo)}'); background-size: cover; background-position: center 30%;" }
-    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%)" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, #1f252b 100%), linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .artist-info{style:"margin:40px;"}
             .artist-name{style:"padding: 10px;"}
@@ -10,7 +10,8 @@
                     %div{ style: "font-size: 15px" }
                         = @artist.genre.name
 
-        .flex{ style: "padding-top: 30px;"}
+    %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
+        .flex{ style: "width: 50%;"}
             .stat
                 .number
                     =  @followers_count
@@ -31,9 +32,7 @@
                     = link_to publications_artist_path(@artist) do   
                         = Publication.plural.upcase             
                     
-    %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
-
-        %span{ style: "display: flex; margin-left: auto; gap:10px; position: relative; z-index: 2;" }
+        %span{ style: "margin-bottom: 25px; display: flex; margin-left: auto; gap:10px; position: relative; z-index: 2;" }
             = render "artists/follow_buttoms", artist: @artist
             - if can?(:unmark_as_favorite, @artist) && current_user.favorite_artist?(@artist)
                 = link_to "#{t("is_favorite")}", unmark_as_favorite_artist_path(@artist), class: "btn-standard", style: "background: #da4778;", data: { turbo_method: :delete }
@@ -45,4 +44,4 @@
                     ♡ #{t("verbs.mark_as_favorite")}
         - if current_user&.admin? && @artist.manually_added
             = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard artist-color"
-                       
+                    

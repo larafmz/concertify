@@ -24,7 +24,7 @@
     -else 
 
         .artists-index{style: "color:#e9e9e9; "}
-            - @artists_db.each do |artist|
+            - @artists_db[0..50].each do |artist|
                 %div
                     %div{ style: "height:10px;"}    
 
@@ -35,7 +35,7 @@
                     .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
                         = link_to artist_path(artist) do
                             = artist.name
-            - @artists_api[0..50-#{@artists_db.count}].each do |artist|
+            - @artists_api[0...(49 - @artists_db.size)].each do |artist|
                 %div
                     %div{ style: "height:10px;"}    
                     = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border-icon" do

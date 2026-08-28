@@ -1,17 +1,20 @@
 %div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{url_for(@event.get_photo)}'); background-size: cover; background-position: center 30%;" }
-    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%)" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, #1f252b 100%), linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .artist-info{style:"margin:40px;"}
             .artist-name
                 .adapted-bubble.event-color
                     ="##{Event.singular.upcase}"
+                    - if current_user&.admin? && @event.request
+                        = @event.request.status_string.upcase
                 %div= @event.tour_name
                 %div{ style: "font-size: 15px; margin-bottom:5px" }
                     %div= "📍#{@event.ubication&.complete_name} "
                 %div{ style: "font-size: 15px;" }
                     %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
-                    
-        .flex{ style: "padding-top: 30px;"}
+             
+    %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
+        .flex{ style: " width: 50%;" }
             - event_date_status = time_status(@event.date, @event.start_time)
             - if event_date_status == "past"
                 .stat
@@ -32,7 +35,6 @@
                     .name{style: "color: white"}
                         = link_to future_assistances_event_path(@event) do
                             = t("totals", model: FutureAssistance.plural)
-
             .stat
                 .number
                     = @event_publications_count
@@ -40,7 +42,5 @@
                     = link_to publications_event_path(@event) do
                         =Publication.plural
 
-    
-    %div{style: "display:flex; align-items:center; padding-top: 10px; gap: 20px;"}
-        %span{ style: "margin-left: auto;" }
+        %span{ style: "margin-left: auto; margin-bottom: 25px;" }
             = render "events/assistance_buttoms", event: @event

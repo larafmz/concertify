@@ -1,5 +1,7 @@
 module TicketmasterEventHelper
 
+    include ApplicationHelper
+
     def get_event_name(event)
         event.dig("name")
     end

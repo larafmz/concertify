@@ -2,8 +2,7 @@ class Artist < ApplicationRecord
 
   ##CONFIGURATIONS
 
-    include ApplicationHelper
-    require "open-uri"
+    extend ApplicationHelper
 
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
@@ -96,22 +95,6 @@ class Artist < ApplicationRecord
 
     def average_rating
       registers.average(:rating).to_i || 0
-    end
-
-    def search_events_by(first_date, second_date, country_code, events_api)
-      events_db = self.events.accepted
-      ticketmaster_ids = events_api.map { |event| event["id"] }
-      events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
-      if first_date.present? || second_date.present?
-        first_date = Date.parse(first_date) if first_date.present?
-        second_date = Date.parse(second_date) if second_date.present?
-        second_date = first_date unless second_date.present?
-        first_date ||= Date.today-365.days
-        events_db = events_db.where("date >= ?", first_date) if first_date.present?
-        events_db = events_db.where("date <= ?", second_date) if second_date.present?
-      end
-      events_db = events_db.by_country_code(country_code) if country_code.present?
-      events_db
     end
 
     def follow(user_id)

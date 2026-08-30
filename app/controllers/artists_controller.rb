@@ -55,12 +55,12 @@ class ArtistsController < ApplicationController
   end
 
   def follow
-    @artist.follow(current_user&.id)
+    @artist.follow(current_user)
     redirect_back fallback_location: root_path
   end
 
   def unfollow
-    @artist.unfollow(current_user&.id)
+    @artist.unfollow(current_user)
     redirect_back fallback_location: root_path
   end
 

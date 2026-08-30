@@ -16,8 +16,8 @@ class Relation < ApplicationRecord
 
   ## VALIDATIONS
 
-    validate :cant_follow_blocked_user
-    validate :cant_follow_self
+    validate :cant_follow_blocked_user, if: -> { followed_type == "User" }
+    validate :cant_follow_self, if: -> { followed_type == "User" }
 
   ## CALLBACKS
 

@@ -98,12 +98,12 @@ class Artist < ApplicationRecord
       registers.average(:rating).to_i || 0
     end
 
-    def follow(user_id)
-      Relation.find_or_create_by!(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)
+    def follow(user)
+      Relation.find_or_create_by!(follower_id: user.id, followed_id: self.id, followed_type: "Artist", relation_type: 0)
     end
 
-    def unfollow(user_id)
-      Relation.find_by(follower_id: user_id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
+    def unfollow(user)
+      Relation.find_by(follower_id: user_id.id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
     end
 
     def mark_as_favorite(user)
@@ -120,6 +120,10 @@ class Artist < ApplicationRecord
 
     def manually_added
       ticketmaster_id.nil?
+    end
+
+    def is_favorite?(user)
+      FavoriteArtist.exists?(user_id: user.id, artist_id: id)
     end
 
 end

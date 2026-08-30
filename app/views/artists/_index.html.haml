@@ -1,27 +1,32 @@
-.widget-content{style: "padding-top:0px;"}  
-    - if artists.empty?
-        = render "common/empty_list_message", model: Artist
-        
-    - else
-        %div      
-            .artists-list
-                - artists.each_with_index do |artist, index|
+- if artists.empty?
+    = render "common/empty_list_message", model: Artist
+-else 
+    .artists-index{style: "color:#e9e9e9; "}
+        - artists.each do |item|
+            - artist = item[:source].present? ? item[:artist] : item
 
-                    .register_user{style: "grid-template-columns: 0.1fr 4fr auto; border-radius: 0px;"}
-                        = link_to artist_path(artist), class: "hover-border-icon" do 
-                            .link_icon
-                                = image_tag artist.photo if artist.photo.attached?
+            %div
+                - if !item[:source] || item[:source] == :db
+                    - if artist.is_favorite?(current_user)
+                        %div{ style: "height:10px; font-size: 13px; width: 120px; display: flex;  justify-content: center;"}    
+                            ❤ 
+                    - else
+                        %div{ style: "height:10px;"}    
+  
+                    = link_to artist_path(artist), class: "hover-border-icon" do
+                        .link_icon{style: "width: 120px; height: 120px;"}
+                            = image_tag  artist.photo if artist.photo.attached?
+                                
+                    .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
+                        = link_to artist_path(artist) do
+                            = artist.name                                
+                - else  
+                    = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border-icon" do
+                        .link_icon{style: "width: 120px; height: 120px;"}
+                            = image_tag  best_quality_image(artist.dig("images")).dig("url")
 
-                        %div
-                            = link_to artist_path(artist) do
-                                %span{ style: "font-size: 15px; font-weight: 700;" }= artist.name
-                            .softest-color{style: "font-size: 12px;" }
-                                = link_to followers_artist_path(artist), class: "hover-border-icon" do 
-                                    = artist.relations.count
-                                    = t("followers").downcase
+                    .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
+                        = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do
+                            = artist.dig("name")      
 
-                        .softest-color
-                            = render "artists/follow_buttoms", artist: artist
-                            
-                    
-                        
+    = paginate artists                 

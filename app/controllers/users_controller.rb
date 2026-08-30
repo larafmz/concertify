@@ -45,8 +45,9 @@ class UsersController < ApplicationController
   end
 
   def artists
-    @favorites = @user.favorite_artists.map(&:artist)
-    @artists = @user.followings.artists.map(&:followed).reject { |artist| @favorites.map(&:id).include?(artist.id) }
+    favorites = @user.favorite_artists.map(&:artist)
+    artists = @user.followings.artists.map(&:followed).reject { |artist| favorites.map(&:id).include?(artist.id) }
+    @artists = Kaminari.paginate_array(favorites + artists).page(params[:page]).per(32)
   end
 
   def requests
@@ -81,12 +82,12 @@ class UsersController < ApplicationController
   end
 
   def follow
-    current_user.follow(params[:id])
+    current_user.follow(@user)
     redirect_back fallback_location: root_path
   end
 
   def unfollow
-    params[:follower_id] ? User.find(params[:follower_id]).unfollow(current_user.id) : current_user.unfollow(params[:id])
+    params[:follower_id] ? User.find(params[:follower_id]).unfollow(current_user) : current_user.unfollow(@user)
     redirect_back fallback_location: root_path
   end
 

@@ -78,12 +78,12 @@ class User < ApplicationRecord
       favorite_artists.count < 4
     end
 
-    def follow(followed_id)
-      Relation.find_or_create_by!(follower_id: self.id, followed_id: followed_id, followed_type: "User", relation_type: 0)
+    def follow(user)
+      Relation.find_or_create_by!(follower_id: self.id, followed_id: user.id, followed_type: "User", relation_type: 0)
     end
 
-    def unfollow(followed_id)
-      Relation.find_by(follower_id: self.id, followed_id: followed_id, followed_type: "User", relation_type: 0)&.destroy
+    def unfollow(user)
+      Relation.find_by(follower_id: self.id, followed_id: user.id, followed_type: "User", relation_type: 0)&.destroy
     end
 
     def block(user_id)

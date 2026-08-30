@@ -10,16 +10,6 @@
       .separator{style: "margin-bottom: 15px; "}
       = render "registers/index_cards", registers: @registers.limit(6)
     
-  - if @publications.present?
-    %div{style: "margin-top: 20px;"}
-      .title_section
-        =link_to publications_path do
-          =t("recents", model: Publication.plural).upcase
-        =link_to publications_path do
-          = t("more").upcase
-      .separator{style: "margin-bottom: 15px; "}
-      = render "publications/index", publications: @publications.limit(3)
-
   %div{style: "margin-top: 20px;"}
     .title_section
       =link_to artists_path do

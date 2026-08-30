@@ -10,11 +10,9 @@ class HomeController < ApplicationController
 
     if current_user
       @registers = Register.viewables(current_user).where(user_id: current_user.followings.users.pluck(:followed_id)).order("created_at DESC")
-      @publications = Publication.viewables(current_user).where(user_id: current_user.followings.users.pluck(:followed_id)).order("created_at DESC")
     end
 
     @registers = Register.viewables(current_user).order("created_at DESC") if !@registers.present? || @registers.empty?
-    @publications = Publication.viewables(current_user).order("created_at DESC") if !@publications.present? || @publications.empty?
     
   end
 

@@ -59,6 +59,12 @@ class UsersController < ApplicationController
 
   def publications
     @publications = @user.publications.order("created_at DESC")
+    @publications = @publications.page(params[:page]).per(10)
+    @pagination_path = { controller: "users", action: "publications", user_id: @user.id }
+    respond_to do |format|
+        format.html
+        format.turbo_stream
+    end
   end
 
   def notifications

@@ -11,7 +11,7 @@
                         = @artist.genre.name
 
     %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
-        .flex{ style: "width: 50%;"}
+        .flex{ style: "width: 30%;"}
             .stat
                 .number
                     =  @followers_count
@@ -20,17 +20,12 @@
                         = t("followers")
             
             .stat
-                .number
-                    ★ #{@average_rating} / 5
-                .name{style: "color: white"}
-                    = t("average", model: Register.plural)
-            
-            .stat
-                .number
-                    = @publications_count
-                .name{style: "color: white"}
-                    = link_to publications_artist_path(@artist) do   
-                        = Publication.plural.upcase             
+                - unless @registers.empty?
+                    .number
+                        ★ #{@average_rating} / 5
+                    .name{style: "color: white"}
+                        = t("average", model: Register.plural)
+           
                     
         %span{ style: "margin-bottom: 25px; display: flex; margin-left: auto; gap:10px; position: relative; z-index: 2;" }
             = render "artists/follow_buttoms", artist: @artist

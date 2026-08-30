@@ -38,12 +38,18 @@ class EventsController < ApplicationController
   end
 
   def publications
+    @publications = @publications.page(params[:page]).per(10)
+    @pagination_path = { controller: "events", action: "publications", event_id: @event.id }
+    respond_to do |format|
+        format.html
+        format.turbo_stream
+    end
   end
 
   def post
     Publication.create!(event_id: params[:id], user_id: current_user&.id, review: params[:text])
     redirect_to publications_event_path(@event)
-  end 
+  end
 
   private
 

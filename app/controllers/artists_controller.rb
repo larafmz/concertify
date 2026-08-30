@@ -43,6 +43,12 @@ class ArtistsController < ApplicationController
   end
 
   def publications
+    @publications = @publications.page(params[:page]).per(10)
+    @pagination_path = { controller: "artists", action: "publications", artist_id: @artist.id }
+    respond_to do |format|
+        format.html
+        format.turbo_stream
+    end
   end
 
   def registers

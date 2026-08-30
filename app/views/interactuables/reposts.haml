@@ -13,8 +13,7 @@
                 %div
                     = render "registers/show", register: @interactuable
             - elsif @interactuable.publication?
-                %div
-                    = render "publications/show", publication: @interactuable
+                = render "publications/show", publication: @interactuable
 
         %div{style: "display: flex; gap: 20px; color: white; margin-left:20px; margin-top: 15px;"}
             = link_to Like.plural, interactuable_path(@interactuable), title: "#{@interactuable.likes.count} #{Like.plural}" 

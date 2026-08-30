@@ -18,7 +18,7 @@ class Publication < Interactuable
   ## CLASS METHODS
 
     def self.search_by(user)
-      Publication.all unless user.present?
+      return Publication.all unless user.present?
       Publication.where(user_id: user.id).or(Publication.of_user_followings(user)).or(Publication.of_user_events(user)).distinct
     end
 

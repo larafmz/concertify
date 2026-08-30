@@ -1,0 +1,13 @@
+= turbo_stream.append "publications-list" do
+    - @publications.each do |publication|
+        = render "publications/show", publication: publication
+        .separator
+
+= turbo_stream.replace "pagination" do
+    %div{id: "pagination"}
+        - if @publications.next_page
+            = link_to "Cargar más",
+                publications_path(page: @publications.next_page),
+                data: { turbo_stream: true },
+                class: "btn-standard",
+                style: "margin: 10px;"

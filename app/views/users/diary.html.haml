@@ -1,2 +1,11 @@
 = render "users/options", active: :diary
-= render "registers/diary", registers: @registers
+
+.widget-content{ style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: diary_user_path(@user), pagination_page_value: 2 } }
+    - if @registers.empty?
+        = render "common/empty_list_message", model: Register
+    - else
+        .registers-items{id: "registers", style: "background: #1e2731; border-radius: 15px; gap: 0px;", data: { pagination_target: "registers" } }
+            - @registers.each do |register|
+                = render "registers/diary_page", register: register
+        - unless @registers.next_page
+            %span{class: "hidden", data: { pagination_target: "noRecords" }}

@@ -1,0 +1,30 @@
+- event = register.event
+- event_date = event.date
+.diary-wrapper
+    = link_to comments_interactuable_path(register), class: "diary-link" do
+        .diary-obj
+            .date-event
+                = event_date.strftime("%B")[0,3].upcase
+                %br
+                %span{ style: "font-size: 20px;" }= event_date.day
+                %br
+                - if event_date.year != Date.today.year
+                    = event_date.year
+
+            .diary_icon
+                = image_tag event.get_photo if event.get_photo&.attached?
+
+            %div
+                - event.artists.each_with_index  do |artist, index|
+                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || "not found"
+                    - if index < event.artists.size - 1
+                        ,
+                %br
+
+                %span{ style: "font-size: 18px;", class: "soft-color; " } #{event.tour_name}
+                
+                - ub = event.ubication&.complete_name || "ubication unidentified"
+                .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
+                    %span= "📍#{ub}" 
+            %div{style: "color: orange"}= register.get_rating
+

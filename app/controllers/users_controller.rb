@@ -37,11 +37,18 @@ class UsersController < ApplicationController
   end
 
   def registers
-    @registers = @user.registers.order("created_at DESC")
+    registers = @user.registers.order("created_at DESC")
+    @registers = Kaminari.paginate_array(registers).page(params[:page]).per(20)
   end
 
   def diary
-    @registers = @user.registers.joins(:event).order("events.date DESC")
+    @page = params[:page] || 1
+    registers = @user.registers.joins(:event).order("events.date DESC")
+    @registers = Kaminari.paginate_array(registers).page(params[:page]).per(10)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def artists

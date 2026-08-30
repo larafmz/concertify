@@ -26,6 +26,7 @@ class Event < ApplicationRecord
     scope :by_genre, -> (genre_id) { left_joins(:artists).where(artists: { genre_id: genre_id }) }
     scope :by_artist, -> (artist_id) { left_joins(:artists).where(artists: { id: artist_id} )}
     scope :by_date, -> (date) { where(date: date) }
+    scope :before_date, -> (date) { where(date: ...date) }
 
     scope :requests, -> { where.not(request: nil) }
     scope :accepted, -> { left_joins(:request).merge(Request.accepted).or(where(requests: { id: nil }).where.not(ticketmaster_id: nil)) }
@@ -46,11 +47,9 @@ class Event < ApplicationRecord
         event_api = TicketmasterService.event_by_id(ticketmaster_id)
         return event if event_api.nil?
         
-        if event.new_record?
-          if event_api.dig("images").present?
-            image = get_event_image_url(event_api)
-            event.photo.attach(io: URI.open(image), filename: image, content_type: "image/jpg")
-          end
+        if event_api.dig("images").present?
+          image = get_event_image_url(event_api)
+          event.photo.attach(io: URI.open(image), filename: image, content_type: "image/jpg")
         end
 
         artists = get_event_artists(event_api)

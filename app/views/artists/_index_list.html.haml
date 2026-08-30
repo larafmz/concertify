@@ -6,12 +6,9 @@
         %div      
             .artists-list
                 - artists.each_with_index do |artist, index|
-                    - if artist.is_favorite(current_user)
-                        %div{ style: "height:10px; font-size: 13px; width: 120px; display: flex;  justify-content: center;"}    
-                            ❤ 
-                    - else
-                        %div{ style: "height:10px;"}    
+                    
                     .register_user{style: "grid-template-columns: 0.1fr 4fr auto; border-radius: 0px;"}
+
                         = link_to artist_path(artist), class: "hover-border-icon" do 
                             .link_icon
                                 = image_tag artist.photo if artist.photo.attached?
@@ -26,7 +23,5 @@
 
                         .softest-color
                             = render "artists/follow_buttoms", artist: artist
-                            
+                                             
                     
-                = paginate @artists                    
-                        

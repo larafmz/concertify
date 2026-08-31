@@ -45,7 +45,12 @@ class ChatsController < ApplicationController
 
     def set_chat
       if params[:user_id]
-        @user = User.find(params[:user_id])
+        @user = User.find_by(id: params[:user_id])
+        unless @user
+          flash[:alert] = t("messages.error")
+          redirect_to chats_path
+          return
+        end
         @chat = Chat.by_users(current_user.id, @user.id).first
         @chat = Chat.create_private_chat(current_user.id, @user.id) unless @chat
       elsif params[:event_id]
@@ -59,6 +64,15 @@ class ChatsController < ApplicationController
           redirect_to chats_path
         end
       end
+
+      if @chat && !@chat.persisted? 
+        if !@chat.save
+          flash[:alert] = t("messages.error")
+          redirect_to chats_path
+          return
+        end
+      end
+
       @chat_user = @chat.chat_users.find_by(user_id: current_user.id) if @chat
       @chats = current_user.chats
     end

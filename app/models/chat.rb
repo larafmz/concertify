@@ -22,7 +22,6 @@ class Chat < ApplicationRecord
       chat = Chat.new
       chat.chat_users << ChatUser.new(user_id: user1_id) 
       chat.chat_users << ChatUser.new(user_id: user2_id) 
-      chat.save!
       chat
     end
 
@@ -31,7 +30,6 @@ class Chat < ApplicationRecord
       unless chat.chat_users.exists?(user_id: user_id)
         chat.chat_users << ChatUser.new(user_id: user_id) 
         ChatEntry.create(chat_id: chat.id, user_id: user_id, text: "entered_chat", chat_type: 1)
-        chat.save!
       end
       chat
     end

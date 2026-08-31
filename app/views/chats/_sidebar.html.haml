@@ -1,12 +1,12 @@
-.sidebar
+.sidebar{style: "height: 100%; overflow-y: auto; min-height: 0;", data: { controller: "chat-filter" }}
     = turbo_stream_from current_user, "sidebar"
     %div{id: "chat_sidebar", style: "margin:15px 15px 5px 20px;"}
         = form_tag chats_path, method: "GET" do
-            = text_field_tag :search, params[:search], placeholder: t("search"), class: "field-custom"
+            = text_field_tag :search, params[:search], placeholder: t("search"), class: "field-custom", data: { chat_filter_target: "input", action: "input->chat-filter#filter" }
         %div{style: "margin:15px 0px 5px 10px;"}
             - chats.order_by_recent_messages.each do |chat|
                 - color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
-                .wrapper
+                .wrapper{data: { chat_filter_target: "chat", chat_name: chat.name(current_user).downcase }}
                     = link_to chat_path(chat), data: { turbo_frame: "chat_content", turbo_prefetch: false }, class: "diary-link" do 
                         - last_message = chat.messages.order(created_at: :desc).first
                         .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
@@ -24,4 +24,4 @@
                                         %div= "🗓️ #{formatted_event_date(chat.event.date, chat.event.start_time)}"  
                             
                             %div{style: "font-size:12px; color: #{color}"}=short_time_ago(last_message.created_at)
-                .separator
+                    .separator

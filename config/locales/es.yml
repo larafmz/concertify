@@ -125,6 +125,7 @@ es:
     no_likes_yet: Sin Me Gustas
 
   messages: 
+    error: Ha ocurrido un error
     cant_find: ¿No encuentras lo que buscas?
     manual_adition: Si el evento ya ha pasado y/ó no aparece en los resultados, puedes solicitar su adición manualmente.
     destroy_confirmation: ¿Esta seguro de que desea eliminar?

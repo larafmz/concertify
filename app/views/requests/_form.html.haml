@@ -9,10 +9,16 @@
             = t("sent_ago_by", user: @request.requester.username , time: time_ago_in_words(@request.created_at))
       %button.modal_close{ data: { action: "dialog#close" } } ×
 
-    = form_with model: @request, data: { turbo: false } do |f|
+    - if @request.errors.any?
+      .form-errors
+        - @request.errors.full_messages.each do |message|
+          ● #{message}
+          %br
+                
+    = form_with model: @request do |f|  
       .modal_body
         
-        - unless @request.requester_id.present?
+        - unless @request.requester_id.present? && @request.persisted?
           = f.hidden_field :requester_id, value: current_user&.id
         = f.hidden_field :status, value: 1
         

@@ -10,3 +10,9 @@ window.addEventListener("pageshow", () => {
     dialog.close()
   })
 })
+
+import { Turbo } from "@hotwired/turbo-rails"
+
+Turbo.StreamActions.redirect = function () {
+  Turbo.visit(this.getAttribute("target"))
+}

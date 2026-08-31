@@ -7,7 +7,7 @@ class Request < ApplicationRecord
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
   ## RELATIONSHIPS
-    belongs_to :requester, class_name: "User", optional: true
+    belongs_to :requester, class_name: "User"
     has_one :event, dependent: :destroy
     accepts_nested_attributes_for :event, allow_destroy: false
 
@@ -19,6 +19,8 @@ class Request < ApplicationRecord
     scope :by_status, -> (status) { where(status: status) }
 
   ## VALIDATIONS
+
+    validates :status, presence: true
 
   ## CALLBACKS
 

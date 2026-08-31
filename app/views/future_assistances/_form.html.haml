@@ -41,12 +41,12 @@
          
             = label_tag :event_seat, FutureAssistance.human_attribute_name(:event_seat), class: "soft-color", style: "font-size: 13px;"          
             %span{ style: "display: grid; grid-template-columns: 1fr 3fr; gap: 10px" }
-              = f.select :event_seat, FutureAssistance.event_seats_for_select, prompt: "Seleccionar...", class: "field-custom"
+              = f.select :event_seat, FutureAssistance.event_seats_for_select, { prompt: "Seleccionar..." }, { class: "field-custom" }
               = f.text_field :event_seat_details, placeholder: FutureAssistance.human_attribute_name(:event_seat_details), class: "field-custom"
 
             %div
               = label_tag :company, FutureAssistance.human_attribute_name(:company), class: "soft-color", style: "font-size: 13px;"
-              = f.select :company, FutureAssistance.companies_for_select, class: "field-custom"
+              = f.select :company, FutureAssistance.companies_for_select, {}, { class: "field-custom" }
 
         %br
         = f.submit t("verbs.save"), style: "float: right", class: "btn-custom event-color", style: "height: auto"

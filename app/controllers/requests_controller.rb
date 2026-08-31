@@ -30,9 +30,12 @@ class RequestsController < ApplicationController
         @event.artists << @artist
 
         if @request.save
-            redirect_to requests_user_path(current_user)
+            respond_to do |format|
+                format.turbo_stream { render turbo_stream: turbo_stream.action(:redirect, requests_user_path(current_user)) }
+                format.html { redirect_to requests_user_path(current_user), status: :see_other }
+            end
         else
-            redirect_back fallback_location: root_path
+            render :new, status: :unprocessable_entity
         end
     end
 

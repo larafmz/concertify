@@ -61,6 +61,7 @@ es:
         start_time: Hora de Inicio
         status: Estado
         requester_id: Usuario solicitante
+        artists: Artista
       artist:
         name: Nombre
         photo: Foto
@@ -69,6 +70,7 @@ es:
         city: Ciudad
         state: Estado
         venue: Recinto
+        country: País
       future_assistance:
         from: Desde
         event_seat: Ubicación en el evento
@@ -80,3 +82,5 @@ es:
       request:
         status: Estado
         message: Mensaje
+      "event/ubication":
+        country: País

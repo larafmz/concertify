@@ -27,6 +27,7 @@ class Event < ApplicationRecord
     scope :by_artist, -> (artist_id) { left_joins(:artists).where(artists: { id: artist_id} )}
     scope :by_date, -> (date) { where(date: date) }
     scope :before_date, -> (date) { where(date: ...date) }
+    scope :after_date, -> (date) { where(date: date...) }
 
     scope :requests, -> { where.not(request: nil) }
     scope :accepted, -> { left_joins(:request).merge(Request.accepted).or(where(requests: { id: nil }).where.not(ticketmaster_id: nil)) }

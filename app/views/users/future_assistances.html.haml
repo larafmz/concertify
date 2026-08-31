@@ -1,73 +1,12 @@
 = render "users/options", active: :future_assistances
 
-.widget-content{style: "padding-top:0px;"}
-    - if @future_assistances.empty?
-        = render "common/empty_list_message", model: FutureAssistance
-    - else
-        - @future_assistances.each do |future_assistance|
+.widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: future_assistances_user_path(@user), pagination_page_value: 2 } }
+    %div{id: "future_assistances", data: { pagination_target: "future_assistances" } }
+        - if @future_assistances.empty?
+            = render "common/empty_list_message", model: FutureAssistance
+        - else
+            - @future_assistances.each do |future_assistance|
+                = render "future_assistances/index_item", future_assistance: future_assistance
 
-            - event = future_assistance.event
-            - event_date = event.date
-            - event_date_status = time_status(event_date, event.start_time)
-            
-            - if event_date_status == "future" 
-                .event_tag
-                    - if event.date == Date.today   
-                        = t("messages.its_today")
-                    - else
-                        = t("messages.in_x_days", count: event.days_left)
-            
-            .item-register
-                .date-event
-                    = I18n.l(event_date, format: "%B")[0,3].upcase
-                    %br
-                    %span{ style: "font-size: 20px;" }= event_date.day
-                    %br
-                    - if event_date.year != Date.today.year
-                        = event_date.year
-
-                = link_to event_path(event) do 
-                    .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
-                        = image_tag event.get_photo if event.get_photo&.attached?
-
-                %div
-
-                    - event.artists.each_with_index  do |artist, index|
-                        = link_to artist_path(artist) do 
-                            %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
-                        - if index < event.artists.size - 1
-                            ,
-                    %br
-
-                    = link_to event_path(event) do 
-                        %span{ style: "font-size: 18px;", class: "soft-color; " } #{event.tour_name}
-                    
-                    - ub = event.ubication&.complete_name || t("not_found")
-                    .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
-                        %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
-                        
-                    %div
-                        - if future_assistance.event_seat_string || !future_assistance.event_seat_details.empty?
-                            .bubble
-                                %span= "🎟️ #{future_assistance.event_seat_string}"
-                                %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
-                        - if future_assistance.from && !future_assistance.from.empty?
-                            .bubble
-                                %span{style: "color: rgb(230, 230, 230);"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
-                                    
-                %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
-                    
-                    - if future_assistance.company_string && future_assistance.company!= 0
-                        .bubble
-                            #{future_assistance.company_string}
-                
-                    - if future_assistance.user_id == current_user&.id
-                        - if event_date_status == "future"
-                            = link_to "✎", edit_future_assistance_path(future_assistance), data: { turbo_frame: "modal" }
-                            = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
-                    
-                - if event_date_status != "future"
-                    %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
-                        = link_to "#{t("verbs.log")} #{Event.singular}", new_register_path(event_id: event.id), class: "btn-custom event-color", data: { turbo_frame: "modal" }
-                        = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
-                
+    - unless @future_assistances.respond_to?(:next_page) && @future_assistances.next_page
+        %span{class: "hidden", data: { pagination_target: "noRecords" }}

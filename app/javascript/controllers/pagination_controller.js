@@ -16,7 +16,7 @@ export default class extends Controller {
         page: {type: Number, default: 1},
     };
 
-    static targets = ["noRecords", "registers", "publications"];
+    static targets = ["noRecords", "registers", "publications", "future_assistances"];
 
     initialize(){
         this.scroll = this.scroll.bind(this);

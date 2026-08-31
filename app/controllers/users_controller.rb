@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def diary
     registers = @user.registers.joins(:event).order("events.date DESC")
-    @registers = Kaminari.paginate_array(registers).page(params[:page]).per(10)
+    @registers = registers.page(params[:page]).per(10)
     @pagination_path = { controller: "users", action: "diary", user_id: @user.id }
     respond_to do |format|
       format.html
@@ -67,7 +67,12 @@ class UsersController < ApplicationController
   end
 
   def future_assistances
-    @future_assistances = @user.future_assistances.joins(:event).order("events.date ASC")
+    future_assistances = @user.future_assistances.joins(:event).order("events.date ASC")
+    @future_assistances = future_assistances.page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def publications

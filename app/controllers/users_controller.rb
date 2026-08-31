@@ -28,11 +28,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    ubication = Ubication.find_or_initialize_by(user_id: @user.id)
-    ubication.country = Country.find_by(code: params[:country])
-    ubication.city = params[:city]
-    ubication.save!
-
     @user.icon.purge if params[:remove_icon] == "1" && @user.icon.attached?
 
     if @user.update(create_params)
@@ -73,7 +68,7 @@ class UsersController < ApplicationController
   end
 
   def future_assistances
-    future_assistances = @user.future_assistances.joins(:event).order("events.date ASC")
+    future_assistances = @user.future_assistances.joins(:event).includes( event: [ :artists, :ubication, { photo_attachment: :blob }]).order("events.date ASC")
     @future_assistances = future_assistances.page(params[:page]).per(5)
     respond_to do |format|
       format.html
@@ -151,7 +146,7 @@ private
   end
 
   def create_params
-      params.require(:user).permit(:username, :email, :description, :icon)
+      params.require(:user).permit(:username, :email, :description, :icon, ubication_attributes: [:id, :city, :country_id])
   end 
 
 end

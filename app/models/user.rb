@@ -12,6 +12,7 @@ class User < ApplicationRecord
     has_many :publications, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
     has_one :ubication, dependent: :destroy
+    accepts_nested_attributes_for :ubication, allow_destroy: false
     has_many :followings, -> { where(relation_type: 0)  }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :followers, -> {  where(relation_type: 0) }, as: :followed, class_name: "Relation", dependent: :destroy
     has_many :blocked_users, -> {  where(relation_type: 1) }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy

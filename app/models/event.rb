@@ -114,7 +114,7 @@ class Event < ApplicationRecord
     end
 
     def get_photo
-      self.photo if self.photo.attached?
+      return self.photo if self.photo.attached?
       self.artists&.first&.photo 
     end
 

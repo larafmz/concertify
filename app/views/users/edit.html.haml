@@ -25,14 +25,18 @@
                 %br   
                 %br  
 
-                .two-columns{style: "gap: 20px;"}
-                    %div
-                        = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                        = select_tag :country, options_for_select(Country.all.map { |country| [t(country.name), country.code] }, @user.ubication&.country&.code), include_blank: "Seleccionar", class: "field-custom", style: "padding: 0px;"
-                    %div
-                        = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
-                        = text_field_tag :city, @user.ubication&.city, class: "field-custom"
-                %br   
+                %div{id: "ubication"}
+                    = f.fields_for :ubication do |ubication_fields|
+                        .two-columns{style: "gap: 20px;"}
+                            %div
+                                = label_tag :country_id, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
+                                = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, 
+                                    @user.ubication&.country_id), { include_blank: "Seleccionar" }, { class: "field-custom", style: "padding: 0px;" }
+                                
+                            %div
+                                = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
+                                = ubication_fields.text_field :city, value: @user.ubication&.city, class: "field-custom"
+                        %br   
                 
 
                 .form-columns{data: { controller: "character-counter" }}

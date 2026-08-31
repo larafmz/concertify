@@ -1,11 +1,10 @@
-- if @publications.empty?
-    = render "common/empty_list_message", model: Publication
-- else
-    %div{id: "publications-list", style: "border: 1px solid #40556d;"}
-        - @publications.each do |publication|
-            = render "publications/show", publication: publication
-            .separator
+.widget-content{style: "padding: 0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
+    - if publications.empty?
+        = render "common/empty_list_message", model: Publication
+    - else
+        %div{id: "publications", data: { pagination_target: "publications" }, style: "border: 1px solid #40556d;" }
+            - publications.each do |publication|
+                = render "publications/show", publication: publication
 
-    %div{id: "pagination"}
-        - if @publications.respond_to?(:next_page) && @publications.next_page && @pagination_path
-            = link_to "Cargar más", url_for(@pagination_path.merge(page: @publications.next_page)), data: { turbo_stream: true }, class: "btn-standard", style: "margin: 10px;"
+        - unless @publications.respond_to?(:next_page) && publications.next_page && @pagination_path
+            %span{class: "hidden", data: { pagination_target: "noRecords" }}

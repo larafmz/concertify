@@ -1,9 +1,9 @@
 = turbo_stream.remove "spinner"
 
-= turbo_stream.append "registers" do
+= turbo_stream.append "diary-registers" do
   - @registers.each do |register|
     = render "registers/diary_page", register: register
 
-- unless @registers.next_page
-  = turbo_stream.append "registers" do
+- unless @registers.respond_to?(:next_page) && @registers.next_page
+  = turbo_stream.append "diary-registers" do
     %span.hidden{data: { pagination_target: "noRecords" }}

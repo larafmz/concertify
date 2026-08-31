@@ -16,7 +16,7 @@ export default class extends Controller {
         page: {type: Number, default: 1},
     };
 
-    static targets = ["posts", "noRecords", "registers"];
+    static targets = ["noRecords", "registers", "publications"];
 
     initialize(){
         this.scroll = this.scroll.bind(this);
@@ -29,7 +29,7 @@ export default class extends Controller {
     scroll() {
         if (this.#pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
             //Add the spinner at the end of the page.
-            this.registersTarget.insertAdjacentHTML("beforeend", spinner)
+            this.element.querySelector("[data-pagination-target]").insertAdjacentHTML("beforeend", spinner)
             this.#loadRecords();
         }
     }

@@ -1,11 +1,11 @@
-.widget-content{style: "padding:0px;", data: { controller: "pagination", pagination_url_value: registers_path, pagination_page_value: 2 } }
+.widget-content{style: "padding:0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
 
-    .registers-items{id: "registers", data: { pagination_target: "registers" } }
+    .registers-items{id: "index-registers", data: { pagination_target: "registers" } }
         - if registers.empty?
             = render "common/empty_list_message", model: Register
         - else
             - registers.each_with_index do |register, index|
                 = render "registers/index_item", register: register
                 
-    - unless registers.next_page
+    - unless registers.respond_to?(:next_page) && registers.next_page && @pagination_path
         %span{class: "hidden", data: { pagination_target: "noRecords" }}

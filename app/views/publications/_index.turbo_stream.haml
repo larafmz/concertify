@@ -1,13 +1,9 @@
-= turbo_stream.append "publications-list" do
-    - @publications.each do |publication|
-        = render "publications/show", publication: publication
-        .separator
+= turbo_stream.remove "spinner"
 
-= turbo_stream.replace "pagination" do
-    %div{id: "pagination"}
-        - if @publications.respond_to?(:next_page) && @publications.next_page && @pagination_path
-            = link_to "Cargar más",
-                url_for(@pagination_path.merge(page: @publications.next_page)),
-                data: { turbo_stream: true },
-                class: "btn-standard",
-                style: "margin: 10px;"
+= turbo_stream.append "publications" do
+  - @publications.each do |publication|
+    = render "publications/show", publication: publication
+
+- unless @publications.next_page
+  = turbo_stream.append "publications" do
+    %span.hidden{data: { pagination_target: "noRecords" }}

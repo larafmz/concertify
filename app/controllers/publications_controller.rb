@@ -3,8 +3,8 @@ class PublicationsController < ApplicationController
     load_and_authorize_resource
 
     def index
-        @publications = Publication.search_by(current_user).viewables(current_user).order("created_at DESC") 
-        @publications = @publications.page(params[:page]).per(10)
+        publications = Publication.search_by(current_user).viewables(current_user).order("created_at DESC") 
+        @publications = publications.page(params[:page]).per(5)
         @pagination_path = { controller: "publications", action: "index" }
         respond_to do |format|
             format.html

@@ -4,7 +4,7 @@ class RegistersController < ApplicationController
 
     def index
         registers = Register.viewables(current_user)
-        @registers = Kaminari.paginate_array(registers).page(params[:page]).per(5)
+        @registers = registers.page(params[:page]).per(5)
         respond_to do |format|
             format.html
             format.turbo_stream

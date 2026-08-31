@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def show
     @favorite_artists = @user.favorite_artists.map(&:artist)
     @registers = @user.registers.order(created_at: :desc).limit(4)
-    @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''")limit(2)
+    @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''").limit(2)
     @populars_registers = @user.registers.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC").limit(2)
     @future_assistances = @user.future_assistances.order(created_at: :desc).limit(5)
     @publications = @user.publications.order(created_at: :desc).limit(3); 
@@ -38,13 +38,18 @@ class UsersController < ApplicationController
 
   def registers
     registers = @user.registers.order("created_at DESC")
-    @registers = Kaminari.paginate_array(registers).page(params[:page]).per(20)
+    @registers = registers.page(params[:page]).per(5)
+    @pagination_path = { controller: "users", action: "registers", user_id: @user.id }
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def diary
-    @page = params[:page] || 1
     registers = @user.registers.joins(:event).order("events.date DESC")
     @registers = Kaminari.paginate_array(registers).page(params[:page]).per(10)
+    @pagination_path = { controller: "users", action: "diary", user_id: @user.id }
     respond_to do |format|
       format.html
       format.turbo_stream

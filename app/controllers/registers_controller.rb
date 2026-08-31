@@ -4,6 +4,7 @@ class RegistersController < ApplicationController
 
     def index
         registers = Register.viewables(current_user, of_friends: true)
+        @pagination_path = request.query_parameters.merge( controller: "registers", action: "index" )
         @registers = registers.page(params[:page]).per(5)
         respond_to do |format|
             format.html

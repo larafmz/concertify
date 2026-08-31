@@ -32,7 +32,7 @@ class Comment < ApplicationRecord
         end
 
         def remove_notification
-            Notification.for_user(interactuable.user_id).for_record(self).destroy_all
+            Notification.for_user(interactuable.user_id).for_record(self).destroy_all if interactuable.user_id
         end
 
     public

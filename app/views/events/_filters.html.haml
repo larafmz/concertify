@@ -7,10 +7,10 @@
         = hidden_field_tag :artist_id, @artist&.id
         %div
             = label_tag :first_date, "🗓️ #{t("filters.from").upcase}", class: "soft-color", style: "font-size: 13px;"
-            = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;"
+            = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;", id: "first_date"
         %div
             = label_tag :second_date, "🗓️ #{t("filters.to").upcase}", class: "soft-color", style: "font-size: 13px;"
-            = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;"
+            = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;", id: "second_date"
         %div
             = label_tag :country, "📍 #{Ubication.singular.upcase}", class: "soft-color", style: "font-size: 13px;"
             = select_tag :country, options_for_select(Country.all.map { |country| [t(country.name), country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"

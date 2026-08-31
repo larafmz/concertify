@@ -39,7 +39,7 @@ class Register < Interactuable
 
         regs.order("created_at DESC")
       else
-        Register.all
+        Register.all.order("created_at DESC")
       end
     end
 

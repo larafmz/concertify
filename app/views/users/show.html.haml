@@ -18,7 +18,7 @@
             .separator{style: "margin-bottom: 15px; "}
             .flex{style: "margin-top: 10px;"}
                 = link_to future_assistances_user_path(@user), class: "hover-border", style: "display: flex; align-items: flex-start; justify-content: space-between;" do
-                    - @future_assistances.limit(5).each do |future_assistance|
+                    - @future_assistances.each do |future_assistance|
                         .small_vertical_rectangle
                             = image_tag future_assistance.event.get_photo if future_assistance.event.get_photo.present?
 
@@ -41,7 +41,7 @@
                     = link_to registers_user_path(@user) do
                         %span= t("more").upcase
                 .separator
-                = render "registers/index_cards", registers: @registers.limit(4)
+                = render "registers/index_cards", registers: @registers
 
                                         
             %div{style: "margin-bottom: 20px; "}
@@ -52,7 +52,7 @@
                         %span= t("more").upcase
                 .separator
                 %div{style: "padding-top:15px;"}
-                    = render "registers/index", registers: @registers_with_review.limit(2)
+                    = render "registers/index", registers: @registers_with_review.
             
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
@@ -61,7 +61,7 @@
                     = link_to registers_user_path(@user) do
                         %span= t("more").upcase
                 .separator{style: "margin-bottom: 15px;"}
-                = render "registers/index", registers: @populars_registers.limit(2)
+                = render "registers/index", registers: @populars_registers
 
             %div{style: "margin-top: 20px;"}
                 .title_section
@@ -70,7 +70,7 @@
                     =link_to publications_user_path(@user) do
                         = t("more").upcase
                 .separator{style: "margin-bottom: 15px; "}
-                = render "publications/index", publications: @publications.limit(3)
+                = render "publications/index", publications: @publications
 
             %div{style: "margin-top: 20px;"}
                 .title_section
@@ -79,6 +79,6 @@
                     =link_to publications_user_path(@user) do
                         = t("more").upcase
                 .separator{style: "margin-bottom: 15px; "}
-                = render "publications/index", publications: @populars_publications.limit(3)                
+                = render "publications/index", publications: @populars_publications        
 
         

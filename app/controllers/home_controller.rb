@@ -7,12 +7,7 @@ class HomeController < ApplicationController
     events_db = Event.accepted.search_by({ country: current_user&.ubication&.country&.code, first_date: Date.today }, events_api)
     @events = TicketmasterService.merge_events(events_db, events_api)
     @events = Kaminari.paginate_array(@events).page(params[:page]).per(10)
-
-    if current_user
-      @registers = Register.viewables(current_user).where(user_id: current_user.followings.users.pluck(:followed_id)).order("created_at DESC")
-    end
-
-    @registers = Register.viewables(current_user).order("created_at DESC") if !@registers.present? || @registers.empty?
+    @registers = Register.viewables(current_user).order("created_at DESC")
     
   end
 

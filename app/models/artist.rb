@@ -123,6 +123,7 @@ class Artist < ApplicationRecord
     end
 
     def is_favorite?(user)
+      return false if !user
       FavoriteArtist.exists?(user_id: user.id, artist_id: id)
     end
 

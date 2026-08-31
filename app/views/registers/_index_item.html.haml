@@ -1,0 +1,30 @@
+- event = register.event
+.register_user
+
+    = link_to user_path(register.user), class: "hover-border-icon" do
+        .link_icon 
+            = image_tag register.user.icon if register.user.icon.attached?
+
+    = link_to comments_interactuable_path(register) do 
+        .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid" }
+            = image_tag event.get_photo if event.get_photo&.attached?
+    %div
+        .soft-color{style: "font-size: 15px;" }
+            = link_to user_path(register.user_id) do 
+                = register.user.username
+            %span{class: "softest-color"}= t("verbs.logged")
+        %span{ style: "font-size: 20px; font-weight: 700; font-family: Georgia, 'Times New Roman', Times, serif;" }= event.tour_name
+        .softest-color{style: "font-size: 15px;" }
+            %span= "📍#{event.ubication&.complete_name} 🗓️ #{short_date(event.date)}" 
+        %span{style: "color: orange; "}= register.get_rating
+        - if register.review.present?
+            .section-box
+                %span{ class: "soft-color", style: "font-size: 15px;" }= simple_format(register.review)
+        
+        = render "interactuables/footer", interactuable: register
+
+
+%div{style: " font-size: 12px; color: #808891;"}
+    = t("created_ago", time:  time_ago_in_words(register.created_at))
+
+.separator

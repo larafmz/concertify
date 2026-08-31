@@ -3,7 +3,12 @@ class RegistersController < ApplicationController
   load_and_authorize_resource
 
     def index
-        @registers = Register.by_friends(current_user).order("created_at DESC")
+        registers = Register.viewables(current_user)
+        @registers = Kaminari.paginate_array(registers).page(params[:page]).per(5)
+        respond_to do |format|
+            format.html
+            format.turbo_stream
+        end
     end
 
     def new

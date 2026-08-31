@@ -10,12 +10,12 @@ class UsersController < ApplicationController
 
   def show
     @favorite_artists = @user.favorite_artists.map(&:artist)
-    @registers = @user.registers.order(created_at: :desc)
-    @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''")
-    @populars_registers = @user.registers.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
-    @future_assistances = @user.future_assistances.order(created_at: :desc)
-    @publications = @user.publications.order(created_at: :desc)
-    @populars_publications = @user.publications.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC")
+    @registers = @user.registers.order(created_at: :desc).limit(4)
+    @registers_with_review = @registers.where.not(review: nil).where("TRIM(review) != ''")limit(2)
+    @populars_registers = @user.registers.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC").limit(2)
+    @future_assistances = @user.future_assistances.order(created_at: :desc).limit(5)
+    @publications = @user.publications.order(created_at: :desc).limit(3); 
+    @populars_publications = @user.publications.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC").limit(3); 
   end
 
   def edit

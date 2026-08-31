@@ -23,7 +23,6 @@ export default class extends Controller {
     }
 
     connect() {
-        console.log("🔥 PAGINATION CONECTADO");
         document.addEventListener("scroll", this.scroll)
     }
 

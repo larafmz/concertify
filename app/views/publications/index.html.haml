@@ -4,5 +4,5 @@
     = t("recents", model: Publication.plural)
 
 .separator{style: "margin-bottom: 15px; "}
-
-=render "publications/index", publications: @publications
+%div{style: "padding: 20px 30px;"}
+    =render "publications/index", publications: @publications

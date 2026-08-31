@@ -30,7 +30,17 @@ class InteractuablesController < ApplicationController
         else
             existing_like = Like.create!(interactuable_id: params[:id], user_id: current_user&.id)
         end
-        redirect_back fallback_location: root_path
+
+        respond_to do |format|
+            format.turbo_stream do
+                render turbo_stream: turbo_stream.replace(
+                    "like-interactuable-#{@interactuable.id}",
+                    partial: "interactuables/like",
+                    locals: { interactuable: @interactuable }
+                )
+                end
+            format.html { redirect_back fallback_location: root_path }
+        end
     end
 
     def repost
@@ -40,7 +50,16 @@ class InteractuablesController < ApplicationController
         else
             existing_repost = Repost.create!(interactuable_id: params[:id], user_id: current_user&.id)
         end
-        redirect_back fallback_location: root_path
+        respond_to do |format|
+            format.turbo_stream do
+                render turbo_stream: turbo_stream.replace(
+                    "repost-interactuable-#{@interactuable.id}",
+                    partial: "interactuables/repost",
+                    locals: { interactuable: @interactuable }
+                )
+                end
+            format.html { redirect_back fallback_location: root_path }
+        end
     end
 
     def comment

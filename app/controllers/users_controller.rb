@@ -106,12 +106,30 @@ class UsersController < ApplicationController
 
   def follow
     current_user.follow(@user)
-    redirect_back fallback_location: root_path
+    respond_to do |format|
+       format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "follow-user-#{@user.id}",
+            partial: "users/relation_buttons",
+            locals: { user: @user }
+          )
+        end
+      format.html { redirect_back fallback_location: root_path }
+    end
   end
 
   def unfollow
     params[:follower_id] ? User.find(params[:follower_id]).unfollow(current_user) : current_user.unfollow(@user)
-    redirect_back fallback_location: root_path
+    respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "follow-user-#{@user.id}",
+            partial: "users/relation_buttons",
+            locals: { user: @user }
+          )
+        end
+      format.html { redirect_back fallback_location: root_path }
+    end
   end
 
   def block

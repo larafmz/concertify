@@ -3,5 +3,5 @@
         - users.each do |user|
             = render "users/index_item", user: user
             
-        - unless users.next_page
+        - unless users.respond_to?(:next_page) && users.next_page
             %span{class: "hidden", data: { pagination_target: "noRecords" }}

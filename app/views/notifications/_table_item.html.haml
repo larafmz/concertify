@@ -19,7 +19,7 @@
         
     %div
         - if notification.for_follow?
-            = render "users/relation_bottoms", user: user
+            = render "users/relation_buttons", user: user
 
     - unless notification.read?
         = link_to "👁", mark_as_read_notification_path(notification), data: { turbo_method: :post }

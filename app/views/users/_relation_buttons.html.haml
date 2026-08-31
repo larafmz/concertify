@@ -1,0 +1,13 @@
+%div{id: "follow-user-#{user.id}"}
+    - if current_user&.blocked_user?(user.id)
+        .red-message
+            =t("blocked").upcase
+    - else
+        - if can?(:unfollow, user) && current_user&.follows_user?(user)
+            = link_to t("following"), unfollow_user_path(user), class: "btn-custom", data: { turbo_method: :delete }
+        - elsif can?(:follow, user) 
+            - if user&.follows_user?(current_user)
+                = link_to t("verbs.follow_back"), follow_user_path(user), class: "btn-custom orange-color", data: { turbo_method: :post }
+            - else
+                = link_to t("verbs.follow"), follow_user_path(user), class: "btn-custom orange-color", data: { turbo_method: :post }
+        

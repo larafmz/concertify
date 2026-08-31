@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
     def index
         requests = Request.do_search(params)        
         @requests = requests.page(params[:page]).per(5)
-        @pagination_path = { controller: "requests", action: "index" }
+        @pagination_path = request.query_parameters.merge( controller: "requests", action: "index" )
         respond_to do |format|
             format.html
             format.turbo_stream

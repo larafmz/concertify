@@ -36,7 +36,7 @@ class EventsController < ApplicationController
 
   def registers
     @registers = @registers.page(params[:page]).per(5)
-    @pagination_path = { controller: "events", action: "registers", event_id: @event.id }
+    @pagination_path = request.query_parameters.merge( controller: "events", action: "registers", event_id: @event.id )
     respond_to do |format|
       format.html
       format.turbo_stream
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
 
   def publications
     @publications = @publications.page(params[:page]).per(10)
-    @pagination_path = { controller: "events", action: "publications", event_id: @event.id }
+    @pagination_path = request.query_parameters.merge( controller: "events", action: "publications", event_id: @event.id )
     respond_to do |format|
         format.html
         format.turbo_stream

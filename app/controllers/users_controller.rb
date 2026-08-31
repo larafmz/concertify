@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def registers
     registers = @user.registers.order("created_at DESC")
     @registers = registers.page(params[:page]).per(5)
-    @pagination_path = { controller: "users", action: "registers", user_id: @user.id }
+    @pagination_path = request.query_parameters.merge( controller: "users", action: "registers", user_id: @user.id )
     respond_to do |format|
       format.html
       format.turbo_stream
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   def diary
     registers = @user.registers.joins(:event).order("events.date DESC")
     @registers = registers.page(params[:page]).per(10)
-    @pagination_path = { controller: "users", action: "diary", user_id: @user.id }
+    @pagination_path = request.query_parameters.merge( controller: "users", action: "diary", user_id: @user.id )
     respond_to do |format|
       format.html
       format.turbo_stream
@@ -64,7 +64,13 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @requests = Request.do_search(params, user: @user)
+    requests = Request.do_search(params, user: @user)
+    @requests = requests.page(params[:page]).per(5)
+    @pagination_path = request.query_parameters.merge(controller: "users", action: "requests", user_id: @user.id )
+    respond_to do |format|
+        format.html
+        format.turbo_stream
+    end
   end
 
   def future_assistances
@@ -79,7 +85,7 @@ class UsersController < ApplicationController
   def publications
     @publications = @user.publications.order("created_at DESC")
     @publications = @publications.page(params[:page]).per(10)
-    @pagination_path = { controller: "users", action: "publications", user_id: @user.id }
+    @pagination_path = request.query_parameters.merge( controller: "users", action: "publications", user_id: @user.id )
     respond_to do |format|
         format.html
         format.turbo_stream

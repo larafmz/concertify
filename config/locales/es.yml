@@ -20,6 +20,8 @@ es:
   not_found_masc: No se ha encontrado el %{model}
   created_ago: Creado hace %{time}
   sent_ago_by: Enviado por @%{user} hace %{time}
+  accepted_ago: Aceptado hace %{time}
+  denied_ago: Denegado hace %{time}
   sent: Enviado
   ago: Hace %{time}
   my_model: Mi %{model}
@@ -149,7 +151,7 @@ es:
     new_comment: "%{user} ha escrito un comentario en tu %{model}: %{comment}"
     new_reply: "%{user} ha respondido a tu comentario en tu %{model}: %{comment}"
     new_repost: "%{user} ha republicado tu %{model}"
-    event_update: "Se ha actualizado tu solicitud de %{event} al estado: "
+    event_update: "Se ha actualizado tu solicitud de %{event} al estado: %{status} "
     new_event: "Un usuario ha solicitada la adición de un nuevo evento: %{tour_name} de %{artist}"
     upcoming_event_7: "¡Queda solo una semana para %{event}! 🎶 ¡La cuenta atrás ha comenzado!"
     upcoming_event_6: "¡Quedan 6 días para %{event}! 🎸 ¡Cada vez falta menos!"

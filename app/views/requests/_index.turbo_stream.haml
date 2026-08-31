@@ -1,0 +1,9 @@
+= turbo_stream.remove "spinner"
+
+= turbo_stream.append "requests" do
+  - @requests.each do |request|
+    = render "requests/index_item", request: request
+
+- unless @requests.respond_to?(:next_page) && @requests.next_page
+  = turbo_stream.append "requests" do
+    %span.hidden{data: { pagination_target: "noRecords" }}

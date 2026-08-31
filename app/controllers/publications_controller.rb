@@ -5,7 +5,7 @@ class PublicationsController < ApplicationController
     def index
         publications = Publication.search_by(current_user).viewables(current_user).order("created_at DESC") 
         @publications = publications.page(params[:page]).per(5)
-        @pagination_path = { controller: "publications", action: "index" }
+        @pagination_path = request.query_parameters.merge( controller: "publications", action: "index" )
         respond_to do |format|
             format.html
             format.turbo_stream

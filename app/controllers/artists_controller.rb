@@ -44,7 +44,7 @@ class ArtistsController < ApplicationController
 
   def publications
     @publications = @publications.page(params[:page]).per(10)
-    @pagination_path = { controller: "artists", action: "publications", artist_id: @artist.id }
+    @pagination_path = request.query_parameters.merge( controller: "artists", action: "publications", artist_id: @artist.id )
     respond_to do |format|
         format.html
         format.turbo_stream

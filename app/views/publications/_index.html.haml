@@ -6,5 +6,5 @@
             - publications.each do |publication|
                 = render "publications/show", publication: publication
 
-        - unless @publications.respond_to?(:next_page) && publications.next_page && @pagination_path
+        - unless publications.respond_to?(:next_page) && publications.next_page && @pagination_path
             %span{class: "hidden", data: { pagination_target: "noRecords" }}

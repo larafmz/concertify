@@ -26,9 +26,11 @@ class Register < Interactuable
 
   ## CLASS METHODS
 
-    def self.viewables(user)
+    def self.viewables(user, of_friends: false)
       if user.present?
-        regs = Register.by_friends(user)
+        regs = Register.all
+        
+        regs = regs.by_friends(user) if of_friends
 
         #Remove Registers from users than have BLOCKED ME
         regs.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))

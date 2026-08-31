@@ -35,6 +35,12 @@ class EventsController < ApplicationController
   end
 
   def registers
+    @registers = @registers.page(params[:page]).per(5)
+    @pagination_path = { controller: "events", action: "registers", event_id: @event.id }
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def publications

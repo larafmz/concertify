@@ -3,7 +3,7 @@ class RegistersController < ApplicationController
   load_and_authorize_resource
 
     def index
-        registers = Register.viewables(current_user)
+        registers = Register.viewables(current_user, of_friends: true)
         @registers = registers.page(params[:page]).per(5)
         respond_to do |format|
             format.html

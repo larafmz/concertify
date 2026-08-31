@@ -1,0 +1,9 @@
+= turbo_stream.remove "spinner"
+
+= turbo_stream.append "users" do
+  - @users.each do |user|
+    = render "users/index_item", user: user
+
+- unless @users.next_page
+  = turbo_stream.append "users" do
+    %span.hidden{data: { pagination_target: "noRecords" }}

@@ -1,23 +1,7 @@
-- users.each_with_index do |user, index|
-
-    .register_user{style: "grid-template-columns: 0.1fr 4fr auto;"}
-        = link_to user_path(user), class: "hover-border-icon" do 
-            .link_icon
-                = image_tag user.icon if user.icon.attached?
-
-        %div
-            = link_to user_path(user) do
-                %span{ style: "font-size: 15px; font-weight: 700;" }= user.username
-            .softest-color{style: "font-size: 12px;" }
-                = link_to followers_user_path(user), class: "hover-border-icon" do 
-                    = user.followers.count
-                    = t("followers").downcase
-                ,
-                = link_to followers_user_path(user), class: "hover-border-icon" do 
-                    = user.followings.users.count
-                    = t("following").downcase
-
-        = render "users/relation_bottoms", user: user
-
-    
-        
+%div{data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
+    .artists-list{id: "users", data: { pagination_target: "users" }}
+        - users.each do |user|
+            = render "users/index_item", user: user
+            
+        - unless users.next_page
+            %span{class: "hidden", data: { pagination_target: "noRecords" }}

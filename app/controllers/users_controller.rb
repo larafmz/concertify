@@ -5,9 +5,15 @@ class UsersController < ApplicationController
   before_action :network, only: [:followers, :followings, :blocked]
 
   def index
-    @users = User.viewables(current_user).by_name(params[:search] )
+    users = User.viewables(current_user).by_name(params[:search] )
+    @users = users.page(params[:page]).per(20)
+    @pagination_path = request.query_parameters.merge(controller: "users",action: "index")
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
-
+ 
   def show
     @favorite_artists = @user.favorite_artists.map(&:artist)
     @registers = @user.registers.order(created_at: :desc).limit(4)

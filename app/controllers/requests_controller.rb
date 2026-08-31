@@ -3,7 +3,13 @@ class RequestsController < ApplicationController
     load_and_authorize_resource
 
     def index
-        @requests = Request.do_search(params)
+        requests = Request.do_search(params)        
+        @requests = requests.page(params[:page]).per(5)
+        @pagination_path = { controller: "requests", action: "index" }
+        respond_to do |format|
+            format.html
+            format.turbo_stream
+        end
     end
 
     def new
@@ -61,8 +67,18 @@ class RequestsController < ApplicationController
 
         @event.artists = [@artist] if @artist
 
-        @request.update(create_params)
-        redirect_back fallback_location: root_path
+        if @request.update(create_params)
+            respond_to do |format|
+                format.turbo_stream do
+                    render turbo_stream: turbo_stream.action( :redirect, request.referer || requests_path)
+                end
+                format.html do
+                    redirect_to request.referer || requests_path
+                end
+            end
+        else
+            render :new, status: :unprocessable_entity
+        end
         
     end
 

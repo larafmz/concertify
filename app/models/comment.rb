@@ -26,7 +26,8 @@ class Comment < ApplicationRecord
                 follower: user, 
                 record: self, 
                 message: notification_message,
-                path: Rails.application.routes.url_helpers.comment_path(self.id))
+                path: Rails.application.routes.url_helpers.comment_path(self.id)
+            )
             notification.deliver(all_users)
         end
 

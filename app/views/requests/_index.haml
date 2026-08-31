@@ -1,57 +1,10 @@
-.widget-content{style: "padding-top:0px;"}  
-    .registers-items
-
+.widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
+    .registers-items{id: "requests", data: { pagination_target: "requests" }}
         - if requests.empty?
             = render "common/empty_list_message", model: Request
-
-        - requests.each do |request| 
-            - event = request.event
-            - artist = event.artists.first
-            - event_date = event.date
-            - status = request.status
+        - else
+            - requests.each do |request| 
+                = render "requests/index_item", request: request
             
-            %div{style: "background: #{color_request(request.status)}; border-radius: 15px;"}
-
-                .request
-
-                    - if request.accepted? ||  (request.status == 2 && request.existing_event_id.present?)
-                        = link_to event_path(request.get_event_id) do
-                            = image_tag artist&.photo if artist&.photo&.attached?
-                    - elsif artist&.accepted?
-                        = image_tag artist&.photo if artist&.photo.attached?
-                    - else
-                        %div
-
-
-                    %div{style: "padding: 15px 15px;"}
-                        - if artist
-                            - if artist.accepted?
-                                = link_to artist_path(artist) do
-                                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.complete_name || t("not_found")
-                            - else
-                                %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.complete_name || t("not_found")
-                            %br
-                        
-                        %span{ style: "font-size: 18px;", class: "soft-color" } #{event.complete_name}
-                        %br
-
-                        - ub = event.ubication&.complete_name_with_venue || t("not_found")
-                        .softest-color{style: "font-size: 15px;" }
-                            %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
-                        
-                        %span{style: "color: #{color_request(request.status)}; font-size: 16px;"}
-                            ● #{request.message_request}
-
-                    %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 15px 15px;"}
-                        %div{style: "background: #{request.second_color_request}; color: #{color_request(request.status)}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
-                            #{request.emoji_request} #{request.status_string}
-                        - if can?(:edit, request)
-                            %div{style: "display: flex; gap: 20px;"}
-                                = link_to "✎", edit_request_path(request), data: { turbo_frame: "modal" }
-                                = link_to "✗", request_path(request), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }
-                        - if request.accepted? ||  (request.status == 2 && request.existing_event_id.present?)
-                            = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom event-color", style: "background-color: #069e34;font-size: 13px; width: 150px;"
-                   
-                .sent_at
-                    = t("sent_ago_by", user: request.requester&.username , time: time_ago_in_words(request.created_at))
-
+            - unless requests.respond_to?(:next_page) && requests.next_page && @pagination_path
+                %span{class: "hidden", data: { pagination_target: "noRecords" }}

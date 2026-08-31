@@ -37,7 +37,7 @@ class Request < ApplicationRecord
         notification = InteractionNotificationNotifier.with(
             record: self,
             path: Rails.application.routes.url_helpers.requests_path,
-            message:  I18n.t("notifications.new_event", tour_name: self.event.complete_name, artist: self.artist&.name)        
+            message: notification_message_new_request
           )
         notification.deliver(User.admins)
       end
@@ -47,7 +47,7 @@ class Request < ApplicationRecord
         notification = InteractionNotificationNotifier.with(
           record: self, 
           path: Rails.application.routes.url_helpers.requests_user_path(requester.id),
-          message: "#{I18n.t("notifications.event_update", event: self.event.tour_name)} <span style='color: #{color_request(self.status)}'>#{get_status_name.upcase}</span>"
+          message: notification_message_update_request
         )
         notification.deliver(requester)
       end
@@ -98,6 +98,23 @@ class Request < ApplicationRecord
     def get_event_id
       return event.id if accepted?
       return existing_event_id if status == 2 && existing_event_id.present?
+    end
+
+    def notification_message_new_request
+      {
+          key: "new_event",
+          tour_name: event.complete_name,
+          artist: artist&.name,
+      }
+    end
+
+    def notification_message_update_request
+      status_str = "<span style='color: #{color_request(self.status)}'>#{get_status_name.upcase}</span>"
+      {
+          key: "event_update",
+          event: event.tour_name,
+          status: status_str,
+      }
     end
 
     def second_color_request

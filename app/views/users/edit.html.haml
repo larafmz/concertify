@@ -47,20 +47,25 @@
                         %br
                         %span{data: { character_counter_target: "counter" }, style: "text-align: right; font-size: 12px; color: #a4b3c4;"}
 
-            .section-box
-                %h6{class: "soft-color"}= t("profile_icon")
-                %br  
-                - if @user.icon.attached?
-                    .div
-                        .circle_icon
-                            = image_tag @user.icon
-                        .delete-image-option
-                            = check_box_tag :remove_icon, "1", false
-                            = label_tag :remove_icon, "Eliminar imagen actual"
-        
-                %br  
-                %br  
-                
-                = f.file_field :icon
+            
+            %div
+                .section-box
+                    %h6{class: "soft-color"}= t("profile_icon")
+                    %br  
+                    - if @user.icon.attached?
+                        .div
+                            .circle_icon
+                                = image_tag @user.icon
+                            .delete-image-option
+                                = check_box_tag :remove_icon, "1", false
+                                = label_tag :remove_icon, t("destroy_actual_icon")
+            
+                    %br  
+                    %br  
+                    
+                    = f.file_field :icon
+
 
         = f.submit t("verbs.save"), style: "float: right", class: "btn-custom orange-color", style: "height: auto"
+
+    = button_to t("verbs.destroy_my_account"), user_registration_path, method: :delete, data: { turbo_confirm: "¿Seguro que quieres eliminar tu cuenta?" }, class: "btn-custom", style: "background: red; float: right;"

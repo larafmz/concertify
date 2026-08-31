@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def after_destroy_path_for(resource_or_scope)
+    root_path
+  end
+
   private
 
   def set_locale

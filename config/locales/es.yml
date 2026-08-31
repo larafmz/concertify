@@ -72,6 +72,7 @@ es:
   you_entered_chat: Te uniste al grupo
   details_of: Datos de %{data}
   not_authorized: No tienes permiso para acceder a esta página.
+  destroy_actual_icon: Eliminar imagen actual
   
   by: por
   about: sobre
@@ -101,6 +102,7 @@ es:
     login: Iniciar sesión
     register: Crear cuenta
     logout: Cerrar sesión
+    destroy_my_account: Eliminar mi cuenta
     mark_as_favorite: Marcar como Favorito
     mark_all_read: Marcar todo como leido
     request: Solicitar %{model}

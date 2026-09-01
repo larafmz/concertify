@@ -50,12 +50,13 @@ class Chat < ApplicationRecord
 
     def name(current_user)
       return event.tour_name if event
-      other_user(current_user).username
+      username = other_user(current_user)&.username
+      username.present? ? username : "NOT FOUND"
     end
 
     def photo(current_user)
       return event.photo if event
-      other_user(current_user).icon
+      other_user(current_user)&.icon
     end
 
     def has_notification?(current_user)

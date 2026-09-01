@@ -11,7 +11,7 @@
                     %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
         - else 
             %div{style: "display:flex; justify-content:start; align-items:center;"}
-                - if !chat_entry.same_previous_user? || !chat_entry.same_previous_type?
+                - if (!chat_entry.same_previous_user? || !chat_entry.same_previous_type?) && chat_entry.user
                     = link_to user_path(chat_entry.user) do 
                         .link_icon{style: "height: 40px; width: 40px;"}
                             = image_tag chat_entry.user.icon if chat_entry.user.icon.attached?
@@ -21,7 +21,7 @@
                 %div
                     - if !chat_entry.same_previous_user? || !chat_entry.same_previous_type?
                         %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}
-                            = chat_entry.user.username
+                            = chat_entry.user&.username || "NOT FOUND"
                     %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
                         %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
                         %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
@@ -30,4 +30,4 @@
             - if chat_entry.user_id == current_user.id
                 = t("you_#{chat_entry.text}", model: chat_entry.user.username)
             - else
-                = t(chat_entry.text, model: chat_entry.user.username)
+                = t(chat_entry.text, model: chat_entry.user&.username)

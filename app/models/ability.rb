@@ -36,8 +36,8 @@ class Ability
             (
               chat.group_chat? ||
               (
-                !chat.other_user(user).blocked_user?(user.id) &&
-                !user.blocked_user?(chat.other_user(user).id)
+                !chat.other_user(user)&.blocked_user?(user.id) &&
+                !user.blocked_user?(chat.other_user(user)&.id)
               )
             )
         end

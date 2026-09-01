@@ -4,6 +4,10 @@ class Role < ApplicationRecord
 
     has_many :users
 
+  ## SCOPES
+
+    scope :user, -> { where(name: "user").first }
+
   ## INSTANCE METHODS
     
     def admin?

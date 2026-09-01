@@ -1,0 +1,11 @@
+%div{style: "margin-top: 20px; display: flex; flex-direction: column; gap: 10px;"}
+
+  - if controller_name != 'sessions'
+    %div
+      %p{class: "soft-color"}=t("user_account.already_registered")
+      = link_to t("user_account.login"), new_session_path(resource_name), class: "btn-standard orange-color"
+
+  - if devise_mapping.registerable? && controller_name != 'registrations'
+    %div
+      %p{class: "soft-color"}=t("user_account.dont_have_account")
+      = link_to t("user_account.register"), new_registration_path(resource_name), class: "btn-standard orange-color"

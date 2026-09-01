@@ -29,7 +29,6 @@ es:
   recently_added: Recientemente añadidos
   from_followed_artists: De Artistas que sigues
   account_configuration: Configuración de la cuenta
-  profile: Perfil
   favorite_artists: Artistas Favoritos
   followers: Seguidores
   following: Siguiendo
@@ -99,16 +98,30 @@ es:
     remove_filters: Limpiar filtros
     remove_filter: Limpiar filtro
     edit: Editar
-    login: Iniciar sesión
-    register: Crear cuenta
-    logout: Cerrar sesión
-    destroy_my_account: Eliminar mi cuenta
     mark_as_favorite: Marcar como Favorito
     mark_all_read: Marcar todo como leido
     request: Solicitar %{model}
     logged: registró
     answer: Responder
     post: Publicar
+    
+  user_account:
+    profile: Perfil
+    password: Contraseña
+    my_profile: Mi Perfil
+    login: Iniciar sesión
+    register: Crear cuenta
+    logout: Cerrar sesión
+    destroy_my_account: Eliminar mi cuenta
+    minimum_password_length: "%{count} caracteres mínimos"
+    password_confirmation: Confirmación de contraseña
+    already_registered: "¿Ya tienes una cuenta?"
+    dont_have_account: "¿No tienes cuenta de usuario?"
+    change_password: Cambiar contraseña
+    new_password: Nueva contraseña
+    current_password: Contraseña actual
+    sure_to_delete_account: ¿Seguro que quieres eliminar tu cuenta?
+    need_current_password_to_confirm: "Necesario para el cambio de contraseña"
 
   filters:
     from: Desde

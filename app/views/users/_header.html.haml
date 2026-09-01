@@ -10,7 +10,7 @@
                     - if @user.follows_user?(current_user)   
                         %span{class: "softest-color", style: "margin-left:5px; font-size:13px;"}= t("follows_you")
                 - if can?(:edit, @user)
-                    = link_to t("crud.edit", model: t("profile")), edit_user_path(current_user), class: "small-btn-custom"
+                    = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "small-btn-custom"
                 .soft-color{style: "font-size: 15px;" }= "📍 #{@user.ubication.complete_name}" if @user.ubication
               
         .flex

@@ -55,6 +55,10 @@ es:
         username: Nombre de usuario
         name: Nombre
         description: Descripción
+        password: Contraseña
+        current_password: Contraseña actual
+        password_confirmation: Confirmación de contraseña
+        remember_me: Recuérdame
       event:
         tour_name: Nombre del Tour / Evento
         date: Fecha

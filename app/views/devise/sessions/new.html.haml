@@ -1,0 +1,22 @@
+.widget-content
+  %h4{style: "color: white;"}= t("user_account.login")
+
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .section-box{style: "display: flex; flex-direction: column; gap: 15px;"}
+
+      .form-field
+        = f.label :email, User.human_attribute_name(:email), class: "soft-color", style: "font-size: 13px;"
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom"
+
+      .form-field
+        = f.label :password, User.human_attribute_name(:password), class: "soft-color", style: "font-size: 13px;"
+        = f.password_field :password, autocomplete: "current-password", class: "field-custom"
+
+      .form-field
+        - if devise_mapping.rememberable?
+          = f.check_box :remember_me
+          = f.label :remember_me, User.human_attribute_name(:remember_me), class: "soft-color", style: "font-size: 13px;"
+
+    = f.submit t("user_account.login"), class: "field-custom orange-color"
+
+  = render "devise/shared/links"

@@ -9,12 +9,8 @@
             = t("sent_ago_by", user: @request.requester.username , time: time_ago_in_words(@request.created_at))
       %button.modal_close{ data: { action: "dialog#close" } } ×
 
-    - if @request.errors.any?
-      .form-errors{style: "margin-top:5px;"}
-        - @request.errors.full_messages.each do |message|
-          ● #{message}
-          %br
-                
+    = render "common/error_messages", resource: @request
+     
     = form_with model: @request do |f|  
       .modal_body
         

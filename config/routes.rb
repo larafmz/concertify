@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   get "change_locale/:locale", to: "application#change_locale", as: :change_locale
   
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
 
-  resources :users, only: [:show, :edit, :update, :index] do
+  resources :users, only: [:show, :index] do
     member do
       post :follow
       delete :unfollow

@@ -1,0 +1,75 @@
+.widget-content
+
+  %h4{style: "color: white;"}= t("account_configuration")
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = render "common/error_messages", resource: @user
+    
+    .two-columns{style: "gap: 20px;"}
+
+      .section-box{style: "display: flex; flex-direction: column; gap: 15px;"}
+        %h6{class: "soft-color"}= t("user_account.profile")
+          
+        .form-field
+          = f.label :username, User.human_attribute_name(:username), class: "soft-color", style: "font-size: 13px;"
+          = f.text_field :username, class: "field-custom", autocomplete: "off"
+
+        .form-field
+          = f.label :email, User.human_attribute_name(:email), class: "soft-color", style: "font-size: 13px;"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom"
+
+        %div{id: "ubication"}
+          = f.fields_for :ubication do |ubication_fields|
+            .two-columns{style: "gap: 20px;"}
+              %div
+                = label_tag :country_id, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
+                = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, 
+                  @user.ubication&.country_id), { include_blank: "Seleccionar" }, { class: "field-custom", style: "padding: 0px;" }
+              %div
+                = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
+                = ubication_fields.text_field :city, value: @user.ubication&.city, class: "field-custom", autocomplete: "off"
+        
+        .form-columns{data: { controller: "character-counter" }}
+          %div
+            = label_tag :description, User.human_attribute_name(:description), class: "soft-color", style: "font-size: 13px;"
+            = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), maxlength: 500, 
+              style: "width: 100%; height: 100px; resize: none;", class: "field-custom", autocomplete: "off",
+              data: {  character_counter_target: "input", action: "input->character-counter#update" }
+
+          %div
+            %span{data: { character_counter_target: "counter" }, style: "text-align: right; font-size: 12px; color: #a4b3c4;"}          
+
+      %div
+
+        .section-box
+          %h6{class: "soft-color"}= t("profile_icon")
+          = f.file_field :icon, style: "margin-bottom: 15px;"
+          - if @user.icon.attached?
+            .circle_icon
+              = image_tag @user.icon
+
+        .section-box{style: "display: flex; flex-direction: column; gap: 15px;"}
+          %h6{class: "soft-color"}= t("user_account.change_password")
+
+          .form-field
+            = f.label :password, User.human_attribute_name(:password), class: "soft-color", style: "font-size: 13px;"
+            - if @minimum_password_length
+              %p{class: "soft-color", style: "font-size: 13px;"}
+                = "(#{t("user_account.minimum_password_length", count: @minimum_password_length)})"
+            = f.password_field :password, autocomplete: "new-password", class: "field-custom"
+
+          .form-field
+            = f.label :password_confirmation, t("user_account.password_confirmation"), class: "soft-color", style: "font-size: 13px;"
+            = f.password_field :password_confirmation, autocomplete: "new-password", class: "field-custom"
+
+          .form-field
+            = f.label :current_password, t("user_account.current_password"), class: "soft-color", style: "font-size: 13px;"
+            %i (#{t("user_account.need_current_password_to_confirm")})
+            = f.password_field :current_password, autocomplete: "current-password", class: "field-custom"
+
+
+    .actions{style: "display: flex; justify-content: flex-end;"}
+      = f.submit t("verbs.save"), class: "btn-custom orange-color"
+
+  .separator
+    = button_to t("user_account.destroy_my_account"),  registration_path(resource_name),  data: { confirm: t("user_account.sure_to_delete_account"), turbo_confirm: t("user_account.sure_to_delete_account") },
+      method: :delete, class: "btn-custom", style: "background: red; margin-top: 10px;"

@@ -24,19 +24,6 @@ class UsersController < ApplicationController
     @populars_publications = @user.publications.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC").limit(3); 
   end
 
-  def edit
-  end
-
-  def update
-    @user.icon.purge if params[:remove_icon] == "1" && @user.icon.attached?
-
-    if @user.update(create_params)
-      redirect_to user_path(@user.id)
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
   def registers
     registers = @user.registers.order("created_at DESC")
     @registers = registers.page(params[:page]).per(5)
@@ -150,9 +137,5 @@ private
     @followers = User.viewables(current_user).where(id: @user.followers.users.select(:follower_id))
     @blocked = @user.blocked_users.users.map(&:followed)
   end
-
-  def create_params
-      params.require(:user).permit(:username, :email, :description, :icon, ubication_attributes: [:id, :city, :country_id])
-  end 
 
 end

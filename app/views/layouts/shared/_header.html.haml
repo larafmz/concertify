@@ -50,7 +50,7 @@
 
   - if current_user
     .flex{style: "display: flex; justify-content: right; gap: 30px; padding: 10px; font-size: 18px; color: white; "}
-      = link_to user_path(current_user), class: "hover-border-icon", title: t("profile") do
+      = link_to user_path(current_user), class: "hover-border-icon", title: t("user_account.profile") do
         .link_icon{ class: ("active" if current_page?(user_path(current_user))) }
           👤
       = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural do
@@ -71,12 +71,16 @@
       
       - if current_user
         %li 
-          = button_to t("verbs.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
+          = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
+        %li 
+          = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
       - else
         %li
-        = link_to t("verbs.login"), new_user_session_path, class: "dropdown-item"
+        = link_to t("user_account.login"), new_user_session_path, class: "dropdown-item"
         %li
-        = link_to t("verbs.register"), new_user_registration_path, class: "dropdown-item"
+        = link_to t("user_account.register"), new_user_registration_path, class: "dropdown-item"
 
 
   .dropdown

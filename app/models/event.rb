@@ -115,7 +115,9 @@ class Event < ApplicationRecord
 
     def get_photo
       return self.photo if self.photo.attached?
-      self.artists&.first&.photo 
+      artist_photo = artists.first&.photo
+      return artist_photo if artist_photo&.attached?
+      nil
     end
 
     def accepted?

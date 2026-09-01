@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
   resources :future_assistances, only: [:new, :create, :destroy, :edit, :update]
 
-  resources :publications, only: [:index, :new, :create, :show]
+  resources :publications, only: [:index, :new, :create, :show, :destroy]
 
   resources :artists, only: [:show, :index, :edit, :update] do
     member do

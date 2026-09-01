@@ -3,7 +3,7 @@ class ChatsController < ApplicationController
   authorize_resource except: [:show]
 
   before_action :authenticate_user
-  before_action :set_chat 
+  before_action :set_chat, except: [:exit]
 
   def index
   end
@@ -24,8 +24,7 @@ class ChatsController < ApplicationController
   end
 
   def exit
-    ChatUser.destroy_by(user_id: params[:user_id], chat_id: params[:id])
-    ChatEntry.create(chat_id: params[:id], user_id: params[:user_id], text: "exited_chat", chat_type: 1)
+    Chat.find(params[:id]).exit_chat(params[:user_id])
     redirect_to chats_path
   end
 

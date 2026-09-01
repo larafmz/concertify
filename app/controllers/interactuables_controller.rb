@@ -19,8 +19,11 @@ class InteractuablesController < ApplicationController
     end
         
     def destroy
-        @interactuable.destroy
-        redirect_to registers_user_path(current_user)
+        event = @interactuable.event if @interactuable.register?
+        if @interactuable.destroy
+            event.chat.exit_chat(current_user.id) if event && event.chat
+            redirect_to registers_user_path(current_user)
+        end
     end
 
     def like

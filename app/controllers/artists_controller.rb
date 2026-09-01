@@ -95,6 +95,8 @@ private
       @average_rating = @artist.average_rating 
       @publications_count = @artist.publications.count 
       @can_mark_favorite = current_user&.can_mark_favorite?
+      photo = @artist.photo
+      @photo_url = photo.attached? ? url_for(photo) : ActionController::Base.helpers.asset_path("default-event.jpg")
     end
   end
 

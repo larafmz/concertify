@@ -63,6 +63,9 @@ class Chat < ApplicationRecord
       !chat_users.find { |cu| cu.user_id == current_user.id }.read?
     end
 
-
+    def exit_chat(user_id)
+      self.chat_users.find_by(user_id: user_id)&.destroy
+      ChatEntry.create(chat_id: self.id, user_id: user_id, text: "exited_chat", chat_type: 1)
+    end
 
 end

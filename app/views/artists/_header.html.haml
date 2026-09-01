@@ -1,4 +1,4 @@
-%div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{url_for(@artist.photo)}'); background-size: cover; background-position: center 30%;" }
+%div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{@photo_url}'); background-size: cover; background-position: center 30%;" }
     %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, #1f252b 100%), linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .artist-info{style:"margin:40px;"}

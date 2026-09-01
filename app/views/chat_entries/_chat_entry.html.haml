@@ -12,7 +12,7 @@
         - else 
             %div{style: "display:flex; justify-content:start; align-items:center;"}
                 - if (!chat_entry.same_previous_user? || !chat_entry.same_previous_type?) && chat_entry.user
-                    = link_to user_path(chat_entry.user) do 
+                    = link_to user_path(chat_entry.user), data: { turbo_frame: "_top" } do 
                         .link_icon{style: "height: 40px; width: 40px;"}
                             = image_tag chat_entry.user.icon if chat_entry.user.icon.attached?
                 - else

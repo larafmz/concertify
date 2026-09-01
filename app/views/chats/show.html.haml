@@ -36,14 +36,16 @@
                             %ul.dropdown-menu
                                 %li
                                     = button_to exit_title, exit_chat_path(@chat, user_id: current_user.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
-                        
+
+            - else
+                .artist-info{style: "gap: 15px; margin: 5px;"}= "NOT FOUND"       
         .separator{style: "padding:0px;"}
 
         .chat-container
             - if @chat_entries
                 = render "chat_entries/show", chat_entries: @chat_entries
 
-        - if @chat && can?(:send_message, @chat)
+        - if @chat && can?(:send_message, @chat) && (@user || @event)
             = render "chats/send_message"
         - else
             %div{style: "border-radius: 15px; border: 1px solid #40556d; height:70px; padding: 10px; margin:10px;"}

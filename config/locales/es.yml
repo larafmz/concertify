@@ -136,6 +136,7 @@ es:
     logged_by: Registrado por
     ratings: Puntuaciones
     no_likes_yet: Sin Me Gustas
+    destroy_message: ¿Esta seguro de que desea eliminar el registro?" Ya no podra acceder al chat del evento.
 
   messages: 
     error: Ha ocurrido un error

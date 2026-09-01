@@ -24,13 +24,8 @@ class PublicationsController < ApplicationController
     end
 
     def destroy
-        @publication = Publication.find(params[:id])
-        user = @publication.user
-        @publication.destroy
-        if request.referer == interactuable_url(@publication)
-            redirect_to publications_path(user_id: user.id)
-        else
-            redirect_back fallback_location: publications_path(user_id: user.id)
+        if @publication.destroy
+            redirect_back fallback_location: publications_path
         end
     end
     

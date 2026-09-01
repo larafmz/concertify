@@ -68,6 +68,8 @@ class EventsController < ApplicationController
       @average_rating = @event.average_rating
       @event_registers_count = @event.registers.viewables(current_user).size
       @event_publications_count = @event.publications.viewables(current_user).size
+      photo = @event.get_photo
+      @photo_url = photo ? url_for(photo) : ActionController::Base.helpers.asset_path("default-event.jpg")
     end
   end
 

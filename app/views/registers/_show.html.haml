@@ -58,4 +58,4 @@
                 %li
                     = link_to t("crud.edit", model: Register.singular), edit_register_path(register), data: { turbo_frame: "modal" }, class: "dropdown-item"
                 %li
-                    = link_to t("crud.destroy", model: Register.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el registro?" }, class: "dropdown-item"
+                    = link_to t("crud.destroy", model: Register.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: t("registers.destroy_message") }, class: "dropdown-item"

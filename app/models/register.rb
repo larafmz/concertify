@@ -1,5 +1,9 @@
 class Register < Interactuable
 
+  ## CONFIGURATIONS
+
+   MAX_PHOTOS = 10
+
   ## RELATIONSHIPS
     
     belongs_to :event
@@ -26,8 +30,8 @@ class Register < Interactuable
   private
 
     def photos_limit
-        if photos.attached? && photos.count > 10
-            errors.add(:photos, "10 fotos máximo")
+        if photos.attached? && photos.count > MAX_PHOTOS
+            errors.add(:photos, I18n.t("messages.max_upload", count: MAX_PHOTOS))
         end
     end
 

@@ -162,6 +162,7 @@ es:
     exists_in_app_already: Ya existe en la app
     cant_send_message: No puedes enviar mensajes en este chat.
     event_already_registered: "Ya has registrado tu asistencia a este evento."
+    max_upload: "Solo puedes subir %{count} fotos, guapa."
     
   notifications:
     new_follower: "%{user} ha comenzado a seguirte"

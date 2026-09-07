@@ -1,5 +1,9 @@
 class Publication < Interactuable
 
+  ## CONFIGURATIONS
+
+   MAX_PHOTOS = 4
+
   ## RELATIONSHIPS
     
     belongs_to :artist, optional: true
@@ -21,8 +25,8 @@ class Publication < Interactuable
   private
 
     def photos_limit
-        if photos.attached? && photos.count > 4
-            errors.add(:photos, "4 fotos máximo") #TO/DO en form y show de registro y de evento/artista
+        if photos.attached? && photos.count > MAX_PHOTOS
+            errors.add(:photos, I18n.t("messages.max_upload", count: MAX_PHOTOS))
         end
     end
 

@@ -62,7 +62,7 @@ class RegistersController < ApplicationController
 private
 
     def create_params
-        params.require(:register).permit(:event_id, :review, :user_id, :rating)
+        params.require(:register).permit(:event_id, :review, :user_id, :rating, photos: [])
     end 
 
 end

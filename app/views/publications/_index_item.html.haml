@@ -41,7 +41,7 @@
     %div{style: "margin:0px 0px 10px 80px;"}
         - if publication.photos.attached?
             .publication-photos            
-                - publication.photos.first(4).each do |photo|
+                - publication.photos.each do |photo|
                     = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do
                         = image_tag photo, class: "publication-photo"
 

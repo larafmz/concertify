@@ -1,4 +1,5 @@
-%div
+%div{id: "publication-#{publication.id}"}
+
     .publication-grid{style: "position: relative; z-index: 1;"}
 
         = link_to user_path(publication.user), class: "hover-border-icon", style: "width: fit-content;" do

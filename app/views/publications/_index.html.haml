@@ -4,7 +4,7 @@
     - else
         %div{id: "publications", data: { pagination_target: "publications" }, style: "border: 1px solid #40556d;" }
             - publications.each do |publication|
-                = render "publications/show", publication: publication
+                = render "publications/index_item", publication: publication
 
         - unless publications.respond_to?(:next_page) && publications.next_page && @pagination_path
             %span{class: "hidden", data: { pagination_target: "noRecords" }}

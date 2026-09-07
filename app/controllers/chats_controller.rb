@@ -73,7 +73,7 @@ class ChatsController < ApplicationController
       end
 
       @chat_user = @chat.chat_users.find_by(user_id: current_user.id) if @chat
-      @chats = current_user.chats
+      @chats = current_user.chats.order_by_recent_messages.includes(:event, :chat_users, :users)
     end
 
 end

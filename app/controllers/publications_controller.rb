@@ -24,8 +24,12 @@ class PublicationsController < ApplicationController
     end
 
     def destroy
+        publication_id = @publication.id
         if @publication.destroy
-            redirect_back fallback_location: publications_path
+            respond_to do |format|
+                format.turbo_stream { render turbo_stream: turbo_stream.remove("publication-#{publication_id}") } #TO/DO revisar aqui
+                format.html { redirect_back fallback_location: root_path }
+            end
         end
     end
     

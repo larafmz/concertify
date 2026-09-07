@@ -41,6 +41,15 @@ class ChatEntry < ApplicationRecord
           locals: { chat_entry: self, current_user: current_user }
         )
       end
+
+      #update sidebar
+      broadcast_replace_to( # se reemplaza todo el sidebar
+        # hace actualizacion a a todos los usuarios, aunque no esten en el mismo chat
+        [ user, "sidebar" ], # = turbo_stream_from current_user, "sidebar" if @chat
+        target: "chat_sidebar", # {id: "chat_sidebar" ... }
+        partial: "chats/sidebar",
+        locals: { chats: user.chats.order_by_recent_messages.includes(:event, :chat_users, :users), current_user: user }
+      )
     end
 
   ## INSTANCE METHODS

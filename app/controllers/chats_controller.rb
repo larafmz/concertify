@@ -4,6 +4,7 @@ class ChatsController < ApplicationController
 
   before_action :authenticate_user
   before_action :set_chat, except: [:exit]
+  before_action :set_params, except: [:exit]
 
   def index
   end
@@ -72,7 +73,11 @@ class ChatsController < ApplicationController
         end
       end
 
+    end
+
+    def set_params
       @chat_user = @chat.chat_users.find_by(user_id: current_user.id) if @chat
+
       @chats = current_user.chats.order_by_recent_messages.includes(:event, :chat_users, :users)
     end
 

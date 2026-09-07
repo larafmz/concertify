@@ -15,7 +15,7 @@ class ChatUser < ApplicationRecord
 
   ## CALLBACKS
 
-   after_update_commit :broadcast_change, if: :saved_change_to_read_at?
+   after_update_commit :broadcast_change, if: -> { saved_change_to_read_at? && read_at_before_last_save.nil? && read_at.present? }
 
   ## CALLBACKS METHODS
 
@@ -28,7 +28,7 @@ class ChatUser < ApplicationRecord
         [ user, "sidebar" ], # = turbo_stream_from current_user, "sidebar" if @chat
         target: "chat_sidebar", # {id: "chat_sidebar" ... }
         partial: "chats/sidebar",
-        locals: { chats: user.chats, current_user: user }
+        locals: { chats: user.chats.order_by_recent_messages.includes(:event, :chat_users, :users), current_user: user }
       )
     
       #update header

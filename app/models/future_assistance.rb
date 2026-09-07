@@ -24,13 +24,24 @@ class FutureAssistance < ApplicationRecord
   ## CALLBACKS
 
     before_validation :truncate_data
+    after_destroy_commit :exit_chat
+
+  ## CALLBACKS METHODS
+
+  private
 
     def truncate_data
       self.event_seat_details = event_seat_details.truncate(MAX_FROM_LENGTH) unless event_seat_details.blank?
       self.from = from.truncate(MAX_FROM_LENGTH) unless from.blank?
     end
 
+    def exit_chat
+      event.chat.exit_chat(user_id) if event&.chat
+    end
+
   ## CLASS METHODS
+
+  public
 
     def self.viewables(user)
       if user.present?

@@ -22,6 +22,8 @@ class Interactuable < ApplicationRecord
 
   ## VALIDATION METHODS
 
+  private
+
     def photos_limit
         if photos.attached? && photos.count > 4
             errors.add(:photos, "4 fotos máximo") #TO/DO en form y show de registro y de evento/artista
@@ -29,6 +31,8 @@ class Interactuable < ApplicationRecord
     end
 
   ## CLASS METHODS
+
+  public
 
     def self.viewables(user)
       if user.present?

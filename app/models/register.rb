@@ -1,27 +1,42 @@
 class Register < Interactuable
 
-    ## RELATIONSHIPS
+  ## RELATIONSHIPS
     
     belongs_to :event
 
-    ## VALIDATIONS
+  ## VALIDATIONS
 
     validates :event_id, presence: true
     validates :event_id, uniqueness: { scope: :user_id, message: I18n.t('messages.event_already_registered') }
     validate :photos_limit
 
-    ## SCOPES
+  ## SCOPES
 
     scope :by_artist, ->(artist_id) { left_joins(event: :artists).where(artists: { id: artist_id }) }
     scope :with_review, -> { where.not(review: nil).where("TRIM(review) != ''") }
     scope :by_friends, -> (current_user) { where(user_id: current_user.followings.pluck(:followed_id)) }
 
-    ## VALIDATION METHODS
+  
+  ## CALLBACKS
+
+    after_destroy_commit :exit_chat
+
+  ## VALIDATION METHODS
+
+  private
 
     def photos_limit
         if photos.attached? && photos.count > 10
             errors.add(:photos, "10 fotos máximo")
         end
+    end
+
+  # CALLBACKS METHODS
+
+  public
+
+    def exit_chat
+      event.chat.exit_chat(user_id) if event&.chat
     end
 
   ## CLASS METHODS

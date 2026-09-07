@@ -17,7 +17,9 @@ class Ability
       if user.admin?
 
         can :manage, :all
- 
+        #cannot follow/unfollow self
+        cannot [:follow, :unfollow], User do |target| target.id == user.id end
+
       elsif user.user?
 
         #read permissions

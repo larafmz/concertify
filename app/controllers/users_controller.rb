@@ -90,12 +90,30 @@ class UsersController < ApplicationController
   end
 
   def followings
+    @users = @followings.page(params[:page]).per(20)
+    @pagination_path = request.query_parameters.merge(controller: "users",action: "followings", user_id: @user.id)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def followers
+    @users = @followers.page(params[:page]).per(20)
+    @pagination_path = request.query_parameters.merge(controller: "users",action: "followers", user_id: @user.id)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def blocked
+    @users = Kaminari.paginate_array(@blocked).page(params[:page]).per(20)
+    @pagination_path = request.query_parameters.merge(controller: "users",action: "blocked", user_id: @user.id)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def follow

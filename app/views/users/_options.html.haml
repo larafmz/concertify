@@ -9,4 +9,4 @@
         = link_to Artist.plural, artists_user_path(@user), style: ("color: white; border-bottom: 2px solid #{artist_color};" if active == :artists)
         - if can?(:requests, @user)
             = link_to Request.plural, requests_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :requests)
-        = link_to t("network"), followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :follows)
+        = link_to t("network"), followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :network)

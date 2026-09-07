@@ -22,13 +22,15 @@
 
         %ul.dropdown-menu
           %li
-            = link_to Event.plural,events_path, class: "dropdown-item"
+            = link_to Event.plural, events_path, class: "dropdown-item"
           %li
             = link_to Register.plural, registers_path, class: "dropdown-item"
           %li
             = link_to Publication.plural, publications_path, class: "dropdown-item"
           %li
             = link_to Artist.plural, artists_path, class: "dropdown-item"
+          %li
+            = link_to User.plural, users_path, class: "dropdown-item"
 
       - if can?(:create, Publication)
         = link_to "+ #{t("verbs.post")}", new_publication_path, class: "btn-custom orange-color", data: { turbo_frame: "modal" }

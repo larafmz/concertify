@@ -1,25 +1,2 @@
-= render "users/options", active: :follows if @user
-
-.widget-content{style: "padding-top:0px;"}  
-
-    %div{style: "display: flex; gap: 20px; color: white;"}
-        = link_to followings_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};"), title: "#{@followings.count} #{User.plural}" do
-            =t("following").upcase
-            (#{@user.followings.users.count})
-        = link_to followers_user_path(@user), title: "#{@followers.count} #{User.plural}" do
-            =t("followers").upcase
-            (#{@user.followers.count})
-        - if can?(:blocked, @user)
-            = link_to blocked_user_path(@user), title: "#{@blocked.count} #{User.plural}" do
-                =t("blocked").upcase
-                (#{@blocked.count})
-    .separator
-
-
-.widget-content{style: "padding-top:0px;"}  
-    - if @followings.empty?
-        = render "common/empty_list_message", model: User
-    - else
-        %div{style: "border: 1px solid #40556d;"}       
-            .registers-items
-                = render "users/index", users: @followings    
+= render "users/options", active: :network
+= render "users/network", active: :followings

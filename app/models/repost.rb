@@ -14,6 +14,8 @@ class Repost < ApplicationRecord
 
         scope :for_interactuable_user, -> (user_id) { joins(:interactuable).where(interactuables: { user_id: user_id }) }
         scope :for_user, -> (user_id) { where(user_id: user_id)}
+        scope :for_publications, -> { joins(:interactuable).where(interactuables: { type: "Publication" }) }
+        scope :for_registers, -> { joins(:interactuable).where(interactuables: { type: "Register" }) }
 
     ## CALLBACKS
 
@@ -24,7 +26,7 @@ class Repost < ApplicationRecord
 
         def cant_repost_own
             if user.id == interactuable.user.id
-                errors.add(:base, t("messages.cant_repost_own"))
+                errors.add(:base, I18n.t("messages.cant_repost_own"))
             end
         end    
 

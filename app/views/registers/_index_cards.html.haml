@@ -3,7 +3,18 @@
     = render "common/empty_list_message", model: Register
 .columns
   - registers.each do |register|
+    - feed = register
+    - register = register[:register] if register[:register].present?
+
     .event-card{style: "display: flex; flex-direction: column; "}
+      .soft-color{style: "margin-left: 15px; font-size: 15px;"}
+        - if feed[:repost]
+          = link_to user_path(feed[:repost].user) do
+            🗘 
+            = feed[:repost].user.username
+        - else
+          %br
+
       = link_to interactuable_path(register), class: "hover-border" do
         .item-name.event-color{style: "width: 190px; height: 30px;", class: "soft-color"}
           %div{style: "display: flex; align-items: center; justify-content: flex-start; gap: 8px;"}

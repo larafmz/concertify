@@ -32,9 +32,27 @@ class Publication < Interactuable
 
   ## CLASS METHODS
 
-    def self.search_by(user)
+    def self.feed(user)
       return Publication.all unless user.present?
-      Publication.where(user_id: user.id).or(Publication.of_user_followings(user)).or(Publication.of_user_events(user)).distinct
+
+      reposts = Repost.for_publications.where(user_id: [user.id, *user.following_ids]).includes(:interactuable, :user)
+      publis = Publication.where(user_id: user.id).or(Publication.of_user_followings(user)).or(Publication.of_user_events(user)).distinct
+      publis = publis.where.not(id: reposts.pluck(:interactuable_id)) # Exclude publications that have been reposted by the user or their followings
+
+      feed = (publis.viewables(user).map do |publi|
+        {
+          publication: publi,
+          repost: nil,
+          date: publi.created_at
+        }
+        end + reposts.map do |repost|
+        {
+          publication: repost.interactuable,
+          repost: repost,
+          date: repost.created_at
+        }
+      end).sort_by { |obj| -obj[:date].to_i }
+      feed
     end
 
     def self.viewables(user)
@@ -47,7 +65,5 @@ class Publication < Interactuable
         Publication.all
       end
     end
-
-
 
 end

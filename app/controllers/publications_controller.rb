@@ -3,8 +3,8 @@ class PublicationsController < ApplicationController
     load_and_authorize_resource
 
     def index
-        publications = Publication.search_by(current_user).viewables(current_user).order("created_at DESC") 
-        @publications = publications.page(params[:page]).per(5)
+        publications = Publication.feed(current_user)
+        @publications = Kaminari.paginate_array(publications).page(params[:page]).per(5)
         @pagination_path = request.query_parameters.merge( controller: "publications", action: "index" )
         respond_to do |format|
             format.html

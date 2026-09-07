@@ -8,7 +8,7 @@
         =link_to registers_path do
           = t("more").upcase
       .separator{style: "margin-bottom: 15px; "}
-      = render "registers/index_cards", registers: @registers.limit(6)
+      = render "registers/index_cards", registers: @registers
     
   %div{style: "margin-top: 20px;"}
     .title_section

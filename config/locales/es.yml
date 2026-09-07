@@ -105,6 +105,8 @@ es:
     logged: registró
     answer: Responder
     post: Publicar
+    reposted: Republicó
+    you_reposted: Republicaste
     
   user_account:
     profile: Perfil

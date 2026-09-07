@@ -3,9 +3,9 @@ class RegistersController < ApplicationController
   load_and_authorize_resource
 
     def index
-        registers = Register.viewables(current_user, of_friends: true)
+        registers = Register.feed(current_user)
+        @registers = Kaminari.paginate_array(registers).page(params[:page]).per(5)
         @pagination_path = request.query_parameters.merge( controller: "registers", action: "index" )
-        @registers = registers.page(params[:page]).per(5)
         respond_to do |format|
             format.html
             format.turbo_stream

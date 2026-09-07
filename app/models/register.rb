@@ -45,20 +45,37 @@ class Register < Interactuable
 
   ## CLASS METHODS
 
-    def self.viewables(user, of_friends: false)
-      if user.present?
-        regs = Register.all
-        
-        regs = regs.by_friends(user) if of_friends
+    def self.feed(user)
+      return Register.all unless user.present?
 
+      reposts = Repost.for_registers.where(user_id: [user.id, *user.following_ids]).includes(:interactuable, :user)
+      regs = Register.by_friends(user)
+      regs = regs.where.not(id: reposts.pluck(:interactuable_id)) # Exclude registers that have been reposted by the user or their followings
+
+      feed = (regs.viewables(user).map do |reg|
+        {
+          register: reg,
+          repost: nil,
+          date: reg.created_at
+        }
+        end + reposts.map do |repost|
+        {
+          register: repost.interactuable,
+          repost: repost,
+          date: repost.created_at
+        }
+      end).sort_by { |obj| -obj[:date].to_i }
+      feed
+    end
+
+    def self.viewables(user)
+      if user.present?
         #Remove Registers from users than have BLOCKED ME
-        regs.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
+        regs = Register.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
         #Remove Registers from users than I HAVE BLOCKED
         regs.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
-
-        regs.order("created_at DESC")
       else
-        Register.all.order("created_at DESC")
+        Register.all
       end
     end
 

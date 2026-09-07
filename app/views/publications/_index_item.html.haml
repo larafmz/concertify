@@ -1,4 +1,18 @@
+- feed = publication
+- publication = publication[:publication] if publication[:publication].present?
 %div{id: "publication-#{publication.id}"}
+
+    - if feed[:repost]
+        .soft-color{style: "margin-left: 15px; font-size: 15px;"}
+            - if feed[:repost].user.id == current_user.id
+                🗘 
+                = t("verbs.you_reposted")
+                = "..."
+            - else
+                🗘 
+                = feed[:repost].user.username
+                = t("verbs.reposted").downcase
+                = "..."
 
     .publication-grid{style: "position: relative; z-index: 1;"}
 

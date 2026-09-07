@@ -1,4 +1,19 @@
+- feed = register
+- register = register[:register] if register[:register].present?
 - event = register.event
+
+- if feed[:repost]
+    .soft-color{style: "margin-left: 15px; font-size: 15px;"}
+        - if feed[:repost].user.id == current_user.id
+            🗘 
+            = t("verbs.you_reposted")
+            = "..."
+        - else
+            🗘 
+            = feed[:repost].user.username
+            = t("verbs.reposted").downcase
+            = "..."
+
 .register_user
 
     = link_to user_path(register.user), class: "hover-border-icon" do

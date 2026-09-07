@@ -1,41 +1,7 @@
-
-.widget-content{style: "padding-top:0px;"}  
-    - if future_assistances.empty?
-        = render "common/empty_list_message", model: FutureAssistance
-    - else
+.widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: @pagination_path, pagination_page_value: 2 } }
+    %div{id: "future_assistances", data: { pagination_target: "future_assistances" } }
         - future_assistances[0..10].each do |future_assistance|
-            - event = future_assistance.event
-            - event_date = event.date
-            - event_date_status = time_status(event_date, event.start_time)
+            = render "future_assistances/index_item_short", future_assistance: future_assistance
 
-            .future_assistance{style: "margin:20px 0px 20px 0px;"}
-                = link_to user_path(future_assistance.user), class: "hover-border-icon" do
-                    .link_icon 
-                        = image_tag future_assistance.user.icon if future_assistance.user.icon.attached?
-
-                %div
-                    .flex-left
-                        .softest-color{style: "font-weight: 700"} #{FutureAssistance.singular} #{t("by")}
-                        = link_to user_path(future_assistance.user) do 
-                            %span{style: "font-weight: 700; color: white;"}=future_assistance.user.username.upcase
-        
-                    .flex-left
-                        %div{style: "margin-top:10px;"}
-                            - if future_assistance.event_seat_string && !future_assistance.event_seat_details.empty?
-                                .bubble
-                                    %span= "🎟️ #{future_assistance.event_seat_string}"
-                                    %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
-                        
-                        %div{style: "margin-top:10px;"}
-                            - if future_assistance.from && !future_assistance.from.empty?
-                                .bubble
-                                    %span{style: "color: rgb(230, 230, 230);"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
-
-                        %div{style: "margin-top:10px;"}
-                            - if future_assistance.company_string && future_assistance.company!= 0
-                                .bubble
-                                    #{future_assistance.company_string}
-
-            .separator{style: "margin-top:10px;"}
-
-
+    - unless @future_assistances.respond_to?(:next_page) && @future_assistances.next_page
+        %span{class: "hidden", data: { pagination_target: "noRecords" }}

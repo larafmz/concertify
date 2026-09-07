@@ -32,6 +32,12 @@ class EventsController < ApplicationController
   end
 
   def future_assistances
+    @future_assistances = @future_assistances.page(params[:page]).per(10)
+    @pagination_path =  future_assistances_event_path(@event)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def registers

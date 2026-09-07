@@ -5,6 +5,8 @@ class FutureAssistance < ApplicationRecord
   kindable :event_seat, { :pista => 0, :grada => 1, :vip => 2, :otro => 3 }
   kindable :company, { :undefined => 0, :alone => 1, :accompanied => 2}
 
+  MAX_FROM_LENGTH = 50
+
   ## RELATIONSHIPS
 
     belongs_to :user
@@ -16,15 +18,16 @@ class FutureAssistance < ApplicationRecord
 
   ## VALIDATIONS
 
-    validates :event_seat_details, :from, length: { maximum: 20 }, allow_nil: true
+    validates :event_seat_details, :from, length: { maximum: MAX_FROM_LENGTH }, allow_nil: true
+    validates :event_id, uniqueness: { scope: :user_id, message: I18n.t('messages.event_already_registered') }
   
   ## CALLBACKS
 
     before_validation :truncate_data
 
     def truncate_data
-      self.event_seat_details = event_seat_details.truncate(20) unless event_seat_details.blank?
-      self.from = from.truncate(20) unless from.blank?
+      self.event_seat_details = event_seat_details.truncate(MAX_FROM_LENGTH) unless event_seat_details.blank?
+      self.from = from.truncate(MAX_FROM_LENGTH) unless from.blank?
     end
 
   ## CLASS METHODS

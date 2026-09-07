@@ -1,6 +1,6 @@
 = render "users/options", active: :future_assistances
 
-.widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: future_assistances_user_path(@user), pagination_page_value: 2 } }
+.widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: @pagination_path, pagination_page_value: 2 } }
     %div{id: "future_assistances", data: { pagination_target: "future_assistances" } }
         - if @future_assistances.empty?
             = render "common/empty_list_message", model: FutureAssistance

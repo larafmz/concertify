@@ -12,10 +12,21 @@ class ChatUser < ApplicationRecord
   ## VALIDATIONS
 
     validates :user_id, uniqueness: { scope: :chat_id }
+    validate :user_logged_event, if: -> { chat&.event } 
 
   ## CALLBACKS
 
    after_update_commit :broadcast_change, if: -> { saved_change_to_read_at? && read_at_before_last_save.nil? && read_at.present? }
+
+  ## VALIDATIONS METHODS
+
+  def user_logged_event
+    register = Register.find_by(user_id: user_id, event_id: chat.event_id)
+    future_assistance = FutureAssistance.find_by(user_id: user_id, event_id: chat.event_id)
+    unless register.present? || future_assistance.present?
+      errors.add(:user_id, "User must assist or have assisted to the event to join the chat.")
+    end
+  end
 
   ## CALLBACKS METHODS
 

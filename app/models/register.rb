@@ -7,7 +7,7 @@ class Register < Interactuable
     ## VALIDATIONS
 
     validates :event_id, presence: true
-    validates :event_id, uniqueness: { scope: :user_id, message: "Ya has registrado este evento" }
+    validates :event_id, uniqueness: { scope: :user_id, message: I18n.t('messages.event_already_registered') }
     validate :photos_limit
 
     ## SCOPES

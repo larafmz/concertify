@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       post :send_message
       delete :exit
       post :mark_as_read
+      get :members
     end
   end
 

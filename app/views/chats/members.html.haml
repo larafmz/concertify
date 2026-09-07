@@ -1,0 +1,15 @@
+%div{style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden;"}
+    = render "chats/header", chat: @chat, user: @user, event: @event
+
+    - if @users.empty?
+        = render "common/empty_list_message", model: User
+    - else
+        - if @future_assistances.present?
+            .widget-content      
+                .registers-items
+                    = render "future_assistances/index", future_assistances: @future_assistances
+        - else
+            .widget-content      
+                .registers-items
+                    = render "users/index", users: @users 
+                    

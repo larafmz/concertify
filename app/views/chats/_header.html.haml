@@ -1,4 +1,4 @@
-%div{style: "display: grid; grid-template-columns: 1fr 1fr auto; background: #1f252b"}
+%div{style: "display: grid; grid-template-columns: 1fr 1fr auto; background: #1f252b; color: white"}
     - if user
         = link_to user_path(user), data: { turbo_frame: "_top" } do 
             .artist-info{style: "gap: 15px; margin: 5px;"}
@@ -16,9 +16,13 @@
                     .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
                         %div= "📍#{event.ubication&.complete_name} 🗓️ #{formatted_event_date(event.date, event.start_time)}" 
         %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
-            %div{style: "margin-right: 15px;"}
-                = chat ? chat.chat_users.count : "0"
-                =t("members")
+            - if action_name == "members"
+                = link_to chat_path(chat.id), style: "margin-right: 15px;" do
+                    =t("back_to_chat")            
+            - else
+                = link_to members_chat_path(chat.id), style: "margin-right: 15px;", data: { turbo_frame: "_top" } do
+                    = chat ? chat.chat_users.count : "0"
+                    =t("members")
         - if chat && chat.chat_users.exists?(user_id: current_user.id)
             - exit_title = chat.group_chat? ? t("exit_group") : t("crud.destroy", model: Chat.singular)
             %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}

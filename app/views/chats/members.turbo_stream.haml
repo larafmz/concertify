@@ -1,0 +1,4 @@
+- if @future_assistances.present?
+    = render partial: "future_assistances/index", formats: [:turbo_stream]
+- else
+    = render partial: "users/index", formats: [:turbo_stream]

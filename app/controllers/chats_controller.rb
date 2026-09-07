@@ -1,5 +1,7 @@
 class ChatsController < ApplicationController
 
+  include ApplicationHelper
+
   authorize_resource except: [:show]
 
   before_action :authenticate_user
@@ -41,6 +43,26 @@ class ChatsController < ApplicationController
   def mark_as_read #used in javascript chat_controller.js
     @chat_user.mark_as_read
     render json: {}, status: :no_content #rendering nothing
+  end
+  
+  def members
+    unless @chat.group_chat? 
+      flash[:alert] = t("messages.error")
+      redirect_to chats_path
+      return
+    end
+
+    @pagination_path = members_chat_path(@chat, request.query_parameters)
+    event_date_status = time_status(@chat.event.date, @chat.event.start_time)
+    users = @chat.users
+    @users = users.page(params[:page]).per(20)
+    if event_date_status == "future"
+      @future_assistances = @chat.event.future_assistances.includes(:user).where(user_id: @users.pluck(:id)).page(params[:page]).per(10)
+    end
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   private 

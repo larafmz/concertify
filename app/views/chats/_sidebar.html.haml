@@ -4,8 +4,6 @@
         = form_tag chats_path, method: "GET" do
             = text_field_tag :search, params[:search], placeholder: t("search"), class: "field-custom", data: { chat_filter_target: "input", action: "input->chat-filter#filter" }
         %div{style: "margin:15px 0px 5px 10px;"}
-            - puts "AQUI"
-            - puts chats.joins(:chat_entries).where(chat_entries: { chat_type: 0 }).group("chats.id").order(Arel.sql("MAX(chat_entries.created_at) DESC, chats.id DESC")).pluck(:id)
             - chats.each do |chat|
                 - color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
                 - chat_name = chat.name(current_user).downcase

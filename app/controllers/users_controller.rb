@@ -63,6 +63,7 @@ class UsersController < ApplicationController
   def future_assistances
     future_assistances = @user.future_assistances.joins(:event).includes( event: [ :artists, :ubication, { photo_attachment: :blob }]).order("events.date ASC")
     @future_assistances = future_assistances.page(params[:page]).per(5)
+    @pagination_path = future_assistances_user_path(@user)
     respond_to do |format|
       format.html
       format.turbo_stream

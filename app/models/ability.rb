@@ -72,7 +72,7 @@ class Ability
         end
         
         # Requests permissions
-        can [:edit, :destroy], Request do |request| request.requester_id == user.id && request.status ==  Request::STATUS_PENDING end
+        can [:update, :destroy], Request do |request| request.requester_id == user.id && request.status ==  Request::STATUS_PENDING end
         
         # Notifications permissions
         can [:mark_as_read, :read_and_redirect, :mark_all_read], Notification do |notification| notification.recipient == user end

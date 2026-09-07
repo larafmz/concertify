@@ -45,7 +45,7 @@
                         .link_icon
                             = image_tag  register_liked.user.icon if register_liked.user.icon.attached?
 
-    - if can?(:edit, register)
+    - if can?(:update, register)
         .dropdown
             %button.btn.btn-secondary.dropdown-toggle{
                 type: "button",

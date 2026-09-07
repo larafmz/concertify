@@ -80,7 +80,13 @@ class UsersController < ApplicationController
   end
 
   def notifications
-    @notifications = @user.notifications.order(created_at: :desc)
+    notifications = @user.notifications.order(created_at: :desc)
+    @notifications = notifications.page(params[:page]).per(10)
+    @pagination_path = request.query_parameters.merge( controller: "users", action: "notifications", user_id: @user.id )
+    respond_to do |format|
+        format.html
+        format.turbo_stream
+    end
   end
 
   def followings

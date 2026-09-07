@@ -6,9 +6,13 @@
 
 .separator
 
-- if @notifications.empty?
-    .widget-content
+.widget-content{style: "padding: 0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
+    - if @notifications.empty?
         = render "common/empty_list_message", model: Notification
+    - else
+        %div{id: "notifications", data: { pagination_target: "notifications" } }
+            - @notifications.each do |notification|  
+                = render "notifications/index_item", notification: notification
 
-- @notifications.each do |notification|  
-    = render "notifications/table_item", notification: notification
+        - unless @notifications.respond_to?(:next_page) && @notifications.next_page && @pagination_path
+            %span{class: "hidden", data: { pagination_target: "noRecords" }}

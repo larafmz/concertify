@@ -8,12 +8,23 @@ class Publication < Interactuable
   ## VALIDATIONS
     
     validates :review, presence: true
+    validate :photos_limit
 
   ## SCOPES
 
     scope :by_artist, -> (artist_id) { left_joins(:artist).where(artist: { id: artist_id }) }
     scope :of_user_followings, -> (user) { where(user_id: user.followings.users.select(:followed_id)).or(where(artist_id: user.followings.artists.select(:followed_id))) }
     scope :of_user_events, -> (user) { where(event_id: user.registers.select(:event_id)).or(where(event_id: user.future_assistances.select(:event_id))) }
+  
+  ## VALIDATION METHODS
+
+  private
+
+    def photos_limit
+        if photos.attached? && photos.count > 4
+            errors.add(:photos, "4 fotos máximo") #TO/DO en form y show de registro y de evento/artista
+        end
+    end
 
   ## CLASS METHODS
 

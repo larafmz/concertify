@@ -37,5 +37,15 @@
                         %li
                             = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item"
 
-    %div{style: "margin:0px 0px 20px 30px;"}
+  
+    %div{style: "margin:0px 0px 10px 80px;"}
+        - if publication.photos.attached?
+            .publication-photos            
+                - publication.photos.first(4).each do |photo|
+                    = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do
+                        = image_tag photo, class: "publication-photo"
+
+    %div{style: "margin:0px 0px 20px 80px;"}
         = render "interactuables/footer", interactuable: publication
+
+.separator

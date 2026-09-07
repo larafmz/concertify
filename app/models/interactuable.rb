@@ -13,22 +13,11 @@ class Interactuable < ApplicationRecord
   
     validates :rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }, allow_nil: true
     validates :type, presence: true
-    validate :photos_limit
   
   ## SCOPES
 
     scope :register, -> { where(type: "Register") }
     scope :publication, -> { where(type: "Publication") }
-
-  ## VALIDATION METHODS
-
-  private
-
-    def photos_limit
-        if photos.attached? && photos.count > 4
-            errors.add(:photos, "4 fotos máximo") #TO/DO en form y show de registro y de evento/artista
-        end
-    end
 
   ## CLASS METHODS
 

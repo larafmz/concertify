@@ -36,7 +36,7 @@ class PublicationsController < ApplicationController
 private
 
     def create_params
-        params.require(:publication).permit(:type, :user_id, :review)
+        params.require(:publication).permit(:type, :user_id, :review, photos: [])
     end 
 
 end

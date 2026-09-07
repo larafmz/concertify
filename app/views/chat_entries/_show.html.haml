@@ -1,4 +1,0 @@
-= turbo_stream_from [@chat, current_user], "messages" if @chat
-.chat{id: "messages", data: { controller: "chat", chat_chat_id_value: @chat.id, chat_current_user_id_value: current_user.id }, style: "margin: 5px;" }
-    - chat_entries.each do |chat_entry|
-        = render "chat_entries/chat_entry", chat_entry: chat_entry

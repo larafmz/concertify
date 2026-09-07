@@ -14,9 +14,18 @@ class ChatsController < ApplicationController
       flash[:alert] = t("not_found_masc", model: Chat.singular.downcase)
       redirect_to chats_path
       return
+    else
+
+      @chat_user.mark_as_read
+
+      @chat_entries = @chat.chat_entries.order("created_at DESC").page(params[:page]).per(10)
+      @pagination_path = chat_path(@chat, request.query_parameters)
+      respond_to do |format|
+          format.html
+          format.turbo_stream
+      end
     end
-    @chat_entries = @chat.chat_entries.order("created_at ASC") if @chat
-    @chat_user.mark_as_read
+
   end
 
   def send_message
@@ -29,7 +38,7 @@ class ChatsController < ApplicationController
     redirect_to chats_path
   end
 
-  def mark_as_read
+  def mark_as_read #used in javascript chat_controller.js
     @chat_user.mark_as_read
     render json: {}, status: :no_content #rendering nothing
   end

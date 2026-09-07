@@ -1,0 +1,7 @@
+= turbo_stream.prepend "chat_entries" do
+    - @chat_entries.reverse_each do |chat_entry|
+        = render "chat_entries/index_item", chat_entry: chat_entry
+
+- unless @chat_entries.next_page
+    = turbo_stream.append "chat_entries" do
+        %span.hidden{data: { chat_pagination_target: "noRecords" }}

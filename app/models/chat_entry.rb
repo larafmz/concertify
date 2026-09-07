@@ -34,10 +34,10 @@ class ChatEntry < ApplicationRecord
     def broadcast_message   
       chat.users.each do |current_user|
         broadcast_append_to( # se añade un mensaje
-          # hace actualizaciona a los usuarios que esten en el chat, "messages" es solo un label
-          [ chat, current_user, "messages" ], # = turbo_stream_from [@chat, current_user] "messages" if @chat
-          target: "messages", # {id: "messages" ... }
-          partial: "chat_entries/chat_entry",
+          # hace actualizaciona a los usuarios que esten en el chat, "chat_entries" es solo un label
+          [ chat, current_user, "chat_entries" ], # = turbo_stream_from [@chat, current_user] "chat_entries" if @chat
+          target: "chat_entries", # {id: "chat_entries" ... }
+          partial: "chat_entries/index_item",
           locals: { chat_entry: self, current_user: current_user }
         )
       end

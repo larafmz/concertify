@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def change_locale
-    session[:locale] = params[:locale]
-    redirect_to_home
+    cookies.permanent[:locale] = params[:locale]
+    redirect_back fallback_location: root_path
   end
 
   def after_sign_out_path_for(resource_or_scope)
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 private
 
   def set_locale
-    I18n.locale = session[:locale] || I18n.default_locale
+    I18n.locale = cookies[:locale] || I18n.default_locale
   end
 
   def redirect_to_home

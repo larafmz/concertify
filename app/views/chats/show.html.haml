@@ -3,47 +3,11 @@
     = render "chats/sidebar", chats: @chats
 
     = turbo_frame_tag "chat_content", style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; " do
-        %div{style: "display: grid; grid-template-columns: 1fr 1fr auto; background: #1f252b"}
-            - if @user
-                = link_to user_path(@user), data: { turbo_frame: "_top" } do 
-                    .artist-info{style: "gap: 15px; margin: 5px;"}
-                        .link_icon{style: "height: 50px; width: 50px;"}
-                            = image_tag @user.icon if @user.icon.attached?
-                        .artist-name 
-                            %div{style: "margin-bottom:5px; font-size:15px;"}= @user.username
-            - elsif @event
-                = link_to event_path(@event), data: { turbo_frame: "_top" } do 
-                    .artist-info{style: "gap: 15px; margin: 5px;"}
-                        .link_icon{style: "height: 50px; width: 50px;"}
-                            = image_tag @event.get_photo if @event.get_photo&.attached?
-                        .artist-name 
-                            %div{style: "font-size:15px;"}= @event.tour_name
-                            .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
-                                %div= "📍#{@event.ubication&.complete_name} 🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
-                %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
-                    %div{style: "margin-right: 15px;"}
-                        = @chat ? @chat.chat_users.count : "0"
-                        =t("members")
-                - if @chat && @chat.chat_users.exists?(user_id: current_user.id)
-                    - exit_title = @chat.group_chat? ? t("exit_group") : t("crud.destroy", model: Chat.singular)
-                    %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
-                        .dropdown
-                            %button{
-                                "data-bs-toggle" => "dropdown",
-                                style: "background: none; border:0px; color: white;"
-                            }
-                                ⁝
-                            %ul.dropdown-menu
-                                %li
-                                    = button_to exit_title, exit_chat_path(@chat, user_id: current_user.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
-
-            - else
-                .artist-info{style: "gap: 15px; margin: 5px;"}= "NOT FOUND"       
-        .separator{style: "padding:0px;"}
+        = render "chats/header", chat: @chat, user: @user, event: @event
 
         .chat-container
             - if @chat_entries
-                = render "chat_entries/show", chat_entries: @chat_entries
+                = render "chat_entries/index", chat_entries: @chat_entries
 
         - if @chat && can?(:send_message, @chat) && (@user || @event)
             = render "chats/send_message"

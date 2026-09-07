@@ -1,0 +1,6 @@
+= turbo_stream_from [@chat, current_user], "chat_entries" if @chat
+.chat{id: "chat_entries", data: { controller: "chat chat-pagination", chat_chat_id_value: @chat.id, chat_current_user_id_value: current_user.id, chat_pagination_url_value: @pagination_path, chat_pagination_page_value: 2 }, style: "margin: 5px; overflow-y: auto; flex: 1; min-height: 0;"}
+    - chat_entries.reverse_each do |chat_entry|
+        = render "chat_entries/index_item", chat_entry: chat_entry
+    - unless chat_entries.respond_to?(:next_page) && chat_entries.next_page
+        %span.hidden{data: { chat_pagination_target: "noRecords" }}

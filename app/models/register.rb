@@ -45,6 +45,12 @@ class Register < Interactuable
 
   ## CLASS METHODS
 
+    def self.do_search(params, user: nil)
+      return Register.viewables(user) unless user.present?
+      return user.registers.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC") if params[:filter] && params[:filter]=="populars" 
+      user.registers.order(created_at: :desc)
+    end
+
     def self.feed(user)
       return Register.all unless user.present?
 

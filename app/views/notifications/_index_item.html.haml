@@ -13,9 +13,10 @@
             %div.softest-color
                 = custom_time_ago_in_words(notification.created_at)
         %div
-            - if notification.icon
+            - icon = notification.icon
+            - if icon
                 .link_icon{style:  "width: 45px; height: 45px; border-radius: 20%; "}
-                    = image_tag notification.icon if notification.icon.attached?
+                    = image_tag icon
         
     %div
         - if notification.for_follow?

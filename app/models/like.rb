@@ -30,7 +30,7 @@ class Like < ApplicationRecord
                 follower: user, 
                 record: self, 
                 message: notification_message,
-                path: Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id))
+                path: Rails.application.routes.url_helpers.interactuable_path(interactuable.id))
             notification.deliver(interactuable.user)
         end
 

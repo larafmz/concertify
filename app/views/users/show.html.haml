@@ -56,9 +56,9 @@
             
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }
-                    = link_to registers_user_path(@user) do
+                    = link_to registers_user_path(@user, filter: "populars") do
                         = t("populars", model: Register.human_attribute_name(:reviews)).upcase
-                    = link_to registers_user_path(@user) do
+                    = link_to registers_user_path(@user, filter: "populars") do
                         %span= t("more").upcase
                 .separator{style: "margin-bottom: 15px;"}
                 = render "registers/index", registers: @populars_registers
@@ -74,9 +74,9 @@
 
             %div{style: "margin-top: 20px;"}
                 .title_section
-                    =link_to publications_user_path(@user) do
+                    =link_to publications_user_path(@user, filter: "populars") do
                         =t("populars", model: Publication.plural).upcase
-                    =link_to publications_user_path(@user) do
+                    =link_to publications_user_path(@user, filter: "populars") do
                         = t("more").upcase
                 .separator{style: "margin-bottom: 15px; "}
                 = render "publications/index", publications: @populars_publications        

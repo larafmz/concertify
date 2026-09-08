@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def registers
-    registers = @user.registers.order("created_at DESC")
+    registers = Register.do_search(params, user: @user)
     @registers = registers.page(params[:page]).per(5)
     @pagination_path = request.query_parameters.merge( controller: "users", action: "registers", user_id: @user.id )
     respond_to do |format|
@@ -71,8 +71,8 @@ class UsersController < ApplicationController
   end
 
   def publications
-    @publications = @user.publications.order("created_at DESC")
-    @publications = @publications.page(params[:page]).per(10)
+    publications = Publication.do_search(params, user: @user)
+    @publications = publications.page(params[:page]).per(10)
     @pagination_path = request.query_parameters.merge( controller: "users", action: "publications", user_id: @user.id )
     respond_to do |format|
         format.html

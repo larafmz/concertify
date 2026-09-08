@@ -39,7 +39,7 @@ class Repost < ApplicationRecord
                 follower: user, 
                 record: self,
                 message: notification_message,
-                path: Rails.application.routes.url_helpers.comments_interactuable_path(interactuable.id))
+                path: Rails.application.routes.url_helpers.reposts_interactuable_path(interactuable.id))
             notification.deliver(interactuable.user)
         end
 

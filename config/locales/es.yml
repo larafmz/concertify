@@ -168,11 +168,16 @@ es:
     
   notifications:
     new_follower: "%{user} ha comenzado a seguirte"
-    new_like: "%{user} ha indicado que le gusta tu %{model}"
-    new_likes: "%{users} han indicado que les gusta tu %{model}" #TO/DO
-    new_comment: "%{user} ha escrito un comentario en tu %{model}: %{comment}"
-    new_reply: "%{user} ha respondido a tu comentario en tu %{model}: %{comment}"
-    new_repost: "%{user} ha republicado tu %{model}"
+    register:
+      new_like: "%{user} ha indicado que le gusta tu review de %{stars} %{tour_name}"
+      new_comment: "%{user} ha respondido a tu comentario en tu review de %{stars} %{tour_name}:%{comment}"
+      new_reply: "%{user} ha respondido a tu comentario en tu review de %{stars} %{tour_name}: %{comment}"
+      new_repost: "%{user} ha republicado tu review de %{stars} %{tour_name}"
+    publication:
+      new_like: "%{user} ha indicado que le gusta tu publicación %{text}"
+      new_comment: "%{user} ha escrito un comentario en tu publicación %{text}: %{comment}"
+      new_reply: "%{user} ha respondido a tu comentario en tu publicación %{text}: %{comment}"
+      new_repost: "%{user} ha republicado tu publicación %{text}"
     event_update: "Se ha actualizado tu solicitud de %{event} al estado: %{status} "
     new_event: "Un usuario ha solicitada la adición de un nuevo evento: %{tour_name} de %{artist}"
     upcoming_event_7: "¡Queda solo una semana para %{event}! 🎶 ¡La cuenta atrás ha comenzado!"

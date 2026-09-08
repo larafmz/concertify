@@ -52,12 +52,14 @@ class Comment < ApplicationRecord
 
         def notification_message
             user_str = "<strong> #{user.username} </strong>"
-            key = comment_father ? "new_reply" : "new_comment"
+            key = comment_father ? "#{interactuable.type.downcase}.new_reply" : "#{interactuable.type.downcase}.new_comment"
             {
                 key: key,
                 user: user_str,
-                model: interactuable.class.singular.downcase,
-                comment: text,
+                stars: interactuable.try(:get_rating),
+                tour_name: "<strong> #{interactuable.event&.tour_name} </strong>",
+                text: "<span style='font-style:italic; overflow-wrap:anywhere;'> #{interactuable.review} </span>",
+                comment: "<br> <span style='overflow-wrap:anywhere'> #{text} </span>",
             }
         end
 

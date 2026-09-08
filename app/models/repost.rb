@@ -54,9 +54,11 @@ class Repost < ApplicationRecord
         def notification_message
             user_str = "<strong> #{user.username} </strong>"
             {
-                key: "new_repost",
+                key: "#{interactuable.type.downcase}.new_repost",
                 user: user_str,
-                model: interactuable.class.singular.downcase,
+                stars: interactuable.try(:get_rating),
+                tour_name: "<strong> #{interactuable.event&.tour_name} </strong>",
+                text: "<span style='font-style:italic; overflow-wrap:anywhere;'> #{interactuable.review} </span>"
             }
         end
 

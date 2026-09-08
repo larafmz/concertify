@@ -62,9 +62,9 @@ class Notification < Noticed::Notification
         end
 
         def icon
-            if self.record.respond_to?(:interactuable) && self.record.interactuable.photos&.attached?
-                self.record.interactuable.photo
-            elsif self.record.respond_to?(:event) && self.record.event.photo&.attached?
+            if self.record.respond_to?(:interactuable) && self.record.interactuable.photos.attached?
+                self.record.interactuable.photos.first
+            elsif self.record.respond_to?(:event) && self.record.event.photo.attached?
                 self.record.event.photo
             end
         end

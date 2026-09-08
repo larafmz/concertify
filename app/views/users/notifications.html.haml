@@ -6,10 +6,11 @@
 
 .separator
 
-.widget-content{style: "padding: 0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
-    - if @notifications.empty?
+- if @notifications.empty?
+    .widget-content
         = render "common/empty_list_message", model: Notification
-    - else
+- else
+    .widget-content{style: "padding: 0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
         %div{id: "notifications", data: { pagination_target: "notifications" } }
             - @notifications.each do |notification|  
                 = render "notifications/index_item", notification: notification

@@ -16,7 +16,16 @@ class Notification < Noticed::Notification
 
         scope :read, -> { where.not(read_at: nil) }
         scope :unread, -> { where(read_at: nil) }
+    
+    ## CALLBACKS
 
+        after_destroy_commit :broadcast_change
+
+    ## CALLBACKS METHODS
+
+    def broadcast_change
+        BroadcastHelper.update_notifications_header(recipient)
+    end
 
     ## CLASS METHODS
 

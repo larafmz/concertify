@@ -33,23 +33,8 @@ class ChatUser < ApplicationRecord
   private
 
     def broadcast_change
-      # replace chat in sidebar to show its read
-      Turbo::StreamsChannel.broadcast_replace_to(
-        [user, "sidebar"],
-         target: "chat_#{chat.id}",
-        partial: "chats/sidebar_chat",
-        locals: { chat: chat, current_user: user }
-      )
-    
-      # update header
-      broadcast_replace_to( # se reemplaza todo el trozo del header 
-        # hace actualizacion a a todos los usuarios
-        [ user, "messages_header" ], # = turbo_stream_from current_user, "messages_header"
-        target: "messages_header", # {id: "messages_header" ... }
-        partial: "layouts/shared/messages_bubble",
-        locals: { current_user: user }
-      )
-
+      BroadcastHelper.replace_chat_in_sidebar(chat, user)
+      BroadcastHelper.update_messages_header(user)
     end
 
   ## INSTANCE METHODS

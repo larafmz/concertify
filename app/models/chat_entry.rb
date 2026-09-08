@@ -18,41 +18,25 @@ class ChatEntry < ApplicationRecord
 
   ## CALLBACKS
 
-   after_create_commit :broadcast_message
+   after_create_commit :broadcast_change
 
   ## CALLBACKS METHODS
 
   private
 
-    def broadcast_message 
-      
+    def broadcast_change
+      # update chat to unread
       ChatUser.where(chat_id: chat.id).where.not(user_id: user.id).each do |chat_user|
         chat_user.mark_as_unread
       end
 
-      chat.users.each do |current_user|
-        broadcast_append_to( # se añade un mensaje
-          # hace actualizaciona a los usuarios que esten en el chat, "chat_entries" es solo un label
-          [ chat, current_user, "chat_entries" ], # = turbo_stream_from [@chat, current_user] "chat_entries" if @chat
-          target: "chat_entries", # {id: "chat_entries" ... }
-          partial: "chat_entries/index_item",
-          locals: { chat_entry: self, current_user: current_user }
-        )
+      # update chat and sidebar of user who sent the message
+      BroadcastHelper.add_message_to_chat(self, user)
+      BroadcastHelper.remove_chat_from_sidebar(self.chat, user)
+      BroadcastHelper.append_chat_to_sidebar(self.chat, user)
 
-        # remove chat from sidebar
-        Turbo::StreamsChannel.broadcast_remove_to(
-          [current_user, :sidebar],
-          target: "chat_#{chat.id}"
-        )
-
-        # append chat to the top of sidear
-        Turbo::StreamsChannel.broadcast_prepend_to(
-          [current_user, "sidebar"],
-          target: "chats_list",
-          partial: "chats/sidebar_chat",
-          locals: { chat: chat, current_user: current_user }
-        )
-      end 
+      # job to update the view of the rest of the users of the chat
+      ChatEntryBroadcastJob.perform_later(self, user.id)
     end
 
   ## INSTANCE METHODS

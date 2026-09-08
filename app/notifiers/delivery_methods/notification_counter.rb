@@ -1,11 +1,7 @@
 class DeliveryMethods::NotificationCounter < ApplicationDeliveryMethod
 
   def deliver
-    notification = self.notification
-    recipient = notification.recipient
-
-    #TO/DO
-   
+    BroadcastHelper.update_notifications_header(self.notification.recipient)
   end
 
 end

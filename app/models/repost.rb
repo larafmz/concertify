@@ -35,7 +35,7 @@ class Repost < ApplicationRecord
     private
 
         def create_notification
-            notification = InteractionNotificationNotifier.with(
+            notification = ApplicationNotifier.with(
                 follower: user, 
                 record: self,
                 message: notification_message,

@@ -34,7 +34,7 @@ class Request < ApplicationRecord
   private
 
       def create_notification_for_admins
-        notification = InteractionNotificationNotifier.with(
+        notification = ApplicationNotifier.with(
             record: self,
             path: Rails.application.routes.url_helpers.requests_path,
             message: notification_message_new_request
@@ -44,7 +44,7 @@ class Request < ApplicationRecord
 
       def create_notification
         remove_notification #remove old notis ab this request
-        notification = InteractionNotificationNotifier.with(
+        notification = ApplicationNotifier.with(
           record: self, 
           path: Rails.application.routes.url_helpers.requests_user_path(requester.id),
           message: notification_message_update_request

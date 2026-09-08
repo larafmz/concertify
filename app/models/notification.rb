@@ -17,16 +17,6 @@ class Notification < Noticed::Notification
         scope :read, -> { where.not(read_at: nil) }
         scope :unread, -> { where(read_at: nil) }
 
-    ## CALLBACKS
-
-        after_create :broadcast_notification
-
-    ## CALLBACKS METHODS
-
-        def broadcast_notification
-            puts "ENTRA EN AFTER CREATE"
-            # TO/DO
-        end
 
     ## CLASS METHODS
 
@@ -41,7 +31,7 @@ class Notification < Noticed::Notification
         end
 
         def self.create_for_upcoming_future_assistance(future_assistance)
-            notification = InteractionNotificationNotifier.with(
+            notification = ApplicationNotifier.with(
                 record: future_assistance, 
                 message: future_assistance.notification_message, 
                 path: Rails.application.routes.url_helpers.future_assistances_user_path(future_assistance.user))

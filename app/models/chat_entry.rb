@@ -18,20 +18,18 @@ class ChatEntry < ApplicationRecord
 
   ## CALLBACKS
 
-   after_create_commit :mark_as_unread
    after_create_commit :broadcast_message
 
   ## CALLBACKS METHODS
 
   private
 
-    def mark_as_unread
+    def broadcast_message 
+      
       ChatUser.where(chat_id: chat.id).where.not(user_id: user.id).each do |chat_user|
         chat_user.mark_as_unread
       end
-    end
 
-    def broadcast_message   
       chat.users.each do |current_user|
         broadcast_append_to( # se añade un mensaje
           # hace actualizaciona a los usuarios que esten en el chat, "chat_entries" es solo un label
@@ -40,16 +38,21 @@ class ChatEntry < ApplicationRecord
           partial: "chat_entries/index_item",
           locals: { chat_entry: self, current_user: current_user }
         )
-      end
 
-      #update sidebar
-      broadcast_replace_to( # se reemplaza todo el sidebar
-        # hace actualizacion a a todos los usuarios, aunque no esten en el mismo chat
-        [ user, "sidebar" ], # = turbo_stream_from current_user, "sidebar" if @chat
-        target: "chat_sidebar", # {id: "chat_sidebar" ... }
-        partial: "chats/sidebar",
-        locals: { chats: user.chats.order_by_recent_messages.includes(:event, :chat_users, :users), current_user: user }
-      )
+        # remove chat from sidebar
+        Turbo::StreamsChannel.broadcast_remove_to(
+          [current_user, :sidebar],
+          target: "chat_#{chat.id}"
+        )
+
+        # append chat to the top of sidear
+        Turbo::StreamsChannel.broadcast_prepend_to(
+          [current_user, "sidebar"],
+          target: "chats_list",
+          partial: "chats/sidebar_chat",
+          locals: { chat: chat, current_user: current_user }
+        )
+      end 
     end
 
   ## INSTANCE METHODS

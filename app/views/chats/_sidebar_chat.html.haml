@@ -1,0 +1,23 @@
+- color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
+- chat_name = chat.name(current_user).downcase
+.wrapper{id: "chat_#{chat.id}", data: { chat_filter_target: "chat", chat_name: chat_name }}
+    = link_to chat_path(chat), data: { turbo_frame: "chat_content", turbo_prefetch: false }, class: "diary-link" do 
+        - last_message = chat.messages.order(created_at: :desc).first
+        .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
+            .link_icon{style: "height: 50px; width: 50px;"}
+                -  photo = chat.photo(current_user)
+                = image_tag photo if photo.present?
+            .artist-name 
+                %div{style: "font-size:15px; color: #{color}"}= chat_name
+                - if last_message.present?
+                    - if last_message&.user_id == current_user.id
+                        %div{style: "font-size:12px; color: #{color}"}= t("sent")
+                    - else
+                        %div{style: "font-size:12px; color: #{color}"}= last_message.text.truncate(30)
+                    - if chat.group_chat? 
+                        .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
+                            %div= "📍#{chat.event.ubication&.complete_name} "
+                            %div= "🗓️ #{formatted_event_date(chat.event.date, chat.event.start_time)}"  
+            - if last_message.present?
+                %div{style: "font-size:12px; color: #{color}"}=short_time_ago(last_message.created_at)
+    .separator

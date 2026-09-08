@@ -22,7 +22,7 @@ class Comment < ApplicationRecord
     private
 
         def create_notification
-            notification = InteractionNotificationNotifier.with(
+            notification = ApplicationNotifier.with(
                 follower: user, 
                 record: self, 
                 message: notification_message,
@@ -53,13 +53,14 @@ class Comment < ApplicationRecord
         def notification_message
             user_str = "<strong> #{user.username} </strong>"
             key = comment_father ? "#{interactuable.type.downcase}.new_reply" : "#{interactuable.type.downcase}.new_comment"
+            text = comment_father ? comment_father.text : interactuable.review
             {
                 key: key,
                 user: user_str,
                 stars: interactuable.try(:get_rating),
                 tour_name: "<strong> #{interactuable.event&.tour_name} </strong>",
-                text: "<span style='font-style:italic; overflow-wrap:anywhere;'> #{interactuable.review} </span>",
-                comment: "<br> <span style='overflow-wrap:anywhere'> #{text} </span>",
+                text: "<span style='font-style:italic; overflow-wrap:anywhere;'> #{text} </span>",
+                comment: "<br> <span style='overflow-wrap:anywhere'> | #{self.text} </span>",
             }
         end
 

@@ -33,16 +33,15 @@ class ChatUser < ApplicationRecord
   private
 
     def broadcast_change
-      #update sidebar
-      broadcast_replace_to( # se reemplaza todo el sidebar
-        # hace actualizacion a a todos los usuarios, aunque no esten en el mismo que esten en el chat
-        [ user, "sidebar" ], # = turbo_stream_from current_user, "sidebar" if @chat
-        target: "chat_sidebar", # {id: "chat_sidebar" ... }
-        partial: "chats/sidebar",
-        locals: { chats: user.chats.order_by_recent_messages.includes(:event, :chat_users, :users), current_user: user }
+      # replace chat in sidebar to show its read
+      Turbo::StreamsChannel.broadcast_replace_to(
+        [user, "sidebar"],
+         target: "chat_#{chat.id}",
+        partial: "chats/sidebar_chat",
+        locals: { chat: chat, current_user: user }
       )
     
-      #update header
+      # update header
       broadcast_replace_to( # se reemplaza todo el trozo del header 
         # hace actualizacion a a todos los usuarios
         [ user, "messages_header" ], # = turbo_stream_from current_user, "messages_header"

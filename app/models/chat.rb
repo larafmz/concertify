@@ -60,7 +60,7 @@ class Chat < ApplicationRecord
     end
 
     def has_notification?(current_user)
-      !chat_users.find { |cu| cu.user_id == current_user.id }.read?
+      !chat_users.find { |cu| cu.user_id == current_user.id }&.read?
     end
 
     def exit_chat(user_id)

@@ -36,7 +36,7 @@ class ChatEntry < ApplicationRecord
       BroadcastHelper.append_chat_to_sidebar(self.chat, user)
 
       # job to update the view of the rest of the users of the chat
-      ChatEntryBroadcastJob.perform_later(self, user.id)
+      ChatEntryBroadcastJob.perform_later(self.id, user.id)
     end
 
   ## INSTANCE METHODS

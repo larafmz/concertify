@@ -1,0 +1,2320 @@
+{
+  "simplecov_history": {
+    "format_version": 1,
+    "entries": [
+      {
+        "created_at": "2026-09-09T13:08:50Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.47,
+          "branch": 6.39
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 23.52,
+            "branch": 3.41
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 57.54,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 39.62,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:11:11Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.47,
+          "branch": 6.39
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 23.52,
+            "branch": 3.41
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 57.54,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 39.62,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:12:14Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.47,
+          "branch": 6.39
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 23.52,
+            "branch": 3.41
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 57.54,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 39.62,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:15:34Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.47,
+          "branch": 6.39
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 23.52,
+            "branch": 3.41
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 57.54,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 39.62,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:16:35Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.47,
+          "branch": 6.39
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 23.52,
+            "branch": 3.41
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 57.54,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 39.62,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:17:03Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.47,
+          "branch": 6.39
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 23.52,
+            "branch": 3.41
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 57.54,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 39.62,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:18:16Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 22.22,
+          "branch": 6.6
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 29.02,
+            "branch": 3.84
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 58.49,
+            "branch": 20.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 56.92,
+            "branch": 30.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 41.5,
+            "branch": 10.34
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 84.21,
+            "branch": 66.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 26.82,
+            "branch": 10.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 46.87,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 43.75,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 62.71,
+            "branch": 30.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:19:02Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.4,
+          "branch": 3.19
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 29.02,
+            "branch": 3.84
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 38.67,
+            "branch": 0.0
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 24.61,
+            "branch": 0.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 32.07,
+            "branch": 0.0
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 42.1,
+            "branch": 0.0
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 26.82,
+            "branch": 10.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 46.87,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 43.75,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 27.11,
+            "branch": 0.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-09-09T13:25:52Z",
+        "branch": "testing",
+        "commit": "85da4f89656c0fe800672f8ad4813c25dd09a97e",
+        "totals": {
+          "line": 19.81,
+          "branch": 3.41
+        },
+        "groups": {
+          "Controllers": {
+            "line": 3.65,
+            "branch": 3.52
+          },
+          "Channels": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Models": {
+            "line": 29.02,
+            "branch": 3.84
+          },
+          "Mailers": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Helpers": {
+            "line": 41.5,
+            "branch": 2.85
+          },
+          "Views": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Jobs": {
+            "line": 0.0,
+            "branch": 100.0
+          },
+          "Libraries": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "Ungrouped": {
+            "line": 29.23,
+            "branch": 0.0
+          }
+        },
+        "files": {
+          "app/channels/application_cable/channel.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/channels/application_cable/connection.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/application_controller.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/controllers/artists_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/chats_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/comments_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/events_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/future_assistances_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/home_controller.rb": {
+            "line": 100.0,
+            "branch": 50.0
+          },
+          "app/controllers/interactuables_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/notifications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/publications_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/registers_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/requests_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users/registrations_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/controllers/users_controller.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/helpers/application_helper.rb": {
+            "line": 32.07,
+            "branch": 0.0
+          },
+          "app/helpers/broadcast_helper.rb": {
+            "line": 50.0,
+            "branch": 100.0
+          },
+          "app/helpers/home_helper.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/helpers/ticketmaster_event_helper.rb": {
+            "line": 50.0,
+            "branch": 16.66
+          },
+          "app/jobs/application_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/jobs/chat_entry_broadcast_job.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/mailers/application_mailer.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ability.rb": {
+            "line": 26.82,
+            "branch": 10.0
+          },
+          "app/models/application_record.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/artist.rb": {
+            "line": 50.74,
+            "branch": 0.0
+          },
+          "app/models/artists_event.rb": {
+            "line": 100.0,
+            "branch": 100.0
+          },
+          "app/models/chat.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_entry.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/chat_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/comment.rb": {
+            "line": 46.87,
+            "branch": 0.0
+          },
+          "app/models/country.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/event.rb": {
+            "line": 63.15,
+            "branch": 20.58
+          },
+          "app/models/favorite_artist.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/future_assistance.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/genre.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/interactuable.rb": {
+            "line": 60.71,
+            "branch": 0.0
+          },
+          "app/models/like.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/notification.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/publication.rb": {
+            "line": 43.75,
+            "branch": 0.0
+          },
+          "app/models/register.rb": {
+            "line": 48.71,
+            "branch": 6.25
+          },
+          "app/models/relation.rb": {
+            "line": 65.38,
+            "branch": 0.0
+          },
+          "app/models/repost.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/request.rb": {
+            "line": 49.25,
+            "branch": 0.0
+          },
+          "app/models/role.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/tagged_user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/ubication.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/models/user.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_delivery_method.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/application_notifier.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/notifiers/delivery_methods/notification_counter.rb": {
+            "line": 0.0,
+            "branch": 0.0
+          },
+          "app/services/ticketmaster_service.rb": {
+            "line": 32.2,
+            "branch": 0.0
+          }
+        }
+      }
+    ]
+  }
+}

@@ -84,3 +84,10 @@ gem "cocoon"
 
 # pagination
 gem "kaminari"
+
+gem "solid_queue", "~> 1.7"
+
+group :test do
+  gem "simplecov", require: false
+  gem "simplecov_json_formatter", require: false
+end

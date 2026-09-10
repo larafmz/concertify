@@ -103,7 +103,7 @@ class Artist < ApplicationRecord
     end
 
     def unfollow(user)
-      Relation.find_by(follower_id: user_id.id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
+      Relation.find_by(follower_id: user.id, followed_id: self.id, followed_type: "Artist", relation_type: 0)&.destroy
     end
 
     def mark_as_favorite(user)

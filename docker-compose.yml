@@ -18,7 +18,7 @@ services:
     command: >
       bash -c '
         bin/rails db:prepare &&
-        bin/rails runner "unless ActiveRecord::Base.connection.data_source_exists?(\"solid_queue_jobs\"); load Rails.root.join(\"db/queue_schema.rb\"); end" &&
+        bin/rails runner "unless ActiveRecord::Base.connection.data_source_exists?(\"solid_queue_recurring_tasks\"); load Rails.root.join(\"db/queue_schema.rb\"); end" &&
         bin/rails runner "unless ActiveRecord::Base.connection.data_source_exists?(\"solid_cable_messages\"); load Rails.root.join(\"db/cable_schema.rb\"); end" &&
         bin/rails db:seed &&
         SECRET_KEY_BASE_DUMMY=1 bin/rails assets:precompile &&
@@ -41,13 +41,14 @@ services:
         condition: service_healthy
 
   worker:
-    build: .
-    command: bin/jobs start
-    env_file:
-      - .env
-    volumes:
-      - .:/app
-      - storage_data:/app/storage
+    build:
+      context: .
+    command: >
+      bash -c '
+        bin/rails db:prepare &&
+        bin/rails runner "unless ActiveRecord::Base.connection.data_source_exists?(\"solid_queue_recurring_tasks\"); load Rails.root.join(\"db/queue_schema.rb\"); end" &&
+        bin/jobs start
+      '
     environment:
       RAILS_ENV: production
       DATABASE_URL: postgresql://postgres:postgres@db:5432/concertify_production

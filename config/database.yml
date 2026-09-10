@@ -18,6 +18,10 @@ development:
   cable:
     <<: *sqlite
     database: storage/concertify_development_cable.sqlite3
+  queue:
+    <<: *default
+    database: concertify_development_queue
+    migrations_paths: db/queue_migrate
 
 test:
   primary:
@@ -26,7 +30,17 @@ test:
   cable:
     <<: *sqlite
     database: storage/concertify_production_cable.sqlite3
+  queue:
+    <<: *default
+    database: concertify_test_queue
 
 production:
-  <<: *default
-  database: concertify_production
+  primary:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+  cable:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>

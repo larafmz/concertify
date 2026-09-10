@@ -8,8 +8,6 @@
  *= require pagination
  */
 
- @import "bootstrap";
-
 body {
   background: #0F1419 !important;
   font-family: system-ui;

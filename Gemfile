@@ -84,3 +84,7 @@ gem "cocoon"
 
 # pagination
 gem "kaminari"
+
+# jobs
+gem "solid_queue"
+gem "solid_cable"

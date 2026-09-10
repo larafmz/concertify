@@ -49,6 +49,8 @@ services:
         bin/rails runner "unless ActiveRecord::Base.connection.data_source_exists?(\"solid_queue_recurring_tasks\"); load Rails.root.join(\"db/queue_schema.rb\"); end" &&
         bin/jobs start
       '
+    env_file:
+      - .env
     environment:
       RAILS_ENV: production
       DATABASE_URL: postgresql://postgres:postgres@db:5432/concertify_production

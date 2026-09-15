@@ -1,4 +1,189 @@
 en:
+  admin: Administrator
+  session: Session
   search: Search...
+  search_event: Search by tour or artist name...
+  search_user: Search by username
+  search_artist: Search by artist name
+  main_search: Search users, artists, events...
   root_title: Go to home page
+  requested_events: Requested Events
+  requested_artists: Requested Artists
+  all_masc: "All %{model}"
+  all_fem: "All %{model}"
+  all: All
+  totals: "Total %{model}"
+  average: "Average %{model}"
+  results: Results
+  not_found_model: No %{model} found
+  not_found: Not found
+  not_found_masc: "The %{model} was not found"
+  created_ago: Created %{time} ago
+  sent_ago_by: Sent by @%{user} %{time} ago
+  accepted_ago: Accepted %{time} ago
+  denied_ago: Denied %{time} ago
+  sent: Sent
+  ago: "%{time} ago"
+  my_model: "My %{model}"
+  my_model_plural: "My %{model}"
+  recently_added: Recently Added
+  from_followed_artists: From Artists You Follow
+  account_configuration: Account Settings
+  favorite_artists: Favorite Artists
+  followers: Followers
+  following: Following
+  follower: Follower
+  request_message:
+    0: Information verified and added to the application.
+    1: We are verifying the details.
+    2: We were unable to verify the information.
+  genre_music: Music Genre
+  profile_icon: Profile Icon
+  this_year: This year
+  recents: "Recent %{model}"
+  populars: "Popular %{model}"
+  from_user: "%{model} from %{user}"
+  more: More
+  diary: Diary
+  asistenece: Attendance
+  likes_of_model_from_user: "Likes on %{model} from %{user}"
+  follows_you: Follows you
+  close_to_you: Near you
+  blocked: Blocked
+  network: Network
+  options: Options
+  is_favorite: "♡ Favorite ♡"
+  upcoming: Upcoming
+  today: Today
+  send_message: Send message
+  send_a_message: Send a message...
+  languages: Languages
+  spanish: Spanish
+  english: English
+  switch_to: "Switch to %{model}"
+  access_chat: Access Chat
+  members: Members
+  exit_group: Leave Group
+  exited_chat: "%{model} left the group"
+  entered_chat: "%{model} joined the group"
+  you_exited_chat: You left the group
+  you_entered_chat: You joined the group
+  details_of: "Details of %{data}"
+  not_authorized: You do not have permission to access this page.
+  destroy_actual_icon: Delete current image
+  back_to_chat: Back to chat
+  by: by
+  about: about
+  of: of
+  in: In
+
+  crud:
+    add: "Add %{model}"
+    show: "View %{model}"
+    edit: "Edit %{model}"
+    destroy: "Delete %{model}"
+    create: "Create %{model}"
+
+  verbs:
+    destroy: Delete
+    log: Log
+    save: Save
+    select: Select
+    follow: Follow
+    follow_back: Follow back
+    block: Block
+    unblock: Unblock
+    filter: Filter
+    remove_filters: Clear filters
+    remove_filter: Clear filter
+    edit: Edit
+    mark_as_favorite: Mark as Favorite
+    mark_all_read: Mark all as read
+    request: "Request %{model}"
+    logged: registered
+    answer: Reply
+    post: Post
+    reposted: Reposted
+    you_reposted: You reposted
+
+  user_account:
+    profile: Profile
+    password: Password
+    my_profile: My Profile
+    login: Log in
+    register: Create account
+    logout: Log out
+    destroy_my_account: Delete my account
+    minimum_password_length: "%{count} characters minimum"
+    password_confirmation: Password confirmation
+    already_registered: "Already have an account?"
+    dont_have_account: "Don't have a user account?"
+    change_password: Change password
+    new_password: New password
+    current_password: Current password
+    sure_to_delete_account: Are you sure you want to delete your account?
+    need_current_password_to_confirm: "Required to change your password"
+
+  filters:
+    from: From
+    to: To
+    at: At
+
+  registers:
+    assisted: + I've attended
+    will_assist: + I'll attend
+    i_assisted_to: I attended...
+    liked_these_reviews: LIKED THESE REVIEWS
+    logged_by: Registered by
+    ratings: Ratings
+    no_likes_yet: No Likes Yet
+    destroy_message: "Are you sure you want to delete this record? You will no longer be able to access the event chat."
+  
+  messages:
+    error: An error has occurred
+    cant_find: Can't find what you're looking for?
+    manual_adition: If the event has already taken place and/or does not appear in the results, you can request its addition manually.
+    destroy_confirmation: Are you sure you want to delete this?
+    cant_mark_as_favorite: |
+      You cannot mark more than 4 artists as favorites.
+      To mark a new one, you must first remove another one from your favorites.
+    cant_like_own: You cannot like your own record or publication
+    cant_repost_own: You cannot repost your own record or publication
+    cant_follow_blocked_user: You cannot follow a blocked user
+    cant_follow_self: You cannot follow or block yourself
+    write_your_review: Write your review
+    write_your_answer: Write your reply
+    whats_going_on: What's going on?
+    post_about: "Post about %{model}"
+    its_today: "IT'S TODAY!"
+    in_x_days:
+      one: "%{count} day remaining"
+      other: "%{count} days remaining"
+    exists_in_app_already: Already exists in the app
+    cant_send_message: You cannot send messages in this chat.
+    event_already_registered: "You have already registered your attendance for this event."
+    max_upload: "You can only upload %{count} photos."
+    
+  notifications:
+    new_follower: "%{user} has started following you"
+    register:
+      new_like: "%{user} liked your %{stars}-star review of %{tour_name}: %{text}"
+      new_comment: "%{user} commented on your review of %{stars} %{tour_name}: %{text} %{comment}"
+      new_reply: "%{user} replied to your comment on your review of %{stars} %{tour_name} %{text} %{comment}"
+      new_repost: "%{user} reposted your review of %{stars} %{tour_name}: %{text}"
+    publication:
+      new_like: "%{user} liked your post %{text}"
+      new_comment: "%{user} commented on your post %{text} %{comment}"
+      new_reply: "%{user} replied to your comment on your post %{text} %{comment}"
+      new_repost: "%{user} reposted your post %{text}"
+    event_update: "Your request for %{event} has been updated to status: %{status}"
+    new_event: "A user has requested the addition of a new event: %{tour_name} by %{artist}"
+    upcoming_event_7: "Only one week left until %{event}! 🎶 The countdown has begun!"
+    upcoming_event_6: "6 days left until %{event}! 🎸 It's getting closer!"
+    upcoming_event_5: "Only 5 days left! 🎵 The excitement is starting to build!"
+    upcoming_event_4: "4 days left until %{event}! 🎶 The concert is getting closer!"
+    upcoming_event_3: "Only 3 days left! 🤩 It's almost here!"
+    upcoming_event_2: "Only 2 days left! 🎸 The countdown is almost over!"
+    upcoming_event_1: "Tomorrow is the big day! 🎶 %{event} is just around the corner. Get ready to enjoy it!"
+    upcoming_event_0: "Today is the big day! 🎉 Enjoy %{event} and let the music begin! Don't forget to register the event when you leave!"
 

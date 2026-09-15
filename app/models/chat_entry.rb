@@ -15,6 +15,7 @@ class ChatEntry < ApplicationRecord
   ## VALIDATIONS
 
     validates :text, presence: true
+    validates :text, length: { maximum: 1000 }
 
   ## CALLBACKS
 

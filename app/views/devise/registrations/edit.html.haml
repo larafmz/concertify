@@ -22,7 +22,7 @@
             .two-columns{style: "gap: 20px;"}
               %div
                 = label_tag :country_id, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, 
+                = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, 
                   @user.ubication&.country_id), { include_blank: "Seleccionar" }, { class: "field-custom", style: "padding: 0px;" }
               %div
                 = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"

@@ -2,7 +2,7 @@ class Ubication < ApplicationRecord
 
   ## RELATIONSHIPS
 
-    belongs_to :country
+    belongs_to :country, optional: true
     belongs_to :user, optional: true
     has_many :events
 
@@ -15,12 +15,12 @@ class Ubication < ApplicationRecord
     def complete_name_with_venue
       parts = [venue&.titleize, city&.titleize]
       parts << state&.titleize unless country&.name == "Spain"
-      parts << I18n.t(country&.name)
+      parts << country&.translation
       parts.reject(&:blank?).join(", ")
     end
 
     def complete_name 
-      str = [city&.titleize, state&.titleize, I18n.t(country&.name)].reject(&:blank?).join(", ")
+      str = [city&.titleize, state&.titleize, country&.translation].reject(&:blank?).join(", ")
     end
 
 

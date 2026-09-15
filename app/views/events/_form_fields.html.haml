@@ -44,4 +44,4 @@
                         = ubication_fields.text_field :city, class: "field-custom", placeholder: "Ex: Madrid"
                     %div
                         = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                        = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }
+                        = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }

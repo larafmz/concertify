@@ -41,7 +41,7 @@
                 %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
                 
             %div
-                - if future_assistance.event_seat_string && !future_assistance.event_seat_details.empty?
+                - if future_assistance.event_seat_string && !future_assistance.event_seat_details&.empty?
                     .bubble
                         %span= "🎟️ #{future_assistance.event_seat_string}"
                         %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"

@@ -165,6 +165,7 @@ es:
     cant_send_message: No puedes enviar mensajes en este chat.
     event_already_registered: "Ya has registrado tu asistencia a este evento."
     max_upload: "Solo puedes subir %{count} fotos."
+    existing_event_requires_accepted_status: debe estar en estado "aceptado" si se selecciona un concierto existente.
     
   notifications:
     new_follower: "%{user} ha comenzado a seguirte"

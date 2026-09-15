@@ -7,6 +7,7 @@ class Request < ApplicationRecord
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
   ## RELATIONSHIPS
+
     belongs_to :requester, class_name: "User"
     has_one :event, dependent: :destroy
     accepts_nested_attributes_for :event, allow_destroy: false
@@ -21,6 +22,7 @@ class Request < ApplicationRecord
   ## VALIDATIONS
 
     validates :status, presence: true
+    validate :requires_accepted_status, if: -> { existing_event_id.present? }
 
   ## CALLBACKS
 
@@ -28,6 +30,14 @@ class Request < ApplicationRecord
       after_update :create_notification, if: :saved_change_to_status?
       after_update :change_to_accepted, if: :saved_change_to_status?
       after_destroy_commit :remove_notification
+
+  ## VALIDATION METHODS
+
+      def requires_accepted_status
+        if status != "accepted"
+          errors.add(:base, I18n.t("messages.existing_event_requires_accepted_status"))
+        end
+      end
 
   ## CALLBACK METHODS
 

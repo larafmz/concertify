@@ -23,7 +23,7 @@ class FutureAssistance < ApplicationRecord
   
   ## CALLBACKS
 
-    before_validation :truncate_data
+    before_validation :truncate_data #TO/DO delete when add controller in form visually.
     after_destroy_commit :exit_chat
 
   ## CALLBACKS METHODS

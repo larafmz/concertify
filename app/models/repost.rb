@@ -8,7 +8,6 @@ class Repost < ApplicationRecord
     ## VALIDATIONS
 
         validates :user_id, uniqueness: { scope: :interactuable_id }
-        validate :cant_repost_own
 
     ## SCOPES
 
@@ -20,15 +19,7 @@ class Repost < ApplicationRecord
     ## CALLBACKS
 
         after_create_commit :create_notification
-        after_destroy_commit :remove_notification
-
-    ## VALIDATION METHODS
-
-        def cant_repost_own
-            if user.id == interactuable.user.id
-                errors.add(:base, I18n.t("messages.cant_repost_own"))
-            end
-        end    
+        after_destroy_commit :remove_notification 
 
     ## CALLBACK METHODS
 

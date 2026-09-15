@@ -14,6 +14,10 @@ class Ability
     
     if user.present?
 
+      can [:like], Interactuable do |interactuable| 
+          interactuable.user_id != user.id
+      end
+
       if user.admin?
 
         can :manage, :all
@@ -45,8 +49,11 @@ class Ability
         end
         
         # Interactuable permissions
-        can [:like, :repost, :comment], Interactuable do |interactuable| 
-          interactuable.user_id != user.id && !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
+        can [:like], Interactuable do |interactuable| 
+          !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
+        end
+        can [:repost, :comment], Interactuable do |interactuable| 
+          !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
         end
         can [:uncomment], Interactuable, user_id: user.id
         can [:reply], Comment do |comment| 

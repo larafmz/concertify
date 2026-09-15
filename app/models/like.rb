@@ -42,7 +42,7 @@ class Like < ApplicationRecord
 
         def cant_like_own
             if user.id == interactuable.user.id
-                errors.add(:base, t("messages.cant_like_own"))
+                errors.add(:base, I18n.t("messages.cant_like_own"))
             end
         end
 

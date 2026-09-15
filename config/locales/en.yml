@@ -164,6 +164,7 @@ en:
     cant_send_message: You cannot send messages in this chat.
     event_already_registered: "You have already registered your attendance for this event."
     max_upload: "You can only upload %{count} photos."
+    existing_event_requires_accepted_status: must be accepted when an existing event is selected.
     
   notifications:
     new_follower: "%{user} has started following you"

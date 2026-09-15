@@ -15,7 +15,7 @@
              
     %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
         .flex{ style: " width: 20%;" }
-            - event_date_status = time_status(@event.date, @event.start_time)
+            - event_date_status = @event.past_or_future?
             - if event_date_status == "past" && !@registers.empty?
                 .stat
                     .number

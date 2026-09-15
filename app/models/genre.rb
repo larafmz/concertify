@@ -10,7 +10,7 @@ class Genre < ApplicationRecord
 
   ## INSTANCE METHODS
 
-  def get_name
+  def translation
     return name if I18n.locale == :en
     I18n.t("genres.#{name}")
   end

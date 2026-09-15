@@ -6,7 +6,8 @@
     = link_to root_path do
       Concertify
 
-  = form_tag "/users", method: "GET" do
+  - search_path = %w[artists users events].include?(controller_name) ? "/#{controller_name}" : "/artists"
+  = form_tag search_path, method: "GET" do
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"
 
   %div
@@ -67,7 +68,7 @@
       "aria-expanded" => "false",
       style: "background: #51485a" 
     }
-      =t("session")
+      = t("user_account.profile")
 
     %ul.dropdown-menu
       
@@ -76,6 +77,18 @@
           = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
         %li
           = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
+        %li
+          %hr.dropdown-divider
+        %li
+          = link_to t("my_model_plural", model: Register.plural), registers_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: Publication.plural), publications_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: Request.plural), requests_user_path(current_user), class: "dropdown-item"
+        %li
+          %hr.dropdown-divider
         %li 
           = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
       - else

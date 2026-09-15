@@ -11,7 +11,7 @@
                     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_artist")}", class: "field-custom"
                 %div
                     = label_tag :genre_id, Genre.singular.upcase, class: "soft-color", style: "font-size: 13px;"
-                    = select_tag :genre_id, options_for_select(Genre.all.map { |genre| [t(genre.name), genre.id] }, params[:genre_id]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
+                    = select_tag :genre_id, options_for_select(Genre.all.map { |genre| [genre.translation, genre.id] }, params[:genre_id]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
                 %div
                     %br  
                     = submit_tag t("verbs.filter"), class: "btn-custom artist-color"

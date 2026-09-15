@@ -128,4 +128,8 @@ class Event < ApplicationRecord
       ticketmaster_id.nil?
     end
 
+    def past_or_future?
+      time_status(date, start_time)
+    end
+
 end

@@ -16,11 +16,8 @@ class Country < ApplicationRecord
     end
 
     def translation
-      if I18n.locale == :en
-        name
-      else
-        I18n.t(name)
-      end
+      return name if I18n.locale == :en
+      I18n.t(name)
     end
 
 end

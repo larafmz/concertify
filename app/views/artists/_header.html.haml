@@ -8,7 +8,7 @@
                 = @artist.name
                 - if @artist.genre && @artist.genre.name != "Undefined"
                     %div{ style: "font-size: 15px" }
-                        = @artist.genre.name
+                        = @artist.genre.translation
 
     %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
         .flex{ style: "width: 30%;"}

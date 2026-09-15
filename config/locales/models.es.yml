@@ -77,12 +77,14 @@ es:
         country: País
       future_assistance:
         from: Desde
+        from_question: ¿Desde dónde viajarás al evento?
         event_seat: Ubicación en el evento
         event_seat_details: Detalles de Ubicación
         company: ¿Con quien vas?
       register:
         review: Reseña
         reviews: Reseñas
+        rating: Puntuación
       request:
         status: Estado
         message: Mensaje

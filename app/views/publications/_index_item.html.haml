@@ -49,9 +49,11 @@
                         ⁝
                     %ul.dropdown-menu
                         %li
-                            = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item"
-
-  
+                            - if destroy_redirect
+                                = button_to t("verbs.destroy"), publication_path(publication), method: :delete,  data: { turbo_confirm: t("registers.destroy_message"), turbo: false}, class: "dropdown-item"
+                            - else
+                                = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item"
+    
     %div{style: "margin:0px 0px 10px 80px;"}
         - if publication.photos.attached?
             .publication-photos            

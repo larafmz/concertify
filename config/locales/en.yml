@@ -76,6 +76,7 @@ en:
   about: about
   of: of
   in: In
+  languages: Languages
 
   crud:
     add: "Add %{model}"

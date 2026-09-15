@@ -92,13 +92,13 @@
       "aria-expanded" => "false",
       style: "background: #51485a" 
     }
-      =t("options")
+      =t("languages")
 
     %ul.dropdown-menu
       %li
-        = link_to t("switch_to", model: t("spanish")), change_locale_path(:es), class: "dropdown-item"
+        = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
       %li
-        = link_to t("switch_to", model: t("english")), change_locale_path(:en), class: "dropdown-item"
+        = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
 
 
 .separator{style: "background: #40556d; "}

@@ -19,7 +19,7 @@ class Country < ApplicationRecord
       if I18n.locale == :en
         name
       else
-        t(name)
+        I18n.t(name)
       end
     end
 

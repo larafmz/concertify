@@ -18,8 +18,11 @@ class Artist < ApplicationRecord
 
     has_many :artists_events, dependent: :destroy
     has_many :events, through: :artists_events, dependent: :destroy
+
     has_many :relations, as: :followed, dependent: :destroy
     has_many :followers, through: :relations, source: :follower
+    
+    has_many :publications
     
     has_one_attached :photo
     
@@ -88,10 +91,6 @@ class Artist < ApplicationRecord
 
     def registers
       Register.by_artist(self.id)
-    end
-
-    def publications
-      Publication.by_artist(self.id)
     end
 
     def average_rating

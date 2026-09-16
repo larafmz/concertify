@@ -5,8 +5,6 @@ class Register < Interactuable
    MAX_PHOTOS = 10
 
   ## RELATIONSHIPS
-    
-    belongs_to :event
 
   ## VALIDATIONS
 

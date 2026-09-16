@@ -2,11 +2,11 @@ class Chat < ApplicationRecord
 
   ## RELATIONSHIPS
 
+    belongs_to :event, optional: true
+
     has_many :chat_users, dependent: :destroy
     has_many :users, through: :chat_users
-    
     has_many :chat_entries, dependent: :destroy
-    belongs_to :event, optional: true
 
   ## SCOPES
 

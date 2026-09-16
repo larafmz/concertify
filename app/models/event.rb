@@ -6,16 +6,19 @@ class Event < ApplicationRecord
     include ApplicationHelper
 
   ## RELATIONSHIPS
-    has_many :artists_events, dependent: :destroy
-    has_many :artists, through: :artists_events
-    has_many :registers, dependent: :destroy
-    has_many :future_assistances, dependent: :destroy
-    has_many :publications, dependent: :destroy
-    has_one :chat, dependent: :destroy 
 
     belongs_to :ubication, optional: true
     accepts_nested_attributes_for :ubication, allow_destroy: false
     belongs_to :request, optional: true, dependent: :destroy
+    
+    has_one :chat, dependent: :destroy 
+
+    has_many :artists_events, dependent: :destroy
+    has_many :artists, through: :artists_events
+
+    has_many :registers, dependent: :destroy
+    has_many :future_assistances, dependent: :destroy
+    has_many :publications, dependent: :destroy
 
     has_one_attached :photo
 

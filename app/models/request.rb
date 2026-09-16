@@ -9,6 +9,7 @@ class Request < ApplicationRecord
   ## RELATIONSHIPS
 
     belongs_to :requester, class_name: "User"
+    
     has_one :event, dependent: :destroy
     accepts_nested_attributes_for :event, allow_destroy: false
 

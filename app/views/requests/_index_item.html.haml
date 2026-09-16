@@ -3,7 +3,7 @@
 - event_date = event.date
 - status = request.status
 
-%div{style: "background: #{color_request(request.status)}; border-radius: 15px;"}
+%div{id: "request-#{request.id}", style: "background: #{color_request(request.status)}; border-radius: 15px;"}
 
     .request
 

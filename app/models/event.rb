@@ -49,7 +49,7 @@ class Event < ApplicationRecord
       event = Event.find_or_initialize_by(ticketmaster_id: ticketmaster_id)
       if event.new_record? || event.updated_at < 5.hours.ago
         event_api = TicketmasterService.event_by_id(ticketmaster_id)
-        return event if event_api.nil?
+        return if event_api.nil?
         
         if event_api.dig("images").present?
           image = get_event_image_url(event_api)
@@ -73,11 +73,12 @@ class Event < ApplicationRecord
       return event
     end
 
-    def self.search_by(params, events_api, artist: nil)
-      #return Event.none unless params[:search].present?
+    def self.search_by(params: {}, artist: nil)
+      events_api = TicketmasterService.events_by(params)    
 
       events_db = Event.accepted.by_name(params[:search])
       events_db = events_db.by_artist(artist.id) if artist
+      events_db = Event.accepted if artist.nil? and params.empty?
 
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)
@@ -90,12 +91,11 @@ class Event < ApplicationRecord
       if first_date || second_date
         first_date =  Date.parse(first_date) if first_date.present? && !first_date.is_a?(Date)
         second_date = Date.parse(second_date) if second_date.present? && !second_date.is_a?(Date)
-        #first_date ||= Date.today-365.days
         events_db = events_db.where("date >= ?", first_date) if first_date.present?
         events_db = events_db.where("date <= ?", second_date) if second_date.present?
       end
 
-      events_db
+      TicketmasterService.merge_events(events_db, events_api)
     end
 
   ## INSTANCE METHODS

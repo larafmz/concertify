@@ -6,23 +6,15 @@ class EventsController < ApplicationController
   before_action :get_attributes, except: [:new, :create, :requests, :index]
 
   def index
-    events_api = TicketmasterService.events_by(query: params[:search], artist_id: params[:ticketmaster_id], first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) 
-    # el tamaño de la consulta afecta a los resultados, x eso aqui sale alguno diferentes que en home
-    events_db = Event.search_by(params, events_api)
-    @events = TicketmasterService.merge_events(events_db, events_api)
-    @events = Kaminari.paginate_array(@events).page(params[:page]).per(10)
-    
+    events = Event.search_by(params: params)
+    @events = Kaminari.paginate_array(events).page(params[:page]).per(10)
   end
 
   def show
-    if params[:ticketmaster_id].present?
-      @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
-    elsif params[:id]
-      @event = Event.accepted.find_by(id: params[:id])
-      @event = Event.create_or_update_by_ticketmaster_id(@event.ticketmaster_id) if !params[:ticketmaster_id].present? && @event&.ticketmaster_id
-    end
-
-    if @event
+    @event = Event.create_or_update_by_ticketmaster_id(params[:ticketmaster_id]) if params[:ticketmaster_id].present?
+    @event = Event.accepted.find_by(id: params[:artist_id] || params[:id]) unless @event
+    
+    if @event.present?
       @artists = @event.artists
       get_attributes
     else

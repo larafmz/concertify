@@ -6,9 +6,7 @@ class ArtistsController < ApplicationController
   before_action :get_attributes, except: [:index, :requests]
 
   def index
-    artists_api = Array(TicketmasterService.artists_by(params))
-    artists_db = Artist.search_by(params, artists_api).most_followed
-    artists = TicketmasterService.merge_artists(artists_db, artists_api)
+    artists = Artist.search_by(params: params).most_followed
     @artists = Kaminari.paginate_array(artists).page(params[:page]).per(48)
   end
 
@@ -17,12 +15,9 @@ class ArtistsController < ApplicationController
     @artist = Artist.accepted.find_by(id: params[:artist_id] || params[:id]) unless @artist
 
     if @artist.present?
-      ticketmaster_id = params[:ticketmaster_id] || @artist.ticketmaster_id || "unfound_artist"
-      events_api = TicketmasterService.events_by(query: nil, artist_id: ticketmaster_id, first_date: params[:first_date], second_date: params[:second_date], country_code: params[:country], size: 100) ||[]
-      ticketmaster_ids = events_api.map { |event| event["id"] }
-      events_db = Event.search_by(params, events_api, artist: @artist)
-      @events = TicketmasterService.merge_events(events_db, events_api)
-      @events = Kaminari.paginate_array(@events).page(params[:page]).per(10)
+      params[:ticketmaster_id] = params[:ticketmaster_id] || @artist.ticketmaster_id || "unfound_artist"
+      events = Event.search_by(params: params, artist: @artist)
+      @events = Kaminari.paginate_array(events).page(params[:page]).per(10)
       get_attributes
     else
       flash[:alert] = t("not_found_masc", model: Artist.singular.downcase)

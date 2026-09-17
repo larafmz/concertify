@@ -71,16 +71,17 @@ class Artist < ApplicationRecord
       return artist
     end
 
-    def self.search_by(params, artists_api)      
-      artists = Artist.accepted
-      artists = artists.by_name(params[:search]) if params[:search].present?
-      artists = artists.by_genre(Genre.find(params[:genre_id]).id) if params[:genre_id].present?
+    def self.search_by(params: nil)    
+      artists_api = Array(TicketmasterService.artists_by(params))  
+      artists_db = Artist.accepted
+      artists_db = artists_db.by_name(params[:search]) if params[:search].present?
+      artists_db = artists_db.by_genre(Genre.find(params[:genre_id]).id) if params[:genre_id].present?
 
       # exclude ticketmaster ids
       ticketmaster_ids = artists_api.map { |artist| artist["id"] }
-      artists = artists.where(ticketmaster_id: nil).or(artists.where.not(ticketmaster_id: ticketmaster_ids))
+      artists_db = artists_db.where(ticketmaster_id: nil).or(artists_db.where.not(ticketmaster_id: ticketmaster_ids))
 
-      artists
+      return TicketmasterService.merge_artists(artists_db, artists_api)
     end
           
   ## INSTANCE METHODS

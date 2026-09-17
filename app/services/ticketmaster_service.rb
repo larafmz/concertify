@@ -47,7 +47,13 @@ class TicketmasterService
         data&.dig("_embedded","events")&.first 
     end
 
-    def self.events_by(query:nil, artist_id:nil, first_date:nil, second_date:nil, country_code:nil, size:10)
+    def self.events_by(params, size:100)
+        query = params[:search]  
+        artist_id = params[:ticketmaster_id]
+        first_date = params[:first_date]
+        second_date = params[:second_date]
+        country_code = params[:country]
+
         first_date  = first_date.presence #converts empty to nil
         second_date = second_date.presence #converts empty to nil
         first_date  = Date.parse(first_date) if first_date && !first_date.is_a?(Date)

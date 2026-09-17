@@ -15,8 +15,8 @@ module TicketmasterEventHelper
     end
 
     def get_event_date(event)
-        #return Date.parse(event.dig("dates", "start", "dateTime")) if event.dig("dates", "start", "dateTime")
-        Date.parse(event.dig("dates", "start", "localDate"))
+        date = event.dig("dates", "start", "localDate")
+        date.nil? ? nil : Date.parse(date)
     end
 
     #get the local time to show directly

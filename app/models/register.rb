@@ -2,7 +2,8 @@ class Register < Interactuable
 
   ## CONFIGURATIONS
 
-   MAX_PHOTOS = 10
+    include ApplicationHelper
+    MAX_PHOTOS = 10
 
   ## RELATIONSHIPS
 
@@ -88,6 +89,12 @@ class Register < Interactuable
     def get_rating
       rating = self.rating.nil? ? 0 : self.rating
       return "★" * rating
+    end
+
+    def get_rating_out_of_five
+      return nil if self.rating.nil? || self.rating == 0
+      blank_star_numbers = 5 - self.rating
+      return "<span style='color:#{orange_color}'>#{"★" * self.rating}</span><span style='color:#white'>#{"★" * blank_star_numbers}</span>".html_safe
     end
 
 end

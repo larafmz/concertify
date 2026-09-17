@@ -28,9 +28,12 @@
             %span{ style: "font-size: 18px;", class: "soft-color" } #{event.complete_name}
             %br
 
-            - ub = event.ubication&.complete_name_with_venue || t("not_found")
             .softest-color{style: "font-size: 15px;" }
-                %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
+                %span{style: "display:flex; align-items:center; gap:10px;"}
+                    = image_tag("icon_ubication_softest_color.png", style: "width: 2.5%; height: 2.5%")
+                    = event.ubication&.complete_name_with_venue || t("not_found")
+                    = image_tag("icon_date_softest_color.png", style: "width: 2.5%; height: 2.5%")
+                    = short_date(event.date)
             
             %span{style: "color: #{color_request(request.status)}; font-size: 16px;"}
                 ● #{request.message_request}

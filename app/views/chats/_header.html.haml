@@ -14,7 +14,11 @@
                 .artist-name 
                     %div{style: "font-size:15px;"}= event.tour_name
                     .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
-                        %div= "📍#{event.ubication&.complete_name} 🗓️ #{formatted_event_date(event.date, event.start_time)}" 
+                        %div{style: "display:flex; align-items:center; gap:10px;"}
+                            = image_tag("icon_ubication_softest_color.png", style: "width: 3%; height: 3%")
+                            = event.ubication&.complete_name || t("not_found")
+                            = image_tag("icon_date_softest_color.png", style: "width: 3%; height: 3%")
+                            = formatted_event_date(event.date, event.start_time)
         %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
             - if action_name == "members"
                 = link_to chat_path(chat.id), style: "margin-right: 15px;" do

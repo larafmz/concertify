@@ -51,10 +51,15 @@ a:hover {
   border-color: #00c3ff;
 }
 
-.hover-border-icon:hover .link_icon,
+.hover-border-icon:hover .link_icon, 
 .link_icon.active {
-  border-color: #00c3ff;
-  background:#51485a; 
+  background: inherit;
+  border: 2px solid #eb5d25;
+
+}
+
+.link_icon:not(.active) {
+  background: inherit;
 }
 
 .rectangle_icon {
@@ -156,7 +161,6 @@ a:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid #2c3744;
 }
 
 .rectangle_img, img {
@@ -234,6 +238,12 @@ a:hover {
 
 .footer {
   height: 100px;
+}
+
+.label-custom{
+  font-size: 13px; 
+  margin-left: 10px;
+  margin-bottom: 5px;
 }
 
 .field-custom {
@@ -347,8 +357,10 @@ a:hover {
 
 .button-without-format {
   background: none;
-  color:white;
+  color: white;
   border: none;
+  padding: 0;
+  display: flex;
 }
 
 .flash-message {

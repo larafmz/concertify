@@ -38,16 +38,23 @@
             
             - ub = event.ubication&.complete_name || t("not_found")
             .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
-                %span= "📍#{ub} 🗓️ #{short_date(event.date)}" 
+                %span{style: "display:flex; align-items:center; gap:5px;"}
+                    = image_tag("icon_ubication_softest_color.png", style: "width: 3%; height: 3%")
+                    = ub 
+                    = image_tag("icon_date_softest_color.png", style: "width: 3%; height: 3%")
+                    = short_date(event.date)
                 
-            %div
+            %div{style: "display:flex; align-items:center; gap:5px;"}
                 - if future_assistance.event_seat_string && !future_assistance.event_seat_details&.empty?
                     .bubble
                         %span= "🎟️ #{future_assistance.event_seat_string}"
                         %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
                 - if future_assistance.from && !future_assistance.from.empty?
                     .bubble
-                        %span{style: "color: rgb(230, 230, 230);"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
+                        %span{style: "color: rgb(230, 230, 230); display:flex; align-items:center; gap: 5px"}
+                            = image_tag("icon_ubication_softest_color.png", style: "width: 10%; height: 10%")
+                            = FutureAssistance.human_attribute_name(:from)
+                            = future_assistance.from
                             
         %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
             

@@ -25,6 +25,8 @@
                 
                 - ub = event.ubication&.complete_name || "ubication unidentified"
                 .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
-                    %span= "📍#{ub}" 
-            %div{style: "color: orange"}= register.get_rating
+                    %span{style: "display:flex; align-items:center; gap:5px;"}
+                        = image_tag("icon_ubication_softest_color.png", style: "width: 3%; height: 3%")
+                        = ub 
+            %div= register.get_rating_out_of_five
 

@@ -30,7 +30,11 @@
             %span{class: "softest-color"}= t("verbs.logged")
         %span{ style: "font-size: 20px; font-weight: 700; font-family: Georgia, 'Times New Roman', Times, serif;" }= event.tour_name
         .softest-color{style: "font-size: 15px;" }
-            %span= "📍#{event.ubication&.complete_name} 🗓️ #{short_date(event.date)}" 
+            %span{style: "display:flex; align-items:center; gap:10px;"}
+                = image_tag("icon_ubication_softest_color.png", style: "width: 2.5%; height: 2.5%")
+                = event.ubication&.complete_name_with_venue || t("not_found")
+                = image_tag("icon_date_softest_color.png", style: "width: 2.5%; height: 2.5%")
+                = short_date(event.date)
         %span{style: "color: orange; "}= register.get_rating
         - if register.review.present?
             .section-box

@@ -38,7 +38,7 @@
 
             .form-columns{data: { controller: "character-counter" }}
               %div
-                = label_tag :review, Register.human_attribute_name(:review), class: "soft-color", style: "font-size: 13px;"
+                = label_tag :review, Register.human_attribute_name(:review), class: "soft-color label-custom"
                 = f.text_area :review, maxlength: 500, placeholder: t("messages.write_your_review"), class: "field-custom", style: "width: 100%; height: 100px; resize: none;", data: {  character_counter_target: "input", action: "input->character-counter#update" }
               %div
                 %br
@@ -49,7 +49,7 @@
               = f.file_field :photos, class: "field-custom", multiple: true, accept: "image/*", data: { controller: "max-files", max_files: Register::MAX_PHOTOS, max_files_message: t("messages.max_upload", count: Register::MAX_PHOTOS), action: "change->max-files#change" }
 
             .rating
-              %div= label_tag :rating, Register.human_attribute_name(:rating), class: "soft-color", style: "font-size: 13px;"
+              %div= label_tag :rating, Register.human_attribute_name(:rating), class: "soft-color label-custom"
               %div{style: "display: flex; gap: 15px;"}
                 - (1..5).each do |i|
                   %div

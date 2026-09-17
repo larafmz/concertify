@@ -1,12 +1,11 @@
 .header
-  .logo
-    = link_to root_path do
-      = image_tag("icon_logo.png", alt: t("root_title"))
   .app_name
     = link_to root_path do
-      Concertify
+      = image_tag("concertify_logo_mix.png")
 
-  = form_tag "/users", method: "GET" do
+
+  - search_path = %w[artists users events].include?(controller_name) ? "/#{controller_name}" : "/artists"
+  = form_tag search_path, method: "GET" do
     = text_field_tag :search, params[:search], placeholder: "🔍 #{t("main_search")}", class: "field-custom"
 
   %div
@@ -33,7 +32,9 @@
             = link_to User.plural, users_path, class: "dropdown-item"
 
       - if can?(:create, Publication)
-        = link_to "+ #{t("verbs.post")}", new_publication_path, class: "btn-custom orange-color", data: { turbo_frame: "modal" }
+        = link_to new_publication_path, class: "btn-standard", data: { turbo_frame: "modal" } do
+          = image_tag("icon_post.png", style: "width: 75%; height: 75%")
+
 
       - if can?(:read, Request)
         .dropdown
@@ -53,8 +54,11 @@
   - if current_user
     .flex{style: "display: flex; justify-content: right; gap: 30px; padding: 10px; font-size: 18px; color: white; "}
       = link_to user_path(current_user), class: "hover-border-icon", title: t("user_account.profile") do
-        .link_icon{ class: ("active" if current_page?(user_path(current_user))) }
-          👤
+        .link_icon
+          - if current_page?(user_path(current_user))
+            = image_tag("icon_user_selected.png", style: "width: 75%; height: 75%")
+          - else
+            = image_tag("icon_user.png", style: "width: 75%; height: 75%")
       = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural do
         = render "layouts/shared/notifications_bubble"
       = link_to chats_path, class: "hover-border-icon", title: Chat.plural do
@@ -67,7 +71,7 @@
       "aria-expanded" => "false",
       style: "background: #51485a" 
     }
-      =t("session")
+      = t("user_account.profile")
 
     %ul.dropdown-menu
       
@@ -76,6 +80,18 @@
           = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
         %li
           = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
+        %li
+          %hr.dropdown-divider
+        %li
+          = link_to t("my_model_plural", model: Register.plural), registers_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: Publication.plural), publications_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: Request.plural), requests_user_path(current_user), class: "dropdown-item"
+        %li
+          %hr.dropdown-divider
         %li 
           = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
       - else
@@ -92,13 +108,13 @@
       "aria-expanded" => "false",
       style: "background: #51485a" 
     }
-      =t("options")
+      =t("languages")
 
     %ul.dropdown-menu
       %li
-        = link_to t("switch_to", model: t("spanish")), change_locale_path(:es), class: "dropdown-item"
+        = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
       %li
-        = link_to t("switch_to", model: t("english")), change_locale_path(:en), class: "dropdown-item"
+        = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
 
 
 .separator{style: "background: #40556d; "}

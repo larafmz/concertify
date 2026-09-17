@@ -1,6 +1,5 @@
 - event = future_assistance.event
-- event_date = event.date
-- event_date_status = time_status(event_date, event.start_time)
+- event_date_status = event.past_or_future?
 
 .future_assistance{style: "margin:20px 0px 20px 0px;"}
     = link_to user_path(future_assistance.user), class: "hover-border-icon" do

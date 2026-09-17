@@ -83,8 +83,10 @@ class RequestsController < ApplicationController
     end
 
     def destroy
-        @request.destroy
-        redirect_back fallback_location: root_path
+        request_id = @request.id
+        if @request.destroy
+            render turbo_stream: turbo_stream.remove("request-#{request_id}")
+        end
     end
 
 private

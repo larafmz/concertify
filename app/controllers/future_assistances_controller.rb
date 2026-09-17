@@ -44,10 +44,7 @@ class FutureAssistancesController < ApplicationController
     def destroy
         future_assistance_id = @future_assistance.id
         if @future_assistance.destroy
-            respond_to do |format|
-                format.turbo_stream { render turbo_stream: turbo_stream.remove("future-assistance-#{future_assistance_id}") }
-                format.html { redirect_back fallback_location: root_path }
-            end
+            render turbo_stream: turbo_stream.remove("future-assistance-#{future_assistance_id}")
         end
     end
 

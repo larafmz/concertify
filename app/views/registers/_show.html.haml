@@ -27,19 +27,22 @@
                         %li
                             = link_to t("crud.edit", model: Register.singular), edit_register_path(register), data: { turbo_frame: "modal" }, class: "dropdown-item"
                         %li
-                            = link_to t("crud.destroy", model: Register.singular), interactuable_path(register), data: { turbo_method: :delete, turbo_confirm: t("registers.destroy_message") }, class: "dropdown-item"
-
+                            = button_to t("crud.destroy", model: Register.singular), interactuable_path(register), method: :delete, form: { data: { turbo: false, confirm: t("registers.destroy_message") } }, class: "dropdown-item"
 
         .separator{style: "margin: 10px 0;"}
 
         = link_to event_path(@event) do 
             %span{ style: "font-size: 28px; font-weight: 600;" }= @event.tour_name
             
-        - if @artist && @artist.genre && @artist.genre.name!="Undefined"
-            %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.name}"
+        - if @artist && @artist.genre && @artist.genre.name!="Undefined"   
+            %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.translation}"
 
         .softest-color{style: "font-size: 15px;" }
-            %span= "📍#{@event.ubication&.complete_name} 🗓️ #{short_date(@event.date)}" 
+            %span{style: "display:flex; align-items:center; gap:5px;"}
+                = image_tag("icon_ubication_softest_color.png", style: "width: 3%; height: 3%")
+                = @event.ubication&.complete_name
+                = image_tag("icon_date_softest_color.png", style: "width: 3%; height: 3%")
+                = short_date(@event.date)
 
         %div{style: "color: orange"}= register.get_rating
         

@@ -8,21 +8,27 @@ class User < ApplicationRecord
 
     belongs_to :role
 
+    has_one :ubication, dependent: :destroy
+    accepts_nested_attributes_for :ubication, allow_destroy: false
+
     has_many :registers, dependent: :destroy
     has_many :publications, dependent: :destroy
     has_many :future_assistances, dependent: :destroy
-    has_one :ubication, dependent: :destroy
-    accepts_nested_attributes_for :ubication, allow_destroy: false
+
+    #Relations
     has_many :followings, -> { where(relation_type: 0)  }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :followers, -> {  where(relation_type: 0) }, as: :followed, class_name: "Relation", dependent: :destroy
     has_many :blocked_users, -> {  where(relation_type: 1) }, class_name: "Relation", foreign_key: :follower_id, dependent: :destroy
     has_many :favorite_artists, dependent: :destroy
-    has_many :chat_users, dependent: :destroy
-    has_many :chats, through: :chat_users
-    has_many :notifications, class_name: "Noticed::Notification", as: :recipient, dependent: :destroy
+
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :reposts, dependent: :destroy
+
+    has_many :chat_users, dependent: :destroy
+    has_many :chats, through: :chat_users
+
+    has_many :notifications, class_name: "Noticed::Notification", as: :recipient, dependent: :destroy
     
     #dont delete, convert to nil
     has_many :requests, foreign_key: :requester_id, dependent: :nullify 

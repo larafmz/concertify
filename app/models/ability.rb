@@ -19,6 +19,7 @@ class Ability
         can :manage, :all
         #cannot follow/unfollow self
         cannot [:follow, :unfollow], User do |target| target.id == user.id end
+        cannot :like, Interactuable do |interactuable| interactuable.user_id == user.id end
 
       elsif user.user?
 
@@ -45,8 +46,12 @@ class Ability
         end
         
         # Interactuable permissions
-        can [:like, :repost, :comment], Interactuable do |interactuable| 
+
+        can [:like], Interactuable do |interactuable| 
           interactuable.user_id != user.id && !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
+        end
+        can [:repost, :comment], Interactuable do |interactuable| 
+          !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
         end
         can [:uncomment], Interactuable, user_id: user.id
         can [:reply], Comment do |comment| 

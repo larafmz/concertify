@@ -2,9 +2,9 @@
     - if can?(:repost, interactuable)
         = button_to repost_interactuable_path(interactuable), method: :post, class: "button-without-format" do
             - unless current_user.reposted?(interactuable.id)
-                %span{style: "color: white; font-size:18px; "} 🗘
+                %span{style: "color: white; font-size: 20px; "} 🗘
             - else
-                %span{style: "color: #1c911c; font-size:18px; "} 🗘
+                %span{style: "color: #{orange_color}; font-size: 20px; "} 🗘
     - else
         %span{style: "color: white; font-size:18px; "} 🗘
     - if interactuable.reposts.count != 0

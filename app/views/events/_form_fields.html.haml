@@ -6,7 +6,7 @@
 
         .two-columns
             %div
-                = label_tag :artist_id, "🧑‍🎤 #{Artist.singular} *", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :artist_id, "🧑‍🎤 #{Artist.singular} *", class: "soft-color label-custom"
                 = f.text_field :artist_name, 
                     value: @event.artists.first&.name || Artist.find_by(id: params[:artist_id])&.name,
                     placeholder: "Ex: Taylor Swift", class: "field-custom", list: "artists-list"
@@ -15,15 +15,15 @@
                         %option{ value: artist.complete_name }
 
             %div
-                = label_tag :tour_name, "🎶 #{Event.human_attribute_name(:tour_name)}", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :tour_name, "🎶 #{Event.human_attribute_name(:tour_name)}", class: "soft-color label-custom"
                 = f.text_field :tour_name, placeholder: "Ej: Eras Tour", class: "field-custom"
 
         .two-columns
             %div
-                = label_tag :date, "🗓️  #{Event.human_attribute_name(:date)} *", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :date, "🗓️  #{Event.human_attribute_name(:date)} *", class: "soft-color label-custom"
                 = f.date_field :date, class: "field-custom"
             %div
-                = label_tag :start_time, "🕐 #{Event.human_attribute_name(:start_time)}", class: "soft-color", style: "font-size: 13px;"
+                = label_tag :start_time, "🕐 #{Event.human_attribute_name(:start_time)}", class: "soft-color label-custom"
                 = f.time_field  :start_time, class: "field-custom"
 
 
@@ -36,12 +36,16 @@
             .nested-fields
                 .three-columns{style: "gap: 20px;"}
                     %div
-                        = label_tag :venue, "#{Ubication.human_attribute_name(:venue)}", class: "soft-color", style: "font-size: 13px;"
+                        = label_tag :venue, "#{Ubication.human_attribute_name(:venue)}", class: "soft-color label-custom"
                         = ubication_fields.text_field :venue, class: "field-custom", placeholder: "Ex: WiZink Center"
 
                     %div
-                        = label_tag :city, "📍 #{Ubication.human_attribute_name(:city)}", class: "soft-color", style: "font-size: 13px;"
+                        = label_tag :city, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:5px;"do
+                            = image_tag("icon_ubication_soft_color.png", style: "width: 10%; height: 10%")
+                            = Ubication.human_attribute_name(:city)
                         = ubication_fields.text_field :city, class: "field-custom", placeholder: "Ex: Madrid"
                     %div
-                        = label_tag :country, "📍  #{Country.singular} *", class: "soft-color", style: "font-size: 13px;"
-                        = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [t(country.name), country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }
+                        = label_tag :country, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:5px;" do
+                            = image_tag("icon_ubication_soft_color.png", style: "width: 10%; height: 10%")
+                            = Country.singular
+                        = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }

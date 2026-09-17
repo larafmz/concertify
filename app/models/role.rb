@@ -4,9 +4,11 @@ class Role < ApplicationRecord
 
     has_many :users
 
-  ## SCOPES
+  ## CLASS METHODS
 
-    scope :user, -> { where(name: "user").first }
+    def self.get_user_role
+      Role.where(name: "user").first
+    end
 
   ## INSTANCE METHODS
     

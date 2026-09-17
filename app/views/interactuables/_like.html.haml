@@ -1,12 +1,12 @@
-%div{id: "like-interactuable-#{interactuable.id}", style: "display: flex;"}
+%div{id: "like-interactuable-#{interactuable.id}", style: "display: flex; align-items: center"}
     - if can?(:like, interactuable)
         = button_to like_interactuable_path(interactuable), method: :post, class: "button-without-format" do
             - unless current_user.liked?(interactuable.id)
-                %span{style: "color: white; font-size:18px; "} ♡ 
+                = image_tag("icon_like.png", style: "width:20px; height:20px; display:block;")
             - else
-                %span{style: "color: #db4949; font-size:18px; "} ♡
+                = image_tag("icon_liked.png", style: "width:20px; height:20px; display:block;")
     - else
-        %span{style: "color: white; font-size:18px; "} ♡ 
+        = image_tag("icon_like.png", style: "width:20px; height:20px; display:block;")
     - if interactuable.likes.count != 0
         = link_to interactuable_path(interactuable) do 
             = interactuable.likes.count

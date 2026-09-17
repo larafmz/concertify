@@ -2,7 +2,7 @@
 // Channel files must be named *_channel.js.
 
 // NEW VERSION WITH IMPORTMAP
-import "./consumer"
+import "channels/consumer"
 
 // OLD WEBPACKER VERSION
 // const channels = require.context('.', true, /_channel\.js$/)

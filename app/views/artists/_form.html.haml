@@ -12,11 +12,11 @@
           .form-modal-info
 
             %div
-              = label_tag :name, "🧑‍🎤 #{Artist.human_attribute_name(:name)}", class: "soft-color", style: "font-size: 13px;"
+              = label_tag :name, "🧑‍🎤 #{Artist.human_attribute_name(:name)}", class: "soft-color label-custom"
               = f.text_field :name, placeholder: "Ej: Taylor Swift", class: "field-custom"
 
             %div
-              = label_tag :photo, "📷 #{Artist.human_attribute_name(:photo)}", class: "soft-color", style: "font-size: 13px;"
+              = label_tag :photo, "📷 #{Artist.human_attribute_name(:photo)}", class: "soft-color label-custom"
               = f.file_field :photo, class: "field-custom", style: "padding: 0px;"
 
       %div

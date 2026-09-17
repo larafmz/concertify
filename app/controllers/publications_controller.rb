@@ -20,7 +20,7 @@ class PublicationsController < ApplicationController
     def create
         @publication = Publication.new(create_params)
         @publication.save!
-        redirect_to publications_path(user_id: current_user&.id)
+        redirect_to interactuable_path(@publication)
     end
 
     def destroy
@@ -28,7 +28,7 @@ class PublicationsController < ApplicationController
         if @publication.destroy
             respond_to do |format|
                 format.turbo_stream { render turbo_stream: turbo_stream.remove("publication-#{publication_id}") }
-                format.html { redirect_back fallback_location: root_path }
+                format.html { redirect_to publications_path }
             end
         end
     end

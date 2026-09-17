@@ -1,3 +1,92 @@
 en:
   activerecord:
     models:
+      user:
+        one: User
+        other: Users
+      register:
+        one: Register
+        other: Registers
+      publication:
+        one: Publication
+        other: Publications
+      event:
+        one: Event
+        other: Events
+      ubication:
+        one: Location
+        other: Locations
+      artist:
+        one: Artist
+        other: Artists
+      country:
+        one: Country
+        other: Countries
+      future_assistance:
+        one: Future Assistance
+        other: Future Assistances
+      genre:
+        one: Genre
+        other: Genres
+      favorite_artist:
+        one: Favorite Artist
+        other: Favorite Artists
+      notification:
+        one: Notification
+        other: Notifications
+      like:
+        one: Like
+        other: Likes
+      comment:
+        one: Comment
+        other: Comments
+      repost:
+        one: Repost
+        other: Reposts
+      chat:
+      one: Chat
+      other: Chats
+      request:
+      one: Request
+      other: Requests
+    attributes:
+      user:
+        email: Email
+        username: Username
+        name: Name
+        description: Description
+        password: Password
+        current_password: Current password
+        password_confirmation: Password confirmation
+        remember_me: Remember me
+      event:
+        tour_name: Tour / Event Name
+        date: Date
+        start_time: Start Time
+        status: Status
+        requester_id: Requesting User
+        artists: Artist
+      artist:
+        name: Name
+        photo: Photo
+        status: Status
+      ubication:
+        city: City
+        state: State
+        venue: Venue
+        country: Country
+      future_assistance:
+        from: From
+        from_question: Which city will you be travelling from to the event?
+        event_seat: Event Seat
+        event_seat_details: Location Details
+        company: Who are you going with?
+      register:
+        review: Review
+        reviews: Reviews
+        rating: Rating
+      request:
+        status: Status
+        message: Message
+      "event/ubication":
+        country: Country

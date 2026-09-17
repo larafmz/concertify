@@ -9,13 +9,15 @@
                         = @event.request.status_string.upcase
                 %div= @event.tour_name
                 %div{ style: "font-size: 15px; margin-bottom:5px" }
-                    %div= "📍#{@event.ubication&.complete_name} "
+                    %div{style: "display:flex; align-items:center; gap:10px;"}
+                        = image_tag("icon_ubication_white.png", style: "width: 10%; height: 10%")
+                        = @event.ubication&.complete_name
                 %div{ style: "font-size: 15px;" }
                     %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
              
     %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
         .flex{ style: " width: 20%;" }
-            - event_date_status = time_status(@event.date, @event.start_time)
+            - event_date_status = @event.past_or_future?
             - if event_date_status == "past" && !@registers.empty?
                 .stat
                     .number

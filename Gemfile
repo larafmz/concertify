@@ -85,7 +85,7 @@ gem "cocoon"
 # pagination
 gem "kaminari"
 
-gem "solid_queue", "~> 1.7"
+gem "solid_queue"
 
 group :test do
   gem "simplecov", require: false

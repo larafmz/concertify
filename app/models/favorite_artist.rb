@@ -1,7 +1,9 @@
 class FavoriteArtist < ApplicationRecord
   
-  belongs_to :user
-  belongs_to :artist
+  ## RELATIONSHIPS
+
+    belongs_to :user
+    belongs_to :artist
 
   ## VALIDATIONS
 

@@ -9,7 +9,6 @@ es:
       undefined: Sin definir
       alone: Solo
       accompanied: Acompañado
-
   requests:
     statuses:
       accepted: Aceptado
@@ -28,8 +27,11 @@ en:
       grada: Seating
       vip: VIP
       otro: Other
-
-  events:
+    companies:
+      undefined: Undefined
+      alone: Alone
+      accompanied: Accompanied
+  requests:
     statuses:
       accepted: Accepted
       pending: Pending

@@ -1,7 +1,11 @@
 = turbo_stream_from current_user, "messages_header"
 %div{id: "messages_header", style: "display:flex; flex-direction:column; align-items:center;"}
-    .link_icon{ class: ("active" if controller_name == "chats") }
-        💬
+    .link_icon
+        - if controller_name == "chats"
+            = image_tag("icon_chat_selected.png", style: "width: 95%; height: 95%")
+        - else
+            = image_tag("icon_chat.png", style: "width: 95%; height: 95%")
+
     - unread_chats = current_user.chat_users.unread.size
     - if unread_chats > 0
         %div{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}

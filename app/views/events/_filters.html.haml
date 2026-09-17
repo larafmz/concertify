@@ -6,14 +6,20 @@
     .filters-search
         = hidden_field_tag :artist_id, @artist&.id
         %div
-            = label_tag :first_date, "🗓️ #{t("filters.from").upcase}", class: "soft-color", style: "font-size: 13px;"
+            = label_tag :first_date, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:10px;" do 
+                = image_tag("icon_date_soft_color.png", style: "width: 5%; height: 5%")
+                = t("filters.from").upcase
             = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;", id: "first_date"
         %div
-            = label_tag :second_date, "🗓️ #{t("filters.to").upcase}", class: "soft-color", style: "font-size: 13px;"
+            = label_tag :second_date, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:10px;" do 
+                = image_tag("icon_date_soft_color.png", style: "width: 5%; height: 5%")
+                = t("filters.to").upcase
             = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;", id: "second_date"
         %div
-            = label_tag :country, "📍 #{Ubication.singular.upcase}", class: "soft-color", style: "font-size: 13px;"
-            = select_tag :country, options_for_select(Country.all.map { |country| [t(country.name), country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
+            = label_tag :country, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:10px;" do 
+                = image_tag("icon_ubication_soft_color.png", style: "width: 5%; height: 5")
+                = Ubication.singular.upcase
+            = select_tag :country, options_for_select(Country.all.map { |country| [country.translation, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
         %div
             %br  
             = submit_tag t("verbs.filter"), class: "btn-custom event-color"

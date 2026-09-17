@@ -6,27 +6,26 @@
 
       = render "common/error_messages", resource: resource
 
-      = f.hidden_field :role_id, value: Role.user.id
+      = f.hidden_field :role_id, value: Role.get_user_role.id
 
       .form-field
-        = f.label :username, User.human_attribute_name(:username), class: "soft-color", style: "font-size: 13px;"
+        = f.label :username, User.human_attribute_name(:username), class: "soft-color label-custom"
         = f.text_field :username, class: "field-custom"
 
       .form-field
-        = f.label :email, User.human_attribute_name(:email), class: "soft-color", style: "font-size: 13px;"
+        = f.label :email, User.human_attribute_name(:email), class: "soft-color label-custom"
         = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom"
 
       .form-field
-        = f.label :password, User.human_attribute_name(:password), class: "soft-color", style: "font-size: 13px;"
+        = f.label :password, User.human_attribute_name(:password), class: "soft-color label-custom"
         - if @minimum_password_length
-          %em{class: "soft-color", style: "font-size: 13px;"}
+          %em{class: "soft-color label-custom"}
             = "(#{t("user_account.minimum_password_length", count: @minimum_password_length)})"
         = f.password_field :password, autocomplete: "new-password", class: "field-custom"
 
       .form-field
-        = f.label :password_confirmation, t("user_account.password_confirmation"), class: "soft-color", style: "font-size: 13px;"
+        = f.label :password_confirmation, t("user_account.password_confirmation"), class: "soft-color label-custom"
         = f.password_field :password_confirmation, autocomplete: "new-password", class: "field-custom"
 
     = f.submit t("user_account.register"), class: "field-custom orange-color"
 
-  = render "devise/shared/links"

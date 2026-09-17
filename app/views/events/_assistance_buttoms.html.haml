@@ -1,6 +1,6 @@
 - register = Register.find_by(user_id: current_user&.id, event_id: event.id)
 - future_assistance = FutureAssistance.find_by(user_id: current_user&.id, event_id: event.id )
-- event_date_status = time_status(event.date, event.start_time)
+- event_date_status = event.past_or_future?
 .button-event{style: "display: flex; gap: 10px;"}
     - if event_date_status == "past" && can?(:create, Register)
         - unless register

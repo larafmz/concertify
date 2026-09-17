@@ -28,7 +28,7 @@
         =Event.plural.upcase
         - if current_user && current_user&.ubication&.country
           = t("in").upcase
-          = t(current_user.ubication.country.name).upcase
+          = current_user.ubication.country.translation.upcase
       =link_to events_path(country: current_user&.ubication&.country&.code) do
         = t("more").upcase
     .separator{style: "margin-bottom: 15px; "}

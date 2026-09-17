@@ -45,7 +45,6 @@ es:
   from_user: "%{model} de %{user}"  
   more: Más
   diary: Diario
-  asistenece: Asistencia
   likes_of_model_from_user: Me gustas sobre %{model} de %{user} de
   follows_you: Te sigue
   from_followed_artists: De tus artistas seguidos
@@ -73,6 +72,7 @@ es:
   not_authorized: No tienes permiso para acceder a esta página.
   destroy_actual_icon: Eliminar imagen actual
   back_to_chat: Volver al chat
+  languages: Idiomas
   
   by: por
   about: sobre
@@ -164,7 +164,8 @@ es:
     exists_in_app_already: Ya existe en la app
     cant_send_message: No puedes enviar mensajes en este chat.
     event_already_registered: "Ya has registrado tu asistencia a este evento."
-    max_upload: "Solo puedes subir %{count} fotos, guapa."
+    max_upload: "Solo puedes subir %{count} fotos."
+    existing_event_requires_accepted_status: debe estar en estado "aceptado" si se selecciona un concierto existente.
     
   notifications:
     new_follower: "%{user} ha comenzado a seguirte"

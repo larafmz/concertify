@@ -1,0 +1,19 @@
+event3_artist3: {
+  artist: artist3,
+  event: event3
+}
+
+event4_artist4: {
+  artist: artist4,
+  event: event4
+}
+
+event5_artist3: {
+  artist: artist3,
+  event: event5
+}
+
+event5_artist4: {
+  artist: artist4,
+  event: event5
+}

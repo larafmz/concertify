@@ -1,0 +1,11 @@
+request1:
+  status: 0
+
+request2:
+  status: 0
+
+request3:
+  status: 1
+
+request4:
+  status: 2

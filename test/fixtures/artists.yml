@@ -1,0 +1,11 @@
+artist3: {
+  ticketmaster_id: 3,
+  name: Artista antiguo1,
+  updated_at: <%= 5.hours.ago %>
+}
+
+artist4: {
+  ticketmaster_id: 4,
+  name: Artista antiguo2,
+  updated_at: <%= 4.hours.ago %>
+}

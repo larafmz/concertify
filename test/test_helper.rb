@@ -1,3 +1,15 @@
+require "simplecov"
+require "minitest/mock"
+
+SimpleCov.start "rails" do
+  enable_coverage :branch
+end
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::JSONFormatter
+]
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative "../config/environment"
 require "rails/test_help"

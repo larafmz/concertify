@@ -10,7 +10,8 @@ event4: {
   tour_name: Evento antiguo2,
   date: <%= Date.today %>,
   updated_at: <%= 4.hours.ago %>,
-  ubication: ubication1
+  ubication: ubication1,
+  start_time: <%= Time.current %>
 }
 
 event5: {
@@ -36,4 +37,11 @@ event8: {
   tour_name: Evento 8,
   date: <%= Date.today + 1.year %>,
   request: request4
+}
+
+event9: {
+  ticketmaster_id: 9,
+  tour_name: Evento 9,
+  date: <%= Date.today %>,
+  start_time: <%= Time.current - 2.hours %>
 }

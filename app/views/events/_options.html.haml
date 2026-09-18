@@ -1,5 +1,5 @@
 .separator
-- event_date_status = @event.past_or_future?
+- event_date_status = @event.past_or_future
 .widget-content{style: "color: #a4b3c4; display: flex; justify-content: left; gap: 60px; padding: 0px 0px 0px 90px;"}
     = link_to Artist.plural, event_path(@event), style: ("color: white; border-bottom: 2px solid #{artist_color};" if active == :artists)
     - if event_date_status == "past"

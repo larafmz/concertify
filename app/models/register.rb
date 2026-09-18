@@ -11,6 +11,8 @@ class Register < Interactuable
 
     validates :event_id, presence: true
     validates :event_id, uniqueness: { scope: :user_id, message: I18n.t('messages.event_already_registered') }
+    validate :event_must_be_accepted
+    validate :event_must_be_past
     validate :photos_limit
 
   ## SCOPES
@@ -19,7 +21,6 @@ class Register < Interactuable
     scope :with_review, -> { where.not(review: nil).where("TRIM(review) != ''") }
     scope :by_friends, -> (current_user) { where(user_id: current_user.followings.pluck(:followed_id)) }
 
-  
   ## CALLBACKS
 
     after_destroy_commit :exit_chat
@@ -32,6 +33,14 @@ class Register < Interactuable
         if photos.attached? && photos.count > MAX_PHOTOS
             errors.add(:photos, I18n.t("messages.max_upload", count: MAX_PHOTOS))
         end
+    end
+
+    def event_must_be_accepted
+      errors.add(:event, "must be accepted") if event.present? && !event.accepted?
+    end
+
+    def event_must_be_past
+      errors.add(:event, "hasn't been celebrated yet") if event.past_or_future == "future"
     end
 
   # CALLBACKS METHODS

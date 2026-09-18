@@ -11,6 +11,8 @@ class Register < Interactuable
 
     validates :event_id, presence: true
     validates :event_id, uniqueness: { scope: :user_id, message: I18n.t('messages.event_already_registered') }
+    validates :rating, numericality: { only_integer: true,  in: 1..5 },  allow_blank: true
+    validates :review, length: { maximum: 500 }, allow_blank: true
     validate :event_must_be_accepted
     validate :event_must_be_past
     validate :photos_limit

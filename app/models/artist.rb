@@ -71,7 +71,7 @@ class Artist < ApplicationRecord
       return artist
     end
 
-    def self.search_by(params: nil)    
+    def self.search_by(params: {})    
       artists_api = Array(TicketmasterService.artists_by(params))  
       artists_db = Artist.accepted
       artists_db = artists_db.by_name(params[:search]) if params[:search].present?

@@ -9,3 +9,25 @@ artist4: {
   name: Artista antiguo2,
   updated_at: <%= 4.hours.ago %>
 }
+
+artist5: {
+  ticketmaster_id: 5,
+  name: Rihanna,
+  genre: pop
+}
+
+artist6: {
+  name: Leiva,
+  status: 0,
+  genre: rock
+}
+
+artist7: {
+  name: Pitbull,
+  status: 1
+}
+
+artist8: {
+  name: Sabrina Carpenter,
+  status: 2
+}

@@ -76,9 +76,9 @@ class Event < ApplicationRecord
     def self.search_by(params: {}, artist: nil)
       events_api = TicketmasterService.events_by(params)    
 
-      events_db = Event.accepted.by_name(params[:search])
+      events_db = Event.accepted
+      events_db = events_db.by_name(params[:search]) if params[:search]
       events_db = events_db.by_artist(artist.id) if artist
-      events_db = Event.accepted if artist.nil? and params.empty?
 
       ticketmaster_ids = events_api.map { |event| event["id"] }
       events_db = events_db.where(ticketmaster_id: nil).or(events_db.where.not(ticketmaster_id: ticketmaster_ids)).order(date: :asc)

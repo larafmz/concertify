@@ -11,7 +11,9 @@ class Publication < Interactuable
   ## VALIDATIONS
     
     validates :review, presence: true
+    validates :review, length: { maximum: 500 }
     validate :photos_limit
+    validate :event_and_artist_must_be_accepted
 
   ## SCOPES
 
@@ -27,6 +29,11 @@ class Publication < Interactuable
         if photos.attached? && photos.count > MAX_PHOTOS
             errors.add(:photos, I18n.t("messages.max_upload", count: MAX_PHOTOS))
         end
+    end
+
+    def event_and_artist_must_be_accepted
+      errors.add(:event, "must be accepted") if event.present? && !event.accepted?   
+      errors.add(:artist, "must be accepted") if artist.present? && !artist.accepted?
     end
 
   ## CLASS METHODS

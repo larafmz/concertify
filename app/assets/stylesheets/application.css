@@ -240,10 +240,30 @@ a:hover {
   height: 100px;
 }
 
-.label-custom{
-  font-size: 13px; 
+.label-custom,
+.label-filter {
+  font-size: 13px;
   margin-left: 10px;
   margin-bottom: 5px;
+}
+
+.label-filter {
+  display: flex !important;
+  align-items: center ;
+  width: fit-content;
+  gap: 0.5em;
+}
+
+.label-filter img, .icon-img, .icon-img-2 {
+  display: inline-block !important;
+  width: 1em !important;
+  height: 1em !important;
+  flex: 0 0 auto;
+}
+
+.icon-img-2 {
+  width: 1.3em !important;
+  height: 1.3em !important;
 }
 
 .field-custom {

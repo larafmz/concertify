@@ -30,9 +30,9 @@
 
             .softest-color{style: "font-size: 15px;" }
                 %span{style: "display:flex; align-items:center; gap:10px;"}
-                    = image_tag("icon_ubication_softest_color.png", style: "width: 2.5%; height: 2.5%")
+                    = image_tag("icon_ubication_softest_color.png", class: "icon-img")
                     = event.ubication&.complete_name_with_venue || t("not_found")
-                    = image_tag("icon_date_softest_color.png", style: "width: 2.5%; height: 2.5%")
+                    = image_tag("icon_date_softest_color.png", class: "icon-img")
                     = short_date(event.date)
             
             %span{style: "color: #{color_request(request.status)}; font-size: 16px;"}

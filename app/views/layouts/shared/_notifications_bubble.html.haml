@@ -2,9 +2,9 @@
 %div{id: "notifications_header", style: "display:flex; flex-direction:column; align-items:center;"}
     .link_icon
         - if current_page?(notifications_user_path(current_user))
-            = image_tag("icon_notification_selected.png", style: "width: 90%; height: 90%")
+            = image_tag("icon_notification_selected.png")
         - else
-            = image_tag("icon_notification.png", style: "width: 90%; height: 90%")
+            = image_tag("icon_notification.png")
     - unread_notis = current_user.notifications.unread.size
     - if unread_notis > 0
         %div{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}

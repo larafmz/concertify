@@ -39,9 +39,9 @@
 
         .softest-color{style: "font-size: 15px;" }
             %span{style: "display:flex; align-items:center; gap:5px;"}
-                = image_tag("icon_ubication_softest_color.png", style: "width: 3%; height: 3%")
+                = image_tag("icon_ubication_softest_color.png", class: "icon-img")
                 = @event.ubication&.complete_name
-                = image_tag("icon_date_softest_color.png", style: "width: 3%; height: 3%")
+                = image_tag("icon_date_softest_color.png", class: "icon-img")
                 = short_date(@event.date)
 
         %div{style: "color: orange"}= register.get_rating

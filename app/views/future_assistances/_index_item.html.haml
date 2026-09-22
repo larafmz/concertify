@@ -39,9 +39,9 @@
             - ub = event.ubication&.complete_name || t("not_found")
             .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
                 %span{style: "display:flex; align-items:center; gap:5px;"}
-                    = image_tag("icon_ubication_softest_color.png", style: "width: 3%; height: 3%")
+                    = image_tag("icon_ubication_softest_color.png", class: "icon-img")
                     = ub 
-                    = image_tag("icon_date_softest_color.png", style: "width: 3%; height: 3%")
+                    = image_tag("icon_date_softest_color.png", class: "icon-img")
                     = short_date(event.date)
                 
             %div{style: "display:flex; align-items:center; gap:5px;"}
@@ -52,7 +52,7 @@
                 - if future_assistance.from && !future_assistance.from.empty?
                     .bubble
                         %span{style: "color: rgb(230, 230, 230); display:flex; align-items:center; gap: 5px"}
-                            = image_tag("icon_ubication_softest_color.png", style: "width: 10%; height: 10%")
+                            = image_tag("icon_ubication_softest_color.png", class: "icon-img")
                             = FutureAssistance.human_attribute_name(:from)
                             = future_assistance.from
                             

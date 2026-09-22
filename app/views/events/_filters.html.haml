@@ -6,18 +6,18 @@
     .filters-search
         = hidden_field_tag :artist_id, @artist&.id
         %div
-            = label_tag :first_date, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:10px;" do 
-                = image_tag("icon_date_soft_color.png", style: "width: 5%; height: 5%")
+            = label_tag :first_date, class: "soft-color label-filter" do 
+                = image_tag("icon_date_soft_color.png")
                 = t("filters.from").upcase
             = date_field_tag :first_date, params[:first_date], class: "field-custom", style: "background: #0F1419;", id: "first_date"
         %div
-            = label_tag :second_date, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:10px;" do 
-                = image_tag("icon_date_soft_color.png", style: "width: 5%; height: 5%")
+            = label_tag :second_date, class: "soft-color label-filter" do 
+                = image_tag("icon_date_soft_color.png")
                 = t("filters.to").upcase
             = date_field_tag  :second_date, params[:second_date], class: "field-custom", style: "background: #0F1419;", id: "second_date"
         %div
-            = label_tag :country, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:10px;" do 
-                = image_tag("icon_ubication_soft_color.png", style: "width: 5%; height: 5")
+            = label_tag :country, class: "soft-color label-filter" do 
+                = image_tag("icon_ubication_soft_color.png")
                 = Ubication.singular.upcase
             = select_tag :country, options_for_select(Country.all.map { |country| [country.translation, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
         %div

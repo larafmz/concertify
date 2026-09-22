@@ -33,7 +33,7 @@
 
       - if can?(:create, Publication)
         = link_to new_publication_path, class: "btn-standard", data: { turbo_frame: "modal" } do
-          = image_tag("icon_post.png", style: "width: 75%; height: 75%")
+          = image_tag("icon_post.png")
 
 
       - if can?(:read, Request)
@@ -56,9 +56,9 @@
       = link_to user_path(current_user), class: "hover-border-icon", title: t("user_account.profile") do
         .link_icon
           - if current_page?(user_path(current_user))
-            = image_tag("icon_user_selected.png", style: "width: 75%; height: 75%")
+            = image_tag("icon_user_selected.png")
           - else
-            = image_tag("icon_user.png", style: "width: 75%; height: 75%")
+            = image_tag("icon_user.png")
       = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural do
         = render "layouts/shared/notifications_bubble"
       = link_to chats_path, class: "hover-border-icon", title: Chat.plural do

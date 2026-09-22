@@ -10,7 +10,7 @@
                 %div= @event.tour_name
                 %div{ style: "font-size: 15px; margin-bottom:5px" }
                     %div{style: "display:flex; align-items:center; gap:10px;"}
-                        = image_tag("icon_ubication_white.png", style: "width: 10%; height: 10%")
+                        = image_tag("icon_ubication_white.png", class: "icon-img")
                         = @event.ubication&.complete_name
                 %div{ style: "font-size: 15px;" }
                     %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 

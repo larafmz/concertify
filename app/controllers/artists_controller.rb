@@ -75,8 +75,8 @@ class ArtistsController < ApplicationController
   end
 
   def post
-    Publication.create(artist_id: params[:id], user_id: current_user&.id, review: params[:text])
-    redirect_to publications_artist_path(@artist)
+    @publication = Publication.create(artist_id: params[:id], user_id: current_user&.id, review: params[:text])
+    redirect_to interactuable_path(@publication)
   end 
 
 private

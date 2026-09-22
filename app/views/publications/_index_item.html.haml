@@ -26,11 +26,11 @@
                 = link_to user_path(publication.user) do 
                     = publication.user.username
                 - if publication.artist
-                    = link_to artist_path(publication.artist) do 
+                    = link_to publications_artist_path(publication.artist) do 
                         .adapted-bubble.artist-color
                             =publication.artist.name
                 - if publication.event
-                    = link_to event_path(publication.event) do 
+                    = link_to publications_event_path(publication.event) do 
                         .adapted-bubble.event-color
                             =publication.event.tour_name               
                 %span.softest-color

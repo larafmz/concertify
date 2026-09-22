@@ -3,7 +3,7 @@
 
     %div{style: "display:flex; align-items:center; gap:5px;"}
         = link_to comments_interactuable_path(interactuable), style: "display:flex; width:fit-content;" do
-            = image_tag("icon_comment.png", style: "width:20px; height:20px; display:block;")
+            = image_tag("icon_comment.png", class: "icon-img-2")
         - if interactuable.comments.count != 0
             = interactuable.comments.count
 

@@ -41,11 +41,11 @@
 
                     %div
                         = label_tag :city, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:5px;"do
-                            = image_tag("icon_ubication_soft_color.png", style: "width: 10%; height: 10%")
+                            = image_tag("icon_ubication_soft_color.png", class: "icon-img")
                             = Ubication.human_attribute_name(:city)
                         = ubication_fields.text_field :city, class: "field-custom", placeholder: "Ex: Madrid"
                     %div
                         = label_tag :country, class: "soft-color label-custom", style: "display:flex; align-items:center; gap:5px;" do
-                            = image_tag("icon_ubication_soft_color.png", style: "width: 10%; height: 10%")
+                            = image_tag("icon_ubication_soft_color.png", class: "icon-img")
                             = Country.singular
                         = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, @event.ubication&.country_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;" }

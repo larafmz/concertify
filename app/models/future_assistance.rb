@@ -3,7 +3,7 @@ class FutureAssistance < ApplicationRecord
   ##CONFIGURATIONS
 
   kindable :event_seat, { :pista => 0, :grada => 1, :vip => 2, :otro => 3 }
-  kindable :company, { :undefined => 0, :alone => 1, :accompanied => 2}
+  kindable :company, { :alone => 1, :accompanied => 2}
 
   MAX_FROM_LENGTH = 50
 
@@ -15,6 +15,10 @@ class FutureAssistance < ApplicationRecord
   ## SCOPES
 
     scope :upcoming, -> { joins(:event).where(events: { date: Date.today...8.days.from_now.to_date }) }
+    scope :by_event, -> (event_id) { where(event_id: event_id) }
+    scope :by_event_seat, -> (event_seat) { where(event_seat: event_seat)}
+    scope :by_company, -> (company) { where(company: company)}
+    scope :by_from, -> (from) { where(from: from)}
 
   ## VALIDATIONS
 
@@ -36,6 +40,18 @@ class FutureAssistance < ApplicationRecord
   ## CLASS METHODS
 
   public
+
+    def self.search_by(current_user, params: {}, event_id: nil)
+      future_assistances = FutureAssistance.viewables(current_user)
+      future_assistances = future_assistances.by_event(event_id) if event_id.present?
+
+      future_assistances = future_assistances.by_event_seat(params[:event_seat]) if params[:event_seat].present?
+      future_assistances = future_assistances.by_company(params[:company]) if params[:company].present?
+      future_assistances = future_assistances.by_from(params[:from]) if params[:from].present?
+
+      future_assistances
+
+    end
 
     def self.viewables(user)
       if user.present?

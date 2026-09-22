@@ -2,11 +2,11 @@
     - if can?(:like, interactuable)
         = button_to like_interactuable_path(interactuable), method: :post, class: "button-without-format" do
             - unless current_user.liked?(interactuable.id)
-                = image_tag("icon_like.png", style: "width:20px; height:20px; display:block;")
+                = image_tag("icon_like.png", class: "icon-img-2")
             - else
-                = image_tag("icon_liked.png", style: "width:20px; height:20px; display:block;")
+                = image_tag("icon_liked.png", class: "icon-img-2")
     - else
-        = image_tag("icon_like.png", style: "width:20px; height:20px; display:block;")
+        = image_tag("icon_like.png", class: "icon-img-2")
     - if interactuable.likes.count != 0
         = link_to interactuable_path(interactuable) do 
             = interactuable.likes.count

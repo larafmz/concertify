@@ -9,3 +9,15 @@ prueba3: {
   email: prueba3@gmail.com,
   role: user
 }
+
+blocked_by: {
+  username: blocked_by,
+  email: blocked_by@gmail.com,
+  role: user
+}
+
+blocked_me: {
+  username: blocked_me,
+  email: blocked_me@gmail.com,
+  role: user
+}

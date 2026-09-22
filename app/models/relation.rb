@@ -1,5 +1,9 @@
 class Relation < ApplicationRecord
 
+  ##CONFIGURATIONS
+
+    kindable :relation_type, { :follow => 0, :block => 1}
+
   ## RELATIONSHIPS
     
     belongs_to :follower, class_name: "User", optional: true
@@ -9,10 +13,6 @@ class Relation < ApplicationRecord
 
     scope :artists, -> { where(followed_type: "Artist" ) }
     scope :users, -> { where(followed_type: "User" ) }
-
-  ##CONFIGURATIONS
-
-    kindable :relation_type, { :follow => 0, :block => 1}
 
   ## VALIDATIONS
 

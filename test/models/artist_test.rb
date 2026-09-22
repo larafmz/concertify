@@ -38,9 +38,8 @@ class ArtistTest < ActiveSupport::TestCase
     
     end
 
+    # PU21
     test "Search_artists_without_filters" do
-
-        # PU21
         response_api = [
             {"name"=>"Miley Cyrus", "id"=> "3"}, 
             {"name"=>"Dua Lipa", "id"=> "4"}, 
@@ -53,7 +52,6 @@ class ArtistTest < ActiveSupport::TestCase
             assert_equal artists[2][:artist]["name"], "Miley Cyrus"
             assert_equal artists[3][:artist]["name"], "Dua Lipa"
         end
-    
     end
 
     test "Search_artists_with_filters" do

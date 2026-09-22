@@ -24,10 +24,22 @@ class FutureAssistance < ApplicationRecord
 
     validates :event_seat_details, :from, length: { maximum: MAX_FROM_LENGTH }, allow_nil: true
     validates :event_id, uniqueness: { scope: :user_id, message: I18n.t('messages.event_already_registered') }
+    validate :event_must_be_accepted
+    validate :event_must_be_future
   
   ## CALLBACKS
 
     after_destroy_commit :exit_chat
+
+  ## VALIDATION METHODS
+
+    def event_must_be_accepted
+      errors.add(:event, "must be accepted") if event.present? && !event.accepted?
+    end
+
+    def event_must_be_future
+      errors.add(:event, "has been celebrated already") if event.past_or_future != "future"
+    end
 
   ## CALLBACKS METHODS
 
@@ -58,7 +70,8 @@ class FutureAssistance < ApplicationRecord
         #Remove FA's from users than have BLOCKED ME
         fa = FutureAssistance.where.not(user_id: Relation.where(followed_id: user.id, relation_type: 1).select(:follower_id))
         #Remove FA's from users than I HAVE BLOCKED
-        fa.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
+        fa = fa.where.not(user_id: Relation.where(follower_id: user.id, relation_type: 1).select(:followed_id))
+        fa
       else
         FutureAssistance.all
       end

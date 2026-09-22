@@ -1,0 +1,48 @@
+future_assistance1: {
+  user: prueba2,
+  event: event3,
+  from: "Madrid",
+  event_seat: 0,
+  company: 1
+}
+
+future_assistance2: {
+  user: prueba2,
+  event: event6,
+  from: "Asturias",
+  event_seat: 1,
+  company: 2
+}
+
+future_assistance3: {
+  user: prueba3,
+  event: event5,
+  from: "London",
+  event_seat: 2,
+  company: 1
+}
+
+future_assistance4: {
+  user: prueba3,
+  event: event5,
+  from: "Italy",
+  event_seat: 3,
+  company: 2
+}
+
+future_assistance_blocked_1: {
+  user: blocked_by,
+  event: event3,
+  from: "London",
+  event_seat: 1,
+  company: 2
+}
+
+future_assistance_blocked_2: {
+  user: blocked_me,
+  event: event3,
+  from: "London",
+  event_seat: 1,
+  company: 2
+}
+

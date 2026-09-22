@@ -1,0 +1,13 @@
+relation1: {
+  follower: prueba2,
+  followed: blocked_by,
+  relation_type: 1,
+  followed_type: "User"
+}
+
+relation2: {
+  follower: blocked_me,
+  followed: prueba2,
+  relation_type: 1,
+  followed_type: "User"
+}

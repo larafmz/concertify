@@ -16,10 +16,20 @@ class ChatEntry < ApplicationRecord
 
     validates :text, presence: true
     validates :text, length: { maximum: 1000 }
+    validate :cant_talk_to_blocked_users, if: -> { !chat.group_chat? } 
 
   ## CALLBACKS
 
-   after_create_commit :broadcast_change
+    after_create_commit :broadcast_change
+   
+  ## VALIDATIONS METHODS
+
+    def cant_talk_to_blocked_users
+      other_user = chat.other_user(user)
+      if other_user.blocked_user?(user.id) || user.blocked_user?(other_user.id)
+        errors.add(:chat, "you can't chat with blocked user")
+      end
+    end
 
   ## CALLBACKS METHODS
 

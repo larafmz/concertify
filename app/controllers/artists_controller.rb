@@ -6,7 +6,7 @@ class ArtistsController < ApplicationController
   before_action :get_attributes, except: [:index, :requests]
 
   def index
-    artists = Artist.search_by(params: params).most_followed
+    artists = Artist.search_by(params: params)
     @artists = Kaminari.paginate_array(artists).page(params[:page]).per(48)
   end
 

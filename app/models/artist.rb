@@ -79,7 +79,7 @@ class Artist < ApplicationRecord
 
       # exclude ticketmaster ids
       ticketmaster_ids = artists_api.map { |artist| artist["id"] }
-      artists_db = artists_db.where(ticketmaster_id: nil).or(artists_db.where.not(ticketmaster_id: ticketmaster_ids))
+      artists_db = artists_db.where(ticketmaster_id: nil).or(artists_db.where.not(ticketmaster_id: ticketmaster_ids)).most_followed
 
       return TicketmasterService.merge_artists(artists_db, artists_api)
     end

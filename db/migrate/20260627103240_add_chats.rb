@@ -2,7 +2,7 @@ class AddChats < ActiveRecord::Migration[7.2]
   def change
 
     create_table :chats do |t|
-      t.references :event
+      t.references :event, foreign_key: true
       t.timestamps
     end    
 

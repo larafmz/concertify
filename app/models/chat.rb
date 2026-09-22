@@ -8,6 +8,10 @@ class Chat < ApplicationRecord
     has_many :users, through: :chat_users
     has_many :chat_entries, dependent: :destroy
 
+  ## VALIDATIONS
+
+    validates :event_id, uniqueness: { allow_nil: true }
+
   ## SCOPES
 
     scope :by_users, ->(user1_id, user2_id) { 
@@ -22,6 +26,7 @@ class Chat < ApplicationRecord
       chat = Chat.new
       chat.chat_users << ChatUser.new(user_id: user1_id) 
       chat.chat_users << ChatUser.new(user_id: user2_id) 
+      chat.save
       chat
     end
 
@@ -31,10 +36,15 @@ class Chat < ApplicationRecord
         chat.chat_users << ChatUser.new(user_id: user_id) 
         ChatEntry.create(chat_id: chat.id, user_id: user_id, text: "entered_chat", chat_type: 1)
       end
+      chat.save
       chat
     end
 
   ## INSTANCE METHODS
+
+    def send_message(user_id, message)
+      ChatEntry.create(chat_id: self.id, chat_type: 0, user_id: user_id, text: message)
+    end
 
     def group_chat?
       event.present?
@@ -64,8 +74,9 @@ class Chat < ApplicationRecord
     end
 
     def exit_chat(user_id)
-      self.chat_users.find_by(user_id: user_id)&.destroy
-      ChatEntry.create(chat_id: self.id, user_id: user_id, text: "exited_chat", chat_type: 1)
+      if self.chat_users.find_by(user_id: user_id)&.destroy
+        ChatEntry.create(chat_id: self.id, user_id: user_id, text: "exited_chat", chat_type: 1)
+      end
     end
 
 end

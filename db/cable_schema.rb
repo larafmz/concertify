@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_09_14_134419) do
+ActiveRecord::Schema[7.2].define(version: 2026_09_22_152907) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -173,17 +173,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_14_134419) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "noticed_events", force: :cascade do |t|
-    t.string "type"
-    t.string "record_type"
-    t.bigint "record_id"
-    t.json "params"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "notifications_count"
-    t.index ["record_type", "record_id"], name: "index_noticed_events_on_record"
-  end
-
   create_table "noticed_notifications", force: :cascade do |t|
     t.string "type"
     t.bigint "event_id", null: false
@@ -281,6 +270,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_14_134419) do
   add_foreign_key "artists_events", "events"
   add_foreign_key "chat_users", "chats"
   add_foreign_key "chat_users", "users"
+  add_foreign_key "chats", "events"
   add_foreign_key "comments", "comments", column: "comment_father_id"
   add_foreign_key "comments", "interactuables"
   add_foreign_key "comments", "users"

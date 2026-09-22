@@ -66,6 +66,10 @@
   width: 10px;
 }
 
+.sidebar::-webkit-scrollbar {
+  width: 10px;
+}
+
 /* Fondo de la barra */
 ::-webkit-scrollbar-track {
   background: #0F1419;

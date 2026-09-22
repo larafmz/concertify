@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
   authorize_resource except: [:show]
 
   before_action :authenticate_user
-  before_action :set_chat, except: [:exit]
+  before_action :set_chat, except: [:exit, :index]
   before_action :set_params, except: [:exit]
 
   def index
@@ -31,7 +31,7 @@ class ChatsController < ApplicationController
   end
 
   def send_message
-    message = ChatEntry.create(chat_id: @chat.id, user_id: current_user.id, text: params[:message], chat_type: 0)
+    @chat.send_message(current_user.id, params[:message])
     render json: {}, status: :no_content #rendering nothing
   end
 
@@ -96,19 +96,16 @@ class ChatsController < ApplicationController
         end
       end
 
-      if @chat && !@chat.persisted? 
-        if !@chat.save
-          flash[:alert] = t("messages.error")
-          redirect_to chats_path
-          return
-        end
+      if !@chat || !@chat.persisted?
+        flash[:alert] = t("messages.error")
+        redirect_to chats_path
+        return
       end
 
     end
 
     def set_params
       @chat_user = @chat.chat_users.find_by(user_id: current_user.id) if @chat
-
       @chats = current_user.chats.order_by_recent_messages.includes(:event, :chat_users, :users)
     end
 

@@ -1,0 +1,5 @@
+register1: {
+  user: prueba2,
+  event: event4,
+  type: "Register"
+}

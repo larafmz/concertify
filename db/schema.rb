@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_09_14_134419) do
+ActiveRecord::Schema[7.2].define(version: 2026_09_22_152907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -274,6 +274,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_14_134419) do
   add_foreign_key "artists_events", "events"
   add_foreign_key "chat_users", "chats"
   add_foreign_key "chat_users", "users"
+  add_foreign_key "chats", "events"
   add_foreign_key "comments", "comments", column: "comment_father_id"
   add_foreign_key "comments", "interactuables"
   add_foreign_key "comments", "users"

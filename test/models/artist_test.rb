@@ -47,11 +47,12 @@ class ArtistTest < ActiveSupport::TestCase
         TicketmasterService.stub :artists_by, response_api do
             artists = Artist.search_by
             assert_equal 4, artists.length
-            assert_equal artists[0][:artist].name, "Rihanna"
-            assert_equal artists[1][:artist].name, "Leiva"
+            assert_equal artists[0][:artist].name, "Leiva"
+            assert_equal artists[1][:artist].name, "Rihanna"
             assert_equal artists[2][:artist]["name"], "Miley Cyrus"
             assert_equal artists[3][:artist]["name"], "Dua Lipa"
         end
+    
     end
 
     test "Search_artists_with_filters" do

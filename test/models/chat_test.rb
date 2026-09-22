@@ -89,7 +89,7 @@ class ChatTest < ActiveSupport::TestCase
         assert_not message.persisted?
         assert_equal chat.chat_entries.count, 0
 
-        # PU63
+        # PU64
         chat = Chat.create_private_chat(users(:prueba2).id, users(:blocked_me).id)
         message = chat.send_message(users(:prueba2).id, "Hola!")
         assert_not message.persisted?

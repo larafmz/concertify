@@ -10,6 +10,12 @@ prueba3: {
   role: user
 }
 
+prueba4: {
+  username: prueba4,
+  email: prueba4@gmail.com,
+  role: user
+}
+
 blocked_by: {
   username: blocked_by,
   email: blocked_by@gmail.com,

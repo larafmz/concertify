@@ -4,7 +4,7 @@ class InteractuablesController < ApplicationController
     
     load_and_authorize_resource
 
-    before_action :set_interactuable, only: [:show, :comments, :reposts]
+    before_action :set_params, only: [:show, :comments, :reposts]
 
     def show
         @users = @interactuable.likes.map(&:user) #likes
@@ -27,13 +27,7 @@ class InteractuablesController < ApplicationController
     end
 
     def like
-        existing_like = Like.find_by(interactuable_id: params[:id], user_id: current_user&.id)
-        if existing_like
-            existing_like.destroy
-        else
-            existing_like = Like.create!(interactuable_id: params[:id], user_id: current_user&.id)
-        end
-
+        @interactuable.like(current_user&.id)
         respond_to do |format|
             format.turbo_stream do
                 render turbo_stream: turbo_stream.replace(
@@ -47,12 +41,7 @@ class InteractuablesController < ApplicationController
     end
 
     def repost
-        existing_repost = Repost.find_by(interactuable_id: params[:id], user_id: current_user&.id)
-        if existing_repost
-            existing_repost.destroy
-        else
-            existing_repost = Repost.create!(interactuable_id: params[:id], user_id: current_user&.id)
-        end
+        @interactuable.repost(current_user&.id)
         respond_to do |format|
             format.turbo_stream do
                 render turbo_stream: turbo_stream.replace(
@@ -66,7 +55,7 @@ class InteractuablesController < ApplicationController
     end
 
     def comment
-        Comment.create!(interactuable_id: params[:id], user_id: current_user&.id, text: params[:text])
+        @interactuable.comment(current_user&.id, params[:text])
         redirect_to comments_interactuable_path(params[:id])
     end
 
@@ -79,7 +68,7 @@ class InteractuablesController < ApplicationController
 
 private
     
-    def set_interactuable
+    def set_params
         unless @interactuable
             flash[:alert] = t("not_found")
             redirect_back fallback_location: root_path

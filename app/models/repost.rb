@@ -8,6 +8,7 @@ class Repost < ApplicationRecord
     ## VALIDATIONS
 
         validates :user_id, uniqueness: { scope: :interactuable_id }
+        validate :cant_repost_blocked
 
     ## SCOPES
 
@@ -20,6 +21,14 @@ class Repost < ApplicationRecord
 
         after_create_commit :create_notification
         after_destroy_commit :remove_notification 
+
+    ## VALIDATIONS METHODS
+    
+        def cant_repost_blocked
+            if user.blocked_user?(interactuable.user.id) || interactuable.user.blocked_user?(user.id)
+                errors.add(:base, "cant like blocked")
+            end
+        end
 
     ## CALLBACK METHODS
 

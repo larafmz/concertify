@@ -58,4 +58,26 @@ class Interactuable < ApplicationRecord
       end
     end
 
+    def like(user_id)
+      existing_like = Like.find_by(interactuable_id: self.id, user_id: user_id)
+      if existing_like
+          existing_like.destroy
+      else
+          return Like.create(interactuable_id: self.id, user_id: user_id)
+      end
+    end
+
+    def repost(user_id)
+        existing_repost = Repost.find_by(interactuable_id: self.id, user_id: user_id)
+        if existing_repost
+            existing_repost.destroy
+        else
+            existing_repost = Repost.create(interactuable_id: self.id, user_id: user_id)
+        end
+    end
+
+    def comment(user_id, text)
+      Comment.create(interactuable_id: self.id, user_id: user_id, text: text)
+    end
+
 end

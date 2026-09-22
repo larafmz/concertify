@@ -11,11 +11,30 @@ class Comment < ApplicationRecord
     ## VALIDATIONS
 
         validates :text, presence: true
+        validates :text, length: { maximum: 500 }
+        validate :cant_comment_blocked
+        validate :cant_reply_blocked
 
     ## CALLBACKS
 
         after_create_commit :create_notification
         after_destroy_commit :remove_notification
+
+    ## VALIDATIONS METHODS
+
+        def cant_comment_blocked
+            if user.blocked_user?(interactuable.user.id) || interactuable.user.blocked_user?(user.id)
+                errors.add(:base, "cant like blocked")
+            end
+        end
+
+        def cant_reply_blocked
+            if comment_father
+                if user.blocked_user?(comment_father.user.id) || comment_father.user.blocked_user?(user.id) 
+                    errors.add(:base, "cant like blocked")
+                end
+            end
+        end
 
     ## CALLBACK METHODS
 
@@ -49,6 +68,10 @@ class Comment < ApplicationRecord
         end
 
       ## INSTANCE METHODS
+
+        def reply(user_id, text)
+            Comment.create(interactuable_id: self.interactuable_id, user_id: user_id, text: text, comment_father_id: self.id)
+        end
 
         def notification_message
             user_str = "<strong> #{user.username} </strong>"

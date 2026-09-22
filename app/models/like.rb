@@ -9,6 +9,7 @@ class Like < ApplicationRecord
 
         validates :user_id, uniqueness: { scope: :interactuable_id }
         validate :cant_like_own
+        validate :cant_like_blocked
 
     ## SCOPES
 
@@ -43,6 +44,12 @@ class Like < ApplicationRecord
         def cant_like_own
             if user.id == interactuable.user.id
                 errors.add(:base, I18n.t("messages.cant_like_own"))
+            end
+        end
+        
+        def cant_like_blocked
+            if user.blocked_user?(interactuable.user.id) || interactuable.user.blocked_user?(user.id)
+                errors.add(:base, "cant like blocked")
             end
         end
 

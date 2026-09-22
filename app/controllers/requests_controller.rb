@@ -20,20 +20,8 @@ class RequestsController < ApplicationController
     end
 
     def create
-        @request = Request.new(create_params)     
-        @event = @request.event
-
-        # Search artist in DB
-        @artist = Artist.find_by(name: params[:request][:event_attributes][:artist_name])
-        # Search artist in Ticketmaster
-        unless @artist
-            artist_api = TicketmasterService.artist_by_name(params[:request][:event_attributes][:artist_name])&.first
-            @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
-        end
-        #Create artist with status pending
-        @artist = Artist.create(name: params[:request][:event_attributes][:artist_name], status: 1, requester_id: params[:request][:requester_id]) unless @artist
-        
-        @event.artists << @artist
+        @request = Request.new(create_params)    
+        @request.create_artists(params[:request][:event_attributes][:artist_name])
 
         if @request.save
             respond_to do |format|

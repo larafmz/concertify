@@ -27,3 +27,9 @@ blocked_me: {
   email: blocked_me@gmail.com,
   role: user
 }
+
+admin: {
+  username: admin,
+  email: admin@gmail.com,
+  role: admin
+}

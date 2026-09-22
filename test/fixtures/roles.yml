@@ -1,5 +1,5 @@
 admin:
-  name: Admin
+  name: admin
 
 user:
-  name: User
+  name: user

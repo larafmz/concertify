@@ -156,4 +156,18 @@ class Request < ApplicationRecord
       end
     end
 
+    def create_artists(artist_name)
+      # Search artist in DB
+      @artist = Artist.find_by(name: artist_name)
+      unless @artist
+          # Search artist in Ticketmaster
+          artist_api = TicketmasterService.artist_by_name(artist_name)
+          @artist = Artist.create_or_update_by_ticketmaster_id(artist_api&.dig("id")) if artist_api
+      end
+      #Create artist with status pending
+      @artist = Artist.create(name: artist_name, status: 1, requester_id: self.requester.id) unless @artist
+      
+      self.event.artists << @artist
+    end
+
 end

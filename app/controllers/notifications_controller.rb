@@ -17,7 +17,7 @@ class NotificationsController < ApplicationController
 
     def mark_all_read
         User.find(params[:user_id]).notifications.mark_as_read 
-        redirect_back fallback_location: root_path
+        redirect_to notifications_user_path(current_user)
     end
 
 end

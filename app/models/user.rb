@@ -90,12 +90,20 @@ class User < ApplicationRecord
       favorite_artists.count < 4
     end
 
-    def follow(user)
-      Relation.find_or_create_by!(follower_id: self.id, followed_id: user.id, followed_type: "User", relation_type: 0)
+    def mark_as_favorite(artist)
+      FavoriteArtist.find_or_create_by!(user_id: self.id, artist_id: artist.id) if self.can_mark_favorite?
     end
 
-    def unfollow(user)
-      Relation.find_by(follower_id: self.id, followed_id: user.id, followed_type: "User", relation_type: 0)&.destroy
+    def unmark_as_favorite(artist)
+      FavoriteArtist.find_by(user_id: self.id, artist_id: artist.id)&.destroy
+    end
+
+    def follow(object)
+      Relation.find_or_create_by(follower_id: self.id, followed: object, relation_type: 0)
+    end
+
+    def unfollow(object)
+      Relation.find_by(follower_id: self.id, followed: object, relation_type: 0)&.destroy
     end
 
     def block(user_id)
@@ -112,7 +120,7 @@ class User < ApplicationRecord
     end
 
     def unblock(user_id)
-      Relation.find_by!(follower_id: user_id, followed_id: self.id, followed_type: "User", relation_type: 1)&.destroy
+      Relation.find_by!(follower_id: self.id, followed_id: user_id, followed_type: "User", relation_type: 1)&.destroy
     end
 
     def liked?(interactuable_id)

@@ -151,7 +151,7 @@ class UsersController < ApplicationController
   end
 
   def unblock
-    @user.unblock(current_user&.id)
+    current_user.unblock(@user.id) if @user.user?
     redirect_back fallback_location: root_path
   end
   

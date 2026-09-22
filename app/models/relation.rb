@@ -44,7 +44,7 @@ class Relation < ApplicationRecord
   ## VALIDATION METHODS
 
     def cant_follow_blocked_user
-        if follower.blocked_user?(followed)
+        if follower.blocked_user?(followed) || followed.blocked_user?(follower)
             errors.add(:follower, I18n.t("messages.cant_follow_blocked_user"))
         end
     end

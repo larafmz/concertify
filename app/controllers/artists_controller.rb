@@ -50,22 +50,22 @@ class ArtistsController < ApplicationController
   end
 
   def follow
-    @artist.follow(current_user)
+    current_user.follow(@artist)
     redirect_back fallback_location: root_path
   end
 
   def unfollow
-    @artist.unfollow(current_user)
+    current_user.unfollow(@artist)
     redirect_back fallback_location: root_path
   end
 
   def mark_as_favorite
-    @artist.mark_as_favorite(current_user)
+    current_user.mark_as_favorite(@artist)
     redirect_back fallback_location: root_path
   end
 
   def unmark_as_favorite
-    @artist.unmark_as_favorite(current_user&.id)
+    current_user.unmark_as_favorite(@artist)
     redirect_back fallback_location: root_path
   end
 

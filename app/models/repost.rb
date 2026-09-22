@@ -19,7 +19,7 @@ class Repost < ApplicationRecord
 
     ## CALLBACKS
 
-        after_create_commit :create_notification
+        after_create_commit :create_notification, if: -> { user.id != interactuable.user.id }
         after_destroy_commit :remove_notification 
 
     ## VALIDATIONS METHODS

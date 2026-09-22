@@ -2,8 +2,5 @@
 = render "events/options", active: :future_assistances
 
 .widget-content{style: "padding-top:0px;" }
-    - if @future_assistances.empty?
-        = render "common/empty_list_message", model: FutureAssistance
-    - else
-        = render "future_assistances/index", future_assistances: @future_assistances
+    = render "future_assistances/index", future_assistances: @future_assistances
         

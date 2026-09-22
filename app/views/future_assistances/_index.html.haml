@@ -1,7 +1,13 @@
-.widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: @pagination_path, pagination_page_value: 2 } }
-    %div{id: "future_assistances", data: { pagination_target: "future_assistances" } }
-        - future_assistances[0..10].each do |future_assistance|
-            = render "future_assistances/index_item_short", future_assistance: future_assistance
+.big-second-column{style: "grid-template-columns: 1fr 3fr;"}
+    = render "future_assistances/filters"
 
-    - unless @future_assistances.respond_to?(:next_page) && @future_assistances.next_page
-        %span{class: "hidden", data: { pagination_target: "noRecords" }}
+    .widget-content{style: "padding:0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
+        - if future_assistances.empty?
+            = render "common/empty_list_message", model: FutureAssistance
+        - else
+            %div{id: "future_assistances", data: { pagination_target: "future_assistances" } }
+                - future_assistances[0..10].each do |future_assistance|
+                    = render "future_assistances/index_item_short", future_assistance: future_assistance
+
+            - unless @future_assistances.respond_to?(:next_page) && @future_assistances.next_page
+                %span{class: "hidden", data: { pagination_target: "noRecords" }}

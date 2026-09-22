@@ -32,8 +32,10 @@ class EventsController < ApplicationController
   end
 
   def future_assistances
-    @future_assistances = @future_assistances.page(params[:page]).per(10)
-    @pagination_path =  future_assistances_event_path(@event)
+    @froms_filters = @event.future_assistances.map(&:from).compact.reject(&:empty?).uniq.sort_by(&:downcase)
+    future_assistances = FutureAssistance.search_by(current_user, params: params, event_id: @event)
+    @future_assistances = future_assistances.page(params[:page]).per(10)
+    @pagination_path =  request.query_parameters.merge( controller: "events", action: "future_assistances", event_id: @event.id )
     respond_to do |format|
       format.html
       format.turbo_stream
@@ -59,18 +61,17 @@ class EventsController < ApplicationController
   end
 
   def post
-    Publication.create!(event_id: params[:id], user_id: current_user&.id, review: params[:text])
-    redirect_to publications_event_path(@event)
+    @publication = Publication.create!(event_id: params[:id], user_id: current_user&.id, review: params[:text])
+    redirect_to interactuable_path(@publication)
   end
 
   private
 
   def get_attributes  
     if @event
-      @future_assistances = @event.future_assistances.viewables(current_user).order("created_at DESC")
       @registers = @event.registers.viewables(current_user).order("created_at DESC")
       @publications = @event.publications.viewables(current_user).order("created_at DESC")
-      @future_assistances_count = @event.future_assistances.count
+      @event_future_assistances_count = @event.future_assistances.count
       @average_rating = @event.average_rating
       @event_registers_count = @event.registers.viewables(current_user).size
       @event_publications_count = @event.publications.viewables(current_user).size

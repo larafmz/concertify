@@ -12,7 +12,7 @@ class RegistrationTest < ApplicationSystemTestCase
         fill_in "Password confirmation", with: "Prueba1!"
 
         click_on "Create account"
-        assert_no_selector "#new_user", wait: 5
+        assert_no_text "Username", wait: 5
         assert_current_path "/"
         assert_not_nil User.find_by(email: "prueba@gmail.com")
         
@@ -34,6 +34,10 @@ class RegistrationTest < ApplicationSystemTestCase
         assert_text "Username has already been taken", wait: 5
         assert_current_path "/users/sign_up"
         assert_nil User.find_by(email: "prueba@gmail.com")
+
+        visit "/users/edit"
+        assert_current_path "/users/sign_in"
+        assert_text "You need to sign in or sign up before continuing."
     end
 
     test "PI03 - user_register_existent_email" do

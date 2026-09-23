@@ -1,6 +1,7 @@
 prueba2: {
   username: prueba2,
   email: prueba2@gmail.com,
+  encrypted_password: "$2a$12$1/f3mCRCqX6rrqrJ5HdPBOEFYcROPdNwk8mkhdRWyK.rRG.D5e9Fq",
   role: user
 }
 

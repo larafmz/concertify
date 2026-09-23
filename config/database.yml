@@ -26,10 +26,10 @@ development:
 test:
   primary:
     <<: *default
-    database: concertify_production
+    database: concertify_test
   cable:
     <<: *sqlite
-    database: storage/concertify_production_cable.sqlite3
+    database: storage/concertify_test_cable.sqlite3
   queue:
     <<: *default
     database: concertify_test_queue

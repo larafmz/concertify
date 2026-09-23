@@ -166,6 +166,7 @@ es:
     event_already_registered: "Ya has registrado tu asistencia a este evento."
     max_upload: "Solo puedes subir %{count} fotos."
     existing_event_requires_accepted_status: debe estar en estado "aceptado" si se selecciona un concierto existente.
+    cant_contain_spaces: no puede contener espacios.
     
   notifications:
     new_follower: "%{user} ha comenzado a seguirte"

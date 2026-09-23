@@ -18,8 +18,8 @@ class LoggingTest < ApplicationSystemTestCase
     test "PI06 - user_logging_inexistent_user" do
         visit "/users/sign_in" 
 
-        fill_in "Email", with: "prueba2@gmail.com"
-        fill_in "Password", with: "Prueba1!"
+        fill_in "Email", with: "prueba@gmail.com"
+        fill_in "Password", with: "Prueba2!"
 
         click_on "Log in"
         assert_text "Invalid email or password.", wait: 5

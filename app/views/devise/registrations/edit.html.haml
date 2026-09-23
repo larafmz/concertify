@@ -11,11 +11,11 @@
           
         .form-field
           = f.label :username, User.human_attribute_name(:username), class: "soft-color label-custom"
-          = f.text_field :username, class: "field-custom", autocomplete: "username"
+          = f.text_field :username, class: "field-custom", autocomplete: "username", id: "username_id", maxlength: 20
 
         .form-field
           = f.label :email, User.human_attribute_name(:email), class: "soft-color label-custom"
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom", id: "email_id"
 
         %div{id: "ubication"}
           = f.fields_for :ubication do |ubication_fields|
@@ -23,15 +23,15 @@
               %div
                 = label_tag :country_id, "📍  #{Country.singular} *", class: "soft-color label-custom"
                 = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, 
-                  @user.ubication&.country_id), { include_blank: "Seleccionar" }, { class: "field-custom", style: "padding: 0px;" }
+                  @user.ubication&.country_id), { include_blank: t("verbs.select") }, { id: "country_id", class: "field-custom", style: "padding: 0px;" }
               %div
                 = label_tag :city, Ubication.human_attribute_name(:city), class: "soft-color label-custom"
-                = ubication_fields.text_field :city, value: @user.ubication&.city, class: "field-custom", autocomplete: "city"
+                = ubication_fields.text_field :city, value: @user.ubication&.city, class: "field-custom", id: "city_id", autocomplete: "city"
         
         .form-columns{data: { controller: "character-counter" }}
           %div
             = label_tag :description, User.human_attribute_name(:description), class: "soft-color label-custom"
-            = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), maxlength: 500, 
+            = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), maxlength: 500, id: "description_id",
               style: "width: 100%; height: 100px; resize: none;", class: "field-custom", autocomplete: "description",
               data: {  character_counter_target: "input", action: "input->character-counter#update" }
 

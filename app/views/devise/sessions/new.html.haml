@@ -6,11 +6,11 @@
 
       .form-field
         = f.label :email, User.human_attribute_name(:email), class: "soft-color label-custom"
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom"
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom", id: "email_id"
 
       .form-field
         = f.label :password, User.human_attribute_name(:password), class: "soft-color label-custom"
-        = f.password_field :password, autocomplete: "current-password", class: "field-custom"
+        = f.password_field :password, autocomplete: "current-password", class: "field-custom", id: "password_id"
 
       .form-field
         - if devise_mapping.rememberable?

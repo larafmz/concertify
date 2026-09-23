@@ -165,6 +165,7 @@ en:
     event_already_registered: "You have already registered your attendance for this event."
     max_upload: "You can only upload %{count} photos."
     existing_event_requires_accepted_status: must be accepted when an existing event is selected.
+    cant_contain_spaces: cant contain spaces.
     
   notifications:
     new_follower: "%{user} has started following you"

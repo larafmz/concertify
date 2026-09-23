@@ -46,6 +46,7 @@ class User < ApplicationRecord
     validates :email, :username, presence: true
     validates :email, :username, uniqueness: true
     validates :description, length: { maximum: 500, message: ->(object, data) {"solo permite #{data[:count]} carácteres y has usado #{data[:value].to_s.length} carácteres" }}, allow_nil: true
+    validates :username, length: { maximum: 20 }, format: { without: /\s/, message: I18n.t("messages.cant_contain_spaces") }
 
   ## CLASS METHODS
 

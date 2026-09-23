@@ -162,5 +162,23 @@ class EventTest < ApplicationSystemTestCase
     end
   end
 
+  test "PI23 - Search_events_by_filters" do
+    #returns "Búsqueda" because the artist of "Búsqueda" is called "Artista ANTIGUO1"
+    TicketmasterService.stub :events_by, [] do
+      visit "/" 
+      assert_selector ".dropdown button"
+      find(".dropdown button", text: "View").click
+      click_on "Events"
+      fill_in "search_filter_id", with: "antiguo1"
+      fill_in "first_date", with: Date.today-1
+      fill_in "second_date", with: Date.today+1.year
+      select "Spain", from: "country_id"
+      click_on "Filter"
+      assert_text "Búsqueda", wait: 10
+      assert_selector ".item-event", count: 1
+      assert_text "1 results"
+    end
+  end
+
 
 end

@@ -5,7 +5,7 @@
         - artists.each do |item|
             - artist = item[:source].present? ? item[:artist] : item
 
-            %div
+            .item-artist
                 - if !item[:source] || item[:source] == :db
                     - if artist.is_favorite?(current_user)
                         %div{ style: "height:10px; font-size: 13px; width: 120px; display: flex;  justify-content: center;"}    
@@ -23,7 +23,8 @@
                 - else  
                     = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")), class: "hover-border-icon" do
                         .link_icon{style: "width: 120px; height: 120px;"}
-                            = image_tag  best_quality_image(artist.dig("images")).dig("url")
+                            - image = best_quality_image(artist.dig("images"))&.dig("url")
+                            = image_tag image if image
 
                     .artist-name{ style: " font-size: 13px; width: 120px; display: flex;  justify-content: center; text-align: center;"}    
                         = link_to artist_path(id: "ticketmaster", ticketmaster_id: artist.dig("id")) do

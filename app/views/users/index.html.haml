@@ -6,7 +6,7 @@
 
     %div{style: "margin-bottom:15px; margin-top:15px;"}
         = form_tag users_path, method: "GET" do
-            = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_user")}", class: "field-custom"
+            = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_user")}", class: "field-custom", id: "user-filter-search"
         
     - if @users.empty?
         = render "common/empty_list_message", model: User

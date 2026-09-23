@@ -13,4 +13,45 @@ class ArtistTest < ApplicationSystemTestCase
         end
     end
 
+    test "PI23 - search_artists_without_filters" do
+        response_api = [
+            {"name"=>"Miley Cyrus", "id"=> "3"}, 
+            {"name"=>"Dua Lipa", "id"=> "4"}, 
+        ]
+        TicketmasterService.stub :artists_by, response_api do
+            visit "/" 
+            find(".dropdown button", text: "View").click
+            click_on "Artists"
+            assert_text "Leiva", wait: 10
+            assert_text "Rihanna"
+            assert_text "Miley Cyrus"
+            assert_text "Dua Lipa"
+            assert_selector ".item-artist", count: 4
+        end 
+    end
+
+    test "PI24 - search_artists_by_name" do
+        TicketmasterService.stub :artists_by, [] do
+            visit "/" 
+            find(".dropdown button", text: "View").click
+            click_on "Artists"
+            fill_in "artist-filter-search", with: "ihan"
+            click_on "Filter"
+            assert_text "Rihanna", wait: 10
+            assert_selector ".item-artist", count: 1
+        end 
+    end
+
+    test "PI25 - search_artists_by_genre" do
+        TicketmasterService.stub :artists_by, [] do
+            visit "/" 
+            find(".dropdown button", text: "View").click
+            click_on "Artists"
+            select "Pop", from: "genre_id"
+            click_on "Filter"
+            assert_text "Rihanna", wait: 10
+            assert_selector ".item-artist", count: 1
+        end 
+    end
+
 end

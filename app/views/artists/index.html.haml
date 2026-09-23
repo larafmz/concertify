@@ -8,10 +8,11 @@
             %div{style: "display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 10px;"}
                 %div
                     = label_tag :search, Artist.human_attribute_name(:name).upcase, class: "soft-color label-custom"
-                    = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_artist")}", class: "field-custom"
+                    = text_field_tag :search, params[:search], placeholder: "🔍 #{t("search_artist")}", class: "field-custom", id: "artist-filter-search"
                 %div
                     = label_tag :genre_id, Genre.singular.upcase, class: "soft-color label-custom"
-                    = select_tag :genre_id, options_for_select(Genre.all.map { |genre| [genre.translation, genre.id] }, params[:genre_id]),include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;"
+                    = select_tag :genre_id, options_for_select(Genre.all.map { |genre| [genre.translation, genre.id] }, params[:genre_id]),
+                        include_blank: t("all_masc", model: Genre.plural), class: "field-custom", style: "background: #0F1419; padding: 0px;", id: "genre_id"
                 %div
                     %br  
                     = submit_tag t("verbs.filter"), class: "btn-custom artist-color"

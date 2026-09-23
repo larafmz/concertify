@@ -36,7 +36,7 @@ module TicketmasterEventHelper
     end
     
     def get_event_image_url(event)
-        best_quality_image(event.dig("images")).dig("url")
+        best_quality_image(event.dig("images"))&.dig("url")
     end
 
     def get_venue_city(venue)

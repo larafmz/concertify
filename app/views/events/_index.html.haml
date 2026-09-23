@@ -21,7 +21,8 @@
                     - if item[:source] == :api
                         = link_to event_path(id: "ticketmaster", ticketmaster_id: get_event_id(event)), class: "hover-border-icon" do
                             .link_icon{style: "height: 80px; width: 100px; border-radius: 0%;"}
-                                = image_tag get_event_image_url(event)
+                                - image = get_event_image_url(event)
+                                = image_tag image if image
                     - else
                         = link_to event_path(event) do
                             .link_icon{style: "height: 80px; width: 100px; border-radius: 0%;"}

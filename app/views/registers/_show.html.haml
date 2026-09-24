@@ -54,7 +54,8 @@
             .register-photos            
                 - register.photos.each do |photo|
                     = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do
-                        = image_tag photo, class: "register-photo"
+                        .register-photo
+                            = image_tag photo
 
         %div{style: "margin: 20px 0px 40px 0px;"}
             = render "interactuables/footer", interactuable: register

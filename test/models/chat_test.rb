@@ -21,11 +21,11 @@ class ChatTest < ActiveSupport::TestCase
     end
 
     test "PU57 - Create_event_chat_with_register" do
-        chat2 = Chat.create_event_chat(events(:event4).id, users(:prueba2).id)
+        chat2 = Chat.create_event_chat(events(:event9).id, users(:prueba2).id)
         assert chat2.persisted?
         assert_equal chat2.chat_entries.count, 1
         assert_equal chat2.chat_users.count, 1
-        assert_equal chat2.event, events(:event4)
+        assert_equal chat2.event, events(:event9)
         assert_equal chat2.chat_users[0].user, users(:prueba2)
     end
 

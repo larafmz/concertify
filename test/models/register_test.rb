@@ -36,7 +36,7 @@ class RegisterTest < ActiveSupport::TestCase
     end
 
     test "PU29 - Create_register_to_same_date_past_time_event" do
-        register5 = Register.create!(user: users(:prueba2), event: events(:event9))
+        register5 = Register.create!(user: users(:prueba2), event: events(:event10))
         assert register5.persisted?
     end
 

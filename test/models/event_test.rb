@@ -46,13 +46,14 @@ class EventTest < ActiveSupport::TestCase
     ]
     TicketmasterService.stub :events_by, response_api do
       events = Event.search_by
-      assert_equal 6, events.length
-      assert_equal events[0][:event]["name"], "Miley Cyrus TOUR"
-      assert_equal events[1][:event]["name"], "Dua Lipa TOUR"
-      assert_equal events[2][:event]["name"], "Michael Jackson TOUR"
-      assert_equal events[3][:event].tour_name, "Evento 9"
-      assert_equal events[4][:event].tour_name, "Búsqueda"
-      assert_equal events[5][:event].tour_name, "Evento 6"
+      assert_equal 7, events.length
+      assert_equal events[0][:event].tour_name, "Evento 10"
+      assert_equal events[1][:event]["name"], "Miley Cyrus TOUR"
+      assert_equal events[2][:event]["name"], "Dua Lipa TOUR"
+      assert_equal events[3][:event]["name"], "Michael Jackson TOUR"
+      assert_equal events[4][:event].tour_name, "Evento 9"
+      assert_equal events[5][:event].tour_name, "Búsqueda"
+      assert_equal events[6][:event].tour_name, "Evento 6"
     end
   end
 
@@ -78,11 +79,12 @@ class EventTest < ActiveSupport::TestCase
   test "PU15 - Search_events_by_second_date" do
     TicketmasterService.stub :events_by, [] do
       events = Event.search_by(params: {second_date: Date.today+1})
-      assert_equal 4, events.length
-      assert_equal events[0][:event].tour_name, "Evento antiguo1"
-      assert_equal events[1][:event].tour_name, "Evento 9"
-      assert_equal events[2][:event].tour_name, "Evento antiguo2"
-      assert_equal events[3][:event].tour_name, "Búsqueda"
+      assert_equal 5, events.length
+      assert_equal events[0][:event].tour_name, "Evento 10"
+      assert_equal events[1][:event].tour_name, "Evento antiguo1"
+      assert_equal events[2][:event].tour_name, "Evento 9"
+      assert_equal events[3][:event].tour_name, "Evento antiguo2"
+      assert_equal events[4][:event].tour_name, "Búsqueda"
     end
   end
 

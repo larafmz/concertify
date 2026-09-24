@@ -34,7 +34,7 @@ class UserTest < ApplicationSystemTestCase
             find(".dropdown button", text: "View").click
             click_on "Users"
             fill_in "user-filter-search", with: "prueb"
-            click_on "Filter"
+            find("#user-filter-search").send_keys(:enter)
             assert_text "prueba2", wait: 10
             assert_text "prueba3"
             assert_text "prueba4"

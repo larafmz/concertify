@@ -45,10 +45,11 @@ class EventTest < ApplicationSystemTestCase
           assert_text "Dua Lipa TOUR"
           assert_text "Michael Jackson TOUR"
           assert_text "Evento 9"
+          assert_text "Evento 10"
           assert_text "Búsqueda"
           assert_text "Evento 6"
-          assert_selector ".item-event", count: 6
-          assert_text "6 results"
+          assert_selector ".item-event", count: 7
+          assert_text "7 results"
       end 
   end
 
@@ -92,10 +93,11 @@ class EventTest < ApplicationSystemTestCase
       click_on "Filter"
       assert_text "Evento antiguo1", wait: 10
       assert_text "Evento 9"
+      assert_text "Evento 10"
       assert_text "Evento antiguo2"
       assert_text "Búsqueda"
-      assert_selector ".item-event", count: 4
-      assert_text "4 results"
+      assert_selector ".item-event", count: 5
+      assert_text "5 results"
     end
   end
 

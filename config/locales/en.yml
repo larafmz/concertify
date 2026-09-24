@@ -133,7 +133,7 @@ en:
   registers:
     assisted: + I've attended
     will_assist: + I'll attend
-    i_assisted_to: I attended...
+    i_assisted_to: I attended to...
     liked_these_reviews: LIKED THESE REVIEWS
     logged_by: Registered by
     ratings: Ratings

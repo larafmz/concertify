@@ -45,3 +45,9 @@ event9: {
   date: <%= Date.today %>,
   start_time: <%= Time.current - 2.hours %>
 }
+
+event10: {
+  ticketmaster_id: 10,
+  tour_name: Evento 10,
+  date: <%= Date.today-1.year %>
+}

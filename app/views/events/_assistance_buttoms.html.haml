@@ -4,9 +4,9 @@
 .button-event{style: "display: flex; gap: 10px;"}
     - if event_date_status == "past" && can?(:create, Register)
         - unless register
-            = link_to t("registers.assisted"), new_register_path(event_id: event["id"]), class: "btn-custom event-color", data: { turbo_frame: "modal" }
+            = link_to t("registers.assisted"), new_register_path(event_id: event["id"]), class: "btn-custom event-color", id: "assisted_to_#{event.id}", data: { turbo_frame: "modal" }
         - else
-            = link_to t("my_model", model: Register.singular), interactuable_path(register), class: "btn-custom", style: "height: auto;"
+            = link_to t("my_model", model: Register.singular), interactuable_path(register), class: "btn-custom", style: "height: auto;", id: "my_register_#{event.id}"
     - elsif can?(:create, FutureAssistance)
         - unless future_assistance
             = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom event-color", data: { turbo_frame: "modal" }

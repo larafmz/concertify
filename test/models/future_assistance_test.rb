@@ -4,7 +4,7 @@ class FutureAssistanceTest < ActiveSupport::TestCase
     fixtures :all
 
     test "PU35 - Create_future_assitance" do
-        future_assistance = FutureAssistance.new(user: users(:prueba2), event: events(:event5), from: "Gijón", event_seat_details: "Grada 54", event_seat: 1, company: 1 )
+        future_assistance = FutureAssistance.new(user: users(:prueba2), event: events(:event6), from: "Gijón", event_seat_details: "Grada 54", event_seat: 1, company: 1 )
         assert future_assistance.valid?
         future_assistance.save
         assert future_assistance.persisted?
@@ -35,9 +35,9 @@ class FutureAssistanceTest < ActiveSupport::TestCase
     end
 
     test "PU40 - Create_future_assistance_but_already_exists" do
-        future_assistance = FutureAssistance.create(user: users(:prueba2), event: events(:event5))
+        future_assistance = FutureAssistance.create(user: users(:prueba2), event: events(:event6))
         assert future_assistance.persisted?
-        future_assistance2 = FutureAssistance.create(user: users(:prueba2), event: events(:event5))
+        future_assistance2 = FutureAssistance.create(user: users(:prueba2), event: events(:event6))
         assert_not future_assistance2.persisted?
     end
 

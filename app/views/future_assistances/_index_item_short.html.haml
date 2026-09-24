@@ -16,7 +16,7 @@
                 - if future_assistance.event_seat_string 
                     .bubble
                         %span= "🎟️ #{future_assistance.event_seat_string}"
-                        - if !future_assistance.event_seat_details.empty?
+                        - if !future_assistance.event_seat_details&.empty?
                             %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
             
             %div{style: "margin-top:10px;"}

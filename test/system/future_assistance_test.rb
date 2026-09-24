@@ -116,4 +116,62 @@ class FutureAssistanceTest < ApplicationSystemTestCase
         assert_no_selector "future-assistance-#{future_assistance_id}"
     end
 
+    test "PI40 - show_future_assistances_of_event" do
+      TicketmasterService.stub :event_by_id, [] do
+        event_id = events(:event5).id
+        visit "/events/#{event_id}/future_assistances"
+        assert_selector ".future_assistance", count: 3
+        assert_text "prueba2".upcase
+        assert_text "prueba3".upcase
+        assert_text "prueba4".upcase
+      end
+    end
+
+    test "PI41 - filter_future_assistances_of_event_by_event_seat" do
+      TicketmasterService.stub :event_by_id, [] do
+        event_id = events(:event5).id
+        visit "/events/#{event_id}/future_assistances"
+        select "Seating", from: "event_seat_id"
+        click_on "Filter"
+        assert_selector ".future_assistance", count: 1, wait: 10
+        assert_text "prueba2".upcase
+      end
+    end
+
+    test "PI42 - filter_future_assistances_of_event_by_from" do
+      TicketmasterService.stub :event_by_id, [] do
+        event_id = events(:event5).id
+        visit "/events/#{event_id}/future_assistances"
+        select "London", from: "from_id"
+        click_on "Filter"
+        assert_selector ".future_assistance", count: 1, wait: 10
+        assert_text "prueba3".upcase
+      end
+    end
+
+    test "PI43 - filter_future_assistances_of_event_by_company" do
+      TicketmasterService.stub :event_by_id, [] do
+        event_id = events(:event5).id
+        visit "/events/#{event_id}/future_assistances"
+        select "Accompanied", from: "company_id"
+        click_on "Filter"
+        assert_selector ".future_assistance", count: 2, wait: 10
+        assert_text "prueba2".upcase
+        assert_text "prueba4".upcase
+      end
+    end
+
+    test "PI44 - filter_future_assistances_by_filters" do
+      TicketmasterService.stub :event_by_id, [] do
+        event_id = events(:event5).id
+        visit "/events/#{event_id}/future_assistances"
+        select "VIP", from: "event_seat_id"
+        select "London", from: "from_id"
+        select "Alone", from: "company_id"
+        click_on "Filter"
+        assert_selector ".future_assistance", count: 1, wait: 10
+        assert_text "prueba3".upcase
+      end
+    end
+
 end

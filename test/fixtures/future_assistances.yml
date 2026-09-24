@@ -8,7 +8,7 @@ future_assistance1: {
 
 future_assistance2: {
   user: prueba2,
-  event: event6,
+  event: event5,
   from: "Asturias",
   event_seat: 1,
   company: 2
@@ -23,7 +23,7 @@ future_assistance3: {
 }
 
 future_assistance4: {
-  user: prueba3,
+  user: prueba4,
   event: event5,
   from: "Italy",
   event_seat: 3,

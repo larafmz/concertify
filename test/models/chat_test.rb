@@ -30,7 +30,7 @@ class ChatTest < ActiveSupport::TestCase
     end
 
     test "PU58 - Create_event_chat_without_assistance" do
-        chat3 = Chat.create_event_chat(events(:event5).id, users(:prueba2).id)
+        chat3 = Chat.create_event_chat(events(:event6).id, users(:prueba2).id)
         assert chat3.persisted?
         assert_equal chat3.chat_users.count, 0
     end

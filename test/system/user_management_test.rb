@@ -4,18 +4,33 @@ class UserManagementTest < ApplicationSystemTestCase
     fixtures :all
 
     setup do
-        visit "/users/sign_in" 
-        fill_in "email_id", with: "prueba2@gmail.com"
-        fill_in "password_id", with: "Prueba2!"
-        click_on "Log in"
-        assert_current_path "/", wait: 15
+        TicketmasterService.stub :events_by, [] do
+            visit "/users/sign_in" 
+            fill_in "email_id", with: "prueba2@gmail.com"
+            fill_in "password_id", with: "Prueba2!"
+            click_on "Log in"
+            assert_current_path "/", wait: 15
+        end
     end
 
     test "PI08 - edit_user" do
         visit "/users/edit"
         assert_current_path "/users/edit", wait: 10
-        find("#username_id").set("nuevo_username")
-        find("#email_id").set("prueba1@gmail.com")
+
+        # Select all username, delete, and write new
+        username = find("#username_id")
+        username.click
+        username.send_keys([:control, "a"])
+        username.send_keys(:backspace)
+        username.send_keys("nuevo_username")
+
+        # Select all email, delete, and write new
+        email = find("#email_id")
+        email.click
+        email.send_keys([:control, "a"])
+        email.send_keys(:backspace)
+        email.send_keys("prueba1@gmail.com")
+
         select "Spain", from: "country_id"
         fill_in "city_id", with: "Gijón"
         fill_in "description_id", with: "amante de la música"
@@ -61,11 +76,13 @@ class UserManagementTest < ApplicationSystemTestCase
     end
 
     test "PI11 - log_out" do
-        find(".dropdown button", text: "Profile").click
-        click_on "Log out"
-        assert_current_path "/", wait: 10
-        visit "/users/edit"
-        assert_current_path "/users/sign_in", wait: 10
+        TicketmasterService.stub :events_by, [] do
+            find(".dropdown button", text: "Profile").click
+            click_on "Log out"
+            assert_current_path "/", wait: 10
+            visit "/users/edit"
+            assert_current_path "/users/sign_in", wait: 10
+        end
     end
 
     test "PI12 - destroy_account" do
@@ -73,7 +90,9 @@ class UserManagementTest < ApplicationSystemTestCase
         accept_confirm do
             click_on "Delete my account"
         end
-        assert_current_path "/", wait: 10
+        TicketmasterService.stub :events_by, [] do
+            assert_current_path "/", wait: 10
+        end
         visit "/users/edit"
         assert_current_path "/users/sign_in", wait: 10
     end

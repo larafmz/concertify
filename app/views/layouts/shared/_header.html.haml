@@ -30,25 +30,13 @@
             = link_to Artist.plural, artists_path, class: "dropdown-item"
           %li
             = link_to User.plural, users_path, class: "dropdown-item"
+          - if can?(:read, Request)
+            %li
+              = link_to t("requested_events"), requests_path, class: "dropdown-item" 
 
       - if can?(:create, Publication)
         = link_to new_publication_path, class: "btn-standard", data: { turbo_frame: "modal" } do
           = image_tag("icon_post.png")
-
-
-      - if can?(:read, Request)
-        .dropdown
-          %button.btn.btn-secondary.dropdown-toggle{
-            type: "button",
-            "data-bs-toggle" => "dropdown",
-            "aria-expanded" => "false",
-            style: "background: #{orange_color}" 
-          }
-            =t("admin")
-
-          %ul.dropdown-menu
-            %li
-              = link_to t("requested_events"), requests_path, class: "dropdown-item"            
 
 
   - if current_user

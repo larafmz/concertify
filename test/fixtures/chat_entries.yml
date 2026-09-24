@@ -1,0 +1,34 @@
+chat_entry1: {
+  chat: chat1,
+  user: prueba3,
+  text: "Hola!",
+  chat_type: 0
+}
+
+chat_entry2: {
+  chat: chat1,
+  user: prueba4,
+  text: "Buenas",
+  chat_type: 0
+}
+
+chat_entry3: {
+  chat: chat2,
+  user: prueba3,
+  text: "Adiós",
+  chat_type: 0
+}
+
+chat_entry4: {
+  chat: chat2,
+  user: admin,
+  text: "Chao",
+  chat_type: 0
+}
+
+chat_entry5: {
+  chat: event_chat1,
+  user: prueba3,
+  text: "Hola gente",
+  chat_type: 0
+}

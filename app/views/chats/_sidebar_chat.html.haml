@@ -1,6 +1,6 @@
 - color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
 - chat_name = chat.name(current_user).downcase
-.wrapper{id: "chat_#{chat.id}", data: { chat_filter_target: "chat", chat_name: chat_name }}
+.sidebar_chat{id: "chat_#{chat.id}", data: { chat_filter_target: "chat", chat_name: chat_name }}
     = link_to chat_path(chat), data: { turbo_frame: "chat_content", turbo_prefetch: false }, class: "diary-link" do 
         - last_message = chat.messages.order(created_at: :desc).first
         .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}

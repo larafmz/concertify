@@ -1,0 +1,6 @@
+publication1: {
+  user: prueba2,
+  review: "Hoy me voy de concierto",
+  type: "Publication"
+}
+

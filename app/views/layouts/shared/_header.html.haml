@@ -35,7 +35,7 @@
               = link_to t("requested_events"), requests_path, class: "dropdown-item" 
 
       - if can?(:create, Publication)
-        = link_to new_publication_path, class: "btn-standard", data: { turbo_frame: "modal" } do
+        = link_to new_publication_path, class: "btn-standard", data: { turbo_frame: "modal" }, id: "post_id" do
           = image_tag("icon_post.png")
 
 

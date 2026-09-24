@@ -50,16 +50,17 @@
                     %ul.dropdown-menu
                         %li
                             - if destroy_redirect
-                                = button_to t("verbs.destroy"), publication_path(publication), method: :delete,  data: { turbo_confirm: t("registers.destroy_message"), turbo: false}, class: "dropdown-item"
+                                = button_to t("verbs.destroy"), publication_path(publication), method: :delete,  data: { turbo_confirm: t("registers.destroy_message"), turbo: false}, class: "dropdown-item", id: "destroy_publication_#{publication.id}"
                             - else
-                                = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item"
+                                = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item", id: "destroy_publication_#{publication.id}"
     
     %div{style: "margin:0px 0px 10px 80px;"}
         - if publication.photos.attached?
             .publication-photos            
                 - publication.photos.each do |photo|
                     = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do
-                        = image_tag photo, class: "publication-photo"
+                        .publication-photo
+                            = image_tag photo
 
     %div{style: "margin:0px 0px 20px 80px;"}
         = render "interactuables/footer", interactuable: publication

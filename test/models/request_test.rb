@@ -3,8 +3,7 @@ require "test_helper"
 class RequestTest < ActiveSupport::TestCase
     fixtures :all
 
-    test "request_event_with_existing_artist_in_db" do
-        # PU93
+    test "PU93 - request_event_with_existing_artist_in_db" do
         request = Request.new(requester: users(:prueba2), status: 1)    
         request.event = Event.new(tour_name: "Loud TOUR", date: Date.today, ubication: ubications(:ubication1), start_time: Time.now)
         request.create_artists("Rihanna")
@@ -19,8 +18,7 @@ class RequestTest < ActiveSupport::TestCase
         assert_equal Notification.first.recipient, users(:admin)
     end
 
-    test "request_event_with_existing_artist_in_api" do
-        # PU94
+    test "PU94 - request_event_with_existing_artist_in_api" do
         request = Request.new(requester: users(:prueba2), status: 1)    
         request.event = Event.new(tour_name: "Debí tirar más fotos TOUR", date: Date.today, ubication: ubications(:ubication2), start_time: Time.now)
         TicketmasterService.stub :artist_by_name, {"name"=>"Bad Bunny", "id"=> "6"} do
@@ -40,8 +38,7 @@ class RequestTest < ActiveSupport::TestCase
         assert_equal Notification.first.recipient, users(:admin)
     end
 
-    test "request_event_with_not_existing_artist" do
-        # PU95
+    test "PU95 - request_event_with_not_existing_artist" do
         request = Request.new(requester: users(:prueba2), status: 1)    
         request.event = Event.new(tour_name: "Donde está la ONU", date: Date.today, ubication: ubications(:ubication2), start_time: Time.now)
         TicketmasterService.stub :artist_by_name, nil do
@@ -59,8 +56,7 @@ class RequestTest < ActiveSupport::TestCase
         assert_equal Notification.first.recipient, users(:admin)
     end
 
-    test "request_event_without artist" do
-        # PU96
+    test "PU96 - request_event_without artist" do
         request = Request.new(requester: users(:prueba2), status: 1)    
         request.event = Event.new(tour_name: "Inventado", date: Date.today, ubication: ubications(:ubication2), start_time: Time.now)
         TicketmasterService.stub :artist_by_name, nil do

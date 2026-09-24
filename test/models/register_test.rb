@@ -3,8 +3,7 @@ require "test_helper"
 class RegisterTest < ActiveSupport::TestCase
     fixtures :all
 
-    # PU25
-    test "Create_registers" do
+    test "PU25 - Create_register" do
         register1 = Register.new(user: users(:prueba2), event: events(:event3), review: Faker::Lorem.characters(number: 500), rating: 5)
         10.times do
             register1.photos.attach(
@@ -21,32 +20,27 @@ class RegisterTest < ActiveSupport::TestCase
         assert_equal register1.rating, 5
     end
 
-    # PU26
-    test "Create_register_to_non_accepted_event" do
+    test "PU26 - Create_register_to_non_accepted_event" do
         register2 = Register.create(user: users(:prueba2), event: events(:event8))
         assert_not register2.persisted?
     end
 
-    # PU27
-    test "Create_register_to_posterior_event" do
+    test "PU27 - Create_register_to_posterior_event" do
         register3 = Register.create(user: users(:prueba2), event: events(:event5))
         assert_not register3.persisted?
     end
 
-    # PU28
-    test "Create_register_to_same_date_posterior_time_event" do
+    test "PU28 - Create_register_to_same_date_posterior_time_event" do
         register4 = Register.create(user: users(:prueba2), event: events(:event4))
         assert_not register4.persisted?
     end
 
-    # PU29
-    test "Create_register_to_same_date_past_time_event" do
+    test "PU29 - Create_register_to_same_date_past_time_event" do
         register5 = Register.create!(user: users(:prueba2), event: events(:event9))
         assert register5.persisted?
     end
 
-    # PU30
-    test "Create_register_with_over_10_photos" do
+    test "PU30 - Create_register_with_over_10_photos" do
         register6 = Register.new(user: users(:prueba2), event: events(:event9))
         11.times do
             register6.photos.attach(
@@ -58,26 +52,22 @@ class RegisterTest < ActiveSupport::TestCase
         assert_not register6.valid?
     end
 
-    test "Create_register_with_invalid_rating" do
-
-        # PU31
+    test "PU31 - Create_register_with_decimal_rating" do
         register7 = Register.create(user: users(:prueba2), event: events(:event3), rating: 1.5)
         assert_not register7.persisted?
-
-        # PU32
-        register8 = Register.create(user: users(:prueba2), event: events(:event3), rating: 6)
-        assert_not register8.persisted?
-
     end
 
-    # PU33
-    test "Create_register_with_invalid_review" do
+    test "PU32 - Create_register_with_bigger_rating" do
+        register8 = Register.create(user: users(:prueba2), event: events(:event3), rating: 6)
+        assert_not register8.persisted?
+    end
+
+    test "PU33 - Create_register_with_invalid_review" do
         register9 = Register.create(user: users(:prueba2), event: events(:event3), review: Faker::Lorem.characters(number: 501))
         assert_not register9.persisted?
     end
 
-    # PU34
-    test "Create_register_but_already_exists" do
+    test "PU34 - Create_register_but_already_exists" do
         register = Register.create(user: users(:prueba2), event: events(:event3))
         assert register.persisted?
         register2 = Register.create(user: users(:prueba2), event: events(:event3))

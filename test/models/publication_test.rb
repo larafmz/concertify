@@ -3,8 +3,7 @@ require "test_helper"
 class PublicationTest < ActiveSupport::TestCase
     fixtures :all
 
-    # PU47
-    test "Create_publication" do
+    test "PU47 - Create_publication" do
         publication = Publication.new(user: users(:prueba2), review: "Hoy ha sido un día increíble" )
         4.times do
             publication.photos.attach(
@@ -20,8 +19,7 @@ class PublicationTest < ActiveSupport::TestCase
         assert_equal publication.type, "Publication"
     end
 
-    # PU48
-    test "Create_publication_on_artist" do
+    test "PU48 - Create_publication_on_artist" do
         publication = Publication.new(user: users(:prueba2), review: "Me encanta este artista", artist: artists(:artist3) )
         assert publication.valid?
         publication.save
@@ -30,16 +28,14 @@ class PublicationTest < ActiveSupport::TestCase
         assert_equal publication.type, "Publication"
     end
 
-    # PU49
-    test "Create_publication_on_unaccepted_artist" do
+    test "PU49 - Create_publication_on_unaccepted_artist" do
         publication = Publication.new(user: users(:prueba2), review: "Me encanta este artista", artist: artists(:artist8) )
         assert_not publication.valid?
         publication.save
         assert_not publication.persisted?
     end
 
-    # PU50
-    test "Create_publication_on_event" do
+    test "PU50 - Create_publication_on_event" do
         publication = Publication.new(user: users(:prueba2), review: "Ojalá haber ido", event: events(:event3) )
         assert publication.valid?
         publication.save
@@ -48,16 +44,14 @@ class PublicationTest < ActiveSupport::TestCase
         assert_equal publication.type, "Publication"
     end
 
-    # PU51
-    test "Create_publication_on_unaccepted_event" do
+    test "PU51 - Create_publication_on_unaccepted_event" do
         publication = Publication.new(user: users(:prueba2), review: "Ojalá haber ido", event: events(:event8) )
         assert_not publication.valid?
         publication.save
         assert_not publication.persisted?
     end
 
-    # PU52
-    test "Create_publication_with_over_4_photos" do
+    test "PU52 - Create_publication_with_over_4_photos" do
         publication = Publication.new(user: users(:prueba2), review: "Demasiadas fotos!")
         5.times do
             publication.photos.attach(
@@ -71,16 +65,14 @@ class PublicationTest < ActiveSupport::TestCase
         assert_not publication.persisted?
     end
 
-    # PU53
-    test "Create_publication_with_over_500_characters" do
+    test "PU53 - Create_publication_with_over_500_characters" do
         publication = Publication.new(user: users(:prueba2), review: Faker::Lorem.characters(number: 501))
         assert_not publication.valid?
         publication.save
         assert_not publication.persisted?
     end
 
-    # PU54
-    test "Create_publication_without_text" do
+    test "PU54 - Create_publication_without_text" do
         publication = Publication.new(user: users(:prueba2))
         assert_not publication.valid?
         publication.save

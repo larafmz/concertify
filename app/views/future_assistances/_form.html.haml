@@ -31,23 +31,23 @@
               - if @event_api
                 = "#{get_full_ubication(@event_api)} - #{get_event_date(@event_api).strftime("%d %B %Y")}"
               - else
-                = "#{@event.ubication.complete_name} - #{short_date(@event.date)}"
+                = "#{@event.ubication&.complete_name} - #{short_date(@event.date)}"
 
             .separator
 
             %div{data: { controller: "character-counter" }}
               = label_tag :from, FutureAssistance.human_attribute_name(:from_question), class: "soft-color label-custom"
-              = f.text_field :from, placeholder: FutureAssistance.human_attribute_name(:from), class: "field-custom", maxlength: 50
+              = f.text_field :from, placeholder: FutureAssistance.human_attribute_name(:from), class: "field-custom", maxlength: 50, id: "from_id"
          
          
             = label_tag :event_seat, FutureAssistance.human_attribute_name(:event_seat), class: "soft-color label-custom"          
             %span{ style: "display: grid; grid-template-columns: 1fr 3fr; gap: 10px",data: { controller: "character-counter" } }
-              = f.select :event_seat, FutureAssistance.event_seats_for_select, { prompt: t("verbs.select") }, { class: "field-custom" }
-              = f.text_field :event_seat_details, placeholder: FutureAssistance.human_attribute_name(:event_seat_details), class: "field-custom", maxlength: 50
+              = f.select :event_seat, FutureAssistance.event_seats_for_select, { prompt: t("verbs.select") }, { class: "field-custom", id: "event_seat_id" }
+              = f.text_field :event_seat_details, placeholder: FutureAssistance.human_attribute_name(:event_seat_details), class: "field-custom", maxlength: 50, id: "event_seat_details_id"
 
             %div
               = label_tag :company, FutureAssistance.human_attribute_name(:company), class: "soft-color label-custom"
-              = f.select :company, FutureAssistance.companies_for_select, {}, { class: "field-custom" }
+              = f.select :company, FutureAssistance.companies_for_select, {}, { class: "field-custom", id: "company_id" }
 
         %br
         = f.submit t("verbs.save"), style: "float: right", class: "btn-custom event-color", style: "height: auto"

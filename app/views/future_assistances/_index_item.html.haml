@@ -1,4 +1,4 @@
-%div{id: "future-assistance-#{future_assistance.id}"}
+.future_assistance_item{id: "future-assistance-#{future_assistance.id}"}
 
     - event = future_assistance.event
     - event_date = event.date
@@ -45,10 +45,11 @@
                     = short_date(event.date)
                 
             %div{style: "display:flex; align-items:center; gap:5px;"}
-                - if future_assistance.event_seat_string && !future_assistance.event_seat_details&.empty?
+                - if future_assistance.event_seat_string 
                     .bubble
                         %span= "🎟️ #{future_assistance.event_seat_string}"
-                        %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
+                        - if !future_assistance.event_seat_details&.empty?
+                            %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
                 - if future_assistance.from && !future_assistance.from.empty?
                     .bubble
                         %span{style: "color: rgb(230, 230, 230); display:flex; align-items:center; gap: 5px"}
@@ -64,8 +65,8 @@
         
             - if future_assistance.user_id == current_user&.id
                 - if event_date_status == "future"
-                    = link_to "✎", edit_future_assistance_path(future_assistance), data: { turbo_frame: "modal" }
-                    = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
+                    = link_to "✎", edit_future_assistance_path(future_assistance), data: { turbo_frame: "modal" }, id: "edit_future_assistance_#{future_assistance.id}"
+                    = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, id: "destroy_future_assistance_#{future_assistance.id}"
             
         - if event_date_status != "future"
             %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}

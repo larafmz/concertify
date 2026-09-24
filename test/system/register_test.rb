@@ -92,18 +92,15 @@ class RegisterTest < ApplicationSystemTestCase
     end
 
     test "PI33 - Destroy_register" do
-        TicketmasterService.stub :events_by, [] do
-            find(".dropdown button", text: "Profile").click
-            click_on "My Registers"
-            user = users(:prueba2)
-            register_id = user.registers.first.id
-            click_on "interactuable_#{register_id}"
-            find(".dropdown button", text: "Edit").click
-            click_on "Delete Register"
-            assert_current_path "/users/#{user.id}/registers"
-            assert_no_selector "interactuable_#{register_id}"
-        end
+        find(".dropdown button", text: "Profile").click
+        click_on "My Registers"
+        user = users(:prueba2)
+        register_id = user.registers.first.id
+        click_on "interactuable_#{register_id}"
+        find(".dropdown button", text: "Edit").click
+        click_on "Delete Register"
+        assert_current_path "/users/#{user.id}/registers"
+        assert_no_selector "interactuable_#{register_id}"
     end
-
 
 end

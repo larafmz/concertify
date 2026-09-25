@@ -115,6 +115,32 @@ class ChatTest < ApplicationSystemTestCase
         assert_no_selector "#chat_#{chat.id}"
     end
 
+    test "PI55 - receives_message" do
+        setup_user3
+        assert_selector "#chat_header_id", wait: 10
+        assert_no_selector ".message_notification"
+        assert_selector "#messages_header", wait: 10
+        sleep 1 #synchronization
+        chat_entry = ChatEntry.create!(chat: chats(:chat1), user: users(:prueba4), text: "Nuevo mensaje!", chat_type: 0)
+        assert_selector ".message_notification", wait: 10
+        assert_selector ".message_notification", text: "1"
+        click_on "chat_header_id"
+        assert_current_path "/chats", wait: 10
+        assert_equal "chat_#{chats(:chat1).id}", all(".sidebar_chat").first[:id]
+        #color is different cause one chat is read and the other is not
+        assert_not_equal(
+            find("#chat_name_#{chats(:chat1).id}")["style"],
+            find("#chat_name_#{chats(:chat2).id}")["style"]
+        )
+        click_on "chat_link_#{chats(:chat1).id}"
+        assert_text "Nuevo mensaje!", wait: 10
+        #color is the same cause both are read now
+        assert_equal(
+            find("#chat_name_#{chats(:chat1).id}")["style"],
+            find("#chat_name_#{chats(:chat2).id}")["style"]
+        )
+    end
+
 
 
 end

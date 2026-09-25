@@ -49,7 +49,7 @@
             = image_tag("icon_user.png")
       = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural do
         = render "layouts/shared/notifications_bubble"
-      = link_to chats_path, class: "hover-border-icon", title: Chat.plural do
+      = link_to chats_path, class: "hover-border-icon", title: Chat.plural, id: "chat_header_id" do
         = render "layouts/shared/messages_bubble"
 
   .dropdown

@@ -16,7 +16,8 @@ class ChatUser < ApplicationRecord
 
   ## CALLBACKS
 
-   after_update_commit :broadcast_change, if: -> { saved_change_to_read_at? && read_at_before_last_save.nil? && read_at.present? }
+   after_update_commit :broadcast_change_sidebar, if: -> { saved_change_to_read_at? && read_at_before_last_save.nil? && read_at.present? }
+   after_update_commit :broadcast_notification_change, if: -> { saved_change_to_read_at? }
 
   ## VALIDATIONS METHODS
 
@@ -32,11 +33,14 @@ class ChatUser < ApplicationRecord
 
   private
 
-    def broadcast_change
+    def broadcast_change_sidebar
       BroadcastHelper.replace_chat_in_sidebar(chat, user)
+    end
+    
+    def broadcast_notification_change
       BroadcastHelper.update_messages_header(user)
     end
-
+       
   ## INSTANCE METHODS
 
   public

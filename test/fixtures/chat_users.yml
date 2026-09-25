@@ -1,24 +1,29 @@
 chat_user1: {
   chat: chat1,
-  user: prueba3
+  user: prueba3,
+  read_at: <%= Time.current %>
 }
 
 chat_user2: {
   chat: chat1,
-  user: prueba4
+  user: prueba4,
+  read_at: <%= Time.current %>
 }
 
 chat_user3: {
   chat: chat2,
-  user: prueba3
+  user: prueba3,
+  read_at: <%= Time.current %>
 }
 
 chat_user4: {
   chat: chat2,
-  user: admin
+  user: admin,
+  read_at: <%= Time.current %>
 }
 
 chat_user5: {
   chat: event_chat1,
-  user: prueba3
+  user: prueba3,
+  read_at: <%= Time.current %>
 }

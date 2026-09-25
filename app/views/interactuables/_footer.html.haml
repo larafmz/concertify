@@ -5,6 +5,6 @@
         = link_to comments_interactuable_path(interactuable), style: "display:flex; width:fit-content;" do
             = image_tag("icon_comment.png", class: "icon-img-2")
         - if interactuable.comments.count != 0
-            = interactuable.comments.count
+            %span{id: "comment_count_#{interactuable.id}"}= interactuable.comments.count
 
     = render "interactuables/repost", interactuable: interactuable

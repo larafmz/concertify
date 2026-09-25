@@ -106,6 +106,7 @@ en:
     post: Post
     reposted: Reposted
     you_reposted: You reposted
+    comment: Comment
 
   user_account:
     profile: Profile
@@ -153,6 +154,7 @@ en:
     cant_follow_blocked_user: You cannot follow a blocked user
     cant_follow_self: You cannot follow or block yourself
     write_your_review: Write your review
+    write_your_comment: Write your comment
     write_your_answer: Write your reply
     whats_going_on: What's going on?
     post_about: "Post about %{model}"

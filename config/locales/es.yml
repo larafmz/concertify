@@ -107,6 +107,7 @@ es:
     post: Publicar
     reposted: Republicó
     you_reposted: Republicaste
+    comment: Comentar
     
   user_account:
     profile: Perfil
@@ -154,6 +155,7 @@ es:
     cant_follow_blocked_user: No se puede seguir a un usuario bloqueado
     cant_follow_self: No puedes seguir o bloquear a ti mismo
     write_your_review: Escribe tu reseña
+    write_your_comment: Escribe tu comentario
     write_your_answer: Escribe tu respuesta
     whats_going_on: ¿Qué está pasando?
     post_about: Publica sobre %{model}

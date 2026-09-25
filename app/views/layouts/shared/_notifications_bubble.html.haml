@@ -7,6 +7,6 @@
             = image_tag("icon_notification.png")
     - unread_notis = current_user.notifications.unread.size
     - if unread_notis > 0
-        %div{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
+        .normal_notification{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
             = unread_notis
 

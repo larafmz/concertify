@@ -1,12 +1,12 @@
 %div{id: "repost-interactuable-#{interactuable.id}", style: "display: flex; align-items: center"}
     - if can?(:repost, interactuable)
-        = button_to repost_interactuable_path(interactuable), method: :post, class: "button-without-format" do
+        = button_to repost_interactuable_path(interactuable), method: :post, class: "button-without-format", id: "repost_interactuable_#{interactuable.id}" do
             - unless current_user.reposted?(interactuable.id)
-                %span{style: "color: white; font-size: 20px; "} 🗘
+                %span{id: "repost_icon_#{interactuable.id}", style: "color: white; font-size: 20px; "} 🗘
             - else
-                %span{style: "color: #{orange_color}; font-size: 20px; "} 🗘
+                %span{id: "reposted_icon_#{interactuable.id}", style: "color: #{orange_color}; font-size: 20px; "} 🗘
     - else
         %span{style: "color: white; font-size:18px; "} 🗘
     - if interactuable.reposts.count != 0
         = link_to reposts_interactuable_path(interactuable) do 
-            = interactuable.reposts.count                
+            %span{id: "repost_count_#{interactuable.id}"}= interactuable.reposts.count

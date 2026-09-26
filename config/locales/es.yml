@@ -37,6 +37,7 @@ es:
     0: Información verificada y añadida a la aplicación.
     1: Estamos verificando los detalles.
     2: No hemos podido verificar la información. 
+    exists: El evento ya existe en la aplicación.
   genre_music: Género de Música
   profile_icon: Icono de Perfil
   this_year: Este año
@@ -167,7 +168,7 @@ es:
     cant_send_message: No puedes enviar mensajes en este chat.
     event_already_registered: "Ya has registrado tu asistencia a este evento."
     max_upload: "Solo puedes subir %{count} fotos."
-    existing_event_requires_accepted_status: debe estar en estado "aceptado" si se selecciona un concierto existente.
+    existing_event_requires_denied_status: debe estar en estado "denegado" si se selecciona un concierto existente.
     cant_contain_spaces: no puede contener espacios.
     
   notifications:

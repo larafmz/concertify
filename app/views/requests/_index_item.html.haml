@@ -46,7 +46,7 @@
                     = link_to "✎", edit_request_path(request), data: { turbo_frame: "modal" }, id: "edit_request_#{request.id}"
                     = link_to "✗", request_path(request), id: "destroy_request_#{request.id}",
                         data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }
-            - if request.accepted? ||  (request.status == 2 && request.existing_event_id.present?)
+            - if request.accepted? || request.existing_event_id.present?
                 = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom event-color", id: "view_event_#{request.id}",
                     style: "background-color: #069e34;font-size: 13px; width: 150px;"
     

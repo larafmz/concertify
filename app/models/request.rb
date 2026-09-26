@@ -35,8 +35,8 @@ class Request < ApplicationRecord
   ## VALIDATION METHODS
 
       def requires_accepted_status
-        if status != "accepted"
-          errors.add(:base, I18n.t("messages.existing_event_requires_accepted_status"))
+        if status != 2
+          errors.add(:event, I18n.t("messages.existing_event_requires_denied_status"))
         end
       end
 
@@ -91,7 +91,7 @@ class Request < ApplicationRecord
 
     def matching_events
       return nil unless self.event.artists.first.present?
-      self.artist.events.accepted.by_date(self.event.date).by_country_code(self.event.ubication.country.code)
+      self.artist.events.accepted.by_date(self.event.date).by_country_code(self.event.ubication.country.code).where.not(id: self.event.id)
     end
 
     def status_string
@@ -142,6 +142,7 @@ class Request < ApplicationRecord
     def message_request
       return I18n.t("request_message.0") if status.nil?
       return message if message.present?
+      return I18n.t("request_message.exists") unless existing_event_id.nil?
       I18n.t("request_message.#{status}")
     end
 

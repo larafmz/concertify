@@ -194,6 +194,7 @@ class RequestTest < ApplicationSystemTestCase
             fill_in "artist_name_id", with: "Nuevo artista", wait: 10
             fill_in "tour_name_id", with: "Nuevo nombre de tour"
             fill_in "date_id", with: Date.today-1.month
+            assert_no_selector "#status_id"
             within("#modal") do
                 select "Italy", from: "country_id"
             end

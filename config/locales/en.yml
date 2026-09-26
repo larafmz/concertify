@@ -37,6 +37,7 @@ en:
     0: Information verified and added to the application.
     1: We are verifying the details.
     2: We were unable to verify the information.
+    exists: The event already exists in the system.
   genre_music: Music Genre
   profile_icon: Profile Icon
   this_year: This year
@@ -166,7 +167,7 @@ en:
     cant_send_message: You cannot send messages in this chat.
     event_already_registered: "You have already registered your attendance for this event."
     max_upload: "You can only upload %{count} photos."
-    existing_event_requires_accepted_status: must be accepted when an existing event is selected.
+    existing_event_requires_denied_status: must be denied when an existing event is selected.
     cant_contain_spaces: cant contain spaces.
     
   notifications:

@@ -39,6 +39,7 @@ class RequestsController < ApplicationController
     end
 
     def update
+        @event = @request.event
         @request.create_artists(params[:request][:event_attributes][:artist_name])
         if @request.update(create_params)
             respond_to do |format|

@@ -66,7 +66,7 @@
                             %li
                                 %hr.dropdown-divider     
                             %li
-                                = link_to t("crud.destroy", model: t("follower")), unfollow_user_path(follower_id: @user.id), class: "dropdown-item", data: { turbo_method: :delete }
-
+                            = link_to t("crud.destroy", model: t("follower")), remove_follower_user_path(@user), class: "dropdown-item", data: { turbo_method: :delete }
+                            
 .separator{style: "background: #40556d; "}
 

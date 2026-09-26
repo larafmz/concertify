@@ -4,10 +4,10 @@
             =t("blocked").upcase
     - else
         - if can?(:unfollow, user) && current_user&.follows_user?(user)
-            = link_to t("following"), unfollow_user_path(user), class: "btn-custom", data: { turbo_method: :delete }
+            = link_to t("following"), unfollow_user_path(user), class: "btn-custom", data: { turbo_method: :delete }, id: "unfollow_#{user.id}"
         - elsif can?(:follow, user) 
             - if user&.follows_user?(current_user)
-                = link_to t("verbs.follow_back"), follow_user_path(user), class: "btn-custom orange-color", data: { turbo_method: :post }
+                = link_to t("verbs.follow_back"), follow_user_path(user), class: "btn-custom orange-color", data: { turbo_method: :post }, id: "follow_back_#{user.id}"
             - else
-                = link_to t("verbs.follow"), follow_user_path(user), class: "btn-custom orange-color", data: { turbo_method: :post }
+                = link_to t("verbs.follow"), follow_user_path(user), class: "btn-custom orange-color", data: { turbo_method: :post }, id: "follow_#{user.id}"
         

@@ -66,7 +66,7 @@ class Ability
         # User permissions
         can :read, User do |target| !target.blocked_user?(user.id) end
         can [:update, :blocked, :requests, :notifications], User, id: user.id
-        can [:follow, :unfollow], User do |target|
+        can [:follow, :unfollow, :remove_follower], User do |target|
           target.id != user.id && !target.blocked_user?(user.id)
         end
         can [:block, :unblock], User do |target|

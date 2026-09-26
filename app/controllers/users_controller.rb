@@ -132,7 +132,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    params[:follower_id] ? User.find(params[:follower_id]).unfollow(current_user) : current_user.unfollow(@user)
+    current_user.unfollow(@user)
     respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
@@ -141,8 +141,12 @@ class UsersController < ApplicationController
             locals: { user: @user }
           )
         end
-      format.html { redirect_back fallback_location: root_path }
     end
+  end
+
+  def remove_follower
+    @user.unfollow(current_user)
+    redirect_to user_path(@user)
   end
 
   def block

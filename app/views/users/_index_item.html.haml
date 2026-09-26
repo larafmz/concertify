@@ -4,7 +4,7 @@
             = image_tag user.icon if user.icon.attached?
 
     %div
-        = link_to user_path(user) do
+        = link_to user_path(user), id: "link_user_#{user.id}" do
             %span{ style: "font-size: 15px; font-weight: 700;" }= user.username
         .softest-color{style: "font-size: 12px;" }
             = link_to followers_user_path(user), class: "hover-border-icon" do 

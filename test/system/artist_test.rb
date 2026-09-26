@@ -29,7 +29,8 @@ class ArtistTest < ApplicationSystemTestCase
                 assert_text "Rihanna"
                 assert_text "Miley Cyrus"
                 assert_text "Dua Lipa"
-                assert_selector ".item-artist", count: 4
+                assert_text "Kesha"
+                assert_selector ".item-artist", count: 5
             end
         end 
     end

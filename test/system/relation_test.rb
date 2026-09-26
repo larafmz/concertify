@@ -23,6 +23,8 @@ class RelationTest < ApplicationSystemTestCase
         click_on "follow_#{user3.id}"
         assert_selector "#unfollow_#{user3.id}"
         assert_no_selector "#follow_#{user3.id}"
+        visit "/users/#{users(:prueba2).id}/followings"
+        assert_text user3.username, wait: 10
     end
 
     test "PI65 - unfollow_user" do
@@ -37,6 +39,8 @@ class RelationTest < ApplicationSystemTestCase
         click_on "unfollow_#{user3.id}"
         assert_selector "#follow_#{user3.id}"
         assert_no_selector "#unfollow_#{user3.id}"
+        visit "/users/#{users(:prueba2).id}/followings"
+        assert_no_text user3.username, wait: 10
     end
 
     test "PI66 - block_user" do
@@ -53,6 +57,8 @@ class RelationTest < ApplicationSystemTestCase
         assert_text "BLOCKED"
         find(".dropdown .dropdown-toggle", text: "⁝").click
         assert_text "Unblock"
+        visit "/users/#{users(:prueba2).id}/blocked"
+        assert_text user3.username, wait: 10
     end
 
     test "PI67 - unblock_user" do
@@ -73,6 +79,8 @@ class RelationTest < ApplicationSystemTestCase
         assert_text "Follow", wait: 10
         assert_text "Send message"
         assert_no_text "BLOCKED"
+        visit "/users/#{users(:prueba2).id}/blocked"
+        assert_no_text user3.username, wait: 10
     end
 
     test "PI68 - remove_follower" do
@@ -90,6 +98,8 @@ class RelationTest < ApplicationSystemTestCase
         click_on "Delete Follower"
         assert_current_path "/users/#{user3.id}", wait: 10
         assert_no_text "Follows you", wait: 10
+        visit "/users/#{users(:prueba2).id}/followers"
+        assert_no_text user3.username, wait: 10
     end
     
     test "PI69 - gets_followed" do
@@ -106,6 +116,135 @@ class RelationTest < ApplicationSystemTestCase
         assert_current_path "/users/#{users(:prueba2).id}/notifications", wait: 10
         assert_selector ".notification", count: 1
         assert_text "#{users(:prueba3).username} has started following you"
+        visit "/users/#{users(:prueba2).id}/followers"
+        assert_text user3.username, wait: 10
     end
+
+    test "PI70 - follow_artist" do
+        TicketmasterService.stub :events_by, [] do
+            TicketmasterService.stub :artist_by_id, [] do
+                TicketmasterService.stub :artists_by, [] do
+                    artist = artists(:artist3)
+                    find(".dropdown button", text: "View").click
+                    click_on "Artists"
+                    click_on artist.name
+                    assert_selector "#follow_artist_#{artist.id}", wait: 10
+                    assert_no_selector "#unfollow_artist_#{artist.id}"
+                    click_on "follow_artist_#{artist.id}"
+                    assert_no_selector "#follow_artist_#{artist.id}", wait: 10
+                    assert_selector "#unfollow_artist_#{artist.id}"
+                    visit "/users/#{users(:prueba2).id}/artists"
+                    assert_text artist.name
+                end
+            end
+        end
+    end
+
+    test "PI71 - unfollow_artist" do
+        TicketmasterService.stub :events_by, [] do
+            TicketmasterService.stub :artist_by_id, [] do
+                TicketmasterService.stub :artists_by, [] do
+                    artist = artists(:artist3)
+                    find(".dropdown button", text: "View").click
+                    click_on "Artists"
+                    click_on artist.name
+                    assert_selector "#follow_artist_#{artist.id}"
+                    assert_no_selector "#unfollow_artist_#{artist.id}"
+                    click_on "follow_artist_#{artist.id}"
+                    assert_no_selector "#follow_artist_#{artist.id}", wait: 10
+                    assert_selector "#unfollow_artist_#{artist.id}"
+                    click_on "unfollow_artist_#{artist.id}"
+                    assert_selector "#follow_artist_#{artist.id}", wait: 10
+                    assert_no_selector "#unfollow_artist_#{artist.id}"
+                    visit "/users/#{users(:prueba2).id}/artists"
+                    assert_no_text artist.name
+                end
+            end
+        end
+    end
+
+    test "PI72 - mark_artist_as_favorite" do
+        TicketmasterService.stub :events_by, [] do
+            TicketmasterService.stub :artist_by_id, [] do
+                TicketmasterService.stub :artists_by, [] do
+                    artist = artists(:artist3)
+                    find(".dropdown button", text: "View").click
+                    click_on "Artists"
+                    click_on artist.name
+                    assert_selector "#mark_as_favorite_#{artist.id}", wait: 10
+                    assert_no_selector "#unmark_as_favorite_#{artist.id}"
+                    click_on "mark_as_favorite_#{artist.id}"
+                    assert_no_selector "#mark_as_favorite_#{artist.id}", wait: 10
+                    assert_selector "#unmark_as_favorite_#{artist.id}"
+                    visit "/users/#{users(:prueba2).id}"
+                    assert_text artist.name, wait: 10
+                    visit "/users/#{users(:prueba2).id}/artists"
+                    assert_text artist.name, wait: 10
+                    assert_text "❤"
+                end
+            end
+        end
+    end
+
+    test "PI73 - mark_artist_as_favorite_more_than_4" do
+        TicketmasterService.stub :events_by, [] do
+            TicketmasterService.stub :artist_by_id, [] do
+                TicketmasterService.stub :artists_by, [] do
+                    artist3 = artists(:artist3)
+                    artist4 = artists(:artist4)
+                    artist5 = artists(:artist5)
+                    artist6 = artists(:artist6)
+                    artist9 = artists(:artist9)
+                    visit "/artists/#{artist3.id}"
+                    click_on "mark_as_favorite_#{artist3.id}"
+                    visit "/artists/#{artist4.id}"
+                    click_on "mark_as_favorite_#{artist4.id}"
+                    visit "/artists/#{artist5.id}"
+                    click_on "mark_as_favorite_#{artist5.id}"
+                    visit "/artists/#{artist6.id}"
+                    click_on "mark_as_favorite_#{artist6.id}"
+                    visit "/artists/#{artist9.id}"
+                    accept_confirm do
+                        click_on "mark_as_favorite_#{artist9.id}"
+                    end
+                    assert_selector "#mark_as_favorite_#{artist9.id}", wait: 10
+                    assert_no_selector "#unmark_as_favorite_#{artist9.id}"
+                    visit "/users/#{users(:prueba2).id}"
+                    assert_text artist3.name, wait: 10
+                    assert_text artist4.name
+                    assert_text artist5.name
+                    assert_text artist6.name
+                    assert_no_text artist9.name
+                end
+            end
+        end
+    end
+
+    test "PI74 - unmark_artist_as_favorite" do
+        TicketmasterService.stub :events_by, [] do
+            TicketmasterService.stub :artist_by_id, [] do
+                TicketmasterService.stub :artists_by, [] do
+                    artist = artists(:artist3)
+                    find(".dropdown button", text: "View").click
+                    click_on "Artists"
+                    click_on artist.name
+                    assert_selector "#mark_as_favorite_#{artist.id}", wait: 10
+                    assert_no_selector "#unmark_as_favorite_#{artist.id}"
+                    click_on "mark_as_favorite_#{artist.id}"
+                    assert_no_selector "#mark_as_favorite_#{artist.id}", wait: 10
+                    assert_selector "#unmark_as_favorite_#{artist.id}"
+                    click_on "unmark_as_favorite_#{artist.id}"
+                    assert_selector "#mark_as_favorite_#{artist.id}", wait: 10
+                    assert_no_selector "#unmark_as_favorite_#{artist.id}"
+                    visit "/users/#{users(:prueba2).id}"
+                    assert_no_text artist.name, wait: 10
+                    visit "/users/#{users(:prueba2).id}/artists"
+                    assert_no_text artist.name, wait: 10
+                    assert_no_text "❤"
+                end
+            end
+        end
+    end
+
 
 end

@@ -30,12 +30,12 @@
         %span{ style: "margin-bottom: 25px; display: flex; margin-left: auto; gap:10px; position: relative; z-index: 2;" }
             = render "artists/follow_buttoms", artist: @artist
             - if can?(:unmark_as_favorite, @artist) && current_user.favorite_artist?(@artist)
-                = link_to "#{t("is_favorite")}", unmark_as_favorite_artist_path(@artist), class: "btn-standard", style: "background: #da4778;", data: { turbo_method: :delete }
+                = link_to "#{t("is_favorite")}", unmark_as_favorite_artist_path(@artist), id: "unmark_as_favorite_#{@artist.id}", class: "btn-standard", style: "background: #da4778;", data: { turbo_method: :delete }
             - elsif can?(:mark_as_favorite, @artist) && @can_mark_favorite
-                = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard artist-color", method: :post, form: { data: { turbo: false } } do
+                = button_to mark_as_favorite_artist_path(@artist), id: "mark_as_favorite_#{@artist.id}", class: "btn-standard artist-color", method: :post, form: { data: { turbo: false } } do
                     ♡ #{t("verbs.mark_as_favorite")}
             - else
-                = button_to mark_as_favorite_artist_path(@artist), class: "btn-standard artist-color", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
+                = button_to mark_as_favorite_artist_path(@artist), id: "mark_as_favorite_#{@artist.id}", class: "btn-standard artist-color", method: :post, form: { data: { turbo: false, controller: "alert", action: "click->alert#show", alert_message_value: t("messages.cant_mark_as_favorite") } } do
                     ♡ #{t("verbs.mark_as_favorite")}
             - if can?(:edit, @artist) && @artist.manually_added
                 = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard artist-color"

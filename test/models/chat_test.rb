@@ -43,15 +43,15 @@ class ChatTest < ActiveSupport::TestCase
 
     test "PU60 - send_message_to_private_chat" do
         chat = Chat.create_private_chat(users(:prueba2).id, users(:prueba3).id)
-        users(:prueba3).chat_users.first.mark_as_read
-        assert users(:prueba3).chat_users.first.read?
+        users(:prueba3).chat_users.last.mark_as_read
+        assert users(:prueba3).chat_users.last.read?
 
         message = chat.send_message(users(:prueba2).id, "Hola!")
         assert message.persisted?
         assert_equal chat.chat_entries.count, 1
         assert_equal chat.chat_entries[0], message
         assert_equal message.text, "Hola!"
-        assert_not users(:prueba3).chat_users.first.read?
+        assert_not users(:prueba3).chat_users.last.read?
         assert_equal users(:prueba3).chat_users.unread.size, 1
     end
 

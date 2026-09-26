@@ -31,3 +31,8 @@ artist8: {
   name: Sabrina Carpenter,
   status: 2
 }
+
+artist9: {
+  name: Kesha,
+  status: 0,
+}

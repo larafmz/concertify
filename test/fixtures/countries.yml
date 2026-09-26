@@ -5,3 +5,7 @@ spain:
 italy:
   name: Italy,
   code: IT
+
+france:   
+  name: France,
+  code: FR

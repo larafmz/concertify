@@ -2,7 +2,8 @@ event3: {
   ticketmaster_id: 3,
   tour_name: Evento antiguo1,
   date: <%= Date.today - 1.day %>,
-  updated_at: <%= 5.hours.ago %>
+  updated_at: <%= 5.hours.ago %>,
+  ubication: ubication3
 }
 
 event4: {
@@ -24,30 +25,35 @@ event5: {
 event6: {
   tour_name: Evento 6,
   date: <%= Date.today + 1.year %>,
-  request: request2
+  request: request2,
+  ubication: ubication3
 }
 
 event7: {
   tour_name: Evento 7,
   date: <%= Date.today + 1.year %>,
-  request: request3
+  request: request3,
+  ubication: ubication3
 }
 
 event8: {
   tour_name: Evento 8,
   date: <%= Date.today + 1.year %>,
-  request: request4
+  request: request4,
+  ubication: ubication3
 }
 
 event9: {
   ticketmaster_id: 9,
   tour_name: Evento 9,
   date: <%= Date.today %>,
-  start_time: <%= Time.current - 2.hours %>
+  start_time: <%= Time.current - 2.hours %>,
+  ubication: ubication3
 }
 
 event10: {
   ticketmaster_id: 10,
   tour_name: Evento 10,
-  date: <%= Date.today-1.year %>
+  date: <%= Date.today-1.year %>,
+  ubication: ubication3
 }

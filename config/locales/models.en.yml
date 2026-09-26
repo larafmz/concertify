@@ -44,11 +44,11 @@ en:
         one: Repost
         other: Reposts
       chat:
-      one: Chat
-      other: Chats
+        one: Chat
+        other: Chats
       request:
-      one: Request
-      other: Requests
+        one: Request
+        other: Requests
     attributes:
       user:
         email: Email

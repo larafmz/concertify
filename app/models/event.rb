@@ -7,7 +7,7 @@ class Event < ApplicationRecord
 
   ## RELATIONSHIPS
 
-    belongs_to :ubication, optional: true
+    belongs_to :ubication
     accepts_nested_attributes_for :ubication, allow_destroy: false
     belongs_to :request, optional: true, dependent: :destroy
     

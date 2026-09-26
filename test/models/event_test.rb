@@ -4,7 +4,12 @@ class EventTest < ActiveSupport::TestCase
   fixtures :all
 
   test "PU08 - Create_event" do
-    TicketmasterService.stub :event_by_id, {"name"=>"Miley Cyrus TOUR", "id"=> "1", "dates" => { "start" => { "localDate" => "2026-09-17" } } } do
+    response = {   
+      "name"=>"Miley Cyrus TOUR", "id"=> "1", 
+      "dates" => { "start" => { "localDate" => "2026-09-17" } }, 
+      "_embedded" => { "venues" => [ { "country" => {"name" => "Spain", "countryCode" => "ES" }  }] }
+    }
+    TicketmasterService.stub :event_by_id, response do
       event1 = Event.create_or_update_by_ticketmaster_id("1")
       assert event1.persisted?
       assert_equal "Miley Cyrus TOUR", event1.tour_name
@@ -19,7 +24,12 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test "PU10 - Create_existent_event" do
-    TicketmasterService.stub :event_by_id, {"name"=>"Dua Lipa TOUR", "id"=> "3", "dates" => { "start" => { "localDate" => "2026-09-17" } }} do
+    response = {   
+      "name"=>"Dua Lipa TOUR", "id"=> "3", 
+      "dates" => { "start" => { "localDate" => "2026-09-17" } }, 
+      "_embedded" => { "venues" => [ { "country" => {"name" => "Spain", "countryCode" => "ES" }  }] }
+    }
+    TicketmasterService.stub :event_by_id, response do
       event3 = events(:event3)
       Event.create_or_update_by_ticketmaster_id(event3.ticketmaster_id)
       event3.reload

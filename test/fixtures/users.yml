@@ -33,5 +33,6 @@ blocked_me: {
 admin: {
   username: admin,
   email: admin@gmail.com,
+  encrypted_password: "$2a$12$1/f3mCRCqX6rrqrJ5HdPBOEFYcROPdNwk8mkhdRWyK.rRG.D5e9Fq",
   role: admin
 }

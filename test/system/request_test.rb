@@ -24,16 +24,6 @@ class RequestTest < ApplicationSystemTestCase
         end
     end
 
-    def setup_admin
-        TicketmasterService.stub :events_by, [] do
-            visit "/users/sign_in" 
-            fill_in "email_id", with: "admin@gmail.com"
-            fill_in "password_id", with: "Prueba2!"
-            click_on "Log in"
-            assert_current_path "/", wait: 15
-        end
-    end
-
     test "PI75 - create_request_for_existing_artist" do
         setup_user2
         TicketmasterService.stub :events_by, [] do
@@ -222,29 +212,47 @@ class RequestTest < ApplicationSystemTestCase
 
     test "PI83 - edit_denied_request" do
         setup_user3
-        TicketmasterService.stub :artist_by_name, {}  do
-            find(".dropdown button", text: "Profile").click
-            click_on "My Requests"
-            user = users(:prueba3)
-            request = requests(:request4)
-            click_on "edit_request_#{request.id}" 
-            fill_in "artist_name_id", with: "Nuevo artista", wait: 10
-            fill_in "tour_name_id", with: "Nuevo nombre de tour"
-            fill_in "date_id", with: Date.today-1.month
-            within("#modal") do
-                select "Italy", from: "country_id"
-            end
-            click_on "Save"
-            within("#request-#{request.id}") do
-                assert_selector "#tour_name_#{request.id}", text: "Nuevo nombre de tour"
-                assert_text "Nuevo artista"
-                assert_text "Italy"
-                assert_text I18n.l(Date.today-1.month, format: "%-d %b")
-                assert_text "We are verifying the details"
-                assert_text "⌛︎ Pending"
-                assert_text "Sent by @#{user.username}"
-            end
+        find(".dropdown button", text: "Profile").click
+        click_on "My Requests"
+        user = users(:prueba3)
+        request = requests(:request4)
+        assert_no_selector "#edit_request_#{request.id}" 
+        assert_no_selector "#destroy_request_#{request.id}" 
+        within("#request-#{request.id}") do
+            assert_text "We were unable to verify the information."
+            assert_text "Denied"
         end
+    end
+
+    test "PI84 - edit_accepted_request" do
+        setup_user3
+        find(".dropdown button", text: "Profile").click
+        click_on "My Requests"
+        user = users(:prueba3)
+        request = requests(:request1)
+        assert_no_selector "#edit_request_#{request.id}" 
+        assert_no_selector "#destroy_request_#{request.id}" 
+        within("#request-#{request.id}") do
+            assert_text "Information verified and added to the application."
+            assert_text "Accepted"
+        end
+        assert_selector "#view_event_#{request.id}" 
+        click_on "view_event_#{request.id}" 
+        assert_current_path "/events/#{request.event.id}", wait: 10
+    end
+
+    test "PI85 - remove_request" do
+        setup_user3
+        find(".dropdown button", text: "Profile").click
+        click_on "My Requests"
+        user = users(:prueba3)
+        request = requests(:request3)
+        assert_selector "#request-#{request.id}"
+        assert_selector "#destroy_request_#{request.id}" 
+        accept_confirm do
+            click_on "destroy_request_#{request.id}" 
+        end
+        assert_no_selector "#request-#{request.id}", wait: 10
     end
 
 end

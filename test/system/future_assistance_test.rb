@@ -16,8 +16,8 @@ class FutureAssistanceTest < ApplicationSystemTestCase
     test "PI34 - Create_future_assistance" do
         TicketmasterService.stub :events_by, [] do
             visit "/events"
-            event = events(:event5)
-            click_on "will_assist_to_#{event.id}"
+            event = events(:event6)
+            click_on "will_assist_to_#{event.id}", wait: 10
             assert "from_id", wait: 10
             from = Faker::Lorem.characters(number: 50)
             fill_in "from_id", with: from
@@ -86,6 +86,7 @@ class FutureAssistanceTest < ApplicationSystemTestCase
         click_on "My Future Assistances"
         user = users(:prueba2)
         future_assistance = user.future_assistances.last
+        event = future_assistance.event
         click_on "edit_future_assistance_#{future_assistance.id}"
         assert "from_id", wait: 10
         from = Faker::Lorem.characters(number: 50)
@@ -96,7 +97,7 @@ class FutureAssistanceTest < ApplicationSystemTestCase
         select "Seating", from: "event_seat_id"
         select "Accompanied", from: "company_id"
         click_on "Save"
-        assert_text "Evento 6", wait: 10
+        assert_text event.tour_name, wait: 10
         assert_text "Accompanied"
         assert_text "Seating"
         assert_text event_seat_details

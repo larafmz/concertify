@@ -67,6 +67,7 @@ class RequestAdminTest < ApplicationSystemTestCase
         end
         request.reload
         assert_selector "#view_event_#{request.id}" 
+        click_on "view_event_#{request.id}"
         assert_current_path "/events/#{request.existing_event_id}", wait: 10
     end
 

@@ -9,7 +9,7 @@ class User < ApplicationRecord
     belongs_to :role
 
     has_one :ubication, dependent: :destroy
-    accepts_nested_attributes_for :ubication, allow_destroy: false
+    accepts_nested_attributes_for :ubication, reject_if: :all_blank
 
     has_many :registers, dependent: :destroy
     has_many :publications, dependent: :destroy

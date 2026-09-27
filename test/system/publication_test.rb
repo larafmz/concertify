@@ -34,6 +34,7 @@ class PublicationTest < ApplicationSystemTestCase
             text = Faker::Lorem.characters(number: 501)
             fill_in "post_text_id", with: text
             click_on "Post"
+            assert page.has_current_path?(/\/interactuables\/\d+/, wait: 10)
             publication = Publication.last
             assert_current_path "/interactuables/#{publication.id}", wait: 10
             assert_no_text text
@@ -50,7 +51,6 @@ class PublicationTest < ApplicationSystemTestCase
             fill_in "post_text_id", with: text
             click_on "Post"
             publication = Publication.last
-            puts publication.inspect
             assert_current_path "/interactuables/#{publication.id}", wait: 10
             assert_no_text text
             assert_text text[0...-1]

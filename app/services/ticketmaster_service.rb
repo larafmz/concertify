@@ -10,11 +10,10 @@ class TicketmasterService
 
     def self.call_api(url) 
         begin
-            puts url
             response = Net::HTTP.get(URI(url))
             return JSON.parse(response)
         rescue
-            puts "Error al conectar con Ticketmaster" #TO/DO mostrar esto en un pop up o algo asi
+            puts "Error al conectar con Ticketmaster"
             return nil
         end
     end

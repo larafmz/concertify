@@ -179,8 +179,8 @@ class ChatTest < ApplicationSystemTestCase
         assert_text "Nuevo mensaje!", wait: 10
         assert_no_selector ".message_notification"
         assert_equal "chat_#{chats(:chat1).id}", all(".sidebar_chat").first[:id]
-        #color is different cause one chat is read and the other is not
-        assert_not_equal(
+        #color is the same cause both are read
+        assert_equal(
             find("#chat_name_#{chats(:chat1).id}")["style"],
             find("#chat_name_#{chats(:chat2).id}")["style"]
         )

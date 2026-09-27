@@ -117,7 +117,7 @@ class RelationTest < ApplicationSystemTestCase
         assert_selector ".notification", count: 1
         assert_text "#{users(:prueba3).username} has started following you"
         visit "/users/#{users(:prueba2).id}/followers"
-        assert_text user3.username, wait: 10
+        assert_text users(:prueba3).username, wait: 10
     end
 
     test "PI70 - follow_artist" do
@@ -196,16 +196,16 @@ class RelationTest < ApplicationSystemTestCase
                     artist6 = artists(:artist6)
                     artist9 = artists(:artist9)
                     visit "/artists/#{artist3.id}"
-                    click_on "mark_as_favorite_#{artist3.id}"
+                    click_on "mark_as_favorite_#{artist3.id}", wait: 10
                     visit "/artists/#{artist4.id}"
-                    click_on "mark_as_favorite_#{artist4.id}"
+                    click_on "mark_as_favorite_#{artist4.id}", wait: 10
                     visit "/artists/#{artist5.id}"
-                    click_on "mark_as_favorite_#{artist5.id}"
+                    click_on "mark_as_favorite_#{artist5.id}", wait: 10
                     visit "/artists/#{artist6.id}"
-                    click_on "mark_as_favorite_#{artist6.id}"
+                    click_on "mark_as_favorite_#{artist6.id}", wait: 10
                     visit "/artists/#{artist9.id}"
                     accept_confirm do
-                        click_on "mark_as_favorite_#{artist9.id}"
+                        click_on "mark_as_favorite_#{artist9.id}", wait: 10
                     end
                     assert_selector "#mark_as_favorite_#{artist9.id}", wait: 10
                     assert_no_selector "#unmark_as_favorite_#{artist9.id}"

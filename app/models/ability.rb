@@ -53,7 +53,7 @@ class Ability
         can [:repost, :comment], Interactuable do |interactuable| 
           !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)
         end
-        can [:uncomment], Interactuable, user_id: user.id
+        can [:remove_comment], Interactuable, user_id: user.id
         can [:reply], Comment do |comment| 
           !comment.interactuable.user.blocked_user?(user.id) && !user.blocked_user?(comment.interactuable.user.id)
         end

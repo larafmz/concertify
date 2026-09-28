@@ -38,7 +38,7 @@ class Publication < Interactuable
 
   ## CLASS METHODS
 
-    def self.do_search(params, user: nil)
+    def self.search_by(params, user: nil)
       return Publication.viewables(user) unless user.present?
       return user.publications.left_joins(:likes).group(:id).order("COUNT(likes.id) DESC") if params[:filter] && params[:filter]=="populars"
       user.publications.order(created_at: :desc)

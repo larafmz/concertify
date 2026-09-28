@@ -7,7 +7,7 @@
 
             .item-artist
                 - if !item[:source] || item[:source] == :db
-                    - if artist.is_favorite?(current_user)
+                    - if current_user&.is_favorite?(artist.id)
                         %div{ style: "height:10px; font-size: 13px; width: 120px; display: flex;  justify-content: center;"}    
                             ❤ 
                     - else

@@ -21,6 +21,6 @@
                         ⁝
                     %ul.dropdown-menu
                         %li
-                            = button_to t("verbs.destroy"), uncomment_interactuable_path(comment_id: comment.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
+                            = button_to t("verbs.destroy"), remove_comment_interactuable_path(comment_id: comment.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
         = link_to comment_path(comment), class: "publication-link", style: "display: grid; grid-template-columns: 1fr auto;" do
             %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(comment.text)

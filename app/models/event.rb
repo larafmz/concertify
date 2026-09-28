@@ -100,10 +100,6 @@ class Event < ApplicationRecord
 
   ## INSTANCE METHODS
 
-    def complete_name
-      tour_name
-    end
-
     def complete_info
       [tour_name, date_in_numbers(date), start_time, ubication.complete_name_with_venue].reject(&:blank?).join(", ")
     end

@@ -136,4 +136,8 @@ class User < ApplicationRecord
       chats.group_chat?
     end
 
+    def is_favorite?(artist_id)
+      FavoriteArtist.exists?(user_id: self.id, artist_id: artist_id)
+    end
+
 end

@@ -12,7 +12,7 @@
                     placeholder: "Ex: Taylor Swift", class: "field-custom", list: "artists-list"
                 %datalist#artists-list
                     - Artist.all.sort_by(&:name).each do |artist|
-                        %option{ value: artist.complete_name }
+                        %option{ value: artist.name }
 
             %div
                 = label_tag :tour_name, "🎶 #{Event.human_attribute_name(:tour_name)}", class: "soft-color label-custom"

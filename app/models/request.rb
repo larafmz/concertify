@@ -73,9 +73,9 @@ class Request < ApplicationRecord
 
   ## CLASS METHODS
 
-    def self.do_search(params={}, order_by="created_at DESC", user: nil)
+    def self.search_by(params={}, user: nil)
         params ||= {}
-        requests = Request.order(order_by)
+        requests = Request.order("created_at DESC")
         requests = requests.where(requester_id: user.id) if user.present?
         requests = requests.by_status(params[:status].to_i) if params[:status]
         requests

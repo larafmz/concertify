@@ -18,6 +18,7 @@ class Artist < ApplicationRecord
 
     has_many :artists_events, dependent: :destroy
     has_many :events, through: :artists_events, dependent: :destroy
+    has_many :registers, through: :events
 
     has_many :relations, as: :followed, dependent: :destroy
     has_many :followers, through: :relations, source: :follower
@@ -86,14 +87,6 @@ class Artist < ApplicationRecord
           
   ## INSTANCE METHODS
 
-    def complete_name
-      name
-    end
-
-    def registers
-      Register.by_artist(self.id)
-    end
-
     def average_rating
       registers.average(:rating).to_i || 0
     end
@@ -104,11 +97,6 @@ class Artist < ApplicationRecord
 
     def manually_added
       ticketmaster_id.nil?
-    end
-
-    def is_favorite?(user)
-      return false if !user
-      FavoriteArtist.exists?(user_id: user.id, artist_id: id)
     end
 
 end

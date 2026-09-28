@@ -24,7 +24,7 @@ class Interactuable < ApplicationRecord
   ## CLASS METHODS
 
   public
-
+    
     def self.viewables(user)
       if user.present?
         #Remove Interactuables from users than have BLOCKED ME
@@ -35,7 +35,7 @@ class Interactuable < ApplicationRecord
         Interactuable.all
       end
     end
-
+    
   ## INSTANCE METHODS
 
     def complete_name

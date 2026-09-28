@@ -59,7 +59,7 @@ class InteractuablesController < ApplicationController
         redirect_to comments_interactuable_path(params[:id])
     end
 
-    def uncomment
+    def remove_comment
         comment = Comment.find(params[:comment_id])
         path = father_link(comment)
         comment.destroy

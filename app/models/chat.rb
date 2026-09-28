@@ -50,27 +50,23 @@ class Chat < ApplicationRecord
       event.present?
     end
 
-    def messages
-      chat_entries.user_messages 
+    def other_user(user)
+      users.find { |u| u.id != user.id }
     end
 
-    def other_user(current_user)
-      users.find { |u| u.id != current_user.id }
-    end
-
-    def name(current_user)
+    def name(user)
       return event.tour_name if event
-      username = other_user(current_user)&.username
+      username = other_user(user)&.username
       username.present? ? username : "NOT FOUND"
     end
 
-    def photo(current_user)
+    def photo(user)
       return event.photo if event
-      other_user(current_user)&.icon
+      other_user(user)&.icon
     end
 
-    def has_notification?(current_user)
-      !chat_users.find { |cu| cu.user_id == current_user.id }&.read?
+    def has_notification?(user)
+      !chat_users.find { |cu| cu.user_id == user.id }&.read?
     end
 
     def exit_chat(user_id)

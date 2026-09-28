@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def registers
-    registers = Register.do_search(params, user: @user)
+    registers = Register.search_by(params, user: @user)
     @registers = registers.page(params[:page]).per(5)
     @pagination_path = request.query_parameters.merge( controller: "users", action: "registers", user_id: @user.id )
     respond_to do |format|
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def requests
-    requests = Request.do_search(params, user: @user)
+    requests = Request.search_by(params, user: @user)
     @requests = requests.page(params[:page]).per(5)
     @pagination_path = request.query_parameters.merge(controller: "users", action: "requests", user_id: @user.id )
     respond_to do |format|
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
   end
 
   def publications
-    publications = Publication.do_search(params, user: @user)
+    publications = Publication.search_by(params, user: @user)
     @publications = publications.page(params[:page]).per(10)
     @pagination_path = request.query_parameters.merge( controller: "users", action: "publications", user_id: @user.id )
     respond_to do |format|

@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
     load_and_authorize_resource
 
     def index
-        requests = Request.do_search(params)        
+        requests = Request.search_by(params)        
         @requests = requests.page(params[:page]).per(5)
         @pagination_path = request.query_parameters.merge( controller: "requests", action: "index" )
         respond_to do |format|

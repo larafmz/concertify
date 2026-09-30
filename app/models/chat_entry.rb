@@ -42,9 +42,9 @@ class ChatEntry < ApplicationRecord
       end
 
       # update chat and sidebar of user who sent the message
-      BroadcastHelper.add_message_to_chat(self, user)
-      BroadcastHelper.remove_chat_from_sidebar(self.chat, user)
-      BroadcastHelper.append_chat_to_sidebar(self.chat, user)
+      BroadcastService.add_message_to_chat(self, user)
+      BroadcastService.remove_chat_from_sidebar(self.chat, user)
+      BroadcastService.append_chat_to_sidebar(self.chat, user)
 
       # job to update the view of the rest of the users of the chat
       ChatEntryBroadcastJob.perform_later(self.id, user.id)

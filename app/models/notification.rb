@@ -24,7 +24,7 @@ class Notification < Noticed::Notification
     ## CALLBACKS METHODS
 
     def broadcast_change
-        BroadcastHelper.update_notifications_header(recipient)
+        BroadcastService.update_notifications_header(recipient)
     end
 
     ## CLASS METHODS

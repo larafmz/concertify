@@ -2,7 +2,7 @@ class Event < ApplicationRecord
 
   ##CONFIGURATIONS
 
-    extend TicketmasterEventHelper
+    extend TicketmasterHelper
     include ApplicationHelper
 
   ## RELATIONSHIPS

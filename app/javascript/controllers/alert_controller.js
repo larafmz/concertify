@@ -6,6 +6,7 @@ export default class extends Controller {
     message: String
   }
 
+  //  Used to show alert message when "mark as favorite" and user has more than 4 artists as favorites
   show() {
     window.alert(this.messageValue)
   }

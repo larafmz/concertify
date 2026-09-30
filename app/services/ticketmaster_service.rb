@@ -4,7 +4,7 @@ require "json"
 
 class TicketmasterService
 
-    extend TicketmasterEventHelper
+    extend TicketmasterHelper
 
     API_KEY = Rails.application.credentials.ticketmaster[:api_key]
 

@@ -1,5 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
+// modals
+
 export default class extends Controller {
   connect() {
     this.closeOnCache = this.closeOnCache.bind(this)

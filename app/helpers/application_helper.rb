@@ -1,42 +1,42 @@
 module ApplicationHelper
 
-    def date_in_numbers(date)
-      date.strftime("%d/%m/%y")
-    end
-
-    def formatted_event_date(date, start_time)
-      str = I18n.t("date.day_names")[date.wday]
-      str += " #{short_date_with_year(date)}"
-      str += " • #{formatted_time(start_time)}" if start_time
-      str
-    end
-
-    def wday_time(date, start_time)
-      str = I18n.t("date.day_names")[date.wday]
-      str += " • #{formatted_time(start_time)}" if start_time
-      str
-    end
-
-    def short_date(date)
-      date.year == Date.current.year ? I18n.l(date, format: "%-d %b") : I18n.l(date, format: "%-d %b %Y")
-    end
-
-    def formatted_time(time)
-      if I18n.locale == :es
-        time.strftime("%H:%M")
-      else
-        time.strftime("%I:%M %p")
-      end
+  def date_in_numbers(date)
+    date.strftime("%d/%m/%y")
   end
 
-    def short_date_with_year(date)
-      I18n.l(date, format: "%-d %b %Y")
-    end
+  def formatted_event_date(date, start_time)
+    str = I18n.t("date.day_names")[date.wday]
+    str += " #{short_date_with_year(date)}"
+    str += " • #{formatted_time(start_time)}" if start_time
+    str
+  end
 
-    def best_quality_image(images)
-      return nil if images.nil? || images.empty?
-      images.find { |img| img["width"] > 1000 } || images.find { |img| img["width"] > 500 } || images.first
+  def wday_time(date, start_time)
+    str = I18n.t("date.day_names")[date.wday]
+    str += " • #{formatted_time(start_time)}" if start_time
+    str
+  end
+
+  def short_date(date)
+    date.year == Date.current.year ? I18n.l(date, format: "%-d %b") : I18n.l(date, format: "%-d %b %Y")
+  end
+
+  def formatted_time(time)
+    if I18n.locale == :es
+      time.strftime("%H:%M")
+    else
+      time.strftime("%I:%M %p")
     end
+  end 
+
+  def short_date_with_year(date)
+    I18n.l(date, format: "%-d %b %Y")
+  end
+
+  def best_quality_image(images)
+    return nil if images.nil? || images.empty?
+    images.find { |img| img["width"] > 1000 } || images.find { |img| img["width"] > 500 } || images.first
+  end
 
   def time_status(event_date, event_time = nil)
     today = Date.today

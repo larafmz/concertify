@@ -2,7 +2,7 @@ class Request < ApplicationRecord
 
   ##CONFIGURATIONS
 
-    include TicketmasterEventHelper
+    include TicketmasterHelper
 
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 

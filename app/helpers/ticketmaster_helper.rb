@@ -1,4 +1,4 @@
-module TicketmasterEventHelper
+module TicketmasterHelper
 
     include ApplicationHelper
 

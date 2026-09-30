@@ -1,4 +1,4 @@
-module BroadcastHelper
+module BroadcastService
 
     def self.add_message_to_chat(chat_entry, user)
         chat = chat_entry.chat

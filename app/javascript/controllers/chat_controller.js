@@ -4,6 +4,8 @@ export default class extends Controller {
 
   static values = { chatId: Number }
 
+  // when a user is connected to a chat and recieves or sends a message, page scroll to bottom and sets chat as read
+
   connect() {
     this.scrollToBottom()
 

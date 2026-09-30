@@ -2,7 +2,7 @@
 - chat_name = chat.name(current_user).downcase
 .sidebar_chat{id: "chat_#{chat.id}", data: { chat_filter_target: "chat", chat_name: chat_name }}
     = link_to chat_path(chat), data: { turbo_frame: "chat_content", turbo_prefetch: false }, class: "diary-link", id: "chat_link_#{chat.id}" do 
-        - last_message = chat.chat_entries.order(created_at: :desc).first
+        - last_message = chat.chat_entries.user_messages.order(created_at: :desc).first
         .artist-info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
             .link_icon{style: "height: 50px; width: 50px;"}
                 -  photo = chat.photo(current_user)

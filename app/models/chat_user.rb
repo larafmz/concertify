@@ -34,8 +34,8 @@ class ChatUser < ApplicationRecord
 
     def broadcast_change
       if read_at_before_last_save.nil? && read_at.present? || read_at_before_last_save.present? && read_at.nil?
-        BroadcastHelper.update_messages_header(user)
-        BroadcastHelper.replace_chat_in_sidebar(chat, user)
+        BroadcastService.update_messages_header(user)
+        BroadcastService.replace_chat_in_sidebar(chat, user)
       end
     end
     

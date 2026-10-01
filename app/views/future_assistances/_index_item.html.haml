@@ -1,8 +1,9 @@
+- event = future_assistance.event
+- event_date = event.date
+- event_date_status = event.past_or_future
+
 .future_assistance_item{id: "future-assistance-#{future_assistance.id}"}
 
-    - event = future_assistance.event
-    - event_date = event.date
-    - event_date_status = event.past_or_future
 
     - if event_date_status == "future" 
         .event_tag
@@ -11,65 +12,68 @@
             - else
                 = t("messages.in_x_days", count: event.days_left)
 
-    .item-register
-        .date-event
-            = I18n.l(event_date, format: "%B")[0,3].upcase
-            %br
-            %span{ style: "font-size: 20px;" }= event_date.day
-            %br
-            - if event_date.year != Date.today.year
-                = event_date.year
-
-        = link_to event_path(event) do 
-            .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
-                = image_tag event.get_photo if event.get_photo&.attached?
-
-        %div
-
-            - event.artists.each_with_index  do |artist, index|
-                = link_to artist_path(artist) do 
-                    %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
-                - if index < event.artists.size - 1
-                    ,
-            %br
+    .future_assistance_user
+        %div{style: "display: flex; align-items: center; gap: 10px;"}
+            .date-event
+                = I18n.l(event_date, format: "%B")[0,3].upcase
+                %br
+                %span{ style: "font-size: 20px;" }= event_date.day
+                %br
+                - if event_date.year != Date.today.year
+                    = event_date.year
 
             = link_to event_path(event) do 
-                %span{ style: "font-size: 18px;", class: "soft-color; " } #{event.tour_name}
-            
-            - ub = event.ubication&.complete_name || t("not_found")
-            .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
-                %span{style: "display:flex; align-items:center; gap:5px;"}
-                    = image_tag("icon_ubication_softest_color.png", class: "icon-img")
-                    = ub 
-                    = image_tag("icon_date_softest_color.png", class: "icon-img")
-                    = short_date(event.date)
+                .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid " }
+                    = image_tag event.get_photo if event.get_photo&.attached?
+
+            %div
+
+                - event.artists.each_with_index  do |artist, index|
+                    = link_to artist_path(artist) do 
+                        %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
+                    - if index < event.artists.size - 1
+                        ,
+                %br
+
+                = link_to event_path(event) do 
+                    %span{ style: "font-size: 18px;", class: "soft-color; " } #{event.tour_name}
                 
-            %div{style: "display:flex; align-items:center; gap:5px;"}
-                - if future_assistance.event_seat_string 
+                - ub = event.ubication&.complete_name || t("not_found")
+                .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
+                    %span{style: "display:flex; align-items:center; gap:5px;"}
+                        = image_tag("icon_ubication_softest_color.png", class: "icon-img")
+                        = ub 
+                        = image_tag("icon_date_softest_color.png", class: "icon-img")
+                        = short_date(event.date)
+                    
+                %div{style: "display:flex; align-items:center; gap:5px;"}
+                    - if future_assistance.event_seat_string 
+                        .bubble
+                            %span= "🎟️ #{future_assistance.event_seat_string}"
+                            - if !future_assistance.event_seat_details&.empty?
+                                %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
+                    - if future_assistance.from && !future_assistance.from.empty?
+                        .bubble
+                            %span{style: "color: rgb(230, 230, 230); display:flex; align-items:center; gap: 5px"}
+                                = image_tag("icon_ubication_softest_color.png", class: "icon-img")
+                                = FutureAssistance.human_attribute_name(:from)
+                                = future_assistance.from
+                                
+
+            %div{style: "margin-left: auto; align-self: stretch; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; padding: 5px 5px 5px 15px;"}
+                - if future_assistance.company_string && future_assistance.company != 0
                     .bubble
-                        %span= "🎟️ #{future_assistance.event_seat_string}"
-                        - if !future_assistance.event_seat_details&.empty?
-                            %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
-                - if future_assistance.from && !future_assistance.from.empty?
-                    .bubble
-                        %span{style: "color: rgb(230, 230, 230); display:flex; align-items:center; gap: 5px"}
-                            = image_tag("icon_ubication_softest_color.png", class: "icon-img")
-                            = FutureAssistance.human_attribute_name(:from)
-                            = future_assistance.from
-                            
-        %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
-            
-            - if future_assistance.company_string && future_assistance.company!= 0
-                .bubble
-                    #{future_assistance.company_string}
-        
-            - if future_assistance.user_id == current_user&.id
-                - if event_date_status == "future"
-                    = link_to "✎", edit_future_assistance_path(future_assistance), data: { turbo_frame: "modal" }, id: "edit_future_assistance_#{future_assistance.id}"
-                    = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, id: "destroy_future_assistance_#{future_assistance.id}"
-            
-        - if event_date_status != "future"
-            %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%;"}
-                = link_to "#{t("verbs.log")} #{Event.singular}", new_register_path(event_id: event.id), class: "btn-custom event-color", data: { turbo_frame: "modal" }
-                = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }
-        
+                        #{future_assistance.company_string}
+
+                - if future_assistance.user_id == current_user&.id
+                    - if event_date_status == "future"
+                        %div{style: "display: flex; gap: 5px;"}
+                            = link_to "✎", edit_future_assistance_path(future_assistance), data: { turbo_frame: "modal" }, id: "edit_future_assistance_#{future_assistance.id}", class: "future-assistance-action"
+
+                            = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, id: "destroy_future_assistance_#{future_assistance.id}", class: "future-assistance-action future-assistance-action-danger"
+
+                - if event_date_status != "future"
+                    %div{style: "display: flex; gap: 5px;"}
+                        = link_to "#{t("verbs.log")} #{Event.singular}", new_register_path(event_id: event.id), class: "btn-custom event-color", data: { turbo_frame: "modal" }
+
+                        = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "future-assistance-action future-assistance-action-danger"

@@ -97,7 +97,7 @@ class FutureAssistance < ApplicationRecord
 
   def notification_message
     days_left = self.event.days_left(actual: Date.today)
-    event_str = "<span style='font-weight: bold' > #{self.event.complete_name} </span>"
+    event_str = "<span style='font-weight: bold' > #{self.event.tour_name} </span>"
     {
         key: "upcoming_event_#{days_left}",
         event: event_str

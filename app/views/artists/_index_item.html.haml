@@ -1,0 +1,17 @@
+.artist-list-new-item
+    = link_to artist_path(artist), class: "artist-list-new-image-link" do
+        .artist-list-new-image
+            - if artist.photo.attached?
+                = image_tag artist.photo
+            - else
+                %span.artist-list-new-placeholder ♫
+
+    .artist-list-new-info
+        = link_to artist_path(artist), class: "artist-list-new-name" do
+            = artist.name
+        = link_to followers_artist_path(artist), class: "artist-list-new-followers" do
+            = artist.relations.count
+            = t("followers").downcase
+
+    .artist-list-new-actions
+        = render "artists/follow_buttoms", artist: artist

@@ -1,0 +1,395 @@
+.auth-page-background {
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px 20px;
+
+  background-image:
+    linear-gradient(
+      rgba(10, 14, 18, 0.68),
+      rgba(10, 14, 18, 0.78)
+    ),
+    url("/assets/default-event.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.auth-form-card {
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+
+  padding: 35px 40px;
+
+  background: rgba(25, 31, 38, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(64, 85, 109, 0.15);
+
+  backdrop-filter: blur(8px);
+}
+
+.auth-form-title {
+  margin: 0 0 28px 0;
+
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.auth-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.auth-form-label {
+  color: #b8c2cc;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auth-form-hint {
+  margin-left: 5px;
+  color: #7f8b97;
+  font-size: 12px;
+}
+
+.auth-form-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  height: 44px;
+  padding: 0 13px;
+
+  color: #f1f4f6;
+  background: #151b21;
+
+  border: 1px solid #3b4652;
+  border-radius: 9px;
+
+  outline: none;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-form-input:focus {
+  background: #192128;
+  border-color: #65798e;
+  box-shadow: 0 0 0 3px rgba(64, 85, 109, 0.20);
+}
+
+.auth-form-input::placeholder {
+  color: #687581;
+}
+
+.auth-form-remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 2px;
+
+  color: #aeb8c2;
+  font-size: 13px;
+}
+
+.auth-form-remember input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #7a5c82;
+  cursor: pointer;
+}
+
+.auth-form-remember label {
+  cursor: pointer;
+}
+
+.auth-form-submit {
+  width: 100%;
+  height: 44px;
+
+  margin-top: 25px;
+
+  border: 0;
+  border-radius: 9px;
+
+  color: #ffffff;
+  background: #7a5c82;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-form-submit:hover {
+  background: #8c6b95;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.auth-form-submit:active {
+  transform: translateY(0);
+}
+
+.profile-edit-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 25px 30px 35px;
+}
+
+.profile-edit-card {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 30px;
+
+  background: #1b232c;
+  border: 1px solid rgba(64, 85, 109, 0.7);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.profile-edit-title {
+  margin: 0 0 28px;
+  color: #f2f4f6;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.profile-edit-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: 25px;
+  align-items: start;
+}
+
+.profile-edit-section {
+  padding: 22px;
+
+  background: #202a34;
+  border: 1px solid rgba(64, 85, 109, 0.55);
+  border-radius: 13px;
+}
+
+.profile-edit-section-title {
+  margin: 0 0 20px;
+
+  color: #aebbc7;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.profile-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-bottom: 17px;
+}
+
+.profile-edit-field:last-child {
+  margin-bottom: 0;
+}
+
+.profile-edit-label {
+  color: #b8c2cc;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.profile-edit-input {
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+
+  padding: 9px 12px;
+
+  color: #edf1f4;
+  background: #151c23;
+
+  border: 1px solid #3b4855;
+  border-radius: 8px;
+
+  outline: none;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.profile-edit-input:focus {
+  background: #19222a;
+  border-color: #6a7e92;
+  box-shadow: 0 0 0 3px rgba(64, 85, 109, 0.18);
+}
+
+.profile-edit-select {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.profile-edit-location {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 15px;
+}
+
+.profile-edit-description {
+  margin-top: 3px;
+}
+
+.profile-edit-textarea {
+  min-height: 115px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.profile-edit-counter {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: -12px;
+
+  color: #7f8b97;
+  font-size: 11px;
+}
+
+.profile-edit-side {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.profile-edit-avatar-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-edit-file {
+  padding: 7px;
+}
+
+.profile-edit-avatar {
+  width: 100px;
+  height: 100px;
+
+  overflow: hidden;
+
+  border: 2px solid #40556d;
+  border-radius: 50%;
+
+  background: #151c23;
+}
+
+.profile-edit-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  object-fit: cover;
+}
+
+.profile-edit-hint {
+  color: #7f8b97;
+  font-size: 11px;
+}
+
+.profile-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 25px;
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(64, 85, 109, 0.4);
+}
+
+.profile-edit-save {
+  min-width: 110px;
+  height: 42px;
+
+  padding: 0 20px;
+
+  border: 0;
+  border-radius: 8px;
+
+  color: #fff;
+  background: #7a5c82;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.profile-edit-save:hover {
+  background: #8c6b95;
+  transform: translateY(-1px);
+}
+
+.profile-edit-danger {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 25px;
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(180, 70, 70, 0.25);
+}
+
+.profile-edit-delete {
+  padding: 8px 14px;
+
+  border: 1px solid rgba(210, 80, 80, 0.35);
+  border-radius: 7px;
+
+  color: #d88989;
+  background: rgba(150, 50, 50, 0.10);
+
+  font-size: 12px;
+
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.profile-edit-delete:hover {
+  color: #ffaaaa;
+  background: rgba(180, 60, 60, 0.18);
+}

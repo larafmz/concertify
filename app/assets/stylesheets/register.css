@@ -1,0 +1,694 @@
+.register-show {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 20px 15px 40px;
+  box-sizing: border-box;
+}
+
+.register-show-header {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.register-show-image-link {
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.register-show-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.3s ease;
+}
+
+.register-show-image-link:hover
+.register-show-image img {
+  transform: scale(1.04);
+}
+
+.register-show-info {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.register-show-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-width: 0;
+}
+
+.register-show-user {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  min-width: 0;
+
+  color: #dce4eb !important;
+  font-size: 14px;
+}
+
+.register-show-avatar-link {
+  text-decoration: none;
+}
+
+.register-show-avatar {
+  width: 28px;
+  height: 28px;
+
+  overflow: hidden;
+  border-radius: 50%;
+
+  background: #40556d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.register-show-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.register-show-logged-by {
+  color: #bfcad5 !important;
+}
+
+.register-show-username {
+  color: #f0f3f6 !important;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.register-show-username:hover {
+  color: #ffffff !important;
+}
+
+.dropdown {
+  flex-shrink: 0;
+}
+
+.dropdown .dropdown-toggle {
+  background: #40556d !important;
+  border: none !important;
+
+  color: #ffffff !important;
+
+  font-size: 13px;
+
+  padding: 6px 11px;
+
+  border-radius: 7px;
+}
+
+.dropdown .dropdown-toggle:hover {
+  background: #506980 !important;
+}
+
+.register-show-separator {
+  width: 100%;
+  height: 1px;
+
+  margin: 10px 0 18px;
+
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.register-show-event-link {
+  display: inline;
+  width: auto;
+  color: inherit;
+  text-decoration: none;
+}
+
+.register-show-event-link:hover {
+  text-decoration: underline;
+}
+
+.register-show-event-name {
+  color: #f1f4f7 !important;
+
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  transition: color 0.2s ease;
+}
+
+.register-show-event-name {
+  color: #ffffff !important;
+}
+
+.register-show-genre {
+  display: inline-block;
+
+  margin-top: 4px;
+
+  color: #b8c3ce !important;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.register-show-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 16px;
+  margin-bottom: 10px;
+
+  color: #d0d9e2 !important;
+}
+
+.register-show-detail {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  max-width: 100%;
+  min-width: 0;
+
+  color: #d0d9e2 !important;
+
+  font-size: 14px;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.register-show-detail img {
+  width: 17px;
+  height: 17px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+
+  opacity: 1;
+}
+
+.register-show-rating {
+  display: inline-flex;
+  align-items: center;
+
+  margin-top: 4px;
+
+  color: #ffb45c !important;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.register-show-review {
+  width: 100%;
+  max-width: 800px;
+
+  box-sizing: border-box;
+
+  margin: 18px 0;
+
+  padding: 15px 17px;
+
+  background: rgba(64, 85, 109, 0.16);
+
+  border-left: 3px solid #40556d;
+
+  border-radius: 0 9px 9px 0;
+
+  color: #e0e6ec !important;
+
+  font-size: 15px;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  white-space: normal;
+}
+
+.register-show-review p {
+  margin: 0 0 10px;
+
+  color: #e0e6ec !important;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.register-show-review p:last-child {
+  margin-bottom: 0;
+}
+
+.register-show-photos {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  width: 100%;
+
+  margin-top: 20px;
+}
+
+.register-photo-link {
+  display: block;
+
+  text-decoration: none;
+
+  max-width: 100%;
+}
+
+.register-photo {
+  width: 180px;
+  height: 140px;
+
+  overflow: hidden;
+
+  border-radius: 9px;
+
+  background: #252b34;
+
+  border: 1px solid rgba(64, 85, 109, 0.65);
+}
+
+.register-photo img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.3s ease;
+}
+
+.register-photo-link:hover
+.register-photo img {
+  transform: scale(1.04);
+}
+
+.register-show-photo-link {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  font-size: 0;
+  vertical-align: top;
+}
+
+.register-show-photo-link .register-photo {
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: 0;
+  padding: 0;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.register-show-footer {
+  width: 100%;
+
+  margin: 20px 0 40px;
+
+  color: #d0d9e2 !important;
+}
+
+.register-show-footer a {
+  color: #d5dee7 !important;
+}
+
+.register-show-footer a:hover {
+  color: #ffffff !important;
+}
+
+.register-show-liked {
+  width: 100%;
+
+  margin-top: 10px;
+
+  color: #cbd5de !important;
+  font-size: 14px;
+}
+
+.register-show-liked-user {
+  color: #f0f3f6 !important;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.register-show-liked-user:hover {
+  color: #ffffff !important;
+}
+
+.register-show-liked-separator {
+  width: 100%;
+  height: 1px;
+
+  margin: 10px 0;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.register-show-liked-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.register-show-liked-item {
+  display: block;
+
+  text-decoration: none;
+}
+
+.register-show-liked-avatar {
+  width: 34px;
+  height: 34px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #40556d;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.register-show-liked-avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.register-show,
+.register-show-header,
+.register-show-info,
+.register-show-user,
+.register-show-review,
+.register-show-footer,
+.register-show-liked {
+  min-width: 0;
+  max-width: 100%;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 750px) {
+
+  .register-show {
+    padding: 20px 15px 35px;
+  }
+
+  .register-show-header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+
+    max-width: none;
+  }
+
+  .register-show-image {
+    width: 100%;
+    height: 220px;
+  }
+
+  .register-show-top {
+    align-items: flex-start;
+  }
+
+  .register-show-event-name {
+    font-size: 24px;
+  }
+
+  .register-show-review {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .register-show {
+    padding: 15px 12px 30px;
+  }
+
+  .register-show-image {
+    height: 180px;
+  }
+
+  .register-show-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown .dropdown-toggle {
+    width: 100%;
+  }
+
+  .register-show-event-name {
+    font-size: 21px;
+  }
+
+  .register-show-genre {
+    font-size: 15px;
+  }
+
+  .register-show-details {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .register-photo {
+    width: calc(50vw - 25px);
+    height: calc(50vw - 25px);
+  }
+}
+
+.register-form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  color: #dce3ea;
+}
+
+/* EVENTO */
+
+.register-form-event {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.register-form-event-image {
+  width: 150px;
+  height: 90px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(64, 85, 109, 0.8);
+  border-radius: 10px;
+
+  background: #202831;
+}
+
+.register-form-event-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.register-form-event-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.register-form-event-name {
+  color: #dce3ea;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+
+  overflow-wrap: anywhere;
+}
+
+.register-form-event-details {
+  color: #8f9ba7;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+/* SEPARADOR */
+
+.register-form-divider {
+  width: 100%;
+  height: 1px;
+
+  background: rgba(64, 85, 109, 0.55);
+}
+
+.register-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.register-form-label {
+  color: #aebbc7;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.register-form-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 10px 12px;
+  color: #edf1f4;
+  background: #151c23;
+  border: 1px solid #3b4855;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-form-input:focus {
+  background: #19222a;
+  border-color: #65798e;
+
+  box-shadow: 0 0 0 3px rgba(64, 85, 109, 0.18);
+}
+
+.register-form-textarea {
+  min-height: 105px;
+
+  padding: 10px 12px;
+
+  resize: vertical;
+
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.register-form-textarea::placeholder {
+  color: #687581;
+}
+
+.register-form-counter {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: -3px;
+
+  color: #788592;
+
+  font-size: 11px;
+}
+
+.register-form-file {
+  min-height: 42px;
+
+  padding: 7px 9px;
+
+  font-size: 13px;
+}
+
+.register-form-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 2px;
+}
+
+.register-form-submit {
+  min-width: 100px;
+  height: 40px;
+
+  padding: 0 18px;
+
+  border: 0;
+  border-radius: 8px;
+
+  color: #ffffff !important;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.register-form-submit:hover {
+  background: #536b86 !important;
+  transform: translateY(-1px);
+
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25);
+}

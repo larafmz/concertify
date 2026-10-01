@@ -1,73 +1,103 @@
 - @event = Event.find(register.event_id)
 - @artist = @event.artists.first
+
 .register-show
-    = link_to event_path(@event) do 
-        .rectangle_icon{ style: "border: 1px solid " }
-            = image_tag @event.get_photo if @event.get_photo&.attached?
-        
-    .register-info
-        .title_section
-            .flex-left
-                = link_to user_path(@user), class: "hover-border-icon" do
-                    .link_icon{style: "width: 25px; height: 25px;"}
-                        = image_tag  @user.icon if @user.icon.attached?
-                = t("registers.logged_by")
-                = link_to user_path(@user), class: "undecored_link" do 
-                    %span{style: "font-weight: 700"}=@user.username.upcase
-            - if can?(:update, register)
-                .dropdown
-                    %button.btn.btn-secondary.dropdown-toggle{
-                        type: "button",
-                        "data-bs-toggle" => "dropdown",
-                        "aria-expanded" => "false",
-                        style: "background: #{orange_color};"
-                    }
-                        =t("verbs.edit")
-                    %ul.dropdown-menu
-                        %li
-                            = link_to t("crud.edit", model: Register.singular), edit_register_path(register), data: { turbo_frame: "modal" }, class: "dropdown-item"
-                        %li
-                            = button_to t("crud.destroy", model: Register.singular), interactuable_path(register), method: :delete, form: { data: { turbo: false, confirm: t("registers.destroy_message") } }, class: "dropdown-item"
+  .register-show-header
+    = link_to event_path(@event), class: "register-show-image-link" do
+      .register-show-image
+        - if @event.get_photo&.attached?
+          = image_tag @event.get_photo
 
-        .separator{style: "margin: 10px 0;"}
+    .register-show-info
+      .register-show-top
+        .register-show-user
+          = link_to user_path(@user), class: "register-show-avatar-link" do
+            .register-show-avatar
+              - if @user.icon.attached?
+                = image_tag @user.icon
 
-        = link_to event_path(@event) do 
-            %span{ style: "font-size: 28px; font-weight: 600;" }= @event.tour_name
-            
-        - if @artist && @artist.genre && @artist.genre.name!="Undefined"   
-            %span{ style: "font-size: 18px; font-weight: 200;" }=" -  #{@artist.genre.translation}"
+          %span.register-show-logged-by
+            = t("registers.logged_by")
 
-        .softest-color{style: "font-size: 15px;" }
-            %span{style: "display:flex; align-items:center; gap:5px;"}
-                = image_tag("icon_ubication_softest_color.png", class: "icon-img")
-                = @event.ubication&.complete_name
-                = image_tag("icon_date_softest_color.png", class: "icon-img")
-                = short_date(@event.date)
+          = link_to user_path(@user), class: "register-show-username" do
+            = @user.username.upcase
 
-        %div{style: "color: orange"}= register.get_rating
-        
-        - unless register.review.blank?
-            %div{ style: "word-break: break-word; overflow-wrap: break-word; padding: 15px; margin: 10px 0; background: rgb(53, 53, 70);" }
-                = register.review
+        - if can?(:update, register)
+          .dropdown
+            %button.btn.btn-secondary.dropdown-toggle{
+              type: "button",
+              "data-bs-toggle" => "dropdown",
+              "aria-expanded" => "false"
+            }
+              = t("verbs.edit")
 
-        - if register.photos.attached?
-            .register-photos            
-                - register.photos.each do |photo|
-                    = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do
-                        .register-photo
-                            = image_tag photo
+            %ul.dropdown-menu
+              %li
+                = link_to t("crud.edit", model: Register.singular),
+                  edit_register_path(register),
+                  data: { turbo_frame: "modal" },
+                  class: "dropdown-item"
 
-        %div{style: "margin: 20px 0px 40px 0px;"}
-            = render "interactuables/footer", interactuable: register
+              %li
+                = button_to t("crud.destroy", model: Register.singular),
+                  interactuable_path(register),
+                  method: :delete,
+                  form: { data: { turbo: false, confirm: t("registers.destroy_message") } },
+                  class: "dropdown-item"
 
-        - unless @liked_by_creator.empty?
-            .soft-color{style: "margin: 10px 0;"}
-                = link_to user_path(@user) do 
-                    %span{style: "font-weight: 700"}=@user.username.upcase
-                =t("registers.liked_these_reviews")
-                .separator
-                - @liked_by_creator.each do |register_liked|
-                    = link_to comments_interactuable_path(register_liked), class: "hover-border-icon" do
-                        .link_icon
-                            = image_tag  register_liked.user.icon if register_liked.user.icon.attached?
+      .register-show-separator
 
+      %span.register-show-event-name
+        = link_to event_path(@event), class: "register-show-event-link" do
+          = @event.tour_name
+
+      - if @artist && @artist.genre && @artist.genre.name != "Undefined"
+        %span.register-show-genre
+          = " - #{@artist.genre.translation}"
+
+      .register-show-details
+        %span.register-show-detail
+          = image_tag("icon_ubication_softest_color.png")
+          %span
+            = @event.ubication&.complete_name || t("not_found")
+
+        %span.register-show-detail
+          = image_tag("icon_date_softest_color.png")
+          %span
+            = short_date(@event.date)
+
+      - if register.rating
+        .register-show-rating
+          = register.get_rating
+
+      - unless register.review.blank?
+        .register-show-review
+          = simple_format(register.review)
+
+      - if register.photos.attached?
+        .register-show-photos
+          - register.photos.each do |photo|
+            = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener", class: "register-show-photo-link" do
+              .register-photo
+                = image_tag photo
+
+      .register-show-footer
+        = render "interactuables/footer", interactuable: register
+
+      - unless @liked_by_creator.empty?
+        .register-show-liked
+          = link_to user_path(@user), class: "register-show-liked-user" do
+            = @user.username.upcase
+
+          %span
+            = t("registers.liked_these_reviews")
+
+          .register-show-liked-separator
+
+          .register-show-liked-list
+            - @liked_by_creator.each do |register_liked|
+              = link_to comments_interactuable_path(register_liked),
+                class: "register-show-liked-item" do
+                .register-show-liked-avatar
+                  - if register_liked.user.icon.attached?
+                    = image_tag register_liked.user.icon

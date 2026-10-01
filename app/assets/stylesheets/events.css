@@ -42,32 +42,6 @@
   border: 2px dashed #40556d;
 }
 
-.message {
-  padding: 15px;
-  margin-bottom: 15px;
-  background: #2f7185;  
-  color: white;
-  border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
-  border: 2px dashed #50a5be;
-  font-size: 15px;
-  font-weight: 600; 
-}
-
-.red-message {
-  height: 35px;
-  display:flex;
-  align-items: center;
-  padding: 10px;
-  margin-right: 15px;
-  background: #bb3a3a;  
-  color: white;
-  border-radius: 15px;
-  border: 2px dashed #ff9696;
-  font-size: 15px;
-  font-weight: 600; 
-}
-
 .event_tag {
   position: relative;
   left: 15px;

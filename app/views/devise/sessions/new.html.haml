@@ -1,21 +1,21 @@
-.widget-content
-  %h4{style: "color: white;"}= t("user_account.login")
+.auth-page-background
+  .auth-form-card
+    %h4.auth-form-title= t("user_account.login")
 
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .section-box{style: "display: flex; flex-direction: column; gap: 15px;"}
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .auth-form-fields
 
-      .form-field
-        = f.label :email, User.human_attribute_name(:email), class: "soft-color label-custom"
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom", id: "email_id"
+        .auth-form-field
+          = f.label :email, User.human_attribute_name(:email), class: "auth-form-label"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-form-input", id: "email_id"
 
-      .form-field
-        = f.label :password, User.human_attribute_name(:password), class: "soft-color label-custom"
-        = f.password_field :password, autocomplete: "current-password", class: "field-custom", id: "password_id"
+        .auth-form-field
+          = f.label :password, User.human_attribute_name(:password), class: "auth-form-label"
+          = f.password_field :password, autocomplete: "current-password", class: "auth-form-input", id: "password_id"
 
-      .form-field
         - if devise_mapping.rememberable?
-          = f.check_box :remember_me
-          = f.label :remember_me, User.human_attribute_name(:remember_me), class: "soft-color label-custom"
+          .auth-form-remember
+            = f.check_box :remember_me
+            = f.label :remember_me, User.human_attribute_name(:remember_me)
 
-    = f.submit t("user_account.login"), class: "field-custom orange-color"
-
+      = f.submit t("user_account.login"), class: "auth-form-submit"

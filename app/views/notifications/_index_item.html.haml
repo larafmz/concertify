@@ -1,26 +1,32 @@
-- background = notification.read? ? "inherit" : "#30363d"
-.notification{style: "background: #{background}; display: grid; grid-template-columns: auto 1fr auto auto; gap: 25px; align-items: center; border-bottom: 1px solid #40556d; padding: 5px 40px 5px 40px; "}
-    - user = notification.user
-    %div
-        - if user
-            = link_to user_path(user), class: "hover-border-icon" do
-                .link_icon
-                    = image_tag user.icon if user.icon.attached?
-    = button_to read_and_redirect_notification_path(notification), class: "notification-button", method: :post, form: { data: { turbo: false } } do
-        %div
-            %div{style: "font-size: 15px ; color: white;"}
-                = notification.message.html_safe
-            %div.softest-color
-                = custom_time_ago_in_words(notification.created_at)
-        %div
-            - icon = notification.icon
-            - if icon
-                .link_icon{style:  "width: 45px; height: 45px; border-radius: 20%; "}
-                    = image_tag icon
-        
-    %div
-        - if notification.for_follow?
-            = render "users/relation_buttons", user: user
+- background = notification.read? ? "transparent" : "#30363d"
+- user = notification.user
 
-    - unless notification.read?
-        = link_to "👁", mark_as_read_notification_path(notification), data: { turbo_method: :post }
+.notification{id: "notification-#{notification.id}", style: "background: #{background};"}
+
+  .notification-user
+    - if user
+      = link_to user_path(user), class: "notification-user-link" do
+        .notification-avatar
+          - if user.icon.attached?
+            = image_tag user.icon
+
+  = button_to read_and_redirect_notification_path(notification), class: "notification-main", method: :post, form: { data: { turbo: false } } do
+
+    .notification-content
+      .notification-message
+        = notification.message.html_safe
+
+      .notification-time
+        = custom_time_ago_in_words(notification.created_at)
+
+    - icon = notification.icon
+    - if icon
+      .notification-icon
+        = image_tag icon
+
+  - if notification.for_follow?
+    .notification-actions
+      = render "users/relation_buttons", user: user
+
+  - unless notification.read?
+    = link_to "👁", mark_as_read_notification_path(notification), data: { turbo_method: :post }, class: "notification-read-button"

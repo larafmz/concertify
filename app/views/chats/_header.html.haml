@@ -1,17 +1,17 @@
 %div{style: "display: grid; grid-template-columns: 2fr 1fr auto; background: #1f252b; color: white"}
     - if user
         = link_to user_path(user), data: { turbo_frame: "_top" } do 
-            .artist-info{style: "gap: 15px; margin: 5px;"}
+            .info{style: "gap: 15px; margin: 5px;"}
                 .link_icon{style: "height: 50px; width: 50px;"}
                     = image_tag user.icon if user.icon.attached?
-                .artist-name 
+                .name 
                     %div{style: "margin-bottom:5px; font-size:15px;"}= user.username
     - elsif event
         = link_to event_path(event), data: { turbo_frame: "_top" } do 
-            .artist-info{style: "gap: 15px; margin: 5px;"}
+            .info{style: "gap: 15px; margin: 5px;"}
                 .link_icon{style: "height: 50px; width: 50px;"}
                     = image_tag event.get_photo if event.get_photo&.attached?
-                .artist-name 
+                .name 
                     %div{style: "font-size:15px;"}= event.tour_name
                     .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
                         %div{style: "display:flex; align-items:center; gap:10px;"}
@@ -41,5 +41,5 @@
                             = button_to exit_title, exit_chat_path(chat, user_id: current_user.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
 
     - else
-        .artist-info{style: "gap: 15px; margin: 5px;"}= "NOT FOUND"       
+        .info{style: "gap: 15px; margin: 5px;"}= "NOT FOUND"       
 .separator{style: "padding:0px;"}

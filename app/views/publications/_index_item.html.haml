@@ -1,68 +1,60 @@
 - feed = publication
 - publication = publication[:publication] if publication[:publication].present?
-%div{id: "publication-#{publication.id}"}
 
-    - if feed[:repost]
-        .soft-color{style: "margin-left: 15px; font-size: 15px;"}
-            - if feed[:repost].user.id == current_user.id
-                🗘 
-                = t("verbs.you_reposted")
-                = "..."
-            - else
-                🗘 
-                = feed[:repost].user.username
-                = t("verbs.reposted").downcase
-                = "..."
+.publication-card{id: "publication-#{publication.id}"}
 
-    .publication-grid{style: "position: relative; z-index: 1;"}
+  - if feed[:repost]
+    .publication-repost
+      %span.publication-repost-icon ↻
+      - if feed[:repost].user.id == current_user.id
+        %span= t("verbs.you_reposted")
+      - else
+        %span= "#{feed[:repost].user.username} #{t("verbs.reposted").downcase}"
 
-        = link_to user_path(publication.user), class: "hover-border-icon", style: "width: fit-content;" do
-            .link_icon
-                = image_tag publication.user.icon if publication.user.icon.attached?
+  .publication-main
 
+    .publication-header
 
-        %div{style: "margin-left: 15px;"}
-            %div{style: "font-size: 15px; color: #dee5eb"}
-                = link_to user_path(publication.user) do 
-                    = publication.user.username
-                - if publication.artist
-                    = link_to publications_artist_path(publication.artist) do 
-                        .adapted-bubble.artist-color
-                            =publication.artist.name
-                - if publication.event
-                    = link_to publications_event_path(publication.event) do 
-                        .adapted-bubble.event-color
-                            =publication.event.tour_name               
-                %span.softest-color
-                    = custom_time_ago_in_words(publication.created_at)
+      = link_to user_path(publication.user), class: "publication-avatar-link" do
+        .publication-avatar
+          - if publication.user.icon.attached?
+            = image_tag publication.user.icon
 
-            = link_to comments_interactuable_path(publication), class: "publication-link" do
-                %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}
-                    = simple_format(publication.review)
-        %div
-            - if can?(:destroy, publication)
-                .dropdown
-                    %button{
-                        "data-bs-toggle" => "dropdown",
-                        style: "background: none; border:0px; color: white;"
-                    }
-                        ⁝
-                    %ul.dropdown-menu
-                        %li
-                            - if destroy_redirect
-                                = button_to t("verbs.destroy"), publication_path(publication), method: :delete,  data: { turbo_confirm: t("registers.destroy_message"), turbo: false}, class: "dropdown-item", id: "destroy_publication_#{publication.id}"
-                            - else
-                                = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item", id: "destroy_publication_#{publication.id}"
-    
-    %div{style: "margin:0px 0px 10px 80px;"}
-        - if publication.photos.attached?
-            .publication-photos            
-                - publication.photos.each do |photo|
-                    = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener" do
-                        .publication-photo
-                            = image_tag photo
+      .publication-meta
+        .publication-user-line
+          = link_to user_path(publication.user), class: "publication-username" do
+            = publication.user.username
 
-    %div{style: "margin:0px 0px 20px 80px;"}
-        = render "interactuables/footer", interactuable: publication
+          - if publication.artist
+            = link_to publications_artist_path(publication.artist), class: "publication-tag publication-tag-artist artist-color" do
+              = publication.artist.name
 
-.separator
+          - if publication.event
+            = link_to publications_event_path(publication.event), class: "publication-tag publication-tag-event event-color" do
+              = publication.event.tour_name
+
+        .publication-time= custom_time_ago_in_words(publication.created_at)
+
+      - if can?(:destroy, publication)
+        .dropdown
+          %button.dropdown-button{type: "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"} ⁝
+          %ul.dropdown-menu
+            %li
+              - if destroy_redirect
+                = button_to t("verbs.destroy"), publication_path(publication), method: :delete, data: { turbo_confirm: t("registers.destroy_message"), turbo: false }, class: "dropdown-item", id: "destroy_publication_#{publication.id}"
+              - else
+                = link_to t("verbs.destroy"), publication_path(publication), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "dropdown-item", id: "destroy_publication_#{publication.id}"
+
+    = link_to comments_interactuable_path(publication), class: "publication-content-link" do
+      .publication-text
+        = simple_format(publication.review)
+
+    - if publication.photos.attached?
+      .publication-photos
+        - publication.photos.each do |photo|
+          = link_to rails_blob_path(photo, disposition: "inline"), target: "_blank", rel: "noopener", class: "publication-photo-link" do
+            .publication-photo
+              = image_tag photo
+
+    .publication-footer
+      = render "interactuables/footer", interactuable: publication

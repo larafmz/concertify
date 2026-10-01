@@ -1,61 +1,67 @@
-= turbo_frame_tag "modal" do
-  = tag.dialog class: "custom_modal", data: { controller: "dialog" } do
+= turbo_frame_tag "modal" do 
+  = tag.dialog class: "custom_modal", data: { controller: "dialog" } do 
 
-    .modal_header
-      %h5= t("registers.i_assisted_to")
-      %button.modal_close{ data: { action: "dialog#close" } } ×
+    .modal_header 
+      %h5= t("registers.i_assisted_to") 
+      %button.modal_close{ data: { action: "dialog#close" } } × 
 
-    .modal_body
+    .modal_body 
       = form_with model: @register, data: { turbo: false } do |f|
-        
+         
         = hidden_field_tag :ticketmaster_id, params[:ticketmaster_id]
         = f.hidden_field :event_id, value: params[:event_id] if @register.event_id.nil?
         = f.hidden_field :user_id, value: current_user&.id
-        
-        .form-modal
 
-          .rectangle_icon
-            - if @event_api
-              = image_tag get_event_image_url(@event_api)
-            - else
-              = image_tag  @event.get_photo if @event.get_photo&.attached?
+        .register-form-layout
 
-          .form-modal-info
-
-            %span{ style: "font-size: 20px;" }
+          .register-form-event
+            .register-form-event-image
               - if @event_api
-                = get_event_name(@event_api)
+                = image_tag get_event_image_url(@event_api)
               - else
-                = @event.tour_name
+                = image_tag @event.get_photo if @event.get_photo&.attached?
 
-            %span{ style: "font-size: 13px;" }
-              - if @event_api
-                = "#{get_full_ubication(@event_api)} - #{get_event_date(@event_api).strftime("%d %B %Y")}"
-              - else
-                = "#{@event.ubication&.complete_name} - #{short_date(@event.date)}"
+            .register-form-event-info
+              .register-form-event-name
+                - if @event_api
+                  = get_event_name(@event_api)
+                - else
+                  = @event.tour_name
 
-            .separator
+              .register-form-event-details
+                - if @event_api
+                  = "#{get_full_ubication(@event_api)} - #{get_event_date(@event_api).strftime("%d %B %Y")}"
+                - else
+                  = "#{@event.ubication&.complete_name} - #{short_date(@event.date)}"
 
-            .form-columns{data: { controller: "character-counter" }}
-              %div
-                = label_tag :review, Register.human_attribute_name(:review), class: "soft-color label-custom"
-                = f.text_area :review, maxlength: 500, placeholder: t("messages.write_your_review"), id: "review_id", class: "field-custom", style: "width: 100%; height: 100px; resize: none;", data: {  character_counter_target: "input", action: "input->character-counter#update" }
-              %div
-                %br
-                %span{data: { character_counter_target: "counter" }, style: "text-align: right; font-size: 12px; color: #a4b3c4;"}
-            
-            
+          .register-form-divider
+
+          .register-form-field{data: { controller: "character-counter" }}
+            = label_tag :review, Register.human_attribute_name(:review), class: "register-form-label"
+            = f.text_area :review, maxlength: 500, placeholder: t("messages.write_your_review"), id: "review_id", class: "register-form-input register-form-textarea", data: { character_counter_target: "input", action: "input->character-counter#update" }
+            .register-form-counter
+              %span{data: { character_counter_target: "counter" }}
+
+          .register-form-field
+            = label_tag :photos, "Fotos", class: "register-form-label"
             %div{data: { controller: "max-files" }}
-              = f.file_field :photos, id: "photos_id", class: "field-custom", multiple: true, accept: "image/*", data: { controller: "max-files", max_files: Register::MAX_PHOTOS, max_files_message: t("messages.max_upload", count: Register::MAX_PHOTOS), action: "change->max-files#change" }
+              = f.file_field :photos, id: "photos_id", class: "register-form-input register-form-file", multiple: true, accept: "image/*", data: { controller: "max-files", max_files: Register::MAX_PHOTOS, max_files_message: t("messages.max_upload", count: Register::MAX_PHOTOS), action: "change->max-files#change" }
 
-            .rating
-              %div= label_tag :rating, Register.human_attribute_name(:rating), class: "soft-color label-custom"
-              %div{style: "display: flex; gap: 15px;"}
-                - (1..5).each do |i|
-                  %div
-                    = f.radio_button :rating, i, id: "rating#{i}"
-                    = f.label :"rating_#{i}" do
-                      - (1..i).each do 
-                        ★
-        %br
-        = f.submit t("verbs.save"), style: "float: right", class: "btn-custom event-color"
+          .register-form-rating
+            .register-form-label
+              = label_tag :rating, Register.human_attribute_name(:rating)
+
+            %div{style: "display: flex; gap: 15px;"}
+              %div
+                = f.radio_button :rating, "", id: "rating_none", class: "register-form-rating-none"
+                = f.label "rating_none", "None"
+              - (1..5).each do |i|
+                %div
+                  = f.radio_button :rating, i, id: "rating#{i}"
+                  = f.label :"rating_#{i}" do
+                    - (1..i).each do
+                      ★
+                      
+
+          .register-form-actions
+            = f.submit t("verbs.save"), class: "register-form-submit event-color"

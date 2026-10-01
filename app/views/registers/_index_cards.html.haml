@@ -1,33 +1,49 @@
 - if registers.empty?
-  %div{style: "padding-top:15px;"}
+  %div{style: "padding-top: 15px;"}
     = render "common/empty_list_message", model: Register
-.columns
+
+.registers-grid
   - registers.each do |register|
     - feed = register
     - register = register[:register] if register[:register].present?
 
-    .event-card{style: "display: flex; flex-direction: column; "}
-      .soft-color{style: "margin-left: 15px; font-size: 15px;"}
-        - if feed[:repost]
-          = link_to user_path(feed[:repost].user) do
-            🗘 
-            = feed[:repost].user.username
-        - else
-          %br
+    .register-card-wrapper
 
-      = link_to interactuable_path(register), class: "hover-border" do
-        .item-name.event-color{style: "width: 190px; height: 30px;", class: "soft-color"}
-          %div{style: "display: flex; align-items: center; justify-content: flex-start; gap: 8px;"}
-            .icon{style: "width: 25px; height: 25px; margin-left: 5px;"}
-              = image_tag register.user.icon, style: "width: 100%; height: 100%; object-fit: cover;" if register.user.icon.attached?
+      - if feed[:repost]
+        .register-repost
+          = link_to user_path(feed[:repost].user), class: "register-repost-link" do
+            %span.register-repost-icon 🗘
+            %span= feed[:repost].user.username
+            %span.register-repost-text= t("verbs.reposted").downcase
+
+      = link_to interactuable_path(register), class: "register-card" do
+
+        .register-card-image
+          - if register.event.get_photo.present?
+            = image_tag register.event.get_photo
+          - else
+            .register-image-placeholder
+              🎵
+
+        .register-card-body
+
+          .register-user
+            - if register.user.icon.attached?
+              = image_tag register.user.icon
+            - else
+              .register-user-placeholder
+                = register.user.username.first.upcase
+
             %span= register.user.username
-        .rectangle_icon{style: "width: 190px; height: 150px;"}
-          = image_tag register.event.get_photo if register.event.get_photo.present?
-        .item-name.event-color{style: "width: 190px;"}
-          = register.event.tour_name
-      .title_section
-        %div
-          =register.get_rating
-          - if register.review.present?
-            %span{style: "font-size:12px;"} Ξ 
-        %span{style: "font-size:12px;"}= short_date(register.created_at)
+
+          .register-event-name
+            = register.event.tour_name
+
+          .register-meta
+            %span.register-rating
+              = register.get_rating
+              - if register.review.present?
+                %span.review-symbol Ξ
+
+            %span.register-date
+              = short_date(register.created_at)

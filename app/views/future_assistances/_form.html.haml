@@ -7,47 +7,49 @@
 
     .modal_body
       = form_with model: @future_assistance, data: { turbo: false } do |f|
-        
+
         = hidden_field_tag :ticketmaster_id, params[:ticketmaster_id]
         = f.hidden_field :event_id, value: params[:event_id] if @future_assistance.event_id.nil?
         = f.hidden_field :user_id, value: current_user&.id
-        
-        .form-modal
 
-          .rectangle_icon
-            - if @event_api
-              = image_tag get_event_image_url(@event_api)
-            - else
-              = image_tag  @event.get_photo if @event.get_photo&.attached?
+        .register-form-layout
 
-          .form-modal-info
-            %span{ style: "font-size: 20px;" }
+          .register-form-event
+            .register-form-event-image
               - if @event_api
-                = get_event_name(@event_api)
+                = image_tag get_event_image_url(@event_api)
               - else
-                = @event.tour_name
+                = image_tag @event.get_photo if @event.get_photo&.attached?
 
-            %span{ style: "font-size: 13px;" }
-              - if @event_api
-                = "#{get_full_ubication(@event_api)} - #{get_event_date(@event_api).strftime("%d %B %Y")}"
-              - else
-                = "#{@event.ubication&.complete_name} - #{short_date(@event.date)}"
+            .register-form-event-info
+              .register-form-event-name
+                - if @event_api
+                  = get_event_name(@event_api)
+                - else
+                  = @event.tour_name
 
-            .separator
+              .register-form-event-details
+                - if @event_api
+                  = "#{get_full_ubication(@event_api)} - #{get_event_date(@event_api).strftime("%d %B %Y")}"
+                - else
+                  = "#{@event.ubication&.complete_name} - #{short_date(@event.date)}"
 
-            %div{data: { controller: "character-counter" }}
-              = label_tag :from, FutureAssistance.human_attribute_name(:from_question), class: "soft-color label-custom"
-              = f.text_field :from, placeholder: FutureAssistance.human_attribute_name(:from), class: "field-custom", maxlength: 50, id: "from_id"
-         
-         
-            = label_tag :event_seat, FutureAssistance.human_attribute_name(:event_seat), class: "soft-color label-custom"          
-            %span{ style: "display: grid; grid-template-columns: 1fr 3fr; gap: 10px",data: { controller: "character-counter" } }
-              = f.select :event_seat, FutureAssistance.event_seats_for_select, { prompt: t("verbs.select") }, { class: "field-custom", id: "event_seat_id" }
-              = f.text_field :event_seat_details, placeholder: FutureAssistance.human_attribute_name(:event_seat_details), class: "field-custom", maxlength: 50, id: "event_seat_details_id"
+          .register-form-divider
 
-            %div
-              = label_tag :company, FutureAssistance.human_attribute_name(:company), class: "soft-color label-custom"
-              = f.select :company, FutureAssistance.companies_for_select, {}, { class: "field-custom", id: "company_id" }
+          .future-assistance-form-field{data: { controller: "character-counter" }}
+            = label_tag :from, FutureAssistance.human_attribute_name(:from_question), class: "register-form-label"
+            = f.text_field :from, placeholder: FutureAssistance.human_attribute_name(:from), maxlength: 50, id: "from_id", class: "register-form-input"
 
-        %br
-        = f.submit t("verbs.save"), style: "float: right", class: "btn-custom event-color"
+          .future-assistance-form-field
+            = label_tag :event_seat, FutureAssistance.human_attribute_name(:event_seat), class: "register-form-label"
+
+            %div{style: "display: grid; grid-template-columns: 1fr 3fr; gap: 10px;"}
+              = f.select :event_seat, FutureAssistance.event_seats_for_select, { prompt: t("verbs.select") }, { class: "register-form-input", id: "event_seat_id" }
+              = f.text_field :event_seat_details, placeholder: FutureAssistance.human_attribute_name(:event_seat_details), maxlength: 50, id: "event_seat_details_id", class: "register-form-input"
+
+          .future-assistance-form-field
+            = label_tag :company, FutureAssistance.human_attribute_name(:company), class: "register-form-label"
+            = f.select :company, FutureAssistance.companies_for_select, { prompt: t("verbs.select") }, { class: "register-form-input", id: "company_id" }
+
+          .register-form-actions
+            = f.submit t("verbs.save"), class: "register-form-submit event-color"

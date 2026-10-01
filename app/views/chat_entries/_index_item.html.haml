@@ -7,8 +7,8 @@
         - if chat_entry.user_id == current_user.id
             %div{style: "display:flex; justify-content:flex-end;"}
                 %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #0290bb"}
-                    %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
-                    %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
+                    %div{style: "overflow-wrap:anywhere; color: white "}= chat_entry.text
+                    %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7; color: white"}= chat_entry.created_at.strftime("%H:%M")
         - else 
             %div{style: "display:flex; justify-content:start; align-items:center;"}
                 - if (!chat_entry.same_previous_user? || !chat_entry.same_previous_type?) && chat_entry.user
@@ -23,8 +23,8 @@
                         %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}
                             = chat_entry.user&.username || "NOT FOUND"
                     %div{style: "display:inline-flex; padding:10px; border-radius:15px; border:1px solid #40556d; margin:5px; background: #363f42"}
-                        %div{style: "overflow-wrap:anywhere; "}= chat_entry.text
-                        %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
+                        %div{style: "overflow-wrap:anywhere; color: white "}= chat_entry.text
+                        .soft-color{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7;"}= chat_entry.created_at.strftime("%H:%M")
     - else
         .soft-color{style: "display:flex; justify-content:center; font-size:13px;"}
             - if chat_entry.user_id == current_user.id

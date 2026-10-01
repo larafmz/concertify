@@ -49,7 +49,7 @@ class RequestTest < ApplicationSystemTestCase
             end
             click_on "Save"
             assert_current_path "/users/#{users(:prueba2).id}/requests", wait: 10
-            assert_selector ".request_item", count: 1
+            assert_selector ".request-card", count: 1
             request = Request.last
             assert_selector "#tour_name_#{request.id}", text: "Gigante Tour"
             assert_text "La Eria, Oviedo, Spain"
@@ -81,7 +81,7 @@ class RequestTest < ApplicationSystemTestCase
                     end
                     click_on "Save"
                     assert_current_path "/users/#{users(:prueba2).id}/requests", wait: 10
-                    assert_selector ".request_item", count: 1
+                    assert_selector ".request-card", count: 1
                     request = Request.last
                     assert_selector "#tour_name_#{request.id}", text: "Debí tirar más fotos"
                     assert_text "Riyadh Air Metropolitano, Madrid, Spain"
@@ -114,7 +114,7 @@ class RequestTest < ApplicationSystemTestCase
                 end
                 click_on "Save"
                 assert_current_path "/users/#{users(:prueba2).id}/requests", wait: 10
-                assert_selector ".request_item", count: 1
+                assert_selector ".request-card", count: 1
                 request = Request.last
                 assert_selector "#tour_name_#{request.id}", text: "Tour inventado"
                 assert_text "Italy"

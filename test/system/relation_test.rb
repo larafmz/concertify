@@ -177,10 +177,9 @@ class RelationTest < ApplicationSystemTestCase
                     assert_no_selector "#mark_as_favorite_#{artist.id}", wait: 10
                     assert_selector "#unmark_as_favorite_#{artist.id}"
                     visit "/users/#{users(:prueba2).id}"
-                    assert_text artist.name, wait: 10
+                    assert_selector ".favorite_artist_icon", count: 1
                     visit "/users/#{users(:prueba2).id}/artists"
                     assert_text artist.name, wait: 10
-                    assert_text "❤"
                 end
             end
         end
@@ -210,11 +209,7 @@ class RelationTest < ApplicationSystemTestCase
                     assert_selector "#mark_as_favorite_#{artist9.id}", wait: 10
                     assert_no_selector "#unmark_as_favorite_#{artist9.id}"
                     visit "/users/#{users(:prueba2).id}"
-                    assert_text artist3.name, wait: 10
-                    assert_text artist4.name
-                    assert_text artist5.name
-                    assert_text artist6.name
-                    assert_no_text artist9.name
+                    assert_selector ".favorite_artist_icon", count: 4
                 end
             end
         end

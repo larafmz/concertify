@@ -1,10 +1,21 @@
-.widget-content{style: "padding: 0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
-    - if publications.empty?
-        = render "common/empty_list_message", model: Publication
-    - else
-        %div{id: "publications", data: { pagination_target: "publications" }, style: "border: 1px solid #40556d;" }
-            - publications.each do |publication|
-                = render "publications/index_item", publication: publication, destroy_redirect: false
+.widget-content.publications-page-content{
+  style: "padding: 0px;",
+  data: {
+    controller: "pagination",
+    pagination_url_value: url_for(@pagination_path),
+    pagination_page_value: 2
+  }
+}
+  - if publications.empty?
+    = render "common/empty_list_message", model: Publication
+  - else
+    #publications.publications-list{
+      data: { pagination_target: "publications" }
+    }
+      - publications.each do |publication|
+        = render "publications/index_item",
+          publication: publication,
+          destroy_redirect: false
 
-        - unless publications.respond_to?(:next_page) && publications.next_page && @pagination_path
-            %span{class: "hidden", data: { pagination_target: "noRecords" }}
+    - unless publications.respond_to?(:next_page) && publications.next_page && @pagination_path
+      %span.hidden{ data: { pagination_target: "noRecords" } }

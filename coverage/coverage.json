@@ -8,9 +8,9 @@
       "Unit Tests"
     ],
     "project_name": "Concertify",
-    "timestamp": "2026-09-27T15:39:08.774+02:00",
+    "timestamp": "2026-10-01T19:59:56.126+02:00",
     "root": "/home/larafmz/concertify",
-    "commit": "8c8312ae8615e6fc87dea5788fa24f7bd716b7bb",
+    "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
     "primary_coverage": "line",
     "line_coverage": true,
     "branch_coverage": true,
@@ -18,19 +18,19 @@
   },
   "total": {
     "lines": {
-      "covered": 1228,
+      "covered": 1223,
       "missed": 324,
-      "omitted": 1550,
-      "total": 1552,
-      "percent": 79.12371134020619,
-      "strength": 20.596005154639176
+      "omitted": 1552,
+      "total": 1547,
+      "percent": 79.0562378797673,
+      "strength": 20.455074337427277
     },
     "branches": {
-      "covered": 270,
-      "missed": 209,
-      "total": 479,
-      "percent": 56.36743215031315,
-      "strength": 25.41544885177453
+      "covered": 269,
+      "missed": 208,
+      "total": 477,
+      "percent": 56.39412997903564,
+      "strength": 25.968553459119498
     }
   },
   "coverage": {
@@ -178,7 +178,7 @@
         1,
         null,
         1,
-        498,
+        495,
         null,
         null,
         1,
@@ -255,12 +255,28 @@
         "",
         "  def follow",
         "    current_user.follow(@artist)",
-        "    redirect_back fallback_location: root_path",
+        "    respond_to do |format|",
+        "       format.turbo_stream do",
+        "          render turbo_stream: turbo_stream.replace(",
+        "            \"follow-artist-#{@artist.id}\",",
+        "            partial: \"artists/follow_buttoms\",",
+        "            locals: { artist: @artist }",
+        "          )",
+        "        end",
+        "    end",
         "  end",
         "",
         "  def unfollow",
         "    current_user.unfollow(@artist)",
-        "    redirect_back fallback_location: root_path",
+        "      respond_to do |format|",
+        "        format.turbo_stream do",
+        "          render turbo_stream: turbo_stream.replace(",
+        "            \"follow-artist-#{@artist.id}\",",
+        "            partial: \"artists/follow_buttoms\",",
+        "            locals: { artist: @artist }",
+        "          )",
+        "        end",
+        "    end",
         "  end",
         "",
         "  def mark_as_favorite",
@@ -319,14 +335,14 @@
         null,
         null,
         1,
-        23,
-        23,
+        20,
+        20,
         null,
-        23,
-        23,
-        23,
-        23,
-        23,
+        20,
+        20,
+        20,
+        20,
+        20,
         null,
         0,
         0,
@@ -360,11 +376,27 @@
         1,
         2,
         2,
+        2,
+        2,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         1,
         1,
         1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         1,
@@ -390,16 +422,16 @@
         1,
         null,
         1,
-        59,
-        36,
-        36,
-        36,
-        36,
-        36,
-        36,
-        36,
-        36,
-        36,
+        53,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
         null,
         null,
         null,
@@ -409,11 +441,11 @@
         null,
         null
       ],
-      "lines_covered_percent": 88.52459016393442,
-      "covered_lines": 54,
+      "lines_covered_percent": 89.23076923076923,
+      "covered_lines": 58,
       "missed_lines": 7,
-      "omitted_lines": 41,
-      "total_lines": 61,
+      "omitted_lines": 53,
+      "total_lines": 65,
       "branches": [
         {
           "type": "then",
@@ -427,7 +459,7 @@
           "type": "else",
           "start_line": 14,
           "end_line": 14,
-          "coverage": 22,
+          "coverage": 19,
           "inline": true,
           "report_line": 14
         },
@@ -443,7 +475,7 @@
           "type": "then",
           "start_line": 15,
           "end_line": 15,
-          "coverage": 22,
+          "coverage": 19,
           "inline": true,
           "report_line": 15
         },
@@ -451,7 +483,7 @@
           "type": "then",
           "start_line": 18,
           "end_line": 21,
-          "coverage": 23,
+          "coverage": 20,
           "inline": false,
           "report_line": 17
         },
@@ -465,41 +497,9 @@
         },
         {
           "type": "then",
-          "start_line": 78,
-          "end_line": 78,
-          "coverage": 1,
-          "inline": true,
-          "report_line": 78
-        },
-        {
-          "type": "else",
-          "start_line": 78,
-          "end_line": 78,
-          "coverage": 0,
-          "inline": true,
-          "report_line": 78
-        },
-        {
-          "type": "then",
-          "start_line": 92,
-          "end_line": 92,
-          "coverage": 35,
-          "inline": true,
-          "report_line": 92
-        },
-        {
-          "type": "else",
-          "start_line": 92,
-          "end_line": 92,
-          "coverage": 1,
-          "inline": true,
-          "report_line": 92
-        },
-        {
-          "type": "then",
           "start_line": 94,
           "end_line": 94,
-          "coverage": 0,
+          "coverage": 1,
           "inline": true,
           "report_line": 94
         },
@@ -507,25 +507,57 @@
           "type": "else",
           "start_line": 94,
           "end_line": 94,
-          "coverage": 36,
+          "coverage": 0,
           "inline": true,
           "report_line": 94
         },
         {
           "type": "then",
-          "start_line": 86,
-          "end_line": 94,
-          "coverage": 36,
+          "start_line": 108,
+          "end_line": 108,
+          "coverage": 32,
+          "inline": true,
+          "report_line": 108
+        },
+        {
+          "type": "else",
+          "start_line": 108,
+          "end_line": 108,
+          "coverage": 1,
+          "inline": true,
+          "report_line": 108
+        },
+        {
+          "type": "then",
+          "start_line": 110,
+          "end_line": 110,
+          "coverage": 0,
+          "inline": true,
+          "report_line": 110
+        },
+        {
+          "type": "else",
+          "start_line": 110,
+          "end_line": 110,
+          "coverage": 33,
+          "inline": true,
+          "report_line": 110
+        },
+        {
+          "type": "then",
+          "start_line": 102,
+          "end_line": 110,
+          "coverage": 33,
           "inline": false,
-          "report_line": 85
+          "report_line": 101
         },
         {
           "type": "else",
-          "start_line": 85,
-          "end_line": 95,
-          "coverage": 23,
+          "start_line": 101,
+          "end_line": 111,
+          "coverage": 20,
           "inline": true,
-          "report_line": 85
+          "report_line": 101
         }
       ],
       "branches_covered_percent": 78.57142857142857,
@@ -1584,11 +1616,10 @@
         "class HomeController < ApplicationController",
         "",
         "  def index",
-        "    ",
         "    @artists = Artist.accepted.left_joins(:relations).group(:id).order(\"COUNT(relations.id) DESC\").first(10)",
         "    events = Event.accepted.search_by(params: { country: current_user&.ubication&.country&.code, first_date: Date.today })",
         "    @events = Kaminari.paginate_array(events).page(params[:page]).per(10)",
-        "    @registers = Register.feed(current_user).first(6)",
+        "    @registers = Register.feed(current_user).first(10)",
         "  end",
         "",
         "end"
@@ -1597,7 +1628,6 @@
         1,
         null,
         1,
-        null,
         88,
         88,
         88,
@@ -1609,56 +1639,56 @@
       "lines_covered_percent": 100.0,
       "covered_lines": 6,
       "missed_lines": 0,
-      "omitted_lines": 5,
+      "omitted_lines": 4,
       "total_lines": 6,
       "branches": [
         {
           "type": "then",
-          "start_line": 6,
-          "end_line": 6,
+          "start_line": 5,
+          "end_line": 5,
           "coverage": 75,
           "inline": true,
-          "report_line": 6
+          "report_line": 5
         },
         {
           "type": "else",
-          "start_line": 6,
-          "end_line": 6,
+          "start_line": 5,
+          "end_line": 5,
           "coverage": 13,
           "inline": true,
-          "report_line": 6
+          "report_line": 5
         },
         {
           "type": "then",
-          "start_line": 6,
-          "end_line": 6,
+          "start_line": 5,
+          "end_line": 5,
           "coverage": 0,
           "inline": true,
-          "report_line": 6
+          "report_line": 5
         },
         {
           "type": "else",
-          "start_line": 6,
-          "end_line": 6,
+          "start_line": 5,
+          "end_line": 5,
           "coverage": 88,
           "inline": true,
-          "report_line": 6
+          "report_line": 5
         },
         {
           "type": "then",
-          "start_line": 6,
-          "end_line": 6,
+          "start_line": 5,
+          "end_line": 5,
           "coverage": 0,
           "inline": true,
-          "report_line": 6
+          "report_line": 5
         },
         {
           "type": "else",
-          "start_line": 6,
-          "end_line": 6,
+          "start_line": 5,
+          "end_line": 5,
           "coverage": 88,
           "inline": true,
-          "report_line": 6
+          "report_line": 5
         }
       ],
       "branches_covered_percent": 66.66666666666667,
@@ -1729,7 +1759,7 @@
         "        redirect_to comments_interactuable_path(params[:id])",
         "    end",
         "",
-        "    def uncomment",
+        "    def remove_comment",
         "        comment = Comment.find(params[:comment_id])",
         "        path = father_link(comment)",
         "        comment.destroy",
@@ -2428,7 +2458,7 @@
         "    load_and_authorize_resource",
         "",
         "    def index",
-        "        requests = Request.do_search(params)        ",
+        "        requests = Request.search_by(params)        ",
         "        @requests = requests.page(params[:page]).per(5)",
         "        @pagination_path = request.query_parameters.merge( controller: \"requests\", action: \"index\" )",
         "        respond_to do |format|",
@@ -2762,13 +2792,13 @@
         "    @registers = @user.registers.order(created_at: :desc).limit(4)",
         "    @registers_with_review = @registers.where.not(review: nil).where(\"TRIM(review) != ''\").limit(2)",
         "    @populars_registers = @user.registers.left_joins(:likes).group(:id).order(\"COUNT(likes.id) DESC\").limit(2)",
-        "    @future_assistances = @user.future_assistances.order(created_at: :desc).limit(5)",
+        "    @future_assistances = @user.future_assistances.order(created_at: :desc)",
         "    @publications = @user.publications.order(created_at: :desc).limit(3); ",
         "    @populars_publications = @user.publications.left_joins(:likes).group(:id).order(\"COUNT(likes.id) DESC\").limit(3); ",
         "  end",
         "",
         "  def registers",
-        "    registers = Register.do_search(params, user: @user)",
+        "    registers = Register.search_by(params, user: @user)",
         "    @registers = registers.page(params[:page]).per(5)",
         "    @pagination_path = request.query_parameters.merge( controller: \"users\", action: \"registers\", user_id: @user.id )",
         "    respond_to do |format|",
@@ -2794,7 +2824,7 @@
         "  end",
         "",
         "  def requests",
-        "    requests = Request.do_search(params, user: @user)",
+        "    requests = Request.search_by(params, user: @user)",
         "    @requests = requests.page(params[:page]).per(5)",
         "    @pagination_path = request.query_parameters.merge(controller: \"users\", action: \"requests\", user_id: @user.id )",
         "    respond_to do |format|",
@@ -2814,7 +2844,7 @@
         "  end",
         "",
         "  def publications",
-        "    publications = Publication.do_search(params, user: @user)",
+        "    publications = Publication.search_by(params, user: @user)",
         "    @publications = publications.page(params[:page]).per(10)",
         "    @pagination_path = request.query_parameters.merge( controller: \"users\", action: \"publications\", user_id: @user.id )",
         "    respond_to do |format|",
@@ -3132,43 +3162,43 @@
       "source": [
         "module ApplicationHelper",
         "",
-        "    def date_in_numbers(date)",
-        "      date.strftime(\"%d/%m/%y\")",
-        "    end",
-        "",
-        "    def formatted_event_date(date, start_time)",
-        "      str = I18n.t(\"date.day_names\")[date.wday]",
-        "      str += \" #{short_date_with_year(date)}\"",
-        "      str += \" • #{formatted_time(start_time)}\" if start_time",
-        "      str",
-        "    end",
-        "",
-        "    def wday_time(date, start_time)",
-        "      str = I18n.t(\"date.day_names\")[date.wday]",
-        "      str += \" • #{formatted_time(start_time)}\" if start_time",
-        "      str",
-        "    end",
-        "",
-        "    def short_date(date)",
-        "      date.year == Date.current.year ? I18n.l(date, format: \"%-d %b\") : I18n.l(date, format: \"%-d %b %Y\")",
-        "    end",
-        "",
-        "    def formatted_time(time)",
-        "      if I18n.locale == :es",
-        "        time.strftime(\"%H:%M\")",
-        "      else",
-        "        time.strftime(\"%I:%M %p\")",
-        "      end",
+        "  def date_in_numbers(date)",
+        "    date.strftime(\"%d/%m/%y\")",
         "  end",
         "",
-        "    def short_date_with_year(date)",
-        "      I18n.l(date, format: \"%-d %b %Y\")",
-        "    end",
+        "  def formatted_event_date(date, start_time)",
+        "    str = I18n.t(\"date.day_names\")[date.wday]",
+        "    str += \" #{short_date_with_year(date)}\"",
+        "    str += \" • #{formatted_time(start_time)}\" if start_time",
+        "    str",
+        "  end",
         "",
-        "    def best_quality_image(images)",
-        "      return nil if images.nil? || images.empty?",
-        "      images.find { |img| img[\"width\"] > 1000 } || images.find { |img| img[\"width\"] > 500 } || images.first",
+        "  def wday_time(date, start_time)",
+        "    str = I18n.t(\"date.day_names\")[date.wday]",
+        "    str += \" • #{formatted_time(start_time)}\" if start_time",
+        "    str",
+        "  end",
+        "",
+        "  def short_date(date)",
+        "    date.year == Date.current.year ? I18n.l(date, format: \"%-d %b\") : I18n.l(date, format: \"%-d %b %Y\")",
+        "  end",
+        "",
+        "  def formatted_time(time)",
+        "    if I18n.locale == :es",
+        "      time.strftime(\"%H:%M\")",
+        "    else",
+        "      time.strftime(\"%I:%M %p\")",
         "    end",
+        "  end ",
+        "",
+        "  def short_date_with_year(date)",
+        "    I18n.l(date, format: \"%-d %b %Y\")",
+        "  end",
+        "",
+        "  def best_quality_image(images)",
+        "    return nil if images.nil? || images.empty?",
+        "    images.find { |img| img[\"width\"] > 1000 } || images.find { |img| img[\"width\"] > 500 } || images.first",
+        "  end",
         "",
         "  def time_status(event_date, event_time = nil)",
         "    today = Date.today",
@@ -3246,13 +3276,13 @@
         null,
         null,
         1,
-        554,
-        554,
-        554,
+        548,
+        548,
+        548,
         null,
         null,
         1,
-        118,
+        173,
         null,
         null,
         1,
@@ -3273,9 +3303,9 @@
         null,
         null,
         1,
-        528,
-        528,
-        467,
+        522,
+        522,
+        464,
         197,
         null,
         null,
@@ -3324,11 +3354,11 @@
         null,
         null,
         1,
-        82,
+        79,
         null,
         null,
         1,
-        433,
+        425,
         null,
         null,
         null
@@ -3367,7 +3397,7 @@
           "type": "else",
           "start_line": 16,
           "end_line": 16,
-          "coverage": 318,
+          "coverage": 312,
           "inline": true,
           "report_line": 16
         },
@@ -3375,7 +3405,7 @@
           "type": "then",
           "start_line": 21,
           "end_line": 21,
-          "coverage": 74,
+          "coverage": 129,
           "inline": true,
           "report_line": 21
         },
@@ -3423,7 +3453,7 @@
           "type": "then",
           "start_line": 43,
           "end_line": 43,
-          "coverage": 61,
+          "coverage": 58,
           "inline": true,
           "report_line": 43
         },
@@ -3431,7 +3461,7 @@
           "type": "else",
           "start_line": 43,
           "end_line": 43,
-          "coverage": 467,
+          "coverage": 464,
           "inline": true,
           "report_line": 43
         },
@@ -3439,7 +3469,7 @@
           "type": "then",
           "start_line": 44,
           "end_line": 44,
-          "coverage": 270,
+          "coverage": 267,
           "inline": true,
           "report_line": 44
         },
@@ -3577,167 +3607,9 @@
       "missed_branches": 9,
       "total_branches": 29
     },
-    "app/helpers/broadcast_helper.rb": {
+    "app/helpers/ticketmaster_helper.rb": {
       "source": [
-        "module BroadcastHelper",
-        "",
-        "    def self.add_message_to_chat(chat_entry, user)",
-        "        chat = chat_entry.chat",
-        "        Turbo::StreamsChannel.broadcast_append_to( # se añade un mensaje",
-        "            # hace actualizaciona a los usuarios que esten en el chat, \"chat_entries\" es solo un label",
-        "            [ chat, user, \"chat_entries\" ], # = turbo_stream_from [@chat, current_user] \"chat_entries\" if @chat",
-        "            target: \"chat_entries\", # {id: \"chat_entries\" ... }",
-        "            partial: \"chat_entries/index_item\",",
-        "            locals: { chat_entry: chat_entry, current_user: user }",
-        "        )",
-        "    end",
-        "",
-        "    def self.remove_chat_from_sidebar(chat, user)",
-        "        Turbo::StreamsChannel.broadcast_remove_to(",
-        "            [user, :sidebar],",
-        "            target: \"chat_#{chat.id}\"",
-        "        )",
-        "    end",
-        "",
-        "    def self.append_chat_to_sidebar(chat, user)",
-        "        Turbo::StreamsChannel.broadcast_prepend_to(",
-        "            [user, \"sidebar\"],",
-        "            target: \"chats_list\",",
-        "            partial: \"chats/sidebar_chat\",",
-        "            locals: { chat: chat, current_user: user }",
-        "        )",
-        "    end",
-        "",
-        "    def self.replace_chat_in_sidebar(chat, user)",
-        "        Turbo::StreamsChannel.broadcast_replace_to(",
-        "            [user, \"sidebar\"],",
-        "            target: \"chat_#{chat.id}\",",
-        "            partial: \"chats/sidebar_chat\",",
-        "            locals: { chat: chat, current_user: user }",
-        "        )",
-        "    end",
-        "",
-        "    def self.update_messages_header(user)",
-        "        Turbo::StreamsChannel.broadcast_replace_to( # se reemplaza todo el messages_header del header",
-        "            # hace actualizacion a a todos los usuarios",
-        "            [ user, \"messages_header\" ], # = turbo_stream_from current_user, \"messages_header\"",
-        "            target: \"messages_header\", # {id: \"messages_header\" ... }",
-        "            partial: \"layouts/shared/messages_bubble\",",
-        "            locals: { current_user: user }",
-        "        )",
-        "    end",
-        "",
-        "    def self.update_notifications_header(user)",
-        "        Turbo::StreamsChannel.broadcast_replace_to( # se reemplaza todo el notifications_header del header",
-        "            # hace actualizacion a a todos los usuarios",
-        "            [ user, \"notifications_header\" ], # = turbo_stream_from current_user, \"notifications_header\"",
-        "            target: \"notifications_header\", # {id: \"notifications_header\" ... }",
-        "            partial: \"layouts/shared/notifications_bubble\",",
-        "            locals: { current_user: user }",
-        "        )",
-        "    end",
-        "",
-        "end"
-      ],
-      "lines": [
-        1,
-        null,
-        1,
-        8,
-        8,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        8,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        8,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        9,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        9,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        9,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "lines_covered_percent": 100.0,
-      "covered_lines": 14,
-      "missed_lines": 0,
-      "omitted_lines": 45,
-      "total_lines": 14,
-      "branches": [
-
-      ],
-      "branches_covered_percent": 100.0,
-      "covered_branches": 0,
-      "missed_branches": 0,
-      "total_branches": 0
-    },
-    "app/helpers/home_helper.rb": {
-      "source": [
-        "module HomeHelper",
-        "end"
-      ],
-      "lines": [
-        1,
-        null
-      ],
-      "lines_covered_percent": 100.0,
-      "covered_lines": 1,
-      "missed_lines": 0,
-      "omitted_lines": 1,
-      "total_lines": 1,
-      "branches": [
-
-      ],
-      "branches_covered_percent": 100.0,
-      "covered_branches": 0,
-      "missed_branches": 0,
-      "total_branches": 0
-    },
-    "app/helpers/ticketmaster_event_helper.rb": {
-      "source": [
-        "module TicketmasterEventHelper",
+        "module TicketmasterHelper",
         "",
         "    include ApplicationHelper",
         "",
@@ -4015,10 +3887,10 @@
         "    chat_entry = ChatEntry.find(chat_entry_id)",
         "    chat = chat_entry.chat",
         "    chat.users.where.not(id: sender_id).find_each do |user|",
-        "      BroadcastHelper.add_message_to_chat(chat_entry, user)",
-        "      BroadcastHelper.remove_chat_from_sidebar(chat, user)",
-        "      BroadcastHelper.append_chat_to_sidebar(chat, user)",
-        "      BroadcastHelper.update_messages_header(user)",
+        "      BroadcastService.add_message_to_chat(chat_entry, user)",
+        "      BroadcastService.remove_chat_from_sidebar(chat, user)",
+        "      BroadcastService.append_chat_to_sidebar(chat, user)",
+        "      BroadcastService.update_messages_header(user)",
         "    end ",
         "  end",
         "",
@@ -4137,7 +4009,7 @@
         "        can [:repost, :comment], Interactuable do |interactuable| ",
         "          !interactuable.user.blocked_user?(user.id) && !user.blocked_user?(interactuable.user.id)",
         "        end",
-        "        can [:uncomment], Interactuable, user_id: user.id",
+        "        can [:remove_comment], Interactuable, user_id: user.id",
         "        can [:reply], Comment do |comment| ",
         "          !comment.interactuable.user.blocked_user?(user.id) && !user.blocked_user?(comment.interactuable.user.id)",
         "        end",
@@ -4187,35 +4059,35 @@
         1,
         null,
         null,
-        419,
-        419,
-        420,
-        429,
-        419,
+        416,
+        416,
+        417,
+        426,
+        416,
         null,
-        419,
+        416,
         null,
-        298,
-        null,
-        27,
+        295,
         null,
         27,
+        null,
+        27,
         27,
         null,
-        271,
+        268,
         null,
         null,
         null,
         null,
-        271,
-        271,
+        268,
+        268,
         null,
         null,
-        271,
+        268,
         0,
         null,
         null,
-        271,
+        268,
         7,
         null,
         7,
@@ -4228,40 +4100,40 @@
         null,
         null,
         null,
-        271,
+        268,
         32,
         null,
-        271,
+        268,
         38,
         null,
-        271,
-        271,
+        268,
+        268,
         0,
         null,
-        272,
+        269,
         null,
         null,
-        380,
-        273,
+        371,
+        270,
         null,
         null,
-        285,
-        271,
-        271,
+        282,
+        268,
+        268,
         143,
         null,
-        271,
+        268,
         26,
         null,
-        271,
+        268,
         17,
         null,
         null,
         null,
-        297,
+        294,
         null,
         null,
-        271,
+        268,
         null,
         null,
         null,
@@ -4317,7 +4189,7 @@
           "type": "then",
           "start_line": 29,
           "end_line": 83,
-          "coverage": 271,
+          "coverage": 268,
           "inline": false,
           "report_line": 28
         },
@@ -4341,7 +4213,7 @@
           "type": "else",
           "start_line": 24,
           "end_line": 83,
-          "coverage": 271,
+          "coverage": 268,
           "inline": false,
           "report_line": 23
         },
@@ -4349,7 +4221,7 @@
           "type": "then",
           "start_line": 17,
           "end_line": 85,
-          "coverage": 298,
+          "coverage": 295,
           "inline": false,
           "report_line": 16
         },
@@ -4439,6 +4311,7 @@
         "",
         "    has_many :artists_events, dependent: :destroy",
         "    has_many :events, through: :artists_events, dependent: :destroy",
+        "    has_many :registers, through: :events",
         "",
         "    has_many :relations, as: :followed, dependent: :destroy",
         "    has_many :followers, through: :relations, source: :follower",
@@ -4496,7 +4369,7 @@
         "      artists_api = Array(TicketmasterService.artists_by(params))  ",
         "      artists_db = Artist.accepted",
         "      artists_db = artists_db.by_name(params[:search]) if params[:search].present?",
-        "      artists_db = artists_db.by_genre(Genre.find(params[:genre_id]).id) if params[:genre_id].present?",
+        "      artists_db = artists_db.by_genre(params[:genre_id]) if params[:genre_id].present?",
         "",
         "      # exclude ticketmaster ids",
         "      ticketmaster_ids = artists_api.map { |artist| artist[\"id\"] }",
@@ -4506,14 +4379,6 @@
         "    end",
         "          ",
         "  ## INSTANCE METHODS",
-        "",
-        "    def complete_name",
-        "      name",
-        "    end",
-        "",
-        "    def registers",
-        "      Register.by_artist(self.id)",
-        "    end",
         "",
         "    def average_rating",
         "      registers.average(:rating).to_i || 0",
@@ -4525,11 +4390,6 @@
         "",
         "    def manually_added",
         "      ticketmaster_id.nil?",
-        "    end",
-        "",
-        "    def is_favorite?(user)",
-        "      return false if !user",
-        "      FavoriteArtist.exists?(user_id: user.id, artist_id: id)",
         "    end",
         "",
         "end"
@@ -4555,6 +4415,7 @@
         null,
         1,
         1,
+        1,
         null,
         1,
         1,
@@ -4567,7 +4428,7 @@
         null,
         2,
         2,
-        120,
+        117,
         1,
         1,
         10,
@@ -4624,133 +4485,104 @@
         null,
         null,
         1,
-        138,
+        33,
         null,
         null,
         1,
-        96,
+        129,
         null,
         null,
         1,
-        36,
-        null,
-        null,
-        1,
-        135,
-        null,
-        null,
-        1,
-        135,
-        null,
-        null,
-        1,
-        37,
-        22,
+        129,
         null,
         null,
         null
       ],
-      "lines_covered_percent": 93.22033898305085,
-      "covered_lines": 55,
+      "lines_covered_percent": 92.45283018867924,
+      "covered_lines": 49,
       "missed_lines": 4,
-      "omitted_lines": 55,
-      "total_lines": 59,
+      "omitted_lines": 49,
+      "total_lines": 53,
       "branches": [
         {
           "type": "then",
-          "start_line": 47,
-          "end_line": 47,
+          "start_line": 48,
+          "end_line": 48,
           "coverage": 0,
           "inline": true,
-          "report_line": 47
+          "report_line": 48
         },
         {
           "type": "else",
-          "start_line": 47,
-          "end_line": 47,
+          "start_line": 48,
+          "end_line": 48,
           "coverage": 0,
           "inline": true,
-          "report_line": 47
+          "report_line": 48
         },
         {
           "type": "then",
-          "start_line": 57,
-          "end_line": 57,
+          "start_line": 58,
+          "end_line": 58,
           "coverage": 0,
           "inline": true,
-          "report_line": 57
+          "report_line": 58
         },
         {
           "type": "else",
-          "start_line": 57,
-          "end_line": 57,
+          "start_line": 58,
+          "end_line": 58,
           "coverage": 2,
           "inline": true,
-          "report_line": 57
+          "report_line": 58
+        },
+        {
+          "type": "then",
+          "start_line": 65,
+          "end_line": 66,
+          "coverage": 0,
+          "inline": false,
+          "report_line": 64
+        },
+        {
+          "type": "else",
+          "start_line": 64,
+          "end_line": 67,
+          "coverage": 2,
+          "inline": true,
+          "report_line": 64
         },
         {
           "type": "then",
           "start_line": 64,
-          "end_line": 65,
-          "coverage": 0,
-          "inline": false,
-          "report_line": 63
-        },
-        {
-          "type": "else",
-          "start_line": 63,
-          "end_line": 66,
-          "coverage": 2,
-          "inline": true,
-          "report_line": 63
-        },
-        {
-          "type": "then",
-          "start_line": 63,
-          "end_line": 66,
-          "coverage": 2,
-          "inline": false,
-          "report_line": 62
-        },
-        {
-          "type": "else",
-          "start_line": 62,
           "end_line": 67,
-          "coverage": 0,
-          "inline": true,
-          "report_line": 62
-        },
-        {
-          "type": "then",
-          "start_line": 56,
-          "end_line": 69,
           "coverage": 2,
           "inline": false,
-          "report_line": 55
+          "report_line": 63
         },
         {
           "type": "else",
-          "start_line": 55,
+          "start_line": 63,
+          "end_line": 68,
+          "coverage": 0,
+          "inline": true,
+          "report_line": 63
+        },
+        {
+          "type": "then",
+          "start_line": 57,
           "end_line": 70,
-          "coverage": 1,
-          "inline": true,
-          "report_line": 55
-        },
-        {
-          "type": "then",
-          "start_line": 77,
-          "end_line": 77,
-          "coverage": 1,
-          "inline": true,
-          "report_line": 77
+          "coverage": 2,
+          "inline": false,
+          "report_line": 56
         },
         {
           "type": "else",
-          "start_line": 77,
-          "end_line": 77,
-          "coverage": 8,
+          "start_line": 56,
+          "end_line": 71,
+          "coverage": 1,
           "inline": true,
-          "report_line": 77
+          "report_line": 56
         },
         {
           "type": "then",
@@ -4770,25 +4602,25 @@
         },
         {
           "type": "then",
-          "start_line": 110,
-          "end_line": 110,
-          "coverage": 15,
+          "start_line": 79,
+          "end_line": 79,
+          "coverage": 1,
           "inline": true,
-          "report_line": 110
+          "report_line": 79
         },
         {
           "type": "else",
-          "start_line": 110,
-          "end_line": 110,
-          "coverage": 22,
+          "start_line": 79,
+          "end_line": 79,
+          "coverage": 8,
           "inline": true,
-          "report_line": 110
+          "report_line": 79
         }
       ],
-      "branches_covered_percent": 68.75,
-      "covered_branches": 11,
+      "branches_covered_percent": 64.28571428571429,
+      "covered_branches": 9,
       "missed_branches": 5,
-      "total_branches": 16
+      "total_branches": 14
     },
     "app/models/artists_event.rb": {
       "source": [
@@ -4878,27 +4710,23 @@
         "      event.present?",
         "    end",
         "",
-        "    def messages",
-        "      chat_entries.user_messages ",
+        "    def other_user(user)",
+        "      users.find { |u| u.id != user.id }",
         "    end",
         "",
-        "    def other_user(current_user)",
-        "      users.find { |u| u.id != current_user.id }",
-        "    end",
-        "",
-        "    def name(current_user)",
+        "    def name(user)",
         "      return event.tour_name if event",
-        "      username = other_user(current_user)&.username",
+        "      username = other_user(user)&.username",
         "      username.present? ? username : \"NOT FOUND\"",
         "    end",
         "",
-        "    def photo(current_user)",
+        "    def photo(user)",
         "      return event.photo if event",
-        "      other_user(current_user)&.icon",
+        "      other_user(user)&.icon",
         "    end",
         "",
-        "    def has_notification?(current_user)",
-        "      !chat_users.find { |cu| cu.user_id == current_user.id }&.read?",
+        "    def has_notification?(user)",
+        "      !chat_users.find { |cu| cu.user_id == user.id }&.read?",
         "    end",
         "",
         "    def exit_chat(user_id)",
@@ -4963,10 +4791,6 @@
         null,
         null,
         1,
-        40,
-        null,
-        null,
-        1,
         194,
         null,
         null,
@@ -4994,10 +4818,10 @@
         null
       ],
       "lines_covered_percent": 100.0,
-      "covered_lines": 42,
+      "covered_lines": 40,
       "missed_lines": 0,
-      "omitted_lines": 40,
-      "total_lines": 42,
+      "omitted_lines": 38,
+      "total_lines": 40,
       "branches": [
         {
           "type": "else",
@@ -5017,41 +4841,57 @@
         },
         {
           "type": "then",
-          "start_line": 62,
-          "end_line": 62,
+          "start_line": 58,
+          "end_line": 58,
           "coverage": 12,
           "inline": true,
-          "report_line": 62
+          "report_line": 58
         },
         {
           "type": "else",
-          "start_line": 62,
-          "end_line": 62,
+          "start_line": 58,
+          "end_line": 58,
           "coverage": 28,
           "inline": true,
-          "report_line": 62
+          "report_line": 58
         },
         {
           "type": "then",
-          "start_line": 63,
-          "end_line": 63,
+          "start_line": 59,
+          "end_line": 59,
           "coverage": 28,
           "inline": true,
-          "report_line": 63
+          "report_line": 59
         },
         {
           "type": "else",
-          "start_line": 63,
-          "end_line": 63,
+          "start_line": 59,
+          "end_line": 59,
           "coverage": 0,
           "inline": true,
-          "report_line": 63
+          "report_line": 59
+        },
+        {
+          "type": "then",
+          "start_line": 60,
+          "end_line": 60,
+          "coverage": 28,
+          "inline": true,
+          "report_line": 60
+        },
+        {
+          "type": "else",
+          "start_line": 60,
+          "end_line": 60,
+          "coverage": 0,
+          "inline": true,
+          "report_line": 60
         },
         {
           "type": "then",
           "start_line": 64,
           "end_line": 64,
-          "coverage": 28,
+          "coverage": 12,
           "inline": true,
           "report_line": 64
         },
@@ -5059,52 +4899,44 @@
           "type": "else",
           "start_line": 64,
           "end_line": 64,
-          "coverage": 0,
+          "coverage": 28,
           "inline": true,
           "report_line": 64
         },
         {
           "type": "then",
-          "start_line": 68,
-          "end_line": 68,
-          "coverage": 12,
+          "start_line": 65,
+          "end_line": 65,
+          "coverage": 28,
           "inline": true,
-          "report_line": 68
+          "report_line": 65
         },
         {
           "type": "else",
-          "start_line": 68,
-          "end_line": 68,
-          "coverage": 28,
-          "inline": true,
-          "report_line": 68
-        },
-        {
-          "type": "then",
-          "start_line": 69,
-          "end_line": 69,
-          "coverage": 28,
-          "inline": true,
-          "report_line": 69
-        },
-        {
-          "type": "else",
-          "start_line": 69,
-          "end_line": 69,
+          "start_line": 65,
+          "end_line": 65,
           "coverage": 0,
           "inline": true,
-          "report_line": 69
+          "report_line": 65
         },
         {
           "type": "then",
-          "start_line": 73,
-          "end_line": 73,
+          "start_line": 69,
+          "end_line": 69,
           "coverage": 39,
           "inline": true,
-          "report_line": 73
+          "report_line": 69
         },
         {
           "type": "else",
+          "start_line": 69,
+          "end_line": 69,
+          "coverage": 1,
+          "inline": true,
+          "report_line": 69
+        },
+        {
+          "type": "then",
           "start_line": 73,
           "end_line": 73,
           "coverage": 1,
@@ -5112,36 +4944,28 @@
           "report_line": 73
         },
         {
-          "type": "then",
-          "start_line": 77,
-          "end_line": 77,
-          "coverage": 1,
-          "inline": true,
-          "report_line": 77
-        },
-        {
           "type": "else",
-          "start_line": 77,
-          "end_line": 77,
+          "start_line": 73,
+          "end_line": 73,
           "coverage": 2,
           "inline": true,
-          "report_line": 77
+          "report_line": 73
         },
         {
           "type": "then",
-          "start_line": 78,
-          "end_line": 78,
+          "start_line": 74,
+          "end_line": 74,
           "coverage": 1,
           "inline": false,
-          "report_line": 77
+          "report_line": 73
         },
         {
           "type": "else",
-          "start_line": 77,
-          "end_line": 79,
+          "start_line": 73,
+          "end_line": 75,
           "coverage": 2,
           "inline": true,
-          "report_line": 77
+          "report_line": 73
         }
       ],
       "branches_covered_percent": 83.33333333333333,
@@ -5195,9 +5019,9 @@
         "      end",
         "",
         "      # update chat and sidebar of user who sent the message",
-        "      BroadcastHelper.add_message_to_chat(self, user)",
-        "      BroadcastHelper.remove_chat_from_sidebar(self.chat, user)",
-        "      BroadcastHelper.append_chat_to_sidebar(self.chat, user)",
+        "      BroadcastService.add_message_to_chat(self, user)",
+        "      BroadcastService.remove_chat_from_sidebar(self.chat, user)",
+        "      BroadcastService.append_chat_to_sidebar(self.chat, user)",
         "",
         "      # job to update the view of the rest of the users of the chat",
         "      ChatEntryBroadcastJob.perform_later(self.id, user.id)",
@@ -5376,8 +5200,8 @@
         "",
         "    def broadcast_change",
         "      if read_at_before_last_save.nil? && read_at.present? || read_at_before_last_save.present? && read_at.nil?",
-        "        BroadcastHelper.update_messages_header(user)",
-        "        BroadcastHelper.replace_chat_in_sidebar(chat, user)",
+        "        BroadcastService.update_messages_header(user)",
+        "        BroadcastService.replace_chat_in_sidebar(chat, user)",
         "      end",
         "    end",
         "    ",
@@ -5410,7 +5234,7 @@
         null,
         null,
         null,
-        240,
+        237,
         null,
         null,
         null,
@@ -5935,7 +5759,7 @@
         null,
         null,
         1,
-        909,
+        894,
         0,
         null,
         null,
@@ -5951,7 +5775,7 @@
           "type": "then",
           "start_line": 19,
           "end_line": 19,
-          "coverage": 909,
+          "coverage": 894,
           "inline": true,
           "report_line": 19
         },
@@ -5975,7 +5799,7 @@
         "",
         "  ##CONFIGURATIONS",
         "",
-        "    extend TicketmasterEventHelper",
+        "    extend TicketmasterHelper",
         "    include ApplicationHelper",
         "",
         "  ## RELATIONSHIPS",
@@ -6073,10 +5897,6 @@
         "",
         "  ## INSTANCE METHODS",
         "",
-        "    def complete_name",
-        "      tour_name",
-        "    end",
-        "",
         "    def complete_info",
         "      [tour_name, date_in_numbers(date), start_time, ubication.complete_name_with_venue].reject(&:blank?).join(\", \")",
         "    end",
@@ -6140,13 +5960,13 @@
         8,
         8,
         1,
-        24,
+        21,
         6,
         1,
         1,
         null,
         1,
-        245,
+        242,
         1,
         null,
         null,
@@ -6187,34 +6007,30 @@
         null,
         null,
         1,
-        144,
+        141,
         null,
-        144,
-        144,
-        144,
+        141,
+        141,
+        141,
         null,
-        150,
-        144,
+        147,
+        141,
         null,
-        144,
+        141,
         null,
-        144,
-        144,
+        141,
+        141,
         null,
-        144,
+        141,
         95,
         95,
         95,
         95,
         null,
         null,
-        144,
+        141,
         null,
         null,
-        null,
-        null,
-        1,
-        59,
         null,
         null,
         1,
@@ -6230,9 +6046,9 @@
         null,
         null,
         1,
-        260,
-        260,
-        260,
+        315,
+        315,
+        315,
         null,
         null,
         null,
@@ -6245,16 +6061,16 @@
         null,
         null,
         1,
-        528,
+        522,
         null,
         null,
         null
       ],
-      "lines_covered_percent": 97.5,
-      "covered_lines": 78,
+      "lines_covered_percent": 97.43589743589743,
+      "covered_lines": 76,
       "missed_lines": 2,
-      "omitted_lines": 58,
-      "total_lines": 80,
+      "omitted_lines": 56,
+      "total_lines": 78,
       "branches": [
         {
           "type": "then",
@@ -6364,7 +6180,7 @@
           "type": "else",
           "start_line": 80,
           "end_line": 80,
-          "coverage": 137,
+          "coverage": 134,
           "inline": true,
           "report_line": 80
         },
@@ -6372,7 +6188,7 @@
           "type": "then",
           "start_line": 81,
           "end_line": 81,
-          "coverage": 23,
+          "coverage": 20,
           "inline": true,
           "report_line": 81
         },
@@ -6396,7 +6212,7 @@
           "type": "else",
           "start_line": 86,
           "end_line": 86,
-          "coverage": 142,
+          "coverage": 139,
           "inline": true,
           "report_line": 86
         },
@@ -6476,73 +6292,73 @@
           "type": "else",
           "start_line": 91,
           "end_line": 96,
-          "coverage": 49,
+          "coverage": 46,
           "inline": true,
           "report_line": 91
         },
         {
           "type": "then",
-          "start_line": 120,
-          "end_line": 120,
+          "start_line": 116,
+          "end_line": 116,
           "coverage": 0,
           "inline": true,
-          "report_line": 120
+          "report_line": 116
         },
         {
           "type": "else",
-          "start_line": 120,
-          "end_line": 120,
-          "coverage": 260,
+          "start_line": 116,
+          "end_line": 116,
+          "coverage": 315,
           "inline": true,
-          "report_line": 120
+          "report_line": 116
         },
         {
           "type": "then",
-          "start_line": 121,
-          "end_line": 121,
+          "start_line": 117,
+          "end_line": 117,
           "coverage": 139,
           "inline": true,
-          "report_line": 121
+          "report_line": 117
         },
         {
           "type": "else",
-          "start_line": 121,
-          "end_line": 121,
-          "coverage": 121,
+          "start_line": 117,
+          "end_line": 117,
+          "coverage": 176,
           "inline": true,
-          "report_line": 121
+          "report_line": 117
         },
         {
           "type": "then",
-          "start_line": 122,
-          "end_line": 122,
+          "start_line": 118,
+          "end_line": 118,
           "coverage": 139,
           "inline": true,
-          "report_line": 122
+          "report_line": 118
         },
         {
           "type": "else",
-          "start_line": 122,
-          "end_line": 122,
-          "coverage": 121,
+          "start_line": 118,
+          "end_line": 118,
+          "coverage": 176,
           "inline": true,
-          "report_line": 122
+          "report_line": 118
         },
         {
           "type": "then",
-          "start_line": 122,
-          "end_line": 122,
+          "start_line": 118,
+          "end_line": 118,
           "coverage": 0,
           "inline": true,
-          "report_line": 122
+          "report_line": 118
         },
         {
           "type": "else",
-          "start_line": 122,
-          "end_line": 122,
-          "coverage": 260,
+          "start_line": 118,
+          "end_line": 118,
+          "coverage": 315,
           "inline": true,
-          "report_line": 122
+          "report_line": 118
         }
       ],
       "branches_covered_percent": 77.77777777777777,
@@ -6724,7 +6540,7 @@
         "",
         "  def notification_message",
         "    days_left = self.event.days_left(actual: Date.today)",
-        "    event_str = \"<span style='font-weight: bold' > #{self.event.complete_name} </span>\"",
+        "    event_str = \"<span style='font-weight: bold' > #{self.event.tour_name} </span>\"",
         "    {",
         "        key: \"upcoming_event_#{days_left}\",",
         "        event: event_str",
@@ -7137,7 +6953,7 @@
         "  ## CLASS METHODS",
         "",
         "  public",
-        "",
+        "    ",
         "    def self.viewables(user)",
         "      if user.present?",
         "        #Remove Interactuables from users than have BLOCKED ME",
@@ -7148,7 +6964,7 @@
         "        Interactuable.all",
         "      end",
         "    end",
-        "",
+        "    ",
         "  ## INSTANCE METHODS",
         "",
         "    def complete_name",
@@ -7623,7 +7439,7 @@
         "    ## CALLBACKS METHODS",
         "",
         "    def broadcast_change",
-        "        BroadcastHelper.update_notifications_header(recipient)",
+        "        BroadcastService.update_notifications_header(recipient)",
         "    end",
         "",
         "    ## CLASS METHODS",
@@ -7711,7 +7527,7 @@
         1,
         null,
         1,
-        236,
+        233,
         null,
         null,
         1,
@@ -7842,14 +7658,14 @@
         "",
         "  ## CLASS METHODS",
         "",
-        "    def self.do_search(params, user: nil)",
+        "    def self.search_by(params, user: nil)",
         "      return Publication.viewables(user) unless user.present?",
         "      return user.publications.left_joins(:likes).group(:id).order(\"COUNT(likes.id) DESC\") if params[:filter] && params[:filter]==\"populars\"",
         "      user.publications.order(created_at: :desc)",
         "    end",
         "",
         "    def self.feed(user)",
-        "      return Publication.all unless user.present?",
+        "      return Publication.all.order(\"created_at DESC\") unless user.present?",
         "",
         "      reposts = Repost.for_publications.where(user_id: [user.id, *user.following_ids]).includes(:interactuable, :user)",
         "      publis = Publication.where(user_id: user.id).or(Publication.of_user_followings(user)).or(Publication.of_user_events(user)).distinct",
@@ -7955,11 +7771,11 @@
         null,
         null,
         1,
-        74,
-        null,
         71,
         null,
-        71,
+        68,
+        null,
+        68,
         null,
         3,
         null,
@@ -8073,7 +7889,7 @@
           "type": "then",
           "start_line": 73,
           "end_line": 75,
-          "coverage": 71,
+          "coverage": 68,
           "inline": false,
           "report_line": 72
         },
@@ -8116,7 +7932,7 @@
         "",
         "    scope :by_artist, ->(artist_id) { left_joins(event: :artists).where(artists: { id: artist_id }) }",
         "    scope :with_review, -> { where.not(review: nil).where(\"TRIM(review) != ''\") }",
-        "    scope :by_friends, -> (current_user) { where(user_id: current_user.followings.pluck(:followed_id)) }",
+        "    scope :by_friends, -> (current_user) { where(user_id: current_user.followings.pluck(:followed_id) + [current_user.id]) }",
         "",
         "  ## CALLBACKS",
         "",
@@ -8150,7 +7966,7 @@
         "",
         "  ## CLASS METHODS",
         "",
-        "    def self.do_search(params, user: nil)",
+        "    def self.search_by(params, user: nil)",
         "      return Register.viewables(user) unless user.present?",
         "      return user.registers.left_joins(:likes).group(:id).order(\"COUNT(likes.id) DESC\") if params[:filter] && params[:filter]==\"populars\" ",
         "      user.registers.order(created_at: :desc)",
@@ -8227,7 +8043,7 @@
         null,
         null,
         null,
-        97,
+        1,
         1,
         76,
         null,
@@ -8278,7 +8094,7 @@
         null,
         75,
         null,
-        0,
+        55,
         null,
         null,
         null,
@@ -8288,16 +8104,16 @@
         null,
         null,
         null,
-        0,
+        55,
         75,
         null,
         null,
         1,
-        149,
-        null,
         146,
         null,
-        146,
+        143,
+        null,
+        143,
         null,
         3,
         null,
@@ -8306,8 +8122,8 @@
         null,
         null,
         1,
-        39,
-        39,
+        88,
+        88,
         null,
         null,
         1,
@@ -8318,9 +8134,9 @@
         null,
         null
       ],
-      "lines_covered_percent": 86.27450980392157,
-      "covered_lines": 44,
-      "missed_lines": 7,
+      "lines_covered_percent": 90.19607843137256,
+      "covered_lines": 46,
+      "missed_lines": 5,
       "omitted_lines": 60,
       "total_lines": 51,
       "branches": [
@@ -8456,7 +8272,7 @@
           "type": "then",
           "start_line": 90,
           "end_line": 92,
-          "coverage": 146,
+          "coverage": 143,
           "inline": false,
           "report_line": 89
         },
@@ -8472,7 +8288,7 @@
           "type": "then",
           "start_line": 101,
           "end_line": 101,
-          "coverage": 36,
+          "coverage": 85,
           "inline": true,
           "report_line": 101
         },
@@ -8896,7 +8712,7 @@
         "",
         "  ##CONFIGURATIONS",
         "",
-        "    include TicketmasterEventHelper",
+        "    include TicketmasterHelper",
         "",
         "    kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }",
         "",
@@ -8967,9 +8783,9 @@
         "",
         "  ## CLASS METHODS",
         "",
-        "    def self.do_search(params={}, order_by=\"created_at DESC\", user: nil)",
+        "    def self.search_by(params={}, user: nil)",
         "        params ||= {}",
-        "        requests = Request.order(order_by)",
+        "        requests = Request.order(\"created_at DESC\")",
         "        requests = requests.where(requester_id: user.id) if user.present?",
         "        requests = requests.by_status(params[:status].to_i) if params[:status]",
         "        requests",
@@ -9008,7 +8824,7 @@
         "    def notification_message_new_request",
         "      {",
         "          key: \"new_event\",",
-        "          tour_name: event.complete_name,",
+        "          tour_name: event.tour_name,",
         "          artist: artist&.name,",
         "      }",
         "    end",
@@ -9088,7 +8904,7 @@
         null,
         null,
         null,
-        261,
+        258,
         17,
         17,
         1,
@@ -9176,12 +8992,12 @@
         null,
         null,
         1,
-        179,
+        212,
         null,
         null,
         1,
-        54,
-        2,
+        87,
+        9,
         null,
         null,
         1,
@@ -9403,7 +9219,7 @@
           "type": "then",
           "start_line": 110,
           "end_line": 110,
-          "coverage": 52,
+          "coverage": 78,
           "inline": true,
           "report_line": 110
         },
@@ -9411,7 +9227,7 @@
           "type": "else",
           "start_line": 110,
           "end_line": 110,
-          "coverage": 2,
+          "coverage": 9,
           "inline": true,
           "report_line": 110
         },
@@ -9419,7 +9235,7 @@
           "type": "then",
           "start_line": 111,
           "end_line": 111,
-          "coverage": 2,
+          "coverage": 4,
           "inline": true,
           "report_line": 111
         },
@@ -9427,7 +9243,7 @@
           "type": "else",
           "start_line": 111,
           "end_line": 111,
-          "coverage": 0,
+          "coverage": 5,
           "inline": true,
           "report_line": 111
         },
@@ -9656,9 +9472,9 @@
           "report_line": 169
         }
       ],
-      "branches_covered_percent": 78.0,
-      "covered_branches": 39,
-      "missed_branches": 11,
+      "branches_covered_percent": 80.0,
+      "covered_branches": 40,
+      "missed_branches": 10,
       "total_branches": 50
     },
     "app/models/role.rb": {
@@ -9703,11 +9519,11 @@
         null,
         null,
         1,
-        358,
+        355,
         null,
         null,
         1,
-        274,
+        271,
         null,
         null,
         null
@@ -9774,10 +9590,10 @@
         null,
         null,
         1,
-        615,
-        615,
-        615,
-        615,
+        609,
+        609,
+        609,
+        609,
         null,
         null,
         1,
@@ -9806,7 +9622,7 @@
           "type": "else",
           "start_line": 17,
           "end_line": 17,
-          "coverage": 602,
+          "coverage": 596,
           "inline": true,
           "report_line": 17
         },
@@ -9822,7 +9638,7 @@
           "type": "else",
           "start_line": 17,
           "end_line": 17,
-          "coverage": 483,
+          "coverage": 477,
           "inline": true,
           "report_line": 17
         },
@@ -9830,7 +9646,7 @@
           "type": "then",
           "start_line": 18,
           "end_line": 18,
-          "coverage": 615,
+          "coverage": 609,
           "inline": true,
           "report_line": 18
         },
@@ -9854,7 +9670,7 @@
           "type": "else",
           "start_line": 18,
           "end_line": 18,
-          "coverage": 494,
+          "coverage": 488,
           "inline": true,
           "report_line": 18
         },
@@ -9870,7 +9686,7 @@
           "type": "then",
           "start_line": 18,
           "end_line": 18,
-          "coverage": 494,
+          "coverage": 488,
           "inline": true,
           "report_line": 18
         },
@@ -9878,7 +9694,7 @@
           "type": "then",
           "start_line": 19,
           "end_line": 19,
-          "coverage": 615,
+          "coverage": 609,
           "inline": true,
           "report_line": 19
         },
@@ -10084,6 +9900,10 @@
         "      chats.group_chat?",
         "    end",
         "",
+        "    def is_favorite?(artist_id)",
+        "      FavoriteArtist.exists?(user_id: self.id, artist_id: artist_id)",
+        "    end",
+        "",
         "end"
       ],
       "lines": [
@@ -10225,13 +10045,17 @@
         0,
         null,
         null,
+        0,
+        0,
+        null,
+        null,
         null
       ],
       "lines_covered_percent": 0.0,
       "covered_lines": 0,
-      "missed_lines": 70,
-      "omitted_lines": 69,
-      "total_lines": 70,
+      "missed_lines": 72,
+      "omitted_lines": 71,
+      "total_lines": 72,
       "branches": [
         {
           "type": "then",
@@ -10438,7 +10262,7 @@
         "class DeliveryMethods::NotificationCounter < ApplicationDeliveryMethod",
         "",
         "  def deliver",
-        "    BroadcastHelper.update_notifications_header(self.notification.recipient)",
+        "    BroadcastService.update_notifications_header(self.notification.recipient)",
         "  end",
         "",
         "end"
@@ -10465,6 +10289,142 @@
       "missed_branches": 0,
       "total_branches": 0
     },
+    "app/services/broadcast_service.rb": {
+      "source": [
+        "module BroadcastService",
+        "",
+        "    def self.add_message_to_chat(chat_entry, user)",
+        "        chat = chat_entry.chat",
+        "        Turbo::StreamsChannel.broadcast_append_to( # se añade un mensaje",
+        "            # hace actualizaciona a los usuarios que esten en el chat, \"chat_entries\" es solo un label",
+        "            [ chat, user, \"chat_entries\" ], # = turbo_stream_from [@chat, current_user] \"chat_entries\" if @chat",
+        "            target: \"chat_entries\", # {id: \"chat_entries\" ... }",
+        "            partial: \"chat_entries/index_item\",",
+        "            locals: { chat_entry: chat_entry, current_user: user }",
+        "        )",
+        "    end",
+        "",
+        "    def self.remove_chat_from_sidebar(chat, user)",
+        "        Turbo::StreamsChannel.broadcast_remove_to(",
+        "            [user, :sidebar],",
+        "            target: \"chat_#{chat.id}\"",
+        "        )",
+        "    end",
+        "",
+        "    def self.append_chat_to_sidebar(chat, user)",
+        "        Turbo::StreamsChannel.broadcast_prepend_to(",
+        "            [user, \"sidebar\"],",
+        "            target: \"chats_list\",",
+        "            partial: \"chats/sidebar_chat\",",
+        "            locals: { chat: chat, current_user: user }",
+        "        )",
+        "    end",
+        "",
+        "    def self.replace_chat_in_sidebar(chat, user)",
+        "        Turbo::StreamsChannel.broadcast_replace_to(",
+        "            [user, \"sidebar\"],",
+        "            target: \"chat_#{chat.id}\",",
+        "            partial: \"chats/sidebar_chat\",",
+        "            locals: { chat: chat, current_user: user }",
+        "        )",
+        "    end",
+        "",
+        "    def self.update_messages_header(user)",
+        "        Turbo::StreamsChannel.broadcast_replace_to( # se reemplaza todo el messages_header del header",
+        "            # hace actualizacion a a todos los usuarios",
+        "            [ user, \"messages_header\" ], # = turbo_stream_from current_user, \"messages_header\"",
+        "            target: \"messages_header\", # {id: \"messages_header\" ... }",
+        "            partial: \"layouts/shared/messages_bubble\",",
+        "            locals: { current_user: user }",
+        "        )",
+        "    end",
+        "",
+        "    def self.update_notifications_header(user)",
+        "        Turbo::StreamsChannel.broadcast_replace_to( # se reemplaza todo el notifications_header del header",
+        "            # hace actualizacion a a todos los usuarios",
+        "            [ user, \"notifications_header\" ], # = turbo_stream_from current_user, \"notifications_header\"",
+        "            target: \"notifications_header\", # {id: \"notifications_header\" ... }",
+        "            partial: \"layouts/shared/notifications_bubble\",",
+        "            locals: { current_user: user }",
+        "        )",
+        "    end",
+        "",
+        "end"
+      ],
+      "lines": [
+        1,
+        null,
+        1,
+        8,
+        8,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        8,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        8,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        9,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        9,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        9,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 14,
+      "missed_lines": 0,
+      "omitted_lines": 45,
+      "total_lines": 14,
+      "branches": [
+
+      ],
+      "branches_covered_percent": 100.0,
+      "covered_branches": 0,
+      "missed_branches": 0,
+      "total_branches": 0
+    },
     "app/services/ticketmaster_service.rb": {
       "source": [
         "require \"net/http\"",
@@ -10473,7 +10433,7 @@
         "",
         "class TicketmasterService",
         "",
-        "    extend TicketmasterEventHelper",
+        "    extend TicketmasterHelper",
         "",
         "    API_KEY = Rails.application.credentials.ticketmaster[:api_key]",
         "",
@@ -10666,9 +10626,9 @@
         null,
         null,
         1,
-        144,
+        141,
         null,
-        548,
+        542,
         null,
         null,
         null,
@@ -10680,7 +10640,7 @@
         null,
         null,
         null,
-        554,
+        548,
         null,
         null,
         1,
@@ -10956,19 +10916,19 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 427,
+        "covered": 431,
         "missed": 114,
-        "omitted": 380,
-        "total": 541,
-        "percent": 78.9279112754159,
-        "strength": 5.2347504621072085
+        "omitted": 391,
+        "total": 545,
+        "percent": 79.08256880733946,
+        "strength": 5.102752293577981
       },
       "branches": {
         "covered": 69,
         "missed": 51,
         "total": 120,
         "percent": 57.5,
-        "strength": 5.583333333333333
+        "strength": 5.408333333333333
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -11010,19 +10970,19 @@
     },
     "Models": {
       "lines": {
-        "covered": 673,
+        "covered": 665,
         "missed": 144,
-        "omitted": 969,
-        "total": 817,
-        "percent": 82.37454100367196,
-        "strength": 27.526315789473685
+        "omitted": 961,
+        "total": 809,
+        "percent": 82.20024721878863,
+        "strength": 27.47095179233622
       },
       "branches": {
-        "covered": 177,
-        "missed": 113,
-        "total": 290,
-        "percent": 61.03448275862069,
-        "strength": 31.444827586206898
+        "covered": 176,
+        "missed": 112,
+        "total": 288,
+        "percent": 61.111111111111114,
+        "strength": 32.33680555555556
       },
       "files": [
         "app/models/ability.rb",
@@ -11073,25 +11033,23 @@
     },
     "Helpers": {
       "lines": {
-        "covered": 94,
+        "covered": 79,
         "missed": 13,
-        "omitted": 125,
-        "total": 107,
-        "percent": 87.85046728971963,
-        "strength": 49.654205607476634
+        "omitted": 79,
+        "total": 92,
+        "percent": 85.8695652173913,
+        "strength": 57.141304347826086
       },
       "branches": {
         "covered": 24,
         "missed": 15,
         "total": 39,
         "percent": 61.53846153846154,
-        "strength": 61.15384615384615
+        "strength": 62.17948717948718
       },
       "files": [
         "app/helpers/application_helper.rb",
-        "app/helpers/broadcast_helper.rb",
-        "app/helpers/home_helper.rb",
-        "app/helpers/ticketmaster_event_helper.rb"
+        "app/helpers/ticketmaster_helper.rb"
       ]
     },
     "Views": {
@@ -11157,12 +11115,12 @@
     },
     "Ungrouped": {
       "lines": {
-        "covered": 28,
+        "covered": 42,
         "missed": 41,
-        "omitted": 60,
-        "total": 69,
-        "percent": 40.57971014492754,
-        "strength": 19.202898550724637
+        "omitted": 105,
+        "total": 83,
+        "percent": 50.602409638554214,
+        "strength": 16.57831325301205
       },
       "branches": {
         "covered": 0,
@@ -11175,6 +11133,7 @@
         "app/notifiers/application_delivery_method.rb",
         "app/notifiers/application_notifier.rb",
         "app/notifiers/delivery_methods/notification_counter.rb",
+        "app/services/broadcast_service.rb",
         "app/services/ticketmaster_service.rb"
       ]
     }
@@ -11182,1777 +11141,6 @@
   "errors": {
   },
   "history": [
-    {
-      "created_at": "2026-09-26T13:03:16Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 38.63,
-        "branch": 8.62
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.66,
-          "branch": 7.46
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 55.65,
-          "branch": 8.45
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 42.99,
-          "branch": 12.82
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 37.14,
-          "branch": 10.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 56.0,
-          "branch": 35.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 41.5,
-          "branch": 17.24
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 65.9,
-          "branch": 30.0
-        },
-        "app/models/application_record.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/artist.rb": {
-          "line": 55.93,
-          "branch": 0.0
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 46.25,
-          "branch": 0.0
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 49.01,
-          "branch": 0.0
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 69.62,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 44.44
-        },
-        "app/models/user.rb": {
-          "line": 65.71,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 40.62,
-          "branch": 10.0
-        }
-      }
-    },
-    {
-      "created_at": "2026-09-26T13:04:00Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 36.94,
-        "branch": 12.11
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.11,
-          "branch": 6.71
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 52.63,
-          "branch": 13.02
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 51.4,
-          "branch": 33.33
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 25.71,
-          "branch": 0.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 50.0,
-          "branch": 30.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 58.49,
-          "branch": 44.82
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 70.45,
-          "branch": 40.0
-        },
-        "app/models/application_record.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/artist.rb": {
-          "line": 61.01,
-          "branch": 6.25
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 66.25,
-          "branch": 22.22
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 66.66,
-          "branch": 9.09
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 68.75,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 50.0
-        },
-        "app/models/user.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 28.12,
-          "branch": 0.0
-        }
-      }
-    },
-    {
-      "created_at": "2026-09-26T13:04:59Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 37.65,
-        "branch": 12.73
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.66,
-          "branch": 7.46
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 52.26,
-          "branch": 12.67
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 51.4,
-          "branch": 33.33
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 41.42,
-          "branch": 10.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 56.0,
-          "branch": 35.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 58.49,
-          "branch": 44.82
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 70.45,
-          "branch": 40.0
-        },
-        "app/models/application_record.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/artist.rb": {
-          "line": 55.93,
-          "branch": 0.0
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 66.25,
-          "branch": 22.22
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 66.66,
-          "branch": 9.09
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 68.75,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 50.0
-        },
-        "app/models/user.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 45.31,
-          "branch": 10.0
-        }
-      }
-    },
-    {
-      "created_at": "2026-09-26T13:05:51Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 36.99,
-        "branch": 12.11
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.11,
-          "branch": 6.71
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 52.76,
-          "branch": 13.02
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 51.4,
-          "branch": 33.33
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 25.71,
-          "branch": 0.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 50.0,
-          "branch": 30.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 58.49,
-          "branch": 44.82
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 70.45,
-          "branch": 40.0
-        },
-        "app/models/application_record.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/artist.rb": {
-          "line": 61.01,
-          "branch": 6.25
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 66.25,
-          "branch": 22.22
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 66.66,
-          "branch": 9.09
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 70.51,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 50.0
-        },
-        "app/models/user.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 28.12,
-          "branch": 0.0
-        }
-      }
-    },
-    {
-      "created_at": "2026-09-26T13:06:40Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 36.92,
-        "branch": 12.11
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.11,
-          "branch": 6.71
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 52.57,
-          "branch": 13.02
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 51.4,
-          "branch": 33.33
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 25.71,
-          "branch": 0.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 50.0,
-          "branch": 30.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 58.49,
-          "branch": 44.82
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 70.45,
-          "branch": 40.0
-        },
-        "app/models/application_record.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/artist.rb": {
-          "line": 61.01,
-          "branch": 6.25
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 66.25,
-          "branch": 22.22
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 66.66,
-          "branch": 9.09
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 67.9,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 50.0
-        },
-        "app/models/user.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 28.12,
-          "branch": 0.0
-        }
-      }
-    },
-    {
-      "created_at": "2026-09-26T13:08:08Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 36.92,
-        "branch": 12.11
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.11,
-          "branch": 6.71
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 52.57,
-          "branch": 13.02
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 51.4,
-          "branch": 33.33
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 25.71,
-          "branch": 0.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 50.0,
-          "branch": 30.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 58.49,
-          "branch": 44.82
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 70.45,
-          "branch": 40.0
-        },
-        "app/models/application_record.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/artist.rb": {
-          "line": 61.01,
-          "branch": 6.25
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 66.25,
-          "branch": 22.22
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 66.66,
-          "branch": 9.09
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 67.9,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 50.0
-        },
-        "app/models/user.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 28.12,
-          "branch": 0.0
-        }
-      }
-    },
-    {
-      "created_at": "2026-09-26T13:08:41Z",
-      "branch": "testing",
-      "commit": "cec41f6eaff7696a0cdaf0ab5377d27294b291ad",
-      "totals": {
-        "line": 36.92,
-        "branch": 12.11
-      },
-      "groups": {
-        "Controllers": {
-          "line": 13.11,
-          "branch": 6.71
-        },
-        "Channels": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "Models": {
-          "line": 52.57,
-          "branch": 13.02
-        },
-        "Mailers": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Helpers": {
-          "line": 51.4,
-          "branch": 33.33
-        },
-        "Views": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Jobs": {
-          "line": 0.0,
-          "branch": 100.0
-        },
-        "Libraries": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "Ungrouped": {
-          "line": 25.71,
-          "branch": 0.0
-        }
-      },
-      "files": {
-        "app/channels/application_cable/channel.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/channels/application_cable/connection.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/controllers/application_controller.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/controllers/artists_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/chats_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/comments_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/events_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/future_assistances_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/home_controller.rb": {
-          "line": 100.0,
-          "branch": 50.0
-        },
-        "app/controllers/interactuables_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/notifications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/publications_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/registers_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/requests_controller.rb": {
-          "line": 50.0,
-          "branch": 30.0
-        },
-        "app/controllers/users/registrations_controller.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/controllers/users_controller.rb": {
-          "line": 26.16,
-          "branch": 0.0
-        },
-        "app/helpers/application_helper.rb": {
-          "line": 58.49,
-          "branch": 44.82
-        },
-        "app/helpers/broadcast_helper.rb": {
-          "line": 50.0,
-          "branch": 100.0
-        },
-        "app/helpers/home_helper.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/helpers/ticketmaster_event_helper.rb": {
-          "line": 41.02,
-          "branch": 0.0
-        },
-        "app/jobs/application_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/jobs/chat_entry_broadcast_job.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/mailers/application_mailer.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/ability.rb": {
-          "line": 70.45,
-          "branch": 40.0
-        },
-        "app/models/application_record.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/artist.rb": {
-          "line": 61.01,
-          "branch": 6.25
-        },
-        "app/models/artists_event.rb": {
-          "line": 100.0,
-          "branch": 100.0
-        },
-        "app/models/chat.rb": {
-          "line": 42.85,
-          "branch": 0.0
-        },
-        "app/models/chat_entry.rb": {
-          "line": 54.28,
-          "branch": 0.0
-        },
-        "app/models/chat_user.rb": {
-          "line": 58.33,
-          "branch": 0.0
-        },
-        "app/models/comment.rb": {
-          "line": 47.72,
-          "branch": 0.0
-        },
-        "app/models/country.rb": {
-          "line": 77.77,
-          "branch": 50.0
-        },
-        "app/models/event.rb": {
-          "line": 66.25,
-          "branch": 22.22
-        },
-        "app/models/favorite_artist.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/future_assistance.rb": {
-          "line": 55.31,
-          "branch": 0.0
-        },
-        "app/models/genre.rb": {
-          "line": 66.66,
-          "branch": 0.0
-        },
-        "app/models/interactuable.rb": {
-          "line": 50.0,
-          "branch": 0.0
-        },
-        "app/models/like.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/models/notification.rb": {
-          "line": 61.76,
-          "branch": 0.0
-        },
-        "app/models/publication.rb": {
-          "line": 44.44,
-          "branch": 0.0
-        },
-        "app/models/register.rb": {
-          "line": 66.66,
-          "branch": 9.09
-        },
-        "app/models/relation.rb": {
-          "line": 65.38,
-          "branch": 0.0
-        },
-        "app/models/repost.rb": {
-          "line": 70.83,
-          "branch": 0.0
-        },
-        "app/models/request.rb": {
-          "line": 67.9,
-          "branch": 27.27
-        },
-        "app/models/role.rb": {
-          "line": 87.5,
-          "branch": 100.0
-        },
-        "app/models/ubication.rb": {
-          "line": 90.9,
-          "branch": 50.0
-        },
-        "app/models/user.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_delivery_method.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/application_notifier.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/notifiers/delivery_methods/notification_counter.rb": {
-          "line": 0.0,
-          "branch": 0.0
-        },
-        "app/services/ticketmaster_service.rb": {
-          "line": 28.12,
-          "branch": 0.0
-        }
-      }
-    },
     {
       "created_at": "2026-09-26T13:09:22Z",
       "branch": "testing",
@@ -36473,6 +34661,1749 @@
           "branch": 100.0
         },
         "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 34.92,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T14:09:14Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 42.44,
+        "branch": 26.83
+      },
+      "groups": {
+        "Controllers": {
+          "line": 2.21,
+          "branch": 0.0
+        },
+        "Channels": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 66.74,
+          "branch": 40.62
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 63.04,
+          "branch": 28.2
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 36.36,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 49.39,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 46.15,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 54.71,
+          "branch": 31.03
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 74.35,
+          "branch": 20.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 30.0,
+          "branch": 100.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 90.56,
+          "branch": 78.57
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 97.5,
+          "branch": 66.66
+        },
+        "app/models/chat_entry.rb": {
+          "line": 88.57,
+          "branch": 100.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 100.0,
+          "branch": 66.66
+        },
+        "app/models/comment.rb": {
+          "line": 86.36,
+          "branch": 63.15
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 87.17,
+          "branch": 58.33
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 80.85,
+          "branch": 56.52
+        },
+        "app/models/genre.rb": {
+          "line": 66.66,
+          "branch": 0.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 67.5,
+          "branch": 20.0
+        },
+        "app/models/like.rb": {
+          "line": 96.29,
+          "branch": 62.5
+        },
+        "app/models/notification.rb": {
+          "line": 61.76,
+          "branch": 0.0
+        },
+        "app/models/publication.rb": {
+          "line": 55.55,
+          "branch": 42.85
+        },
+        "app/models/register.rb": {
+          "line": 60.78,
+          "branch": 31.81
+        },
+        "app/models/relation.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/repost.rb": {
+          "line": 95.83,
+          "branch": 50.0
+        },
+        "app/models/request.rb": {
+          "line": 58.53,
+          "branch": 20.0
+        },
+        "app/models/role.rb": {
+          "line": 62.5,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 63.63,
+          "branch": 16.66
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 66.66,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 34.92,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T14:10:44Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 42.57,
+        "branch": 27.46
+      },
+      "groups": {
+        "Controllers": {
+          "line": 2.21,
+          "branch": 0.0
+        },
+        "Channels": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 66.99,
+          "branch": 41.66
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 63.04,
+          "branch": 28.2
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 36.36,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 49.39,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 46.15,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 54.71,
+          "branch": 31.03
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 74.35,
+          "branch": 20.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 30.0,
+          "branch": 100.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 90.56,
+          "branch": 78.57
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 97.5,
+          "branch": 66.66
+        },
+        "app/models/chat_entry.rb": {
+          "line": 88.57,
+          "branch": 100.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 100.0,
+          "branch": 66.66
+        },
+        "app/models/comment.rb": {
+          "line": 86.36,
+          "branch": 63.15
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 87.17,
+          "branch": 58.33
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 80.85,
+          "branch": 56.52
+        },
+        "app/models/genre.rb": {
+          "line": 66.66,
+          "branch": 0.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 67.5,
+          "branch": 20.0
+        },
+        "app/models/like.rb": {
+          "line": 96.29,
+          "branch": 62.5
+        },
+        "app/models/notification.rb": {
+          "line": 61.76,
+          "branch": 0.0
+        },
+        "app/models/publication.rb": {
+          "line": 55.55,
+          "branch": 42.85
+        },
+        "app/models/register.rb": {
+          "line": 60.78,
+          "branch": 31.81
+        },
+        "app/models/relation.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/repost.rb": {
+          "line": 95.83,
+          "branch": 50.0
+        },
+        "app/models/request.rb": {
+          "line": 60.97,
+          "branch": 26.0
+        },
+        "app/models/role.rb": {
+          "line": 62.5,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 63.63,
+          "branch": 16.66
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 66.66,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 34.92,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T14:19:19Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 78.74,
+        "branch": 60.79
+      },
+      "groups": {
+        "Controllers": {
+          "line": 75.97,
+          "branch": 53.33
+        },
+        "Channels": {
+          "line": 50.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 83.68,
+          "branch": 70.13
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 85.86,
+          "branch": 61.53
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 36.36,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 50.6,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 53.84,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 88.52,
+          "branch": 78.57
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 64.7,
+          "branch": 57.14
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 87.5,
+          "branch": 75.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 83.87,
+          "branch": 40.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 100.0,
+          "branch": 66.66
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 74.41,
+          "branch": 28.57
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 56.0,
+          "branch": 0.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 52.5,
+          "branch": 37.5
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 97.61,
+          "branch": 83.33
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 100.0,
+          "branch": 75.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 94.39,
+          "branch": 50.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 84.9,
+          "branch": 68.96
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 87.17,
+          "branch": 40.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 30.0,
+          "branch": 100.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 95.45,
+          "branch": 70.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 92.45,
+          "branch": 78.57
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 100.0,
+          "branch": 83.33
+        },
+        "app/models/chat_entry.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 100.0,
+          "branch": 83.33
+        },
+        "app/models/comment.rb": {
+          "line": 93.18,
+          "branch": 68.42
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 97.43,
+          "branch": 86.11
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 91.48,
+          "branch": 82.6
+        },
+        "app/models/genre.rb": {
+          "line": 83.33,
+          "branch": 50.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 72.5,
+          "branch": 20.0
+        },
+        "app/models/like.rb": {
+          "line": 96.29,
+          "branch": 62.5
+        },
+        "app/models/notification.rb": {
+          "line": 82.35,
+          "branch": 50.0
+        },
+        "app/models/publication.rb": {
+          "line": 75.0,
+          "branch": 71.42
+        },
+        "app/models/register.rb": {
+          "line": 92.15,
+          "branch": 72.72
+        },
+        "app/models/relation.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/repost.rb": {
+          "line": 95.83,
+          "branch": 50.0
+        },
+        "app/models/request.rb": {
+          "line": 98.78,
+          "branch": 80.0
+        },
+        "app/models/role.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 100.0,
+          "branch": 77.77
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 34.92,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T15:59:35Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 79.0,
+        "branch": 56.39
+      },
+      "groups": {
+        "Controllers": {
+          "line": 78.92,
+          "branch": 57.5
+        },
+        "Channels": {
+          "line": 50.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 82.2,
+          "branch": 61.11
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 85.86,
+          "branch": 61.53
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 36.36,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 50.6,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 53.84,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 88.52,
+          "branch": 78.57
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 64.7,
+          "branch": 57.14
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 87.5,
+          "branch": 75.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 83.87,
+          "branch": 40.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 100.0,
+          "branch": 66.66
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 83.72,
+          "branch": 50.0
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 76.0,
+          "branch": 50.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 70.0,
+          "branch": 43.75
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 97.61,
+          "branch": 83.33
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 100.0,
+          "branch": 75.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 94.39,
+          "branch": 50.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 84.9,
+          "branch": 68.96
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 87.17,
+          "branch": 40.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 30.0,
+          "branch": 100.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 95.45,
+          "branch": 70.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 92.45,
+          "branch": 64.28
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 100.0,
+          "branch": 83.33
+        },
+        "app/models/chat_entry.rb": {
+          "line": 97.14,
+          "branch": 50.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 95.83,
+          "branch": 66.66
+        },
+        "app/models/comment.rb": {
+          "line": 86.36,
+          "branch": 42.1
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 97.43,
+          "branch": 77.77
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 91.48,
+          "branch": 69.56
+        },
+        "app/models/genre.rb": {
+          "line": 83.33,
+          "branch": 50.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 72.5,
+          "branch": 20.0
+        },
+        "app/models/like.rb": {
+          "line": 88.88,
+          "branch": 37.5
+        },
+        "app/models/notification.rb": {
+          "line": 82.35,
+          "branch": 50.0
+        },
+        "app/models/publication.rb": {
+          "line": 72.22,
+          "branch": 50.0
+        },
+        "app/models/register.rb": {
+          "line": 90.19,
+          "branch": 59.09
+        },
+        "app/models/relation.rb": {
+          "line": 92.3,
+          "branch": 50.0
+        },
+        "app/models/repost.rb": {
+          "line": 91.66,
+          "branch": 33.33
+        },
+        "app/models/request.rb": {
+          "line": 98.78,
+          "branch": 80.0
+        },
+        "app/models/role.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 100.0,
+          "branch": 77.77
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 34.92,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T16:03:37Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 44.58,
+        "branch": 13.41
+      },
+      "groups": {
+        "Controllers": {
+          "line": 26.43,
+          "branch": 10.0
+        },
+        "Channels": {
+          "line": 50.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 57.23,
+          "branch": 14.23
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 50.0,
+          "branch": 28.2
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 40.96,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 50.0,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 77.04,
+          "branch": 50.0
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 100.0,
+          "branch": 50.0
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 71.96,
+          "branch": 50.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 56.6,
+          "branch": 37.93
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 41.02,
+          "branch": 0.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 81.81,
+          "branch": 40.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 71.69,
+          "branch": 14.28
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 42.5,
+          "branch": 0.0
+        },
+        "app/models/chat_entry.rb": {
+          "line": 54.28,
+          "branch": 0.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 58.33,
+          "branch": 0.0
+        },
+        "app/models/comment.rb": {
+          "line": 47.72,
+          "branch": 0.0
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 69.23,
+          "branch": 44.44
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 55.31,
+          "branch": 0.0
+        },
+        "app/models/genre.rb": {
+          "line": 83.33,
+          "branch": 50.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 50.0,
+          "branch": 0.0
+        },
+        "app/models/like.rb": {
+          "line": 66.66,
+          "branch": 0.0
+        },
+        "app/models/notification.rb": {
+          "line": 82.35,
+          "branch": 50.0
+        },
+        "app/models/publication.rb": {
+          "line": 52.77,
+          "branch": 7.14
+        },
+        "app/models/register.rb": {
+          "line": 74.5,
+          "branch": 13.63
+        },
+        "app/models/relation.rb": {
+          "line": 92.3,
+          "branch": 50.0
+        },
+        "app/models/repost.rb": {
+          "line": 70.83,
+          "branch": 0.0
+        },
+        "app/models/request.rb": {
+          "line": 43.9,
+          "branch": 0.0
+        },
+        "app/models/role.rb": {
+          "line": 87.5,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 90.9,
+          "branch": 44.44
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
+          "line": 57.14,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 31.74,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T17:38:19Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 79.05,
+        "branch": 56.39
+      },
+      "groups": {
+        "Controllers": {
+          "line": 79.08,
+          "branch": 57.5
+        },
+        "Channels": {
+          "line": 50.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 82.2,
+          "branch": 61.11
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 85.86,
+          "branch": 61.53
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 36.36,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 50.6,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 53.84,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 89.23,
+          "branch": 78.57
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 64.7,
+          "branch": 57.14
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 87.5,
+          "branch": 75.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 83.87,
+          "branch": 40.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 100.0,
+          "branch": 66.66
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 83.72,
+          "branch": 50.0
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 76.0,
+          "branch": 50.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 70.0,
+          "branch": 43.75
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 97.61,
+          "branch": 83.33
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 100.0,
+          "branch": 75.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 94.39,
+          "branch": 50.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 84.9,
+          "branch": 68.96
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 87.17,
+          "branch": 40.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 30.0,
+          "branch": 100.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 95.45,
+          "branch": 70.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 92.45,
+          "branch": 64.28
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 100.0,
+          "branch": 83.33
+        },
+        "app/models/chat_entry.rb": {
+          "line": 97.14,
+          "branch": 50.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 95.83,
+          "branch": 66.66
+        },
+        "app/models/comment.rb": {
+          "line": 86.36,
+          "branch": 42.1
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 97.43,
+          "branch": 77.77
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 91.48,
+          "branch": 69.56
+        },
+        "app/models/genre.rb": {
+          "line": 83.33,
+          "branch": 50.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 72.5,
+          "branch": 20.0
+        },
+        "app/models/like.rb": {
+          "line": 88.88,
+          "branch": 37.5
+        },
+        "app/models/notification.rb": {
+          "line": 82.35,
+          "branch": 50.0
+        },
+        "app/models/publication.rb": {
+          "line": 72.22,
+          "branch": 50.0
+        },
+        "app/models/register.rb": {
+          "line": 90.19,
+          "branch": 59.09
+        },
+        "app/models/relation.rb": {
+          "line": 92.3,
+          "branch": 50.0
+        },
+        "app/models/repost.rb": {
+          "line": 91.66,
+          "branch": 33.33
+        },
+        "app/models/request.rb": {
+          "line": 98.78,
+          "branch": 80.0
+        },
+        "app/models/role.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 100.0,
+          "branch": 77.77
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/ticketmaster_service.rb": {
+          "line": 34.92,
+          "branch": 0.0
+        }
+      }
+    },
+    {
+      "created_at": "2026-10-01T17:59:56Z",
+      "branch": "testing",
+      "commit": "1556f663362db48039a6f3e3b6851d61b5eb9fad",
+      "totals": {
+        "line": 79.05,
+        "branch": 56.39
+      },
+      "groups": {
+        "Controllers": {
+          "line": 79.08,
+          "branch": 57.5
+        },
+        "Channels": {
+          "line": 50.0,
+          "branch": 100.0
+        },
+        "Models": {
+          "line": 82.2,
+          "branch": 61.11
+        },
+        "Mailers": {
+          "line": 0.0,
+          "branch": 100.0
+        },
+        "Helpers": {
+          "line": 85.86,
+          "branch": 61.53
+        },
+        "Views": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Jobs": {
+          "line": 36.36,
+          "branch": 100.0
+        },
+        "Libraries": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "Ungrouped": {
+          "line": 50.6,
+          "branch": 0.0
+        }
+      },
+      "files": {
+        "app/channels/application_cable/channel.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/channels/application_cable/connection.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/controllers/application_controller.rb": {
+          "line": 53.84,
+          "branch": 100.0
+        },
+        "app/controllers/artists_controller.rb": {
+          "line": 89.23,
+          "branch": 78.57
+        },
+        "app/controllers/chats_controller.rb": {
+          "line": 64.7,
+          "branch": 57.14
+        },
+        "app/controllers/comments_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/events_controller.rb": {
+          "line": 87.5,
+          "branch": 75.0
+        },
+        "app/controllers/future_assistances_controller.rb": {
+          "line": 83.87,
+          "branch": 40.0
+        },
+        "app/controllers/home_controller.rb": {
+          "line": 100.0,
+          "branch": 66.66
+        },
+        "app/controllers/interactuables_controller.rb": {
+          "line": 83.72,
+          "branch": 50.0
+        },
+        "app/controllers/notifications_controller.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/controllers/publications_controller.rb": {
+          "line": 76.0,
+          "branch": 50.0
+        },
+        "app/controllers/registers_controller.rb": {
+          "line": 70.0,
+          "branch": 43.75
+        },
+        "app/controllers/requests_controller.rb": {
+          "line": 97.61,
+          "branch": 83.33
+        },
+        "app/controllers/users/registrations_controller.rb": {
+          "line": 100.0,
+          "branch": 75.0
+        },
+        "app/controllers/users_controller.rb": {
+          "line": 94.39,
+          "branch": 50.0
+        },
+        "app/helpers/application_helper.rb": {
+          "line": 84.9,
+          "branch": 68.96
+        },
+        "app/helpers/ticketmaster_helper.rb": {
+          "line": 87.17,
+          "branch": 40.0
+        },
+        "app/jobs/application_job.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/jobs/chat_entry_broadcast_job.rb": {
+          "line": 30.0,
+          "branch": 100.0
+        },
+        "app/mailers/application_mailer.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/ability.rb": {
+          "line": 95.45,
+          "branch": 70.0
+        },
+        "app/models/application_record.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/models/artist.rb": {
+          "line": 92.45,
+          "branch": 64.28
+        },
+        "app/models/artists_event.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/chat.rb": {
+          "line": 100.0,
+          "branch": 83.33
+        },
+        "app/models/chat_entry.rb": {
+          "line": 97.14,
+          "branch": 50.0
+        },
+        "app/models/chat_user.rb": {
+          "line": 95.83,
+          "branch": 66.66
+        },
+        "app/models/comment.rb": {
+          "line": 86.36,
+          "branch": 42.1
+        },
+        "app/models/country.rb": {
+          "line": 77.77,
+          "branch": 50.0
+        },
+        "app/models/event.rb": {
+          "line": 97.43,
+          "branch": 77.77
+        },
+        "app/models/favorite_artist.rb": {
+          "line": 85.71,
+          "branch": 50.0
+        },
+        "app/models/future_assistance.rb": {
+          "line": 91.48,
+          "branch": 69.56
+        },
+        "app/models/genre.rb": {
+          "line": 83.33,
+          "branch": 50.0
+        },
+        "app/models/interactuable.rb": {
+          "line": 72.5,
+          "branch": 20.0
+        },
+        "app/models/like.rb": {
+          "line": 88.88,
+          "branch": 37.5
+        },
+        "app/models/notification.rb": {
+          "line": 82.35,
+          "branch": 50.0
+        },
+        "app/models/publication.rb": {
+          "line": 72.22,
+          "branch": 50.0
+        },
+        "app/models/register.rb": {
+          "line": 90.19,
+          "branch": 59.09
+        },
+        "app/models/relation.rb": {
+          "line": 92.3,
+          "branch": 50.0
+        },
+        "app/models/repost.rb": {
+          "line": 91.66,
+          "branch": 33.33
+        },
+        "app/models/request.rb": {
+          "line": 98.78,
+          "branch": 80.0
+        },
+        "app/models/role.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/models/ubication.rb": {
+          "line": 100.0,
+          "branch": 77.77
+        },
+        "app/models/user.rb": {
+          "line": 0.0,
+          "branch": 0.0
+        },
+        "app/notifiers/application_delivery_method.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/application_notifier.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/notifiers/delivery_methods/notification_counter.rb": {
+          "line": 100.0,
+          "branch": 100.0
+        },
+        "app/services/broadcast_service.rb": {
           "line": 100.0,
           "branch": 100.0
         },

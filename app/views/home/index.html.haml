@@ -1,38 +1,61 @@
-.widget-content{style: "color: #a4b3c4;"}
+.home
 
   - if @registers.present?
-    %div{style: "margin-top: 20px;"}
-      .title_section
-        =link_to registers_path do
-          =t("recents", model: Register.plural).upcase
-        =link_to registers_path do
+    %section.home-section.registers-section
+      .section-heading
+        .section-title
+          %span.section-accent.event-accent
+          = link_to registers_path do
+            = t("recents", model: Register.plural).upcase
+
+        = link_to registers_path, class: "section-more" do
           = t("more").upcase
-      .separator{style: "margin-bottom: 15px; "}
+          %span →
+
       = render "registers/index_cards", registers: @registers
-    
-  %div{style: "margin-top: 20px;"}
-    .title_section
-      =link_to artists_path do
-        = t("populars", model: Artist.plural).upcase
-      =link_to artists_path do
-        = t("more").upcase
-    .separator{style: "margin-bottom: 15px; "}
-    .items
-      = render "artists/index_cards", artists: @artists
 
 
-  %div{style: "margin-top: 20px;"}
-    .title_section
-      =link_to events_path(country: current_user&.ubication&.country&.code) do
-        =t("upcoming").upcase
-        =Event.plural.upcase
-        - if current_user && current_user&.ubication&.country
-          = t("in").upcase
-          = current_user.ubication.country.translation.upcase
-      =link_to events_path(country: current_user&.ubication&.country&.code) do
+  %section.home-section.artists-section
+    .section-heading
+      .section-title
+        %span.section-accent.artist-accent
+        = link_to artists_path do
+          = t("populars", model: Artist.plural).upcase
+
+      = link_to artists_path, class: "section-more" do
         = t("more").upcase
-    .separator{style: "margin-bottom: 15px; "}
+        %span →
+
+    .artists-grid
+      - @artists.each do |artist|
+        = link_to artist_path(artist), class: "artist-card" do
+          .artist-card-image
+            - if artist.photo.present?
+              = image_tag artist.photo
+            - else
+              .artist-placeholder
+                = artist.name.first.upcase
+
+          .artist-card-info
+            %span.artist-card-name= artist.name
+
+
+  %section.home-section.events-section
+    .section-heading
+      .section-title
+        %span.section-accent.event-accent
+        = link_to events_path(country: current_user&.ubication&.country&.code) do
+          = t("upcoming").upcase
+          = Event.plural.upcase
+          - if current_user&.ubication&.country
+            = t("in").upcase
+            = current_user.ubication.country.translation.upcase
+
+      = link_to events_path(country: current_user&.ubication&.country&.code), class: "section-more" do
+        = t("more").upcase
+        %span →
+
     - unless @events.empty?
-      .section-box
+      .events-home
         = render "events/index", events: @events, photo: false
-        
+

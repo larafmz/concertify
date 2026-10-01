@@ -114,7 +114,7 @@ class Request < ApplicationRecord
     def notification_message_new_request
       {
           key: "new_event",
-          tour_name: event.complete_name,
+          tour_name: event.tour_name,
           artist: artist&.name,
       }
     end

@@ -3,21 +3,21 @@
 
     .modal_header
       %div
-        %h5=t("crud.add", model: Event.singular)
+        %h5= t("crud.add", model: Event.singular)
         - if @request.requester&.username && @request.created_at
           .soft-color{style: "font-size: 13px;"}
-            = t("sent_ago_by", user: @request.requester.username , time: time_ago_in_words(@request.created_at))
+            = t("sent_ago_by", user: @request.requester.username, time: time_ago_in_words(@request.created_at))
       %button.modal_close{ data: { action: "dialog#close" } } ×
 
     = render "common/error_messages", resource: @request
-     
-    = form_with model: @request do |f|  
+
+    = form_with model: @request do |f|
       .modal_body
-        
+
         - unless @request.requester_id.present? && @request.persisted?
           = f.hidden_field :requester_id, value: current_user&.id
         = f.hidden_field :status, value: 1
-        
+
         .form-modal
 
           .form-modal-info
@@ -27,22 +27,23 @@
                 = render "events/form_fields", f: event_fields
 
             - if current_user&.admin? && @request.persisted?
-              .separator{style: "margin-top:10px;"}
+              .separator{style: "margin-top: 10px;"}
 
               .two-columns
-                %div
-                
-                  = label_tag :status, Request.human_attribute_name(:status).upcase, class: "soft-color label-custom"
-                  = f.select :status, options_for_select(Request.statuses_for_select, @request.status), {}, { class: "field-custom", id: "status_id", style: "padding: 0px;" }
-                %div
-                
-                  = label_tag :message, Request.human_attribute_name(:message).upcase, class: "soft-color label-custom"
-                  = f.text_field :message, class: "field-custom", id: "message_id"
 
-              .separator{style: "margin-top:10px;"}
-              = label_tag :existing_event_id, t("messages.exists_in_app_already").upcase, class: "soft-color label-custom"
-              = f.select :existing_event_id, options_for_select(Array(@request.matching_events).sort_by(&:tour_name).map { |event| [event.complete_info, event.id] },
-                @request.existing_event_id), { include_blank: t("verbs.select") }, { class: "field-custom", style: "padding: 0px;", id: "existing_event_id" }
+                .register-form-field
+                  = label_tag :status, Request.human_attribute_name(:status).upcase, class: "register-form-label"
+                  = f.select :status, options_for_select(Request.statuses_for_select, @request.status), {}, { class: "register-form-input", id: "status_id" }
 
-      %div
-        = f.submit t("verbs.save"), style: "float: right; height: auto;", class: "btn-custom event-color"
+                .register-form-field
+                  = label_tag :message, Request.human_attribute_name(:message).upcase, class: "register-form-label"
+                  = f.text_field :message, class: "register-form-input", id: "message_id"
+
+              .separator{style: "margin-top: 10px;"}
+
+              .register-form-field
+                = label_tag :existing_event_id, t("messages.exists_in_app_already").upcase, class: "register-form-label"
+                = f.select :existing_event_id, options_for_select(Array(@request.matching_events).sort_by(&:tour_name).map { |event| [event.complete_info, event.id] }, @request.existing_event_id), { include_blank: t("verbs.select") }, { class: "register-form-input", id: "existing_event_id" }
+
+      .register-form-actions
+        = f.submit t("verbs.save"), class: "register-form-submit event-color"

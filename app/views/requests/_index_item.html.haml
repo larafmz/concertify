@@ -3,58 +3,76 @@
 - event_date = event.date
 - status = request.status
 
-.request_item{id: "request-#{request.id}", style: "background: #{color_request(request.status)}; border-radius: 15px;"}
+.request-card{id: "request-#{request.id}", style: "border-color: #{color_request(request.status)};"}
 
-    .request
+  .request-card-main
 
-        - if request.accepted? ||  (request.status == 2 && request.existing_event_id.present?)
-            = link_to event_path(request.get_event_id) do
-                = image_tag artist&.photo if artist&.photo&.attached?
-        - elsif artist&.accepted?
-            = image_tag artist&.photo if artist&.photo.attached?
+    .request-card-image
+      - if request.accepted? || (request.status == 2 && request.existing_event_id.present?)
+        = link_to event_path(request.get_event_id), class: "request-card-image-link" do
+          - if artist&.photo&.attached?
+            = image_tag artist.photo
+      - elsif artist&.accepted?
+        - if artist.photo.attached?
+          = image_tag artist.photo
+
+    .request-card-info
+
+      - if artist
+        .request-card-artist
+          - if artist.accepted?
+            = link_to artist_path(artist), id: "link_artist_#{artist.id}", class: "request-card-artist-link" do
+              = artist.name || t("not_found")
+          - else
+            %span{id: "artist_name_#{artist.id}"}
+              = artist.name || t("not_found")
+
+        - if request.get_event_id.present?
+          = link_to event_path(request.get_event_id), class: "request-card-event-link" do
+            %span{id: "tour_name_#{request.id}", class: "request-card-event"}
+              = event.tour_name
         - else
-            %div
+          %span{id: "tour_name_#{request.id}", class: "request-card-event"}
+            = event.tour_name
 
+      .request-card-details
+        %span.request-card-detail
+          = image_tag("icon_ubication_softest_color.png")
+          %span= event.ubication&.complete_name_with_venue || t("not_found")
 
-        %div{style: "padding: 15px 15px;"}
-            - if artist
-                - if artist.accepted?
-                    = link_to artist_path(artist), id: "link_artist_#{artist.id}" do
-                        %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name || t("not_found")
-                - else
-                    %span{ style: "font-size: 20px; font-weight: 700;", id: "artist_name_#{artist.id}" }= artist&.name || t("not_found")
-                %br
-            
-            %span{ style: "font-size: 18px;", class: "soft-color", id: "tour_name_#{request.id}" } #{event.tour_name}
-            %br
+        %span.request-card-detail
+          = image_tag("icon_date_softest_color.png")
+          %span= short_date(event.date)
 
-            .softest-color{style: "font-size: 15px;" }
-                %span{style: "display:flex; align-items:center; gap:10px;"}
-                    = image_tag("icon_ubication_softest_color.png", class: "icon-img")
-                    = event.ubication&.complete_name_with_venue || t("not_found")
-                    = image_tag("icon_date_softest_color.png", class: "icon-img")
-                    = short_date(event.date)
-            
-            %span{style: "color: #{color_request(request.status)}; font-size: 16px;"}
-                ● #{request.message_request}
+      .request-card-message{style: "color: #{color_request(request.status)};"}
+        %span.request-card-message-dot
+          ●
+        %span
+          = request.message_request
 
-        %div{ style: "display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 15px 15px;"}
-            %div{style: "background: #{request.second_color_request}; color: #{color_request(request.status)}; border-radius: 15px; font-size:15px; padding: 5px 10px; " }
-                #{request.emoji_request} #{request.status_string}
-            - if can?(:update, request)
-                %div{style: "display: flex; gap: 20px;"}
-                    = link_to "✎", edit_request_path(request), data: { turbo_frame: "modal" }, id: "edit_request_#{request.id}"
-                    = link_to "✗", request_path(request), id: "destroy_request_#{request.id}",
-                        data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }
-            - if request.accepted? || request.existing_event_id.present?
-                = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom event-color", id: "view_event_#{request.id}",
-                    style: "background-color: #069e34;font-size: 13px; width: 150px;"
-    
-    .sent_at
-        = t("sent_ago_by", user: request.requester&.username , time: time_ago_in_words(request.created_at))
-        - if status == Request::STATUS_ACCEPTED
-            ="//"
-            = t("accepted_ago", time: time_ago_in_words(request.updated_at))
-        - elsif status == Request::STATUS_DENIED
-            ="//"
-            = t("denied_ago", time: time_ago_in_words(request.updated_at))
+    .request-card-side
+
+      .request-card-status{style: "background: #{request.second_color_request}; color: #{color_request(request.status)};"}
+        = "#{request.emoji_request} #{request.status_string}"
+
+      - if can?(:update, request)
+        .request-card-actions
+          = link_to "✎", edit_request_path(request), data: { turbo_frame: "modal" }, id: "edit_request_#{request.id}", class: "request-card-action"
+          = link_to "✗", request_path(request), id: "destroy_request_#{request.id}", data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }, class: "request-card-action request-card-action-danger"
+
+      - if request.accepted? || request.existing_event_id.present?
+        = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom event-color request-card-event-button", id: "view_event_#{request.id}"
+
+  .request-card-footer
+    %span
+      = t("sent_ago_by", user: request.requester&.username, time: time_ago_in_words(request.created_at))
+
+    - if status == Request::STATUS_ACCEPTED
+      %span.request-card-footer-separator //
+      %span
+        = t("accepted_ago", time: time_ago_in_words(request.updated_at))
+
+    - elsif status == Request::STATUS_DENIED
+      %span.request-card-footer-separator //
+      %span
+        = t("denied_ago", time: time_ago_in_words(request.updated_at))

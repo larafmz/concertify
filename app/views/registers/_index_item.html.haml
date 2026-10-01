@@ -2,48 +2,74 @@
 - register = register[:register] if register[:register].present?
 - event = register.event
 
-- if feed[:repost]
-    .soft-color{style: "margin-left: 15px; font-size: 15px;"}
-        - if feed[:repost].user.id == current_user.id
-            🗘 
-            = t("verbs.you_reposted")
-            = "..."
+.register-index-item
+
+  - if feed[:repost]
+    .register-index-repost
+      %span.register-index-repost-icon ↻
+
+      - if feed[:repost].user.id == current_user.id
+        = t("verbs.you_reposted")
+      - else
+        = feed[:repost].user.username
+        = " "
+        = t("verbs.reposted").downcase
+
+  .register-index-main
+
+    .register-index-user
+      = link_to user_path(register.user), class: "register-index-avatar-link" do
+        .register-index-avatar
+          - if register.user.icon.attached?
+            = image_tag register.user.icon
+          - else
+            = register.user.username.first.upcase
+
+    = link_to comments_interactuable_path(register),
+      id: "interactuable_#{register.id}",
+      class: "register-index-event-image-link" do
+
+      .register-index-event-image
+        - if event.get_photo&.attached?
+          = image_tag event.get_photo
         - else
-            🗘 
-            = feed[:repost].user.username
-            = t("verbs.reposted").downcase
-            = "..."
+          .register-index-event-placeholder
+            🎵
 
-.register_user
+    .register-index-content
 
-    = link_to user_path(register.user), class: "hover-border-icon" do
-        .link_icon 
-            = image_tag register.user.icon if register.user.icon.attached?
+      .register-index-user-info
+        = link_to user_path(register.user_id), class: "register-index-username" do
+          = register.user.username
 
-    = link_to comments_interactuable_path(register), id: "interactuable_#{register.id}" do 
-        .rectangle_icon{ style: "height: 90px; width: 150px; border: 1px solid" }
-            = image_tag event.get_photo if event.get_photo&.attached?
-    %div
-        .soft-color{style: "font-size: 15px;" }
-            = link_to user_path(register.user_id) do 
-                = register.user.username
-            %span{class: "softest-color"}= t("verbs.logged")
-        %span{ style: "font-size: 20px; font-weight: 700; font-family: Georgia, 'Times New Roman', Times, serif;" }= event.tour_name
-        .softest-color{style: "font-size: 15px;" }
-            %span{style: "display:flex; align-items:center; gap:10px;"}
-                = image_tag("icon_ubication_softest_color.png", class: "icon-img")
-                = event.ubication&.complete_name_with_venue || t("not_found")
-                = image_tag("icon_date_softest_color.png", class: "icon-img")
-                = short_date(event.date)
-        %span{style: "color: orange; "}= register.get_rating
-        - if register.review.present?
-            .section-box
-                %span{ class: "soft-color", style: "font-size: 15px;" }= simple_format(register.review)
-        
+        %span.register-index-action
+          = t("verbs.logged")
+
+      = link_to comments_interactuable_path(register),
+        class: "register-index-event-name" do
+        = event.tour_name
+
+      .register-index-details
+
+        %span.register-index-detail
+          = image_tag("icon_ubication_softest_color.png")
+          = event.ubication&.complete_name_with_venue || t("not_found")
+
+        %span.register-index-detail
+          = image_tag("icon_date_softest_color.png")
+          = short_date(event.date)
+
+      .register-index-rating
+        = register.get_rating
+
+      - if register.review.present?
+        .register-index-review
+          = simple_format(register.review)
+
+      .register-index-footer
         = render "interactuables/footer", interactuable: register
 
+  .register-index-created
+    = t("created_ago", time: time_ago_in_words(register.created_at))
 
-%div{style: " font-size: 12px; color: #808891;"}
-    = t("created_ago", time:  time_ago_in_words(register.created_at))
-
-.separator
+.register-index-separator

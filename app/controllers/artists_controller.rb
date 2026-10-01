@@ -51,12 +51,28 @@ class ArtistsController < ApplicationController
 
   def follow
     current_user.follow(@artist)
-    redirect_back fallback_location: root_path
+    respond_to do |format|
+       format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "follow-artist-#{@artist.id}",
+            partial: "artists/follow_buttoms",
+            locals: { artist: @artist }
+          )
+        end
+    end
   end
 
   def unfollow
     current_user.unfollow(@artist)
-    redirect_back fallback_location: root_path
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "follow-artist-#{@artist.id}",
+            partial: "artists/follow_buttoms",
+            locals: { artist: @artist }
+          )
+        end
+    end
   end
 
   def mark_as_favorite

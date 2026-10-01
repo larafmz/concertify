@@ -1,7 +1,0 @@
-- artists.each do |artist|
-    = link_to artist_path(artist), class: "hover-border" do
-        .rectangle_icon
-            = image_tag artist.photo if artist.photo.present?
-        .item-name.artist-color
-            = artist.name
-    

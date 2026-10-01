@@ -76,7 +76,7 @@ class Artist < ApplicationRecord
       artists_api = Array(TicketmasterService.artists_by(params))  
       artists_db = Artist.accepted
       artists_db = artists_db.by_name(params[:search]) if params[:search].present?
-      artists_db = artists_db.by_genre(Genre.find(params[:genre_id]).id) if params[:genre_id].present?
+      artists_db = artists_db.by_genre(params[:genre_id]) if params[:genre_id].present?
 
       # exclude ticketmaster ids
       ticketmaster_ids = artists_api.map { |artist| artist["id"] }

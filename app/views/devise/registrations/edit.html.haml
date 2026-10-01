@@ -1,75 +1,77 @@
-.widget-content
+.profile-edit-page
+  .profile-edit-card
 
-  %h4{style: "color: white;"}= t("account_configuration")
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    = render "common/error_messages", resource: @user
-    
-    .two-columns{style: "gap: 20px;"}
+    %h4.profile-edit-title= t("account_configuration")
 
-      .section-box{style: "display: flex; flex-direction: column; gap: 15px;"}
-        %h6{class: "soft-color"}= t("user_account.profile")
-          
-        .form-field
-          = f.label :username, User.human_attribute_name(:username), class: "soft-color label-custom"
-          = f.text_field :username, class: "field-custom", autocomplete: "username", id: "username_id", maxlength: 20
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = render "common/error_messages", resource: @user
 
-        .form-field
-          = f.label :email, User.human_attribute_name(:email), class: "soft-color label-custom"
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: "field-custom", id: "email_id"
+      .profile-edit-columns
 
-        %div{id: "ubication"}
-          = f.fields_for :ubication do |ubication_fields|
-            .two-columns{style: "gap: 20px;"}
-              %div
-                = label_tag :country_id, "📍  #{Country.singular} *", class: "soft-color label-custom"
-                = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, 
-                  @user.ubication&.country_id), { include_blank: t("verbs.select") }, { id: "country_id", class: "field-custom", style: "padding: 0px;" }
-              %div
-                = label_tag :city, Ubication.human_attribute_name(:city), class: "soft-color label-custom"
-                = ubication_fields.text_field :city, value: @user.ubication&.city, class: "field-custom", id: "city_id", autocomplete: "city"
-        
-        .form-columns{data: { controller: "character-counter" }}
-          %div
-            = label_tag :description, User.human_attribute_name(:description), class: "soft-color label-custom"
-            = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), maxlength: 500, id: "description_id",
-              style: "width: 100%; height: 100px; resize: none;", class: "field-custom", autocomplete: "description",
-              data: {  character_counter_target: "input", action: "input->character-counter#update" }
+        .profile-edit-section
+          %h6.profile-edit-section-title= t("user_account.profile")
 
-          %div
-            %span{data: { character_counter_target: "counter" }, style: "text-align: right; font-size: 12px; color: #a4b3c4;"}          
+          .profile-edit-field
+            = f.label :username, User.human_attribute_name(:username), class: "profile-edit-label"
+            = f.text_field :username, class: "profile-edit-input", autocomplete: "username", id: "username_id", maxlength: 20
 
-      %div
+          .profile-edit-field
+            = f.label :email, User.human_attribute_name(:email), class: "profile-edit-label"
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "profile-edit-input", id: "email_id"
 
-        .section-box
-          %h6{class: "soft-color"}= t("profile_icon")
-          = f.file_field :icon, style: "margin-bottom: 15px;", class: "field-custom"
-          - if @user.icon.attached?
-            .circle_icon
-              = image_tag @user.icon
+          %div{id: "ubication"}
+            = f.fields_for :ubication do |ubication_fields|
+              .profile-edit-location
+                .profile-edit-field
+                  = label_tag :country_id, "📍  #{Country.singular} *", class: "profile-edit-label"
+                  = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, @user.ubication&.country_id), { include_blank: t("verbs.select") }, { id: "country_id", class: "profile-edit-input profile-edit-select" }
 
-        .section-box{style: "display: flex; flex-direction: column; gap: 15px;"}
-          %h6{class: "soft-color"}= t("user_account.change_password")
+                .profile-edit-field
+                  = label_tag :city, Ubication.human_attribute_name(:city), class: "profile-edit-label"
+                  = ubication_fields.text_field :city, value: @user.ubication&.city, class: "profile-edit-input", id: "city_id", autocomplete: "city"
 
-          .form-field
-            = f.label :password, User.human_attribute_name(:password), class: "soft-color label-custom"
-            - if @minimum_password_length
-              %p{class: "soft-color label-custom"}
-                = "(#{t("user_account.minimum_password_length", count: @minimum_password_length)})"
-            = f.password_field :password, autocomplete: "new-password", class: "field-custom"
+          .profile-edit-description{data: { controller: "character-counter" }}
+            .profile-edit-field
+              = label_tag :description, User.human_attribute_name(:description), class: "profile-edit-label"
+              = f.text_area :description, placeholder: t("crud.add", model: User.human_attribute_name(:description)), maxlength: 500, id: "description_id", class: "profile-edit-input profile-edit-textarea", autocomplete: "description", data: { character_counter_target: "input", action: "input->character-counter#update" }
 
-          .form-field
-            = f.label :password_confirmation, t("user_account.password_confirmation"), class: "soft-color label-custom"
-            = f.password_field :password_confirmation, autocomplete: "new-password", class: "field-custom"
+            %div.profile-edit-counter
+              %span{data: { character_counter_target: "counter" }}
 
-          .form-field
-            = f.label :current_password, t("user_account.current_password"), class: "soft-color label-custom"
-            %i (#{t("user_account.need_current_password_to_confirm")})
-            = f.password_field :current_password, autocomplete: "current-password", class: "field-custom"
+        .profile-edit-side
 
+          .profile-edit-section
+            %h6.profile-edit-section-title= t("profile_icon")
 
-    .actions{style: "display: flex; justify-content: flex-end;"}
-      = f.submit t("verbs.save"), class: "btn-custom orange-color"
+            .profile-edit-avatar-upload
+              = f.file_field :icon, class: "profile-edit-input profile-edit-file"
 
-  .separator
-    = button_to t("user_account.destroy_my_account"),  registration_path(resource_name),  data: { confirm: t("user_account.sure_to_delete_account"), turbo_confirm: t("user_account.sure_to_delete_account") },
-      method: :delete, class: "btn-custom", style: "background: red; margin-top: 10px;"
+              - if @user.icon.attached?
+                .profile-edit-avatar
+                  = image_tag @user.icon
+
+          .profile-edit-section
+            %h6.profile-edit-section-title= t("user_account.change_password")
+
+            .profile-edit-field
+              = f.label :password, User.human_attribute_name(:password), class: "profile-edit-label"
+              - if @minimum_password_length
+                %span.profile-edit-hint
+                  = "(#{t("user_account.minimum_password_length", count: @minimum_password_length)})"
+              = f.password_field :password, autocomplete: "new-password", class: "profile-edit-input"
+
+            .profile-edit-field
+              = f.label :password_confirmation, t("user_account.password_confirmation"), class: "profile-edit-label"
+              = f.password_field :password_confirmation, autocomplete: "new-password", class: "profile-edit-input"
+
+            .profile-edit-field
+              = f.label :current_password, User.human_attribute_name(:current_password), class: "profile-edit-label"
+              %span.profile-edit-hint
+                = t("user_account.need_current_password_to_confirm")
+              = f.password_field :current_password, autocomplete: "current-password", class: "profile-edit-input"
+
+      .profile-edit-actions
+        = f.submit t("verbs.save"), class: "profile-edit-save"
+
+    .profile-edit-danger
+      = button_to t("user_account.destroy_my_account"), registration_path(resource_name), data: { confirm: t("user_account.sure_to_delete_account"), turbo_confirm: t("user_account.sure_to_delete_account") }, method: :delete, class: "profile-edit-delete"

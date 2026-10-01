@@ -143,6 +143,9 @@ es:
     no_likes_yet: Sin Me Gustas
     destroy_message: ¿Esta seguro de que desea eliminar el registro?" Ya no podra acceder al chat del evento.
 
+  artists:
+    destroy_message: ¿Esta seguro de que desea eliminar el artista?"
+
   messages: 
     error: Ha ocurrido un error
     cant_find: ¿No encuentras lo que buscas?

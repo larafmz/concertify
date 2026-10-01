@@ -45,9 +45,14 @@
         %span.register-index-action
           = t("verbs.logged")
 
-      = link_to comments_interactuable_path(register),
-        class: "register-index-event-name" do
+      = link_to comments_interactuable_path(register), class: "register-index-event-name" do
         = event.tour_name
+      
+      - event.artists.each_with_index  do |artist, index|
+        = link_to artist_path(artist), class: "register-index-event-name" do 
+          %span{ style: "font-size: 20px; font-weight: 700;" }= artist&.name
+        - if index < event.artists.size - 1
+          ,    
 
       .register-index-details
 

@@ -142,6 +142,9 @@ en:
     no_likes_yet: No Likes Yet
     destroy_message: "Are you sure you want to delete this record? You will no longer be able to access the event chat."
   
+  artists:
+    destroy_message: ¿Esta seguro de que desea eliminar el artista?"
+  
   messages:
     error: An error has occurred
     cant_find: Can't find what you're looking for?

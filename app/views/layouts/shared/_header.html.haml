@@ -30,15 +30,24 @@
           = link_to Artist.plural, artists_path, class: "dropdown-item"
         %li
           = link_to User.plural, users_path, class: "dropdown-item"
-        - if can?(:read, Request)
-          %li
-            = link_to t("requested_events"), requests_path, class: "dropdown-item" 
+
+    - if current_user&.admin?
+      .dropdown
+        %button.btn.btn-secondary.dropdown-toggle{
+          type: "button",
+          "data-bs-toggle" => "dropdown",
+          "aria-expanded" => "false",
+          style: "background: #51485a" 
+        }
+          =t("admin")
+
+        %ul.dropdown-menu       
+          - if can?(:read, Request)
+            %li
+              = link_to t("requested_events"), requests_path, class: "dropdown-item" 
 
     - if can?(:create, Publication)
-      = link_to new_publication_path,
-        class: "btn-standard orange-color",
-        data: { turbo_frame: "modal" },
-        id: "post_id" do
+      = link_to new_publication_path, class: "btn-standard orange-color", data: { turbo_frame: "modal" }, id: "post_id" do
         = image_tag("icon_post.png")
 
     - if current_user
@@ -97,7 +106,6 @@
         = link_to t("user_account.login"), new_user_session_path, class: "dropdown-item"
         %li
         = link_to t("user_account.register"), new_user_registration_path, class: "dropdown-item"
-
 
   .dropdown
     %button.btn.btn-secondary.dropdown-toggle{

@@ -39,9 +39,7 @@
                   class: "dropdown-item"
 
               %li
-                = button_to t("crud.destroy", model: Register.singular),
-                  interactuable_path(register),
-                  method: :delete,
+                = button_to t("crud.destroy", model: Register.singular), interactuable_path(register), method: :delete,
                   form: { data: { turbo: false, confirm: t("registers.destroy_message") } },
                   class: "dropdown-item"
 

@@ -95,6 +95,11 @@ class ArtistsController < ApplicationController
     redirect_to interactuable_path(@publication)
   end 
 
+  def destroy
+    @artist.destroy
+    redirect_to requests_path
+  end
+
 private
 
   def get_attributes

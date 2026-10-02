@@ -49,57 +49,58 @@ artists_id.each do |ticketmaster_id|
 end
 
 puts "------------------- CREATING EVENTS -------------------"
-events = TicketmasterService.events_by({})    
+events_api = TicketmasterService.events_by({}, size: 10)    
 ticketmaster_ids = events_api.map { |event| event["id"] }
 ticketmaster_ids.each do |ticketmaster_id|
+  puts "Creating with Ticketmaster ID: #{ticketmaster_id}"
   Event.create_or_update_by_ticketmaster_id(ticketmaster_id)
 end
 
 puts "------------------- CREATING REQUESTS -------------------"
-request1 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Semana Grande de Gijón", date: "2019-08-12", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ9179HEV")] ))
-request2 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Metropoli Gijón", date: "2022-07-06", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_or_create_by(name: "Beli Basarte", status: 0, requester_id: user.id)] ))
-request3 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Metropoli Gijón", date: "2022-07-06", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request1 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Semana Grande de Gijón", date: "2019-08-12", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+    artists: [Artist.find_by!(ticketmaster_id: "K8vZ9179HEV")] ))
+request2 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Metropoli Gijón", date: "2022-07-06", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+    artists: [Artist.create(name: "Beli Basarte", status: 0, requester_id: user.id)] ))
+request3 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Metropoli Gijón", date: "2022-07-06", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917_3a7")] ))
-request4 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Metropoli Gijón", date: "2022-07-07", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request4 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Metropoli Gijón", date: "2022-07-07", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917QeqV")] ))
-request5 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Cuando te muerdes el labio Tour", date: "2022-09-11", ubication: Ubication.find_or_create_by(venue: "La Ería", city: "Oviedo, Asturias", country: Country.find_by(code: "ES")),
+request5 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Cuando te muerdes el labio Tour", date: "2022-09-11", ubication: Ubication.find_or_create_by(venue: "La Ería", city: "Oviedo, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ9174dlV")] ))
-request6 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "The 5 Seconds of Summer Show Tour", date: "2023-09-24", ubication: Ubication.find_or_create_by(venue: "Palacio Vistalegre", city: "Madrid", country: Country.find_by(code: "ES")),
+request6 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "The 5 Seconds of Summer Show Tour", date: "2023-09-24", ubication: Ubication.find_or_create_by(venue: "Palacio Vistalegre", city: "Madrid", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ9178oX0")] ))
-request7 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "PORTALS Tour", date: "2023-11-28", ubication: Ubication.find_or_create_by(venue: "WiZink Center", city: "Madrid", country: Country.find_by(code: "ES")),
+request7 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "PORTALS Tour", date: "2023-11-28", ubication: Ubication.find_or_create_by(venue: "WiZink Center", city: "Madrid", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917oP4f")] ))
-request8 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Metropoli Gijón", date: "2024-07-05", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request8 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Metropoli Gijón", date: "2024-07-05", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917bDxf")] ))
-request9 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Semana Grande de Gijón", date: "2024-08-13", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request9 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Semana Grande de Gijón", date: "2024-08-13", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ9178u5f")] ))
-request10 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Semana Grande de Gijón", date: "2026-08-08", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request10 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Semana Grande de Gijón", date: "2026-08-08", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917bQoV")] ))
-request11 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "The Clancy World Tour", date: "2025-04-22", ubication: Ubication.find_or_create_by(venue: "Palau Sant Jordi", city: "Barcelona", country: Country.find_by(code: "ES")),
+request11 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "The Clancy World Tour", date: "2025-04-22", ubication: Ubication.find_or_create_by(venue: "Palau Sant Jordi", city: "Barcelona", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917ukw7")] ))
-request12 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "The Trilogy Tour", date: "2024-10-05", ubication: Ubication.find_or_create_by(venue: "Palau Sant Jordi", city: "Barcelona", country: Country.find_by(code: "ES")),
+request12 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "The Trilogy Tour", date: "2024-10-05", ubication: Ubication.find_or_create_by(venue: "Palau Sant Jordi", city: "Barcelona", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ917oP4f")] ))
-request13 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Tour Gigante", date: "2025-07-26", ubication: Ubication.find_or_create_by(venue: "Parque Hermanos Castro", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request13 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Tour Gigante", date: "2025-07-26", ubication: Ubication.find_or_create_by(venue: "Parque Hermanos Castro", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ9174dlV")] ))
-request14 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "ONU TOUR", date: "2026-11-06", ubication: Ubication.find_or_create_by(venue: "Teatro Albéniz", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
+request14 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "ONU TOUR", date: "2026-11-06", ubication: Ubication.find_or_create_by(venue: "Teatro Albéniz", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_or_create_by(name: "Niña Polaca", status: 0, requester_id: user.id)] ))
-request15 = Request.find_or_create_by!(status: 0, requester_id: user.id, 
-  event: Event.find_or_create_by(tour_name: "Tour Gigante (Fin de Gira)", date: "2026-09-19", ubication: Ubication.find_or_create_by(venue: "La Ería", city: "Oviedo, Asturias", country: Country.find_by(code: "ES")),
+request15 = Request.create!(status: 0, requester_id: user.id, 
+  event: Event.create(tour_name: "Tour Gigante (Fin de Gira)", date: "2026-09-19", ubication: Ubication.find_or_create_by(venue: "La Ería", city: "Oviedo, Asturias", country: Country.find_by(code: "ES")),
     artists: [Artist.find_by(ticketmaster_id: "K8vZ9174dlV")] ))
 
 
@@ -172,5 +173,5 @@ events = Event.accepted.pluck(:id)
 end
 
 50.times do
-  Relation.create(follower_id: users_ids.sample, followed_id: Artist.random.pluck(:id).first, relation_type: 0, followed_type: "Artist")
+  Relation.create(follower_id: users_ids.sample, followed_id: Artist.accepted.order("RANDOM()").first.id, relation_type: 0, followed_type: "Artist")
 end

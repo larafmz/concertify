@@ -8,7 +8,7 @@ if Country.count == 0
   end
 end
 
-puts "------------------- CREATING GENRES -------------------"
+puts "------------------- LOADING GENRES -------------------"
 if Genre.count == 0
   genres = TicketmasterService.genres
   genres.each do |genre|
@@ -24,10 +24,6 @@ puts "------------------- CREATING USERS -------------------"
 admin = User.find_or_create_by!(username: "admin", email: "admin@gmail.com") do |user|
   user.password = "Admin123!"
   user.role = admin_role
-end
-user = User.find_or_create_by!(username: "larafmz", email: "larafmdz@gmail.com") do |user|
-  user.password = "Prueba1!"
-  user.role = user_role
 end
 names = ["music_lover", "fan", "maria", "ana", "lucia", "sofia", "carla", "paula", "elena", "carlos", "laura", "eva", "julia", "marta", "alba", "clara", "david", "pablo", "andrea", "sara", "nuria", "gabriel", "ivan", "javier", "raul", "sergio", "miguel", "alvaro", "roberto", "jorge"]
 50.times do |i|
@@ -56,72 +52,9 @@ ticketmaster_ids.each do |ticketmaster_id|
   Event.create_or_update_by_ticketmaster_id(ticketmaster_id)
 end
 
-puts "------------------- CREATING REQUESTS -------------------"
-request1 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Semana Grande de Gijón", date: "2019-08-12", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by!(ticketmaster_id: "K8vZ9179HEV")] ))
-request2 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Metropoli Gijón", date: "2022-07-06", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.create(name: "Beli Basarte", status: 0, requester_id: user.id)] ))
-request3 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Metropoli Gijón", date: "2022-07-06", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917_3a7")] ))
-request4 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Metropoli Gijón", date: "2022-07-07", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917QeqV")] ))
-request5 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Cuando te muerdes el labio Tour", date: "2022-09-11", ubication: Ubication.find_or_create_by(venue: "La Ería", city: "Oviedo, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ9174dlV")] ))
-request6 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "The 5 Seconds of Summer Show Tour", date: "2023-09-24", ubication: Ubication.find_or_create_by(venue: "Palacio Vistalegre", city: "Madrid", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ9178oX0")] ))
-request7 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "PORTALS Tour", date: "2023-11-28", ubication: Ubication.find_or_create_by(venue: "WiZink Center", city: "Madrid", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917oP4f")] ))
-request8 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Metropoli Gijón", date: "2024-07-05", ubication: Ubication.find_or_create_by(venue: "Metropoli Gijón", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917bDxf")] ))
-request9 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Semana Grande de Gijón", date: "2024-08-13", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ9178u5f")] ))
-request10 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Semana Grande de Gijón", date: "2026-08-08", ubication: Ubication.find_or_create_by(venue: "Playa de Poniente", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917bQoV")] ))
-request11 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "The Clancy World Tour", date: "2025-04-22", ubication: Ubication.find_or_create_by(venue: "Palau Sant Jordi", city: "Barcelona", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917ukw7")] ))
-request12 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "The Trilogy Tour", date: "2024-10-05", ubication: Ubication.find_or_create_by(venue: "Palau Sant Jordi", city: "Barcelona", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ917oP4f")] ))
-request13 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Tour Gigante", date: "2025-07-26", ubication: Ubication.find_or_create_by(venue: "Parque Hermanos Castro", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ9174dlV")] ))
-request14 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "ONU TOUR", date: "2026-11-06", ubication: Ubication.find_or_create_by(venue: "Teatro Albéniz", city: "Gijón, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_or_create_by(name: "Niña Polaca", status: 0, requester_id: user.id)] ))
-request15 = Request.create!(status: 0, requester_id: user.id, 
-  event: Event.create(tour_name: "Tour Gigante (Fin de Gira)", date: "2026-09-19", ubication: Ubication.find_or_create_by(venue: "La Ería", city: "Oviedo, Asturias", country: Country.find_by(code: "ES")),
-    artists: [Artist.find_by(ticketmaster_id: "K8vZ9174dlV")] ))
-
-
 puts "------------------- CREATING REGISTERS -------------------"
-Register.create(user_id: user.id, review: "Chulisima y encima GRATIS", event_id: request1.event.id, rating: 4) 
-Register.create(user_id: user.id, event_id: request2.event.id) 
-Register.create(user_id: user.id, event_id: request3.event.id) 
-Register.create(user_id: user.id, review: "Estaba PETADISIMO de gente que no podiamos ni movernos y yo tenia COVID pero TOP CONCIERTOS", event_id: request4.event.id, rating: 5) 
-Register.create(user_id: user.id, review: "Primera vez que vi a Leiva y la vez que mas me presto", event_id: request5.event.id, rating: 5) 
-Register.create(user_id: user.id, review: "Concierto con Lau!! Aunque no me sabia casi las canciones, me encantoooo", event_id: request6.event.id, rating: 3) 
-Register.create(user_id: user.id, review: "Primer conci de Melanie despues de ser fan desde que tenia 14 años. Y en primera fila (de la pista B :c)", event_id: request7.event.id, rating: 5) 
-Register.create(user_id: user.id, event_id: request8.event.id) 
-Register.create(user_id: user.id, event_id: request9.event.id) 
-Register.create(user_id: user.id, review: "Conciertazo, Amaia reina... LLoré.", event_id: request10.event.id, rating: 5) 
-Register.create(user_id: user.id, review: "PRIMER CONCI CHULO CON ALI Y ENCIMA DE LOS MAS GRANDES, VAYA DIA, 10/10", event_id: request11.event.id, rating: 5) 
-Register.create(user_id: user.id, review: "Desvirtualize a una amiga en este conci!! Estuvo chulo pero tuvimos beef con la señora de atras, no repetiria :,)", event_id: request12.event.id, rating: 2) 
-Register.create(user_id: user.id, review: "Segundaaaaa, casi primera fila. No me toco la gente mas guay alrededor en el conci y me jodieron un poco la experiencia.", event_id: request13.event.id, rating: 3) 
-Register.create(user_id: user.id, review: "Fui con MI MADRE, alli desde las 17 como buenas fans. Me encanto. Toco la cancion de Robe y pude ver a Juanchito.", event_id: request15.event.id, rating: 4) 
-FutureAssistance.create(user_id: user.id, event_id: request14.event.id, from: "", event_seat: nil, event_seat_details: "", company: 1)
 reviews = [
-  "Fui con mi madre y me encantó. El ambiente fue increíble y disfruté muchísimo.",
+  "Fui con mis padres y me encantó. El ambiente fue increíble y disfruté muchísimo.",
   "Muy buen evento, lo pasé genial y repetiría sin duda.",
   "La experiencia fue increíble, sobre todo el ambiente y la música.",
   "Fui con unos amigos y nos lo pasamos genial. Muy recomendable.",

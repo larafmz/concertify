@@ -1,7 +1,7 @@
 .header
   .app_name
     = link_to root_path do
-      = image_tag("concertify_logo.png")
+      = image_tag("#{session[:theme]}/concertify_logo.png")
 
   - search_path = %w[artists users events].include?(controller_name) ? "/#{controller_name}" : "/artists"
   = form_tag search_path, method: "GET", class: "header-search" do
@@ -37,7 +37,7 @@
           type: "button",
           "data-bs-toggle" => "dropdown",
           "aria-expanded" => "false",
-          style: "background: #51485a" 
+          style: "background: var(--softest-color)" 
         }
           =t("admin")
 
@@ -57,7 +57,7 @@
             - if current_page?(user_path(current_user))
               = image_tag("icon_user_selected.png")
             - else
-              = image_tag("icon_user.png")
+              = image_tag("#{session[:theme]}/icon_user.png")
 
         = link_to notifications_user_path(current_user),
           class: "hover-border-icon",
@@ -76,7 +76,7 @@
       type: "button",
       "data-bs-toggle" => "dropdown",
       "aria-expanded" => "false",
-      style: "background: #51485a" 
+      style: "background: var(--softest-color)" 
     }
       = t("user_account.profile")
 
@@ -112,15 +112,20 @@
       type: "button",
       "data-bs-toggle" => "dropdown",
       "aria-expanded" => "false",
-      style: "background: #51485a" 
+      style: "background: var(--softest-color)" 
     }
-      =t("languages")
+      =t("configuration")
 
     %ul.dropdown-menu
       %li
         = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
       %li
         = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
+      %li
+        %hr.dropdown-divider
+      %li
+        = link_to t("day_mode"), change_theme_path("light"), class: "dropdown-item", data: { turbo: false }
+      %li
+        = link_to t("night_mode"), change_theme_path("dark"), class: "dropdown-item", data: { turbo: false }
 
-
-.separator{style: "background: #40556d; "}
+.separator{style: "background: var(--second-text-color); "}

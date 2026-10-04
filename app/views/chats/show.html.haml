@@ -2,7 +2,7 @@
     
     = render "chats/sidebar", chats: @chats
 
-    = turbo_frame_tag "chat_content", style: "border-left:1px solid #40556d; display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; " do
+    = turbo_frame_tag "chat_content", style: "border-left:1px solid var(--second-text-color); display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden; " do
         = render "chats/header", chat: @chat, user: @user, event: @event
 
         .chat-container
@@ -12,6 +12,6 @@
         - if @chat && can?(:send_message, @chat) && (@user || @event)
             = render "chats/send_message"
         - else
-            %div{style: "border-radius: 15px; border: 1px solid #40556d; height:70px; padding: 10px; margin:10px;"}
-                %div{style: "display: flex; align-items: center; justify-content: center; height: 100%; color: white;"}
+            %div{style: "border-radius: 15px; border: 1px solid var(--second-text-color); height:70px; padding: 10px; margin:10px;"}
+                %div{style: "display: flex; align-items: center; justify-content: center; height: 100%; color: var(--main-text-color);"}
                     = t("messages.cant_send_message")

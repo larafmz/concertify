@@ -1,5 +1,5 @@
 %div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{@photo_url}'); background-size: cover; background-position: center 30%;" }
-    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, #1f252b 100%), linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, var(--background) 100%), linear-gradient(to right, var(--darker-second-text-color) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .info{style:"margin:40px;"}
             .name{style:"padding: 10px;"}
@@ -15,7 +15,7 @@
             .stat
                 .number
                     =  @followers_count
-                .name{style: "color: white"}
+                .name{style: "color: var(--main-text-color)"}
                     = link_to followers_artist_path(@artist) do   
                         = t("followers")
             
@@ -23,7 +23,7 @@
                 - unless @registers.empty?
                     .number
                         ★ #{@average_rating} / 5
-                    .name{style: "color: white"}
+                    .name{style: "color: var(--main-text-color)"}
                         = t("average", model: Register.plural)
            
                     

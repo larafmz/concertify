@@ -1,8 +1,8 @@
-%div{style: "display: grid; grid-template-columns: 2fr 1fr auto; background: #1f252b; color: white"}
+%div{style: "display: grid; grid-template-columns: 2fr 1fr auto; background: var(--background); color: var(--main-text-color)"}
     - if user
         = link_to user_path(user), data: { turbo_frame: "_top" } do 
             .info{style: "gap: 15px; margin: 5px;"}
-                .link_icon{style: "height: 50px; width: 50px; background: #0F1419;"}
+                .link_icon{style: "height: 50px; width: 50px; background: var(--background);"}
                     - if user.icon.attached?
                         = image_tag user.icon
                     - else
@@ -18,9 +18,9 @@
                     %div{style: "font-size:15px;"}= event.tour_name
                     .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
                         %div{style: "display:flex; align-items:center; gap:10px;"}
-                            = image_tag("icon_ubication_softest_color.png", class: "icon-img")
+                            = image_tag("#{session[:theme]}/icon_ubication_softest_color.png", class: "icon-img")
                             = event.ubication&.complete_name || t("not_found")
-                            = image_tag("icon_date_softest_color.png", class: "icon-img")
+                            = image_tag("#{session[:theme]}/icon_date_softest_color.png", class: "icon-img")
                             = formatted_event_date(event.date, event.start_time)
         %div{style: "display:flex; justify-content:flex-end; align-items:center; margin-right: 15px; ", class: "soft-color"}
             - if action_name == "members"
@@ -36,7 +36,7 @@
                 .dropdown
                     %button{
                         "data-bs-toggle" => "dropdown",
-                        style: "background: none; border:0px; color: white;"
+                        style: "background: none; border:0px; color: var(--main-text-color);"
                     }
                         ⁝
                     %ul.dropdown-menu

@@ -5,7 +5,7 @@
 
 .widget-content{style: "padding-top:0px; border: "}  
 
-    %div{style: "border: 1px solid #40556d;"}
+    %div{style: "border: 1px solid var(--second-text-color);"}
 
         %div{style: "margin:20px; margin-bottom:0px;"}
             - if @interactuable.register? 
@@ -14,27 +14,27 @@
             - elsif @interactuable.publication?
                 = render "publications/index_item", publication: @interactuable, destroy_redirect: true
 
-        %div{style: "display: flex; gap: 20px; color: white; margin-left:20px; margin-top: 15px;"}
+        %div{style: "display: flex; gap: 20px; color: var(--main-text-color); margin-left:20px; margin-top: 15px;"}
             = link_to Like.plural, interactuable_path(@interactuable), title: "#{@interactuable.likes.count} #{Like.plural}" 
-            = link_to Comment.plural, comments_interactuable_path(@interactuable), style: ("color: white; border-bottom: 2px solid #{orange_color};"), title: "#{@interactuable.comments.count} #{Comment.plural}"
+            = link_to Comment.plural, comments_interactuable_path(@interactuable), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};"), title: "#{@interactuable.comments.count} #{Comment.plural}"
             = link_to Repost.plural, reposts_interactuable_path(@interactuable), title: "#{@interactuable.reposts.count} #{Repost.plural}"
         .separator
 
         - if can?(:comment, @interactuable)
-            %div{style: "border-bottom: 1px solid #40556d;"}
+            %div{style: "border-bottom: 1px solid var(--second-text-color);"}
                 = form_tag comment_interactuable_path(@interactuable), method: :post, data: { turbo: false } do
-                    %div{data: { controller: "character-counter" }, style: "margin:15px; display: grid; grid-template-columns: auto 1fr auto; color: white; gap: 10px; "}
+                    %div{data: { controller: "character-counter" }, style: "margin:15px; display: grid; grid-template-columns: auto 1fr auto; color: var(--main-text-color); gap: 10px; "}
                         %div
                             = link_to user_path(current_user), class: "hover-border-icon",style: "display: block;" do 
-                                .link_icon{style: "background: #1e2731"}
+                                .link_icon{style: "background: var(--darker-second-text-color)"}
                                     - if current_user.icon.attached?
                                         = image_tag current_user.icon
                                     - else
                                         = current_user.username.first.upcase
                         = text_area_tag :text, nil, maxlength: 500, placeholder: t("messages.write_your_comment"), id: "comment_text_area",
-                            style: "outline:none; color: white; border: none; background:none; width: 100%; height: 50px; resize: none;", 
+                            style: "outline:none; color: var(--main-text-color); border: none; background:none; width: 100%; height: 50px; resize: none;", 
                             data: {  character_counter_target: "input", action: "input->character-counter#update" }
-                        %div{data: { character_counter_target: "counter" }, style: "text-align: right; font-size: 12px; color: #a4b3c4;"}
+                        %div{data: { character_counter_target: "counter" }, style: "text-align: right; font-size: 12px; color: var(--soft-color);"}
                     %div{style: "display: flex; justify-content: flex-end; margin: 10px;"}
                         = submit_tag t("verbs.comment"), class: "btn-custom orange-color"
 

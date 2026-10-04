@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
     redirect_back fallback_location: root_path
   end
 
+  def change_theme
+    session[:theme] = params[:theme]
+    redirect_back(fallback_location: root_path)
+  end
+
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end

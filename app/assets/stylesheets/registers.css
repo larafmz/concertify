@@ -8,7 +8,7 @@
 }
 
 .register-index-item:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--darker-second-text-color);
 }
 
 .register-index-repost {
@@ -16,14 +16,13 @@
   align-items: center;
   gap: 7px;
   margin-bottom: 16px;
-
-  color: #d5dde6 !important;
+  color: var(--main-text-color) !important;
   font-size: 13px;
 }
 
 .register-index-repost-icon {
   font-size: 17px;
-  color: #e5ebf1 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-main {
@@ -44,13 +43,13 @@
   border-radius: 50%;
   overflow: hidden;
 
-  background: #40556d;
+  background: var(--second-text-color);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
   font-size: 15px;
   font-weight: 700;
 }
@@ -76,8 +75,8 @@
   overflow: hidden;
 
   border-radius: 10px;
-  background: #252b34;
-  border: 1px solid rgba(64, 85, 109, 0.8);
+  background: var(--darker-second-text-color);
+  border: 1px solid var(--darker-second-text-color);
 }
 
 .register-index-event-image img {
@@ -103,7 +102,7 @@
   align-items: center;
   justify-content: center;
 
-  color: #dce4ec !important;
+  color: var(--main-text-color) !important;
   font-size: 32px;
 }
 
@@ -118,11 +117,11 @@
 
   margin-bottom: 5px;
 
-  color: #dfe6ed !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-username {
-  color: #f0f3f6 !important;
+  color: var(--main-text-color) !important;
 
   font-size: 14px;
   font-weight: 600;
@@ -133,11 +132,11 @@
 }
 
 .register-index-username:hover {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-action {
-  color: #c2ccd6 !important;
+  color: var(--main-text-color) !important;
   font-size: 13px;
 }
 
@@ -149,7 +148,7 @@
 
   margin-bottom: 12px;
 
-  color: #f4f6f8 !important;
+  color: var(--main-text-color) !important;
 
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 22px;
@@ -162,7 +161,7 @@
 }
 
 .register-index-event-name:hover {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-details {
@@ -174,7 +173,7 @@
 
   margin-bottom: 10px;
 
-  color: #d0d8e0 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-detail {
@@ -182,7 +181,7 @@
   align-items: center;
   gap: 6px;
 
-  color: #d0d8e0 !important;
+  color: var(--main-text-color) !important;
 
   font-size: 13px;
 }
@@ -200,7 +199,7 @@
   display: inline-flex;
   align-items: center;
 
-  color: #ffb45c !important;
+  color: var(--orange) !important;
 
   font-size: 14px;
   font-weight: 600;
@@ -213,41 +212,41 @@
   word-break: break-word;
   margin-top: 12px;
   padding: 12px 15px;
-  border-left: 3px solid #40556d;
-  background: rgba(64, 85, 109, 0.18);
+  border-left: 3px solid var(--second-text-color);
+  background: var(--darker-second-text-color);
   border-radius: 0 8px 8px 0;
-  color: #dce3ea !important;
+  color: var(--main-text-color) !important;
   font-size: 14px;
   line-height: 1.5;
 }
 
 .register-index-review p {
-  color: #dce3ea !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-footer {
   margin-top: 12px;
 
-  color: #d0d8e0 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-footer > * {
-  color: #d0d8e0 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-footer a {
-  color: #dce4eb !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-footer a:hover {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-index-created {
   margin-top: 12px;
   margin-left: 238px;
 
-  color: #b7c2cd !important;
+  color: var(--soft-color) !important;
 
   font-size: 11px;
 }
@@ -256,11 +255,8 @@
 .register-index-separator {
   width: calc(100% - 40px);
   max-width: none;
-
   height: 1px;
-
   margin: 0 20px;
-
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--second-text-color);
 }
 

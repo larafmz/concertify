@@ -1,10 +1,10 @@
-- color = chat.has_notification?(current_user) ? "white" : "#a4b3c4"
+- color = chat.has_notification?(current_user) ? "var(--main-text-color)" : "var(--soft-color)"
 - chat_name = chat.name(current_user)
 .sidebar_chat{id: "chat_#{chat.id}", data: { chat_filter_target: "chat", chat_name: chat_name }}
     = link_to chat_path(chat), data: { turbo_frame: "chat_content", turbo_prefetch: false }, class: "diary-link", id: "chat_link_#{chat.id}" do 
         - last_message = chat.chat_entries.user_messages.order(created_at: :desc).first
         .info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
-            .link_icon{style: "height: 50px; width: 50px; background: #1e2731; color: white;"}
+            .link_icon{style: "height: 50px; width: 50px; background: var(--darker-second-text-color); color: var(--main-text-color);"}
                 - photo = chat.photo(current_user)
                 - if photo.present?
                     = image_tag photo 
@@ -20,10 +20,10 @@
                 - if chat.group_chat? 
                     .softest-color{ style: "font-size: 12px; margin-bottom:5px" }
                         %div{style: "display:flex; align-items:center; gap:10px;"}
-                            = image_tag("icon_ubication_softest_color.png", class: "icon-img")
+                            = image_tag("#{session[:theme]}/icon_ubication_softest_color.png", class: "icon-img")
                             = chat.event.ubication&.complete_name || t("not_found")
                         %div{style: "display:flex; align-items:center; gap:10px;"}
-                            = image_tag("icon_date_softest_color.png", class: "icon-img")
+                            = image_tag("#{session[:theme]}/icon_date_softest_color.png", class: "icon-img")
                             = formatted_event_date(chat.event.date, chat.event.start_time)
             - if last_message.present?
                 %div{style: "font-size:12px; color: #{color}"}=short_time_ago(last_message.created_at)

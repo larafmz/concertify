@@ -1,6 +1,6 @@
 .info{style: "margin-top:15px; padding-left:15px; padding-right:15px;"}
     = link_to user_path(comment.user_id), class: "hover-border-icon" do
-        .link_icon{style: "background: #1e2731; color: white"}
+        .link_icon{style: "background: var(--darker-second-text-color); color: var(--main-text-color)"}
             - if comment.user.icon.attached?
                 = image_tag comment.user.icon
             - else
@@ -18,11 +18,11 @@
                 .dropdown
                     %button{
                         "data-bs-toggle" => "dropdown",
-                        style: "background: none; border:0px; color: white;"
+                        style: "background: none; border:0px; color: var(--main-text-color);"
                     }
                         ⁝
                     %ul.dropdown-menu
                         %li
                             = button_to t("verbs.destroy"), remove_comment_interactuable_path(comment_id: comment.id), method: :delete, class: "dropdown-item", form: { data: { turbo: false } }
         = link_to comment_path(comment), class: "publication-link", style: "display: grid; grid-template-columns: 1fr auto;" do
-            %span{style: "font-size: 15px; color: #dee5eb; overflow-wrap: anywhere;"}= simple_format(comment.text)
+            %span{style: "font-size: 15px; color: var(--main-text-color); overflow-wrap: anywhere;"}= simple_format(comment.text)

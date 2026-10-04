@@ -8,7 +8,7 @@
   border: 1px solid;
   border-radius: 15px;
 
-  color: #dce3ea;
+  color: var(--main-text-color);
 
   transition:
     background 0.2s ease,
@@ -16,7 +16,6 @@
 }
 
 .request-card:hover {
-  background: rgba(255, 255, 255, 0.025);
   transform: translateY(-1px);
 }
 
@@ -36,7 +35,7 @@
 
   border-radius: 10px;
 
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--main-text-color);
 }
 
 .request-card-image-link {
@@ -75,7 +74,7 @@
 .request-card-artist {
   margin-bottom: 3px;
 
-  color: #d8c5dd;
+  color: var(--soft-color);
 
   font-size: 20px;
   font-weight: 700;
@@ -92,7 +91,7 @@
 }
 
 .request-card-artist-link:hover {
-  color: #eadcef;
+  color: var(--main-text-color);
 }
 
 .request-card-event-link {
@@ -116,7 +115,7 @@
   flex-wrap: wrap;
   gap: 7px 16px;
 
-  color: #929eaa;
+  color: var(--soft-color);
 
   font-size: 13px;
 }
@@ -201,31 +200,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   width: 31px;
   height: 31px;
-
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid var(--main-text-color);
   border-radius: 7px;
-
-  background: rgba(255, 255, 255, 0.04);
-
-  color: #aebbc7;
-
+  background: var(--softest-color2);
+  color: var(--soft-color);
   font-size: 15px;
   text-decoration: none;
-
   transition: all 0.18s ease;
 }
 
 .request-card-action:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: #f0f3f6;
+  background: var(--second-text-color);
+  color: var(--main-text-color);
 }
 
 .request-card-action-danger:hover {
-  background: rgba(180, 70, 70, 0.18);
-  color: #e5a1a1;
+  background: var(--soft-red);
+  color: var(--softest-red);
 }
 
 .request-card-event-button {
@@ -244,18 +237,14 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-
   padding: 9px 15px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-
-  color: #7f8b97;
-
+  border-top: 1px solid var(--softest-color2);
+  color: var(--softest-color);
   font-size: 11px;
 }
 
 .request-card-footer-separator {
-  color: #596672;
+  color: var(--softest-color);
 }
 
 @media (max-width: 800px) {

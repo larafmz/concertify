@@ -65,7 +65,7 @@
 
   min-width: 0;
 
-  color: #dce4eb !important;
+  color: var(--main-text-color) !important;
   font-size: 14px;
 }
 
@@ -80,7 +80,7 @@
   overflow: hidden;
   border-radius: 50%;
 
-  background: #40556d;
+  background: var(--second-text-color);
 
   display: flex;
   align-items: center;
@@ -97,11 +97,11 @@
 }
 
 .register-show-logged-by {
-  color: #bfcad5 !important;
+  color: var(--soft-color) !important;
 }
 
 .register-show-username {
-  color: #f0f3f6 !important;
+  color: var(--main-text-color) !important;
 
   font-weight: 700;
 
@@ -111,18 +111,14 @@
 }
 
 .register-show-username:hover {
-  color: #ffffff !important;
-}
-
-.dropdown {
-  flex-shrink: 0;
+  color: var(--main-text-color) !important;
 }
 
 .dropdown .dropdown-toggle {
-  background: #40556d !important;
+  background: var(--dropdown) !important;
   border: none !important;
 
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 
   font-size: 13px;
 
@@ -132,7 +128,7 @@
 }
 
 .dropdown .dropdown-toggle:hover {
-  background: #506980 !important;
+  background: var(--second-text-color) !important;
 }
 
 .register-show-separator {
@@ -141,7 +137,7 @@
 
   margin: 10px 0 18px;
 
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--main-text-color);
 }
 
 .register-show-event-link {
@@ -156,7 +152,7 @@
 }
 
 .register-show-event-name {
-  color: #f1f4f7 !important;
+  color: var(--main-text-color) !important;
 
   font-size: 28px;
   font-weight: 700;
@@ -169,7 +165,7 @@
 }
 
 .register-show-event-name {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-show-genre {
@@ -177,7 +173,7 @@
 
   margin-top: 4px;
 
-  color: #b8c3ce !important;
+  color: var(--soft-color) !important;
 
   font-size: 17px;
   font-weight: 400;
@@ -196,7 +192,7 @@
   margin-top: 16px;
   margin-bottom: 10px;
 
-  color: #d0d9e2 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-show-detail {
@@ -208,7 +204,7 @@
   max-width: 100%;
   min-width: 0;
 
-  color: #d0d9e2 !important;
+  color: var(--main-text-color) !important;
 
   font-size: 14px;
 
@@ -230,11 +226,8 @@
 .register-show-rating {
   display: inline-flex;
   align-items: center;
-
   margin-top: 4px;
-
-  color: #ffb45c !important;
-
+  color: var(--orange) !important;
   font-size: 16px;
   font-weight: 700;
 }
@@ -249,13 +242,13 @@
 
   padding: 15px 17px;
 
-  background: rgba(64, 85, 109, 0.16);
+  background: var(--darker-second-text-color);
 
-  border-left: 3px solid #40556d;
+  border-left: 3px solid var(--second-text-color);
 
   border-radius: 0 9px 9px 0;
 
-  color: #e0e6ec !important;
+  color: var(--main-text-color) !important;
 
   font-size: 15px;
   line-height: 1.6;
@@ -269,7 +262,7 @@
 .register-show-review p {
   margin: 0 0 10px;
 
-  color: #e0e6ec !important;
+  color: var(--main-text-color) !important;
 
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -306,9 +299,9 @@
 
   border-radius: 9px;
 
-  background: #252b34;
+  background: var(--darker-second-text-color);
 
-  border: 1px solid rgba(64, 85, 109, 0.65);
+  border: 1px solid var(--darker-second-text-color);
 }
 
 .register-photo img {
@@ -351,15 +344,15 @@
 
   margin: 20px 0 40px;
 
-  color: #d0d9e2 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-show-footer a {
-  color: #d5dee7 !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-show-footer a:hover {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-show-liked {
@@ -367,12 +360,12 @@
 
   margin-top: 10px;
 
-  color: #cbd5de !important;
+  color: var(--main-text-color) !important;
   font-size: 14px;
 }
 
 .register-show-liked-user {
-  color: #f0f3f6 !important;
+  color: var(--main-text-color) !important;
 
   font-weight: 700;
 
@@ -380,7 +373,7 @@
 }
 
 .register-show-liked-user:hover {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-show-liked-separator {
@@ -389,7 +382,7 @@
 
   margin: 10px 0;
 
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--main-text-color);
 }
 
 .register-show-liked-list {
@@ -413,9 +406,9 @@
 
   border-radius: 50%;
 
-  background: #40556d;
+  background: var(--second-text-color);
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--main-text-color);
 }
 
 .register-show-liked-avatar img {
@@ -491,10 +484,6 @@
     width: 100%;
   }
 
-  .dropdown .dropdown-toggle {
-    width: 100%;
-  }
-
   .register-show-event-name {
     font-size: 21px;
   }
@@ -521,7 +510,7 @@
   flex-direction: column;
   gap: 18px;
 
-  color: #dce3ea;
+  color: var(--main-text-color);
 }
 
 /* EVENTO */
@@ -539,10 +528,10 @@
 
   overflow: hidden;
 
-  border: 1px solid rgba(64, 85, 109, 0.8);
+  border: 1px solid var(--darker-second-text-color);
   border-radius: 10px;
 
-  background: #202831;
+  background: var(--darker-second-text-color);
 }
 
 .register-form-event-image img {
@@ -563,7 +552,7 @@
 }
 
 .register-form-event-name {
-  color: #dce3ea;
+  color: var(--main-text-color);
 
   font-size: 20px;
   font-weight: 600;
@@ -573,21 +562,17 @@
 }
 
 .register-form-event-details {
-  color: #8f9ba7;
-
+  color: var(--soft-color);
   font-size: 13px;
   line-height: 1.4;
-
   overflow-wrap: anywhere;
 }
-
-/* SEPARADOR */
 
 .register-form-divider {
   width: 100%;
   height: 1px;
 
-  background: rgba(64, 85, 109, 0.55);
+  background: var(--darker-second-text-color);
 }
 
 .register-form-field {
@@ -597,8 +582,7 @@
 }
 
 .register-form-label {
-  color: #aebbc7;
-
+  color: var(--soft-color2);
   font-size: 13px;
   font-weight: 500;
 }
@@ -608,19 +592,19 @@
   box-sizing: border-box;
   min-height: 42px;
   padding: 10px 12px;
-  color: #edf1f4;
-  background: #151c23;
-  border: 1px solid #3b4855;
+  color: var(--main-text-color);
+  background: var(--darker-second-text-color);
+  border: 1px solid var(--second-text-color);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .register-form-input:focus {
-  background: #19222a;
-  border-color: #65798e;
+  background: var(--background);
+  border-color: var(--second-text-color);
 
-  box-shadow: 0 0 0 3px rgba(64, 85, 109, 0.18);
+  box-shadow: 0 0 0 3px var(--darker-second-text-color);
 }
 
 .register-form-textarea {
@@ -635,7 +619,7 @@
 }
 
 .register-form-textarea::placeholder {
-  color: #687581;
+  color: var(--softest-color);
 }
 
 .register-form-counter {
@@ -644,7 +628,7 @@
 
   margin-top: -3px;
 
-  color: #788592;
+  color: var(--softest-color);
 
   font-size: 11px;
 }
@@ -673,7 +657,7 @@
   border: 0;
   border-radius: 8px;
 
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 
   font-size: 14px;
   font-weight: 600;
@@ -687,8 +671,8 @@
 }
 
 .register-form-submit:hover {
-  background: #536b86 !important;
+  background: var(--second-text-color) !important;
   transform: translateY(-1px);
 
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 5px 14px var(--full);
 }

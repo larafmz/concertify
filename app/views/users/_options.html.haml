@@ -1,11 +1,9 @@
-.widget-content{style: "color: #a4b3c4; "}
+.widget-content{style: "color: var(--soft-color); "}
     .widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; border: 1px solid #263241; box-sizing: border-box;"}
-        = link_to "👤 #{@user.username}", user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :profile)
-        = link_to Register.han("reviews"), registers_user_path(@user), style: ("color: white; border-bottom: 2px solid #{event_color};" if active == :reviews)
-        = link_to t("diary"), diary_user_path(@user), style: ("color: white; border-bottom: 2px solid #{event_color};" if active == :diary)
-        = link_to FutureAssistance.plural, future_assistances_user_path(@user), style: ("color: white; border-bottom: 2px solid #{event_color};" if active == :future_assistances)
-        = link_to Publication.plural, publications_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :publications)
-        = link_to Artist.plural, artists_user_path(@user), style: ("color: white; border-bottom: 2px solid #{artist_color};" if active == :artists)
-        - if can?(:requests, @user)
-            = link_to Request.plural, requests_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :requests)
-        = link_to t("network"), followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :network)
+        = link_to "👤 #{@user.username}", user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :profile)
+        = link_to Register.han("reviews"), registers_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :reviews)
+        = link_to t("diary"), diary_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :diary)
+        = link_to FutureAssistance.plural, future_assistances_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :future_assistances)
+        = link_to Publication.plural, publications_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :publications)
+        = link_to Artist.plural, artists_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{artist_color};" if active == :artists)
+        = link_to t("network"), followers_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :network)

@@ -53,15 +53,15 @@
           = link_to artist_path(artist), class: "register-index-event-name" do
             %span{style: "font-size: 20px; font-weight: 700;"}= artist.name
           - if index < event.artists.size - 1
-            %span{style: "font-size: 20px; font-weight: 700; margin-right: 6px; color: white;"}= ","
+            %span{style: "font-size: 20px; font-weight: 700; margin-right: 6px; color: var(--main-text-color);"}= ","
       .register-index-details
 
         %span.register-index-detail
-          = image_tag("icon_ubication_softest_color.png")
+          = image_tag("#{session[:theme]}/icon_ubication_softest_color.png")
           = event.ubication&.complete_name_with_venue || t("not_found")
 
         %span.register-index-detail
-          = image_tag("icon_date_softest_color.png")
+          = image_tag("#{session[:theme]}/icon_date_softest_color.png")
           = short_date(event.date)
 
       .register-index-rating

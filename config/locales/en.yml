@@ -1,5 +1,8 @@
 en:
   admin: Administrator
+  configuration: Configuration
+  day_mode: Day Mode
+  night_mode: Night Mode
   session: Session
   search: Search...
   search_event: Search by tour or artist name...

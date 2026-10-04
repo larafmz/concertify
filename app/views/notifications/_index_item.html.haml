@@ -1,4 +1,4 @@
-- background = notification.read? ? "transparent" : "#30363d"
+- background = notification.read? ? "var(--darker-second-text-color2)" : "transparent"
 - user = notification.user
 
 .notification{id: "notification-#{notification.id}", style: "background: #{background};"}
@@ -6,7 +6,7 @@
   .notification-user
     - if user
       = link_to user_path(user), class: "notification-user-link" do
-        .link_icon{style: "background: #1e2731"}
+        .link_icon{style: "background: var(--darker-second-text-color)"}
           - if user.icon.attached?
             = image_tag user.icon
           - else

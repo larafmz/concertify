@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // The HTML code for the spinner
 const spinner = `
-  <div id="spinner" style=" height: 80px; padding: 20px; text-align: center; color: white;">
+  <div id="spinner" style=" height: 80px; padding: 20px; text-align: center; color: var(--main-text-color);">
     Loading...
   </div>
 `;

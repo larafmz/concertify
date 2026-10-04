@@ -1,28 +1,28 @@
 
 .custom_modal {
-    background: #0F1419;
-    color: white;
+    background: var(--background);
+    color: var(--main-text-color);
     border-radius: 15px;
-    border: 1px solid #40556d;
+    border: 1px solid var(--second-text-color);
     width: 800px;
 }
 
 .custom_modal::backdrop {
-  background: rgba(0, 0, 0, 0.6);
+   background: rgba(0, 0, 0, 0.7); /* black transparent */
 }
 
 .modal_header {
   display: flex;
   justify-content: space-between;
   padding: 10px 10px;
-  border-bottom: 1px solid #40556d;
+  border-bottom: 1px solid var(--second-text-color);
 }
 
 .modal_close {
   background: none;
   border: none;
   padding: 4px;
-  color: #444;
+  color: var(--second-text-color);
 }
 
 .modal_body {
@@ -31,7 +31,7 @@
 
 input[type="file"].field-custom::file-selector-button {
   background: rgb(53, 53, 70);
-  color: white;
+  color: var(--main-text-color);
   border: none;
   border-right: 1px solid rgb(87, 87, 124);
   cursor: pointer;

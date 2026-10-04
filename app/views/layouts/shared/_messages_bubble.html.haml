@@ -4,9 +4,9 @@
         - if controller_name == "chats"
             = image_tag("icon_chat_selected.png")
         - else
-            = image_tag("icon_chat.png")
+            = image_tag("#{session[:theme]}/icon_chat.png")
 
     - unread_chats = current_user.chat_users.unread.size
     - if unread_chats > 0
-        .message_notification{style: "width:18px; height:18px; border-radius:50%; background:#00c3ff; color:#0F1419; display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
+        .message_notification{style: "width:18px; height:18px; border-radius:50%; background:var(--link); color: var(--background); display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
             = unread_chats

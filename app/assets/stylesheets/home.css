@@ -1,5 +1,5 @@
 .home {
-  color: #a4b3c4;
+  color: var(--soft-color);
   max-width: 1400px;
   margin: 0 auto;
   padding: 10px 25px 50px;
@@ -31,20 +31,20 @@
 }
 
 .section-title a {
-  color: #d7dee7;
+  color: var(--main-text-color);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .section-title a:hover {
-  color: white;
+  color: var(--main-text-color);
 }
 
 .section-more {
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #8998a9;
+  color: var(--soft-color);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -58,7 +58,7 @@
 }
 
 .section-more:hover {
-  color: white;
+  color: var(--main-text-color);
 }
 
 .section-more:hover span {
@@ -73,11 +73,11 @@
 }
 
 .event-accent {
-  background: #40556d;
+  background: var(--second-text-color);
 }
 
 .artist-accent {
-  background: #7a5c82;
+  background: var(--softest-color);
 }
 
 .artists-grid {
@@ -96,8 +96,6 @@
 
 .artist-card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.055);
-  border-color: rgba(122, 92, 130, 0.7);
 }
 
 .artist-card-image {
@@ -106,7 +104,7 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 10px;
-  background: #252b34;
+  background: var(--darker-second-text-color);
 }
 
 .artist-card-image img {
@@ -129,8 +127,8 @@
   justify-content: center;
   font-size: 38px;
   font-weight: 700;
-  color: #bca9c0;
-  background: #51485a;
+  color: var(--soft-color);
+  background: var(--softest-color);
 }
 
 .artist-card-info {
@@ -139,7 +137,7 @@
 
 .artist-card-name {
   display: block;
-  color: #d7dee7;
+  color: var(--main-text-color);
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
@@ -159,8 +157,8 @@
   padding: 0;
   overflow: hidden;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--main-text-color);
+  border: 1px solid var(--darker-second-text-colmain-text-coloror);
   transition:
     transform 0.2s ease,
     background 0.2s ease,
@@ -169,8 +167,8 @@
 
 .registers-section .event-card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(64, 85, 109, 0.8);
+  background: var(--softest-color);
+  border-color: var(--softest-color);
 }
 
 .registers-section .event-card > a {
@@ -220,8 +218,8 @@
 .events-home {
   border-radius: 14px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--darker-second-text-color);
+  border: 1px solid var(--softest-color);
 }
 
 .events-home .item-event {
@@ -230,7 +228,7 @@
 }
 
 .events-home .item-event:hover {
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--second-text-color);
 }
 
 .events-home .separator {
@@ -255,8 +253,7 @@
 
 .register-card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(64, 85, 109, 0.8);
+  background: var(--darker-second-text-color);
 }
 
 .register-card-image {
@@ -264,7 +261,7 @@
   width: 100%;
   aspect-ratio: 16 / 11;
   overflow: hidden;
-  background: #252b34;
+  background: var(--darker-second-text-color);
 }
 
 .register-card-image img {
@@ -291,13 +288,14 @@
 
 .register-card-body {
   padding: 13px;
+
 }
 
 .register-user {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #8998a9;
+  color: var(--soft-color);
   font-size: 12px;
   margin-bottom: 10px;
 }
@@ -314,14 +312,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #40556d;
-  color: white;
+  background: var(--second-text-color);
+  color: var(--main-text-color);
   font-size: 11px;
   font-weight: 700;
 }
 
 .register-event-name {
-  color: #d7dee7;
+  color: var(--main-text-color);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
@@ -334,16 +332,16 @@
   align-items: center;
   margin-top: 12px;
   padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--main-text-color);
   font-size: 11px;
 }
 
 .register-rating {
-  color: #a4b3c4;
+  color: var(--soft-color);
 }
 
 .register-date {
-  color: #687788;
+  color: var(--softest-color);
 }
 
 .review-symbol {
@@ -367,7 +365,7 @@
 .registers-grid::-webkit-scrollbar-track,
 .chat::-webkit-scrollbar-track,
 .sidebar::-webkit-scrollbar-track {
-  background: #0F1419;
+  background: var(--background);
   border-radius: 10px;
 }
 
@@ -376,7 +374,7 @@
 .registers-grid::-webkit-scrollbar-thumb,
 .chat::-webkit-scrollbar-thumb,
 .sidebar::-webkit-scrollbar-thumb {
-  background: #6f6e85;
+  background: var(--softest-color);
   border-radius: 10px;
 }
 
@@ -385,7 +383,7 @@
 .registers-grid::-webkit-scrollbar-thumb:hover,
 .chat::-webkit-scrollbar-thumb:hover,
 .sidebar::-webkit-scrollbar-thumb:hover {
-  background: #666;
+  background: var(--softest-color);
 }
 
 .registers-grid {
@@ -421,12 +419,12 @@
   align-items: center;
   gap: 5px;
 
-  color: #9daab6 !important;
+  color: var(--soft-color) !important;
   text-decoration: none;
 }
 
 .register-repost-link:hover {
-  color: #ffffff !important;
+  color: var(--main-text-color) !important;
 }
 
 .register-repost-icon {
@@ -435,7 +433,7 @@
 }
 
 .register-repost-text {
-  color: #788592 !important;
+  color: var(--softest-color) !important;
 }
 
 .register-card {

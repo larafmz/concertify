@@ -10,9 +10,9 @@
   box-sizing: border-box;
   padding: 12px 25px;
 
-  border-bottom: 1px solid rgba(64, 85, 109, 0.55);
+  border-bottom: 1px solid var(--second-text-color);
 
-  color: #dce3ea;
+  color: var(--main-text-color);
 
   transition:
     background 0.2s ease,
@@ -20,7 +20,7 @@
 }
 
 .notification:hover {
-  background: rgba(255, 255, 255, 0.025) !important;
+  background: var(--second-text-color) !important;
 }
 
 .notification-user {
@@ -41,8 +41,8 @@
   overflow: hidden;
   border-radius: 50%;
 
-  background: #40556d;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--second-text-color);
+  border: 1px solid var(--main-text-color);
 }
 
 .notification-avatar img {
@@ -79,7 +79,7 @@
 }
 
 .notification-message {
-  color: #eef2f5;
+  color: var(--main-text-color);
 
   font-size: 14px;
   line-height: 1.4;
@@ -91,13 +91,13 @@
 }
 
 .notification-main:hover .notification-message {
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 .notification-time {
   margin-top: 4px;
 
-  color: #8d9aa7;
+  color: var(--soft-color);
   font-size: 11px;
 }
 
@@ -110,7 +110,7 @@
   overflow: hidden;
   border-radius: 9px;
 
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--main-text-color);
 }
 
 .notification-icon img {
@@ -139,7 +139,7 @@
 
   border-radius: 7px;
 
-  color: #aebbc7;
+  color: var(--soft-color);
   text-decoration: none;
 
   transition:
@@ -148,15 +148,15 @@
 }
 
 .notification-read-button:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: #ffffff;
+  background: var(--darker-second-text-color);
+  color: var(--main-text-color);
 }
 
-.notification[style*="#30363d"] {
-  border-left: 3px solid #40556d;
+.notification[style*="var(--second-text-color)"] {
+  border-left: 3px solid var(--second-text-color);
 }
 
-.notification[style*="#30363d"] .notification-message {
+.notification[style*="var(--main-text-color)"] .notification-message {
   font-weight: 600;
 }
 

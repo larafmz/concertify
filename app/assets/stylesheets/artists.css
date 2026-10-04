@@ -9,11 +9,11 @@
 .favorite_artist_icon {
   width: 100%;
   height: 150px;
-  background: black;
+  background: var(--full);
   overflow: hidden;
   display: flex;
   align-items: center;
-  border: 2px solid #40556d;
+  border: 2px solid var(--second-text-color);
   box-sizing: border-box;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .artist-color {
-  background: #18A999;
+  background: var(--artist);
 }
 
 .artists-index {
@@ -47,7 +47,7 @@
 }
 
 .artists-list > :nth-child(even) {
-  border-left: 1px solid #40556d;
+  border-left: 1px solid var(--second-text-color);
   padding-left: 20px;
 }
 
@@ -66,19 +66,16 @@
   grid-template-columns: 70px minmax(0, 1fr) auto;
   column-gap: 35px;
   align-items: center;
-
   padding: 12px 20px;
-
-  background: #141a21;
-  border: 1px solid #3d3042;
+  background: var(--darker-second-text-color);
+  border: 1px solid var(--second-text-color);
   border-radius: 14px;
-
-  color: #f1eef2;
+  color: var(--main-text-color);
 }
 
 .artist-list-new-item:hover {
-  background: #1a2028;
-  border-color: #7a5c82;
+  background: var(--darker-second-text-color);
+  border-color: var(--softest-color);
 }
 
 .artist-list-new-image-link {
@@ -94,9 +91,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #211c25;
-  border: 1px solid #7a5c82;
+  background: var(--full);
+  border: 1px solid var(--softest-color);
   border-radius: 11px;
 }
 
@@ -108,7 +104,7 @@
 }
 
 .artist-list-new-placeholder {
-  color: #c29bc8;
+  color: var(--soft-color);
   font-size: 25px;
 }
 
@@ -123,7 +119,7 @@
   display: inline-block;
   width: fit-content;
 
-  color: #f5f2f6;
+  color: var(--main-text-color);
   font-size: 17px;
   font-weight: 700;
   line-height: 1.25;
@@ -133,20 +129,20 @@
 }
 
 .artist-list-new-name:hover {
-  color: #cbaed0;
+  color: var(--soft-color);
 }
 
 .artist-list-new-followers {
   display: inline-flex;
   width: fit-content;
 
-  color: #aeb5bd;
+  color: var(--soft-color);
   font-size: 12px;
   text-decoration: none;
 }
 
 .artist-list-new-followers:hover {
-  color: #c6a8cc;
+  color: var(--soft-color);
 }
 
 .artist-list-new-actions {

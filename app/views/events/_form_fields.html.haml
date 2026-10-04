@@ -42,13 +42,13 @@
 
           %div
             = label_tag :city, class: "register-form-label", style: "display:flex; align-items:center; gap:5px;" do
-              = image_tag("icon_ubication_soft_color.png", class: "icon-img")
+              = image_tag("#{session[:theme]}/icon_ubication_soft_color.png", class: "icon-img")
               = Ubication.human_attribute_name(:city)
             = ubication_fields.text_field :city, class: "register-form-input", placeholder: "Ex: Madrid", id: "city_id"
 
           %div
             = label_tag :country, class: "register-form-label", style: "display:flex; align-items:center; gap:5px;" do
-              = image_tag("icon_ubication_soft_color.png", class: "icon-img")
+              = image_tag("#{session[:theme]}/icon_ubication_soft_color.png", class: "icon-img")
               = Country.singular
             = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, @event&.ubication&.country_id),
               { include_blank: t("verbs.select") }, { class: "register-form-input", id: "country_id" }

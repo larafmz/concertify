@@ -1,14 +1,14 @@
 .widget-content{style: "padding-top:0px;"}  
 
-    %div{style: "display: flex; gap: 20px; color: white;"}
-        = link_to followings_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :followings), title: "#{@followings.count} #{User.plural}" do
+    %div{style: "display: flex; gap: 20px; color: var(--main-text-color);"}
+        = link_to followings_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :followings), title: "#{@followings.count} #{User.plural}" do
             =t("following").upcase
             (#{@user.followings.users.count})
-        = link_to followers_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :followers), title: "#{@followers.count} #{User.plural}" do
+        = link_to followers_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :followers), title: "#{@followers.count} #{User.plural}" do
             =t("followers").upcase
             (#{@user.followers.count})
         - if can?(:blocked, @user)
-            = link_to blocked_user_path(@user), style: ("color: white; border-bottom: 2px solid #{orange_color};" if active == :blocked), title: "#{@blocked.count} #{User.plural}" do
+            = link_to blocked_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :blocked), title: "#{@blocked.count} #{User.plural}" do
                 =t("blocked").upcase
                 (#{@blocked.count})
     .separator
@@ -18,6 +18,6 @@
     - if @users.empty?
         = render "common/empty_list_message", model: User
     - else
-        %div{style: "border: 1px solid #40556d;"}       
+        %div{style: "border: 1px solid var(--second-text-color);"}       
             .registers-items
                 = render "users/index", users: @users 

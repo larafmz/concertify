@@ -16,7 +16,7 @@
     .publication-header
 
       = link_to user_path(publication.user), class: "publication-avatar-link" do
-        .link_icon{style: "background: #1e2731"}
+        .link_icon{style: "background: var(--darker-second-text-color)"}
           - if publication.user.icon.attached?
             = image_tag publication.user.icon
           - else
@@ -60,3 +60,4 @@
 
     .publication-footer
       = render "interactuables/footer", interactuable: publication
+

@@ -1,4 +1,4 @@
-%div{ style: "background: #1f252b;color: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 50px 0px 50px;" }
+%div{ style: "background: var(--background);color: var(--main-text-color); font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; padding: 5px 50px 0px 50px;" }
     .title_section{style: "color: inherit"}
         %div
             = t("requested_events")
@@ -7,10 +7,10 @@
 
     .widget-content{style: "padding-top:0px;"}  
         - status= params[:status]
-        .widget-content{style: "color: #a4b3c4; display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid #263241;"}
-            = link_to "#{t("all")} #{Request.all.count}", url_for, style: ("color: white; border-bottom: 2px solid #{orange_color};" if status.nil? )
-            = link_to "#{t("requests.statuses.accepted")} #{Request.accepted.count}", url_for(status: 0), style: ("color: white; border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 0)
-            = link_to "#{t("requests.statuses.pending")} #{Request.pending.count}", url_for(status: 1), style: ("color: white; border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 1)
-            = link_to "#{t("requests.statuses.denied")} #{Request.denied.count}", url_for(status: 2), style: ("color: white; border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 2)
+        .widget-content{style: "color: var(--soft-color); display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid #263241;"}
+            = link_to "#{t("all")} #{Request.all.count}", url_for, style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if status.nil? )
+            = link_to "#{t("requests.statuses.accepted")} #{Request.accepted.count}", url_for(status: 0), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 0)
+            = link_to "#{t("requests.statuses.pending")} #{Request.pending.count}", url_for(status: 1), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 1)
+            = link_to "#{t("requests.statuses.denied")} #{Request.denied.count}", url_for(status: 2), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 2)
 
     = render "requests/index", requests: @requests

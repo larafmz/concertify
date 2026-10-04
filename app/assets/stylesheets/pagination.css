@@ -15,20 +15,20 @@
   align-items: center;
   border-radius: 7px;
   font-size: 14px;
-  color: #a4b3c4;
-  border: 1px solid #40556d;
+  color: var(--soft-color);
+  border: 1px solid var(--second-text-color);
 }
 
 .pagination a:hover {
-  color: white;
-  background: #8926b8;
-  border-color: #8926b8;
+  color: var(--main-text-color);
+  background: var(--event);
+  border-color: var(--event);
 }
 
 .pagination .current {
-  color: white;
-  background: #8926b8;
-  border-color: #8926b8;
+  color: var(--main-text-color);
+  background: var(--event);
+  border-color: var(--event);
   font-weight: bold;
 }
 

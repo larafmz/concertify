@@ -3,9 +3,9 @@
   box-sizing: border-box;
 
   background: transparent;
-  color: #dce3ea;
+  color: var(--main-text-color);
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid var(--second-text-color);
 
   transition: color 0.2s ease;
 }
@@ -15,23 +15,23 @@
 }
 
 .publication-card:hover {
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 .publication-card:hover .publication-text {
-  color: #f4f6f8;
+  color: var(--main-text-color);
 }
 
 .publication-card:hover .publication-username {
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 .publication-card:hover .publication-time {
-  color: #aebbc7;
+  color: var(--soft-color);
 }
 
 .publication-card:hover .publication-repost {
-  color: #b9c4ce;
+  color: var(--soft-color);
 }
 
 .publication-repost {
@@ -41,14 +41,14 @@
 
   padding: 11px 20px 0 76px;
 
-  color: #9daab6;
+  color: var(--soft-color);
   font-size: 13px;
 
   transition: color 0.2s ease;
 }
 
 .publication-repost-icon {
-  color: #82909d;
+  color: var(--soft-color);
   font-size: 18px;
 }
 
@@ -79,7 +79,7 @@
   overflow: hidden;
 
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--main-text-color);
 
   background: transparent;
 }
@@ -109,7 +109,7 @@
 }
 
 .publication-username {
-  color: #dee5eb;
+  color: var(--main-text-color);
 
   font-size: 15px;
   font-weight: 700;
@@ -120,7 +120,7 @@
 }
 
 .publication-username:hover {
-  color: #ffffff;
+  color: var(--main-text-color);
 }
 
 .publication-tag {
@@ -155,7 +155,7 @@
 .publication-time {
   margin-top: 3px;
 
-  color: #7f8b97;
+  color: var(--softest-color);
 
   font-size: 12px;
 
@@ -174,7 +174,7 @@
 
   background: transparent;
 
-  color: #aab5bf;
+  color: var(--soft-color);
 
   font-size: 21px;
   line-height: 1;
@@ -183,8 +183,8 @@
 }
 
 .dropdown-button:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #eef2f5;
+  background: var(--second-text-color);
+  color: var(--main-text-color);
 }
 
 .publication-content-link {
@@ -198,7 +198,7 @@
 }
 
 .publication-text {
-  color: #dee5eb;
+  color: var(--main-text-color);
 
   font-size: 15px;
   line-height: 1.55;
@@ -241,7 +241,7 @@
 
   border-radius: 9px;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--main-text-color);
 
   background: transparent;
 }

@@ -13,15 +13,61 @@
  *= require session
  */
 
+:root {
+  --background: #0F1419;
+  --main-text-color: #E7E7E7;
+  --second-text-color: #4D6074;
+  --dropdown: #4D6074;
+  --darker-second-text-color: #26313C;
+  --darker-second-text-color2: #26313C;
+  --soft-color: #AAB8C7;
+  --soft-color2: #AAB8C7;
+  --softest-color: #6B747D;
+  --softest-color2: #6B747D;
+  --full: #000000;
+  --orange: #EB5D25;
+  --event: #8926B8;
+  --artist: #18A999;
+  --softest-red: #FFAAAA;
+  --soft-red: rgba(210, 80, 80, 0.35);
+  --contrast: #E7E7E7;
+  --link: #00c3ff;
+  --info: #00c3ff;
+  --message: #0290bb;
+}
+
+:root.light {
+  --background: white;
+  --main-text-color: black;
+  --second-text-color: rgb(191, 186, 211);
+  --dropdown: #E7E7E7;
+  --darker-second-text-color: #f1f1f1;
+  --darker-second-text-color2: #d4d4d4;
+  --soft-color: rgb(37, 37, 37);
+  --soft-color2: rgb(5, 5, 5);
+  --softest-color: #414141;
+  --softest-color2: #E7E7E7;
+  --full: white;
+  --orange: #c43902;
+  --event: #d790f8;
+  --artist: #18A999;
+  --softest-red: #fffefe;
+  --soft-red: rgba(141, 0, 0, 0.35);
+  --contrast: black;
+  --link: #ba25ff;
+  --info: rgb(224, 248, 255);
+  --message: rgb(135, 197, 233);
+}
+
 body {
-  background: #0F1419 !important;
+  background: var(--background) !important;
   font-family: system-ui;
 }
 
 .title {
   font-size: 19px !important;
   letter-spacing: 1px;
-  color: white;
+  color: var(--main-text-color);
 }
 
 .widget-content {
@@ -32,11 +78,10 @@ body {
   padding: 20px 20px;
   margin-bottom: 15px;
   margin-top: 15px;
-  background: #1e2731;  
-  color: white;
+  background: var(--darker-second-text-color);  
+  color: var(--main-text-color);
   border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
-  border: 1px solid #40556d;
+  border: 1px solid var(--second-text-color);
 }
 
 a,
@@ -49,17 +94,17 @@ a:active {
 }
 
 a:hover {
-  color: #00c3ff;
+  color: var(--link);
 }
 
 .hover-border:hover {
-  border-color: #00c3ff;
+  border-color: var(--link);
 }
 
 .hover-border-icon:hover .link_icon, 
 .link_icon.active {
   background: inherit;
-  border: 2px solid #eb5d25;
+  border: 2px solid var(--orange);
 
 }
 
@@ -75,18 +120,18 @@ a:hover {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border: 2px solid #40556d;
+  border: 2px solid var(--second-text-color);
 }
 
 .small_vertical_rectangle {
   width: 80px;
   height: 100px;
-  background: black;
+  background: var(--full);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #40556d;
+  border: 2px solid var(--second-text-color);
   margin-left: -18px;
 }
 
@@ -97,14 +142,14 @@ a:hover {
 .form-columns {
     display: grid;
     grid-template-columns: 1fr auto;
-    color: white;
+    color: var(--main-text-color);
     gap: 10px;
 }
 
 .icon {
   width: 50px;
   height: 50px;
-  background: black;
+  background: var(--full);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -115,7 +160,7 @@ a:hover {
 .circle_icon {
   width: 200px;
   height: 200px;
-  background: black;
+  background: var(--full);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -126,19 +171,19 @@ a:hover {
 .user_icon {
   width: 120px;
   height: 120px;
-  background: black;
+  background: var(--full);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1px solid #cecfd1;
+  border: 1px solid var(--main-text-color);
 }
 
 .link_icon {
   width: 45px;
   height: 45px;
-  background: #1f2731;
+  background: var(--darker-second-text-color);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -179,14 +224,14 @@ a:hover {
 
 .separator {
   height: 1px;
-  background: #40556d;
+  background: var(--second-text-color);
 }
 
 .title_section {
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
-  color: #a4b3c4;
+  color: var(--soft-color);
 }
 
 /*
@@ -196,8 +241,8 @@ a:hover {
 .btn-standard,
 .btn-custom {
   white-space: nowrap;
-  background: #3a485a;
-  color: white !important;
+  background: var(--second-text-color);
+  color: var(--main-text-color) !important;
   border: none;
   border-radius: 15px;
   padding: 10px 18px;
@@ -224,8 +269,8 @@ a:hover {
 .small-btn-custom {
   justify-self: start;
   width: fit-content;
-  background: #5c5768;
-  color: rgb(226, 211, 211);
+  background: var(--softest-color2);
+  color: var(--main-text-color);
   border-radius: 7px;
   padding: 7px 12px;
   font-size: 12px;
@@ -257,12 +302,12 @@ a:hover {
 .rectangle_icon {
   width: 200px;
   height: 150px;
-  background: black;
+  background: var(--full);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #40556d;
+  border: 2px solid var(--second-text-color);
 }
 
 .label-filter img, .icon-img, .icon-img-2 {
@@ -280,35 +325,35 @@ a:hover {
 .field-custom {
   height: 40px;
   width: 100%;
-  background: rgb(53, 53, 70); 
-  border: 1px solid rgb(87, 87, 124);
-  color: white; 
+  background: var(--darker-second-text-color);
+  border: 1px solid var(--second-text-color);
+  color: var(--main-text-color); 
   border-radius: 20px;
   padding: 10px;
 }
 
 .soft-color {
-  color: #a4b3c4;
+  color: var(--soft-color);
 }
 
 .softest-color {
-  color: #5a626b;
+  color: var(--softest-color);
 }
 
 .bubble {
   display: inline-block;
-  background: #0F1419;
-  color: white; 
+  background: var(--full);
+  color: var(--main-text-color); 
   border-radius: 15px; 
   font-size:15px; 
-  border: 2px solid #40556d;
+  border: 2px solid var(--second-text-color);
   padding: 1px 10px;
 }
 
 .adapted-bubble {
   display: inline-block;
   width: fit-content;
-  color: white; 
+  color: var(--main-text-color); 
   border-radius: 15px; 
   font-size:15px; 
   padding: 1px 10px;
@@ -317,11 +362,11 @@ a:hover {
 
 
 .event-color {
-  background: #8926b8;
+  background: var(--event);
 }
 
 .orange-color {
-  background: #eb5d25;
+  background: var(--orange);
 }
 
 /*
@@ -365,10 +410,10 @@ a:hover {
   box-sizing: border-box;
   margin: 0 0 15px 0;
   padding: 15px;
-  background: #1e2731;
-  border: 1px solid #40556d;
+  background: var(--darker-second-text-color);
+  border: 1px solid var(--second-text-color);
   border-radius: 15px;
-  color: white
+  color: var(--main-text-color);
 }
 
 .four-columns {
@@ -384,7 +429,7 @@ a:hover {
 }
 
 .stat .number {
-    color: #ffe7e7;
+    color: var(--main-text-color);;
     font-size: 20px;
     font-weight: 600;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -392,7 +437,7 @@ a:hover {
 }
 
 .stat .name {
-    color: #5a626b; 
+    color: var(--softest-color); 
     font-size: 15px;
     text-transform: uppercase;
     
@@ -400,7 +445,7 @@ a:hover {
 
 .button-without-format {
   background: none;
-  color: white;
+  color: var(--main-text-color);
   border: none;
   padding: 0;
   display: flex;
@@ -413,9 +458,9 @@ a:hover {
   z-index: 9999;
   padding: 12px 20px;
   border-radius: 10px;
-  background: #30363d;
-  color: white;
-  border: 1px solid #40556d;
+  background: var(--darker-second-text-color);
+  color: var(--main-text-color);
+  border: 1px solid var(--second-text-color);
 }
 
 
@@ -449,13 +494,13 @@ a:hover {
   padding: 15px 15px;
   font-size: 18px;
   text-align: left;
-  color: white;
+  color: var(--main-text-color);
 }
 
 .item-register {
   border-radius: 15px;
-  border: 1px solid #40556d;
-  background: #161e25;
+  border: 1px solid var(--second-text-color);
+  background: var(--full);
   display: grid;
   grid-template-columns: 0.3fr 1fr 4fr 1fr auto;
   gap: 20px;
@@ -463,7 +508,7 @@ a:hover {
   font-size: 18px;
   text-align: left;
   align-items: center;
-  color: white;
+  color: var(--main-text-color);
   margin-bottom:10px
 }
 
@@ -475,7 +520,7 @@ a:hover {
   font-size: 18px;
   text-align: left;
   align-items: center;
-  color: white;
+  color: var(--main-text-color);
 }
 
 .diary-link {
@@ -488,7 +533,7 @@ a:hover {
 }
 
 .diary-link:hover {
-  background-color: #263241;
+  background-color: var(--darker-second-text-color);
 }
 
 .publication-link, .notification-button {
@@ -501,7 +546,7 @@ a:hover {
 }
 
 .publication-link:hover, .notification-button:hover {
-  background: #1f252b;
+  background: var(--darker-second-text-color);
 }
 
 .review {
@@ -520,7 +565,7 @@ a:hover {
 .two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    color: white;
+    color: var(--main-text-color);
     gap:10px;
 }
 
@@ -550,7 +595,7 @@ a:hover {
 .artist-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    color: white;
+    color: var(--main-text-color);
 }
 
 .info  {
@@ -572,10 +617,9 @@ a:hover {
 .message {
   padding: 15px;
   margin-bottom: 15px;
-  background: #2f7185;  
-  color: white;
+  background: var(--info); 
+  color: var(--main-text-color);
   border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
   border: 2px dashed #50a5be;
   font-size: 15px;
   font-weight: 600; 
@@ -588,7 +632,7 @@ a:hover {
   padding: 10px;
   margin-right: 15px;
   background: #bb3a3a;  
-  color: white;
+  color: var(--main-text-color);
   border-radius: 15px;
   border: 2px dashed #ff9696;
   font-size: 15px;

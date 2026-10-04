@@ -86,15 +86,15 @@ module ApplicationHelper
   end
 
   def artist_color
-    return "#18A999"
+    return "var(--artist)"
   end
 
   def event_color
-    return "#8926b8"
+    return "var(--event);"
   end
 
   def orange_color
-    return "#eb5d25"
+    return "var(--orange)"
   end
 
 end

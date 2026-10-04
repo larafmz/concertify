@@ -30,6 +30,7 @@ class Ability
         can :create, [Register, Interactuable, FutureAssistance, Publication, Request]
 
         # Chat permissions
+        can :create, Chat
         can [:read, :exit, :mark_as_read, :members], Chat do |chat| 
           chat.chat_users.exists?(user_id: user.id)
         end

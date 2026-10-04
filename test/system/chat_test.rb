@@ -73,7 +73,7 @@ class ChatTest < ApplicationSystemTestCase
         event = register.event
         visit "/events/#{event.id}" 
         click_on "Access Chat"
-        assert_current_path "/chats/#{event.id}?event_id=#{event.id}", wait: 10
+        assert_current_path "/chats/#{event.chat.id}", wait: 10
         assert_text event.tour_name
         assert_text "1 Members"
         assert_text "You joined the group"
@@ -87,7 +87,7 @@ class ChatTest < ApplicationSystemTestCase
         event = future_assistance.event
         visit "/events/#{event.id}" 
         click_on "Access Chat"
-        assert_current_path "/chats/#{event.id}?event_id=#{event.id}", wait: 10
+        assert_current_path "/chats/#{event.chat.id}", wait: 10
         assert_text event.tour_name
         assert_text "1 Members"
         assert_text "You joined the group"

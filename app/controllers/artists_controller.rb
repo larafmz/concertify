@@ -55,7 +55,7 @@ class ArtistsController < ApplicationController
        format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "follow-artist-#{@artist.id}",
-            partial: "artists/follow_buttoms",
+            partial: "artists/follow_buttons",
             locals: { artist: @artist }
           )
         end
@@ -68,7 +68,7 @@ class ArtistsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "follow-artist-#{@artist.id}",
-            partial: "artists/follow_buttoms",
+            partial: "artists/follow_buttons",
             locals: { artist: @artist }
           )
         end

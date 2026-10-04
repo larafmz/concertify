@@ -49,8 +49,7 @@
             .soft-color{ style: "margin-left: auto; background: #1f252b; display: flex; align-items: center; gap: 10px;"}
                 = render "users/relation_buttons", user: @user
                 - unless current_user.blocked_user?(@user.id)
-                    = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-custom orange-color"
-                     
+                    = button_to t("send_message"), chats_path(user_id: @user.id), method: :post, data: { turbo: false }, class: "btn-standard orange-color"
             - if can?(:block, @user) || @user.follows_user?(current_user)
                 .dropdown
                     .dropdown-toggle{

@@ -6,9 +6,11 @@
   .notification-user
     - if user
       = link_to user_path(user), class: "notification-user-link" do
-        .notification-avatar
+        .link_icon{style: "background: #1e2731"}
           - if user.icon.attached?
             = image_tag user.icon
+          - else
+            = user.username.first.upcase
 
   = button_to read_and_redirect_notification_path(notification), class: "notification-main", method: :post, form: { data: { turbo: false } } do
 

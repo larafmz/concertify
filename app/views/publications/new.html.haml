@@ -14,8 +14,11 @@
 
         .info
 
-          .link_icon
-            = image_tag current_user.icon if current_user.icon.attached?
+          .link_icon{style: "background: #1e2731"}
+            - if current_user.icon.attached?
+              = image_tag current_user.icon
+            - else
+              = current_user.username.first.upcase
 
           .form-columns{data: { controller: "character-counter" }}
             = f.text_area :review, required: true, maxlength: 500, placeholder: t("messages.whats_going_on"), id: "review_id", class: "register-form-input register-form-textarea", data: { character_counter_target: "input", action: "input->character-counter#update" }

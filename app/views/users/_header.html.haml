@@ -1,9 +1,11 @@
 %div{ class: "widget-content", style: "background: #1f252b;"}
     %div{ class: "artist-content", style: "background: #1f252b;"}
         .info
-            .user_icon
-                = image_tag  @user.icon if @user.icon.attached?
-                
+            .user_icon{style: "background: #0F1419"}
+                - if @user.icon.attached?
+                    = image_tag @user.icon
+                - else
+                    = @user.username.first.upcase                
             .name
                 %div{style: "margin-bottom:5px; font-size:25px;"}
                     = @user.username

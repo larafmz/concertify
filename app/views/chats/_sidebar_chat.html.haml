@@ -4,9 +4,12 @@
     = link_to chat_path(chat), data: { turbo_frame: "chat_content", turbo_prefetch: false }, class: "diary-link", id: "chat_link_#{chat.id}" do 
         - last_message = chat.chat_entries.user_messages.order(created_at: :desc).first
         .info{style: "grid-template-columns: auto 1fr auto; gap: 15px; margin: 5px;"}
-            .link_icon{style: "height: 50px; width: 50px;"}
+            .link_icon{style: "height: 50px; width: 50px; background: #1e2731; color: white;"}
                 -  photo = chat.photo(current_user)
-                = image_tag photo if photo.present?
+                - if photo.present?
+                    = image_tag photo 
+                - else
+                    = chat_name.first.upcase
             .name 
                 %div{id: "chat_name_#{chat.id}", style: "font-size:15px; color: #{color}"}= chat_name
                 - if last_message.present?

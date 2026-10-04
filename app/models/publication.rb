@@ -64,6 +64,7 @@ class Publication < Interactuable
           date: repost.created_at
         }
       end).sort_by { |obj| -obj[:date].to_i }
+      return Publication.viewables(user) if feed.empty?
       feed
     end
 

@@ -2,8 +2,11 @@
     - if user
         = link_to user_path(user), data: { turbo_frame: "_top" } do 
             .info{style: "gap: 15px; margin: 5px;"}
-                .link_icon{style: "height: 50px; width: 50px;"}
-                    = image_tag user.icon if user.icon.attached?
+                .link_icon{style: "height: 50px; width: 50px; background: #0F1419;"}
+                    - if user.icon.attached?
+                        = image_tag user.icon
+                    - else
+                        = user.username.first.upcase
                 .name 
                     %div{style: "margin-bottom:5px; font-size:15px;"}= user.username
     - elsif event

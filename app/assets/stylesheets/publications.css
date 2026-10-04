@@ -152,14 +152,6 @@
   transform: translateY(-1px);
 }
 
-.publication-tag-artist {
-  background: rgba(122, 92, 130, 0.20);
-}
-
-.publication-tag-event {
-  background: rgba(64, 85, 109, 0.25);
-}
-
 .publication-time {
   margin-top: 3px;
 

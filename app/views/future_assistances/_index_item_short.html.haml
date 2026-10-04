@@ -3,8 +3,11 @@
 
 .future_assistance{style: "margin:20px 0px 20px 0px;"}
     = link_to user_path(future_assistance.user), class: "hover-border-icon" do
-        .link_icon 
-            = image_tag future_assistance.user.icon if future_assistance.user.icon.attached?
+        .link_icon{style: "background: #1e2731; color: white"}
+            - if future_assistance.user.icon.attached?
+                = image_tag future_assistance.user.icon
+            - else
+                = future_assistance.user.username.first.upcase
 
     %div
         .flex-left

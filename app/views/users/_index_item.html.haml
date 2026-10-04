@@ -1,7 +1,10 @@
 .register_user{style: "grid-template-columns: 0.1fr 4fr auto; border-radius: 0px;"}
     = link_to user_path(user), class: "hover-border-icon" do 
-        .link_icon
-            = image_tag user.icon if user.icon.attached?
+        .link_icon{style: "background: #1e2731"}
+            - if user.icon.attached?
+                = image_tag user.icon
+            - else
+                = user.username.first.upcase
 
     %div
         = link_to user_path(user), id: "link_user_#{user.id}" do

@@ -1,8 +1,10 @@
 .info{style: "margin-top:15px; padding-left:15px; padding-right:15px;"}
     = link_to user_path(comment.user_id), class: "hover-border-icon" do
-        .link_icon 
-            = image_tag comment.user.icon if comment.user.icon.attached?
-
+        .link_icon{style: "background: #1e2731; color: white"}
+            - if comment.user.icon.attached?
+                = image_tag comment.user.icon
+            - else
+                = comment.user.username.first.upcase
     %div
         .title_section
             .soft-color{style: "font-size: 15px;" }

@@ -217,7 +217,7 @@
 }
 
 .request-card-action-danger:hover {
-  background: var(--soft-red);
+  background: var(--transparent-red);
   color: var(--softest-red);
 }
 

@@ -73,11 +73,15 @@
 }
 
 .event-accent {
-  background: var(--second-text-color);
+  background: var(--event);
+}
+
+.register-accent {
+  background: var(--orange);
 }
 
 .artist-accent {
-  background: var(--softest-color);
+  background: var(--artist);
 }
 
 .artists-grid {

@@ -47,7 +47,7 @@ class Publication < Interactuable
     def self.feed(user)
       return Publication.all.order("created_at DESC") unless user.present?
 
-      reposts = Repost.for_publications.where(user_id: [user.id, *user.following_ids]).includes(:interactuable, :user)
+      reposts = Repost.for_publications.where(user_id: [user.id] +  user.followings.map(&:followed_id)).includes(:interactuable, :user)
       publis = Publication.where(user_id: user.id).or(Publication.of_user_followings(user)).or(Publication.of_user_events(user)).distinct
       publis = publis.where.not(id: reposts.pluck(:interactuable_id)) # Exclude publications that have been reposted by the user or their followings
 

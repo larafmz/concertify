@@ -1,8 +1,8 @@
 %div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{@photo_url}'); background-size: cover; background-position: center 30%;" }
-    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, var(--background) 100%), linear-gradient(to right, var(--full) 0%, var(--full) 25%, var(--full) 60%);" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, var(--black) 100%), linear-gradient(to right, var(--black) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .info{style:"margin:40px;"}
-            .name
+            .name{style: "color: var(--main-text-color2)"}
                 .adapted-bubble.event-color
                     ="##{Event.singular.upcase}"
                     - if current_user&.admin? && @event.request
@@ -20,9 +20,9 @@
             - event_date_status = @event.past_or_future
             - if event_date_status == "past" && !@registers.empty?
                 .stat
-                    .number
+                    .number{style: "color: var(--main-text-color2)"}
                         ★ #{@average_rating} / 5
-                    .name{style: "color: var(--main-text-color)"}
+                    .name{style: "color: var(--main-text-color2)"}
                         = t("average", model: Register.plural)
 
         %span{ style: "margin-left: auto; margin-bottom: 25px;" }

@@ -1,5 +1,5 @@
 .widget-content{style: "color: var(--soft-color); "}
-    .widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; border: 1px solid #263241; box-sizing: border-box;"}
+    .widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; border: 1px solid var(--second-text-color); box-sizing: border-box;"}
         = link_to "👤 #{@user.username}", user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :profile)
         = link_to Register.han("reviews"), registers_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :reviews)
         = link_to t("diary"), diary_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :diary)

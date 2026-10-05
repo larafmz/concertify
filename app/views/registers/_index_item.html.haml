@@ -64,8 +64,9 @@
           = image_tag("#{session[:theme]}/icon_date_softest_color.png")
           = short_date(event.date)
 
-      .register-index-rating
-        = register.get_rating
+      - if register.rating.present?
+        .register-index-rating
+          = register.get_rating
 
       - if register.review.present?
         .register-index-review
@@ -74,7 +75,7 @@
       .register-index-footer
         = render "interactuables/footer", interactuable: register
 
-  .register-index-created
-    = t("created_ago", time: time_ago_in_words(register.created_at))
+      .register-index-created
+        = t("created_ago", time: time_ago_in_words(register.created_at))
 
 .register-index-separator

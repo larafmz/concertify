@@ -1,7 +1,7 @@
 .header
   .app_name
     = link_to root_path do
-      = image_tag("#{session[:theme]}/concertify_logo.png")
+      = image_tag("#{session[:theme]}/concertify_logo.PNG")
 
   - search_path = %w[artists users events].include?(controller_name) ? "/#{controller_name}" : "/artists"
   = form_tag search_path, method: "GET", class: "header-search" do
@@ -52,13 +52,6 @@
 
     - if current_user
       .header-icons
-        = link_to user_path(current_user), class: "hover-border-icon", title: t("user_account.profile") do
-          .link_icon
-            - if current_page?(user_path(current_user))
-              = image_tag("icon_user_selected.png")
-            - else
-              = image_tag("#{session[:theme]}/icon_user.png")
-
         = link_to notifications_user_path(current_user),
           class: "hover-border-icon",
           title: Notification.plural,

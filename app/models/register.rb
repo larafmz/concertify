@@ -64,9 +64,8 @@ class Register < Interactuable
     def self.feed(user)
       return Register.all unless user.present?
 
-      reposts = Repost.for_registers.where(user_id: [user.id, *user.following_ids]).includes(:interactuable, :user)
-      regs = Register.by_friends(user)
-      regs = regs.where.not(id: reposts.pluck(:interactuable_id)) # Exclude registers that have been reposted by the user or their followings
+      reposts = Repost.for_registers.where(user_id: [user.id] +  user.followings.map(&:followed_id)).includes(:interactuable, :user)
+      regs = Register.by_friends(user).where.not(id: reposts.pluck(:interactuable_id)) # Exclude registers that have been reposted by the user or their followings
 
       feed = (regs.viewables(user).map do |reg|
         {

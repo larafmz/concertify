@@ -6,7 +6,7 @@
 
     .two-columns
       %div
-        = label_tag :artist_id, "🧑‍🎤 #{Artist.singular} *", class: "register-form-label"
+        = label_tag :artist_id, "🧑‍🎤 #{Artist.singular}", class: "register-form-label"
         = f.text_field :artist_name, id: "artist_name_id",
           value: @event&.artists&.first&.name || Artist.find_by(id: params[:artist_id])&.name,
           placeholder: "Ex: Taylor Swift", class: "register-form-input", list: "artists-list"
@@ -20,7 +20,7 @@
 
     .two-columns
       %div
-        = label_tag :date, "🗓️ #{Event.human_attribute_name(:date)} *", class: "register-form-label"
+        = label_tag :date, "🗓️ #{Event.human_attribute_name(:date)}", class: "register-form-label"
         = f.date_field :date, class: "register-form-input", id: "date_id"
 
       %div

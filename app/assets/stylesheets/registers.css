@@ -244,10 +244,7 @@
 
 .register-index-created {
   margin-top: 12px;
-  margin-left: 238px;
-
-  color: var(--soft-color) !important;
-
+  color: var(--softest-color) !important;
   font-size: 11px;
 }
 

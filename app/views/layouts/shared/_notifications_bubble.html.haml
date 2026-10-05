@@ -7,6 +7,6 @@
             = image_tag("#{session[:theme]}/icon_notification.png")
     - unread_notis = current_user.notifications.unread.size
     - if unread_notis > 0
-        .normal_notification{style: "width:18px; height:18px; border-radius:50%; background:var(--link); color: var(--background); display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
+        .normal_notification{style: "width:18px; height:18px; border-radius:50%; background:var(--orange); color: var(--background); display:flex; justify-content:center; align-items:center; font-size:13px; font-weight:bold; margin-top:-6px;"}
             = unread_notis
 

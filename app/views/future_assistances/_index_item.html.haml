@@ -54,7 +54,7 @@
                                 %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
                     - if future_assistance.from && !future_assistance.from.empty?
                         .bubble
-                            %span{style: "color: rgb(230, 230, 230); display:flex; align-items:center; gap: 5px"}
+                            %span{style: "color: var(--main-text-color); display:flex; align-items:center; gap: 5px"}
                                 = image_tag("#{session[:theme]}/icon_ubication_softest_color.png", class: "icon-img")
                                 = FutureAssistance.human_attribute_name(:from)
                                 = future_assistance.from

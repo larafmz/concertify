@@ -28,10 +28,6 @@
   border: 1px solid var(--softest--color);
   border-radius: 18px;
 
-  box-shadow:
-    0 20px 50px var(--full),
-    0 0 0 1px var(--darker-second-text-color);
-
   backdrop-filter: blur(8px);
 }
 
@@ -133,8 +129,8 @@
   border-radius: 9px;
 
   color: var(--main-text-color);
-  background: var(--softest-color);
 
+  background: var(--second-text-color);
   font-size: 14px;
   font-weight: 600;
 
@@ -355,15 +351,15 @@
   margin-top: 25px;
   padding-top: 20px;
 
-  border-top: 1px solid var(--soft-red);
+  border-top: 1px solid var(--transparent-red);
 }
 
 .profile-edit-delete {
   padding: 8px 14px;
-  border: 1px solid var(--soft-red);
+  border: 1px solid var(--transparent-red);
   border-radius: 7px;
   color: var(--softest-red);
-  background: var(--soft-red);
+  background: var(--transparent-red);
   font-size: 12px;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
@@ -371,5 +367,5 @@
 
 .profile-edit-delete:hover {
   color: var(--softest-red);
-  background: var(--soft-red);
+  background: var(--transparent-red);
 }

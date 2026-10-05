@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  before_action :set_locale
+  before_action :set_locale_and_mode
 
   rescue_from AbstractController::ActionNotFound do |exception|
     flash[:alert] = t("not_found")
@@ -42,8 +42,9 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def set_locale
+  def set_locale_and_mode
     I18n.locale = cookies[:locale] || I18n.default_locale
+    session[:theme] ||= "dark"
   end
 
   def redirect_to_home

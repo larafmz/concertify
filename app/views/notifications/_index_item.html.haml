@@ -31,4 +31,4 @@
       = render "users/relation_buttons", user: user
 
   - unless notification.read?
-    = link_to "👁", mark_as_read_notification_path(notification), data: { turbo_method: :post }, class: "notification-read-button"
+    = link_to "✓", mark_as_read_notification_path(notification), data: { turbo_method: :post }, class: "notification-read-button"

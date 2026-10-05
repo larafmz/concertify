@@ -45,7 +45,7 @@
   position: relative;
   left: 15px;
   color: var(--main-text-color);
-  background: var(--second-text-color);
+  background: var(--darker-second-text-color);
   padding: 5px 15px;
   display: inline-block;
   clip-path: polygon(

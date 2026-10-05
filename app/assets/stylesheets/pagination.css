@@ -20,13 +20,13 @@
 }
 
 .pagination a:hover {
-  color: var(--main-text-color);
+  color: var(--main-text-color2);
   background: var(--event);
   border-color: var(--event);
 }
 
 .pagination .current {
-  color: var(--main-text-color);
+  color: var(--main-text-color2);
   background: var(--event);
   border-color: var(--event);
   font-weight: bold;

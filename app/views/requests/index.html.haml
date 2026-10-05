@@ -7,7 +7,7 @@
 
     .widget-content{style: "padding-top:0px;"}  
         - status= params[:status]
-        .widget-content{style: "color: var(--soft-color); display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid #263241;"}
+        .widget-content{style: "color: var(--soft-color); display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid var(--second-text-color);"}
             = link_to "#{t("all")} #{Request.all.count}", url_for, style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if status.nil? )
             = link_to "#{t("requests.statuses.accepted")} #{Request.accepted.count}", url_for(status: 0), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 0)
             = link_to "#{t("requests.statuses.pending")} #{Request.pending.count}", url_for(status: 1), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 1)

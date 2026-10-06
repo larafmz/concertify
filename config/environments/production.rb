@@ -32,7 +32,7 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = 'http://assets.example.com'
-  config.hosts << ENV["RAILS_ALLOWED_HOSTS"] if ENV["RAILS_ALLOWED_HOSTS"].present?
+  config.hosts << "concertify-app-ejcmh5h5a9g7d9c8.polandcentral-01.azurewebsites.net"
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache

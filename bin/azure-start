@@ -10,5 +10,8 @@ RAILS_ENV=production bin/rails runner 'unless ActiveRecord::Base.connection.data
 echo "Preparing Solid Cable..."
 RAILS_ENV=production bin/rails runner 'unless ActiveRecord::Base.connection.data_source_exists?("solid_cable_messages"); load Rails.root.join("db/cable_schema.rb"); end'
 
+echo "Loading seeds..."
+RAILS_ENV=production bin/rails db:seed
+
 echo "Starting Rails..."
 exec env RAILS_ENV=production bin/rails server -b 0.0.0.0 -p 3000

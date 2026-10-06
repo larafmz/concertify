@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+echo "Preparing primary database..."
+RAILS_ENV=production bin/rails db:prepare
+
+echo "Preparing Solid Queue..."
+RAILS_ENV=production bin/rails runner 'unless ActiveRecord::Base.connection.data_source_exists?("solid_queue_recurring_tasks"); load Rails.root.join("db/queue_schema.rb"); end'
+
+echo "Preparing Solid Cable..."
+RAILS_ENV=production bin/rails runner 'unless ActiveRecord::Base.connection.data_source_exists?("solid_cable_messages"); load Rails.root.join("db/cable_schema.rb"); end'
+
+echo "Starting Rails..."
+exec RAILS_ENV=production bin/rails server -b 0.0.0.0 -p 3000

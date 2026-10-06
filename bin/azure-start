@@ -13,5 +13,8 @@ RAILS_ENV=production bin/rails runner 'unless ActiveRecord::Base.connection.data
 echo "Loading seeds..."
 RAILS_ENV=production bin/rails db:seed
 
+echo "Starting Solid Queue..."
+RAILS_ENV=production bin/jobs start &
+
 echo "Starting Rails..."
 exec env RAILS_ENV=production bin/rails server -b 0.0.0.0 -p 3000

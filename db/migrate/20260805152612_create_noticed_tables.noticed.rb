@@ -25,6 +25,10 @@ class CreateNoticedTables < ActiveRecord::Migration[6.1]
     end
   end
 
+  add_column :noticed_events, :notifications_count, :integer
+  add_reference :noticed_notifications, :chat
+
+
   private
 
   def primary_and_foreign_key_types

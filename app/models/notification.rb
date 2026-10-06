@@ -12,6 +12,7 @@ class Notification < Noticed::Notification
     ## SCOPES
 
         scope :for_user, ->(user_id) { where(recipient_type: "User", recipient_id: user_id) }
+        # event Noticed::Event, not my Event model
         scope :for_record, ->(record) { joins(:event).where(noticed_events: { record_type: record.class.name, record_id: record.id } )  }
 
         scope :read, -> { where.not(read_at: nil) }

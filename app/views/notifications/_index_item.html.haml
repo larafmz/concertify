@@ -1,4 +1,4 @@
-- background = notification.read? ? "var(--darker-second-text-color2)" : "transparent"
+- background = notification.read? ? "var(--notification-read)" : "var(--notification-unread)" 
 - user = notification.user
 
 .notification{id: "notification-#{notification.id}", style: "background: #{background};"}

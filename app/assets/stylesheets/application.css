@@ -37,6 +37,8 @@
   --info: #0290bb;
   --message: #0290bb;
   --black: black;
+  --notification-read: transparent;
+  --notification-unread: #26313C;;
 }
 
 :root.light {
@@ -63,6 +65,8 @@
   --info: rgb(224, 248, 255);
   --message: rgb(135, 197, 233);
   --black: black;
+  --notification-read: #d4d4d4;
+  --notification-unread: transparent;
 }
 
 body {

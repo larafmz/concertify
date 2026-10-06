@@ -52,17 +52,17 @@
 
     - if current_user
       .header-icons
-        = link_to notifications_user_path(current_user),
-          class: "hover-border-icon",
-          title: Notification.plural,
-          id: "notifications_header_id" do
-          = render "layouts/shared/notifications_bubble"
+        = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural, id: "notifications_header_id" do
+          %div{style: "display:flex; flex-direction:column; align-items:center;"}
+            .link_icon
+              = image_tag("#{session[:theme]}/icon_notification.png")
+            = render "layouts/shared/notifications_bubble"
 
-        = link_to chats_path,
-          class: "hover-border-icon",
-          title: Chat.plural,
-          id: "chat_header_id" do
-          = render "layouts/shared/messages_bubble"
+        = link_to chats_path, class: "hover-border-icon", title: Chat.plural, id: "chat_header_id" do
+          %div{style: "display:flex; flex-direction:column; align-items:center;"}
+            .link_icon
+              = image_tag("#{session[:theme]}/icon_chat.png")
+            = render "layouts/shared/messages_bubble"
 
   .dropdown
     %button.btn.btn-secondary.dropdown-toggle{

@@ -38,7 +38,7 @@ class ChatsController < ApplicationController
       @event = Event.find(@chat.event_id) if @chat.group_chat?
       @user = @chat.other_user(current_user) unless @chat.group_chat?
       
-      @chat_user.mark_as_read
+      @chat_user&.mark_as_read
 
       @chat_entries = @chat.chat_entries.order("created_at DESC").page(params[:page]).per(10)
       @pagination_path = chat_path(@chat, request.query_parameters)

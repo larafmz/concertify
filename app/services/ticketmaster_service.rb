@@ -21,7 +21,7 @@ class TicketmasterService
     def self.artists_by(params)
         name = params[:search]
         genre = params[:genre_id].present? ? Genre.find(params[:genre_id]).name : "music"
-        Rails.cache.fetch("ticketmaster_artists_#{name}", expires_in: 10.minutes) do
+        Rails.cache.fetch("ticketmaster_artists_#{name}_#{genre}", expires_in: 10.minutes) do
             data = call_api("https://app.ticketmaster.com/discovery/v2/attractions.json?apikey=#{API_KEY}&classificationName=#{genre}&keyword=#{name}&size=200")
             data.dig("_embedded","attractions") if data.present?
         end
@@ -61,7 +61,7 @@ class TicketmasterService
         first_date  = "#{first_date.to_date}T00:00:00" if first_date.present?
         second_date = "#{second_date.to_date}T23:59:59" if second_date.present?
         
-        Rails.cache.fetch("ticketmaster_events_#{query}_#{artist_id}_#{first_date}_#{second_date}", expires_in: 10.minutes) do
+        Rails.cache.fetch("ticketmaster_events_#{query}_#{artist_id}_#{first_date}_#{second_date}_#{country_code}", expires_in: 10.minutes) do
             url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=#{API_KEY}&classificationName=music&sort=date,asc&size=#{size}&localStartDateTime=#{first_date},#{second_date}"
             url += "&keyword=#{query}" if query.present?
             url += "&attractionId=#{artist_id}" if artist_id.present?

@@ -21,7 +21,6 @@ admin_role = Role.find_or_create_by!(name: "admin")
 user_role = Role.find_or_create_by!(name: "user")
 
 puts "------------------- CREATING USERS -------------------"
-admin = User.find_or_create_by!(username: "admin", email: "admin@gmail.com") do |user|
-  user.password = "Admin123!"
-  user.role = admin_role
-end
+admin = User.find_or_create_by!(username: "admin", email: "admin@gmail.com", role_id: admin_role.id)
+admin.password = ENV.fetch("ADMIN_PASSWORD")
+admin.save!

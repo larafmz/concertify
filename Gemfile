@@ -93,3 +93,5 @@ group :test do
 end
 
 gem "faker"
+
+gem "azure-storage-blob", "~> 2.0", require: false

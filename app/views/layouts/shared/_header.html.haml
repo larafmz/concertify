@@ -1,7 +1,8 @@
 .header
   .app_name
     = link_to root_path do
-      = image_tag("#{session[:theme]}/concertify_logo.PNG")
+      = image_tag("#{session[:theme]}/concertify_logo.PNG", class: "logo-full")
+      = image_tag("icon_logo.png", class: "logo-mobile")
 
   - search_path = %w[artists users events].include?(controller_name) ? "/#{controller_name}" : "/artists"
   = form_tag search_path, method: "GET", class: "header-search" do
@@ -30,21 +31,9 @@
           = link_to Artist.plural, artists_path, class: "dropdown-item"
         %li
           = link_to User.plural, users_path, class: "dropdown-item"
-
-    - if current_user&.admin?
-      .dropdown
-        %button.btn.btn-secondary.dropdown-toggle{
-          type: "button",
-          "data-bs-toggle" => "dropdown",
-          "aria-expanded" => "false",
-          style: "background: var(--softest-color)" 
-        }
-          =t("admin")
-
-        %ul.dropdown-menu       
-          - if can?(:read, Request)
-            %li
-              = link_to t("requested_events"), requests_path, class: "dropdown-item" 
+        - if can?(:read, Request)
+          %li
+            = link_to t("requested_events"), requests_path, class: "dropdown-item"       
 
     - if can?(:create, Publication)
       = link_to new_publication_path, class: "btn-standard orange-color", data: { turbo_frame: "modal" }, id: "post_id" do
@@ -64,61 +53,61 @@
               = image_tag("#{session[:theme]}/icon_chat.png")
             = render "layouts/shared/messages_bubble"
 
-  .dropdown
-    %button.btn.btn-secondary.dropdown-toggle{
-      type: "button",
-      "data-bs-toggle" => "dropdown",
-      "aria-expanded" => "false",
-      style: "background: var(--softest-color)" 
-    }
-      = t("user_account.profile")
+    .dropdown
+      %button.btn.btn-secondary.dropdown-toggle{
+        type: "button",
+        "data-bs-toggle" => "dropdown",
+        "aria-expanded" => "false",
+        style: "background: var(--softest-color)" 
+      }
+        = t("user_account.profile")
 
-    %ul.dropdown-menu
-      
-      - if current_user
-        %li 
-          = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
+      %ul.dropdown-menu
+        
+        - if current_user
+          %li 
+            = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
+          %li
+            = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
+          %li
+            %hr.dropdown-divider
+          %li
+            = link_to t("my_model_plural", model: Register.plural), registers_user_path(current_user), class: "dropdown-item"
+          %li
+            = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_user_path(current_user), class: "dropdown-item"
+          %li
+            = link_to t("my_model_plural", model: Publication.plural), publications_user_path(current_user), class: "dropdown-item"
+          %li
+            = link_to t("my_model_plural", model: Request.plural), requests_user_path(current_user), class: "dropdown-item"
+          %li
+            %hr.dropdown-divider
+          %li 
+            = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
+        - else
+          %li
+          = link_to t("user_account.login"), new_user_session_path, class: "dropdown-item"
+          %li
+          = link_to t("user_account.register"), new_user_registration_path, class: "dropdown-item"
+
+    .dropdown
+      %button.btn.btn-secondary.dropdown-toggle{
+        type: "button",
+        "data-bs-toggle" => "dropdown",
+        "aria-expanded" => "false",
+        style: "background: var(--softest-color)" 
+      }
+        =t("configuration")
+
+      %ul.dropdown-menu
         %li
-          = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
+          = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
+        %li
+          = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li
-          = link_to t("my_model_plural", model: Register.plural), registers_user_path(current_user), class: "dropdown-item"
+          = link_to t("day_mode"), change_theme_path("light"), class: "dropdown-item", data: { turbo: false }
         %li
-          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_user_path(current_user), class: "dropdown-item"
-        %li
-          = link_to t("my_model_plural", model: Publication.plural), publications_user_path(current_user), class: "dropdown-item"
-        %li
-          = link_to t("my_model_plural", model: Request.plural), requests_user_path(current_user), class: "dropdown-item"
-        %li
-          %hr.dropdown-divider
-        %li 
-          = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
-      - else
-        %li
-        = link_to t("user_account.login"), new_user_session_path, class: "dropdown-item"
-        %li
-        = link_to t("user_account.register"), new_user_registration_path, class: "dropdown-item"
-
-  .dropdown
-    %button.btn.btn-secondary.dropdown-toggle{
-      type: "button",
-      "data-bs-toggle" => "dropdown",
-      "aria-expanded" => "false",
-      style: "background: var(--softest-color)" 
-    }
-      =t("configuration")
-
-    %ul.dropdown-menu
-      %li
-        = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
-      %li
-        = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
-      %li
-        %hr.dropdown-divider
-      %li
-        = link_to t("day_mode"), change_theme_path("light"), class: "dropdown-item", data: { turbo: false }
-      %li
-        = link_to t("night_mode"), change_theme_path("dark"), class: "dropdown-item", data: { turbo: false }
+          = link_to t("night_mode"), change_theme_path("dark"), class: "dropdown-item", data: { turbo: false }
 
 .separator{style: "background: var(--second-text-color); "}

@@ -676,3 +676,121 @@
 
   box-shadow: 0 5px 14px var(--full);
 }
+
+@media (max-width: 800px) {
+  .custom_modal {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    max-height: calc(100vh - 30px);
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+
+  .modal_header {
+    padding: 9px 10px;
+  }
+
+  .modal_header h5 {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .modal_body {
+    padding: 12px;
+  }
+
+  .register-form-event {
+    display: grid;
+    grid-template-columns: 85px minmax(0, 1fr);
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .register-form-event-image {
+    width: 85px;
+    height: 70px;
+    overflow: hidden;
+  }
+
+  .register-form-event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .register-form-event-info {
+    min-width: 0;
+  }
+
+  .register-form-event-name {
+    font-size: 15px;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .register-form-event-details {
+    font-size: 12px;
+    line-height: 1.3;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .register-form-field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .register-form-input {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .register-form-textarea {
+    min-height: 100px;
+  }
+
+  .register-form-rating > div:last-child {
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+
+  .register-form-actions {
+    width: 100%;
+  }
+
+  .register-form-submit {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .custom_modal {
+    width: calc(100% - 14px);
+    max-width: calc(100% - 14px);
+    max-height: calc(100vh - 20px);
+  }
+
+  .modal_body {
+    padding: 10px;
+  }
+
+  .register-form-event {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .register-form-event-image {
+    width: 70px;
+    height: 60px;
+  }
+
+  .register-form-event-name {
+    font-size: 14px;
+  }
+
+  .register-form-event-details {
+    font-size: 11px;
+  }
+}

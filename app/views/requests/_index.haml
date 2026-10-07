@@ -1,3 +1,4 @@
+= render "requests/options"
 .widget-content{style: "padding-top:0px;", data: { controller: "pagination", pagination_url_value: url_for(@pagination_path), pagination_page_value: 2 } }
     .registers-items{id: "requests", data: { pagination_target: "requests" }}
         - if requests.empty?

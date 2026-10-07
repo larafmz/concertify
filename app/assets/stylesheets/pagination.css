@@ -32,3 +32,36 @@
   font-weight: bold;
 }
 
+
+@media (max-width: 800px) {
+  .pagination {
+    gap: 5px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .pagination a,
+  .pagination span {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    font-size: 13px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 400px) {
+  .pagination {
+    gap: 4px;
+    margin: 15px 0;
+  }
+
+  .pagination a,
+  .pagination span {
+    min-width: 29px;
+    height: 29px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+}

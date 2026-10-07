@@ -369,3 +369,293 @@
   color: var(--softest-red);
   background: var(--transparent-red);
 }
+
+@media (max-width: 800px) {
+
+  /* =====================================================
+     AUTH
+     ===================================================== */
+
+  .auth-page-background {
+    min-height: calc(100vh - 70px);
+    padding: 20px 12px;
+  }
+
+  .auth-form-card {
+    max-width: 480px;
+    padding: 25px 20px;
+    border-radius: 15px;
+  }
+
+  .auth-form-title {
+    margin-bottom: 22px;
+    font-size: 22px;
+  }
+
+  .auth-form-fields {
+    gap: 15px;
+  }
+
+  .auth-form-field {
+    gap: 6px;
+  }
+
+  .auth-form-label {
+    font-size: 13px;
+  }
+
+  .auth-form-input {
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .auth-form-remember {
+    font-size: 12px;
+  }
+
+  .auth-form-submit {
+    height: 42px;
+    margin-top: 20px;
+    font-size: 13px;
+  }
+
+
+  /* =====================================================
+     PROFILE EDIT
+     ===================================================== */
+
+  .profile-edit-page {
+    padding: 15px 10px 25px;
+  }
+
+  .profile-edit-card {
+    padding: 20px 15px;
+    border-radius: 13px;
+  }
+
+  .profile-edit-title {
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .profile-edit-columns {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .profile-edit-section {
+    padding: 15px;
+    border-radius: 11px;
+  }
+
+  .profile-edit-section-title {
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+
+  .profile-edit-field {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .profile-edit-label {
+    font-size: 12px;
+  }
+
+  .profile-edit-input {
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .profile-edit-location {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .profile-edit-description {
+    margin-top: 2px;
+  }
+
+  .profile-edit-textarea {
+    min-height: 100px;
+  }
+
+  .profile-edit-counter {
+    margin-top: -8px;
+    font-size: 10px;
+  }
+
+  .profile-edit-side {
+    gap: 15px;
+  }
+
+  .profile-edit-avatar-upload {
+    gap: 12px;
+  }
+
+  .profile-edit-file {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px;
+  }
+
+  .profile-edit-avatar {
+    width: 85px;
+    height: 85px;
+  }
+
+  .profile-edit-hint {
+    font-size: 10px;
+  }
+
+  .profile-edit-actions {
+    justify-content: stretch;
+    margin-top: 20px;
+    padding-top: 15px;
+  }
+
+  .profile-edit-save {
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .profile-edit-danger {
+    justify-content: stretch;
+    margin-top: 20px;
+    padding-top: 15px;
+  }
+
+  .profile-edit-delete {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 400px) {
+
+  /* =====================================================
+     AUTH
+     ===================================================== */
+
+  .auth-page-background {
+    padding: 12px 7px;
+  }
+
+  .auth-form-card {
+    padding: 20px 13px;
+    border-radius: 12px;
+  }
+
+  .auth-form-title {
+    margin-bottom: 18px;
+    font-size: 20px;
+  }
+
+  .auth-form-fields {
+    gap: 13px;
+  }
+
+  .auth-form-label {
+    font-size: 12px;
+  }
+
+  .auth-form-input {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .auth-form-hint {
+    font-size: 11px;
+  }
+
+  .auth-form-remember {
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .auth-form-submit {
+    height: 40px;
+    margin-top: 17px;
+    font-size: 12px;
+  }
+
+
+  /* =====================================================
+     PROFILE EDIT
+     ===================================================== */
+
+  .profile-edit-page {
+    padding: 10px 7px 20px;
+  }
+
+  .profile-edit-card {
+    padding: 15px 10px;
+    border-radius: 11px;
+  }
+
+  .profile-edit-title {
+    margin-bottom: 17px;
+    font-size: 20px;
+  }
+
+  .profile-edit-columns {
+    gap: 10px;
+  }
+
+  .profile-edit-section {
+    padding: 12px 10px;
+  }
+
+  .profile-edit-section-title {
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+
+  .profile-edit-field {
+    margin-bottom: 12px;
+  }
+
+  .profile-edit-label {
+    font-size: 11px;
+  }
+
+  .profile-edit-input {
+    min-height: 38px;
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  .profile-edit-location {
+    gap: 8px;
+  }
+
+  .profile-edit-textarea {
+    min-height: 90px;
+  }
+
+  .profile-edit-avatar {
+    width: 75px;
+    height: 75px;
+  }
+
+  .profile-edit-actions,
+  .profile-edit-danger {
+    margin-top: 15px;
+    padding-top: 12px;
+  }
+
+  .profile-edit-save {
+    height: 38px;
+    font-size: 12px;
+  }
+
+  .profile-edit-delete {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+}

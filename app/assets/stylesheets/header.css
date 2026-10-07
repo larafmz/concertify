@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 20px;
+  padding: 0 20px;
   margin: 0 30px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .header .app_name {
@@ -14,6 +14,14 @@
 .header .app_name img {
   max-width: 180px;
   height: auto;
+}
+
+.header .app_name .logo-full {
+  display: block !important;
+}
+
+.header .app_name .logo-mobile {
+  display: none !important;
 }
 
 .header form {
@@ -41,11 +49,17 @@
   padding: 10px;
   font-size: 18px;
 }
-
-.app_name img {
+.app_name .logo-full {
   display: block;
   width: 200px;
   height: auto;
+}
+
+.app_name .logo-mobile {
+  display: none;
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
 }
 
 .dropdown-menu.show {
@@ -61,10 +75,6 @@
 .dropdown-item:hover {
   background-color: var(--second-text-color) !important;
   color: var(--main-text-color) !important;
-}
-
-.header form {
-  width: 100%;
 }
 
 .header input[type="text"] {
@@ -98,4 +108,155 @@
   width: 16px;
   height: 16px;
   object-fit: contain;
+}
+
+@media (max-width: 1100px) {
+  .header .app_name .logo-full {
+    display: none !important;
+  }
+
+  .header .app_name .logo-mobile {
+    display: block !important;
+    width: 35px;
+    height: 35px;
+    max-width: 35px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .header {
+    gap: 6px;
+    padding: 6px 8px;
+    margin: 0 8px;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  /* Logo */
+  .header .app_name {
+    flex-shrink: 0;
+  }
+
+  .header .app_name .logo-full {
+    display: none !important;
+  }
+
+  .header .app_name .logo-mobile {
+    display: block !important;
+    width: 32px;
+    height: 32px;
+    max-width: 32px;
+    object-fit: contain;
+  }
+
+  /* Buscador */
+  .header form {
+    flex: 1 1 120px;
+    min-width: 100px;
+  }
+
+  .header .field-custom,
+  .header input[type="text"] {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Botones y acciones */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .header-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .header-post-button {
+    gap: 3px;
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  .header-post-button img {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Dropdowns */
+  .header > .dropdown {
+    flex-shrink: 0;
+  }
+
+}
+
+
+/* Móviles pequeños */
+@media (max-width: 500px) {
+
+  .header {
+    gap: 5px;
+    padding: 5px;
+    margin: 0 5px;
+  }
+
+  .header .app_name .logo-mobile {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+  }
+
+  .header form {
+    flex: 1 1 100px;
+    min-width: 80px;
+  }
+
+  .header-actions {
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .header-icons {
+    gap: 4px;
+    padding: 1px;
+    font-size: 14px;
+  }
+
+  .header-post-button {
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+
+  .header-post-button img {
+    width: 13px;
+    height: 13px;
+  }
+
+}
+
+@media (max-width: 800px) {
+  .header .header-actions .btn-standard img {
+    width: 14px !important;
+    height: 14px !important;
+    max-width: 14px !important;
+    object-fit: contain !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .header .header-actions .btn-standard img {
+    width: 12px !important;
+    height: 12px !important;
+    max-width: 12px !important;
+  }
 }

@@ -1,9 +1,1 @@
-.widget-content
-    - status= params[:status]
-    .widget-content{style: "color: var(--soft-color); display: flex; justify-content: center; gap: 60px; padding: 10px; border: 1px solid var(--second-text-color)"}
-        = link_to "#{t("all")} #{@user.requests.count}", url_for, style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if status.nil? )
-        = link_to "#{t("requests.statuses.accepted")} #{@user.requests.accepted.count}", url_for(status: 0), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 0)
-        = link_to "#{t("requests.statuses.pending")} #{@user.requests.pending.count}", url_for(status: 1), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 1)
-        = link_to "#{t("requests.statuses.denied")} #{@user.requests.denied.count}", url_for(status: 2), style: ("color: var(--main-text-color); border-bottom: 2px solid #{color_request(status)};" if !status.nil? && status.to_i == 2)
-
 = render "requests/index", requests: @requests

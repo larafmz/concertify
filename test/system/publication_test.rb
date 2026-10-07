@@ -8,7 +8,7 @@ class PublicationTest < ApplicationSystemTestCase
             visit "/users/sign_in" 
             fill_in "email_id", with: "prueba2@gmail.com"
             fill_in "password_id", with: "Prueba2!"
-            click_on "Log in"
+            click_on "login_button"
             assert_current_path "/", wait: 15
         end
     end

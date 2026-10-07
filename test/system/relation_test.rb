@@ -9,7 +9,7 @@ class RelationTest < ApplicationSystemTestCase
             visit "/users/sign_in" 
             fill_in "email_id", with: "prueba2@gmail.com"
             fill_in "password_id", with: "Prueba2!"
-            click_on "Log in"
+            click_on "login_button"
             assert_current_path "/", wait: 15
         end
     end
@@ -48,8 +48,9 @@ class RelationTest < ApplicationSystemTestCase
         find(".dropdown button", text: "View").click
         click_on "Users"
         click_on "link_user_#{user3.id}"
+        assert_current_path "/users/#{user3.id}", wait: 15
         assert_text "Follow"
-        assert_text "Send message"
+        assert_selector "#send_message_id"
         find(".dropdown .dropdown-toggle", text: "⁝").click
         click_on "Block"
         assert_no_text "Follow"
@@ -66,7 +67,8 @@ class RelationTest < ApplicationSystemTestCase
         find(".dropdown button", text: "View").click
         click_on "Users"
         click_on "link_user_#{user3.id}"
-        assert_text "Send message", wait: 10
+        assert_current_path "/users/#{user3.id}", wait: 15
+        assert_selector "#send_message_id"
         assert_text "Follow"
         find(".dropdown .dropdown-toggle", text: "⁝").click
         click_on "Block"
@@ -77,7 +79,7 @@ class RelationTest < ApplicationSystemTestCase
         assert_text "Unblock"
         click_on "Unblock"
         assert_text "Follow", wait: 10
-        assert_text "Send message"
+        assert_selector "#send_message_id"
         assert_no_text "BLOCKED"
         visit "/users/#{users(:prueba2).id}/blocked"
         assert_no_text user3.username, wait: 10
@@ -91,7 +93,8 @@ class RelationTest < ApplicationSystemTestCase
         find(".dropdown button", text: "View").click
         click_on "Users"
         click_on "link_user_#{user3.id}"
-        assert_text "Send message", wait: 10
+        assert_current_path "/users/#{user3.id}", wait: 15
+        assert_selector "#send_message_id", wait: 10
         assert_text "Follow"
         assert_text "Follows you"
         find(".dropdown .dropdown-toggle", text: "⁝").click

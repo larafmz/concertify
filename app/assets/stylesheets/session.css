@@ -9,8 +9,7 @@
 
   padding: 30px 20px;
 
-  background-image:
-    url("/assets/default-event.jpg");
+  background-image: url("/default-event.jpg");
 
   background-size: cover;
   background-position: center;

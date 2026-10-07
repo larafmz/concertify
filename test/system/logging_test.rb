@@ -10,7 +10,7 @@ class LoggingTest < ApplicationSystemTestCase
             fill_in "email_id", with: "prueba2@gmail.com"
             fill_in "password_id", with: "Prueba2!"
 
-            click_on "Log in"
+            click_on "login_button"
             assert_current_path "/", wait: 10
             visit "/users/edit"
             assert_current_path "/users/edit", wait: 10
@@ -23,7 +23,7 @@ class LoggingTest < ApplicationSystemTestCase
         fill_in "email_id", with: "prueba@gmail.com"
         fill_in "password_id", with: "Prueba2!"
 
-        click_on "Log in"
+        click_on "login_button"
         assert_text "Invalid email or password.", wait: 5
         assert_current_path "/users/sign_in"
     end
@@ -34,7 +34,7 @@ class LoggingTest < ApplicationSystemTestCase
         fill_in "email_id", with: "prueba2@gmail.com"
         fill_in "password_id", with: "Prueba1!"
 
-        click_on "Log in"
+        click_on "login_button"
         assert_text "Invalid email or password", wait: 5
         assert_current_path "/users/sign_in"
     end

@@ -18,7 +18,7 @@
 :root {
   --background: #0F1419;
   --main-text-color: #E7E7E7;
-  --main-text-color2: #E7E7E7;
+  --main-text-color2: #ffffff;
   --second-text-color: #4D6074;
   --dropdown: #4D6074;
   --darker-second-text-color: #26313C;
@@ -41,6 +41,7 @@
   --black: black;
   --notification-read: transparent;
   --notification-unread: #26313C;
+  --flash: #c93232;
 }
 
 :root.light {
@@ -69,6 +70,7 @@
   --black: black;
   --notification-read: #d4d4d4;
   --notification-unread: transparent;
+  --flash: rgb(209, 53, 53);
 }
 
 body {
@@ -462,14 +464,27 @@ a:active {
 
 .flash-message {
   position: fixed;
-  top: 80px;
-  right: 20px;
+  top: 120px;
+  left: 20px;
   z-index: 9999;
   padding: 12px 20px;
   border-radius: 10px;
-  background: var(--darker-second-text-color);
-  color: var(--main-text-color);
+  background: var(--flash);
+  color: var(--main-text-color2);
   border: 1px solid var(--second-text-color);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.flash-message button {
+  background: none;
+  border: none;
+  color: var(--main-text-color2);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
 }
 
 

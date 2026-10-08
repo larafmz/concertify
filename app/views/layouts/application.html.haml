@@ -14,7 +14,8 @@
   %body
     = render "layouts/shared/header"
     - if flash[:alert]
-      .flash-message
+      .flash-message{ data: { controller: "flash" } }
         = flash[:alert]
+        %button{ type: "button", data: { action: "flash#close" } } ×
     = turbo_frame_tag "modal"
     = yield

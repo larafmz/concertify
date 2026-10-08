@@ -40,7 +40,7 @@ class ChatsController < ApplicationController
       
       @chat_user&.mark_as_read
 
-      @chat_entries = @chat.chat_entries.order("created_at DESC").page(params[:page]).per(10)
+      @chat_entries = @chat.chat_entries.order("created_at DESC").page(params[:page]).per(20)
       @pagination_path = chat_path(@chat, request.query_parameters)
       respond_to do |format|
           format.html

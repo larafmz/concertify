@@ -11,16 +11,6 @@
                     %span{style: "font-size:10px; margin-left: 5px; align-self:flex-end; opacity:0.7; color: var(--main-text-color)"}= chat_entry.created_at.strftime("%H:%M")
         - else 
             %div{style: "display:flex; justify-content:start; align-items:center;"}
-                - if (!chat_entry.same_previous_user? || !chat_entry.same_previous_type?) && chat_entry.user
-                    = link_to user_path(chat_entry.user), data: { turbo_frame: "_top" } do 
-                        .link_icon{style: "height: 40px; width: 40px; background:var(--darker-second-text-color); color: var(--main-text-color)"}
-                            - if chat_entry.user.icon.attached?
-                                = image_tag chat_entry.user.icon
-                            - else
-                                = chat_entry.user.username.first.upcase
-                - else
-                    %div{style: "height: 40px; width: 40px;"}
-
                 %div
                     - if !chat_entry.same_previous_user? || !chat_entry.same_previous_type?
                         %div{style: "margin-left:10px; font-size: 10px;", class: "soft-color"}

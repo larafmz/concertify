@@ -4,7 +4,7 @@
     %section.home-section.registers-section
       .section-heading
         .section-title
-          %span.section-accent.register-accent
+          %span.section-accent.event-accent
           = link_to registers_path do
             = t("recents", model: Register.plural).upcase
         = link_to registers_path, class: "section-more" do
@@ -38,22 +38,14 @@
               %span.artist-card-name= artist.name
 
 
-  %section.home-section.events-section
-    .section-heading
-      .section-title
-        %span.section-accent.event-accent
-        = link_to events_path(country: current_user&.ubication&.country&.code) do
-          = t("upcoming").upcase
-          = Event.plural.upcase
-          - if current_user&.ubication&.country
-            = t("in").upcase
-            = current_user.ubication.country.translation.upcase
-
-      = link_to events_path(country: current_user&.ubication&.country&.code), class: "section-more" do
-        = t("more").upcase
-        %span →
-
-    - unless @events.empty?
-      .events-home
-        = render "events/index", events: @events, photo: false
-
+  - if @publications.present?
+    %section.home-section
+      .section-heading
+        .section-title
+          %span.section-accent.register-accent
+          = link_to publications_path do
+            = t("recents", model: Publication.plural).upcase
+        = link_to publications_path, class: "section-more" do
+          = t("more").upcase
+          %span →
+      = render "publications/index", publications: @publications

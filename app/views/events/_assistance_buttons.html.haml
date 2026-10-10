@@ -12,5 +12,5 @@
             = link_to t("registers.will_assist"), new_future_assistance_path(event_id: event["id"]), class: "btn-custom event-color", id: "will_assist_to_#{event.id}", data: { turbo_frame: "modal" }
         - else
             = link_to t("my_model", model: FutureAssistance.singular), future_assistances_user_path(current_user), class: "btn-custom", style: "height: auto;", id: "my_future_assistance_#{event.id}"
-    - if (register || future_assistance) && @event && can?(:show, Chat)
+    - if ((register || future_assistance) && @event && can?(:show, Chat)) || @current_user.admin?
         = button_to t("access_chat"), chats_path(event_id: event.id), method: :post, data: { turbo: false }, class: "btn-standard orange-color"

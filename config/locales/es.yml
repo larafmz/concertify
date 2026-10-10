@@ -176,6 +176,7 @@ es:
     max_upload: "Solo puedes subir %{count} fotos."
     existing_event_requires_denied_status: debe estar en estado "denegado" si se selecciona un concierto existente.
     cant_contain_spaces: no puede contener espacios.
+    fill_this_field: Completa este campo
     
   notifications:
     new_follower: "%{user} ha comenzado a seguirte"

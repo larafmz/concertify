@@ -175,6 +175,7 @@ en:
     max_upload: "You can only upload %{count} photos."
     existing_event_requires_denied_status: must be denied when an existing event is selected.
     cant_contain_spaces: cant contain spaces.
+    fill_this_field: Please fill out this field
     
   notifications:
     new_follower: "%{user} has started following you"

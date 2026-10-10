@@ -252,7 +252,7 @@ a:active {
 .btn-custom {
   white-space: nowrap;
   background: var(--dropdown);
-  color: var(--main-text-color);
+  color: var(--main-text-color) !important;
   border: none;
   border-radius: 15px;
   padding: 10px 18px;

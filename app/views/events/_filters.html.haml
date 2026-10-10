@@ -19,7 +19,7 @@
             = label_tag :country, class: "soft-color label-filter" do 
                 = image_tag("#{session[:theme]}/icon_ubication_soft_color.png")
                 = Ubication.singular.upcase
-            = select_tag :country, options_for_select(Country.all.map { |country| [country.translation, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: var(--background); padding: 0px;", id: "country_id"
+            = select_tag :country, options_for_select(Country.all.sort_by(&:translation).map { |country| [country.translation, country.code] }, params[:country]),include_blank: t("all_fem", model: Ubication.plural), class: "field-custom", style: "background: var(--background); padding: 0px;", id: "country_id"
         %div
             %br  
             = submit_tag t("verbs.filter"), class: "btn-custom event-color"

@@ -73,11 +73,12 @@ class ChatsController < ApplicationController
     end
 
     @pagination_path = members_chat_path(@chat, request.query_parameters)
-    event_date_status = @chat.event.past_or_future
+    @event = @chat.event
+    event_date_status = @event.past_or_future
     users = @chat.users
     @users = users.page(params[:page]).per(20)
     if event_date_status == "future"
-      @future_assistances = @chat.event.future_assistances.includes(:user).where(user_id: @users.pluck(:id)).page(params[:page]).per(10)
+      @future_assistances = @event.future_assistances.includes(:user).where(user_id: @users.pluck(:id)).page(params[:page]).per(10)
     end
     respond_to do |format|
       format.html

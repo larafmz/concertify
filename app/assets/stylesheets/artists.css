@@ -24,7 +24,8 @@
 }
 
 .artist-color {
-  background: var(--artist);
+  background: var(--artist) !important;
+  color: var(--main-text-color2) !important;
 }
 
 .artists-index {

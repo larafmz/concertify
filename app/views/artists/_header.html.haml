@@ -2,10 +2,11 @@
     %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, var(--black) 100%), linear-gradient(to right, var(--black) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .info{style:"margin:40px;"}
-            .name{style:"padding: 10px; color: var(--main-text-color2)"}
+            .name{style: "color: var(--main-text-color2)"}
                 .adapted-bubble.artist-color
                     ="##{Artist.singular.upcase}"
-                = @artist.name
+                %span{style: "text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"}
+                    = @artist.name
                 - if @artist.genre && @artist.genre.name != "Undefined"
                     %div{ style: "font-size: 15px" }
                         = @artist.genre.translation
@@ -39,6 +40,6 @@
                     ♡ #{t("verbs.mark_as_favorite")}
             - if can?(:edit, @artist)
                 = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard artist-color"
-            - if can?(:destoy, @artist) && @artist.manually_added
+            - if can?(:destroy, @artist) 
                 = button_to t("crud.destroy", model: Artist.singular), artist_path(@artist), method: :delete,
                   form: { data: { turbo: false, confirm: t("artists.destroy_message") } }, class: "btn-standard artist-color"

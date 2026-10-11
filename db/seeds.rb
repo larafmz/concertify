@@ -21,6 +21,7 @@ admin_role = Role.find_or_create_by!(name: "admin")
 user_role = Role.find_or_create_by!(name: "user")
 
 puts "------------------- CREATING USERS -------------------"
-admin = User.find_or_create_by!(username: "admin", email: "admin@gmail.com", role_id: admin_role.id)
+admin = User.find_or_initialize_by(username: "admin", email: "admin@gmail.com")
+admin.role = admin_role
 admin.password = ENV.fetch("ADMIN_PASSWORD")
 admin.save!

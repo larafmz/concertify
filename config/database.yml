@@ -2,9 +2,9 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: password
-  host: localhost
+  username: <%= ENV.fetch("DB_USERNAME", "root") %>
+  password: <%= ENV.fetch("DB_PASSWORD", "password") %>
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
 
 sqlite: &sqlite
   adapter: sqlite3 
@@ -20,7 +20,7 @@ development:
     database: storage/concertify_development_cable.sqlite3
   queue:
     <<: *default
-    database: concertify_development_queue
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/queue_migrate
 
 test:

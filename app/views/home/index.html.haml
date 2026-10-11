@@ -1,51 +1,49 @@
 .home
 
-  - if @registers.present?
-    %section.home-section.registers-section
-      .section-heading
-        .section-title
-          %span.section-accent.event-accent
-          = link_to registers_path do
-            = t("recents", model: Register.plural).upcase
-        = link_to registers_path, class: "section-more" do
-          = t("more").upcase
-          %span →
-      = render "registers/index_cards", registers: @registers
+  %section.home-section.registers-section
+    .section-heading
+      .section-title
+        %span.section-accent.event-accent
+        = link_to registers_path do
+          = t("recents", model: Register.plural).upcase
+      = link_to registers_path, class: "section-more" do
+        = t("more").upcase
+        %span →
+    = render "registers/index_cards", registers: @registers
 
 
-  - if @artists.present?
-    %section.home-section.artists-section
-      .section-heading
-        .section-title
-          %span.section-accent.artist-accent
-          = link_to artists_path do
-            = t("populars", model: Artist.plural).upcase
+  %section.home-section.artists-section
+    .section-heading
+      .section-title
+        %span.section-accent.artist-accent
+        = link_to artists_path do
+          = t("populars", model: Artist.plural).upcase
+      = link_to artists_path, class: "section-more" do
+        = t("more").upcase
+        %span →
+    - if @artists.empty?
+      %div{style: "padding-top: 15px;"}
+        = render "common/empty_list_message", model: Artist
+    .artists-grid
+      - @artists.each do |artist|
+        = link_to artist_path(artist), class: "artist-card" do
+          .artist-card-image
+            - if artist.photo.present?
+              = image_tag artist.photo
+            - else
+              .artist-placeholder
+                = artist.name.first.upcase
+          .artist-card-info
+            %span.artist-card-name= artist.name
 
-        = link_to artists_path, class: "section-more" do
-          = t("more").upcase
-          %span →
-      .artists-grid
-        - @artists.each do |artist|
-          = link_to artist_path(artist), class: "artist-card" do
-            .artist-card-image
-              - if artist.photo.present?
-                = image_tag artist.photo
-              - else
-                .artist-placeholder
-                  = artist.name.first.upcase
 
-            .artist-card-info
-              %span.artist-card-name= artist.name
-
-
-  - if @publications.present?
-    %section.home-section
-      .section-heading
-        .section-title
-          %span.section-accent.register-accent
-          = link_to publications_path do
-            = t("recents", model: Publication.plural).upcase
-        = link_to publications_path, class: "section-more" do
-          = t("more").upcase
-          %span →
-      = render "publications/index", publications: @publications
+  %section.home-section
+    .section-heading
+      .section-title
+        %span.section-accent.register-accent
+        = link_to publications_path do
+          = t("recents", model: Publication.plural).upcase
+      = link_to publications_path, class: "section-more" do
+        = t("more").upcase
+        %span →
+    = render "publications/index", publications: @publications

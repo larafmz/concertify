@@ -29,4 +29,17 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest      
+          tags: ghcr.io/${{ github.repository }}:latest
+
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Restart Azure App Service
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az webapp restart \
+              --name concertify-app \
+              --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}"

@@ -1,15 +1,6 @@
 .home
 
-  %section.home-section.registers-section
-    .section-heading
-      .section-title
-        %span.section-accent.event-accent
-        = link_to registers_path do
-          = t("recents", model: Register.plural).upcase
-      = link_to registers_path, class: "section-more" do
-        = t("more").upcase
-        %span →
-    = render "registers/index_cards", registers: @registers
+  PRUEBA
 
 
   %section.home-section.artists-section

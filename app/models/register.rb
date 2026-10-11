@@ -79,7 +79,7 @@ class Register < Interactuable
           repost: repost,
           date: repost.created_at
         }
-      end).sort_by { |obj| -obj[:date].to_i }
+      end).sort_by { |obj| obj[:date] || Time.at(0) }.reverse
       return Register.viewables(user) if feed.empty?
       feed
     end

@@ -9,7 +9,7 @@ class RequestAdminTest < ApplicationSystemTestCase
             visit "/users/sign_in" 
             fill_in "email_id", with: "admin@gmail.com"
             fill_in "password_id", with: "Prueba2!"
-            click_on "Log in"
+            click_on "login_button"
             assert_current_path "/", wait: 15
         end
     end

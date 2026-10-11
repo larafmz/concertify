@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     events = Event.accepted.search_by(params: { country: current_user&.ubication&.country&.code, first_date: Date.today })
     @events = Kaminari.paginate_array(events).page(params[:page]).per(10)
     @registers = Register.feed(current_user).first(10)
+    @publications = Publication.feed(current_user).first(5)
   end
 
 end

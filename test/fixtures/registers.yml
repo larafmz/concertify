@@ -1,6 +1,7 @@
 register1: {
   user: prueba2,
   event: event9,
+  review: "Chulo",
   type: "Register"
 }
 

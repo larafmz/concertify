@@ -5,7 +5,7 @@
     - if @followers.empty?
         = render "common/empty_list_message", model: User
     - else
-        %div{style: "border: 1px solid #40556d;"}       
+        %div{style: "border: 1px solid var(--second-text-color);"}       
             .registers-items
                 = render "users/index", users: @followers
         

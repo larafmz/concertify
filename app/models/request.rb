@@ -131,11 +131,11 @@ class Request < ApplicationRecord
     def second_color_request
       case status
         when 1
-          "rgb(78, 61, 41)"
+          "rgb(252, 170, 46, 0.3);"
         when 2
-          "rgb(78, 41, 41);"
+          "rgb(245, 83, 83, 0.3);"
         else
-          "rgb(48, 66, 49)"
+          "rgb(88, 216, 94, 0.3);"
         end
     end
 

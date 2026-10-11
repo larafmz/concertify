@@ -37,11 +37,11 @@
 
       .request-card-details
         %span.request-card-detail
-          = image_tag("icon_ubication_softest_color.png")
+          = image_tag("#{session[:theme]}/icon_ubication_softest_color.png")
           %span= event.ubication&.complete_name_with_venue || t("not_found")
 
         %span.request-card-detail
-          = image_tag("icon_date_softest_color.png")
+          = image_tag("#{session[:theme]}/icon_date_softest_color.png")
           %span= short_date(event.date)
 
       .request-card-message{style: "color: #{color_request(request.status)};"}

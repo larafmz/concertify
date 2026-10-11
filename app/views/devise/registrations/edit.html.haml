@@ -24,7 +24,7 @@
               .profile-edit-location
                 .profile-edit-field
                   = label_tag :country_id, "📍  #{Country.singular} *", class: "profile-edit-label"
-                  = ubication_fields.select :country_id, options_for_select(Country.all.map { |country| [country.translation, country.id] }, @user.ubication&.country_id), { include_blank: t("verbs.select") }, { id: "country_id", class: "profile-edit-input profile-edit-select" }
+                  = ubication_fields.select :country_id, options_for_select(Country.all.sort_by(&:translation).map { |country| [country.translation, country.id] }, @user.ubication&.country_id), { include_blank: t("verbs.select") }, { id: "country_id", class: "profile-edit-input profile-edit-select" }
 
                 .profile-edit-field
                   = label_tag :city, Ubication.human_attribute_name(:city), class: "profile-edit-label"

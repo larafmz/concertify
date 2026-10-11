@@ -2,13 +2,31 @@ class ChatsController < ApplicationController
 
   include ApplicationHelper
 
-  authorize_resource except: [:show]
-
-  before_action :authenticate_user
-  before_action :set_chat, except: [:exit, :index]
-  before_action :set_params, except: [:exit]
+  load_and_authorize_resource
+  before_action :set_params, only: [:index, :show, :members]
 
   def index
+  end
+
+  def create
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+      unless @user
+        flash[:alert] = t("messages.error")
+        redirect_to chats_path
+        return
+      end
+      @chat = Chat.by_users(current_user.id, @user.id).first
+      @chat = Chat.create_private_chat(current_user.id, @user.id) unless @chat
+    elsif params[:event_id]
+      @chat = Chat.create_or_add_user_to_event_chat(params[:event_id], current_user.id)
+    end 
+    if !@chat || !@chat.persisted?
+      flash[:alert] = t("messages.error")
+      redirect_to chats_path
+      return
+    end
+    redirect_to chat_path(@chat)
   end
 
   def show
@@ -17,10 +35,12 @@ class ChatsController < ApplicationController
       redirect_to chats_path
       return
     else
+      @event = Event.find(@chat.event_id) if @chat.group_chat?
+      @user = @chat.other_user(current_user) unless @chat.group_chat?
+      
+      @chat_user&.mark_as_read
 
-      @chat_user.mark_as_read
-
-      @chat_entries = @chat.chat_entries.order("created_at DESC").page(params[:page]).per(10)
+      @chat_entries = @chat.chat_entries.order("created_at DESC").page(params[:page]).per(20)
       @pagination_path = chat_path(@chat, request.query_parameters)
       respond_to do |format|
           format.html
@@ -53,11 +73,12 @@ class ChatsController < ApplicationController
     end
 
     @pagination_path = members_chat_path(@chat, request.query_parameters)
-    event_date_status = @chat.event.past_or_future
+    @event = @chat.event
+    event_date_status = @event.past_or_future
     users = @chat.users
     @users = users.page(params[:page]).per(20)
     if event_date_status == "future"
-      @future_assistances = @chat.event.future_assistances.includes(:user).where(user_id: @users.pluck(:id)).page(params[:page]).per(10)
+      @future_assistances = @event.future_assistances.includes(:user).where(user_id: @users.pluck(:id)).page(params[:page]).per(10)
     end
     respond_to do |format|
       format.html
@@ -66,43 +87,6 @@ class ChatsController < ApplicationController
   end
 
   private 
-
-    def authenticate_user
-      unless current_user.present?
-        redirect_back fallback_location: root_path
-        return
-      end
-    end
-
-    def set_chat
-      if params[:user_id]
-        @user = User.find_by(id: params[:user_id])
-        unless @user
-          flash[:alert] = t("messages.error")
-          redirect_to chats_path
-          return
-        end
-        @chat = Chat.by_users(current_user.id, @user.id).first
-        @chat = Chat.create_private_chat(current_user.id, @user.id) unless @chat
-      elsif params[:event_id]
-        @event = Event.find(params[:event_id])
-        @chat = Chat.create_event_chat(params[:event_id], current_user.id)
-      elsif params[:id] && Chat.exists?(params[:id])
-        @chat = Chat.find(params[:id])
-        @event = @chat.event if @chat.group_chat?
-        @user = @chat.other_user(current_user) unless @chat.group_chat?
-        unless @chat.chat_users.exists?(user_id: current_user.id)
-          redirect_to chats_path
-        end
-      end
-
-      if !@chat || !@chat.persisted?
-        flash[:alert] = t("messages.error")
-        redirect_to chats_path
-        return
-      end
-
-    end
 
     def set_params
       @chat_user = @chat.chat_users.find_by(user_id: current_user.id) if @chat

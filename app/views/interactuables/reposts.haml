@@ -6,7 +6,7 @@
 
 .widget-content{style: "padding-top:0px; border: "}  
 
-    %div{style: "border: 1px solid #40556d;"}
+    %div{style: "border: 1px solid var(--second-text-color);"}
 
         %div{style: "margin:20px; margin-bottom:0px;"}
             - if @interactuable.register? 
@@ -15,10 +15,10 @@
             - elsif @interactuable.publication?
                 = render "publications/index_item", publication: @interactuable, destroy_redirect: true
 
-        %div{style: "display: flex; gap: 20px; color: white; margin-left:20px; margin-top: 15px;"}
+        %div{style: "display: flex; gap: 20px; color: var(--main-text-color); margin-left:20px; margin-top: 15px;"}
             = link_to Like.plural, interactuable_path(@interactuable), title: "#{@interactuable.likes.count} #{Like.plural}" 
             = link_to Comment.plural, comments_interactuable_path(@interactuable), title: "#{@interactuable.comments.count} #{Comment.plural}"
-            = link_to Repost.plural, reposts_interactuable_path(@interactuable), style: ("color: white; border-bottom: 2px solid #{orange_color};"), title: "#{@interactuable.reposts.count} #{Repost.plural}"
+            = link_to Repost.plural, reposts_interactuable_path(@interactuable), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};"), title: "#{@interactuable.reposts.count} #{Repost.plural}"
         .separator
 
 .widget-content{style: "padding-top:0px;"}  
@@ -27,6 +27,6 @@
             ℹ️
             = t("not_found_model", model: User.plural.downcase )
     - else
-        %div{style: "border: 1px solid #40556d;"}       
+        %div{style: "border: 1px solid var(--second-text-color);"}       
             .registers-items
                 = render "users/index", users: @users

@@ -64,9 +64,8 @@ class Register < Interactuable
     def self.feed(user)
       return Register.all unless user.present?
 
-      reposts = Repost.for_registers.where(user_id: [user.id, *user.following_ids]).includes(:interactuable, :user)
-      regs = Register.by_friends(user)
-      regs = regs.where.not(id: reposts.pluck(:interactuable_id)) # Exclude registers that have been reposted by the user or their followings
+      reposts = Repost.for_registers.where(user_id: [user.id] +  user.followings.map(&:followed_id)).includes(:interactuable, :user)
+      regs = Register.by_friends(user).where.not(id: reposts.pluck(:interactuable_id)) # Exclude registers that have been reposted by the user or their followings
 
       feed = (regs.viewables(user).map do |reg|
         {
@@ -81,6 +80,7 @@ class Register < Interactuable
           date: repost.created_at
         }
       end).sort_by { |obj| -obj[:date].to_i }
+      return Register.viewables(user) if feed.empty?
       feed
     end
 
@@ -105,7 +105,7 @@ class Register < Interactuable
     def get_rating_out_of_five
       return nil if self.rating.nil? || self.rating == 0
       blank_star_numbers = 5 - self.rating
-      return "<span style='color:#{orange_color}'>#{"★" * self.rating}</span><span style='color:#white'>#{"★" * blank_star_numbers}</span>".html_safe
+      return "<span style='color:#{orange_color}'>#{"★" * self.rating}</span><span style='color: var(--main-text-color)'>#{"★" * blank_star_numbers}</span>".html_safe
     end
 
 end

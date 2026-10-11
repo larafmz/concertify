@@ -13,9 +13,7 @@
       data: { pagination_target: "publications" }
     }
       - publications.each do |publication|
-        = render "publications/index_item",
-          publication: publication,
-          destroy_redirect: false
+        = render "publications/index_item", publication: publication, destroy_redirect: false
 
     - unless publications.respond_to?(:next_page) && publications.next_page && @pagination_path
       %span.hidden{ data: { pagination_target: "noRecords" } }

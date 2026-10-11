@@ -1,4 +1,4 @@
-- background = notification.read? ? "transparent" : "#30363d"
+- background = notification.read? ? "var(--notification-read)" : "var(--notification-unread)" 
 - user = notification.user
 
 .notification{id: "notification-#{notification.id}", style: "background: #{background};"}
@@ -6,9 +6,11 @@
   .notification-user
     - if user
       = link_to user_path(user), class: "notification-user-link" do
-        .notification-avatar
+        .link_icon{style: "background: var(--darker-second-text-color)"}
           - if user.icon.attached?
             = image_tag user.icon
+          - else
+            = user.username.first.upcase
 
   = button_to read_and_redirect_notification_path(notification), class: "notification-main", method: :post, form: { data: { turbo: false } } do
 
@@ -29,4 +31,4 @@
       = render "users/relation_buttons", user: user
 
   - unless notification.read?
-    = link_to "👁", mark_as_read_notification_path(notification), data: { turbo_method: :post }, class: "notification-read-button"
+    = link_to "✓", mark_as_read_notification_path(notification), data: { turbo_method: :post }, class: "notification-read-button"

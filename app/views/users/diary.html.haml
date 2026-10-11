@@ -4,7 +4,7 @@
     - if @registers.empty?
         = render "common/empty_list_message", model: Register
     - else
-        .registers-items{id: "diary-registers", style: "background: #1e2731; border-radius: 15px; gap: 0px;", data: { pagination_target: "registers" } }
+        .registers-items{id: "diary-registers", style: "background: var(--darker-second-text-color); border-radius: 15px; gap: 0px;", data: { pagination_target: "registers" } }
             - @registers.each do |register|
                 = render "registers/diary_page", register: register
         - unless @registers.respond_to?(:next_page) && @registers.next_page

@@ -17,8 +17,7 @@ class Chat < ApplicationRecord
     scope :by_users, ->(user1_id, user2_id) { 
       where(event_id: nil).joins(:chat_users).where(chat_users: { user_id: [user1_id, user2_id] }).group(:id).having("COUNT(DISTINCT chat_users.user_id) = 2")
     }
-
-    scope :order_by_recent_messages, -> { left_joins(:chat_entries).where(chat_entries: { chat_type: 0 }).group(:id).order(Arel.sql("MAX(chat_entries.created_at) DESC, chats.id DESC")) }
+    scope :order_by_recent_messages, -> { joins(:chat_entries).group(:id).order(Arel.sql("MAX(chat_entries.created_at) DESC, chats.id DESC")) }
 
   ## CLASS METHODS
 
@@ -30,7 +29,7 @@ class Chat < ApplicationRecord
       chat
     end
 
-    def self.create_event_chat(event_id, user_id)
+    def self.create_or_add_user_to_event_chat(event_id, user_id)
       chat = Chat.find_or_create_by(event_id: event_id)
       unless chat.chat_users.exists?(user_id: user_id)
         chat.chat_users << ChatUser.new(user_id: user_id) 

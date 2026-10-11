@@ -1,9 +1,9 @@
 = render "users/header"
 = render "users/options", active: :profile
 
-.widget-content{style: "color: #a4b3c4; padding-top:0px;"}
+.widget-content{style: "color: var(--soft-color); padding-top:0px;"}
         
-    .big-second-column{style: "color: #a4b3c4; "}
+    .big-second-column{style: "color: var(--soft-color); "}
         %div{style: "margin-right: 20px; "}
 
             = User.human_attribute_name(:description).upcase
@@ -45,7 +45,7 @@
                     = link_to registers_user_path(@user) do
                         %span= t("more").upcase
                 .separator
-                = render "registers/index_cards", registers: @registers
+                = render "registers/index_cards", registers: @registers.limit(5)
 
             %div{style: "margin-bottom: 20px; "}
                 %div{ style: "display: flex; justify-content: space-between; align-items: center;" }

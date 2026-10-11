@@ -1,29 +1,23 @@
-%div{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{@photo_url}'); background-size: cover; background-position: center 30%;" }
-    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, #1f252b 100%), linear-gradient(to right, rgba(15, 20, 25, 1) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
+.artist-show{ style: "position: relative; padding: 0px 70px 10px 0px; background-image: url('#{@photo_url}'); background-size: cover; background-position: center 30%;" }
+    %div{ style: "position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, var(--black) 100%), linear-gradient(to right, var(--black) 0%, rgba(15, 20, 25, 0.7) 25%, rgba(15, 20, 25, 0) 60%);" }
     .artist-content{ style: "position: relative; z-index: 1;" }
         .info{style:"margin:40px;"}
-            .name
+            .name{style: "color: var(--main-text-color2)"}
                 .adapted-bubble.event-color
                     ="##{Event.singular.upcase}"
                     - if current_user&.admin? && @event.request
                         = @event.request.status_string.upcase
-                %div= @event.tour_name
-                %div{ style: "font-size: 15px; margin-bottom:5px" }
-                    %div{style: "display:flex; align-items:center; gap:10px;"}
-                        = image_tag("icon_ubication_white.png", class: "icon-img")
-                        = @event.ubication&.complete_name
-                %div{ style: "font-size: 15px;" }
-                    %div= "🗓️ #{formatted_event_date(@event.date, @event.start_time)}" 
-             
+                = render "events/index_item", event: @event
+
     %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}
         .flex{ style: " width: 20%;" }
             - event_date_status = @event.past_or_future
             - if event_date_status == "past" && !@registers.empty?
                 .stat
-                    .number
+                    .number{style: "color: var(--main-text-color2)"}
                         ★ #{@average_rating} / 5
-                    .name{style: "color: white"}
+                    .name{style: "color: var(--main-text-color2)"}
                         = t("average", model: Register.plural)
 
         %span{ style: "margin-left: auto; margin-bottom: 25px;" }
-            = render "events/assistance_buttoms", event: @event
+            = render "events/assistance_buttons", event: @event

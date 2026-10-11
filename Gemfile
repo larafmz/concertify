@@ -76,10 +76,8 @@ gem "noticed"
 # For permissions
 gem "cancancan"
 
-# jquery (necessary for cocoon gem)
-gem "jquery-rails"
-
 # nested fields in forms
+gem "jquery-rails" #(necessary for cocoon gem)
 gem "cocoon"
 
 # pagination
@@ -93,3 +91,5 @@ group :test do
 end
 
 gem "faker"
+
+gem "azure-storage-blob", "~> 2.0", require: false

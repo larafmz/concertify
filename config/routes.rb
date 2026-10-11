@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get "change_locale/:locale", to: "application#change_locale", as: :change_locale
+  get "change_theme/:theme", to: "application#change_theme", as: :change_theme
   
   devise_for :users, controllers: {
     registrations: "users/registrations"
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :chats, only: [:index, :show] do
+  resources :chats, only: [:index, :show, :create] do
     member do
       post :send_message
       delete :exit

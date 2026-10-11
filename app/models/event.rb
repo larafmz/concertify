@@ -74,8 +74,10 @@ class Event < ApplicationRecord
     end
 
     def self.search_by(params: {}, artist: nil)
-      events_api = TicketmasterService.events_by(params)    
+      ## Search in Ticketmaster
+      events_api = TicketmasterService.events_by(params)   
 
+      ## Search in database
       events_db = Event.accepted
       events_db = events_db.by_name(params[:search]) if params[:search]
       events_db = events_db.by_artist(artist.id) if artist
@@ -95,6 +97,7 @@ class Event < ApplicationRecord
         events_db = events_db.where("date <= ?", second_date) if second_date.present?
       end
 
+      ## Merge API and DB events
       TicketmasterService.merge_events(events_db, events_api)
     end
 

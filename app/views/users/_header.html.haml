@@ -1,9 +1,11 @@
-%div{ class: "widget-content", style: "background: #1f252b;"}
-    %div{ class: "artist-content", style: "background: #1f252b;"}
+%div{ class: "widget-content", style: "background: var(--background);"}
+    %div{ class: "artist-content", style: "background: var(--background);"}
         .info
-            .user_icon
-                = image_tag  @user.icon if @user.icon.attached?
-                
+            .user_icon{style: "background: var(--background)"}
+                - if @user.icon.attached?
+                    = image_tag @user.icon
+                - else
+                    = @user.username.first.upcase                
             .name
                 %div{style: "margin-bottom:5px; font-size:25px;"}
                     = @user.username
@@ -44,16 +46,15 @@
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
         - if can?(:follow, @user) #follow para englobar todo
-            .soft-color{ style: "margin-left: auto; background: #1f252b; display: flex; align-items: center; gap: 10px;"}
+            .soft-color{ style: "margin-left: auto; background: var(--background); display: flex; align-items: center; gap: 10px;"}
                 = render "users/relation_buttons", user: @user
                 - unless current_user.blocked_user?(@user.id)
-                    = link_to t("send_message"), chat_path(user_id: @user.id), class: "btn-custom orange-color"
-                     
+                    = button_to t("send_message"), chats_path(user_id: @user.id), method: :post, data: { turbo: false }, class: "btn-standard orange-color", id: "send_message_id"
             - if can?(:block, @user) || @user.follows_user?(current_user)
                 .dropdown
                     .dropdown-toggle{
                         "data-bs-toggle" => "dropdown",
-                        style: "color: white" 
+                        style: "color: var(--main-text-color)" 
                     }
                         ⁝
                     %ul.dropdown-menu
@@ -68,5 +69,5 @@
                             %li
                             = link_to t("crud.destroy", model: t("follower")), remove_follower_user_path(@user), class: "dropdown-item", data: { turbo_method: :delete }
                             
-.separator{style: "background: #40556d; "}
+.separator{style: "background: var(--second-text-color); "}
 

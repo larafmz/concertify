@@ -6,7 +6,7 @@ class TicketmasterService
 
     extend TicketmasterHelper
 
-    API_KEY = Rails.application.credentials.ticketmaster[:api_key]
+    API_KEY = ENV["TICKETMASTER_API_KEY"]
 
     def self.call_api(url) 
         begin

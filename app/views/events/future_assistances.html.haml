@@ -2,5 +2,7 @@
 = render "events/options", active: :future_assistances
 
 .widget-content{style: "padding-top:0px;" }
-    = render "future_assistances/index", future_assistances: @future_assistances
+    .big-second-column{style: "grid-template-columns: 1fr 3fr;"}
+        = render "future_assistances/filters"
+        = render "future_assistances/index", future_assistances: @future_assistances
         

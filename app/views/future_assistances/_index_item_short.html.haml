@@ -25,7 +25,7 @@
             %div{style: "margin-top:10px;"}
                 - if future_assistance.from && !future_assistance.from.empty?
                     .bubble
-                        %span{style: "color: rgb(230, 230, 230);"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
+                        %span{class: "softest-color"}= "📍 #{FutureAssistance.human_attribute_name(:from)} #{future_assistance.from}"
 
             %div{style: "margin-top:10px;"}
                 - if future_assistance.company_string && future_assistance.company!= 0

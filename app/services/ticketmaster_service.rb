@@ -13,7 +13,6 @@ class TicketmasterService
             response = Net::HTTP.get(URI(url))
             return JSON.parse(response)
         rescue
-            puts "Error al conectar con Ticketmaster"
             return nil
         end
     end

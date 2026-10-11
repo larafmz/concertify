@@ -76,10 +76,8 @@ gem "noticed"
 # For permissions
 gem "cancancan"
 
-# jquery (necessary for cocoon gem)
-gem "jquery-rails"
-
 # nested fields in forms
+gem "jquery-rails" #(necessary for cocoon gem)
 gem "cocoon"
 
 # pagination

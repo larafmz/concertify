@@ -2,6 +2,6 @@
     data: {controller: "send-message", action: "turbo:submit-end->send-message#reset" } do
     .send_message
         = text_area_tag :message, nil, maxlength: 500, placeholder: t("send_a_message"), id:"chat_text_area_id", 
-            class: text_area_message, data: { controller: "send-message", action: "keydown->send-message#submit" }
+            class: "text_area_message", data: { controller: "send-message", action: "keydown->send-message#submit" }
         %div{style: "display: flex; justify-content: flex-end; margin: 5px;"}
             = submit_tag "➤", class: "btn-custom orange-color", id:"submit_message_id"

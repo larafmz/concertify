@@ -7,10 +7,6 @@ class Artist < ApplicationRecord
 
     kindable :status, { :accepted => 0, :pending => 1, :denied => 2 }
 
-  ## CALLBACKS
-
-    before_destroy :destroy_orphan_events #before the associations line
-
   ## RELATIONSHIPS
 
     belongs_to :genre, optional: true
@@ -40,14 +36,6 @@ class Artist < ApplicationRecord
 
     validates :name, presence: true
     validates :ticketmaster_id, uniqueness: { allow_nil: true }
-
-  ## CALLBACKS METHODS
-  
-    def destroy_orphan_events
-      events.each do |event|
-        event.destroy if event.artists.where.not(id: id).empty?
-      end
-    end
     
   ## CLASS METHODS
 

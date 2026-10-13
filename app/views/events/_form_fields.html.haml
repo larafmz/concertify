@@ -11,7 +11,7 @@
           value: @event&.artists&.first&.name || Artist.find_by(id: params[:artist_id])&.name,
           placeholder: "Ex: Taylor Swift", class: "register-form-input", list: "artists-list"
         %datalist#artists-list
-          - Artist.all.sort_by(&:name).each do |artist|
+          - Artist.accepted.sort_by(&:name).each do |artist|
             %option{ value: artist.name }
 
       %div

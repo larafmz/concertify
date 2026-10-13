@@ -3,4 +3,4 @@
         %div
             = t("requested_events")
 .separator
-= render "requests/index", requests: @requests
+= render "requests/index", requests: @requests, all_requests: Request.all

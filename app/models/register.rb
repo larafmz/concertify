@@ -62,7 +62,7 @@ class Register < Interactuable
     end
 
     def self.feed(user)
-      return Register.all unless user.present?
+      return Register.all.order("created_at DESC") unless user.present?
 
       reposts = Repost.for_registers.where(user_id: [user.id] +  user.followings.map(&:followed_id)).includes(:interactuable, :user)
       regs = Register.by_friends(user).where.not(id: reposts.pluck(:interactuable_id)) # Exclude registers that have been reposted by the user or their followings
@@ -80,7 +80,7 @@ class Register < Interactuable
           date: repost.created_at
         }
       end).sort_by { |obj| obj[:date] || Time.at(0) }.reverse
-      return Register.viewables(user) if feed.empty?
+      return Register.viewables(user).order("created_at DESC") if feed.empty?
       feed
     end
 

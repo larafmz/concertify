@@ -20,4 +20,5 @@
                         = t("average", model: Register.plural)
 
         %span{ style: "margin-left: auto; margin-bottom: 25px;" }
-            = render "events/assistance_buttons", event: @event
+            .button-event{style: "display: flex; gap: 10px;"}
+                = render "events/assistance_buttons", event: @event

@@ -48,7 +48,8 @@
 
                 - if current_user
                     - if item[:source] == :db
-                        = render "events/assistance_buttons", event: event
+                        .button-event{style: "display: flex; gap: 10px;"}
+                            = render "events/assistance_buttons", event: event
                     - else  
                         .button-event
                             - event_date_status = time_status(event_date, event_time)

@@ -61,7 +61,7 @@
           = link_to "✗", request_path(request), id: "destroy_request_#{request.id}", data: { turbo_method: :delete, turbo_confirm: "¿Esta seguro de que desea eliminar el evento solicitado?" }, class: "request-card-action request-card-action-danger"
 
       - if request.accepted? || request.existing_event_id.present?
-        = link_to t("crud.show", model: Event.singular), event_path(request.get_event_id), class: "btn-custom event-color request-card-event-button", id: "view_event_#{request.id}"
+        = render "events/assistance_buttons", event: Event.find(request.get_event_id)
 
   .request-card-footer
     %span

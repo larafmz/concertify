@@ -75,7 +75,7 @@ class Request < ApplicationRecord
 
     def self.search_by(params={}, user: nil)
         params ||= {}
-        requests = Request.order("created_at DESC")
+        requests = Request.order(Arel.sql("COALESCE(updated_at, created_at) DESC"))
         requests = requests.where(requester_id: user.id) if user.present?
         requests = requests.by_status(params[:status].to_i) if params[:status]
         requests

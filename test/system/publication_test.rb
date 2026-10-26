@@ -27,7 +27,7 @@ class PublicationTest < ApplicationSystemTestCase
         assert_selector ".publication-photo", count: 4
     end
 
-    test "PI47 - Create_publication_for_artist" do
+    test "PI46 - Create_publication_for_artist" do
         TicketmasterService.stub :artist_by_id, [] do
             artist = artists(:artist5)
             visit "/artists/#{artist.id}/publications"

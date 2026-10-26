@@ -6,7 +6,9 @@
 
     .two-columns
       %div
-        = label_tag :artist_id, "🧑‍🎤 #{Artist.singular}", class: "register-form-label"
+        = label_tag :artist_id, class: "register-form-label" do
+          %i.fa-solid.fa-guitar
+          = Artist.singular
         = f.text_field :artist_name, id: "artist_name_id",
           value: @event&.artists&.first&.name || Artist.find_by(id: params[:artist_id])&.name,
           placeholder: "Ex: Taylor Swift", class: "register-form-input", list: "artists-list"
@@ -15,16 +17,22 @@
             %option{ value: artist.name }
 
       %div
-        = label_tag :tour_name, "🎶 #{Event.human_attribute_name(:tour_name)}", class: "register-form-label"
+        = label_tag :tour_name, class: "register-form-label" do
+          %i.fa-solid.fa-music
+          = Event.human_attribute_name(:tour_name)
         = f.text_field :tour_name, placeholder: "Ej: Eras Tour", class: "register-form-input", id: "tour_name_id"
 
     .two-columns
       %div
-        = label_tag :date, "🗓️ #{Event.human_attribute_name(:date)}", class: "register-form-label"
+        = label_tag :date, class: "register-form-label" do
+          %i.fa-solid.fa-calendar
+          = Event.human_attribute_name(:date)
         = f.date_field :date, class: "register-form-input", id: "date_id"
 
       %div
-        = label_tag :start_time, "🕐 #{Event.human_attribute_name(:start_time)}", class: "register-form-label"
+        = label_tag :start_time, class: "register-form-label" do
+          %i.fa-solid.fa-clock
+          = Event.human_attribute_name(:start_time)
         = f.time_field :start_time, class: "register-form-input", id: "start_time_id"
 
     .separator{style: "margin-top: 10px"}
@@ -42,13 +50,13 @@
 
           %div
             = label_tag :city, class: "register-form-label", style: "display:flex; align-items:center; gap:5px;" do
-              = image_tag("#{session[:theme]}/icon_ubication_soft_color.png", class: "icon-img")
+              %i.fa-solid.fa-location-dot
               = Ubication.human_attribute_name(:city)
             = ubication_fields.text_field :city, class: "register-form-input", placeholder: "Ex: Madrid", id: "city_id"
 
           %div
             = label_tag :country, class: "register-form-label", style: "display:flex; align-items:center; gap:5px;" do
-              = image_tag("#{session[:theme]}/icon_ubication_soft_color.png", class: "icon-img")
+              %i.fa-solid.fa-location-dot
               = Country.singular
             = ubication_fields.select :country_id, options_for_select(Country.all.sort_by(&:translation).map { |country| [country.translation, country.id] }, @event&.ubication&.country_id),
               { include_blank: t("verbs.select") }, { class: "register-form-input", id: "country_id" }

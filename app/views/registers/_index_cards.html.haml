@@ -12,7 +12,8 @@
       - if feed[:repost]
         .register-repost
           = link_to user_path(feed[:repost].user), class: "register-repost-link" do
-            %span.register-repost-icon 🗘
+            %span.register-repost-icon 
+              %i.fa-solid.fa-retweet
             %span= feed[:repost].user.username
             %span.register-repost-text= t("verbs.reposted").downcase
 
@@ -42,8 +43,5 @@
           .register-meta
             %span.register-rating
               = register.get_rating
-              - if register.review.present?
-                %span.review-symbol Ξ
-
             %span.register-date
               = short_date(register.created_at)

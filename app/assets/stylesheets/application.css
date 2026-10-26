@@ -216,6 +216,7 @@ a:active {
   font-size: 13px;
   line-height: 1;
   z-index: 2;
+  color: var(--main-text-color2);
 }
 
 .artist_icon img {
@@ -270,14 +271,12 @@ a:active {
   height: 40px;
 }
 
-a.btn-custom {
-  color: var(--main-text-color);
+.btn-lineless {
+  color: var(--main-text-color) !important;
 }
 
-.btn-custom::after {
-  content: "›";
-  font-size: 18px;
-  font-weight: 700;
+a.btn-custom {
+  color: var(--main-text-color);
 }
 
 .small-btn-custom {

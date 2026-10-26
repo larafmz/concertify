@@ -11,47 +11,19 @@
       class: "field-custom"
 
   .header-actions
-    .dropdown
-      %button.btn.btn-secondary.dropdown-toggle{
-        type: "button",
-        "data-bs-toggle" => "dropdown",
-        "aria-expanded" => "false",
-        style: "background: #{orange_color}"
-      }
-        = t("crud.show", model: "")
-
-      %ul.dropdown-menu
-        %li
-          = link_to Event.plural, events_path, class: "dropdown-item"
-        %li
-          = link_to Register.plural, registers_path, class: "dropdown-item"
-        %li
-          = link_to Publication.plural, publications_path, class: "dropdown-item"
-        %li
-          = link_to Artist.plural, artists_path, class: "dropdown-item"
-        %li
-          = link_to User.plural, users_path, class: "dropdown-item"
-        - if can?(:read, Request)
-          %li
-            = link_to t("requested_events"), requests_path, class: "dropdown-item"       
-
     - if can?(:create, Publication)
-      = link_to new_publication_path, class: "btn-standard orange-color", data: { turbo_frame: "modal" }, id: "post_id" do
-        = image_tag("icon_post.png")
+      = link_to new_publication_path, class: "btn-lineless", data: { turbo_frame: "modal" }, id: "post_id" do
+        %i.fa-solid.fa-pen-clip
 
     - if current_user
-      .header-icons
-        = link_to notifications_user_path(current_user), class: "hover-border-icon", title: Notification.plural, id: "notifications_header_id" do
-          %div{style: "display:flex; flex-direction:column; align-items:center;"}
-            .link_icon
-              = image_tag("#{session[:theme]}/icon_notification.png")
-            = render "layouts/shared/notifications_bubble"
-
-        = link_to chats_path, class: "hover-border-icon", title: Chat.plural, id: "chat_header_id" do
-          %div{style: "display:flex; flex-direction:column; align-items:center;"}
-            .link_icon
-              = image_tag("#{session[:theme]}/icon_chat.png")
-            = render "layouts/shared/messages_bubble"
+      = link_to notifications_user_path(current_user), class: "btn-lineless", title: Notification.plural, id: "notifications_header_id" do
+        %i.fa-solid.fa-bell
+        = render "layouts/shared/notifications_bubble"
+    
+    - if current_user
+      = link_to chats_path, class: "btn-lineless", title: Chat.plural, id: "chat_header_id" do
+        %i.fa-solid.fa-message
+        = render "layouts/shared/messages_bubble"
 
     .dropdown
       %button.btn.btn-secondary.dropdown-toggle{
@@ -60,7 +32,8 @@
         "aria-expanded" => "false",
         style: "background: var(--softest-color)" 
       }
-        = t("user_account.profile")
+        %i.fa-solid.fa-user
+
 
       %ul.dropdown-menu
         
@@ -96,7 +69,7 @@
         "aria-expanded" => "false",
         style: "background: var(--softest-color)" 
       }
-        =t("configuration")
+        %i.fa-solid.fa-gear
 
       %ul.dropdown-menu
         %li

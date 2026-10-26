@@ -12,11 +12,15 @@
           .form-modal-info
 
             %div
-              = label_tag :name, "🧑‍🎤 #{Artist.human_attribute_name(:name)}", class: "soft-color label-custom"
+              = label_tag :name, class: "soft-color label-custom" do
+                %i.fa-solid.fa-guitar
+                = Artist.human_attribute_name(:name)
               = f.text_field :name, placeholder: "Ej: Taylor Swift", class: "field-custom"
 
             %div
-              = label_tag :photo, "📷 #{Artist.human_attribute_name(:photo)}", class: "soft-color label-custom"
+              = label_tag :photo, class: "soft-color label-custom" do
+                %i.fa-solid.fa-image
+                = Artist.human_attribute_name(:photo)
               = f.file_field :photo, class: "field-custom", style: "padding: 0px;"
 
       %div

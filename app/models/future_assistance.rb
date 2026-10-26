@@ -84,16 +84,16 @@ class FutureAssistance < ApplicationRecord
     nil
   end 
   
-  def company_string
-    case company
-    when 1
-      "👤 #{get_company_name}"
-    when 2
-      "👥 #{get_company_name}"
-    else
-      nil
-    end
+def company_string
+  case company
+  when 1
+    '<i class="fa-solid fa-user"></i> '.html_safe + get_company_name
+  when 2
+    '<i class="fa-solid fa-users"></i> '.html_safe + get_company_name
+  else
+    nil
   end
+end
 
   def notification_message
     days_left = self.event.days_left(actual: Date.today)

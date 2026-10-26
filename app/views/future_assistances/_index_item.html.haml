@@ -41,21 +41,23 @@
                 - ub = event.ubication&.complete_name || t("not_found")
                 .softest-color{style: "font-size: 15px; padding-bottom: 10px;" }
                     %span{style: "display:flex; align-items:center; gap:5px;"}
-                        = image_tag("#{session[:theme]}/icon_ubication_softest_color.png", class: "icon-img")
+                        %i.fa-solid.fa-location-dot
                         = ub 
-                        = image_tag("#{session[:theme]}/icon_date_softest_color.png", class: "icon-img")
+                        %i.fa-solid.fa-calendar
                         = short_date(event.date)
                     
                 %div{style: "display:flex; align-items:center; gap:5px;"}
                     - if future_assistance.event_seat_string 
                         .bubble
-                            %span= "🎟️ #{future_assistance.event_seat_string}"
+                            %span
+                                %i.fa-solid.fa-ticket
+                                = future_assistance.event_seat_string
                             - if !future_assistance.event_seat_details&.empty?
                                 %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
                     - if future_assistance.from && !future_assistance.from.empty?
                         .bubble
                             %span{style: "color: var(--main-text-color); display:flex; align-items:center; gap: 5px"}
-                                = image_tag("#{session[:theme]}/icon_ubication_softest_color.png", class: "icon-img")
+                                %i.fa-solid.fa-location-dot
                                 = FutureAssistance.human_attribute_name(:from)
                                 = future_assistance.from
                                 

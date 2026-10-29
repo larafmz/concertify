@@ -1,0 +1,14 @@
+.title_section{style: "color: inherit"}
+    %div
+        =link_to users_path(params.permit!.to_h) do
+            =User.plural
+            - if params[:search].present?
+                = "\"#{params[:search]}\""
+            - if @users.total_count >= 100
+                + 100 #{t("results").downcase}
+            - else 
+                • #{@users.total_count} #{t("results").downcase}
+
+
+
+            

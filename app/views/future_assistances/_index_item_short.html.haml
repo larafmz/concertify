@@ -18,16 +18,18 @@
             %div{style: "margin-top:10px;"}
                 - if future_assistance.event_seat_string 
                     .bubble
-                        %i.fa-solid.fa-ticket
+                        %span
+                            %i.fa-solid.fa-ticket
+                            = future_assistance.event_seat_string
                         - if !future_assistance.event_seat_details&.empty?
                             %span{class: "softest-color"}= " · #{future_assistance.event_seat_details}"
             
             %div{style: "margin-top:10px;"}
                 - if future_assistance.from && !future_assistance.from.empty?
                     .bubble
-                        %span{class: "softest-color"}                            
+                        %span{style: "color: var(--main-text-color); display:flex; align-items:center; gap: 5px"}
                             %i.fa-solid.fa-location-dot
-                            = FutureAssistance.human_attribute_name(:from) 
+                            = FutureAssistance.human_attribute_name(:from)
                             = future_assistance.from
 
             %div{style: "margin-top:10px;"}

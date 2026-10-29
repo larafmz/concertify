@@ -1,10 +1,10 @@
 .separator
 - event_date_status = @event.past_or_future
-.artist-options
-    = link_to Artist.plural, event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{artist_color};" if active == :artists)
+.widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; box-sizing: border-box;"}
+    = link_to Artist.plural, event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :artists)
     - if event_date_status == "past"
-        = link_to "#{@event_registers_count} #{Register.plural}", registers_event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :registers)
+        = link_to "#{@event_registers_count} #{Register.plural}", registers_event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :registers)
     - else
-        = link_to "#{@event_future_assistances_count} #{FutureAssistance.plural}", future_assistances_event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :future_assistances)
+        = link_to "#{@event_future_assistances_count} #{FutureAssistance.plural}", future_assistances_event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :future_assistances)
     = link_to "#{@event_publications_count} #{Publication.plural}", publications_event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :publications)
 .separator{style: "margin-bottom:20px;"}

@@ -4,8 +4,7 @@
     - if @artists.empty?
         = render "common/empty_list_message", model: Artist
     - else
-        .artists-list-new
-        - @artists.each do |artist|
-            %br
-            = render "artists/index_item", artist: artist
+        .artists-list{style: "gap: 10px;"}
+            - @artists.each do |artist|
+                = render "artists/index_item", artist: artist
 

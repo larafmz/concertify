@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   before_action :get_attributes, except: [:new, :create, :requests, :index]
 
   def index
+    params[:first_date] = Date.today.to_s unless params[:first_date].present?
     events = Event.search_by(params: params)
     @events = Kaminari.paginate_array(events).page(params[:page]).per(10)
   end

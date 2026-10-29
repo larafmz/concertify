@@ -3,7 +3,7 @@
 - elsif @comment.interactuable.register?
     = render "users/options", active: :reviews
 
-.widget-content{style: "padding-top:0px;"}  
+.widget-content
 
     .event_tag
         = link_to "<-", father_link(@comment)

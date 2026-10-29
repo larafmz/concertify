@@ -19,9 +19,9 @@
                 %i.fa-solid.fa-users
                 = FutureAssistance.human_attribute_name(:company)
             = select_tag :company, options_for_select(FutureAssistance.companies_for_select, params[:company]), include_blank: t("all"), 
-                class: "field-custom", style: "background: var(--background); padding: 0px;", id: "company_id"
+                class: "field-custom", style: "padding: 0px;", id: "company_id"
         %div
-            = submit_tag t("verbs.filter"), class: "btn-custom event-color"
+            = submit_tag t("verbs.filter"), class: "btn-custom"
         %div 
-            = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:event_seat, :company, :from)), class: "btn-custom event-color"
+            = link_to t("verbs.remove_filters"), url_for(params.to_unsafe_h.except(:event_seat, :company, :from)), class: "btn-custom"
             

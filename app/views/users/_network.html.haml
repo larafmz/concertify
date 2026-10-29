@@ -1,5 +1,4 @@
-.widget-content{style: "padding-top:0px;"}  
-
+.widget-content  
     %div{style: "display: flex; gap: 20px; color: var(--main-text-color);"}
         = link_to followings_user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :followings), title: "#{@followings.count} #{User.plural}" do
             =t("following").upcase
@@ -17,7 +16,6 @@
 .widget-content{style: "padding-top:0px;"}  
     - if @users.empty?
         = render "common/empty_list_message", model: User
-    - else
-        %div{style: "border: 1px solid var(--second-text-color);"}       
-            .registers-items
-                = render "users/index", users: @users 
+    - else    
+        .registers-items
+            = render "users/index", users: @users 

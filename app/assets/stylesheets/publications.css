@@ -198,6 +198,7 @@
 }
 
 .publication-text {
+  width: 70%;
   color: var(--main-text-color);
 
   font-size: 15px;

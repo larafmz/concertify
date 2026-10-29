@@ -206,6 +206,7 @@
 }
 
 .register-index-review {
+  width: 70%;
   min-width: 0;
   max-width: 100%;
   overflow-wrap: anywhere;

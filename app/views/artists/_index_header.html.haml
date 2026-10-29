@@ -1,0 +1,16 @@
+.title_section{style: "color: inherit"}
+    %div
+        =link_to artists_path(params.permit!.to_h) do
+            = Artist.plural
+            - if params[:search].present?
+                = "\"#{params[:search]}\""
+            - if params[:genre_id].present?
+                =t("of").downcase
+                =t(Genre.find_by(id:params[:genre_id]).name)
+            - if @artists.total_count >= 100
+                + 100 #{t("results").downcase}
+            - else 
+                • #{@artists.total_count} #{t("results").downcase}
+
+
+            

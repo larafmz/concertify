@@ -1,4 +1,4 @@
-.artist-options
+.widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; box-sizing: border-box; color: var(--main-text-color);"}
     = link_to user_path(@user), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :profile) do
         %i.fa-solid.fa-user
         = @user.username

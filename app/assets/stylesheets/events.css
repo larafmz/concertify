@@ -23,12 +23,11 @@
 }
 
 .date-event {
-  background: var(--darker-second-text-color);
+  background: var(--orange);
   border-radius: 8px;
-  color: var(--main-text-color);
+  color: var(--main-text-color2);
   padding: 10px 10px;
   text-align: center;
-  border: 2px solid var(--second-text-color);
   font-size: 17px;
 }
 

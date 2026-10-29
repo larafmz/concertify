@@ -1,6 +1,6 @@
 .separator
 - event_date_status = @event.past_or_future
-.widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; box-sizing: border-box;"}
+.widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; box-sizing: border-box; color: var(--main-text-color);"}
     = link_to Artist.plural, event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :artists)
     - if event_date_status == "past"
         = link_to "#{@event_registers_count} #{Register.plural}", registers_event_path(@event), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :registers)

@@ -1,5 +1,5 @@
 .separator
-.widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; box-sizing: border-box;"}
+.widget-content{style: "display: flex; justify-content: center; flex-wrap: wrap; gap: 15px 30px; padding: 10px; box-sizing: border-box; color: var(--main-text-color);"}
     = link_to Event.plural, artist_path(@artist), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :events)
     = link_to "#{@artist.registers.count} #{Register.plural}", registers_artist_path(@artist), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :registers)
     = link_to "#{@artist.publications.count} #{Publication.plural}", publications_artist_path(@artist), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :publications)

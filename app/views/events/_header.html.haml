@@ -3,10 +3,6 @@
     .artist-content{ style: "position: relative; z-index: 1;" }
         .info{style:"margin:40px;"}
             .name{style: "color: var(--main-text-color2)"}
-                .adapted-bubble.event-color
-                    ="##{Event.singular.upcase}"
-                    - if current_user&.admin? && @event.request
-                        = @event.request.status_string.upcase
                 = render "events/index_item", event: @event
 
     %div{style: "display:flex; align-items:center; width:100%; padding-top:10px; position: relative;"}

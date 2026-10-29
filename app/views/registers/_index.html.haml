@@ -5,7 +5,10 @@
             = render "common/empty_list_message", model: Register
         - else
             - registers.each_with_index do |register, index|
+                - if index>0
+                    .separator 
                 = render "registers/index_item", register: register
+            
                 
     - unless registers.respond_to?(:next_page) && registers.next_page && @pagination_path
         %span{class: "hidden", data: { pagination_target: "noRecords" }}

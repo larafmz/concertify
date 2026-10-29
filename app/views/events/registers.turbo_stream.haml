@@ -2,6 +2,7 @@
 
 = turbo_stream.append "index-registers" do
   - @registers.each do |register|
+    .separator 
     = render "registers/index_item", register: register
 
 - unless @registers.respond_to?(:next_page) && @registers.next_page

@@ -3,8 +3,6 @@
     .artist-content{ style: "position: relative; z-index: 1;" }
         .info{style:"margin:40px;"}
             .name{style: "color: var(--main-text-color2)"}
-                .adapted-bubble.artist-color
-                    ="##{Artist.singular.upcase}"
                 %span{style: "text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"}
                     = @artist.name
                 - if @artist.genre && @artist.genre.name != "Undefined"

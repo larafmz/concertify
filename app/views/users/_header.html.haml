@@ -15,33 +15,41 @@
                     = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "small-btn-custom"
                 .soft-color{style: "font-size: 15px;" }= "📍 #{@user.ubication.complete_name}" if @user.ubication
               
+        
         .flex
             .stat
                 .number
+                    %i.fa-solid.fa-music
                     = @user.registers.size
                 .name
                     = link_to diary_user_path(@user) do
                         = Event.plural
-            
+
             .stat
                 .number
+                    %i.fa-solid.fa-music
                     = @user.registers.joins(:event).where("EXTRACT(YEAR FROM events.date) = ?", Date.current.year).size
                 .name
                     = link_to registers_user_path(@user) do
+                        = Event.plural
                         = t("this_year")
+
             .stat
                 .number
+                    %i.fa-solid.fa-user
                     = @user.followings.users.size
                 .name
                     = link_to followings_user_path(@user) do
-                        = t("following")                            
+                        = t("following")
+
             .stat
                 .number
+                    %i.fa-solid.fa-user
                     = @user.followers.users.size
                 .name
                     = link_to followers_user_path(@user) do
                         = t("followers")
-                            
+                                
 
     %div{style: "display:flex; align-items:center; gap:8px; padding-top: 10px;"}
 
@@ -49,7 +57,7 @@
             .soft-color{ style: "margin-left: auto; background: var(--background); display: flex; align-items: center; gap: 10px;"}
                 = render "users/relation_buttons", user: @user
                 - unless current_user.blocked_user?(@user.id)
-                    = button_to t("send_message"), chats_path(user_id: @user.id), method: :post, data: { turbo: false }, class: "btn-standard orange-color", id: "send_message_id"
+                    = button_to t("send_message"), chats_path(user_id: @user.id), method: :post, data: { turbo: false }, class: "btn-standard", id: "send_message_id"
             - if can?(:block, @user) || @user.follows_user?(current_user)
                 .dropdown
                     .dropdown-toggle{

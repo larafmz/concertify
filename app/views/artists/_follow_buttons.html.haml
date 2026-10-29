@@ -1,8 +1,8 @@
 %div{id: "follow-artist-#{artist.id}"}
   - if can?(:unfollow, artist) && current_user.follows_artist?(artist)
-    = button_to unfollow_artist_path(artist), class: "btn-standard", id: "unfollow_artist_#{artist.id}", method: :delete do
+    = button_to unfollow_artist_path(artist), class: "btn-standard orange-color", id: "unfollow_artist_#{artist.id}", method: :delete do
       = t("following")
 
   - elsif can?(:follow, artist)
-    = button_to follow_artist_path(artist), method: :post, id: "follow_artist_#{artist.id}", class: "btn-standard artist-color" do
+    = button_to follow_artist_path(artist), method: :post, id: "follow_artist_#{artist.id}", class: "btn-standard" do
       = t("verbs.follow")

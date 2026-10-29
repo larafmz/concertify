@@ -6,5 +6,6 @@
     - else
         .artists-list-new
         - @artists.each do |artist|
+            %br
             = render "artists/index_item", artist: artist
 

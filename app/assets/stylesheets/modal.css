@@ -30,7 +30,7 @@
 }
 
 input[type="file"].field-custom::file-selector-button {
-  background: rgb(53, 53, 70);
+  background: var(--darker-second-text-color);
   color: var(--main-text-color);
   border: none;
   border-right: 1px solid rgb(87, 87, 124);

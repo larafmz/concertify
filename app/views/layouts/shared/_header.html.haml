@@ -10,77 +10,76 @@
       placeholder: "🔍 #{t("main_search")}",
       class: "field-custom"
 
-  .header-actions
-    - if can?(:create, Publication)
-      = link_to new_publication_path, class: "btn-lineless", data: { turbo_frame: "modal" }, id: "post_id" do
-        %i.fa-solid.fa-pen-clip
+  - if can?(:create, Publication)
+    = link_to new_publication_path, class: "btn-lineless", data: { turbo_frame: "modal" }, id: "post_id" do
+      %i.fa-solid.fa-pen-clip
 
-    - if current_user
-      = link_to notifications_user_path(current_user), class: "btn-lineless", title: Notification.plural, id: "notifications_header_id" do
-        %i.fa-solid.fa-bell
-        = render "layouts/shared/notifications_bubble"
-    
-    - if current_user
-      = link_to chats_path, class: "btn-lineless", title: Chat.plural, id: "chat_header_id" do
-        %i.fa-solid.fa-message
-        = render "layouts/shared/messages_bubble"
+  - if current_user
+    = link_to notifications_user_path(current_user), class: "btn-lineless", title: Notification.plural, id: "notifications_header_id" do
+      %i.fa-solid.fa-bell
+      = render "layouts/shared/notifications_bubble"
+  
+  - if current_user
+    = link_to chats_path, class: "btn-lineless", title: Chat.plural, id: "chat_header_id" do
+      %i.fa-solid.fa-message
+      = render "layouts/shared/messages_bubble"
 
-    .dropdown
-      %button.btn.btn-secondary.dropdown-toggle{
-        type: "button",
-        "data-bs-toggle" => "dropdown",
-        "aria-expanded" => "false",
-        style: "background: var(--softest-color)" 
-      }
-        %i.fa-solid.fa-user
+  .dropdown
+    %button.btn.btn-secondary.dropdown-toggle{
+      type: "button",
+      "data-bs-toggle" => "dropdown",
+      "aria-expanded" => "false",
+      style: "background: var(--softest-color)" 
+    }
+      %i.fa-solid.fa-user
 
 
-      %ul.dropdown-menu
-        
-        - if current_user
-          %li 
-            = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
-          %li
-            = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
-          %li
-            %hr.dropdown-divider
-          %li
-            = link_to t("my_model_plural", model: Register.plural), registers_user_path(current_user), class: "dropdown-item"
-          %li
-            = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_user_path(current_user), class: "dropdown-item"
-          %li
-            = link_to t("my_model_plural", model: Publication.plural), publications_user_path(current_user), class: "dropdown-item"
-          %li
-            = link_to t("my_model_plural", model: Request.plural), requests_user_path(current_user), class: "dropdown-item"
-          %li
-            %hr.dropdown-divider
-          %li 
-            = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
-        - else
-          %li
-          = link_to t("user_account.login"), new_user_session_path, class: "dropdown-item"
-          %li
-          = link_to t("user_account.register"), new_user_registration_path, class: "dropdown-item"
-
-    .dropdown
-      %button.btn.btn-secondary.dropdown-toggle{
-        type: "button",
-        "data-bs-toggle" => "dropdown",
-        "aria-expanded" => "false",
-        style: "background: var(--softest-color)" 
-      }
-        %i.fa-solid.fa-gear
-
-      %ul.dropdown-menu
+    %ul.dropdown-menu
+      
+      - if current_user
+        %li 
+          = link_to t("user_account.my_profile"), user_path(current_user), class: "dropdown-item"
         %li
-          = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
-        %li
-          = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
+          = link_to t("crud.edit", model: t("user_account.profile")), edit_user_registration_path, class: "dropdown-item"
         %li
           %hr.dropdown-divider
         %li
-          = link_to t("day_mode"), change_theme_path("light"), class: "dropdown-item", data: { turbo: false }
+          = link_to t("my_model_plural", model: Register.plural), registers_user_path(current_user), class: "dropdown-item"
         %li
-          = link_to t("night_mode"), change_theme_path("dark"), class: "dropdown-item", data: { turbo: false }
+          = link_to t("my_model_plural", model: FutureAssistance.plural), future_assistances_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: Publication.plural), publications_user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to t("my_model_plural", model: Request.plural), requests_user_path(current_user), class: "dropdown-item"
+        %li
+          %hr.dropdown-divider
+        %li 
+          = button_to t("user_account.logout"), destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "dropdown-item"
+      - else
+        %li
+        = link_to t("user_account.login"), new_user_session_path, class: "dropdown-item"
+        %li
+        = link_to t("user_account.register"), new_user_registration_path, class: "dropdown-item"
+
+  .dropdown
+    %button.btn.btn-secondary.dropdown-toggle{
+      type: "button",
+      "data-bs-toggle" => "dropdown",
+      "aria-expanded" => "false",
+      style: "background: var(--softest-color)" 
+    }
+      %i.fa-solid.fa-gear
+
+    %ul.dropdown-menu
+      %li
+        = link_to t("spanish"), change_locale_path(:es), class: "dropdown-item"
+      %li
+        = link_to t("english"), change_locale_path(:en), class: "dropdown-item"
+      %li
+        %hr.dropdown-divider
+      %li
+        = link_to t("day_mode"), change_theme_path("light"), class: "dropdown-item", data: { turbo: false }
+      %li
+        = link_to t("night_mode"), change_theme_path("dark"), class: "dropdown-item", data: { turbo: false }
 
 .separator{style: "background: var(--second-text-color); "}

@@ -16,7 +16,7 @@ en:
   all_fem: "All %{model}"
   all: All
   totals: "Total %{model}"
-  average: "Average %{model}"
+  popularity: "Popularity"
   results: Results
   not_found_model: No %{model} found
   not_found: Not found

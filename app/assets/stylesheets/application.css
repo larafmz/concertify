@@ -19,7 +19,7 @@
   --background: #0F1419;
   --main-text-color: #E7E7E7;
   --main-text-color2: #ffffff;
-  --second-text-color: #4D6074;
+  --second-text-color: #5f748b;
   --dropdown: #4D6074;
   --darker-second-text-color: #26313C;
   --darker-second-text-color2: #26313C;
@@ -253,8 +253,8 @@ a:active {
 .btn-custom {
   white-space: nowrap;
   background: var(--dropdown);
-  color: var(--main-text-color) ;
-  border: none;
+  color: var(--main-text-color);
+  border: 1px solid var(--second-text-color) !important;
   border-radius: 15px;
   padding: 10px 18px;
   font-size: 15px;
@@ -371,8 +371,6 @@ a.btn-custom {
   font-size:15px; 
   padding: 1px 10px;
 }
-
-
 
 .event-color {
   background: var(--event);

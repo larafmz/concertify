@@ -2,10 +2,10 @@
     = link_to users_path(search: params[:search]), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :users) do
         %i.fa-solid.fa-users
         = User.plural 
-    = link_to events_path(search: params[:search]), style: ("color: var(--main-text-color); border-bottom: 2px solid #{event_color};" if active == :events) do
+    = link_to events_path(search: params[:search]), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :events) do
         %i.fa-solid.fa-music
         = Event.plural
-    = link_to artists_path(search: params[:search]), style: ("color: var(--main-text-color); border-bottom: 2px solid #{artist_color};" if active == :artists) do
+    = link_to artists_path(search: params[:search]), style: ("color: var(--main-text-color); border-bottom: 2px solid #{orange_color};" if active == :artists) do
         %i.fa-solid.fa-guitar
         = Artist.plural 
 

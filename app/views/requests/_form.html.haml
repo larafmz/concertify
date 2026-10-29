@@ -46,4 +46,4 @@
                 = f.select :existing_event_id, options_for_select(Array(@request.matching_events).sort_by(&:tour_name).map { |event| [event.complete_info, event.id] }, @request.existing_event_id), { include_blank: t("verbs.select") }, { class: "register-form-input", id: "existing_event_id" }
 
       .register-form-actions
-        = f.submit t("verbs.save"), class: "register-form-submit event-color"
+        = f.submit t("verbs.save"), class: "register-form-submit"

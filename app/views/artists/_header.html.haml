@@ -25,7 +25,7 @@
                     .number{style: "color: var(--main-text-color2);"}
                         ★ #{@average_rating} / 5
                     .name{style: "color: var(--main-text-color2)"}
-                        = t("average", model: Register.plural)
+                        = t("popularity")
            
                     
         %span{ style: "margin-bottom: 25px; display: flex; margin-left: auto; gap:10px; position: relative; z-index: 2;" }
@@ -33,10 +33,10 @@
             - if can?(:unmark_as_favorite, @artist) && current_user.favorite_artist?(@artist)
                 = link_to "#{t("is_favorite")}", unmark_as_favorite_artist_path(@artist), id: "unmark_as_favorite_#{@artist.id}", class: "btn-standard", style: "background: #da4778; color: var(--main-text-color2)", data: { turbo_method: :delete }
             - elsif can?(:mark_as_favorite, @artist) && @can_mark_favorite
-                = button_to mark_as_favorite_artist_path(@artist), id: "mark_as_favorite_#{@artist.id}", class: "btn-standard artist-color", method: :post, form: { data: { turbo: false } } do
+                = button_to mark_as_favorite_artist_path(@artist), id: "mark_as_favorite_#{@artist.id}", class: "btn-standard", method: :post, form: { data: { turbo: false } } do
                     ♡ #{t("verbs.mark_as_favorite")}
             - if can?(:edit, @artist)
-                = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard artist-color"
+                = link_to t("crud.edit", model: Artist.singular), edit_artist_path(@artist), data: { turbo_frame: "modal" }, class: "btn-standard", style: "color: var(--main-text-color)"
             - if can?(:destroy, @artist) 
                 = button_to t("crud.destroy", model: Artist.singular), artist_path(@artist), method: :delete,
-                  form: { data: { turbo: false, confirm: t("artists.destroy_message") } }, class: "btn-standard artist-color"
+                  form: { data: { turbo: false, confirm: t("artists.destroy_message") } }, class: "btn-standard"

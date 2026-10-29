@@ -76,6 +76,6 @@
 
                 - if event_date_status != "future"
                     %div{style: "display: flex; gap: 5px;"}
-                        = link_to "#{t("verbs.log")} #{Event.singular}", new_register_path(event_id: event.id), class: "btn-custom event-color", data: { turbo_frame: "modal" }
+                        = link_to "#{t("verbs.log")} #{Event.singular}", new_register_path(event_id: event.id), class: "btn-custom", data: { turbo_frame: "modal" }
 
                         = link_to "✗", future_assistance_path(future_assistance), data: { turbo_method: :delete, turbo_confirm: t("messages.destroy_confirmation") }, class: "future-assistance-action future-assistance-action-danger"

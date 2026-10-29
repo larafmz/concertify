@@ -16,7 +16,7 @@ es:
   all_fem: "Todas las %{model}"
   all: Todo
   totals: "%{model} Totales"
-  average: "Media de %{model}"
+  popularity: "Popularidad"
   results: Resultados
   not_found_model: No se han encontrado %{model}
   not_found: No se ha encontrado
@@ -63,7 +63,7 @@ es:
   send_a_message: Envía un mensaje...
   languages: Idiomas
   spanish: Español
-  english: Ingles
+  english: Inglés
   switch_to: Cambiar a %{model}
   access_chat: Acceder a Chat
   members: Miembros
